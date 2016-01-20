@@ -1,0 +1,51 @@
+{
+	"returnCode": "0000",
+	"returnMessage": "success",
+	"bean":{
+		"total": "4"
+	},
+	"beans":[
+		{
+			"IVR_SEQPRC_ID":"0001",
+			"IVR_SEQPRC_NM":"张三",
+			"IVR_JNUP_NUM":"A100010",
+			"IVR_SEQPRC_DESC":"空闲",
+			"IVR_SEQPRC_ORG":"电销一组"
+		},
+		{
+			"IVR_SEQPRC_ID":"0001",
+			"IVR_SEQPRC_NM":"张三",
+			"IVR_JNUP_NUM":"A100010",
+			"IVR_SEQPRC_DESC":"空闲",
+			"IVR_SEQPRC_ORG":"电销一组"
+		},
+		{
+			"IVR_SEQPRC_ID":"0001",
+			"IVR_SEQPRC_NM":"张三",
+			"IVR_JNUP_NUM":"A100010",
+			"IVR_SEQPRC_DESC":"空闲",
+			"IVR_SEQPRC_ORG":"电销一组"
+		},
+		{
+			"IVR_SEQPRC_ID":"0001",
+			"IVR_SEQPRC_NM":"张三",
+			"IVR_JNUP_NUM":"A100010",
+			"IVR_SEQPRC_DESC":"空闲",
+			"IVR_SEQPRC_ORG":"电销一组"
+		},
+		{
+			"IVR_SEQPRC_ID":"0001",
+			"IVR_SEQPRC_NM":"张三",
+			"IVR_JNUP_NUM":"A100010",
+			"IVR_SEQPRC_DESC":"空闲",
+			"IVR_SEQPRC_ORG":"电销一组"
+		},
+		{
+			"IVR_SEQPRC_ID":"0001",
+			"IVR_SEQPRC_NM":"张三",
+			"IVR_JNUP_NUM":"A100010",
+			"IVR_SEQPRC_DESC":"空闲",
+			"IVR_SEQPRC_ORG":"电销一组"
+		}
+	]
+}

@@ -1,0 +1,9 @@
+{
+	"returnCode": "0",
+	"returnMessage": "success",
+	"bean":{
+		"regnDesc":"河南",
+		"regnNm":"郑州",
+		"mtopFctyNo":"1"
+	}
+}

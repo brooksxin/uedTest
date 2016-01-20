@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<link rel="stylesheet" href="alice.css">
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+
+<div>
+	
+</div>
+
+<script src="jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	var employees = [
+		{name:"George", age:32, retiredate:"March 12, 2014"}, 
+		{name:"Edward", age:17, retiredate:"June 2, 2023"}, 
+		{name:"Christine", age:58, retiredate:"December 20, 2036"}, 
+		{name:"Sarah", age:62, retiredate:"April 30, 2020"}
+	];
+
+	console.log(employees);//sort会改变自身
+
+	var employees2 = employees.slice(0);
+	console.log(employees2)
+
+	employees.sort(function(a, b) { return a.age > b.age ? 1 : -1;} );//升序
+
+	console.log(employees);
+
+	var arr1 = ['a','b','c'];
+	var arr2 = arr1;
+	arr2.push('d');
+	console.log(arr1);
+
+
+	function cat(){
+
+	}
+	cat.prototype={
+		name: "cat",
+		food:"fish",
+		say: function(){
+			console.log(this.name+" love "+this.food);
+		}
+	}
+
+	var blackCat = new cat();
+	// var blackCat = new cat;
+	blackCat.name = 'blackCat';
+	blackCat.say();
+	var whiteDog = {name: "whiteDog",food:"bone"};
+	blackCat.say.call(whiteDog);
+});
+
+</script>
+</body>
+</html>

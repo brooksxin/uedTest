@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>未支付订单-任务订单-订单筛选</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+    <div class="breadcrumb"></div>
+    <div class="cmxform">
+        <form class="record-search-form record-search-min record-search-form-border"
+        id="J_formSearch" name="J_formSearch">
+            <div class="record-search-cate">
+                <table class="search_table" cellpadding="0" cellspacing="0" border="0"
+                width="100%">
+                    
+                        
+                    
+                        <tr>
+                            <td width="60">
+                                <label class="description">
+                                    时间选择
+                                </label>
+                            </td>
+                            <td colspan="3">
+                                <input id="param-eDate" class="inputWidth element text Wdate" type="text" value="2015-12-04"
+                                onFocus="WdatePicker()" />
+                                -
+                                <input id="param-eDate" class="inputWidth element text Wdate" type="text" value="2015-12-04"
+                                onFocus="WdatePicker()" />
+                            </td>
+                            <td width="80">
+                                <label class="description">
+                                    客户来电号码
+                                </label>
+                            </td>
+                            <td width="100">
+                                <input class="inputWidth inputText" type="text" maxlength="255" value="" />
+                            </td>
+                            <td width="110">
+                                <div class="normalBtnArea fn-center w82">
+                                    <a class="searchBtn" href="javascript:;" id="J_search" style="width:120px">
+                                        <i></i>
+                                        查询
+                                    </a>
+                                </div>
+                            </td>
+                       </tr>
+                  <tbody id="J_searchMore" class="searchMore">
+                       <tr>
+                            <td>
+                                <label class="description">
+                                    工号
+                                </label>
+                            </td>
+                            <td>
+                                <input class="inputWidth inputText" type="text" maxlength="255" value=" x10082" />
+                            </td>
+                            <td>
+                                <label class="description">
+                                    处理人
+                                </label>
+                            </td>
+                            <td>
+                                <input class="inputWidth inputText" type="text" maxlength="255" value="" />
+                            </td>
+                            <td>
+                                <label class="description">
+                                    订单编号
+                                </label>
+                            </td>
+                            <td>
+                                <input class="inputWidth inputText" type="text" maxlength="255" value="" />
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="description">
+                                    客户姓名
+                                </label>
+                            </td>
+                            <td>
+                                <input class="inputWidth inputText" type="text" maxlength="255" value="" />
+                            </td>
+                            <td>
+                                <label class="description">
+                                    商品名称
+                                </label>
+                            </td>
+                            <td>
+                                <input class="inputWidth inputText" type="text" maxlength="255" value="" />
+                            </td>
+                            <td>
+                                <label class="description">
+                                    活动信息
+                                </label>
+                            </td>
+                            <td>
+                                <select class="inputWidth inputSelect">
+                                    <option>
+                                        暂无
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        
+                       <tr>
+                            <td>
+                                <label class="description">
+                                    支付方式
+                                </label>
+                            </td>
+                            <td>
+                                <select class="inputWidth inputSelect">
+                                    <option>
+                                        暂无
+                                    </option>
+                                </select>
+                            </td>
+                            <td>
+                                <label class="description">
+                                    物流状态
+                                </label>
+                            </td>
+                            <td>
+                                <select class="inputWidth inputSelect">
+                                    <option>
+                                        暂无
+                                    </option>
+                                </select>
+                            </td>
+                            <td>
+                                <label class="description">
+                                    物流单号
+                                </label>
+                            </td>
+                            <td>
+                                <input class="inputWidth inputText" type="text" maxlength="255" value=""/>
+                            </td>
+                     </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+            <div class="seeMoreFilter">
+                <a href="#" class="down">
+                </a>
+            </div>
+        </form>
+    </div>
+    <div class="listTopBtn">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="800">
+                    <h3>
+                        共1500条记录
+                    </h3>
+                </td>
+                <td width="120">
+                    <div class="normalBtnArea ft-right">
+                        <a class="normalBtn BGblue" href="#">
+                            导出订单
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="tablewidth mg_t_10">
+        <table class="ui-record-table table_radius table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th width="25">
+                        <div class="table_select">
+                            <input type="checkbox" />
+                        </div>
+                    </th>
+                    <th width="80">
+                        订单编号
+                    </th>
+                    <th width="">
+                        商品名称
+                    </th>
+                    <th width="40">
+                        金额
+                    </th>
+                    <th width="60">
+                        客户姓名
+                    </th>
+                    <th width="80">
+                        客户来电号码
+                    </th>
+                    <th width="60">
+                        下单时间
+                    </th>
+                    <th width="100">
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="J_tabletpl">
+                <tr>
+                    <td>
+                        <div class="table_select">
+                            <input type="checkbox" />
+                        </div>
+                    </td>
+                    <td>
+                        CM20150318825824
+                    </td>
+                    <td>
+                        酷派大神F1plus 移动4G（智铂银）
+                    </td>
+                    <td>
+                        <div class="fn-right">
+                            1779.00
+                        </div>
+                    </td>
+                    <td>
+                        张凤仪
+                    </td>
+                    <td>
+                        15966137525
+                    </td>
+                    <td>
+                        2015-12-5 12:24:35
+                    </td>
+                    <td>
+                        <div class="gridRowBtn">
+                            <a class="item-text" href="javascript:;">
+                                查看
+                            </a>
+                            <a class="item-text" href="javascript:;" onclick="cancelReservation()">
+                                取消预约
+                            </a>
+                            <a class="item-text" href="javascript:;">
+                                拨打电话
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="table_select">
+                            <input type="checkbox" />
+                        </div>
+                    </td>
+                    <td>
+                        CM20150318825824
+                    </td>
+                    <td>
+                        酷派大神F1plus 移动4G（智铂银）
+                    </td>
+                    <td>
+                        <div class="fn-right">
+                            1779.00
+                        </div>
+                    </td>
+                    <td>
+                        张凤仪
+                    </td>
+                    <td>
+                        15966137525
+                    </td>
+                    <td>
+                        2015-12-5 12:24:35
+                    </td>
+                    <td>
+                        <div class="gridRowBtn">
+                            <a class="item-text" href="javascript:;">
+                                查看
+                            </a>
+                            <a class="item-text" href="javascript:;" onclick="cancelReservation()">
+                                取消预约
+                            </a>
+                            <a class="item-text" href="javascript:;">
+                                拨打电话
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="table_select">
+                            <input type="checkbox" />
+                        </div>
+                    </td>
+                    <td>
+                        CM20150318825824
+                    </td>
+                    <td>
+                        酷派大神F1plus 移动4G（智铂银）
+                    </td>
+                    <td>
+                        <div class="fn-right">
+                            1779.00
+                        </div>
+                    </td>
+                    <td>
+                        张凤仪
+                    </td>
+                    <td>
+                        15966137525
+                    </td>
+                    <td>
+                        2015-12-5 12:24:35
+                    </td>
+                    <td>
+                        <div class="gridRowBtn">
+                            <a class="item-text" href="javascript:;">
+                                查看
+                            </a>
+                            <a class="item-text" href="javascript:;" onclick="cancelReservation()">
+                                取消预约
+                            </a>
+                            <a class="item-text" href="javascript:;">
+                                拨打电话
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--翻页及功能按钮区域开始-->
+    <DIV class="amount-bottom">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+            <tr>
+                <td width="60">
+                    <input type="checkbox" class="selectAll" id="selectAll" />
+                    <label for="selectAll">
+                        全选
+                    </label>
+                </td>
+                
+                <td width="50%">
+                    <DIV class="fn-clear action-other  action-other-show ">
+                        <DIV id=Pagination class="page pagination fn-right">
+                        </DIV>
+                        <DIV class="fn-right fn-pt5 fn-pr10">
+                        </DIV>
+                    </DIV>
+                </td>
+            </tr>
+        </table>
+    </DIV>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+//页面加载完开始执行
+$(function () {
+});
+  function cancelReservation(){
+  artDialog({
+        id: 'Confirm',
+        lock: true,
+        opacity: .1,
+        content: '您确定要取消此预约单吗？',
+        ok: function (here) {
+            art.dialog.tips('已取消');
+        },
+        cancel: function (here) {
+            return;
+        }
+    });
+    
+    
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>质量管理模块——评分项</title>
+
+<#include "../../tpl/res_css.tpl" />
+
+
+
+</head>
+
+<body>
+<!-- 面包屑 begain -->	
+<div class="breadcrumb"></div>
+<!-- 面包屑end -->
+<div class="titleArea">
+    <div class="listTopBtn fn-clear">
+        <h2 class="fn-left">评分项管理</h2>
+        <div class="normalBtnArea mb-10 ft-right">
+            <a class="normalBtn BGblue" href="javascript:;" id="CreateScore">新建评分项</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div method="post" action="#" class="cmxform" >
+    <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+        <div class="record-search-cate">
+            <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="100"><label class="description">评分项名称</label></td>
+                        <td colspan="2" width="200">
+                   		<input name="ascore_item_nm" id="ascore_item_nm" class="inputWidth inputText" type="text" maxlength="255" value="" />
+                        </td>
+                        <td colspan="3">&nbsp;</td>
+                        <td>
+                            <a class="btn_search" href="javascript:;" id="J_search" >查询</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="description">创建时间起</label>
+                        </td>
+                        <td>
+                            <input id="query_ben_date" name="query_ben_date" class="element text Wdate" type="text"  onFocus="WdatePicker()"  />
+                        </td>
+                        <td>
+                            <label class="description">创建时间止</label>
+                        </td>
+                        <td>
+                           <input id="query_end_date" name="query_end_date" class="element text Wdate" type="text"  onFocus="WdatePicker()"  />
+                        </td>
+                        <td>
+                            <label class="description">发布工号</label>
+                        </td>
+                        <td>
+                            <select class="inputSelect w160" id="crt_user_id" name="crt_user_id">
+
+                            </select>
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+    </form>
+</div>
+<div class="tablewidth mg_t_10">
+    <table class="ui-record-table table_radius table-bordered table-striped">
+        <thead>
+            <tr>
+                <th width="25">&nbsp;</th>
+                <th width="150">评分项</th>
+                <th width="">等级名称</th>
+                <th width="200">等级分值</th>
+                <th width="260">创建时间</th>
+                <th width="150">发布工号</th>
+                <th width="200">操作</th>
+            </tr>
+        </thead>
+        <tbody id="J_tabletpl">
+ 
+        </tbody>
+    </table>
+</div>
+
+<!--翻页及功能按钮区域开始-->
+<div class="amount-bottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+        <tr>
+            <td width="60">
+                <input type="checkbox" class="selectAll" id="selectAll"  />
+                <label for="selectAll">全选</label>
+            </td>
+            <td>
+                <div class="normalBtnArea"><!--不附加ft-right样式，默认左对齐-->
+                    <a class="normalBtn BGgray" id="J_deleteList" href="#">删除评分项</a>
+                </div>
+            </td>
+            <td width="50%">
+                <div class="fn-clear action-other  action-other-show ">
+                    <div id="Pagination" class="page pagination fn-right"></div>
+                    <div class="fn-right fn-pt5 fn-pr10"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<script id="T_tabletpl" type="text/x-handlebars-template">
+    {{#if beans}}
+        {{#each beans}} 
+			<tr>
+                <td>
+				<div class="table_select">
+				<input  data-keyid='{{ASCORE_ITEM_ID}}' type="checkbox" name="prod" value='{{ASCORE_ITEM_ID}}'/></div>
+                 </td>
+                <td><a class="item-text" href="javascript:;" onclick="update('{{ASCORE_ITEM_ID}}')">{{ASCORE_ITEM_NM}}</a></td>
+                <td>{{LVL_NAME}}</td>
+                <td><div>{{LVL_SCORE}}</div></td>
+                <td>{{CRT_TIME}}</td>
+                <td>{{CRT_USER_ID}}</td>
+                <td>
+                    <div class="gridRowBtn" data='{{dataToJSON this}}'>
+                       <a class="item-text" href="javascript:;" onclick="update('{{ASCORE_ITEM_ID}}')">编辑</a>
+                    </div>
+                </td>
+            </tr> 
+         {{/each}}
+    {{else}}
+	<tr>
+		<td colspan="8">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+
+    {{/if}}
+</script>
+ 
+ <script id="T_crt_user_id" type="text/x-handlebars-template">
+		<option value="">请选择</option>
+		{{#if beans}}
+            {{#each beans}}
+                 <option value="{{USER_ID}}">{{PTY_NO}} {{PTY_NM}}</option>
+             {{/each}}
+   		{{/if}}
+</script>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+	srvMap.add('query', '','front/sh/quality!execute?uid=pfx001');   //查询服务
+	srvMap.add('queryUser', '','front/sh/user!userinfo?uid=u005');	 //查询工号
+	srvMap.add('delScore', '','front/sh/quality!execute?uid=pfx002');//批量删除
+
+    var G_params = {
+        		    url : srvMap.get('query'),
+        		    searchformId :"J_formSearch",
+        		    items_per_page : 10,   // 每页数     @param : limit
+        		    page_index : 0 , //当前页  @param : start
+        		    pagination : "Pagination" , //分页id
+        		    tabletpl : "T_tabletpl",  //表格模板
+        		    tablewrap :"J_tabletpl" //表格容器
+        		};
+
+    //编辑问题
+    function update(CMPGN_ID) {	
+		//TODO 进入编辑页面
+		window.location.href = "EditScoreGrade.html?id=" + CMPGN_ID;
+	}
+ 
+
+//全选checkbox
+	$('#selectAll').change(function() {
+		var ck=this.checked;
+		$("#J_tabletpl input[type='checkbox']").each(function(i,ele){
+			this.checked=ck;
+		});
+	}); 
+  
+	//删除
+    $('#J_deleteList').bind('click',function(){ 
+    	if(confirm("确定要将选中的评分项删除吗？"))
+    	{
+        var $boxes =  $('#J_tabletpl').find('input[type=checkbox]:checked');
+        var idStr = ''; 
+        $.each($boxes, function(p0, p1, p3) { 
+        	idStr += $(p1).val() + ',';
+        });
+
+       	idStr = "SCORE_ITEM_IDS="+ idStr;
+       	   //不分页获取数据
+           Util.ajax.postJsonSync(srvMap.get('delScore'),idStr,function(json,status){
+                if (status) {
+                    alert("删除成功！");
+                }else{
+                    alert(json.returnMessage||'删除失败，请重试！');
+                }
+           })
+           $('#J_search').trigger("click");
+    	}
+    });
+  
+  
+//页面加载完开始执行
+$(document).ready(function () { 
+			//新建评分项 
+			$('#CreateScore').bind('click',function(){
+			    window.location.href="NewScoreGrade.html"; 
+			});
+
+		  //初始化发布工单
+          var cmd={"DEPT_ID": 1000000000106};
+	    	 Util.ajax.postJson(srvMap.get('queryUser'),cmd,function(json,status){
+	    		  if(status){
+	    		  		Util.ajax.loadTemp("#crt_user_id", $("#T_crt_user_id"), json);
+	    		  		//console.log(json);
+	    		  }else{
+	    			  window.location.href="NewScoreGrade.html"; 
+	    		  }
+	    	  });
+
+        	$('#J_search').bind('click',function(){
+        		  	var str= $("#"+G_params.searchformId).serialize();
+        	        Util.pagination(G_params.page_index, true , G_params , str );
+        	  }); 
+});
+
+Handlebars.registerHelper('dataToJSON', function(obj) {
+    return JSON.stringify(obj);
+  });
+</script>
+</body>
+</html>

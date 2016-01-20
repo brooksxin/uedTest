@@ -1,0 +1,182 @@
+      <!DOCTYPE html>
+      <html>
+      <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>编辑岗位信息</title>
+      <#include "../../tpl/res_css.tpl" />
+      </head>
+      
+      <body>
+      <div class="formItem">
+         
+                <div class="titleArea">
+                    <h2>编辑岗位信息</h2>
+                </div>
+          <div class="formArea">
+                <table class="form_table">
+                      <tbody>
+                          <tr>
+                              <td width="90"><label class="formDescription"><span class="fn-high">*</span> 岗位名称</label></td>
+                              <td width=""><input class="FormInputText width100" type="text" id="POST_NM" name="POST_NM"/></td>
+                          </tr>
+                          <tr>
+                              <td width="90"><label class="formDescription"><span class="fn-high">*</span> 渠道</label></td>
+                              <td width="">
+                                   <select class="FormInputText width100" id="CHNL_ID" name="CHNL_ID">
+                                   	<option value="">请选择</option>
+                                   </select>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td width="90"><label class="formDescription"><span class="fn-high">*</span> 类型</label></td>
+                              <td width="">
+                                   <select class="FormInputText width100" id=POST_TYPE_CD name="POST_TYPE_CD">
+                                   	<option value="">全部</option>
+                                   </select>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td valign="top"><label class="formDescription"><span class="fn-high">*</span> 活动描述：</label></td>
+                              <td>
+                              		<div class="qDecorationTxt">
+										<textarea class="qDecorationTxtEdit" cols="50" rows="5" id="POST_DESC" name="POST_DESC"  placeholder="输入岗位描述，非必填项"></textarea>
+									</div>
+                              </td>
+                          </tr>
+                      </tbody>
+                </table>
+                <hr/>
+                <div class="formBtnArea">
+                    <div class="normalBtnArea fn-center">
+                       <a class="normalBtn BGblue largeBtn" href="javascript:;" id="SURE" >确定</a>
+                       <a class="normalBtn BGgray largeBtn" href="javascript:;" id="CANCEL" >取消</a>   
+                    </div>
+                </div>
+                                                 
+      </div>
+      
+   </div>
+
+	<script id="T_CHNL_ID" type="text/x-handlebars-template">
+		<option value="">请选择</option>
+		{{#if beans}}
+            {{#each beans}}
+                 <option value="{{CHNL_ID}}">{{PTY_NM}}</option>
+             {{/each}}
+   		{{/if}}
+	</script>
+
+	<script id="T_POST_TYPE_CD" type="text/x-handlebars-template">
+		<option value="">全部</option>
+		{{#if beans}}
+            {{#each beans}}
+                 <option value="{{CD_VAL}}">{{CMN_CD_VAL_NM}}</option>
+             {{/each}}
+   		{{/if}}
+	</script>
+
+
+	<#include "../../tpl/res_js.tpl" />  
+      <script type="text/javascript">
+      
+      	srvMap.add('queryPost' , 'query.json','front/sh/user!index?uid=sys0033');//根据岗位ID查询岗位
+      	srvMap.add('updatePost' , 'query.json','front/sh/user!index?uid=sys0012');//修改岗位
+      	srvMap.add('queryChnl' , 'query.json','front/sh/user!getChnl?uid=u002');//查询渠道
+      	//srvMap.add('queryPostType' , 'query.json','front/sh/user!index?uid=sys0034');//查询岗位类型
+      	srvMap.add('queryPostType' , 'query.json','front/sh/common!smsRs?uid=c009')
+        //页面加载完开始执行
+        $(document).ready(function () {
+        	var cmd = {};
+        	//加载渠道
+        	Util.ajax.postJsonSync(srvMap.get('queryChnl'),cmd,function(json,status){
+        		  if(status){
+        		  		Util.ajax.loadTemp("#CHNL_ID",$("#T_CHNL_ID"),json);
+        		  }else{
+        			  
+        		  }
+        	});
+            
+            //加载岗位类型 
+        	cmd = {"tbNm":"T_PI_PRIV_POST","colNm":"POST_TYPE_CD"};
+          	Util.ajax.postJsonSync(srvMap.get('queryPostType'),cmd,function(json,status){
+          		  if(status){
+          		  		Util.ajax.loadTemp("#POST_TYPE_CD",$("#T_POST_TYPE_CD"),json);
+          		  }else{
+          			  Util.dialog.tips("加载岗位类型失败");
+          		  }
+          	});
+        	
+            //加载岗位信息
+        	var PRIV_POST_ID = Util.browser.getParameter("PRIV_POST_ID");
+        	var cmd={"PRIV_POST_ID":PRIV_POST_ID};
+          	Util.ajax.postJson(srvMap.get("queryPost"), cmd,function(json){
+          		  if (json.returnCode == 0) {
+          			  if(json.beans.length > 0){
+          				  var data = json.beans[0];
+          				  $("#POST_NM").val(data.POST_NM);
+          				  //$("#POST_TYPE_CD").val(data.POST_TYPE_CD);
+          				  for(var i=0;i<$("#CHNL_ID").get(0).options.length;i++){
+          					  if($("#CHNL_ID").get(0).options[i].value==data.CHNL_ID){
+          						$("#CHNL_ID").get(0).options[i].selected = true;
+          						break;
+          					  }
+          				  }
+          				  
+          				  for(var i=0;i<$("#POST_TYPE_CD").get(0).options.length;i++){
+        					  if($("#POST_TYPE_CD").get(0).options[i].value==data.POST_TYPE_CD){
+        						$("#POST_TYPE_CD").get(0).options[i].selected = true;
+        						break;
+        					  }
+        				  }
+          				  //$("#CHNL_ID").val(data.CHNL_ID);alert(data.CHNL_ID);
+          				  $("#POST_DESC").val(data.POST_DESC);
+          			  }
+          		  }else{
+          			  
+          		  }
+             });
+        });
+        
+    	//保存修改信息
+        $(function(){
+      	  $("#SURE").click(function(){
+      		  var PRIV_POST_ID = Util.browser.getParameter("PRIV_POST_ID");
+      		  var POST_NM = $("#POST_NM").val();
+      		  var POST_TYPE_CD = $("#POST_TYPE_CD").val();
+      		  var CHANEL = $("#CHNL_ID").val();
+      		  var POST_DESC = $("#POST_DESC").val();
+      		  
+      		if(POST_NM == null || POST_NM == '' || POST_NM == undefined){
+		 		Util.dialog.tips("请输入岗位名称");
+				return;
+		 	}
+		 	if(CHANEL == null || CHANEL == '' || CHANEL == undefined){
+		 		Util.dialog.tips("请输选择渠道");
+				return;
+		 	}
+		 	if(POST_TYPE_CD == null || POST_TYPE_CD == '' || POST_TYPE_CD == undefined){
+		 		Util.dialog.tips("请输选择岗位类型");
+				return;
+		 	}
+      		  
+      		  var cmd = {"PRIV_POST_ID":PRIV_POST_ID,"CHNL_ID":CHANEL,"POST_NM":POST_NM,"POST_TYPE_CD":POST_TYPE_CD,"POST_DESC":POST_DESC};
+      		  Util.ajax.postJson(srvMap.get("updatePost"), cmd,function(json){
+        		  if (json.returnCode == 0) {
+        			  Util.dialog.tips("修改岗位成功");
+        			  window.location.href="privPostList.html";
+        		  }else{
+        			  Util.dialog.tips(json.returnMessage);
+        		  }
+              });
+      	  });
+        });
+        
+    	//取消
+        $(function(){
+      	  $("#CANCEL").click(function(){
+      		  window.location.href="privPostList.html";
+      	  });
+        });
+      </script>
+      </body>
+      </html>

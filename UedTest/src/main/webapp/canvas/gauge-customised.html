@@ -1,0 +1,297 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="animations.css">
+    <script src="RGraph.common.core.js" ></script>
+    <script src="RGraph.gauge.js" ></script>
+    <script src="RGraph.common.effects.js" ></script>
+    <script src="jquery.js"></script>
+    <!--[if lt IE 9]><script src="excanvas.js"></script><![endif]-->
+    
+    <title>A customised Gauge chart</title>
+    <style type="text/css">
+    .items {
+        float: left;
+    }
+    .cvs2 {
+        /*margin-top: -150px;*/
+        display: inline-block;
+    }
+    </style>
+</head>
+<body>
+
+    <h1>A customised Gauge chart</h1>
+
+    <select id="animation_selector" onchange="selectAnimation(this.value)">
+        <option selected></option>
+        <option>flash</option>
+        <option>bounce</option>
+        <option>shake</option>
+        <option>tada</option>
+        <option>swing</option>
+        <option>wobble</option>
+        <option>wiggle</option>
+        <option>pulse</option>
+        <option>flip</option>
+        <option>flipInX</option>
+        <option>flipOutX</option>
+        <option>flipInY</option>
+        <option>flipOutY</option>
+        
+        <option></option>
+
+        <option>fadeIn</option>
+        <option>fadeInUp</option>
+        <option>fadeInDown</option>
+        <option>fadeInLeft</option>
+        <option>fadeInRight</option>
+        <option>fadeInUpBig</option>
+        <option>fadeInDownBig</option>
+        <option>fadeInLeftBig</option>
+        <option>fadeInRightBig</option>
+        
+        <option></option>
+
+        <option>fadeOut</option>
+        <option>fadeOutUp</option>
+        <option>fadeOutDown</option>
+        <option>fadeOutLeft</option>
+        <option>fadeOutRight</option>
+        <option>fadeOutUpBig</option>
+        <option>fadeOutDownBig</option>
+        <option>fadeOutLeftBig</option>
+        <option>fadeOutRightBig</option>
+        
+        <option></option>
+
+        <option>bounceIn</option>
+        <option>bounceInDown</option>
+        <option>bounceInUp</option>
+        <option>bounceInLeft</option>
+        <option>bounceInRight</option>
+
+        <option></option>
+    
+        <option>bounceOut</option>
+        <option>bounceOutDown</option>
+        <option>bounceOutUp</option>
+        <option>bounceOutLeft</option>
+        <option>bounceOutRight</option>
+
+        <option></option>
+    
+        <option>rotateIn</option>
+        <option>rotateInDownLeft</option>
+        <option>rotateInDownRight</option>
+        <option>rotateInUpLeft</option>
+        <option>rotateInUpRight</option>
+
+        <option></option>
+
+        <option>rotateOut</option>
+        <option>rotateOutDownLeft</option>
+        <option>rotateOutDownRight</option>
+        <option>rotateOutUpLeft</option>
+        <option>rotateOutUpRight</option>
+
+        <option></option>
+
+        <option>lightSpeedIn</option>
+        <option>lightSpeedOut</option>
+
+        <option></option>
+
+        <option>hinge</option>
+        <option>rollIn</option>
+        <option>rollOut</option>
+        <option>expand</option>
+        <option>contract</option>
+    </select>
+
+    <div class="items">
+        <canvas id="cvs" width="300" height="300">[No canvas support]</canvas>
+    </div>
+    <div class="items cvs2">
+        <canvas id="cvs2" width="300" height="300">[No canvas support]</canvas>
+    </div>
+    <div class="items">
+        <canvas id="cvs3" width="300" height="300">[No canvas support]</canvas>
+    </div>
+    
+    <script>
+        $(document).ready(function ()
+        {
+            var gauge = new RGraph.Gauge({
+                id: 'cvs',
+                min: 0,
+                max: 200,
+                // value: [184,12],//多个值会显示多个指针
+                value: [184],
+                options: {
+                    title: {
+                        top: {//顶部字体
+                            self: '中文',
+                            size: 'Italic 22',
+                            font: 'Impact',
+                            color: 'white'
+                        },
+                        bottom: {//底部字体
+                            self: 'Knots',
+                            size: 'Italic 14',
+                            font: 'Impact',
+                            color: '#ccc',
+                            pos: -0.4
+                        }
+                    },
+                    background: {//内部大圆
+                        color: 'black',
+                        gradient: true
+                    },
+                    centerpin: {//中心圆
+                        color: '#666'
+                    },
+                    needle: {//指针---需要与value数组对应
+                        // size: [null, 50],//null表示贴近内部大圆半径
+                        size: [null],
+                        // colors: ['Gradient(transparent:white:white:white:white:white)', 'Gradient(transparent:#d66:#d66:#d66:#d66)']//指针的颜色变化
+                        colors: ['Gradient(transparent:#d66:#d66:#d66:#d66)']
+                    },
+                    text: {//内部大圆刻度上描述文字
+                        color: 'white'
+                    },
+                    tickmarks: {//内部大圆刻度
+                        big: {
+                            color: 'white'
+                        },
+                        medium: {
+                            color: 'white'
+                        },
+                        small: {
+                            color: 'white'
+                        }
+                    },
+                    border: {
+                        outer: '#666',
+                        inner: '#333'
+                    },
+                    colors: {//超过警戒值的颜色
+                        ranges: [[-100,-90, 'red'], [-90, -70,'yellow'], [-70, 70, '#0f0'], [70, 90, 'yellow'], [90,100,'red']]
+                        // ranges: []
+                    },
+                    angles: {//刻度所占区域
+                        /**
+                         * RGraph.HALFPI, 六点钟方向
+                         * RGraph.PI, 九点钟方向
+                         * RGraph.TWOPI 三点钟方向
+                        **/
+                        // start: RGraph.PI,
+                        // end: RGraph.TWOPI,
+                    },
+                    gutter: {//margin值（可控制图片的缩放大小），默认5
+                        left: 5,
+                        right: 5,
+                        top: 5,
+                        bottom: 5
+                    },
+                    centerx: 150,//控制x轴方向的padding，默认位置为宽度的一半（即显示全部）
+                    // centery: 270,//控制y轴方向的padding，默认位置为高度的一半（即显示全部）
+                    radius: null,//图像的半径
+                    scale: {
+                        // decimals: 2//数值精确度
+                    },
+                    zoom: {
+                        factor: 3
+                    }
+
+                }
+            }).draw();
+
+            var gauge2 = new RGraph.Gauge({
+                id: 'cvs2',
+                min: 0,
+                max: 200,
+                value: [184],
+                options: {
+                    title: {
+                        top: {
+                            self: '中文',
+                            size: 'Italic 22',
+                            font: 'Impact',
+                            color: 'white'
+                        },
+                        bottom: {
+                            self: 'Knots',
+                            size: 'Italic 14',
+                            font: 'Impact',
+                            color: '#ccc',
+                            pos: 0.4
+                        }
+                    },
+                    background: {
+                        color: 'black',
+                        gradient: true
+                    },
+                    centerpin: {
+                        color: '#666',
+                        radius: 10
+                    },
+                    needle: {
+                        colors: ['Gradient(transparent:#d66:#d66:#d66:#d66)']
+                    },
+                    text: {
+                        color: 'white'
+                    },
+                    tickmarks: {
+                        big: {
+                            color: 'white'
+                        },
+                        medium: {
+                            color: 'white'
+                        },
+                        small: {
+                            color: 'white'
+                        }
+                    },
+                    border: {
+                        outer: '#666',
+                        inner: '#333'
+                    },
+                    angles: {
+                        start: RGraph.PI,
+                        end: RGraph.TWOPI
+                    },
+                    centery: 280
+
+                }
+            }).grow({frame: 60});
+
+            var gauge3 = new RGraph.Gauge('cvs3', 0, 20, 18)
+                .set('title.top', 'Coal')
+                .set('units.post', '')
+                .set('red.start', 17)
+                .set('red.end', 20)
+                .set('yellow.start', 10)
+                .set('yellow.end', 27)
+                .set('scale.decimals', 1)
+                .set('value.text', true)//大圆中部单位显示
+                .set('value.text.y.pos', 0.3)
+                .set('value.text.units.pre', 'ZW')
+                .set('value.text.units.post', 'GW')
+                .draw();
+
+        })
+
+        function selectAnimation(effect)
+        {
+            var select = document.getElementById('cvs2');
+
+            select.className = '';
+            select.className = 'animated ' + effect;
+        }
+    </script>
+
+</body>
+</html>

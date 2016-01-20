@@ -1,0 +1,34 @@
+{
+	"returnCode": "0000",
+	"returnMessage": "success",
+	"beans":[
+		{
+			"CATG_UNIT_ID":"04",
+			"CATG_UNIT_NM":"华为",
+		},
+		{
+			"CATG_UNIT_ID":"06",
+			"CATG_UNIT_NM":"mi"
+		},
+		{
+			"CATG_UNIT_ID":"07",
+			"CATG_UNIT_NM":"meizu",
+		},
+		{
+			"CATG_UNIT_ID":"10",
+			"CATG_UNIT_NM":"中兴"
+		},
+		{
+			"CATG_UNIT_ID":"08",
+			"CATG_UNIT_NM":"苹果",
+		},
+		{
+			"CATG_UNIT_ID":"09",
+			"CATG_UNIT_NM":"test"
+		},
+		{
+			"CATG_UNIT_ID":"12",
+			"CATG_UNIT_NM":"OPPO"
+		}
+	]
+}

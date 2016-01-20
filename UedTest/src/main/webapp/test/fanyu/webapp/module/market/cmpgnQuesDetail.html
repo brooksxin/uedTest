@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>项目详情_营销类</title>
+<#include "../../tpl/res_css.tpl" />
+
+</head>
+
+<body>
+<div class="formItem">
+    <div class="titleArea bd-bottom fn-clear">
+        <a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a><h2 class="ui-textIndentStyle fn-left">项目详情</h2>
+       
+    </div>
+	<div class="ml-15 mr-15">
+    	<div id="cmpgn_detail" class="mt-20"><h2 class="ft-14">1.基本信息</h2>
+    
+    	
+       
+        </div>
+    </div>
+ 
+    <div class="ml-15 mr-15">
+    	<div class="mt-20" id ="prod_detail"><h2 class="ft-14">2.项目问卷</h2></div>
+    	
+    	<div class="tablewidth fn-mt10">
+        <table class="ui-record-table table_radius table-bordered table-striped"  >
+                    <thead>
+                        <tr>
+                          
+                            <th width="80">问卷编号</th>
+                            <th>问卷名称</th>
+                            <th>问卷类型</th>
+                            <th width="80">发布人</th>
+                            <th width="80">发布时间</th>
+                            <th width="80">操作</th>
+                        </tr>
+                     </thead>
+                     <tbody id="J_tabletpl_ques">
+                        
+                    </tbody>
+                </table>
+        </div>
+    </div>
+	
+  
+	<div class="ml-15 mr-15">
+    	<div class="mt-20"><h2 class="ft-14">3.目标客户</h2></div>
+    	
+    	<div class="tablewidth fn-mt10">
+        <table class="ui-record-table table_radius table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>文件名称</th>
+                    <th>样本数量</th>
+                    <th> 已剔除重复名单</th>
+                    <th>已剔除敏感客户</th>
+                    <th width="120">上传时间</th>
+                </tr>
+            </thead>
+            <tbody id="J_tabletpl_cust">
+               
+            </tbody>
+        </table>
+            <div class="fn-right"><a class="normalBtn BGgray" href="javascript:;" id="addCust">导入名单</a></div>
+        </div>
+    </div>
+    </div>
+    
+    <div class="ml-15 mr-15">
+    	<div class="mt-20"><h2 class="ft-14">4.执行团队</h2></div>
+    
+    	<div class="tablewidth mg_t_10">
+                <table class="ui-record-table table_radius table-bordered table-striped mt-10" >
+                    <thead>
+                        <tr>
+                            <th width="120">班组名称</th>
+                            <th width="120">班组人数 </th>
+                            <th width="120">任务总量</th>
+                            <th width="120">完成数量</th>
+                        </tr>
+                     </thead>
+                     <tbody id="J_tabletpl_team">
+                        
+                    </tbody>
+                </table>
+		</div>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+<#include "../../tpl/res_js.tpl" />  
+<script id="cmpgnTab" type="text/x-handlebars-template">
+<form id="J_form_activity">
+<table class="form_table"  width="100%">
+    <tr>
+        <td><span class="gray_text">项目名称:</span><span class="ml-15">{{CMPGN_NM}}</span></td>
+        <td><span class="gray_text">项目编号:</span><span class="ml-15">{{CMPGN_ID}}</span></td>
+    </tr>
+    <tr>
+        <td><span class="gray_text">创建人:</span><span class="ml-15">{{CRT_USER_ID}}</span></td>
+        <td><span class="gray_text">执行渠道:</span><span class="ml-15">{{PTY_NM}}</span></td>
+    </tr>
+    <tr>
+        <td><span class="gray_text">项目类型:</span><span class="ml-15">{{CMPGN_TYPE_CD}}</span></td>
+        <td><span class="gray_text">项目归属:</span><span class="ml-15">{{POST_NAME}}</span></td>
+    </tr>
+
+    <tr>
+        <td><span class="gray_text">起止时间:</span><span class="ml-15">{{CMPGN_EFF_DATE}} - {{CMPGN_INVLD_DATE}}</span></td>
+    </tr>
+    <tr>
+        <td><span class="gray_text">项目描述:</span><span class="ml-15">{{CMPGN_DESC}}</span></td>
+    </tr>
+    <tr>
+        <td><span class="gray_text">执行进度:</span><span class="fn-right gray_text">已完成：<span class="gray_text">{{hasFinish}}</span>/{{total}}</span></td>
+    </tr>
+</table>
+ <div class="importProcess" id="J_step5_2">
+            <div class="rateBar">
+                    <div class="rateBg"></div>
+                    <div class="rateProcess" style="width: 75%;"></div>
+					<input type="hidden" value="{{hasFinish}}" id="has_fs"/>
+					<input type="hidden" value="{{total}}" id="hs_total"/>
+            </div>
+        </div>
+</form>
+</script>
+<script id=quesTab type="text/x-handlebars-template">
+{{#if beans}}
+ {{#each beans}}
+       					<tr>
+                            
+                            <td>{{QNR_ID}}</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">{{QNR_NM}}</a></div></td>
+                            <td>{{QNR_TYPE_CD}}</td>                            
+                            <td>{{CRT_USER_ID}}</td>
+                            
+                            <td>{{CRT_TIME}}</td>
+                            <td><a href="#" onclick="showQues('{{QNR_ID}}')">预览</a></td>
+                        </tr>
+{{/each}}
+    {{else}}
+	<tr>
+		<td colspan="9">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+<script id="custTab" type="text/x-handlebars-template">
+{{#if cust}}
+    {{#each cust}}
+ 				<tr>
+					<td><a href="#">{{FILE_NM}}</a></td>
+					<td>{{SMPL_QTY}}</td>
+					<td>{{DEL_DPLCT_CUST_QTY}}</td>
+					<td>{{DEL_SNSTV_CUST_QTY}}</td>
+					<td>{{UPLOAD_TIME}}</td>
+                </tr>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="9">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+<script id="teamTab" type="text/x-handlebars-template">
+{{#if team}}
+    {{#each team}}
+ 				<tr>
+                    <td>{{BM}}</td>
+					<td>{{num}}</td>
+					<td>{{TSK_ALCT_QTY}}</td>
+					<td>{{count}}</td>
+                </tr>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="9">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+
+<script type="text/javascript">
+
+
+srvMap.add('detail', 'query.json', 'front/sh/market!index?uid=mgl002');//查询商品详情
+srvMap.add('queryQues' , 'update.json','front/sh/questionaire!index?uid=qnrwq006');//查询问卷信息
+	var CMPGN_ID = Util.browser.getParameter("CMPGN_ID");
+	var cmd ={
+			CMPGN_ID : CMPGN_ID	
+	}
+	var QNR_ID="";
+    //页面加载完开始执行
+    $(document).ready(function () {
+    	//加载数据
+    	 Util.ajax.postJsonSync(srvMap.get("detail"),cmd,function(json, status){
+    		if(status){
+    			Util.ajax.loadTemp("#cmpgn_detail",$("#cmpgnTab"),json.object.cmpgn);
+    			QNR_ID=json.object.cmpgn.QNR_ID;
+ 	    		Util.ajax.loadTemp("#J_tabletpl_cust",$("#custTab"),json.object);
+ 	    		Util.ajax.loadTemp("#J_tabletpl_team",$("#teamTab"),json.object);
+ 	    		
+ 	    		
+ 	    		Number.prototype.toPercent = function(){
+ 	    			return (Math.round(this * 10000)/100).toFixed(2) + '%';
+ 	    			}
+ 	    		var total=$('#hs_total').val();
+ 	    		var finish=$('#has_fs').val();
+ 	    		var progress_val=eval(parseInt(finish)/parseInt(total));
+ 	    		//var progress_val=eval(parseInt(50)/parseInt(100));
+ 	    		$('.rateProcess').css('width',progress_val.toPercent());
+ 	    		
+    		}
+    	 });
+    		var param={"QNR_ID":QNR_ID};
+            Util.ajax.postJsonSync(srvMap.get('queryQues'),param,function(json,status){
+   	            if(status){
+   	                if(json.beans.length != "0"){
+   	                	Util.ajax.loadTemp("#J_tabletpl_ques",$("#quesTab"),json);
+   	                }
+   	                
+   	            }
+   	        });
+    	 
+    		 
+    	$("#addCust").bind("click",function(){
+    		    window.location.href="importAddCust.html?id="+CMPGN_ID;
+    	});
+    	
+    	 
+        //初始化函数
+        $(".qBox").mouseover(function() {
+          $(this).addClass("qBoxHover");
+          $(this).find(".qEditIcon").show();
+
+        }).mouseout(function() {
+          $(this).removeClass("qBoxHover");
+          $(this).find(".qEditIcon").hide();
+        });
+    });
+    
+    function showQues(QNR_ID){
+      	require(['common/questionnaire/questionView'], function(QuestionView){
+  			//'77ee5102-51cd-4223-ac68-39868917a8ce'
+              var creatQuestionArie = new QuestionView({ questionnaireID:QNR_ID }).render();
+          });
+      	//window.location.href="?QNR_ID"
+      }
+</script>
+</body>
+</html>

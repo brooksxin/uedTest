@@ -1,0 +1,54 @@
+{
+    "rtnCode": "0",
+    "prodMenu": [
+        {
+            "name": "用户管理",
+            "sub": [
+                {
+                    "name": "用户赋权",
+                    "url": "empowerment.html"
+                },
+                {
+                    "name": "用户审批",
+                    "url": "approve.html"
+                }
+            ]
+        },
+        {
+            "name": "产品中心",
+            "sub": [
+                {
+                    "name": "产品管理",
+                    "url": "prodManage.html"
+                },
+                {
+                    "name": "艾扑V2.0版本",
+                    "url": "product.html"
+                },
+                {
+                    "name": "艾扑V3.0版本"
+                }
+            ]
+        },
+        {
+            "name": "文档下载",
+            "sub": [
+                {
+                    "name": "艾扑V1.0版本"
+                },
+                {
+                    "name": "艾扑V2.0版本"
+                }
+            ]
+        },
+        {
+            "name": "资源中心",
+            "sub": [
+                {
+                    "name": "文档管理",
+                    "url": "docManage.html"
+                }
+            ]
+        }
+    ]
+}

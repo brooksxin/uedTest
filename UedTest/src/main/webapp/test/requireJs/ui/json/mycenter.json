@@ -1,0 +1,46 @@
+{
+    "rtnCode": "0",
+    "userInfo": {
+        "id": "2009",
+        "name": "zhangxx3",
+        "Email": "zhangxx3@asiainfo.com",
+        "regDate": "2015/07/08",
+        "points": "2000"
+    },
+    "roleInfo": [
+        {
+            "img": "ui/theme/img/userIcon.png",
+            "tit": "下载使用者",
+            "beans": [
+                {
+                    "prod": "亚信艾扑1"
+                },{
+                    "prod": "亚信艾扑2"
+                },{
+                    "prod": "亚信艾扑3"
+                },{
+                    "prod": "亚信艾扑4"
+                }
+            ]
+        },
+        {
+            "img": "ui/theme/img/userIcon.png",
+            "tit": "下载使用者2",
+            "beans": [
+                {
+                    "prod": "亚信艾扑21"
+                },{
+                    "prod": "亚信艾扑22"
+                },{
+                    "prod": "亚信艾扑23"
+                },{
+                    "prod": "亚信艾扑24"
+                },{
+                    "prod": "亚信艾扑25"
+                },{
+                    "prod": "亚信艾扑26"
+                }
+            ]
+        }
+    ]
+}

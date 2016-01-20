@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>选择质检项目</title>
+    <#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<div class="formItem">
+ <div class="titleArea">
+  <div class="listTopBtn fn-clear">
+   <h2 class="fn-left">选择质检项目</h2>
+  </div>
+ </div>
+<div method="post" action="#" class="cmxform" >
+  <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+    <div class="record-search-cate">
+        <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td width="100"><label class="description">项目名称</label></td>
+                    <td width="200">
+                        <input class="inputWidthDataPoint element text" type="text">
+                    </td>
+                    <td>
+                        <div class="normalBtnArea w82"> <a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a> 
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3"><hr/></td>
+                </tr>
+                <tr>
+                    <td><label class="description">业务类型</label></td>
+                    <td>
+                        <select>
+                            <option>语音外乎类</option>
+                            <option>语音接听类</option>
+                            <option>工单类</option>
+                            <option>互联网投诉类</option>
+                        </select>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </form>
+</div>
+
+
+<!--翻页及功能按钮区域开始-->
+
+</div>
+
+<#include "../../tpl/res_js.tpl" /> 
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>单选组</title>
+<#include "../../tpl/res_css.tpl" />
+<link href="../../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+</head>
+<body id="main_body" onload="prettyPrint()" >
+	
+<div class="form_container">
+
+    <div class="searchType fn-clear" data-type="coopNm">
+        <dl>
+            <dt>商家：</dt>
+            <dd>
+                <ul>
+					<li><a class="click" href="#">全部</a></li>
+					<li><a class="" href="#">小米公司</a></li>
+					<li><a class="" href="#">天语公司</a></li>
+					<li><a class="" href="#">魅族科技</a></li>
+					<li><a class="" href="#">北京终端</a></li>
+					<li><a class="" href="#">酷派公司</a></li>
+					<li><a class="" href="#">广东终端</a></li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+    <div class="searchType fn-clear" data-type="brand">
+        <dl>
+            <dt>品牌：</dt>
+            <dd>
+                <ul>
+					<li><a class="click" href="#">全部</a></li>
+					<li><a class="" href="#">苹果</a></li>
+					<li><a class="" href="#">三星</a></li>
+					<li><a class="" href="#">华为</a></li>
+					<li><a class="" href="#">酷派</a></li>
+					<li><a class="" href="#">魅族</a></li>
+					<li><a class="" href="#">魅蓝</a></li>
+					<li><a class="" href="#">小米</a></li>
+					<li><a class="" href="#">红米</a></li>
+					<li><a class="" href="#">联想</a></li>
+					<li><a class="" href="#">TCL</a></li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+    <div class="searchType fn-clear" data-type="priceRange">
+        <dl>
+            <dt>价格区间：</dt>
+            <dd>
+                <ul>
+					<li><a class="click" href="#">全部</a></li>
+					<li><a class="" href="#">1000以下</a></li>
+					<li><a class="" href="#">1000-1999</a></li>
+					<li><a class="" href="#">2000-2999</a></li>
+					<li><a class="" href="#">3000-3999</a></li>
+					<li><a class="" href="#">4000-4999</a></li>
+					<li><a class="" href="#">5000以上</a></li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+    <div class="searchType fn-clear" data-type="screenSize">
+        <dl>
+            <dt>屏幕：</dt>
+            <dd>
+                <ul>
+					<li><a class="click" href="#">全部</a></li>
+					<li><a class="" href="#">4'以下</a></li>
+					<li><a class="" href="#">4'-4.9'</a></li>
+					<li><a class="" href="#">5'-5.9'</a></li>
+					<li><a class="" href="#">6'以上</a></li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+
+
+	<pre class="prettyprint mg_t_20 fn-clear" id="html">
+		$(".searchType a").click(function() {
+		    $(this).addClass("click").parent().siblings('li').find("a.click").removeClass("click");
+		});
+	</pre>
+</div>
+
+
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript" src="../../lib/pretty/prettify.js"></script>
+<script type="text/javascript">
+	$(function() {
+        $(".searchType a").click(function() {
+            $(this).addClass("click").parent().siblings('li').find("a.click").removeClass("click");
+        });
+	})
+</script>
+</body>
+</html>

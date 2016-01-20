@@ -1,0 +1,370 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>问题库</title>
+<link rel="stylesheet" href="../../css/common.css">
+	<link rel="stylesheet" href="../../css/tablepay.css" />
+	<link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+</head>
+<body>
+	<div class="listTopBtn">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><div class="normalBtnArea ft-right mb-10">
+						<a class="normalBtn BGblue" href="#" id="importFile">批量导入名单</a> <a
+							class="normalBtn BGblue" href="#" id="addCust">新增敏感客户名单</a>
+					</div></td>
+			</tr>
+		</table>
+	</div>
+	<div method="post" action="#" class="cmxform">
+		<form method="get" action=""
+			class="record-search-form record-search-min record-search-form-border"
+			id="J_formSearch" name="J_formSearch">
+			<div class="record-search-cate">
+				<table class="search_table" width="100%">
+					<tbody>
+						<tr>
+
+							<td width="80"><label class="description">类型</label></td>
+							<td>
+								<div id="J_snstvCustTypeCd">
+									<select class="inputWidth inputSelect" id="snstvCustTypeCd"
+										name="snstvCustTypeCd">
+										<option></option>
+									</select>
+								</div>
+							</td>
+							<td width="80"><label class="description">用户号码</label></td>
+							<td><input id="telNum" name="telNum" class="inputText"
+								type="text" maxlength="255" value="" /></td>
+							<td width="80"><label class="description">省公司</label></td>
+							<td><input id="provCoNm" name="provCoNm" class="inputText"
+								type="text" maxlength="255" value="" /></td>
+							<td width="100">
+								<div class="normalBtnArea w82">
+									<a class="searchBtn" href="javascript:;" id="J_search"><i></i>查询</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td width="80"><label class="description">开始时间</label></td>
+							<td><input id="bgnEffTime" name="bgnEffTime"
+								class="element text Wdate" type="text" value=""
+								onFocus="WdatePicker()" style="width:100px;" />
+								<td width="80"><label class="description">结束时间</label></td>
+								<td><input id="endEffTime" name="endEffTime"
+									class="element text Wdate" type="text" value=""
+									onFocus="WdatePicker()" style="width:100px;" /></td>
+
+								<td></td>
+								<td></td>
+								<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="tablewidth mg_t_10" style="margin-top:50px;">
+				<table
+					class="ui-record-table table_radius table-bordered table-striped">
+					<thead>
+						<tr>
+							<th width="25"></th>
+							<th>用户号码</th>
+							<th width="80">类型</th>
+							<th width="120">省公司</th>
+							<th width="80">分公司</th>
+							<th width="80">品牌</th>
+							<th>生效日期</th>
+							<th>失效日期</th>
+						</tr>
+					</thead>
+					<tbody id="J_tabletpl"></tbody>
+				</table>
+			</div>
+
+			<!--翻页及功能按钮区域开始-->
+			<DIV class="amount-bottom">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0"
+					class="gridBottom">
+					<tr>
+						<td width="60">
+							<input type="checkbox" class="selectAll" id="selectAll" /> <label for="selectAll">全选</label> 
+						</td>
+						<td>
+							<div class="normalBtnArea">
+								<!--不附加ft-right样式，默认左对齐-->
+
+								<a class="normalBtn BGgray" href="#"  id="J_deleteList" >删除</a>
+							</div>
+						</td>
+						<td>
+							<DIV class="fn-clear action-other  action-other-show ">
+								<DIV id=Pagination class="page pagination fn-right"></DIV>
+								<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+							</DIV>
+						</td>
+					</tr>
+				</table>
+			</DIV>
+			<!-- 初始化客户信息 -->
+		<div id="T_addHealthCust" class="fn-hide">
+	        <div class="newAdd_center">
+	        	<form id="J_healthForm">
+	        	
+				
+					 <table class="form_table"  width="500">
+					    <tr>
+					        <td width="50"><label class="formDescription">类型</label></td>
+					        <td>
+					          <div id="J_addSnstvCustTypeCd">
+									<select class="inputWidth inputSelect" id="c_snstvCustTypeCd"
+										name="c_snstvCustTypeCd">
+										<option></option>
+									</select>
+							  </div>
+							</td>
+					    </tr>
+					    <tr>
+					        <td><label class="formDescription">省公司</label></td>
+					        <td>
+					            <select class="element text" id="c_provCoNm" name="c_provCoNm"></select>
+                                          <script type="text/x-handlebars-template" id="p_suprRegnCode">
+                      											<option value="">--请选择--</option>
+                      										    {{#each beans}}
+                      										        <option value="{{suprRegnCode}}">{{regnDesc}}</option>
+                      											{{/each}}
+                      					  </script>  
+					        </td>
+					    </tr>
+					    <tr>
+					        <td><label class="formDescription">分公司</label></td>
+					        <td>
+					            <select class="element text" id="c_embrCoNm" name="c_embrCoNm"></select>
+                                          <script type="text/x-handlebars-template" id="p_regnCode">
+                      											<option value="">--请选择--</option>
+                      										    {{#each beans}}
+                      										        <option value="{{regnCode}}">{{regnNm}}</option>
+                      											{{/each}}
+                      					  </script>     
+					        </td>
+					    </tr>
+					    <tr>
+					        <td><label class="formDescription">品牌</label></td>
+					        <td>
+					            <input type="text" id="c_brandNm" name="c_brandNm" value=""  class="FormInputText w314">
+					        </td>
+					    </tr>
+					    <tr>
+					        <td><label class="formDescription">用户号码</label></td>
+					        <td>
+					            <input type="text" id="c_telNum" name="c_telNum" value=""  class="FormInputText w314">
+					        </td>
+					    </tr>
+					</table>
+				</form>
+	        </div>
+	        <div class="normalBtnArea newAdd_bottom">
+	            <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_healthCustAdd">确认</a>
+	            <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_healthCustCancel">取消</a>
+	        </div>
+	        </div>
+			<script id="T_tabletpl" type="text/x-handlebars-template">
+    {{#if beans}}
+        {{#each beans}}
+            <tr>
+                <td><div class="table_select">
+				<input  data-keyid='{{telNum}}' type="checkbox" name="prod" value='{{telNum}}'/></div></td>
+                <td>{{telNum}}</td>
+                <td>{{snstvCustTypeCd}}</td>
+                <td>{{provCoNm}}</td>
+                <td>{{embrCoNm}}</td>
+                <td>{{brandNm}}</td>
+                <td>{{bgnEffTime}}</td>
+				<td>{{endEffTime}}</td>
+            </tr>
+        {{/each}}
+    {{else}}
+       	<tr>
+		<td colspan="8">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+    {{/if}}
+    </script>
+			<#include "../../tpl/res_js.tpl" />
+			<script type="text/javascript">
+	    /*
+		    服务配置
+		    param1: 服务名
+		    param2: 假数据路径
+		    param3: 后台服务路径
+		*/
+		srvMap.add('querySnstvCustList', 'querySnstvCustList.json','front/sh/user!snstvCustList?uid=u001');//查询服务
+		srvMap.add('addSnstvCustList', 'addSnstvCustList.json','front/sh/user!snstvCustList?uid=u002');//添加服务
+		srvMap.add('allCmdCd', 'allCmdCd.json','front/sh/common!execute?uid=c004');//查询所有送货方式
+		srvMap.add('deleteList', 'deleteList.json','front/sh/user!snstvCustList?uid=u005');//查询所有送货方式
+	    srvMap.add('queryProvinceData', 'provinceData.json','front/sh/contact!execute?uid=u016');//查询省数据
+
+		
+		var custForm =  null;
+	    var _dialog = null;
+	    var elem = null;
+	    var G_params = null;
+	    $(function() {
+	    	//新增敏感客户信息
+	    	elem = $('#T_addHealthCust').html();
+	    	G_params = {
+			    url : srvMap.get('querySnstvCustList'),
+			    items_per_page : 10 ,   // 每页数     @param : limit
+			    page_index : 0 , //当前页  @param : start
+			    pagination : "Pagination" , //分页id
+			    searchformId : "J_formSearch", //搜索表单的id
+			    tabletpl : "T_tabletpl", //表格模板
+			    tablewrap : "J_tabletpl" //表格容器
+			};
+	     	$("#addCust").bind("click",function(){
+	     		var params = {
+	     			id : 'D_addHealthCust',
+	     			title : '初始化客户',
+	     			content : elem,
+	     			width : 600
+	     		};
+	     		//debugger;
+	     		_dialog = new top.dialog(params);//弹出框需要在iframe的父页面上弹出，需要添加'top'
+	     		_dialog.show();
+	     		custForm = $("#J_healthForm", _dialog.node);
+	     		var J_healthCustAdd = $('#J_healthCustAdd', _dialog.node);	//按钮
+	     		var J_healthCustCancel = $('#J_healthCustCancel', _dialog.node);//按钮
+	     		var J_suprRegnCode  =  $('#c_provCoNm', _dialog.node);	//更改省公司
+	     		custForm[0].reset();
+				 $("#J_addSnstvCustTypeCd", _dialog.node).NiceSelect({
+			        	url:srvMap.get('allCmdCd'),
+			            datas : "cmnCd=SNSTV_CUST_TYPE_CD",
+			            id : "c_snstvCustTypeCd",
+			            name : "c_snstvCustTypeCd",
+			            all:"请选择",
+			            key:"VAL",
+			            value:"NAME"
+		     	 });
+				 loadProvinceData();
+				 function loadProvinceData(){
+				     var coopParam={'regionFlag':0};		
+				   	 Util.ajax.postJson(srvMap.get('queryProvinceData'),coopParam,function(json,status){
+				   		Util.ajax.loadTemp($('#c_provCoNm', _dialog.node),$('#p_suprRegnCode', _dialog.node),json);//加载模板
+					    });	  
+					  
+				    }    
+				  //查询地市数据
+				  J_suprRegnCode.unbind('change').change( function loadCityData(){
+							     var coopParam={'suprRegnCode':$("#c_provCoNm", _dialog.node).val(),'regionFlag':'2'};
+							    
+							   	 Util.ajax.postJson(srvMap.get('queryProvinceData'),coopParam,function(json,status){
+							   		Util.ajax.loadTemp($('#c_embrCoNm', _dialog.node),$('#p_regnCode', _dialog.node),json);//加载模板
+								    });	  
+							   }  
+				  )
+				J_healthCustAdd.unbind('click').click(function(){
+		             var c_snstvCustTypeCd =  $("#c_snstvCustTypeCd option:selected", _dialog.node).val();
+		             var c_provCoNm =  $("#c_provCoNm option:selected", _dialog.node).text();
+		             var c_embrCoNm =  $("#c_embrCoNm option:selected", _dialog.node).text();
+		             var c_brandNm =  $("#c_brandNm", _dialog.node).val();
+		             var c_telNum =  $("#c_telNum", _dialog.node).val();
+		             if(c_provCoNm == "--请选择--"){
+		            	 c_provCoNm = "";
+		             }
+		             if(c_embrCoNm == "--请选择--"){
+		            	 c_embrCoNm = "";
+		             }
+		             var str = "c_snstvCustTypeCd="+c_snstvCustTypeCd+
+		             			"&c_provCoNm="+c_provCoNm+
+		             			"&c_embrCoNm="+c_embrCoNm+
+		             			"&c_brandNm="+c_brandNm+
+		             			"&c_telNum="+c_telNum;
+		             Util.ajax.postJson(srvMap.get('addSnstvCustList'),str,function(json,status){
+		             	if (status) {
+		                   	top.Util.dialog.tips("敏感客户新增成功");
+		                   	top.Util.dialog.close('D_addHealthCust');
+		                  	 $("#J_search").trigger("click");
+		             	}else{
+		             		top.Util.dialog.tips(json.returnMessage || '系统异常，请重试！');
+		              	}
+		            });
+		        });
+				J_healthCustCancel.click(function(){
+					 top.Util.dialog.close('D_addHealthCust');
+					 $("#J_search").trigger("click");
+		        });
+	     	});
+	     });
+	    
+	    $('#selectAll').change(function() {
+	    	var ck=this.checked;
+	    	$("#J_tabletpl input[type='checkbox']").each(function(i,ele){
+	    		this.checked=ck;
+	    	});
+	    });
+		    //页面加载完开始执行
+			//动态加载支付方式
+		    $("#J_snstvCustTypeCd").NiceSelect({
+	        	url:srvMap.get('allCmdCd'),
+	            datas : "cmnCd=SNSTV_CUST_TYPE_CD",
+	            id : "snstvCustTypeCd",
+	            name : "snstvCustTypeCd",
+	            all:"请选择",
+	            key:"VAL",
+	            value:"NAME"
+     		 });
+		    
+	         var G_params = {
+			    url : srvMap.get('querySnstvCustList'),
+			    items_per_page : 10 ,   // 每页数     @param : limit
+			    page_index : 0 , //当前页  @param : start
+			    pagination : "Pagination" , //分页id
+			    searchformId : "J_formSearch", //搜索表单的id
+			    tabletpl : "T_tabletpl", //表格模板
+			    tablewrap : "J_tabletpl" //表格容器
+		 	 };
+	         //查询事件绑定
+	         $('#J_search').bind('click',function(){
+	             var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+	             //分页获取数据
+	             Util.pagination(0, true , G_params , str );
+	         });
+	         $('#J_search').trigger("click");
+	        
+	         //删除
+	         $('#J_deleteList').bind('click',function(){
+	       
+	         	if(confirm("确定要将选中的号码从敏感客户名单中删除吗？")){
+	             var $boxes =  $('#J_tabletpl').find('input[type=checkbox]:checked');
+	             var idStr = '';
+	             
+	             $.each($boxes, function(p0, p1, p3) {
+	            	 
+	             	idStr += $(p1).val()+',';
+	             });
+	            	idStr = "telNums="+ idStr;
+	            	//不分页获取数据
+	                Util.ajax.postJsonSync(srvMap.get('deleteList'),idStr,function(json,status){
+	                     if (status) {
+	                         alert("删除成功！");
+	                     }else{
+	                         alert(json.returnMessage||'删除失败，请重试！');
+	                     }
+	                })
+	                $('#J_search').trigger("click");
+	         	}
+	         });
+	         //导入
+	         $('#importFile').bind('click',function(){
+	        	 window.location.href = "confirmImportsClosure.html";
+	         });
+ 	</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>评分类型-新建策略模板</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<div class="formItem">
+    <div class="titleArea">
+        <div class="listTopBtn fn-clear">
+            <h2 class="fn-left">添加为案例</h2>
+        </div>
+    </div>
+    <hr/>
+    <div class="mtb20"></div>
+    <div class="record-search-cate">
+        <table  class="form_table" >                                            
+            <tbody>  
+                <tr>
+                    <td valign="top" width="120">
+                        <label class="formDescription">案例项目</label>
+                    </td>
+                    <td>
+                        <p>家庭回访计划</p>
+                        <p>录音编号：20150615004</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <table  class="form_table" >                                            
+            <tbody>  
+                <tr>
+                    <td width="120">
+                        <label class="formDescription">案例类型</label>
+                    </td>
+                    <td>
+                        <select class="FormInputText width100">
+                            <option>优秀</option>
+                            <option>有重大问题</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        <label class="formDescription">添加理由</label>
+                    </td>
+                    <td>
+                        <textarea rows="8" cols="40"style="resize:none;"class="width100"></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr/>
+</div>
+<#include "../../tpl/res_js.tpl" />   
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+    });
+</script>
+</body>
+</html>

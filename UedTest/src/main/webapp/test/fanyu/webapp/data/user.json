@@ -1,0 +1,21 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": null,
+    "bean": {
+        "deptName": "销售部",
+        "uid": "null",
+        "staffId": "2",
+        "postName": "订单组",
+        "staffName": "孙晓辉",
+        "userId": "1",
+        "userName": "admin",
+        "userAls": "三国杀",
+        "deptId": "201",
+        "postId": "1"
+    },
+    "beans": [],
+    "object": null
+}

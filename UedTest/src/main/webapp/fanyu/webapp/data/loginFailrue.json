@@ -1,0 +1,14 @@
+//登录失败
+{
+	"returnCode":"0004",
+	"returnMessage":"Success",
+	"bean":{
+		"uid":"l001",
+		"username":"admin",
+		"rememberMe":"null",
+		"errorCode":"0004",
+		"errorMsg":"密码错误，请重新输入",
+		"password":"123456333"
+	},
+	"beans":[]
+}

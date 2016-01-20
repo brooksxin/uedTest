@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>客户信息</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1 , user-scalable=no">
+<meta content="telephone=no" name="format-detection" />
+<link rel="stylesheet" href="../../theme/hum/hum.css">
+<link rel="stylesheet" href="../../theme/default/common.css">
+</head>
+<body>
+<div class="fn-h100p">
+	<header class="bar bar-nav fn-clear" style="padding:0px;">
+      <div class="nb-ui-scrollList" id="J_iscroll">
+        <ul class="nb-ui-busiTab fn-clear" id="J_tab" style="z-index:1;width:450px;overflow:hidden;">
+          <li><a href="#" class="ui-tab-cur">话费服务</a></li>
+          <li><a href="dealBusi.html">业务办理</a></li>
+          <li><a href="dealBusi.html">手机充值</a></li>
+          <li><a href="#">积分计划</a></li>
+        </ul>
+      </div>
+    </header>
+    <div class="ui-body" id="">
+		<div class="ui-content-wp fn-clear tele-info-bill">
+			<table class="fn-left ui-content-tb">
+				<tr>
+					<td class="label">余额:</td>
+					<td class="vlaue"><span class="ui-impo">1917.00</span>元</td>
+				</tr>
+				<tr>
+					<td>当月消费:</td>
+					<td><span class="ui-impo">917.00</span>元</td>
+				</tr>
+			</table>
+			<div class="fn-right tele-link-panel">
+				<a class="tele-link" href="">账单</a>
+				<a class="tele-link" href="">详单</a>
+			</div>
+		</div>
+		<div class="ui-percent-bar">
+			<div class="value" style="width:30%"></div>
+		</div>
+		<div class="ui-content-wp fn-clear tele-info-date">
+			<div class="fn-left">本月已过14/30天</div>
+			<div class="fn-right">43.4%</div>
+		</div>
+		<div class="ui-content-wp">
+			<div class="tele-detail">
+				<h3 class="tele-detail-title">移动数据流量</h3>
+				<ul>
+					<li>
+						<div class="tele-item-list">
+							<div class="tele-item-data">
+								<div class="tele-textdata fn-clear">
+									<span class="fn-left">数据流量</span>
+									<span class="fn-right tele-detail-value">340/500M</span>
+								</div>
+								<div class="ui-percent-bar">
+									<div class="value" style="width:30%"></div>
+								</div>
+							</div>
+							<div class="tele-item-percent">
+								37.5%
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="tele-item-list">
+							<div class="tele-item-data">
+								<div class="tele-textdata fn-clear">
+									<span class="fn-left">本地4G/3G流量</span>
+									<span class="fn-right tele-detail-value">300.23/500M</span>
+								</div>
+								<div class="ui-percent-bar">
+									<div class="value" style="width:30%"></div>
+								</div>
+							</div>
+							<div class="tele-item-percent">
+								37.5%
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="tele-detail">
+				<h3 class="tele-detail-title">WLAN</h3>
+				<ul>
+					<li>
+						<div  class="tele-item-list tele-item-full">
+							<div class="tele-item-data">
+								<div class="tele-textdata fn-clear">
+									<span class="fn-left">WLAN时长</span>
+									<span class="fn-right tele-detail-value">500/500分钟</span>
+								</div>
+								<div class="ui-percent-bar">
+									<div class="value" style="width:100%"></div>
+								</div>
+							</div>
+							<div class="tele-item-percent">
+								100%
+							</div>
+						</div>
+						<div class="fn-relative">
+							<a class="tele-item-order icon-navigate-right">
+								流量不够用？快来办理流量套餐吧！
+							</a>
+							<span class="tele-item-sorrow"></span>
+						</div>
+					</li>
+					<li>
+						<div class="tele-item-list">
+							<div class="tele-item-data">
+								<div class="tele-textdata fn-clear">
+									<span class="fn-left">WLAN自动认证流量</span>
+									<span class="fn-right tele-detail-value">340/500M</span>
+								</div>
+								<div class="ui-percent-bar">
+									<div class="value" style="width:47.9%"></div>
+								</div>
+							</div>
+							<div class="tele-item-percent">
+								47.9%
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="tele-detail">
+				<h3 class="tele-detail-title">语音</h3>
+				<ul>
+					<li>
+						<div class="tele-item-list">
+							<div class="tele-item-data">
+								<div class="tele-textdata fn-clear">
+									<span class="fn-left">国内主叫时长</span>
+									<span class="fn-right tele-detail-value">175.00/500分钟</span>
+								</div>
+								<div class="ui-percent-bar">
+									<div class="value" style="width:30%"></div>
+								</div>
+							</div>
+							<div class="tele-item-percent">
+								37.5%
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+    </div>
+</div>
+<script src="../../lib/jquery/2.1.0/jquery.min.js"></script><!-- 
+<script src="../../common/config.js"></script>
+<script src="../../common/common.js"></script> -->
+<script type="text/javascript" src="../../lib/iscroll/4.0/iscroll.js"></script>
+<script type="text/javascript">
+	var myscroll;
+    function loaded(){
+      myscroll=new iScroll("J_iscroll",{
+        vScroll: false,
+        hScroll: true,
+        hScrollbar:false
+      });
+    }
+    window.addEventListener("DOMContentLoaded",loaded,false);
+</script>
+</body>
+</html>

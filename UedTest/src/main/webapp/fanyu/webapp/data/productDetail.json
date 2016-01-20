@@ -1,0 +1,29 @@
+{
+  "busiCode": null,
+  "opId": null,
+  "phone": null,
+  "returnCode": "0",
+  "returnMessage": null,
+  "bean": {
+    "PIC_NM": "iPhone 6 Plus 16GB 金色 手机正面图",
+    "MCDS_UNIT_NM": " iPhone 6 Plus 白色5.5英寸16G公开版手机",
+    "model": "小米4",
+    "opSys": "触控",
+    "UPRC": "1001.00",
+    "PIC_STO_URL_ADDR": "C:Users",
+    "listedYearMon": "黑色",
+    "jdPrice": "高通骁龙805",
+    "SKU_QTY": "600",
+    "inputMode": "12月",
+    "cpuModel": "是",
+    "MCDS_UNIT_ID": "MUID00002",
+    "color": "2.5GHZ",
+    "cpuCodeCnt": "Android 4.4",
+    "myopFctyFlagOrCntt": "2014年",
+    "cpuFrqry": "Android",
+    "brand": "小米",
+    "": "四核"
+  },
+  "beans": [],
+  "object": null
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>预览</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+	<body>	
+		<div class="tabsArea fn-clear" style="margin-top:10px">
+		
+			<div class="tabs">
+				<div class="ui-tab  thefirstdiv">
+					<ul class="ui-tab-items">
+						<li class="ui-tab-item ui-tab-item-current">
+							<a href="endCalling.html">通话结束</a>
+						</li>
+						<li class="ui-tab-item ">
+							<a href="appointment.html">下单预约</a>
+						</li>
+						<li class="ui-tab-item">
+							<a href="goodInfo.html">商品信息</a>
+						</li>
+						<li class="ui-tab-item">
+							<a href="saleService.html">售后处理</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<!--内容-->
+		<div id="T_editSms" class="fn-hide">
+			<div class="formItem">
+
+				<div>
+					<div class="divcolor">
+						已输入字数：
+						<span id="wordCheck">0</span>
+					</div>
+					<div class="thedivcolor">
+						使用场景：
+						<span id="cj"></span>
+					</div>
+				</div>
+
+				<div class="mt-20 mb-20">
+					<textarea rows="7" cols="140" id="smsCntt" name="smsCntt" class="width_all" 
+					onKeyUp="javascript:checkWord(this,'wordCheck');" onMouseDown="javascript:checkWord(this,'wordCheck');"></textarea>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="tableborderdiv fn-clear" id="J_sms">
+            <div class="ui-loading"><h1><img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等 ...</h1></div>
+		</div>
+<script type="text/x-handlebars-template" id="T_sms">
+    {{#if beans.length}}
+	    {{#each beans}}
+	      <div class="textdiva" style="text-align:right;margin-top:12px;">
+	      	<a href="javascript:;" SMS_CNTT="{{SMS_CNTT}}" CMN_CD_VAL_NM="{{CMN_CD_VAL_NM}}" onclick="editSms('{{SMS_RS_ID}}',this)">编辑</a>
+	      </div>
+	      <div class="textdiv" >使用场景:  {{CMN_CD_VAL_NM}}</div>
+	      <div class="ml-10 divwidth mb-10" >{{SMS_CNTT}}</div> 
+        {{/each}}
+   	{{/if}}   
+ </script>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+srvMap.add('sms','sms.json','front/sh/common!smsRs');
+var param={'uid':'c001','flag':'phone'};
+$(document).ready(function () {
+    Util.ajax.postJson(srvMap.get("sms"), param, function(json,flag){
+    	if (flag) {
+			Util.ajax.loadTemp('#J_sms',$('#T_sms'),json);//加载模板
+    	};
+    });
+});
+ var elem = document.getElementById('T_editSms');
+ var J_cj = document.getElementById('cj');
+ var J_smsCntt = document.getElementById('smsCntt');
+function editSms(id,obj){
+	 $(J_smsCntt).val($(obj).attr('SMS_CNTT'));
+	 $(J_cj).html($(obj).attr('CMN_CD_VAL_NM'));
+     var params = {
+         top:top,
+         id:'T_editSms',
+         title:'编辑短信模板',
+         content: elem,
+         width: 900,
+         height:200,
+         modal: true,
+         cancelVal:'取消',
+         cancelCallback:option,
+         okVal:'确定',
+         okCallback:option(id)
+     }
+     Util.dialog.openDiv(params);
+	 $(J_smsCntt).trigger('keyup');
+}
+ 
+function option(tempID){
+	return function() {
+	var param1={'uid':'c004','smsRsId':tempID,'smsCntt':$(J_smsCntt).val()};
+		Util.ajax.postJsonSync(srvMap.get("sms"),param1,function(json,status){
+			if(status){
+				alert("修改成功!");
+				Util.ajax.postJson(srvMap.get("sms"), param, function(json,flag){
+					if (flag) {
+				    	 Util.ajax.loadTemp('#J_sms',$('#T_sms'),json);//加载模板
+					};	
+		        });
+			}
+			else {
+				alert("修改失败");
+			}
+			
+		});
+	}
+}
+</script>
+</body>
+</html>

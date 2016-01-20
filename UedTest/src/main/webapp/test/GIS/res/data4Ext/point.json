@@ -1,0 +1,58 @@
+{
+    "returncode": "1",
+    "points": [
+        {
+            "lng": "120.336658",
+            "lat": "30.279206",
+            "title": "树节点1",
+            "pointid":"1",
+            "businessid":"1",
+            "icon": "3",
+            "address":"",
+            "staticdata": [
+                {
+                    "name": "精通数据1",
+                    "value": "pointId与businessId用于加载动态属性的"
+                },
+                {
+                    "name": "静态数据2",
+                    "value": "树节点1静态属性2"
+                }
+            ]
+        },
+        {
+            "lng": "120.336658",
+            "lat": "30.255002",
+            "title": "树节点2",
+            "icon": "",
+            "address":"",
+            "staticdata": [
+                {
+                    "name": "精通数据1",
+                    "value": "树节点2静态属性1"
+                },
+                {
+                    "name": "静态数据2",
+                    "value": "树节点2静态属性2"
+                }
+            ]
+        },
+        {
+            "lng": "120.35333",
+            "lat": "30.281951",
+            "title": "树节点3",
+            "icon": "",
+            "address":"",
+            "staticdata": [
+                {
+                    "name": "精通数据1",
+                    "value": "树节点3静态属性1"
+                },
+                {
+                    "name": "静态数据2",
+                    "value": "树节点3静态属性2"
+                }
+            ]
+        }
+    ]
+}

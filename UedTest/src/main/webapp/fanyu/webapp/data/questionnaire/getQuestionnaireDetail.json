@@ -1,0 +1,93 @@
+{
+	"returnCode": "0",					"":" 0成功，其它失败",
+	"returnMessage": "无法获取详情",	"":"成功的消息提示或具体的失败原因",
+	"bean":{
+		"prolusion":{
+			"qu_id":"1001", 				"":"标识列", 
+			"qu_type_cd":"0B", 				"":"问题类型 0B开场白,0E结束语", 
+			"qu_nm":"开场白Test", 			"":"标题", 
+			"qu_have_aswr_flag":"0", 		"":"是否有答案 0没有1有", 
+			"qu_desc":"这是开场白描述",  	"":"主要内容"
+		}, 
+		"questions":[
+			{
+				"qu_id":"1000", 			"":"单选题", 
+				"qu_type_cd":"20",
+				"qu_nm":"单选题标题",
+				"qu_desc":"",
+				"qu_have_aswr_flag":"1",
+				"beans":[
+					{
+						"aswr_id":"101", "":"标识列", 
+						"aswr_seqno":"1","":"序列号", 
+						"aswr_cntt":"是", "":"答案值"
+					},
+					{
+						"aswr_id":"102",
+						"aswr_seqno":"2",
+						"aswr_cntt":"否"
+					}
+				]
+			},
+			{
+				"qu_id":"1003",
+				"qu_type_cd":"10",
+				"qu_nm":"多项填空默认问题名",
+				"qu_desc":"这里是多项填空的描述",
+				"qu_have_aswr_flag":"1",
+				"beans":[
+					{
+						"qu_id":"10031","":"填空子问题标识列", 
+						"qu_type_cd":"10","":"问题类型", 
+						"qu_nm":"您经常在线购物的网站是？","":"", 
+						"qu_desc":"多项填空的描述","":"", 
+						"qu_have_aswr_flag":"0","":""
+					},
+					{
+						"qu_id":"10032",
+						"qu_type_cd":"10",
+						"qu_nm":"印相最深的是？",
+						"qu_desc":"多项填空的描述",
+						"qu_have_aswr_flag":"0",
+					},
+					{
+						"qu_id":"10033",
+						"qu_type_cd":"10",
+						"qu_nm":"还有哪些？",
+						"qu_desc":"多项填空的描述",
+						"qu_have_aswr_flag":"0",
+					}
+				]
+			},
+			{
+				"qu_id":"1002",
+				"qu_type_cd":"40",
+				"qu_nm":"您是否正在使用4g手机？",
+				"qu_desc":"问题的描述",
+				"qu_have_aswr_flag":"1",
+				"beans":[
+					{
+						"aswr_id":"101", "":"标识列", 
+						"aswr_seqno":"1","":"序列号", 
+						"aswr_cntt":"是", "":"答案值"
+					},
+					{
+						"aswr_id":"102",
+						"aswr_seqno":"2",
+						"aswr_cntt":"否"
+					}
+				]
+			},
+			
+		], 
+		"closing":[
+			{
+				"qu_id":"1004", "":"结束语标识列", 
+				"qu_type_cd":"0E", "":"", 
+				"qu_nm":"这是结束语Test", "":"", 
+				"qu_have_aswr_flag":"0", "":"", 
+				"qu_desc":"这是结束语", "":"", 
+			}
+		]
+	}
+}

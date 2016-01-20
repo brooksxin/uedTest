@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0" />
+<title>jQuery图标嵌套悬浮动画 - 站长素材</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/mate.hover.css" type="text/css" />
+<link rel="stylesheet" href="css/demo.css" type="text/css" />
+<link rel="stylesheet" media="only screen and (min-width:50px) and (max-width: 500px)" href="css/screen_small.css" />
+<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src='js/jquery-1.9.1.min.js'></script>
+<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
+<script src="js/jquery.mate-hover.1-1-min.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+
+$(window).load(function(){
+
+$('[data-zlname = test]').mateHover({
+	position: 'x',
+	overlayStyle: 'classic',
+	overlayOpacity: 0.7,
+    popupEasing: 'easeOutQuint'
+});
+$('[data-zlname = test-reverse]').mateHover({
+	position: 'x-reverse',
+	overlayStyle: 'classic',
+	overlayOpacity: 0.7,
+    popupEasing: 'easeOutQuint'
+});
+$('[data-zlname = test2]').mateHover({
+	position: 'y',
+	overlayStyle: 'rolling',
+	overlayBg: '#fff',
+	overlayOpacity: 0.7,
+	overlayEasing: 'easeOutCirc',
+	rollingPosition: 'top',
+	popupEasing: 'easeOutBack',
+	popup2Easing: 'easeOutBack'
+});
+$('[data-zlname = test2-reverse]').mateHover({
+	position: 'y-reverse',
+	overlayStyle: 'rolling',
+	overlayBg: '#fff',
+	overlayOpacity: 0.7,
+	overlayEasing: 'easeOutCirc',
+	rollingPosition: 'top',
+	popupEasing: 'easeOutBack',
+	popup2Easing: 'easeOutBack'
+});
+$('[data-zlname = test3]').mateHover({
+	position: 'x+i',
+	overlayStyle: 'rolling',
+	overlayBg:'#e13030',
+	overlayOpacity: 0.6,
+	overlayEasing: 'easeOutCirc',
+	rollingPosition: 'bottom'
+	
+});
+$('[data-zlname = test4]').mateHover({
+	position: 'y+i',
+	overlayStyle: 'rolling',
+	overlayOpacity: 0.8,
+	overlayBg:'url(css/img/bg_overlay.png)',
+	rollingPosition: 'left',
+	overlayEasing: 'easeOutCirc',
+    overlaySpeedOut: 800,
+	popupEasing: 'easeOutBounce',
+	popup2Easing: 'easeOutBounce'
+});
+$('[data-zlname = test5]').mateHover({
+	position: 'y+i',
+	overlayStyle: 'rolling',
+	overlayOpacity: 1,
+	overlayBg:'url(css/img/bg_overlay2.png)',
+	rollingPosition: 'right',
+	popupEasing: 'easeOutBack'
+});
+$('[data-zlname = test6]').mateHover({
+	position: 'x+i-reverse',
+	overlayStyle: 'double',
+	doublePosition: 'vertical',
+	overlayOpacity: 1,
+	overlayBg: '#4380fc'
+});
+$('[data-zlname = test7]').mateHover({
+	position: 'y+i',
+	overlayStyle: 'double',
+	overlayEasing: 'easeOutBounce',
+	doublePosition: 'horizontal',
+	popupEasing: 'easeOutBounce'
+});
+$('[data-zlname = test8]').mateHover({
+	position: 'y+i',
+	overlayBg: '#fff',
+	overlayOpacity: 0.5,
+	overlayStyle: 'four'
+});
+$('[data-zlname = test8-reverse]').mateHover({
+	position: 'y+i-reverse',
+	overlayBg: '#fff',
+	overlayOpacity: 0.5,
+	overlayStyle: 'four'
+});
+$('[data-zlname = test9]').mateHover({
+	position: 'x',
+	overlayStyle: 'four',
+	overlayEasing: 'easeOutBounce',
+	fourSpeedIn0:400,   // 1
+    fourSpeedOut0:400,   // 1
+    fourSpeedIn1:900,   // 2
+    fourSpeedOut1:900,   // 2
+    fourSpeedIn2:500,   // 3
+    fourSpeedOut2:500,   // 3
+    fourSpeedIn3:800,   // 4
+    fourSpeedOut3:800,
+    overlayBg:'url(css/img/bg_overlay.png)',
+    popupEasing:'easeInOutQuart'
+});
+});
+
+
+
+</script>
+<style type="text/css">
+
+</style>
+
+</head>
+<body>
+<div class="page">
+<div class="container_p"><!-- container open -->
+
+
+
+
+
+
+<div class="column">
+<div class="info">
+	Overlay Classic, Pop Up Position: x
+
+<div data-zlname="test">
+	<img src="images/classic.jpg">
+	<div data-zl-popup="link">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id diam 
+		eros. Nunc sit amet velit lacus, sed accumsan dolor. Ut luctus massa eu 
+		odio porta bibendum. Aliquam erat volutpat
+	</div>
+</div><!-- test close -->
+
+</div><!-- demo info close -->
+
+<div class="info">
+	Overlay Rolling(top), Pop Up Position: y
+
+<div data-zlname="test2">
+	<img src="images/social.jpg">
+	<a data-zl-popup="link" href="http://sc.chinaz.com"></a>
+	<a data-zl-popup="link2" href="http://sc.chinaz.com"></a>
+</div><!-- test close -->
+
+</div><!-- demo info close -->
+
+<div class="info">
+	Overlay Rolling(bottom), Pop Up Position: x+i
+
+<div data-zlname="test3">
+	<img src="images/level.jpg">
+	<a data-zl-popup="link" href="#"></a>
+</div><!-- test close -->
+
+</div><!-- demo info close -->
+
+</div><!-- column close -->
+
+<div class="column">
+<div class="info">
+	Overlay Rolling(left), Pop Up Position: y+i
+
+<div data-zlname="test4">
+	<img src="images/vote.jpg">
+	<a data-zl-popup="link" href="#"></a>
+	<a data-zl-popup="link2" href="#"></a>
+</div><!-- test close -->
+
+</div><!-- demo info close -->
+
+<div class="info">
+	Overlay Rolling(right), Pop Up Position: y+i
+
+<div data-zlname="test5">
+	<img src="images/log.jpg">
+
+	<div data-zl-popup="link">
+		<input type="text" value="Login...">
+		<input type="text" value="Password...">
+		<input type="submit" value="Log In" class="sub_zl">
+	</div>
+</div><!-- test close -->
+
+</div><!-- demo info close -->
+
+<div class="info">
+	Overlay Double(vertical), Pop Up Position: x+i
+
+<div data-zlname="test6">
+	<img src="images/metro.jpg">
+	<a data-zl-popup="link" href="#">Photo</a>
+	<a data-zl-popup="link2" href="#">Audio</a>
+</div><!-- test close -->
+
+</div><!-- demo info close -->
+
+</div><!-- column close -->
+
+<div class="column">
+
+<div class="info">
+	Overlay Four, Pop Up Position: y+i
+
+<div data-zlname="test8">
+	<img src="images/snow.jpg">
+	<a data-zl-popup="link" href="#"></a>
+</div><!-- test close -->
+
+</div><!-- demo info close -->
+
+<div class="info">
+	Overlay Double(horizontal), Pop Up Position: y+i
+
+<div data-zlname="test7">
+	<img src="images/dynamic2.jpg">
+	<a data-zl-popup="link" href="#"></a>
+</div><!-- test close -->
+
+</div><!-- demo info close -->
+
+<div class="info">
+	Overlay Four, Pop Up Position: x
+
+<div data-zlname="test9">
+	<img src="images/dynamic.jpg">
+	<a data-zl-popup="link" href="#"></a>
+	<a data-zl-popup="link2" href="#"></a>
+</div><!-- test close -->
+
+</div><!-- demo info close -->
+
+</div><!-- column close -->
+
+<div class="column">
+
+<div class="info">
+	Overlay Rolling(top), Pop Up Position: y-reverse
+
+<div data-zlname="test2-reverse">
+	<img src="images/social.jpg">
+	<a data-zl-popup="link" href="http://sc.chinaz.com"></a>
+	<a data-zl-popup="link2" href="http://sc.chinaz.com"></a>
+</div><!-- test close -->
+
+</div><!-- demo info close -->
+
+<div class="info">
+	Overlay Four, Pop Up Position: y+i-reverse
+
+<div data-zlname="test8-reverse">
+	<img src="images/snow.jpg">
+	<a data-zl-popup="link" href="#"></a>
+</div><!-- test close -->
+
+</div><!-- demo info close -->
+
+<div class="info">
+	Overlay Classic, Pop Up Position: x-reverse
+
+<div data-zlname="test-reverse">
+	<img src="images/classic.jpg">
+	<div data-zl-popup="link">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id diam 
+		eros. Nunc sit amet velit lacus, sed accumsan dolor. Ut luctus massa eu 
+		odio porta bibendum. Aliquam erat volutpat
+	</div>
+</div><!-- test close -->
+
+</div><!-- demo info close -->
+
+</div><!-- column close -->
+
+<div class="clear-fix"></div>
+
+</div><!-- container close-->
+</div><!-- page close -->
+<div style="text-align:center;clear:both">
+<p>适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. </p>
+<p>来源：<a href="http://sc.chinaz.com/" target="_blank">站长素材</a></p>
+</div>
+</body>
+
+</html>

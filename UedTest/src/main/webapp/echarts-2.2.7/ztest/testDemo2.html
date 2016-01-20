@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<style type="text/css">
+html,body{
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+.J_echarts {
+	height:300px; 
+	width: 500px; 
+	float: left; 
+	margin: 50px;
+}
+.drp-popup {
+	display: none;
+}
+</style>
+</head>
+<body>
+
+<div>
+	<select class='custom-date' name='select'>
+		<option value='7'>7 Days</option>
+		<option value='30'>30 Days</option>
+		<option value='90'>90 Days</option>
+		<option value='180'>180 Days</option>
+		<option value='365'>365 Days</option>
+		<option value='custom'>Custom</option>
+	</select>
+</div>
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" class="J_echarts"></div>
+
+<script src="jquery.js"></script>
+<script src="echartsZw.js"></script>
+<script src="calendar.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.custom-date').dateRangePicker();
+
+	var zw = [{"id": "A0DEEAC3CF7F4783823B6A56329891FA", "patientid": "0E16BA05F41545CAB0C54E43A8F5EB43", "doctorid": "00EFCFDAA150480F8F316B0F5E0B11FE", "content": "http://lw.yd800.com//file/chat1/564ad18cee0e30bc79faed1e.do", "way": 1, "type": "image", "createtime": "2015-11-17 15:04:44", "icon": "http://lw.yd800.com//file/icon/564304101dad01ebda0b75b9.do"}, {"id": "EFC9DA39B9D143E18AC00F219E53E925", "patientid": "0E16BA05F41545CAB0C54E43A8F5EB43", "doctorid": "00EFCFDAA150480F8F316B0F5E0B11FE", "content": "好痛的？", "way": 1, "type": "text", "createtime": "2015-11-17 15:05:03", "icon": "http://lw.yd800.com//file/icon/564304101dad01ebda0b75b9.do"}, {"id": "AF3ED91417DD4EF78BFB5016A562DDDB", "patientid": "0E16BA05F41545CAB0C54E43A8F5EB43", "doctorid": "00EFCFDAA150480F8F316B0F5E0B11FE", "content": "不要因为痛就忽视健康问题", "way": 2, "type": "text", "createtime": "2015-11-17 15:06:28", "sender": "self", "icon": "http://lw.yd800.com//file/doctoricon/564ad20eee0e30bc79faed20.do"}, {"sender": "self", "type": "text", "content": "？", "icon": "http://lw.yd800.com//file/doctoricon/564ad20eee0e30bc79faed20.do"}, {"sender": "self", "type": "text", "content": "好吧", "icon": "http://lw.yd800.com//file/doctoricon/564ad20eee0e30bc79faed20.do"} ]
+	zw = zw.splice(zw.length - 3, zw.length);
+	// console.log(zw.splice(zw.length - 3, zw.length))
+	console.log(zw)
+
+	var jsonData = {
+		text: '血压（单日）',
+		subtext: '杜俊',
+		datas: [
+			{
+				dataItem: [
+					['2015-11-10 18:19', 12], 
+					['2015-11-10 18:22', 23], 
+					['2015-11-10 18:29', 14], 
+					['2015-11-10 18:39', 15], 
+					['2015-11-10 18:44', 12], 
+					['2015-11-10 18:56', 13]
+				]
+			},
+			{
+				dataItem: [
+					['2015-11-10 18:19', 2], 
+					['2015-11-10 18:22', 13], 
+					['2015-11-10 18:29', 4], 
+					['2015-11-10 18:39', 5], 
+					['2015-11-10 18:44', 2], 
+					['2015-11-10 18:56', 3]
+				]
+			},
+			{
+				dataItem: [
+					['2015-11-10 18:9', 20], 
+					['2015-11-10 18:12', 33], 
+					['2015-11-10 18:29', 40], 
+					['2015-11-10 18:39', 58], 
+					['2015-11-10 18:44', 28], 
+					['2015-11-10 18:56', 35]
+				]
+			}
+		]
+	}
+
+
+	var option = {
+	    title : {
+	        text: jsonData.text,
+	        subtext: jsonData.subtext
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        formatter : function (params) {	
+            var date = new Date(params.value[0]);
+	            date = date.getFullYear() + '-'
+	                   + (date.getMonth() + 1) + '-'
+	                   + date.getDate() + ' '
+	                   + date.getHours() + ':'
+	                   + date.getMinutes();
+	            var unit = "mmHg";
+	            if(params.seriesIndex == 2)
+	            	unit = "次每分钟";
+	            return date + '<br/>'
+	                   + params.seriesName + "  "
+	                   + params.value[1] + unit + '<br/>'
+	        }
+	    },
+	    legend: {
+	        data:["收缩压", "舒张压", "心率"]
+	    },
+	    toolbox: {
+	        show : true,
+	        feature : {
+	            dataView : {show: true, readOnly: false},
+	            magicType : {show: true, type: ['line', 'bar']},
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    dataZoom: {
+	        show: true,
+	        start : 0,//从哪个位置开始，百分比
+	        end: 100
+	    },
+	    grid: {
+	        y: 80,
+	        y2: 80//距离底部
+	    },
+	    xAxis : [
+	        {
+	            type: 'time'
+	            // splitLine: false//不显示竖线
+	        }
+	    ],
+	    yAxis : [
+	        {
+	        	name: "血压/mmHg",
+	            type: 'value',
+	            splitNumber: 4
+	        },
+	        {
+	            name : "心率/次每分钟",
+	            type : 'value',
+	            splitNumber: 4
+	        }
+	    ],
+	    series : [
+	        {
+	            name: "收缩压",
+	            type:'line',
+	            showAllSymbol: true,
+	            symbol:'circle',
+	            data:(function(){
+	            	var d = [];
+	            	for(var i=0,len=jsonData.datas[0].dataItem.length; i<len; i++){
+	            		var time = new Date(jsonData.datas[0].dataItem[i][0]);
+	            		var d2 = [];
+	            		d2.push(time, jsonData.datas[0].dataItem[i][1]);
+	            		d.push(d2);
+	            		if(i == len-1)
+		            		return d;
+	            	}
+	            })()
+	        },
+            {
+                name: "舒张压",
+                type:'line',
+                showAllSymbol: true,
+                symbol:'circle',
+                data:(function(){
+                	var d = [];
+                	for(var i=0,len=jsonData.datas[1].dataItem.length; i<len; i++){
+                		var time = new Date(jsonData.datas[1].dataItem[i][0]);
+                		var d2 = [];
+                		d2.push(time, jsonData.datas[1].dataItem[i][1]);
+                		d.push(d2);
+                		if(i == len-1)
+    	            		return d;
+                	}
+                })()
+            },
+            {
+                name: "心率",
+                type:'line',
+           		yAxisIndex:1,
+                showAllSymbol: true,
+                symbol:'circle',
+                data:(function(){
+                	var d = [];
+                	for(var i=0,len=jsonData.datas[2].dataItem.length; i<len; i++){
+                		var time = new Date(jsonData.datas[2].dataItem[i][0]);
+                		var d2 = [];
+                		d2.push(time, jsonData.datas[2].dataItem[i][1]);
+                		d.push(d2);
+                		if(i == len-1)
+    	            		return d;
+                	}
+                })()
+            }
+	    ]
+	};
+	// 基于准备好的dom，初始化echarts图表
+	var myChart = echarts.init(document.getElementById('main')); 
+	// 为echarts对象加载数据 
+	myChart.setOption(option); 
+
+});
+
+</script>
+</body>
+</html>

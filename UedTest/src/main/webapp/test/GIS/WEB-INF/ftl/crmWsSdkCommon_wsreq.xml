@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WSREQ>
+	<PUB_INFO>
+		<OP_ID>${pubInfo.opId}</OP_ID>                          
+		<OP_ORG_ID>${pubInfo.oporgId}</OP_ORG_ID>               
+		<ORG_ID>${pubInfo.orgId}</ORG_ID>                       
+		<OP_REGION_CODE>${pubInfo.regionCode}</OP_REGION_CODE>  
+		<OP_COUNTY_CODE>${pubInfo.countyCode}</OP_COUNTY_CODE> 
+		<OP_PASSWD>${pubInfo.oppasswd}</OP_PASSWD>              
+		<BUSI_ORIGIN>${pubInfo.busiorigin}</BUSI_ORIGIN>        
+	</PUB_INFO>
+	<SERVICE_PARAMS>
+		<INTF_ID>${busInfo.intfId}</INTF_ID>             
+		<BUSI_PARAMS>
+			<OP_ID>${busInfo.opId}</OP_ID>
+			<ORG_ID>${busInfo.orgId}</ORG_ID>
+		</BUSI_PARAMS>
+	</SERVICE_PARAMS>
+</WSREQ>

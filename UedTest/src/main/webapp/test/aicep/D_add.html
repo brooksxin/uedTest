@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>新增</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/jquery-easyui-1.4/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/dialog/4.1.6/skins/simple.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+
+<script type="text/javascript" src="ui/js/jquery.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/js/jquery.form.js"></script>
+<script type="text/javascript" src="ui/js/json2.js"></script>
+<script type="text/javascript" src="ui/pagination/1.2.1/jquery.pagination.js"></script>
+<script type="text/javascript" src="ui/js/handlebars.js"></script>
+<script type="text/javascript" src="ui/js/helpers.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="ui/js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="ui/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="ui/js/common.js"></script>
+</head>
+<body>
+
+<div class="openwind">
+	<div class="wrap">
+		<table cellpadding="0" cellspacing="0" border="0" width="100%" class="add_table">
+			<tbody>
+				<tr>
+					<td width="16%">
+						<span class="fn-high">*</span><label>能力名称：</label>
+					</td>
+					<td>
+						<input type="text" id="" class="ui-input fn-w-190" name="" />
+					</td>
+				</tr>
+				<tr>
+					<td width="11%">
+						<label>图片上传：</label>
+					</td>
+					<td>
+						<img src="" id="apply_logo_img" alt="" width="56" height="56" class="img_des">
+						<span id="apply_logo_add"></span>
+					</td>
+				</tr>
+				<tr>
+					<td width="11%">
+						<label>文件上传：</label>
+					</td>
+					<td>
+						<span id="J_file_add"></span>
+					</td>
+				</tr>
+				<tr>
+					<td width="11%">
+						<label>文本框：</label>
+					</td>
+					<td>
+						<textarea class="ui-textarea"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div class="handler">
+							<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="J_sub">
+								<span>提 交</span>
+							</a>
+							<a class="ui-button ui-button-blue " href="javascript:;" hidefocus="true" id="J_cancel">
+								<span>关 闭</span>
+							</a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="handler">
+			
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+	$("#J_sub").click(function(){
+		var win = art.dialog.opener;
+		win.zalert("nihao");
+	})
+})
+
+//应用logo上传
+var swfu1, settings1,
+	swfu2, settings2;
+$(function(){
+	var settings = {
+		flash_url : "ui/swfupload/1.0.0/2.5/swfupload.swf",
+		upload_url: "ui/json/test.json",
+		post_params: "",
+		use_query_string: true,
+		file_size_limit : "1 MB",
+		file_types : "*.*",  //允许所有类型时请使用 *.*
+		file_types_description : "All Files",
+		file_upload_limit : 0,
+		file_queue_limit : 0,
+		debug: false,
+
+		// Button settings
+		button_image_url: "ui/swfupload/1.0.0/vendor/add.png",
+		button_width: "68",
+		button_height: "68",
+		button_placeholder_id: "apply_logo_add",
+		button_text: '',
+		button_text_style: ".theFont { font-size: 16; }",
+		button_text_left_padding: 12,
+		button_text_top_padding: 3,
+		button_cursor : SWFUpload.CURSOR.HAND,
+		
+		// The event handler functions are defined in handlers.js
+		file_dialog_complete_handler : fileDialogComplete,
+		upload_start_handler : uploadStart,
+		upload_error_handler : uploadError,
+		upload_success_handler : uploadSuccess,
+		upload_complete_handler : upload_complete_handler 
+	};
+
+	settings1 = $.extend({},settings,{
+        upload_url: "ui/json/test.json",
+        file_types: "*.jpg;*.png;*.gif;*.jpeg",
+        button_placeholder_id: "apply_logo_add"
+    });
+    swfu1 = new SWFUpload(settings1);
+
+    settings2 = $.extend({},settings,{
+		button_image_url: "ui/swfupload/1.0.0/vendor/add_file.png",
+        upload_url: "ui/json/test.json",
+        file_types: "*.doc;*.docx",
+        button_width: "115",
+        button_height: "40",
+        button_placeholder_id: "J_file_add"
+    });
+    swfu2 = new SWFUpload(settings2);
+
+
+});
+
+/**
+ * 选择完文件后出发方法
+ */
+function fileDialogComplete(numFilesSelected, numFilesQueued) {
+    try {
+
+        if(this.movieName == 'SWFUpload_0'){
+            result_tips("这是图片上传");
+            this.startUpload();
+        }else if(this.movieName == 'SWFUpload_1'){
+            result_tips("这是doc上传");
+            this.startUpload();
+        }else {
+            this.startUpload();
+        }
+
+    } catch (ex) {
+        this.debug(ex);
+    }
+}
+function uploadStart(file) {
+	return true;
+}
+function uploadSuccess(file, serverData) {
+	try {
+		var serverData = JSON.parse(serverData);
+    	if (serverData.returnCode=='0') {
+    		result_tips("上传成功！");
+    		if(this.movieName == 'SWFUpload_0'){
+	    		$("#apply_logo_img").attr({"src": "ui/swfupload/1.0.0/vendor/file_img.png"})
+    		}
+    	}else{
+    		alert("失败");
+    	}
+	} catch (ex) {
+		this.debug(ex);
+	}
+}
+function uploadError(file, errorCode, message) {
+	try {
+    	alert("上传失败!");
+	} catch (ex) {
+        this.debug(ex);
+    }
+}
+function upload_complete_handler(file){
+	this.startUpload();
+}
+</script>
+
+</body>
+</html>

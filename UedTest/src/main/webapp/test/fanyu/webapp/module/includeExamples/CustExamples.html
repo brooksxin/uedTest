@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>客户管理模板</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+	<#include "../../tpl/sys_top.tpl" />
+    <div class="wrapper">
+        <div class="menu fn-clear">
+        <#include "../../tpl/sys_topMenu.tpl" />
+        </div>
+        <!-- left start -->
+       	<div class="left">
+            <div class="leftInner" id="mainLeft">
+				<#include "../../tpl/cust_left.tpl" />
+            </div>
+            <div class="middle" id="mainMiddle">&nbsp;</div>
+        </div>
+        <!-- left END -->
+        <!-- right start -->
+        <div class="right" id="mainRight" style="overflow:auto;*position:relative">
+            <div id="mainRight_child" style="height:100%;">
+
+
+            业务内容放这里
+
+
+          </div>
+        </div>
+        <!-- right stop -->
+    </div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+//页面加载完开始执行
+$(function () {
+    
+});
+</script>
+</body>
+</html>

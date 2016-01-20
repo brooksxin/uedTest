@@ -1,0 +1,18 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": "queryOneDrafts查询成功",
+    "bean": {},
+    "beans": [
+        {
+            "CMPGN_DESC": "活动",
+            "CMPGN_TYPE_CD": "1",
+            "CMPGN_NM": "你好",
+            "CMPGN_INVLD_DATE": "2015-05-08 00:00:00",
+            "CMPGN_EFF_DATE": "2015-05-08 00:00:00"
+        }
+    ],
+    "object": null
+}

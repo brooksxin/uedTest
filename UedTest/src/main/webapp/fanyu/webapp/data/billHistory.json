@@ -1,0 +1,19 @@
+{
+	"returnCode": "0",
+	"returnMessage": "success",
+	"amount":"3",
+	"beans":[
+		{
+			"BILL_ID":"1001",
+			"BILL_DATE":"0424",
+			"BRAND":"三星",
+			"TYPE":"NOTE3"
+		},
+		{
+			"BILL_ID":"1002",
+			"BILL_DATE":"0428",
+			"BRAND":"IPHONE",
+			"TYPE":"6PLUS"
+		}
+	]
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10085系统</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+	<div class="formItem">
+        <div class="titleArea fn-center fn-clear">
+			<h2 class="tabledivh2">编辑收货地址</h2>
+			<div class="ft-right normalBtnArea  tablediva"><a class="normalBtn BGgray" href="#">删除地址</a></div>
+			<hr>
+        </div>
+
+	    <table  class="form_table">
+		    <tbody>
+			  <tr>
+				  <td width="90"><label class="formDescription"><span class="fn-high">*</span>收货人姓名：</label></td>
+				  <td colspan="3"><input class="FormInputText width100" type="text" /></td>
+			  </tr>
+			   <tr>
+				  <td width="90"><label class="formDescription"><span class="fn-high">*</span>所在地区：</label></td>
+				  <td colspan="3">
+					   <select class="inputSelect" >
+						   <option>北京市</option>
+					   </select>
+
+					  <select class="inputSelect" >
+						   <option>市辖区</option>
+					   </select>
+					  <select class="inputSelect" >
+						   <option>海淀区</option>
+					   </select>
+				  </td>
+				</tr>
+				<td width="90" valign="top"><label class="formDescription"><span class="fn-high">*</span>详细地址：</label></td>
+				<td colspan="3">
+				  <textarea rows="8" cols="40" id="REMARK" name="REMARK" class="width100">中关村大街27号603</textarea>
+				</td>
+				</tr>
+				<tr>
+					<td width="90"><label class="formDescription"><span class="fn-high">*</span>手机号码：</label></td>
+					<td><input class="FormInputText width100" type="text" value="1384567890"/></td>
+				</tr>
+				<tr>
+					<td width="90"><label class="formDescription">第二联系电话：</label></td>
+					<td colspan="3"><input class="FormInputText width100" type="text" placeholder="请输入收货人备用号码"/></td>
+				</tr>
+			</tbody>
+	</table>
+    <hr/>
+</div>
+
+<div class="formBtnArea">
+	<table width="100%">
+	<tr>
+		<td>
+			<div class="normalBtnArea fn-center">
+				<a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" >保存</a>
+				<a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_search" >取消</a>   
+			</div>
+		</td>
+    </tr>
+	</table>
+</div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+//页面加载完开始执行
+$(function () {
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,371 @@
+{
+  "busiCode": null,
+  "opId": null,
+  "phone": null,
+  "returnCode": "0",
+  "returnMessage": null,
+  "bean": {
+    "QU_CNTT": "结束语",
+    "QU_TYPE_CD_NAME": "结束语",
+    "ASWR_ID": "0",
+    "QU_TYPE_CD": "0E",
+    "QU_HAVE_ASWR_FLAG": "0",
+    "QU_ASWR_TYPE_CD": "01",
+    "QU_NM": "添加结束语01",
+    "QU_ASWR_SEQNO": "0",
+    "IS_ANSWER_QNR_ISTNC_ID": "0",
+    "QNR_ISTNC_ID": "ef09c7de-81d1-4ee1-9ef6-8659c81263db",
+    "QU_ID": "7b27cbdf-acc2-4c91-b5b8-8e5e8ee7de30"
+  },
+  "beans": [],
+  "object": {
+    "prolusion": [
+      {
+        "bean": {
+          "QU_CNTT": "添加开篇词01",
+          "QU_DESC": "开篇词",
+          "QU_TYPE_CD_NAME": "开场白",
+          "ASWR_ID": "0",
+          "QU_TYPE_CD": "0B",
+          "QU_HAVE_ASWR_FLAG": "0",
+          "QU_ASWR_TYPE_CD": "01",
+          "QU_NM": "尚未添加开篇词",
+          "QU_ASWR_SEQNO": "0",
+          "IS_ANSWER_QNR_ISTNC_ID": "0",
+          "QNR_ISTNC_ID": "514af141-d1ad-4dab-a778-4e332a5e7d2e",
+          "QU_ID": "c30e7eab-1252-4ea7-aaea-c2cc6fb29d2f"
+        },
+        "beans": []
+      }
+    ],
+    "questions": [
+      {
+        "bean": {
+          "QU_CNTT": "今天您感觉舒服吗？",
+          "QU_DESC": "新建单选题",
+          "QU_TYPE_CD_NAME": "单选题",
+          "ASWR_ID": "0",
+          "QU_TYPE_CD": "20",
+          "QU_HAVE_ASWR_FLAG": "1",
+          "QU_ASWR_TYPE_CD": "01",
+          "QU_NM": "今天您感觉舒服吗？",
+          "QU_ASWR_SEQNO": "1",
+          "IS_ANSWER_QNR_ISTNC_ID": "1",
+          "QNR_ISTNC_ID": "09254ad9-74fc-489b-a055-559e5f796121",
+          "QU_ID": "19d1fce1-782b-4610-bd18-70660b79f47c"
+        },
+        "beans": [
+          {
+            "QU_CNTT": "今天您感觉舒服吗？",
+            "QU_DESC": "新建单选题",
+            "ASWR_CNTT": "舒服",
+            "ASWR_ID": "10146dfc-c6a6-4022-b68c-c25f36aba122",
+            "QU_TYPE_CD": "20",
+            "QU_HAVE_ASWR_FLAG": "1",
+            "QU_ASWR_TYPE_CD": "02",
+            "QU_NM": "今天您感觉舒服吗？",
+            "QU_ASWR_SEQNO": "0",
+            "IS_ANSWER_QNR_ISTNC_ID": "0",
+            "QNR_ISTNC_ID": "2cbd6da6-ebdc-402b-b0f3-6442a3dc4f81",
+            "QU_ID": "19d1fce1-782b-4610-bd18-70660b79f47c"
+          },
+          {
+            "QU_CNTT": "今天您感觉舒服吗？",
+            "QU_DESC": "新建单选题",
+            "ASWR_CNTT": "不舒服",
+            "ASWR_ID": "fe0a05aa-14a6-49ce-84a2-d20cf6fd5267",
+            "QU_TYPE_CD": "20",
+            "QU_HAVE_ASWR_FLAG": "1",
+            "QU_ASWR_TYPE_CD": "02",
+            "QU_NM": "今天您感觉舒服吗？",
+            "QU_ASWR_SEQNO": "1",
+            "IS_ANSWER_QNR_ISTNC_ID": "0",
+            "QNR_ISTNC_ID": "183170f3-4c54-4792-b17e-3ebdeeb5d70e",
+            "QU_ID": "19d1fce1-782b-4610-bd18-70660b79f47c"
+          },
+          {
+            "QU_CNTT": "今天您感觉舒服吗？",
+            "QU_DESC": "新建单选题",
+            "ASWR_CNTT": "一般般了",
+            "ASWR_ID": "bfa38d85-bdf3-4fdd-b632-3e6eb6575523",
+            "QU_TYPE_CD": "20",
+            "QU_HAVE_ASWR_FLAG": "1",
+            "QU_ASWR_TYPE_CD": "02",
+            "QU_NM": "今天您感觉舒服吗？",
+            "QU_ASWR_SEQNO": "2",
+            "IS_ANSWER_QNR_ISTNC_ID": "0",
+            "QNR_ISTNC_ID": "d95827dc-8038-4b22-8277-2018d6d57418",
+            "QU_ID": "19d1fce1-782b-4610-bd18-70660b79f47c"
+          },
+          {
+            "QU_CNTT": "今天您感觉舒服吗？",
+            "QU_DESC": "新建单选题",
+            "ASWR_CNTT": "非常好",
+            "ASWR_ID": "bfb3d7f4-0083-47ee-90e6-8d91bfa1e588",
+            "QU_TYPE_CD": "20",
+            "QU_HAVE_ASWR_FLAG": "1",
+            "QU_ASWR_TYPE_CD": "02",
+            "QU_NM": "今天您感觉舒服吗？",
+            "QU_ASWR_SEQNO": "3",
+            "IS_ANSWER_QNR_ISTNC_ID": "0",
+            "QNR_ISTNC_ID": "d192df90-699e-4b6a-8b2b-d27c42e49591",
+            "QU_ID": "19d1fce1-782b-4610-bd18-70660b79f47c"
+          }
+        ]
+      },
+      {
+        "bean": {
+          "QU_CNTT": "您最喜欢的运动是什么？",
+          "QU_DESC": "添加多选题",
+          "QU_TYPE_CD_NAME": "多选题",
+          "ASWR_ID": "0",
+          "QU_TYPE_CD": "30",
+          "QU_HAVE_ASWR_FLAG": "1",
+          "QU_ASWR_TYPE_CD": "01",
+          "QU_NM": "您最喜欢的运动是什么？",
+          "QU_ASWR_SEQNO": "4",
+          "IS_ANSWER_QNR_ISTNC_ID": "1",
+          "QNR_ISTNC_ID": "984ac9d1-5ebc-49f0-8334-fbe5fc062e39",
+          "QU_ID": "43ba159d-e643-48b2-9ae1-61b86fa9b717"
+        },
+        "beans": [
+          {
+            "QU_CNTT": "您最喜欢的运动是什么？",
+            "QU_DESC": "添加多选题",
+            "ASWR_CNTT": "打乒乓球",
+            "ASWR_ID": "a3d43acd-df8f-463a-94f1-6447e182da95",
+            "QU_TYPE_CD": "30",
+            "QU_HAVE_ASWR_FLAG": "1",
+            "QU_ASWR_TYPE_CD": "02",
+            "QU_NM": "您最喜欢的运动是什么？",
+            "QU_ASWR_SEQNO": "0",
+            "IS_ANSWER_QNR_ISTNC_ID": "0",
+            "QNR_ISTNC_ID": "b05025cf-7a19-41ce-b3f2-4c127ec8df3b",
+            "QU_ID": "43ba159d-e643-48b2-9ae1-61b86fa9b717"
+          },
+          {
+            "QU_CNTT": "您最喜欢的运动是什么？",
+            "QU_DESC": "添加多选题",
+            "ASWR_CNTT": "打篮球",
+            "ASWR_ID": "6422ba18-ea90-440b-86e0-f6902c6d0fd6",
+            "QU_TYPE_CD": "30",
+            "QU_HAVE_ASWR_FLAG": "1",
+            "QU_ASWR_TYPE_CD": "02",
+            "QU_NM": "您最喜欢的运动是什么？",
+            "QU_ASWR_SEQNO": "1",
+            "IS_ANSWER_QNR_ISTNC_ID": "0",
+            "QNR_ISTNC_ID": "f5222c3d-4933-4ae5-a830-7a5d96992df9",
+            "QU_ID": "43ba159d-e643-48b2-9ae1-61b86fa9b717"
+          },
+          {
+            "QU_CNTT": "您最喜欢的运动是什么？",
+            "QU_DESC": "添加多选题",
+            "ASWR_CNTT": "踢毽子",
+            "ASWR_ID": "58e6fb51-70d3-4e41-bb1a-75db7bcfd0e6",
+            "QU_TYPE_CD": "30",
+            "QU_HAVE_ASWR_FLAG": "1",
+            "QU_ASWR_TYPE_CD": "02",
+            "QU_NM": "您最喜欢的运动是什么？",
+            "QU_ASWR_SEQNO": "2",
+            "IS_ANSWER_QNR_ISTNC_ID": "0",
+            "QNR_ISTNC_ID": "c8f55f48-a5fb-4fee-b806-1c14d3e291f6",
+            "QU_ID": "43ba159d-e643-48b2-9ae1-61b86fa9b717"
+          },
+          {
+            "QU_CNTT": "您最喜欢的运动是什么？",
+            "QU_DESC": "添加多选题",
+            "ASWR_CNTT": "跳绳",
+            "ASWR_ID": "ffa7c040-fe1a-4ad0-8128-f07fc12a8c78",
+            "QU_TYPE_CD": "30",
+            "QU_HAVE_ASWR_FLAG": "1",
+            "QU_ASWR_TYPE_CD": "02",
+            "QU_NM": "您最喜欢的运动是什么？",
+            "QU_ASWR_SEQNO": "3",
+            "IS_ANSWER_QNR_ISTNC_ID": "0",
+            "QNR_ISTNC_ID": "f3625ac9-577a-47c9-a876-6dba3e8be1db",
+            "QU_ID": "43ba159d-e643-48b2-9ae1-61b86fa9b717"
+          },
+          {
+            "QU_CNTT": "您最喜欢的运动是什么？",
+            "QU_DESC": "添加多选题",
+            "ASWR_CNTT": "看电影",
+            "ASWR_ID": "bb4d4194-03b4-4b89-9129-e4b4fe3fc3f0",
+            "QU_TYPE_CD": "30",
+            "QU_HAVE_ASWR_FLAG": "1",
+            "QU_ASWR_TYPE_CD": "02",
+            "QU_NM": "您最喜欢的运动是什么？",
+            "QU_ASWR_SEQNO": "4",
+            "IS_ANSWER_QNR_ISTNC_ID": "0",
+            "QNR_ISTNC_ID": "364820d8-d499-42e8-b68d-1fd79e242926",
+            "QU_ID": "43ba159d-e643-48b2-9ae1-61b86fa9b717"
+          }
+        ]
+      },
+      {
+        "bean": {
+          "QU_CNTT": "新建填空题",
+          "QU_DESC": "添加填空题",
+          "QU_TYPE_CD_NAME": "填空题",
+          "ASWR_ID": "0",
+          "QU_TYPE_CD": "10",
+          "QU_HAVE_ASWR_FLAG": "1",
+          "QU_ASWR_TYPE_CD": "01",
+          "QU_NM": "新建填空题",
+          "QU_ASWR_SEQNO": "5",
+          "IS_ANSWER_QNR_ISTNC_ID": "1",
+          "QNR_ISTNC_ID": "48bbb582-1b6e-4b75-a1d3-17daef353e1e",
+          "QU_ID": "f222e63e-e149-4a33-93a4-411fa3622296"
+        },
+        "beans": []
+      },
+      {
+        "bean": {
+          "QU_CNTT": "今天天气好吗？",
+          "QU_DESC": "新建判断题",
+          "QU_TYPE_CD_NAME": "判断题",
+          "ASWR_ID": "0",
+          "QU_TYPE_CD": "40",
+          "QU_HAVE_ASWR_FLAG": "1",
+          "QU_ASWR_TYPE_CD": "01",
+          "QU_NM": "今天天气好吗？",
+          "QU_ASWR_SEQNO": "3",
+          "IS_ANSWER_QNR_ISTNC_ID": "1",
+          "QNR_ISTNC_ID": "5017fef0-6548-4a5e-8547-41b99987ae74",
+          "QU_ID": "de1e946a-239f-417f-9181-9deea1233b83"
+        },
+        "beans": [
+          {
+            "QU_CNTT": "今天天气好吗？",
+            "QU_DESC": "新建判断题",
+            "ASWR_CNTT": "是",
+            "ASWR_ID": "99c95ff8-00c9-4dd3-b734-e59bea782385",
+            "QU_TYPE_CD": "40",
+            "QU_HAVE_ASWR_FLAG": "1",
+            "QU_ASWR_TYPE_CD": "02",
+            "QU_NM": "今天天气好吗？",
+            "QU_ASWR_SEQNO": "0",
+            "IS_ANSWER_QNR_ISTNC_ID": "0",
+            "QNR_ISTNC_ID": "b601574a-c25f-4ef6-bf1f-f417a883c00d",
+            "QU_ID": "de1e946a-239f-417f-9181-9deea1233b83"
+          },
+          {
+            "QU_CNTT": "今天天气好吗？",
+            "QU_DESC": "新建判断题",
+            "ASWR_CNTT": "否",
+            "ASWR_ID": "06ed3a3b-971d-4473-a3fd-2250df7d2139",
+            "QU_TYPE_CD": "40",
+            "QU_HAVE_ASWR_FLAG": "1",
+            "QU_ASWR_TYPE_CD": "02",
+            "QU_NM": "今天天气好吗？",
+            "QU_ASWR_SEQNO": "1",
+            "IS_ANSWER_QNR_ISTNC_ID": "0",
+            "QNR_ISTNC_ID": "51fdd79e-683e-44cd-b2a9-c0296f215316",
+            "QU_ID": "de1e946a-239f-417f-9181-9deea1233b83"
+          }
+        ]
+      },
+      {
+        "bean": {
+          "QU_CNTT": "今天感觉好吗？请说出你的想法",
+          "QU_DESC": "今天感觉好吗？",
+          "QU_TYPE_CD_NAME": "问答题",
+          "ASWR_ID": "0",
+          "QU_TYPE_CD": "50",
+          "QU_HAVE_ASWR_FLAG": "0",
+          "QU_ASWR_TYPE_CD": "01",
+          "QU_NM": "今天感觉好吗？请说出你的想法",
+          "QU_ASWR_SEQNO": "6",
+          "IS_ANSWER_QNR_ISTNC_ID": "0",
+          "QNR_ISTNC_ID": "59807780-5a18-49e4-a028-8ef8407c9a1b",
+          "QU_ID": "3a56c309-f2e2-4c84-a629-c1fc0ab2708a"
+        },
+        "beans": []
+      },
+      {
+        "bean": {
+          "QU_CNTT": "新建单选题",
+          "QU_DESC": "",
+          "QU_TYPE_CD_NAME": "单选题",
+          "ASWR_ID": "0",
+          "QU_TYPE_CD": "20",
+          "QU_HAVE_ASWR_FLAG": "1",
+          "QU_ASWR_TYPE_CD": "01",
+          "QU_NM": "新建单选题",
+          "QU_ASWR_SEQNO": "2",
+          "IS_ANSWER_QNR_ISTNC_ID": "1",
+          "QNR_ISTNC_ID": "67012239-450d-40f3-92c4-5ba0e51a148a",
+          "QU_ID": "319a2aa3-97bf-43fd-90ce-a3027b3a096f"
+        },
+        "beans": []
+      },
+      {
+        "bean": {},
+        "beans": [
+          {
+            "QU_CNTT": "新建子问题",
+            "ASWR_ID": "0",
+            "QU_TYPE_CD": "10",
+            "QU_HAVE_ASWR_FLAG": "0",
+            "QU_ASWR_TYPE_CD": "02",
+            "QU_NM": "你一顿吃几个馒头？",
+            "QU_ASWR_SEQNO": "0",
+            "IS_ANSWER_QNR_ISTNC_ID": "0",
+            "QNR_ISTNC_ID": "7bdd1a27-a70b-4e64-92cb-fd586b16bab4",
+            "QU_ID": "d54793c6-d3db-457f-92e9-f25745b75343"
+          }
+        ]
+      },
+      {
+        "bean": {},
+        "beans": [
+          {
+            "QU_CNTT": "新建子问题",
+            "ASWR_ID": "0",
+            "QU_TYPE_CD": "10",
+            "QU_HAVE_ASWR_FLAG": "0",
+            "QU_ASWR_TYPE_CD": "02",
+            "QU_NM": "几个包子？",
+            "QU_ASWR_SEQNO": "1",
+            "IS_ANSWER_QNR_ISTNC_ID": "0",
+            "QNR_ISTNC_ID": "b360ade3-59de-4a70-89dd-942e7e63bfe1",
+            "QU_ID": "303933c0-7033-4d41-9686-99741e665566"
+          }
+        ]
+      }
+    ],
+    "closing": [
+      {
+        "bean": {
+          "QU_CNTT": "结束语",
+          "QU_TYPE_CD_NAME": "结束语",
+          "ASWR_ID": "0",
+          "QU_TYPE_CD": "0E",
+          "QU_HAVE_ASWR_FLAG": "0",
+          "QU_ASWR_TYPE_CD": "01",
+          "QU_NM": "添加结束语02",
+          "QU_ASWR_SEQNO": "1",
+          "IS_ANSWER_QNR_ISTNC_ID": "0",
+          "QNR_ISTNC_ID": "c1efe021-a651-445b-8590-44e46059da13",
+          "QU_ID": "d83ac939-ea17-4c3b-ae9e-97fb9005d981"
+        },
+        "beans": []
+      },
+      {
+        "bean": {
+          "QU_CNTT": "结束语",
+          "QU_TYPE_CD_NAME": "结束语",
+          "ASWR_ID": "0",
+          "QU_TYPE_CD": "0E",
+          "QU_HAVE_ASWR_FLAG": "0",
+          "QU_ASWR_TYPE_CD": "01",
+          "QU_NM": "添加结束语01",
+          "QU_ASWR_SEQNO": "0",
+          "IS_ANSWER_QNR_ISTNC_ID": "0",
+          "QNR_ISTNC_ID": "ef09c7de-81d1-4ee1-9ef6-8659c81263db",
+          "QU_ID": "7b27cbdf-acc2-4c91-b5b8-8e5e8ee7de30"
+        },
+        "beans": []
+      }
+    ]
+  }
+}

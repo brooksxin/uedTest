@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10085-商品管理-商品信息管理-审核商品</title>
+<#include "../../tpl/res_css.tpl" />
+
+</head>
+<body>
+
+			<div class="breadcrumb"></div>
+      <div class="tabsArea">
+          <div class="ui-tab">
+              <div class="tabsBtn">
+                    <a href="javascript:;"  class="normalBtn BGblue" onclick="pass()">通过</a>
+                    <a href="javascript:;" class="normalBtn BGgray" onclick="showRejectDiv()">驳回</a>
+              </div>
+              <ul class="ui-tab-items">
+                  <li class="ui-tab-item ui-tab-item-current"> <a href="javascript:;" onclick="setTabShow(1)">手机综述</a></li>
+                  <li class="ui-tab-item"> <a href="javascript:;" onclick="setTabShow(2)">图文信息</a></li>
+              </ul>
+          </div>
+      </div>
+         
+         
+            
+            <!-- 手机综述tabs -->
+            <div id="J_detailTpl"></div>
+          	
+          	<!-- 图文信息tabs -->
+            <div id="J_detailPicTpl" class="fn-hide">
+            	<img src=1.jpg />
+            	<img src=1.jpg />
+            	<img src=1.jpg />
+            </div>
+        <!-- 审核不通过的驳回弹出框 -->
+        <!-- <div id="emvryCnluDesc" class="fn-hide"> -->
+          <div id="T_importProd" class="fn-hide">
+          <div class="formItem">
+          	<div class="caption">驳回</div>
+                  <table  class="form_table" >
+                      <tbody>
+                        <tr>
+                            <td width="120">商品名称：</td>
+                            <td id="prodName"></td>
+                        </tr>
+                        <tr>
+                            <td valign="top">请输入驳回原因：</td>
+                            <td>
+                              <textarea rows="8" cols="40" style="resize:none;" id="REMARK" name="REMARK" class="width100"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+          </div>
+          </div>
+          
+<script id="T_tabletpl" type="text/x-handlebars-template">
+
+<div class="productDetailInfo ml-15 mr-15"> 
+ <div>
+ <!--h2 class="productDetailTitle">手机综述</h2-->
+  <table cellpadding="0" cellspacing="0" width="100%">
+   <tr>
+    <td width="210" class="pr-30 pt-30" valign="top"><table width="100%">
+      <tr>
+       <td align="center"><img src="{{bean.ftpUrl}}{{bean.image150x270}}" width="122" height="264" /></td>
+      </tr>
+      <tr>
+       <td>{{bean.MCDS_UNIT_NM}}</td>
+      </tr>
+      <tr>
+       <td class="gray_text mr-10">价格：<span class="fn-high ft-16">&yen;{{bean.UPRC}}</span></td>
+      </tr>
+      <tr>
+       <td class="gray_text mr-10">京东价格：&yen;{{bean.jdPrice}}</span></td>
+      </tr>
+      <tr>
+       <td class="gray_text pt-20">库存：{{bean.SKU_QTY}}</td>
+      </tr>
+     </table></td>
+    <td>
+      <div class="formAreaB_dashed pt-30 pb-30">
+      <table>
+       <tr>
+        <td colspan="4" class="size100">基本参数</td>
+       </tr>
+       <tr>
+        <td width="100" class="align-r gray_text">品牌</td>
+        <td width="200">{{bean.brand}}</td>
+        <td width="100" class="align-r gray_text">型号</td>
+        <td width="">{{bean.model}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">颜色</td>
+        <td>{{bean.color}}</td>
+        <td class="align-r gray_text">上市时间</td>
+        <td width="">{{bean.listedYearMon}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">输入方式</td>
+        <td>{{bean.inputMode}}</td>
+        <td class="align-r gray_text">智能机</td>
+        <td width=""></td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">操作系统</td>
+        <td>{{bean.opSys}}</td>
+        <td class="align-r gray_text">系统版本</td>
+        <td width="">{{bean.osModel}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">CPU型号</td>
+        <td>{{bean.cpuModel}}</td>
+        <td class="align-r gray_text">CPU核数</td>
+        <td width="">{{bean.cpuCodeCnt}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">CPU频率</td>
+        <td>{{bean.cpuFrqry}}</td>
+        <td class="align-r gray_text">运营商标志或内容</td>
+        <td width="">{{bean.myopFctyFlagOrCntt}}</td>
+       </tr>
+      </table>
+     </div>
+     <div class="formAreaB_dashed pt-30 pb-30">
+      <table>
+       <tr>
+        <td class="size100" colspan="2">网络参数</td>
+       </tr>
+       <tr>
+        <td width="100" class="align-r gray_text">4G网络制式</td>
+        <td>{{bean.network4G}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">3G网络制式</td>
+        <td>{{bean.network3G}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">2G网络制式</td>
+        <td>{{bean.network2G}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">网络频率</td>
+        <td>{{bean.networkFreq}}</td>
+       </tr>
+      </table>
+     </div>
+     <div class="formAreaB_dashed pt-30 pb-30">
+      <table>
+       <tr>
+        <td class="size100" colspan="4">存储参数</td>
+       </tr>
+       <tr>
+        <td width="100" class="align-r gray_text">机身内存</td>
+        <td width="200">{{bean.mchnMemry}}</td>
+        <td width="100" class="align-r gray_text">运行内存</td>
+        <td width="">{{bean.runMemry}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">存储卡类型</td>
+        <td colspan="3">{{bean.layinCardType}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">最大存储卡扩展</td>
+        <td colspan="3">{{bean.maxStoCardExtd}}</td>
+       </tr>
+      </table>
+     </div>
+     <div class="formAreaB_dashed pt-30 pb-30">
+      <table>
+       <tr>
+        <td class="size100" colspan="4">显示参数</td>
+       </tr>
+       <tr>
+        <td width="100" class="align-r gray_text">屏幕尺寸</td>
+        <td width="200">{{bean.svrSize}}</td>
+        <td width="100" class="align-r gray_text">屏幕材质</td>
+        <td width="">{{bean.scrMtial}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">像素密度</td>
+        <td>{{bean.scrPixel}}</td>
+        <td class="align-r gray_text">分辨率</td>
+        <td width="">{{bean.scrRatio}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">屏幕色彩</td>
+        <td>{{bean.scrCol}}</td>
+        <td class="align-r gray_text">&nbsp;</td>
+        <td width="">&nbsp;</td>
+       </tr>
+      </table>
+     </div>
+     <div class="formAreaB_dashed pt-30 pb-30">
+      <table>
+       <tr>
+        <td class="size100" colspan="4">感应器</td>
+       </tr>
+       <tr>
+        <td width="100" class="align-r gray_text">GPS模块</td>
+        <td width="200">{{bean.gpsModule}}</td>
+        <td width="100" class="align-r gray_text">重力感应</td>
+        <td width="">{{bean.gravity}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">光线感应</td>
+        <td>{{bean.lightSensor}}</td>
+        <td class="align-r gray_text">距离感应</td>
+        <td width="">{{bean.pSensor}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">陀螺仪</td>
+        <td>{{bean.gyroscope}}</td>
+        <td class="align-r gray_text">&nbsp;</td>
+        <td width="">&nbsp;</td>
+       </tr>
+      </table>
+     </div>
+     <div class="formAreaB_dashed pt-30 pb-30">
+      <table>
+       <tr>
+        <td class="size100" colspan="4">摄像功能</td>
+       </tr>
+       <tr>
+        <td width="100" class="align-r gray_text">后置摄像头</td>
+        <td width="200">{{bean.cameraAfter}}</td>
+        <td width="100" class="align-r gray_text">前置摄像头</td>
+        <td width="">{{bean.cameraFront}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">前置摄像头</td>
+        <td>{{bean.cameraFront}}</td>
+        <td class="align-r gray_text">传感器类型</td>
+        <td width="">{{bean.sensorType}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">光圈</td>
+        <td>{{bean.aperture}}</td>
+        <td class="align-r gray_text">闪光灯</td>
+        <td width="">{{bean.flashlight}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text" valign="top">其他性能</td>
+        <td colspan="3">
+          {{otherNature}}
+        </td>
+       </tr>
+      </table>
+     </div>
+     <div class="formAreaB_dashed pt-30 pb-30">
+      <table>
+       <tr>
+        <td class="size100" colspan="4">娱乐功能</td>
+       </tr>
+       <tr>
+        <td width="100" class="align-r gray_text">音乐播放</td>
+        <td width="200">{{bean.playMusic}}</td>
+        <td width="100" class="align-r gray_text">视频播放</td>
+        <td width="">{{bean.playVideo}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">收音机</td>
+        <td>{{bean.radio}}</td>
+        <td class="align-r gray_text">录音</td>
+        <td width="">{{bean.record}}</td>
+       </tr>
+      </table>
+     </div>
+     <div class="formAreaB_dashed pt-30 pb-30">
+      <table>
+       <tr>
+        <td class="size100" colspan="4">传输功能</td>
+       </tr>
+       <tr>
+        <td width="100" class="align-r gray_text">Wifi</td>
+        <td width="200">{{bean.wifi}}</td>
+        <td width="100" class="align-r gray_text">蓝牙版本</td>
+        <td width="">{{bean.bluetoothVersion}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">NFC</td>
+        <td>{{bean.nfc}}</td>
+        <td class="align-r gray_text">Wifi热点</td>
+        <td width="">{{bean.wifiHot}}</td>
+       </tr>
+      </table>
+     </div>
+     <div class="formAreaB_dashed pt-30 pb-30">
+      <table>
+       <tr>
+        <td class="size100" colspan="4">其它</td>
+       </tr>
+       <tr>
+        <td width="100" class="align-r gray_text">SIM卡尺寸</td>
+        <td width="200">{{bean.simSize}}</td>
+        <td width="100" class="align-r gray_text">电池类型</td>
+        <td width="">{{bean.cellType}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">电池容量(mAh)</td>
+        <td>{{bean.cellSize}}</td>
+        <td class="align-r gray_text">电池更换</td>
+        <td width="">{{bean.cellChange}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">理论通话时间</td>
+        <td>{{bean.telTime}}</td>
+        <td class="align-r gray_text">理论待机时间</td>
+        <td width="">{{bean.standbyTime}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">数据线</td>
+        <td>{{bean.dataLine}}</td>
+        <td class="align-r gray_text">耳机接口</td>
+        <td width="">{{bean.headsetConn}}</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">机身尺寸(mm)</td>
+        <td>{{bean.mobileSize}}</td>
+        <td class="align-r gray_text">机身重量(g)</td>
+        <td width="">{{bean.mobileWeight}}</td>
+       </tr>
+      </table>
+     </div>
+     <div class="formAreaB_dashed pt-30 pb-30">
+      <table>
+       <tr>
+        <td class="size100"  >包装清单</td>
+       </tr>
+       <tr>
+        <td class="align-r gray_text">{{bean.packInv}}</td>
+        
+       </tr>
+       
+      </table>
+     </div>
+     <div class="formAreaB_dashed pt-30 pb-30">
+      <table>
+       <tr>
+        <td class="size100"  >售后保障</td>
+       </tr>
+       <tr>
+        <td class="gray_text" >{{bean.saleAfter}}</td>
+       </tr>
+      </table>
+     </div>
+      
+     </td>
+   </tr>
+  </table>
+ </div>
+ 
+
+</td>
+</tr>
+</table>
+</div>
+
+
+</script>
+
+
+<script id="T_detailPicTpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <img src='{{../bean.ftpUrl}}{{PIC_STO_URL_ADDR}}' /><br/>
+    {{/each}}
+
+{{/if}}
+
+</script>
+    
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+var prodId=Util.browser.getParameter("prodId");
+var flag = Util.browser.getParameter("flag");
+var reject = $("#REMARK");
+var elem = $("#T_importProd");
+srvMap.add('queryProdDetail', 'prod.json', 'front/sh/prod!execute?uid=p022');//查询商品详情
+srvMap.add('auditProd', 'prod.json', 'front/sh/prod!execute?uid=p012');//审核商品
+
+//页面加载完开始执行
+$(function () {
+  var str = "prodId="+prodId;
+  Util.ajax.postJson(srvMap.get('queryProdDetail'), str,function(json, status) {
+//   alert(status);
+//   alert(json.bean.brand);
+    if (status) {
+    Util.ajax.loadTemp("#J_detailTpl",$("#T_tabletpl"),json);
+    $("#prodName").html(json.bean.MCDS_UNIT_NM);
+    Util.ajax.loadTemp("#J_detailPicTpl",$("#T_detailPicTpl"),json);
+    
+
+//   $("#count1").text(count);
+  } else {
+  
+  }
+    
+  $(reject).bind("change",function(){
+	  if(""==reject.val()){
+		  alert("请输入驳回原因!")
+	  }
+	  
+  })
+  });
+
+
+});
+function pass(){
+    var grams={
+        mcdsUnitId:prodId,
+        flag:"03"
+      }; 
+    Util.ajax.postJson(srvMap.get('auditProd'), grams,function(json, status){
+      console.log(JSON.stringify(json));
+      if(status){
+    	  Util.dialog.tips("审核成功！");
+        if("sb"==flag){
+        	window.location.href = "shsbProdList.html";
+        }
+        if("wait"==flag){
+        	window.location.href = "shProdList.html";
+        }
+      }else{
+    	  Util.dialog.tips("审核不成功！");
+      }
+    });
+}
+
+function showRejectDiv(){
+    var params = {
+    	   top:top,
+         content: elem,
+         width: 420,
+         height:300,
+         modal: true,
+         okVal:'确定',
+         cancelVal:'取消',
+         cancelCallback:closeDialog,
+         okCallback:okDialog
+     }
+     Util.dialog.openDiv(params);
+}
+
+    /*
+        点击弹出框中的取消按钮之后的回调事件
+     */
+    function closeDialog(){
+        
+    }
+//标签页切换
+function setTabShow(obj){
+	if(obj == 1){
+		$("#J_detailTpl").show();
+		$("#J_detailPicTpl").hide();
+	}else{
+		$("#J_detailTpl").hide();
+		$("#J_detailPicTpl").show();
+	}
+}
+
+        /*
+        点击弹出框中的确定按钮之后的回调事件
+     */
+    function okDialog(){
+        var grams={
+            mcdsUnitId:prodId,
+            flag:"04",
+            emvryCnluDesc:reject.val()
+        }; 
+        
+        Util.ajax.postJson(srvMap.get('auditProd'), grams,function(json, status){
+          if(status){
+              Util.dialog.tips("审核成功！");
+              if("sb"==flag){
+              	window.location.href = "shsbProdList.html";
+              }
+              if("wait"==flag){
+              	window.location.href = "shProdList.html";
+              }
+          }else{
+              Util.dialog.tips("审核不成功！");  
+          }
+        });
+    }
+
+</script>
+</body>
+</html>

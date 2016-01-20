@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="../res/theme/opui/om-default.css" rel="stylesheet" type="text/css" />
+<link href="../res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<div class="main">
+	<div id="hnav" >
+		<div class="hnav_logo"></div>
+		<ul id="nav">
+			<li class="">
+				<a href="#nogo"  onclick="getContent(this,'file/menu/json2.html','file/xianchang/paidui.html')">
+					<img src="../res/theme/default/images/icon_2.png" width="48" height="48" alt="" />
+					<span>基础管理</span>
+				</a>
+			</li>
+			<li class="">
+				<a href="#nogo" onclick="getContent(this,'file/menu/json3.html','file/report/report.html')">
+					<img src="../res/theme/default/images/icon_3.png" width="48" height="48" alt="" />
+					<span>标点管理</span>
+				</a>
+			</li>
+			<li class="">
+				<a href="#nogo" onclick="getContent(this,'file/menu/json4.html','file/busi/manage.html')">
+					<img src="../res/theme/default/images/icon_4.png" width="48" height="48" alt="" />
+					<span>XX管理</span>
+				</a>
+			</li>
+			<li class="">
+				<a href="#nogo" onclick="getContent(this,'file/menu/json5.html','file/test/cpcs_csfq.html')">
+					<img src="../res/theme/default/images/icon_5.png" width="48" height="48" alt="" />
+					<span>XX管理</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div id="wrapContent">
+		<div class="wrap">
+			<div class="content">
+				<!--内容start-->
+				<div class="pathhome">
+					<h4>日常工作 &gt; 请假管理 &gt; 请假申请</h4>
+				</div>
+				<div class="bz_manage">
+
+					<div id="bz_wrap" class="bz_wrap">
+						<div class="qj_wrap">
+							<form id="busi_form">
+								<table class="infoTable" cellpadding="0" cellspacing="0" border="0" width="100%">
+									<colgroup>
+										<col width="19%"/>
+										<col />
+										<col width="19%"/>
+										<col />
+									</colgroup>
+									<tbody>
+										<tr>
+											<td >归属县区分公司：</td>
+											<td ><input class="normalinput " type="text" value="" /></td>
+											<td >营业厅名称：</td>
+											<td ><input class="normalinput " type="text" value="" /></td>
+											<td >申请人：</td>
+											<td ><input class="normalinput " type="text" value="王小虎"  /></td>
+										</tr>
+										<tr>
+											<td >申请人：</td>
+											<td ><input class="normalinput " type="text" value="王小虎"  /></td>
+											<td >申请人：</td>
+											<td ><input class="normalinput " type="text" value="王小虎"  /></td>
+											<td ><em class="error_color">*</em>申请类型：</td>
+											<td >
+												<select class="form-select-80">
+												  <option>请选择</option>	
+												  <option>事假</option>	
+												  <option>公假</option>
+												  <option>产假</option>
+												  <option>病假</option>
+												  <option>临时假</option>
+											   </select> 
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
+							<div class="bz_btn_list noneline">
+								 <a class="btn_normal btn_normal20" href="#nogo"><em>查询</em></a>
+							</div>
+						</div>
+					</div>
+
+					<table id="mytable"></table>
+
+					<div class="bz_btn_list noneline">
+						 <a class="btn_normal btn_normal20" href="#nogo"><em>新增</em></a>
+					</div>
+
+				</div>
+				<!--内容end-->
+			</div>
+		</div>
+		<div class="aside">
+			<ul >
+				<li class="active">
+					<a href="#nogo" class="tit" onclick="showNextMenu(this)">基础管理</a>
+					<ul class="titlist">
+						<li class=""><a  href="attrsetting.html">新增,修改表单</a></li>
+						<li class="cur"><a  href="attsearch.html">搜索+Grid</a></li>
+						<li class=""><a  href="atttree.html">树(zTree)</a></li>
+						<li class=""><a  href="attdialog.html">对话框(artDialog)</a></li>
+						<li class=""><a  href="atttable.html">自制表格(Grid)</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="../res/lib/jquery/1.10.2/jquery.js"></script>
+<script type="text/javascript" src="../res/lib/opui/2.1/operamasks-ui.src.js"></script>
+<script type='text/javascript' src='../res/common/common.js'></script>
+<script type="text/javascript" >
+ $(document).ready(function() {
+     $('#mytable').omGrid({
+         height : 280,
+         width : '100%',
+         limit : 8, //分页显示，每页显示8条
+         singleSelect : false, //出现checkbox列，可以选择同时多行记录
+         colModel : [    {header:'编号',name:'id', width:100, align : 'center'},
+                         {header:'地区',name:'city', width:250, align : 'left',wrap:true},
+                         {header:'地址',name:'address', width:'autoExpand',renderer:function(value,rowData,rowIndex){ return '<b>'+value+'</b>'; }}
+         ],
+         dataSource : '../res/data/griddata.json' //后台取数的URL
+     });
+ });
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>创建质检计划</title>
+    <#include "../../tpl/res_css.tpl" />
+
+</head>
+
+<body>
+
+<!-- 面包屑 begain -->
+<div class="breadcrumb"></div>
+<!-- 面包屑end -->
+
+<div class="formItem">
+    <div class="titleArea bd-bottom fn-clear">
+        <a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a><h2 class="ui-textIndentStyle fn-left">创建质检计划</h2>
+    </div>
+
+
+    <div class="ml-15 mr-15">
+    	<div class="mt-20"><h2 class="ft-14">基本信息</h2></div>
+    	<div class="importProcess" id="J_step5_2">
+            <div class="rateBar">
+                    <div class="borgray"></div>
+                    <div class="borblue"></div>
+            </div>
+        </div>
+      
+      	<div class="onlin_borBot pb-10">
+          <table  class="form_table mt-10" width="100%">
+              <tr>
+                  <td width="90"><span class="fn-high">*</span> 计划名称</td>
+                  <td><input type="text" class="FormInputText w314" /></td>
+              </tr>
+              <tr>
+                  <td width="90" valign="top">计划描述</td>
+                  <td><textarea class="form_textarea"></textarea></td>
+              </tr>
+              <tr>
+                  <td><span class="fn-high">*</span>执行时间</td>
+                  <td><input id="startDate" name="startDate" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'endDate\')}'})" type="text"> 至 <input id="endDate" name="endDate" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{$dp.$D(\'startDate\',{d:1})||\'2010-01-01 23:59:59\'}'})" type="text">
+                  </td>  
+              </tr>
+          </table>
+        </div>
+    </div>
+	<div class="ml-15 mr-15">
+    	<div class="mt-20"><h2 class="ft-14">质检条件</h2></div>
+    	<div class="importProcess" id="J_step5_2">
+            <div class="rateBar">
+                    <div class="borgray"></div>
+                    <div class="borblue"></div>
+            </div>
+        </div>
+    	<div class="onlin_borBot pb-10">
+          <table  class="form_table mt-10" width="100%">
+              <!--<tr>
+                  <td><span class="fn-high">*</span>质检项目</td>
+                  <td>
+                      <div class="normalBtnArea">
+                        <a class="normalBtn BGblue largeBtn" href="javascript:;">选择质检项目</a>
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td><span class="fn-high">*</span>抽取策略</td>
+                  <td>
+                      <div class="normalBtnArea">
+                        <a class="normalBtn BGblue largeBtn" href="javascript:;">设置抽取策略</a>
+                      </div>
+                  </td>
+              </tr>若后期配置可显示-->
+              <tr>
+                  <td><span class="fn-high">*</span>抽取频率</td>
+                  <td>
+                      <select  class="selectStyle w314">
+                        <option>5分钟</option>
+                      </select>
+                  </td>
+              </tr>
+              <tr>
+                  <td><span class="fn-high">*</span>评分模板</td>
+                  <td>
+                      <div class="normalBtnArea">
+                        <a class="normalBtn BGblue largeBtn" href="javascript:;">设置评分维度</a>
+                      </div>
+                  </td>
+              </tr>
+          </table>
+        </div>
+    </div>
+    <div class="ml-15 mr-15">
+    	<div class="mt-20"><h2 class="ft-14">考评关系</h2></div>
+    	<div class="importProcess" id="J_step5_2">
+            <div class="rateBar">
+                    <div class="borgray"></div>
+                    <div class="borblue"></div>
+            </div>
+        </div>
+    	<div class="pb-20">
+          <div class="pt-20">
+          	<span class="fn-high">*</span>执行部门
+          </div>
+          <div class="ml-20">
+            <div class="pt-10 pb-10"><a href="#"></a><span class="table_select"><input type="checkbox" /></span> 北京客服中心</div>
+            <div class="pt-10 pb-10"><a href="#"></a><span class="table_select"><input type="checkbox" /></span> 河南客服中心</div>
+            <div class="pt-10 pb-10"><a href="#"></a><span class="table_select"><input type="checkbox" /></span> 山东客服中心</div>
+          </div>      
+        </div>
+        <div class="pb-20">
+          <div>
+          	<span class="fn-high">*</span>被测团队
+          </div>
+          <div class="ml-20">
+            <div class="pt-10 pb-10"><a href="#"></a><span class="table_select"><input type="checkbox" /></span> 北京客服中心</div>
+            <div class="pt-10 pb-10"><a href="#"></a><span class="table_select"><input type="checkbox" /></span> 河南客服中心</div>
+            <div class="pt-10 pb-10"><a href="#"></a><span class="table_select"><input type="checkbox" /></span> 山东客服中心</div>
+          </div>      
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="formBtnArea bd-top fn-clear">
+    <div class="normalBtnArea fn-center">
+        <a class="normalBtn BGblue largeBtn" href="javascript:;">发布</a>
+        <a href="#" class="formLink fn-right"><span>取消创建</span></a>
+    </div>
+</div>
+
+
+</div>
+
+
+
+
+
+<#include "../../tpl/res_js.tpl" />   
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        $(".qBox").mouseover(function() {
+          $(this).addClass("qBoxHover");
+          $(this).find(".qEditIcon").show();
+
+        }).mouseout(function() {
+          $(this).removeClass("qBoxHover");
+          $(this).find(".qEditIcon").hide();
+        });;
+    });
+</script>
+</body>
+</html>

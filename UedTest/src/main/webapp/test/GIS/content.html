@@ -1,0 +1,405 @@
+<html>
+<head>
+<base />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>test frame content</title>
+<script type="text/javascript" src="../../common/scripts/jquery.js"></script>
+<!--base64-->
+<script type="text/javascript" src="../../common/scripts/core-min.js"></script>
+<script type="text/javascript" src="../../common/scripts/enc-base64-min.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        $('#propsSubBtn').click(function(){
+            $.ajax({
+                type:'post',
+                data:'typeId='+$('#propstypeId').val()+'&uid='+$('#propsuid').val(),
+                url:'common.action',
+                success:function(data){
+                    $('#result').html(data);
+                },
+                error:function(){
+                $('#result').html('查询失败');
+                }
+            });
+        });
+        
+        $('#subBtn1').click(function(){
+            var pageNum  = $('#pageNum').val();
+            var pageSize = $('#pageSize').val();
+            
+            var startNum = (parseInt(pageNum) - 1) * parseInt(pageSize);
+            var endNum   = pageSize;
+            
+            $.ajax({
+                type:'post',
+                data:'typeId='+$('#typeId').val()+'&templateName='+$('#templateName').val()+'&uid='+$('#puid').val()+'&startNum='+startNum+'&endNum='+endNum,
+                url:'common.action',
+                success:function(data){
+                    $('#result1').html(data);
+                },
+                error:function(){
+                $('#result1').html('查询失败');
+                }
+            });
+        });
+        
+        $('#subBtn2').click(function(){
+        	var addtemplateJson = $('#templateJson').text();
+        	var wordArray = CryptoJS.enc.Utf8.parse(addtemplateJson); 
+        	var base64Json= CryptoJS.enc.Base64.stringify(wordArray);
+        	
+            $.ajax({
+                type:'post',
+                data:'typeId='+$('#addtypeId').val()+'&templateJson='+base64Json+'&uid='+$('#tuid').val(),
+                url:'common.action',
+                success:function(data){
+                    $('#result2').html(data);
+                },
+                error:function(){
+                $('#result2').html('模板添加失败');
+                }
+            });
+        });
+        $('#subBtn3').click(function(){
+        	var addtemplateJson = $('#updtemplateJson').text();
+        	var wordArray = CryptoJS.enc.Utf8.parse(addtemplateJson); 
+        	var base64Json= CryptoJS.enc.Base64.stringify(wordArray);
+            
+            $.ajax({
+                type:'post',
+                data:'typeId='+$('#uptypeId').val()+'&templateJson='+base64Json+'&uid='+$('#upuid').val(),
+                url:'common.action',
+                success:function(data){
+                    $('#result3').html(data);
+                },
+                error:function(){
+                $('#result3').html('模板修改失败');
+                }
+            });
+        });
+    })
+</script>
+</head>
+<body>
+模板下载测试:
+<form action="common-export.action" method="post" target="templateIF">
+    结点类型：<input type="text" name="typeId" id="typeId" /><br />
+    <input type="hidden" id="uid" name="uid" value="exportTemplateProps" /> 
+    <br /><input type="submit" value="下载模板" id="expBtn" />
+</form>
+<iframe id="templateIF" name="templateIF" src="about:blank" frameborder="0" style="height: 0px;width: 0px;"></iframe>
+标记点上传测试:
+<form action="common-import.action" method="post" enctype="multipart/form-data" target="templateIF">
+    结点类型：<input type="text" name="typeId" id="typeId" /><br />
+    结点数据文件:<input type="file" name="importExcelFile" />
+    <input type="hidden" id="uid" name="uid" value="importMkPoint" /> 
+    <br /><input type="submit" value="上传标记点数据" id="expBtn" />
+</form>
+
+模板属性查询:
+<form action="hz/action/common.action" method="post">
+    结点类型：<input type="text" name="propstypeId" id="propstypeId" /><br />
+    <input type="hidden" id="propsuid" value="templatePropsQuery" /> 
+    <br /><input type="button" value="查询" id="propsSubBtn" />
+</form>
+<div id="result"></div>
+<span>模板分布查询:</span>
+<form action="hz/action/common.action" method="post">
+    结点类型：<input type="text" name="typeId" id="typeId" /><br />
+    模板名称：<input type="text" name="templateName" id="templateName" /><br />
+    第几页： <input type="text" name="pageNum" id="pageNum" value="1" /><br />
+    每页几条：<input type="text" name="pageSize" id="pageSize" value="5" /><br />
+    <input type="hidden" id="puid" value="templateQuery" /> 
+    <br /><input type="button" value="分页查询" id="subBtn1" />
+</form>
+<div id="result1"></div>
+
+<span>模板添加:</span>
+<form action="hz/action/common.action" method="post">
+	<input type="hidden" id="addtypeId" value="1" />
+    <input type="hidden" id="tuid" value="addTemplate" /> 
+    <br /><input type="button" value="模板添加" id="subBtn2" />
+</form>
+<div id="result2"></div>
+<div id="templateJson">
+{
+    "typeId":"1",
+    "name": "三墩营业厅",
+    "beans": [
+        {
+            "type": "1",
+            "name": "nodeName",
+            "label": "结点名称",
+            "templateStatus":"1",
+            "propOrder":"1"
+        },
+        {
+            "type": "1",
+            "name": "businessId",
+            "label": "业务ID",
+            "templateStatus":"1",
+            "propOrder":"2"
+        },
+        {
+            "type": "1",
+            "name": "nodelng",
+            "label": "经度",
+            "templateStatus":"1",
+            "propOrder":"3"
+        },
+        {
+            "type": "1",
+            "name": "nodelat",
+            "label": "纬度",
+            "templateStatus":"1",
+            "propOrder":"4"
+        },
+        {
+            "type": "1",
+            "name": "address",
+            "label": "中文地址",
+            "templateStatus":"1",
+            "propOrder":"5"
+        },
+        {
+            "type": "2",
+            "name": "queueNum",
+            "label": "排队人数",
+            "templateStatus":"1",
+            "propOrder":"6",
+            "value":"business?action=getQueueNum",
+            "key":"queueNum"
+        },
+        {
+            "type": "2",
+            "name": "operPosition",
+            "label": "操作员当前位置",
+            "templateStatus":"1",
+            "propOrder":"7",
+            "value":"business?action=getPosition",
+            "key":"queuePosition"
+        }
+        ,
+        {
+            "type": "3",
+            "name": "money",
+            "label": "营业额",
+            "templateStatus":"1",
+            "propOrder":"8",
+            "value":"saleMoneyID"
+        },
+        {
+            "type": "1",
+            "name": "testStaticProp",
+            "label": "测试静态数据",
+            "templateStatus":"1",
+            "propOrder":"9"
+        }
+    ]
+}
+</div>
+<span>模板更新:</span>
+<form action="hz/action/common.action" method="post">
+	<input type="hidden" id="uptypeId" value="2" />
+    <input type="hidden" id="upuid" value="updTemplate" /> 
+    <br /><input type="button" value="模板更新" id="subBtn3" />
+</form>
+<div id="result3"></div>
+<div id="updtemplateJson">
+{
+    "typeId":"2",
+    "name": "三墩营业厅",
+    "beans": [
+        {
+        	"templateId": "19",
+            "type": "2",
+            "name": "area",
+            "label": "测试更新面积",
+            "templateStatus":"1",
+            "propOrder":"1"
+        },
+        {
+        	"templateId": "20",
+            "type": "3",
+            "name": "queue",
+            "label": "测试更新排队人数",
+            "templateStatus":"1",
+            "propOrder":"2",
+            "value": "url的id"
+        },
+        {
+        	"templateId": "21",
+            "type": "4",
+            "name": "money",
+            "label": "测试删除1",
+            "value": "business?action=getMoney",
+            "templateStatus":"0",
+            "key": "MONEY"
+        },
+        {
+        	"templateId": "22",
+            "type": "2",
+            "name": "descript",
+            "templateStatus":"0",
+            "label": "测试删除"
+        },
+        {
+            "type": "2",
+            "name": "testAdd",
+            "propOrder":"3",
+            "templateStatus":"1",
+            "label": "测试添加"
+        },
+        {
+            "type": "2",
+            "name": "testAdd1",
+            "propOrder":"4",
+            "templateStatus":"1",
+            "label": "测试添加1"
+        }
+    ]
+}
+</div>
+<hr />
+<div id="mkpointTest">
+
+<span id="pointQuery">
+	标记结点查询:
+	<form action="hz/action/common.action" method="post" id="pointQueryFm">
+	    类型：<input type="text" name="nodeType" id="pointQuerynodeType" /><br />
+	中文地址：<input type="text" name="pointName" id="pointQueryaddress" /><br />
+	      名称：<input type="text" name="address" id="pointQuerypointName" /><br />
+	     起始：<input type="text" name="startNum" id="pointQuerystartNum" /><br />
+  每页多少条:<input type="text" name="endNum" id="pointQueryendNum" /><br />
+	    <input type="hidden" name="uid" id="pointQueryuid" value="queryMkpoint" /> 
+	    <br /><input type="button" value="查询" id="queryBtn" onclick="queryPoint();"/>
+	</form>
+	
+	<div id="mkPointResult"></div>
+</span>
+
+<span id="pointQuery">
+	标记结点添加查询:
+	<form action="hz/action/common.action" method="post">
+	    类型：<input type="text" name="nodeType" id="pointAddnodeType" /><br />
+	    <input type="hidden" name="uid" id="pointAdduid" value="querypointAdd" /> 
+	    <br /><input type="button" value="查询" id="queryBtn" onclick="pointAdd();"/>
+	</form>
+	
+	<div id="pointAddResult"></div>
+</span>
+
+<span id="pointQuery">
+	标记结点修改查询:
+	<form action="hz/action/common.action" method="post">
+	    标记点ID：<input type="text" name="nodeId" id="pointUpdatenodeId" /><br />
+	    <input type="hidden" name="uid" id="pointUpdateuid" value="querypointUpdate" /> 
+	    <br /><input type="button" value="查询" id="queryBtn" onclick="pointUpdate();"/>
+	</form>
+	
+	<div id="pointUpdateResult"></div>
+</span>
+<span id="getAroundPoint">
+	标记结点修改查询:
+	<form action="hz/action/common.action" method="post">
+	    标记点类型：<input type="text" name="nodeType" id="aroundNodeType" /><br />
+	    叫心坐标经度:<input type="text" name="nodelng" id="aroundNodelng" /><br />
+	    叫心坐标纬度:<input type="text" name="nodelat" id="aroundNodelat" /><br />
+	    搜索范围:<input type="text" name="radius" id="aroundradius" /><br />
+	    <input type="hidden" name="uid" id="arounduid" value="getAroundPoint" /> 
+	    <br /><input type="button" value="查询" onclick="getAroundPoint();"/>
+	</form>
+	
+	<div id="getAroundPointResult"></div>
+</span>
+
+<span id="getAroundPoint">
+	标记结添加:
+	<form action="hz/action/common.action" method="post">
+	    标记点类型：<input type="text" name="nodeType" id="aroundNodeType" /><br />
+	    叫心坐标经度:<input type="text" name="nodelng" id="aroundNodelng" /><br />
+	    叫心坐标纬度:<input type="text" name="nodelat" id="aroundNodelat" /><br />
+	    搜索范围:<input type="text" name="radius" id="aroundradius" /><br />
+	    <input type="hidden" name="uid" id="arounduid" value="getAroundPoint" /> 
+	    <br /><input type="button" value="查询" onclick="getAroundPoint();"/>
+	</form>
+	
+	<div id="getAroundPointResult"></div>
+</span>
+<script type="text/javascript">
+	function getAroundPoint(){
+		var nodeType = $('#aroundNodeType');
+		var uid = $('#arounduid');
+		var nodelng = $('aroundNodelng').val();
+		var nodelat = $('aroundNodelat').val();
+		var radius  = $('#aroundradius').val();
+		$.ajax({
+             type:'post',
+             data:'nodeType='+nodeType.val()+'&uid='+uid.val()+'&pointLng='+nodelng+'&pointLat='+nodelat+'&radius='+radius,
+             url:'common.action',
+             success:function(data){
+                 $('#getAroundPointResult').html(data);
+             },
+             error:function(){
+             $('#getAroundPointResult').html('查询失败');
+             }
+         });
+	}
+	function pointAdd(){
+		var nodeType = $('#pointAddnodeType');
+		var uid = $('#pointAdduid');
+		$.ajax({
+             type:'post',
+             data:'nodeType='+nodeType.val()+'&uid='+uid.val(),
+             url:'common.action',
+             success:function(data){
+                 $('#pointAddResult').html(data);
+             },
+             error:function(){
+             $('#pointAddResult').html('查询失败');
+             }
+         });
+	}
+
+	function pointUpdate(){
+		var nodeId = $('#pointUpdatenodeId');
+		var uid = $('#pointUpdateuid');
+		$.ajax({
+             type:'post',
+             data:'nodeId='+nodeId.val()+'&uid='+uid.val(),
+             url:'common.action',
+             success:function(data){
+                 $('#pointUpdateResult').html(data);
+             },
+             error:function(){
+             $('#pointUpdateResult').html('查询失败');
+             }
+         });
+	}
+
+	function queryPoint(){
+		var nodeType = $('#pointQuerynodeType');
+		var endNum   = $('#pointQueryendNum');
+		var startNum = $('#pointQuerystartNum');
+		var address = $('#pointQueryaddress');
+		var pointName = $('#pointQuerypointName');
+		var uid = $('#pointQueryuid');
+		//alert(nodeType.val());
+		
+		$.ajax({
+             type:'post',
+             data:'nodeType='+nodeType.val()+'&endNum='+endNum.val()+'&startNum='+startNum.val()+'&address='+address.val()+'&pointName='+pointName.val()+'&uid='+uid.val(),
+             url:'common.action',
+             success:function(data){
+                 $('#mkPointResult').html(data);
+             },
+             error:function(){
+             $('#mkPointResult').html('查询失败');
+             }
+         });
+	}
+</script>	
+</div>
+</body>
+</html>

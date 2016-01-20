@@ -1,0 +1,148 @@
+
+#J_questionRender .qBox { background-color:#fff }
+#J_questionRender .qBox .qTitle {
+  padding: 0px 0px 10px 0px;
+
+  color: #000;  margin-top: 10px;
+}
+#J_questionRender .qBox .qAnswerList {
+  margin: 0px;
+}
+#J_questionRender .qBox .qAnswerList ul li {
+  float: none;
+}
+#J_questionRender .qBox .cancelIcon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: red;
+  margin-left: 2px;
+  margin-top: -4px;
+  vertical-align: middle;
+  background: url(/ecp/css/images/hn10085/spriteQuestion.gif) no-repeat;
+}
+/*#J_questionRender>.gapFilling .qAnswerList ul li { float:left; }*/
+
+/*大纲*/
+.question>.questionLeft {  }
+.question>.questionLeft .fixed { position: fixed; top:120px; }
+.question>.questionRight {  }
+
+#J_questionRender {}
+/*#J_questionRender .qBox .qEditIcon { display:none; }*/
+#J_questionRender>.qBox>.qDecorationEdit { display:none; }
+#J_questionRender>.qBoxHover>.qEditIcon { display:block; }
+#J_questionRender>.edit>.qEditIcon { display:none; }
+#J_questionRender>.edit>.qDecorationEdit { display:block; }
+/*问题状态控制*/
+#J_questionRender>.qBox>.qDecorationTxt .descriptionLabel { display:block; }
+#J_questionRender>.qBox>.qDecorationTxt .descriptionBox { display:none; }
+#J_questionRender>.qBox>.qDecorationTxt .titleLabel { display:block; }
+#J_questionRender>.qBox>.qDecorationTxt .titleBox { display:none; }
+#J_questionRender>.edit>.qDecorationTxt .descriptionLabel { display:none; }
+#J_questionRender>.edit>.qDecorationTxt .descriptionBox { display:block; }
+#J_questionRender>.edit>.qDecorationTxt .titleLabel { display:none; }
+#J_questionRender>.edit>.qDecorationTxt .titleBox { display:block; }
+
+/*答案状态控制*/
+#J_questionRender>.qBox .qAnswerList li>.answerLabel {   display: inline-block;
+  width: 200px;
+  height: 18px;
+  line-height: 18px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;}
+#J_questionRender>.qBox .qAnswerList li>.answerBox { display:none;}
+#J_questionRender>.qBox .qAnswerList li>.editIcon { display:inline-block;}
+#J_questionRender>.qBox .qAnswerList li>.saveIcon { display:none;}
+#J_questionRender>.qBox .qAnswerList li>.cancelIcon { display:none;}
+#J_questionRender>.qBox .qAnswerList .answerEdit>.answerLabel {display:none;}
+#J_questionRender>.qBox .qAnswerList .answerEdit>.answerBox {  display:inline-block;}
+#J_questionRender>.qBox .qAnswerList .answerEdit>.editIcon { display:none;}
+#J_questionRender>.qBox .qAnswerList .answerEdit>.saveIcon { display:inline-block;}
+#J_questionRender>.qBox .qAnswerList .answerEdit>.cancelIcon { display:inline-block;}
+#J_questionRender>.qBox .qAnswerList .answerEdit>.upIcon { display:none;}
+#J_questionRender>.qBox .qAnswerList .answerEdit>.downIcon { display:none;}
+#J_questionRender>.qBox .qAnswerList .answerEdit>.delIcon { display:none;}
+
+/*临时隐藏未完成的功能wxf 150627 16:37*/
+#J_questionRender>.qBox .qEditIcon .qClone,#J_questionRender>.qBox .qEditIcon .qMove{display:none;background:none;}
+
+/*开篇*/
+.questionRight>.articleStart {}
+.questionRight>.articleStart .qEditIcon { display: inline-block; }
+.questionRight>.articleStart .qDecorationEdit { display:none; }
+.questionRight>.articleStartEdit .qEditIcon { display:none; }
+.questionRight>.articleStartEdit .qDecorationEdit { display:inline-block; }
+.questionRight>.articleStart .qDecorationTxt .label { display: inline-block; }
+.questionRight>.articleStart .qDecorationTxt .box { display:none; }
+.questionRight>.articleStartEdit .qDecorationTxt .label { display: none; }
+.questionRight>.articleStartEdit .qDecorationTxt .box { display:inline-block; }
+
+/*结束语*/
+.questionRight>.articleEndContainer>.list>.qBox {}
+.questionRight>.articleEndContainer>.list>.qBox .qEditIcon { display: inline-block; }
+.questionRight>.articleEndContainer>.list>.qBox .qDecorationEdit { display:none; }
+.questionRight>.articleEndContainer>.list>.qBox .qDecorationTxt .label { display: inline-block; }
+.questionRight>.articleEndContainer>.list>.qBox .qDecorationTxt .box { display:none; }
+.questionRight>.articleEndContainer>.list>.edit .qEditIcon { display:none; }
+.questionRight>.articleEndContainer>.list>.edit .qDecorationEdit { display:inline-block; }
+.questionRight>.articleEndContainer>.list>.edit .qDecorationTxt .label { display: none; }
+.questionRight>.articleEndContainer>.list>.edit .qDecorationTxt .box { display:inline-block; }
+
+/*选择题*/
+#J_questionRender .judge .qAnswerList ul li {
+  float:left;
+}
+
+/*填空*/
+#J_questionRender>.gapFilling .qAnswerList .answerLabel { display: inline-block; }
+#J_questionRender>.gapFilling .qAnswerList .answerBox { display:none; }
+#J_questionRender>.gapFilling .qAnswerList .answerEdit>.answerLabel { display:none; }
+#J_questionRender>.gapFilling .qAnswerList .answerEdit>.answerBox { display: inline-block; width:200px; }
+#J_questionRender>.gapFilling .qAnswerList .borderBox { display:none; }
+#J_questionRender>.gapFilling .qAnswerList .answerEdit>.borderBox { display: inline-block; }
+
+/*问答*/
+#J_questionRender>.questionAnswer .qContent textarea { readonly:true; height: 60px; }
+
+.formBtnArea #Publish,
+.formBtnArea #Save { display:none; }
+.formBtnArea .current_3 #Publish,
+.formBtnArea .current_3 #Save { display:inline; }
+
+/*多选*/
+.viewMode .qDecorationEdit, 
+#J_questionRender>.viewMode>.qEditIcon, 
+.viewMode .qAnswerList .answerBox, 
+.viewMode .qAnswerList ul>li .upIcon, 
+.viewMode .qAnswerList ul>li .downIcon, 
+#J_questionRender>.viewMode .qAnswerList>ul>li>a.editIcon, 
+.viewMode .qAnswerList ul>li .saveIcon, 
+.viewMode .qAnswerList ul>li .cancelIcon, 
+.viewMode .qAnswerList ul>li .delIcon, 
+#J_questionRender .viewMode .addAnswer
+{ display:none; }
+#J_questionRender .viewMode .qAnswerList ul li { float: left; }
+.questionView .questionLeft .querstionCatlog ul>li .current { color:#000; }
+
+/*问卷预览*/
+.questionView .questionLeft .querstionCatlog ul  {
+    height: 300px;
+    overflow: auto;
+}
+
+
+/*
+.viewMode .qAnswerList ul>li .upIcon {display:none;}
+, 
+.viewMode .qAnswerList .answerBox, 
+#J_questionRender .viewMode .qAnswerList .upIcon, 
+#J_questionRender .viewMode .qAnswerList .downIcon, 
+#J_questionRender .viewMode .qAnswerList .editIcon, 
+#J_questionRender .viewMode .qAnswerList .saveIcon, 
+#J_questionRender .viewMode .qAnswerList .cancelIcon, 
+#J_questionRender .viewMode .qAnswerList .delIcon, 
+*/
+

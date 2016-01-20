@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>开发者注册</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/jquery-easyui-1.4/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/dialog/4.1.6/skins/blue.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+
+<script type="text/javascript" src="ui/js/jquery.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/js/jquery.form.js"></script>
+<script type="text/javascript" src="ui/js/json2.js"></script>
+<script type="text/javascript" src="ui/pagination/1.2.1/jquery.pagination.js"></script>
+<script type="text/javascript" src="ui/js/handlebars.js"></script>
+<script type="text/javascript" src="ui/js/helpers.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="ui/js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="ui/js/jquery.slides.min.js"></script>
+<script type="text/javascript" src="ui/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="ui/js/common.js"></script>
+</head>
+<body>
+
+<!--顶部-->
+<div class="global-top">
+	<div class="top-content">
+		<!--左侧logo-->
+		<div class="fn-left">
+			<span class="logo"></span>
+		</div>
+
+		<!--中间-->
+		<div class="menutitle" id="menutitle">
+			<span class="active">首页</span>
+			<span class="item">应用管理</span>
+			<span class="item">能力查询</span>
+			<span class="item">申请查询</span>
+			<span class="item">其他</span>
+		</div>
+
+		<!--右侧-->
+		<div class="fn-right">
+			<div class="helpDoc" title="帮助中心"></div>
+			<div class="devDoc" title="开发文档"></div>
+			<div class="user-info" id="userInfo" title="用户信息">
+				<div class="user-info-more" id="userInfoMore">
+					<i class="iconfont" title="上三角形"></i>
+					<ul>
+						<li>
+							<a href="javascript:;" hidefocus="true" id="userInfoBase">基本信息</a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true">修改密码</a>
+						</li>
+						<li class="last">
+							<a href="javascript:;" hidefocus="true">联系人</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="msgInfo" title="站内信"></div>
+		</div>
+	</div>
+</div>
+
+
+<div class="global-content">
+	<div class="container">
+		<div class="zui-step">
+			<div id="step_1" class="step-page">
+				<div class="title">
+					<ol class="ui-step ui-step-4">
+					    <li class="ui-step-start ui-step-active">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">1</i>
+					            <span class="ui-step-text">基础信息</span>
+					        </div>
+					    </li>
+					    <li class="">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">2</i>
+					            <span class="ui-step-text">开发者信息</span>
+					        </div>
+					    </li>
+					    <li class="">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">3</i>
+					            <span class="ui-step-text">确认提交</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-end">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">4</i>
+					            <span class="ui-step-text">申请结果</span>
+					        </div>
+					    </li>
+					</ol>
+				</div>
+
+				<div class="content user-regist">
+					<h2>请填写账号基础信息</h2>
+					<div class="content-wrap fn-clear">
+						<div class="logo-container fn-left">
+							<span id="user_logo_add"></span>
+						</div>
+						<div class="apply-info fn-left">
+							<table cellpadding="0" cellspacing="0" border="0" width="100%" class="search_table">
+								<tbody>
+									<tr>
+										<td width="13%" class="des">
+											<label>登录账号：</label>
+										</td>
+										<td >
+											<input type="text" id="" class="ui-input regist-input" name="inputDemo" />
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>密码：</label>
+										</td>
+										<td >
+											<input type="password" id="" class="ui-input regist-input" name="inputDemo" />
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>密码确认：</label>
+										</td>
+										<td >
+											<input type="password" id="" class="ui-input regist-input" name="inputDemo" />
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>手机号码：</label>
+										</td>
+										<td >
+											<input type="text" id="" class="ui-input regist-input" name="inputDemo" />
+										</td>
+									</tr>
+									<tr>
+										<td width="13%" class="des">
+											<label>动态密码：</label>
+										</td>
+										<td >
+											<input type="text" id="" class="ui-input fn-w-190 fn-ver-md fn-mr-20" name="inputDemo" />
+											<a class="ui-button ui-button-normal" href="javascript:;" hidefocus="true" id="">
+												<span>点击获取</span>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>昵称：</label>
+										</td>
+										<td >
+											<input type="text" id="" class="ui-input regist-input" name="inputDemo" />
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>邮箱：</label>
+										</td>
+										<td >
+											<input type="text" id="" class="ui-input regist-input" name="inputDemo" />
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<h2>请选择开发者类型</h2>
+					<div class="regist-type">
+						<h3>（一经确认将无法回退修改，请按照实际情况选择）</h3>
+						<ul class="fn-clear">
+							<li class="company active">
+								<div class="fn-clear">
+									<i class="logo fn-left"></i>
+									<div class="fn-left">
+										<p class="regist-tit">企业开发者</p>
+										<p class="des">
+											您将需要填写以下信息：公司全称/公司注册号/法人姓名/营业执照/企业电话等
+										</p>
+									</div>
+								</div>
+								<div class="chose-content">
+									<i></i>
+									<span>已选择</span>
+								</div>
+							</li>
+							<li class="personal">
+								<div class="fn-clear">
+									<i class="logo fn-left"></i>
+									<div class="fn-left">
+										<p class="regist-tit">个人开发者</p>
+										<p class="des">
+											您将需要填写以下信息：公司全称/公司注册号/法人姓名/营业执照/企业电话等
+										</p>
+									</div>
+								</div>
+								<div class="chose-content">
+									<i></i>
+									<span>未选择</span>
+								</div>
+							</li>
+						</ul>
+					</div>
+
+					<div class="handler">
+						<a class="ui-button ui-button-green" href="javascript:;" hidefocus="true" id="go_step_2">
+							<span>下一步</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="global-footer">
+	<div class="foot-wrap">
+		<div class="contract">
+			<a href="javascript:;" hidefocus="true">联系我们</a>
+			<a href="javascript:;" hidefocus="true">投诉举报</a>
+			<a href="javascript:;" hidefocus="true">Complaint  Guidlines</a>
+			<a href="javascript:;" hidefocus="true" class="last">移动能力开放平台</a>
+		</div>
+		<div>
+			<p>Copyright  ©  1998-2050  China  Mobile. All Rights  Reserved.</p>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+	
+});
+
+var swfu;
+$(function(){
+	var settings = {
+		flash_url : "ui/swfupload/1.0.0/2.5/swfupload.swf",
+		upload_url: "ui/json/test.json",
+		post_params: "",
+		use_query_string: true,
+		file_size_limit : "1 MB",
+		file_types : "*.jpg;*.png;*.gif;*.jpeg",  //允许所有类型时请使用 *.*
+		file_types_description : "All Files",
+		file_upload_limit : 0,
+		file_queue_limit : 0,
+		debug: false,
+
+		// Button settings
+		button_image_url: "ui/swfupload/1.0.0/vendor/logo_add.png",
+		button_width: "100",
+		button_height: "100",
+		button_placeholder_id: "user_logo_add",
+		button_text: '',
+		button_text_style: ".theFont { font-size: 16; }",
+		button_text_left_padding: 12,
+		button_text_top_padding: 3,
+		button_cursor : SWFUpload.CURSOR.HAND,
+		
+		// The event handler functions are defined in handlers.js
+		file_dialog_complete_handler : fileDialogComplete,
+		upload_start_handler : uploadStart,
+		upload_error_handler : uploadError,
+		upload_success_handler : uploadSuccess
+	};
+
+	swfu = new SWFUpload(settings);
+});
+
+function fileDialogComplete(numFilesSelected, numFilesQueued) {
+	try {
+		this.startUpload();
+	} catch (ex)  {
+        this.debug(ex);
+	}
+}
+function uploadStart(file) {
+	alert("开始");
+	return true;
+}
+function uploadSuccess(file, serverData) {
+	try {
+		serverData = JSON.parse(serverData);
+    	if (serverData.returnCode=='0') {
+    		alert("成功");
+    	}else{
+    		alert("失败");
+    	}
+	} catch (ex) {
+		this.debug(ex);
+	}
+}
+
+function uploadError(file, errorCode, message) {
+	try {
+    	alert("上传失败!");
+	} catch (ex) {
+        this.debug(ex);
+    }
+}
+</script>
+</body>
+</html>

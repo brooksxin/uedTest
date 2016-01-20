@@ -1,0 +1,53 @@
+      <!DOCTYPE html>
+      <html>
+      <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>添加新岗位</title>
+     <#include "../../tpl/res_css.tpl" />
+      </head>
+      
+      <body>
+      <div class="formItem">
+                <div class="titleArea">
+                    <h2>添加岗位</h2>
+                </div>
+
+         <div class="formArea">
+                <div class="form_table" style="text-align:center;">岗位创建成功，是否现在配置对应角色？</div>
+                <hr/>
+                <div class="formBtnArea">
+                   <div class="normalBtnArea fn-center">
+                       <a class="normalBtn BGblue largeBtn" href="javascript:;" id="CONFIG_NOW" >配置角色</a>
+                       <a class="normalBtn BGgray largeBtn" href="javascript:;" id="CONFIG_LATER" >稍后再配置</a>   
+                    </div>
+                </div>
+         </div> 
+
+      
+
+      
+      <#include "../../tpl/res_js.tpl" />   
+      <script type="text/javascript">
+          //页面加载完开始执行
+          $(document).ready(function () {
+              //初始化函数
+          });
+          
+          ////配置角色
+          $(function(){
+        	  $("#CONFIG_NOW").click(function(){
+        		  var PRIV_POST_ID = Util.browser.getParameter("PRIV_POST_ID");
+        		  var POST_NM = Util.browser.getParameter("POST_NM");
+        		  window.location.href="configRole.html?PRIV_POST_ID=" + PRIV_POST_ID + "&POST_NM=" + encodeURI(POST_NM); 
+        	  });
+          });
+          
+      	  ////不配置角色
+          $(function(){
+        	  $("#CONFIG_LATER").click(function(){
+        		  window.location.href="privPostList.html";
+        	  });
+          });
+      </script>
+      </body>
+      </html>

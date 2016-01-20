@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人信息</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+
+</head>
+
+<body>
+
+
+<div class="formItem bd-bottom">
+    <div class="titleArea">
+        <h2>动感地带用户满意度调查</h2>
+    </div>
+</div>
+
+
+
+
+
+<!--问卷start-->
+<div class="question">
+
+    <!--问卷提纲START-->
+    <div class="questionLeft">
+        <div class="querstionCatlog_answer">
+            <h2>问卷纲要</h2>
+            <ul>
+
+                <li>
+                    <a href="#">
+                        <div class="qTxt"><i class="listIndex">1.</i>您已经使用使用过4G手机？</div>
+
+                        <!--回答完成写入答案并显示okIcon-->
+                        <div class="okIcon" ></div>
+                        <div class="anserTxt">A.是</div>
+                        <div class="querstionView fn-hide">
+                            <div class="viewTitle"><i class="listIndex">1.</i>您已经使用使用过4G手机？</div>
+                            <div class="viewAnswer">A.是</div>
+                            <div class="divArrow"></div>
+                        </div>
+                    </a>
+
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="qTxt"><i class="listIndex">2.</i>您已经使用该号码多久了？</div>
+
+                        <!--回答完成写入答案并显示okIcon-->
+                        <div class="okIcon" ></div>
+                        <div class="anserTxt">自2011年开始使用，已有5年开始使开始使开始使开始使</div>
+
+                        <!--悬浮展示详细内容-->
+                        <div class="querstionView">
+                            <div class="viewTitle"><i class="listIndex">2.</i>您已经使用该号码多久了？</div>
+                            <div class="viewAnswer">自2011年开始使用，已有5年，自2011年开始使用，已有5年，自2011年开始使用，已有5年，您已经使用该号码多久了？您已经使用该号码多久了？您已经使用该号码多久了？</div>
+                            <div class="divArrow"></div>
+                        </div>
+                    </a>
+                </li>
+
+                <!-- 当前样式附加current样式 -->
+                <li><a href="#" class="current"><div class="qTxt"><i class="listIndex">3.</i>中华人民共和国中华人民共和国测试</div></a></li>
+                <li><a href="#"><div class="qTxt"><i class="listIndex">4.</i>中华人民共和国中华人民共和国</div></a></li>
+                <li><a href="#"><div class="qTxt"><i class="listIndex">5.</i>动感地带用户满意度调查</div></a></li>
+
+            </ul>
+        </div>
+    </div>
+    <!--问卷提纲END-->
+
+
+    <!--问卷右侧内容START-->
+    <div class="questionRight">
+
+
+<div id="J_questionRender">
+
+<!-- 单选类题 -->
+        <div class="qBox">
+            <div class="qContent">
+
+                <!--展示内容-->
+                <div class="showContent">
+                    <div class="qTitle"><i class="listIndex">1.</i>您是否正在使用4G手机？</div>
+                    <div class="qAnswerList">
+                        <ul class="fn-clear">
+                            <li><input type="radio" name="myradio" />A.是</li>
+                            <li><input type="radio" name="myradio" />B.否</li>
+                            <li><input type="radio" name="myradio" />C.不清楚</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+<!-- 多选类题 -->
+        <div class="qBox">
+            <div class="qContent">
+                <!--展示内容-->
+                <div class="showContent">
+                    <div class="qTitle"><i class="listIndex">2.</i>您是否正在使用4G手机？</div>
+                    <div class="qAnswerList">
+                        <ul class="fn-clear">
+                            <li><input type="checkbox" />A.选项一</li>
+                            <li><input type="checkbox" />B.选项二A</li>
+                            <li><input type="checkbox" />C.选项三</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+<!-- 填空题展示 -->
+        <div class="qBox">
+            <div class="qContent">
+                <!--展示内容-->
+                <div class="showContent ">
+                    <div class="qTitle"><i class="listIndex">3.</i>您一周购物购次<input type="text" class="FormInputText w100" value="A" />，平均每次消费<input type="text" class="FormInputText w100" value="B" />元。</div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+<!-- 日期类题 -->
+        <div class="qBox">
+            <div class="qContent">
+                <!--展示内容-->
+                <div class="showContent">
+                    <div class="qTitle"><i class="listIndex">4.</i>您的生日是？</div>
+                    <div class="qAnswerList">
+                        <ul class="fn-clear">
+                            <li><input id="endDate" name="endDate" class="inputWidth element text Wdate" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startDate\',{d:1})||\'1930-01-01 23:59:59\'}'})"></li>
+                        </ul>
+                    </div>
+                </div>
+           </div>
+        </div>
+
+
+
+
+<!-- 问答类题 -->
+        <div class="qBox">
+            <div class="qContent">
+
+                <!--展示内容-->
+                <div class="showContent">
+                    <div class="qTitle"><i class="listIndex">5.</i>我来问你来答</div>
+                    <div class="qAnswerList">
+                        <ul class="fn-clear">
+                            <li><textarea name=""></textarea></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+<!--J_questionRender结束-->
+
+
+    </div>
+    <!--问卷右侧内容END-->
+
+</div>
+<!--问卷END-->
+
+
+
+
+
+
+
+<div class="formBtnArea bd-top">
+    <table width="100%">
+        <tr>
+            <td>
+                <div class="normalBtnArea norBtnAleft">
+                    <a class="normalBtn disable largeBtn" href="#" id="Return">上一题</a>
+                    <a class="normalBtn BGblue largeBtn" href="javascript:;" id="Next">下一题</a>
+                </div>
+            </td>
+            <td>
+                <div class="normalBtnArea fn-right">
+                    <a href="#" class="formLink"><span>结束答题</span></a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+
+
+<script src="../../lib/jquery/1.8.1/jquery.js"></script>
+<script src="../../lib/json2/1.0.0/json2.js"></script>
+<script src="../../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../../lib/handlebars/1.3.0/helpers.js"></script>
+<script src="../../lib/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="../../lib/blockUI/2.64/jquery.blockUI.js"></script>
+<script src="../../common/frameInit.js"></script>
+<script src="../../lib/dialog/4.1.7/artDialog.js"></script>
+<script src="../../lib/dialog/4.1.7/iframeTools.js"></script>
+<script src="../../common/config.js"></script>
+<script src="../../common/common.js"></script>    
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+      
+    });
+</script>
+</body>
+</html>

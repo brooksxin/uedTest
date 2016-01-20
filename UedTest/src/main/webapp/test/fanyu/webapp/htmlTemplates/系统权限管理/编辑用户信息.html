@@ -1,0 +1,208 @@
+      <!DOCTYPE html>
+      <html>
+      <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>编辑用户信息</title>
+      <#include "../../tpl/res_css.tpl" />
+      <link rel="stylesheet" href="../../dest/ecp.min.css" />
+      <link rel="stylesheet" href="../../css/common.css" />
+      <link rel="stylesheet" href="../../css/tablepay.css" />
+      <link rel="stylesheet" href="../../lib/jqueryui/jquery-ui.min.css" />
+      <link rel="stylesheet" href="../../lib/dialog/6.0.4/css/ui-dialog.css" />
+      <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+    <body>
+      <div class="formItem">
+         
+                <div class="titleArea">
+                    <h2>编辑用户信息</h2>
+                </div>
+         <form class="editForm" class="formArea">
+                <table class="form_table">
+                  <tbody>
+                      <tr>
+                          <td width="90"><label class="formDescription"><span class="fn-high">*</span> 员工编号</label></td>
+                          <td width=""><input class="FormInputText width100" id="emnumberid" name="emnumberid" type="text" value="X10085" /></td>
+                      </tr>
+                      <tr>
+                          <td width="90"><label class="formDescription"><span class="fn-high">*</span> 所属渠道</label></td>
+                          <td width="">
+                               <select class="FormInputText width100" id="ptyIdone" name="ptyIdone">
+                                   <option>语音</option>
+                                   <option>众包</option>
+                                   <option>O2O</option>
+                               </select>
+                          </td>
+                      </tr>
+
+                      <tr>
+                          <td width="90"><label class="formDescription"><span class="fn-high">*</span> 登录方式</label></td>
+                          <td><span><input type="radio" for="phonenumber"/>手机号</span>
+                              <span><input type="radio" for="emailnumber" name=""/>邮箱</span>
+                              <span><input type="radio" for="everything"name="" checked="checked;" />自定义</span>
+                              <input type="hidden" value="" id="phone"/>
+                              <input type="hidden" value="" id="email"/>
+                              <input type="hidden" value="" id="every"/>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td width="90"><label class="formDescription"><span class="fn-high">*</span> 工号 </label></td>
+                          <td width=""><input class="FormInputText width100" type="text" id="jobnumberid" name="jobnumberid" /></td>
+                      </tr>
+                      <tr>
+                          <td width="90"><label class="formDescription">别名</label></td>
+                          <td width=""><input class="FormInputText width100" type="text" id="aliasesid" neme="aliasesid"/></td>
+                      </tr>
+                      <tr>
+                          <td width="90"><label class="formDescription"><span class="fn-high">*</span>登录密码</label></td>
+                          <td width=""><input class="FormInputText width100" type="text" id="okpasswordid" name="okpasswordid" /></td>
+                      </tr>
+                      <tr>
+                          <td width="90"><label class="formDescription"><span class="fn-high">*</span>确认密码</label></td>
+                          <td width=""><input class="FormInputText width100" type="text" id="yespasswordid" name="yespasswordid" /></td>
+                      </tr>
+                      <tr>
+                          <td valign="top"><label class="formDescription"><span class="fn-high">*</span> 活动描述</label></td>
+                          <td>
+                              <textarea class="form_textarea" id="activityid" name="activityid" maxlength="500"></textarea>
+                          </td>
+                      </tr>
+
+                  </tbody>
+                </table>
+                <hr/>
+                <div class="formBtnArea">
+                      <table width="100%">
+                        <tr>
+                          <td>
+                            <div class="normalBtnArea fn-center">
+                                <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" onclick="goNext(3)">下一步</a>
+                            </div>
+                          </td>
+                          <td>
+                              <div class="normalBtnArea fn-right">
+                                <a href="javascript:history.back();" class="formLink"><span>取消</span></a>
+                              </div>
+                          </td>
+                        </tr>
+                      </table>
+                </div>
+                                                 
+      </form>
+      
+   </div>   
+      
+      
+      
+      
+      
+      
+      <#include "../../tpl/res_js.tpl" />  
+      <script src="../../lib/jquery/1.8.1/jquery.js"></script>  
+      <script src="../../lib/validate/1.13.1/jquery.validate.js"></script> 
+      <script src="../../lib/dialog/6.0.4/dialog-min.js"></script> 
+      <script src="../../common/common.js"></script>  
+      <script src="../../common/config.js"></script>  
+      <script type="text/javascript">
+      
+
+          //页面加载完开始执行
+          $(document).ready(function () {
+            init();
+            eventInit();
+          });
+
+          var init = function(){
+            //初始化员工编号
+            var emnumberid = Util.browser.getParameter("PTY_NO");
+            $("#emnumberid").val(emnumberid);
+            //初始化所属渠道
+            var channelid = Util.browser.getParameter("CHNL_ID");;
+            Util.ajax.postJson(srvMap.get("coopPrnr"), channelid, function(json,flag){
+              if(flag){
+                Util.ajax.loadTemp('#ptyIdone',$('#ptyIdone.tabletpl'),json);//加载模板
+              }
+              //初始化登录方式
+
+              //初始化员工工号
+              var jobnumberid = Util.browser.getParameter("USER_LOGIN_ID");
+              $("#jobnumberid").val(jobnumberid);
+              //初始化别名
+              var aliasesid = Util.browser.getParameter("USER_ALS");
+              $("#aliasesid").val(aliasesid);
+              //登录密码
+              var okpasswordid = Util.browser.getParameter("USER_LOGIN_PW");
+              $("#okpasswordid").val(okpasswordid);
+              //确认密码
+              var yespasswordid = Util.browser.getParameter("USER_LOGIN_PW");
+              $("#yespasswordid").val(yespasswordid);
+              //活动描述
+              var activityid = Util.browser.getParameter("");
+              $("#activityid").val(activityid);
+                
+
+
+            });
+          }
+         //登录方式的选择，以及显示于隐藏
+          $("#phonenumber").bind("click",function(){
+            if($("#phonenumber").attr("checked")){
+              $("#phone").show();
+              }else{
+                $("#phone").hide();
+              }
+          });
+          $("#emailnumber").bind("click",function(){
+            if($("#emailnumber").attr("checked")){
+              $("#email").show();
+            }else{
+              $("#email").hide();
+            }
+          });
+          
+          $("#everything").bind("click",function(){
+          window.location.href = "partnerManage.html";
+          })
+
+
+       //获取from表单的信息
+          var eventInit = function(){
+            var arr = $('.editForm').serializeArray();
+            console.log(arr);
+          }
+
+       //判断，以及提示
+          function checkInfo(){ 
+             var emnumberid = $("#emnumberid").val();
+             if(emnumberid=='null' || emnumberid =="" || emnumberid=="undefined"){
+               alert("请输入有效的员工编号！")
+               return false;
+             }
+             if(""==ptyIdone){
+               alert("请选择渠道!");
+               return false; 
+             }
+             var jobnumberid = $("#jobnumberid").val();
+             if(jobnumberid=='null' || jobnumberid =="" || jobnumberid=="undefined"){
+               alert("请输入员工工号")
+               return false;
+             }
+             var aliasesid = $("#aliasesid").val();
+             if(aliasesid=='null' || aliasesid =="" || aliasesid=="undefined"){
+               alert("请输入别名")
+               return false;
+             }
+             var okpasswordid = $("#okpasswordid").val();
+             if(okpasswordid=='null' || okpasswordid =="" || okpasswordid=="undefined"){
+               alert("请输入登录密码")
+               return false;
+             }
+             var activityid = $("#activityid").val();
+             if(activityid=='null' || activityid =="" || activityid=="undefined"){
+               alert("请输入活动描述")
+               return false;
+             }
+             return true;
+            } 
+      </script>
+      </body>
+      </html>

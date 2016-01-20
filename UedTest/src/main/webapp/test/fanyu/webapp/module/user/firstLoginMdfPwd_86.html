@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>首次登陆密码设置</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+
+<!-- header start -->
+<div class="loginHeader">
+  <div class="headerInner10086"> <span></span> </div>
+</div>
+<div class="formItem">
+ <form id="J_formMdfPwd" name="J_formMdfPwd">
+ <table class="form_table" cellpadding="1" cellspacing="1" align="center" width="350" >
+    <tr>
+      <td class="size100">为保证你的账户安全，请设置新的登录密码</td>
+    </tr>
+    <tr>
+      <td class="gray_text"><div id="J_userName"></div></td>
+    </tr>
+  </table>
+  <table class="form_table" cellpadding="0" cellspacing="0" align="center"  width="350">
+    <tbody>
+      <!-- <tr>
+        <td>&nbsp;</td>
+        <td class="fn-high">两次输入的密码不一致，请从新输入</td>
+      </tr> -->
+      <tr>
+        <td><label class="formDescription">新登录密码：</label></td>
+        <td ><input class="FormInputText width100"  name="newPassword"  id="newPassword" type="password"/></td>
+      </tr>
+      <tr>
+        <td><label class="formDescription">确认登陆密码：</label></td>
+        <td><input class="FormInputText  width100" name="confirmPassword"  id="confirmPassword" type="password"/></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td class="gray_text">密码由6位以上数字或字母构成</td>
+      </tr>
+    </tbody>
+  </table>
+  </form>
+</div>
+
+<div class="normalBtnArea mt-50 fn-center">
+    <a class="searchBtn" href="javascript:;" id="J_Submit">确定</a>
+</div>
+
+
+<!--底部版权区-->
+<div style="margin-top:50px">
+  <div class=" fn-center">Copyright©1999-2015  中国移动 版权所有</div>
+</div>
+
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+/*
+   服务配置
+ param1: 服务名
+ param2: 假数据路径
+ param3: 后台服务路径
+ */
+srvMap.add('curUser', 'session.json', 'front/sh/user!session');//查询服务
+srvMap.add('firstLoginMdfPwd', 'firstLoginMdfPwd.json', 'front/sh/user!firstLoginMdfPwd');//查询服务
+//页面加载完开始执行
+$(function () {
+		//初始化函数
+		Util.ajax.postJson(srvMap.get('curUser'), "uid=u001",function(json, status) {
+			if (status) {
+				if (json.returnCode == "0") {
+               		var username = json.bean.userName;
+	             	$("#J_userName").html("您的工号是："+username);//加载模板
+				}
+			} else {
+				Util.dialog.tips(json.returnMessage || '登录失败，请重试！');
+			}
+		});
+		
+    $('#J_Submit').bind('click',function(){
+        var str = $("#J_formMdfPwd").serialize(); //把form序列化
+
+        //不分页获取数据
+         Util.ajax.postJson(srvMap.get('firstLoginMdfPwd'),"uid=u001&"+str,function(json,status){
+        	var returnCode = json.returnCode;
+        	var returnMessage = json.returnMessage;
+            if (status) {
+            	Util.dialog.tips("密码修改成功");
+             	window.location.href="../../module/homePage/hp_86.html";
+            }else{
+            	if(returnCode == "0001"){
+            		Util.dialog.tips(returnMessage);
+            	}else if(returnCode = "0002"){
+            		Util.dialog.tips(returnMessage);
+            	}else{
+            		Util.dialog.tips(json.returnMessage||'登录失败，请重试！');
+            	}
+            }
+        }); 
+    })
+});
+</script>
+</body>
+</html>

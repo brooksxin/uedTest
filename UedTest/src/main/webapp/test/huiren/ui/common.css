@@ -1,0 +1,577 @@
+body {
+	font-family: \5fae\8f6f\96c5\9ed1, Verdana, Arial, \5b8b\4f53, sans-serif;
+	background: #EFEFF4;
+}
+input, select, textarea {
+	font-family: \5fae\8f6f\96c5\9ed1, Verdana, Arial, \5b8b\4f53, sans-serif;
+}
+/**
+ * 常用
+**/
+.fn-mr-20 {
+	margin-right: 20px;
+}
+.fn-ml-20 {
+	margin-left: 20px;
+}
+.fn-high {
+	color: red;
+}
+.fn-right {
+	float: right;
+}
+.fn-left {
+	float: left;
+}
+/* 清理浮动 */
+.fn-clear:after {
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+}
+.fn-clear {
+    zoom:1; /* for IE6 IE7 */
+}
+.fn-center {
+	text-align: center!important;
+}
+.fn-text-right {
+	text-align: right!important;
+}
+.fn-hide {
+	display: none;
+}
+.fn-va-top {
+	vertical-align: top;
+}
+.fn-pd-10 {
+	padding: 10px;
+}
+.fn-mb-20 {
+	margin-bottom: 20px;
+}
+.zui-loading {
+	background: url(img/loading.gif) 7px 50% no-repeat #3C3C3C;
+	width: auto;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	z-index: 999;
+	cursor: wait;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -20px 0 0 -80px;
+	padding: 20px 10px 20px 34px;
+	font-size: 14px;
+	color: #fff;
+}
+
+/**
+ * 微信ui -- dialog
+ * https://github.com/weui/weui
+**/
+.weui_toptips {
+	display: none;
+	position: fixed;
+	-webkit-transform: translateZ(0);
+	width: 100%;
+	top: 0;
+	line-height: 2.3;
+	font-size: 14px;
+	text-align: center;
+	color: #FFF;
+	z-index: 2;
+}
+.weui_toptips.weui_warn {
+	background-color: #e64340;
+}
+.weui_msg {
+	padding: 75px 15px 0;
+	text-align: center;
+}
+.weui_msg .weui_icon_area {
+	margin-bottom: 19px;
+}
+.weui_msg .weui_text_area {
+	margin-bottom: 25px;
+}
+.weui_msg .weui_msg_title {
+	margin-bottom: 12px;
+	font-weight: 400;
+	font-size: 20px;
+}
+.weui_msg .weui_msg_desc {
+	color: #b2b2b2;
+}
+.weui_msg .weui_opr_area {
+  margin-bottom: 25px;
+}
+.weui_msg .weui_extra_area {
+	margin-bottom: 20px;
+	font-size: 14px;
+	color: #888888;
+}
+.weui_msg .weui_extra_area a {
+	color: #61749b;
+}
+@media screen and (max-height: 416px) {
+	.weui_msg {
+		padding: 45px 15px 0;
+	}
+}
+@media screen and (min-height: 416px) {
+	.weui_extra_area {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		text-align: center;
+	}
+}
+.weui_dialog {
+	position: fixed;
+	z-index: 13;
+	width: 85%;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	  -ms-transform: translate(-50%, -50%);
+	      transform: translate(-50%, -50%);
+	background-color: #fafafc;
+	text-align: center;
+	border-radius: 3px;
+}
+.weui_dialog_confirm .weui_dialog .weui_dialog_hd {
+	text-align: left;
+	padding: 1.2em 20px .5em;
+}
+.weui_dialog_confirm .weui_dialog .weui_dialog_bd {
+	text-align: left;
+}
+.weui_dialog_hd {
+	padding: 1.2em 0 .5em;
+}
+.weui_dialog_title {
+	font-weight: 400;
+	font-size: 17px;
+}
+.weui_dialog_bd {
+	padding: 0 20px;
+	font-size: 15px;
+	color: #888888;
+}
+.weui_dialog_ft {
+	position: relative;
+	line-height: 42px;
+	margin-top: 20px;
+	font-size: 17px;
+}
+.weui_dialog_ft a {
+	display: block;
+	color: #3cc51f;
+	text-decoration: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.weui_dialog_ft a:active,
+.weui_dialog_ft a:hover {
+	text-decoration: none;
+}
+.weui_dialog_ft:after {
+	content: " ";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 1px;
+	border-top: 1px solid #d5d5d6;
+	-webkit-transform-origin: 0 0;
+	  -ms-transform-origin: 0 0;
+	      transform-origin: 0 0;
+	-webkit-transform: scaleY(0.5);
+	  -ms-transform: scaleY(0.5);
+	      transform: scaleY(0.5);
+}
+.weui_dialog_confirm .weui_dialog_ft a {
+	position: relative;
+	float: left;
+	width: 50%;
+}
+.weui_dialog_confirm .weui_dialog_ft a:after {
+	content: " ";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 1px;
+	height: 100%;
+	border-left: 1px solid #d5d5d6;
+	-webkit-transform-origin: 0 0;
+	  -ms-transform-origin: 0 0;
+	      transform-origin: 0 0;
+	-webkit-transform: scaleX(0.5);
+	  -ms-transform: scaleX(0.5);
+	      transform: scaleX(0.5);
+}
+.weui_dialog_confirm .weui_dialog_ft a:first-child:after {
+	display: none;
+}
+.weui_dialog_confirm .weui_dialog_ft a:last-child {
+	float: none;
+	width: auto;
+	overflow: hidden;
+	*zoom: 1;
+}
+.btn_weui_dialog.default {
+	color: #353535;
+}
+.btn_weui_dialog.primary {
+	color: #0BB20C;
+}
+@media screen and (min-width: 1024px) {
+	.weui_dialog {
+		width: 35%;
+	}
+}
+.weui_mask {
+	position: fixed;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.6);
+}
+/**
+ * 微信ui -- dialog
+ * https://github.com/weui/weui
+ * end
+**/
+
+/**自定义mui样式**/
+.zui .mui-bar-nav {
+	background: #0AB0B3;
+	height: 60px;
+}
+.zui .mui-bar-nav .mui-title, .zui .mui-bar-nav .mui-icon {
+	color: #fff;
+}
+.zui .mui-bar-nav h1.mui-title {
+	font-size: 20px;
+	height: 60px;
+	line-height: 60px;
+}
+.zui .mui-bar-nav .mui-icon {
+	height: 39px;
+	line-height: 39px;
+}
+.zui .mui-table-view-cell {
+	padding: 14px 15px;
+}
+.zui .input-col {
+	padding: 0 15px;
+	width: 100%;
+	margin-top: 5px;
+}
+.zui .mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) {
+	margin-right: -25px;
+}
+.zui .mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn) .mui-badge {
+	font-size: 14px;
+}
+.zui .mui-bar-tab .mui-tab-item.active {
+	color: #0AB0B3;
+}
+.zui .mui-input-row label {
+	color: #363945;
+	font-family: \5fae\8f6f\96c5\9ed1, Verdana, Arial, \5b8b\4f53, sans-serif;
+}
+.zui .mui-input-row input, .zui .mui-input-row select,  .zui .mui-input-row textarea {
+	color: #6A707C;
+	font-family: \5fae\8f6f\96c5\9ed1, Verdana, Arial, \5b8b\4f53, sans-serif;
+}
+.zui .J_fileUpload {
+	margin-left: 16px;
+	position: relative;
+	margin-top: 10px;
+	display: inline-block;
+}
+.zui .J_fileUpload input[type=file] {
+	position: relative;
+	z-index:2;
+	opacity:0;
+	filter:alpha(opacity=0);
+	width: 100%;
+	height: 50px;
+}
+.zui .J_fileUpload .des {
+	background: url(img/fileupload.png) 0 0 no-repeat;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 50px;
+	width: 100%;
+	padding: 10px 0 0 60px;
+	font-size: 14px;
+}
+.zui .ui-btn-blue {
+	background-color: #0AB0B3;
+	border: 1px solid #0AB0B3;
+}
+.zui .ui-btn-blue.ui-btn-blue {
+	padding: 10px 0;
+}
+.zui .mui-switch {
+	background: #8A98B2;
+	color: #fff;
+}
+.zui .mui-switch.mui-active {
+	background: #4cd964;
+}
+.zui .mui-switch:before {
+	font-size: 14px;
+	color: #fff;
+}
+.zui-sex-switch .mui-switch.mui-active:before {
+	content: "女";
+}
+.zui-sex-switch .mui-switch:before {
+	content: "男";
+}
+.zui-marriage-switch .mui-switch.mui-active:before {
+	content: "未婚";
+}
+.zui-marriage-switch .mui-switch:before {
+	content: "已婚";
+}
+.mui-popover {
+	width: 200px;
+}
+.mui-popover .mui-table-view {
+	padding-top: 0;
+}
+
+/**
+ * 我的医生
+**/
+.myDoctor {
+
+}
+.myDoctor .mui-media {
+	position: relative;
+}
+.myDoctor .mui-media .icon {
+	
+}
+.myDoctor .mui-media .des {
+	padding-left: 13px;
+	width: 50%;
+}
+.myDoctor .mui-media .des p {
+	height: 25px;
+	line-height: 25px;
+}
+.myDoctor .mui-media .des p:first-child {
+	margin-bottom: 6px;
+}
+.myDoctor .mui-media .consult {
+	width: 20%;
+	background: #3594FE;
+	border: 1px solid #3594FE;
+	border-radius: 5px;
+	padding: 1px;
+	text-align: center;
+	color: #fff;
+}
+.myDoctor .ident {
+	background: #0AB0B3;
+	color: #fff;
+	font-size: 14px;
+	padding: 4px 12px;
+}
+.myDoctor .ident .mui-icon {
+	font-size: 24px;
+	vertical-align: middle;
+	line-height: 5px;
+	margin: -1px 0 0 -8px;
+}
+.myDoctor .desident {
+	background: #A8B3C5;
+	color: #fff;
+	font-size: 14px;
+	padding: 4px 12px;
+}
+.myDoctor .doc-name {
+	font-size: 17px;
+	color: #000;
+	margin-right: 10px;
+}
+.myDoctor .consult span {
+	display: block;
+	padding: 4px;
+}
+.myDoctor .consult .tit {
+	color: #57A4FF;
+	background: #fff;
+	padding: 8px 4px;
+	border-radius: 5px;
+}
+.myDoctor .consult .price {
+	font-size: 14px;
+}
+.myDoctor .mui-media .msg {
+	right: auto;
+	left: 80px;
+	top: 30px;
+	background: #FF5D32;
+	color: #fff;
+}
+/**
+ * 医生详情
+**/
+.myDoctorDtl .mui-media .des {
+
+}
+.myDoctorDtl .mui-media .consult {
+	background: #fff;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+}
+.myDoctorDtl .mui-media .consult .mui-btn {
+	font-size: 14px;
+}
+.myDoctorDtl .mui-media .consult .mui-btn .mui-icon {
+	display: inline-block;
+	margin-left: -8px;
+	font-size: 22px;
+}
+.zui .ui-btn-yellow {
+	background-color: #FFB400;
+	border: 1px solid #FFB400;
+	padding: 2px 8px;
+}
+.myDoctorDtl .contact-wrap {
+	
+}
+.myDoctorDtl .contact-wrap ul {
+	background: #F8FAFC;
+}
+.myDoctorDtl .contact-wrap ul:before, .myDoctorDtl .contact-wrap ul:after {
+	background-color: #E4E9EF;
+}
+.myDoctorDtl .contact-wrap .item {
+	width: 32%;
+	display: inline-block;
+	border-left: 1px solid #E4E9EF;
+	margin-bottom: -3px;
+}
+.myDoctorDtl .contact-wrap .item:first-child {
+	width: 33%;
+	border-left: 0;
+}
+.myDoctorDtl .contact-wrap .item:after {
+	background: #fff;
+}
+.myDoctorDtl .contact-wrap .item a {
+	text-align: center;
+}
+.myDoctorDtl .contact-wrap .item a p {
+	color: #7A828F;
+	font-size: 14px;
+}
+.myDoctorDtl .contact-wrap .item a p:first-child {
+	color: #000;
+	font-size: 17px;
+}
+.myDoctorDtl .contact-wrap .item a p .mui-icon {
+	color: #FFB400;
+	font-size: 36px;
+	margin: 6px 0;
+}
+.myDoctorDtl .desinfo p {
+	font-size: 17px;
+	width: 70%;
+}
+.myDoctorDtl .desinfo p:first-child {
+	width: 30%;
+}
+.myDoctorDtl .desinfo p.mui-pull-left {
+	color: #000;
+}
+.myDoctorDtl .desinfo p.mui-pull-right {
+	color: #7A828F;
+	text-align: right;
+}
+.myDoctorDtl .desinfo .introduction p {
+	width: 100%;
+	color: #000;
+}
+.myDoctorDtl .desinfo .introduction p.word {
+    font-size: 14px;
+    color: #7A828F;
+    margin-top: 10px;
+}
+/**
+ * 健康日记
+**/
+.zui .mui-bar-nav .mui-icon.J_addLog {
+	font-size: 34px;
+}
+.zui .mui-table-view-cell .J_unit {
+	
+}
+.zui .mui-table-view-cell .J_unit input {
+	width: 50%;
+}
+.zui .mui-table-view-cell .J_unit label.unit {
+	width: 30px;
+    padding: 10px 5px;
+    position: absolute;
+    right: 0;
+    top: 2px;
+    font-size: 14px;
+}
+.zui .J_addLogNormal {
+	margin-top: 15px;
+}
+.zui .J_addLogNormal .ui-select, .zui .J_addLogNormal .ui-select option, .zui .J_addLogNormal input.ui-date {
+	direction: rtl;
+	padding-right: 30px;
+}
+.zui .J_addLogNormal input[type=date] {
+	/*margin-right: -50px;*/
+}
+.zui .J_addLogNormal .ui-input {
+	text-align: right;
+	padding-right: 5px;
+}
+.zui .mui-table-view-cell .J_unit .ui-input {
+	margin-right: 28px;
+}
+.zui .J_addLogNormal .ui-select + .mui-icon, .zui .J_addLogNormal .ui-input + .mui-icon {
+	position: absolute;
+	right: 0;
+	top: 10px;
+	font-size: 22px;
+	color: #6A707C;
+}
+
+/**
+ * 个人中心
+**/
+.myCenter {
+	
+}
+.myCenter .userInfo {
+	padding-top: 30px;
+	text-align: center;
+	background: #fff;
+	margin-bottom: 20px;
+}
+.myCenter .userInfo p:last-child {
+	font-size: 20px;
+	color: #000;
+	padding-bottom: 20px;
+}

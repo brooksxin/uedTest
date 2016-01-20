@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>项目进度报表</title>
+	<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<div class="formItem">
+ <div class="titleArea">
+  <div class="listTopBtn fn-clear">
+   <h2 class="fn-left">项目进度报表</h2>
+   <div class="normalBtnArea mb-10 ft-right"><a class="normalBtn BGblue" target="erroriframe" href="/ecp/front/sh/report!createExcel?uid=0004" id="excel">导出Excel</a></div>
+  </div>
+ </div>
+ <div method="post" action="#" class="cmxform" >
+  <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+   <div class="record-search-cate">
+    <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+     <tbody>
+      <tr>
+       <td width="75"><label class="description">开始时间</label></td>
+       <td width="100"><input id="startDate" name="STDT" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'endDate\')}'})" type="text"></td>
+       <td width="75"><label class="description">结束时间</label></td>
+       <td colspan="3" width="100"><input id="endDate" name="ENDT" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{$dp.$D(\'startDate\',{d:1})||\'2010-01-01 23:59:59\'}'})" type="text"></td>
+       <td width="100"><label class="description">项目名称</label></td>
+       <td width="200"><select id="activity" class="FormInputText inputWidth" name="PROJ"></select>
+			  <script type="text/x-handlebars-template" id="p_activity">
+                     <option value="">--全部--</option>
+					 {{#each beans}}
+            		 <option value="{{CMPGN_ID}}">{{CMPGN_NM}}</option>
+                     {{/each}}
+              </script></td>
+       <td><div class="normalBtnArea w82"> <a class="searchBtn" href="javascript:;" id="J_search"><i></i>查询</a> </div></td>
+      </tr>
+      <tr>
+       <td width=""><label class="description">省份</label></td>
+	   <td width=""><select class="inputSelect inputWidth" id="province" onchange="loadCityData()" name="PROV">
+        </select>
+			  <script type="text/x-handlebars-template" id="p_suprRegnCode">
+                    <option value="">--全部--</option>
+					 {{#each beans}}
+            		 <option value="{{suprRegnCode}}">{{regnDesc}}</option>
+                     {{/each}}
+              </script></td>
+       <td width=""><label class="description">地市</label></td>
+       <td width=""><select class="inputSelect inputWidth" id="city" name="CITY">
+        </select>
+			 <script type="text/x-handlebars-template" id="p_regnCode">
+                    <option value="">--全部--</option>
+					{{#each beans}}
+                    <option value="{{regnCode}}">{{regnNm}}</option>
+                    {{/each}}
+             </script></td>
+       <td></td><td></td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <!-- <div class="seeMoreFilter"><a href="#" class="down"></a></div> -->
+  </form>
+ </div>
+ <div class="tablewidth mg_t_10" style="overflow:scroll;overflow-y:hidden">
+  <table class="ui-record-table table_radius table-bordered table-striped text-hidden" >
+   <thead>
+    <tr>
+     <th width="80">省份</th>
+     <th width="80">地市</th>
+     <th width="150">项目名称</th>
+     <th width="80">导入号码量</th>
+     <th width="80">外呼量</th>
+     <th width="60">接通量</th>
+     <th width="60">成功访问量</th>
+     <th width="60">接通率</th>
+     <th width="60">项目进度</th>
+     <th width="60">过滤量</th>
+    </tr>
+   </thead>
+   <tbody id="J_tabletpl">
+   </tbody>
+  </table>
+ </div>
+ 
+ <!--翻页及功能按钮区域开始-->
+ <DIV class="amount-bottom">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+   <tr>
+    <td width="50%"><DIV class="fn-clear action-other  action-other-show ">
+      <DIV id=Pagination class="page pagination fn-right"></DIV>
+      <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+     </DIV></td>
+   </tr>
+  </table>
+ </DIV>
+</div>
+
+
+
+<!-- 脚本部分 -->
+<#include "../../tpl/res_js.tpl" />
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+			<td>{{C1}}</td>
+			<td>{{C2}}</td>
+			<td>{{C3}}</td>
+			<td>{{C4}}</td>
+			<td>{{C5}}</td>
+			<td>{{C6}}</td>
+			<td>{{C7}}</td>
+			<td>{{C8}}</td>
+			<td>{{C9}}</td>
+			<td>{{C10}}</td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="10">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+<script type="text/javascript">
+	srvMap.add('progressReport','','front/sh/report!statement?uid=0004');
+	srvMap.add('queryProvince','','front/sh/contact!execute?uid=u016');
+	srvMap.add('queryCity','','front/sh/contact!execute?uid=u016');
+	srvMap.add('queryCategory','','front/sh/market!index?uid=mgl001');
+	//格式化时间方法
+	Date.prototype.format = function(format){ 
+	var o = { 
+	"M+" : this.getMonth()+1, //month 
+	"d+" : this.getDate(), //day 
+	"h+" : this.getHours(), //hour 
+	"m+" : this.getMinutes(), //minute 
+	"s+" : this.getSeconds(), //second 
+	"q+" : Math.floor((this.getMonth()+3)/3), //quarter 
+	"S" : this.getMilliseconds() //millisecond 
+	} 
+	if(/(y+)/.test(format)) { 
+	format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+	} 
+	for(var k in o) { 
+	if(new RegExp("("+ k +")").test(format)) { 
+	format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length)); 
+	} 
+	} 
+	return format; 
+	};
+	//分页数据
+	var G_params = {
+	    url : srvMap.get('progressReport'),
+	    items_per_page : 10,   		// 每页数     @param : limit
+	    page_index : 0 , 				//当前页  @param : start
+	    pagination : "Pagination" , 	//分页id
+	    searchformId : "J_formSearch",  //搜索表单的id
+	    tabletpl : "T_tabletpl", 		//表格模板
+	    tablewrap : "J_tabletpl", 		//表格容器
+	};
+	//查询省份数据
+	function loadProvinceData(){
+		var coopParam={'regionFlag':0};		
+		Util.ajax.postJson(srvMap.get('queryProvince'),coopParam,function(json,status){
+ 		//alert(JSON.stringify(json));
+		Util.ajax.loadTemp('#province',$('#p_suprRegnCode'),json);//加载模板
+		});	  
+
+	}    
+	//查询地市数据
+	function loadCityData(){
+		var coopParam={'suprRegnCode':$("#province").val(),'regionFlag':'2'};
+		//Util.ajax.postJson(srvMap.get('queryProvinceData'),'&province_id='+province_id+'&flag='+flag,function(json,status)
+		Util.ajax.postJson(srvMap.get('queryCity'),coopParam,function(json,status){
+		Util.ajax.loadTemp('#city',$('#p_regnCode'),json);//加载模板
+	 	});
+	}
+	//查询活动内容
+  	function loadActivityData(){
+  		Util.ajax.postJson(srvMap.get('queryCategory'),'',function(json,status){
+ 		   Util.ajax.loadTemp('#activity',$('#p_activity'),json);//加载模板
+  		});
+	}
+      //页面加载完开始执行
+      $(document).ready(function () {
+    	  //时间初始化
+    	  var end = new Date();
+          var start = new Date(new Date()-(7*86400000));
+          $('#endDate').val(end.format("yyyy-MM-dd hh:mm:ss"));
+          $('#startDate').val(start.format("yyyy-MM-dd hh:mm:ss"));
+    	  //初始化函数
+          loadProvinceData();
+          loadActivityData();
+          $('#J_search').bind('click',function(){
+              var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+              Util.pagination(0, true , G_params , str );
+          });
+      });
+      
+  function cancelReservation(){
+      artDialog({
+          id: 'Confirm',
+          lock: true,
+          opacity: .1,
+          content: '您确定要取消此预约单吗？',
+          ok: function (here) {
+              art.dialog.tips('已取消');
+          },
+          cancel: function (here) {
+              return;
+          }
+      });
+      
+      
+  }
+  </script>
+   <!-- 导出excel方法 -->
+  <iframe id="erroriframe" name="erroriframe" style="width: 0px;height:0px;display: none;"></iframe>
+</body>
+</html>

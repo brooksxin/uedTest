@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>设置抽取策略</title>
+   <#include "../../tpl/res_css.tpl" />
+</head>
+
+<body>
+<div class="onlin_borBot pb-10 mb-10">
+    <h2 class="fn-center">设置抽取策略</h2>
+</div>
+<div class="formItem">
+
+
+    <div class="ml-15 mr-15 mb-20">
+      	<div class="pb-10 fn-clear">
+          <div class="fn-left pr-30"> <span class="attributionValue fn-right">策略项1</span></div>
+          <div class="fn-left">
+              <div class="mb-10">
+                  <select  class="selectStyle w314">
+                    <option>时间</option>
+                    <option>比例</option>
+                    <option>日期</option>
+                    <option>时长</option>
+                    <option>总条数</option>
+                    <option>提优条数</option>
+                    <option>固定条件</option>
+                  </select>
+              </div>
+              <div class="mb-10">
+                <input id="startDate" name="startDate" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'endDate\')}'})" type="text"> 至 <input id="endDate" name="endDate" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{$dp.$D(\'startDate\',{d:1})||\'2010-01-01 23:59:59\'}'})" type="text">
+              </div>
+              <div class="mb-10">
+                <span class="mr-10">抽取条数</span><input type="text" class="FormInputText w160" value="70" />
+              </div>
+          </div>
+          <div class="fn-left fn-red pl-15"><a href="#">删除</a></div>
+        </div>     
+    
+    	<div class="pb-10 fn-clear">
+          <div class="fn-left pr-30"> <span class="attributionValue fn-right">策略项2</span></div>
+          <div class="fn-left">
+              <div class="mb-10">
+                  <select  class="selectStyle w314">
+                    <option>比例</option>
+                    <option>时间</option>
+                    <option>日期</option>
+                    <option>时长</option>
+                    <option>总条数</option>
+                    <option>提优条数</option>
+                    <option>固定条件</option>
+                  </select>
+              </div>
+              <div class="mb-10">
+                <span class="mr-10">占通话总量</span><input type="text" class="FormInputText w160" /> %
+              </div>
+          </div>
+          <div class="fn-left fn-red pl-15"><a href="#">删除</a></div>
+        </div>
+        <div class="normalBtnArea">
+        	<a class="normalBtn BGblue largeBtn" href="javascript:;">+ 增加策略项</a>
+    	</div>     
+        <div class="onlin_borTop pr-30 mt-20 pt-20"> 
+            <span class="attributionValue pr-30"><span class="fn-high">*</span>抽取频率</span>
+            <span>
+                <select  class="selectStyle w314">
+                    <option>5分钟</option>
+                </select>
+            </span>
+        </div>
+    
+	</div>
+
+</div>
+
+
+
+<div class="formBtnArea bd-top fn-clear">
+    <div class="normalBtnArea fn-center">
+        <a class="normalBtn BGblue largeBtn" href="javascript:;">完成</a>
+        <a href="#" class="formLink fn-right"><span>取消创建</span></a>
+    </div>
+</div>
+
+
+</div>
+
+
+
+
+<#include "../../tpl/res_js.tpl" />    
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        $(".qBox").mouseover(function() {
+          $(this).addClass("qBoxHover");
+          $(this).find(".qEditIcon").show();
+
+        }).mouseout(function() {
+          $(this).removeClass("qBoxHover");
+          $(this).find(".qEditIcon").hide();
+        });;
+    });
+</script>
+</body>
+</html>

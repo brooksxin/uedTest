@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>新建问题-日期问题</title>
+	<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<div class="formItem">
+    <div class="pt-10 ui-fhw"><a href="Javascript:history.go(-1);void(0);" class="formItem_jiantou-tu normalLink">返回</a></div>
+</div>
+
+<div class="formItem bd-bottom">
+    <div class="titleArea">
+        <!--
+        不同题型对应样式
+        单选：qIcon_Radio
+        判断：qIcon_Judgment
+        多选：qIcon_Checkbox
+        填空：qIcon_Blank
+        问答：qIcon_Essay
+        日期：qIcon_Date
+        -->
+        <h2><i class="qTitleIcon qIcon_Date"></i><span class="titleAreaTxt">日期题</span></h2>
+    </div>
+</div>
+
+
+	
+<form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+
+	<div class="questionAdd">
+		
+		<div class="qBox">
+			<div class="qBoxTitle">
+				<div class="qDecoration">
+					<a href="#" id="J_addDescription"  title="点击添加问题描述" >问题描述</a>
+				</div>
+			</div>
+
+			<div class="qDecorationTxt">
+				<textarea class="qDecorationTxtEdit" id="QU_DESC" name="QU_DESC"  placeholder="您可以在这里输入问题描述，非必填项"></textarea>
+			</div>
+
+			<div class="qContent">
+
+				<!--编辑内容-->
+				<div class="editContent">
+					<div class="qTitle">
+						<div>问题标题：</div>
+						<input type="text" class="FormInputText" id="QU_NM" name="QU_NM" value="" placeholder="输入问题标题" />
+					</div>
+					<!-- 
+					<div class="qAnswerEdit">
+						<ul class="fn-clear">
+							<li>
+							
+							<input name="QU_ANSWER" id="QU_ANSWER" class="element text Wdate" type="text" onFocus="WdatePicker()"  /> 
+
+							</li>
+						</ul>
+					</div>
+					-->
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+
+
+<!-- 以下代码为测试用，不用在生产上 -->
+<!--  
+<a class="normalBtn BGblue largeBtn" href="javascript:;" id="Delete">删除</a>
+<a class="normalBtn BGblue largeBtn" href="javascript:;" id="Copy">复制</a>
+<a class="normalBtn BGblue largeBtn" href="javascript:;" id="Invalid">作废</a>
+-->
+
+</form>
+
+		<div class="formBtnArea bd-top">
+			<table width="100%">
+				<tr>
+					<td>
+						<div class="normalBtnArea norBtnAleft">
+							<a class="normalBtn BGblue largeBtn" href="javascript:;" id="Release">发布</a>
+							<a class="normalBtn BGblue largeBtn" href="javascript:;" id="Save">保存</a>
+						</div>
+					</td>
+					<td>
+						<div class="normalBtnArea fn-right">
+							<a href="#" class="formLink" id="Cancel"><span>取消编辑</span></a>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+	<#include "../../tpl/res_js.tpl" />
+	
+	<script type="text/javascript">
+	
+		var QU_ID = "";//问题id,修改时链接传入 
+		var COPY_QU_ID = "";//问题复制时随链接传入
+	
+		srvMap.add('addQuestion', '','front/sh/question!index?uid=mys100');//保存日期问题
+		srvMap.add('releaseQuestion', '','front/sh/question!index?uid=mys103');//发布日期问题
+		srvMap.add('updateQuestion', '','front/sh/question!index?uid=mys101');//修改日期问题 
+		srvMap.add('qryQuestion', '','front/sh/question!index?uid=mys102');//查询日期问题
+		srvMap.add('copyQuestion', '','front/sh/question!index?uid=mys105');//复制日期问题
+		
+		/*以下代码为测试用,不在生产运行*/
+		/*
+		srvMap.add('delQuestion', '','front/sh/question!index?uid=mys104');//删除日期问题
+		srvMap.add('copyQuestion', '','front/sh/question!index?uid=mys105');//复制日期问题
+		srvMap.add('invalidQuestion', '','front/sh/question!index?uid=mys106');//作废除日期问题
+		*/
+	
+	
+	    //页面加载完开始执行
+	    $(document).ready(function () {
+	        $("#J_addDescription").on('click',function(){
+	        	$(".qDecorationTxt").toggle();
+	        });
+        
+        
+	    	//页面传入问题ID
+	        QU_ID = Util.browser.getParameter("QU_ID");
+	        COPY_QU_ID = Util.browser.getParameter("COPY_QU_ID");
+	        //alert(QU_ID);
+	        //问题id不为空，需要加载该问题到页面
+	        if(QU_ID != null && QU_ID != "" && QU_ID != undefined){	        	
+	        	var cmd = {"QU_ID" : QU_ID};
+	        	Util.ajax.postJson(srvMap.get("qryQuestion"), cmd, function(json) {
+					if (json.returnCode == 0) {
+						var result = json.beans[0];
+						//alert(result);
+						if(result != null && result != "" && result != undefined){
+							$("#QU_DESC").val(result.QU_DESC);//加载问题描述
+							$("#QU_NM").val(result.QU_NM);//加载问题名称
+							//$("#QU_ANSWER").val(result.QU_CNTT);//问题内容
+						}
+						else{
+							Util.dialog.tips("加载问题失败！");
+						}
+					} 
+					else {
+						Util.dialog.tips("加载问题失败！");
+					}
+				});
+	        }
+	        if(COPY_QU_ID != null && COPY_QU_ID != "" && COPY_QU_ID != undefined){	        	
+	        	var cmd = {"QU_ID" : COPY_QU_ID};
+	        	Util.ajax.postJson(srvMap.get("qryQuestion"), cmd, function(json) {
+					if (json.returnCode == 0) {
+						var result = json.beans[0];
+						//alert(result);
+						if(result != null && result != "" && result != undefined){
+							$("#QU_DESC").val(result.QU_DESC);//加载问题描述
+							$("#QU_NM").val(result.QU_NM);//加载问题名称
+							//$("#QU_ANSWER").val(result.QU_CNTT);//问题内容
+						}
+						else{
+							Util.dialog.tips("加载问题失败！");
+						}
+					} 
+					else {
+						Util.dialog.tips("加载问题失败！");
+					}
+				});
+	        }
+	    });
+		
+		
+		//取消编辑
+		$(function(){
+			$("#Cancel").click(function(){
+				window.location.href="questionList.html";
+			});
+		});
+		
+		//保存问题按钮
+		$(function(){
+			$("#Save").click(function(){
+				var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定继续该操作吗？</div></div></div>');
+				var params = {
+      		          top:top,
+      		          content: elem,
+      		          width: "300px",
+      		          height: "120px",
+      		          modal: true,
+      		          okVal:'确定',
+      		          okCallback:function(){
+						QU_ID = Util.browser.getParameter("QU_ID");
+						COPY_QU_ID = Util.browser.getParameter("COPY_QU_ID");
+						
+						if($("#QU_NM").val() == null || $("#QU_NM").val() == "" || $("#QU_NM").val() == undefined){
+							Util.dialog.tips("没有输入问题名称,无法继续操作！");
+							return;
+						}
+						
+						
+						//参数
+						var cmd = {"QU_NM" : $("#QU_NM").val(), "QU_DESC" : $("#QU_DESC").val()};
+						 
+						//如果连接中传入的有问题ID则为修改
+						if(QU_ID != null && QU_ID != "" && QU_ID != undefined){
+							cmd = {"QU_ID" : QU_ID, "QU_NM" : $("#QU_NM").val(), "QU_DESC" : $("#QU_DESC").val()};
+							
+							
+								//cmd = {"QU_ID" : QU_ID, "QU_NM" : $("#QU_NM").val(), "QU_DESC" : $("#QU_DESC").val()};
+								 Util.ajax.postJson(srvMap.get("updateQuestion"), cmd, function(json) {
+									if (json.returnCode == 0) {
+										Util.dialog.tips("修改问题完成！");
+										window.location.href="questionList.html";
+									} 
+									else {
+										Util.dialog.tips(json.returnMessage);
+									}
+								});
+							
+						}
+						else if(COPY_QU_ID != null && COPY_QU_ID != "" && COPY_QU_ID != undefined){
+							cmd = {"QU_ID" : COPY_QU_ID, "QU_NM" : $("#QU_NM").val(), "QU_DESC" : $("#QU_DESC").val()};
+							Util.ajax.postJson(srvMap.get("copyQuestion"), cmd, function(json) {
+								if (json.returnCode == 0) {
+									Util.dialog.tips("复制问题完成！");
+									window.location.href="questionList.html";
+								} 
+								else {
+									Util.dialog.tips(json.returnMessage);
+								}
+							});
+						}
+						else//如果连接中没有问题ID则为新增问题 
+						{
+							Util.ajax.postJson(srvMap.get("addQuestion"), cmd, function(json) {
+								if (json.returnCode == 0) {
+									Util.dialog.tips("保存问题完成！");
+									window.location.href="questionList.html";
+								} 
+								else {
+									Util.dialog.tips(json.returnMessage);
+								}
+							});
+						}
+      		        },
+					cancelVal:'取消',
+		            cancelCallback:function(){}
+				}
+				Util.dialog.openDiv(params); 
+				
+				
+				
+			});
+			
+		});
+		
+		
+		
+		//发布问题
+		$(function(){
+			$("#Release").click(function(){
+				var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要发布吗？</div></div></div>');
+				var params = {
+	      		          top:top,
+	      		          content: elem,
+	      		          width: "300px",
+	      		          height: "120px",
+	      		          modal: true,
+	      		          okVal:'确定',
+	      		          okCallback:function(){
+								QU_ID = Util.browser.getParameter("QU_ID");
+								var cmd;
+								if(QU_ID != null && QU_ID != "" && QU_ID != undefined){
+									cmd = {"QU_ID" : QU_ID,"QU_NM" : $("#QU_NM").val(), "QU_DESC" : $("#QU_DESC").val()};
+								}
+								else{
+									var cmd = {"QU_NM" : $("#QU_NM").val(), "QU_DESC" : $("#QU_DESC").val()};
+								}
+								
+								Util.ajax.postJson(srvMap.get("releaseQuestion"), cmd, function(json) {
+									if (json.returnCode == 0) {
+										Util.dialog.tips("发布问题完成！");
+										window.location.href="questionList.html";
+									} 
+									else {
+										Util.dialog.tips(json.returnMessage);
+									}
+								});
+	      		          },
+	      		        cancelVal:'取消',
+			            cancelCallback:function(){}
+				}
+				Util.dialog.openDiv(params); 
+				
+				
+			});
+			
+		});
+		
+		
+		
+		
+		
+		/*以下代码只做测试使用*/
+		/*
+		//删除问题
+		$(function(){
+			$("#Delete").click(function(){
+				
+				var cmd = {"QU_ID" : "ed510a31-e5be-440c-b42c-860e3b3fb316"};
+				
+				Util.ajax.postJson(srvMap.get("delQuestion"), cmd, function(json) {
+					alert(json.returnCode);
+					if (json.returnCode == 0) {
+						Util.dialog.tips("删除问题完成！");
+					} 
+					else {
+						Util.dialog.tips("删除问题失败！");
+					}
+				});
+			});
+		});
+		
+		
+		//复制问题
+		$(function(){
+			$("#Copy").click(function(){
+				
+				var cmd = {"QU_ID" : "56dd374b-8f61-4ff2-887a-845f89d84827"};
+				
+				Util.ajax.postJson(srvMap.get("copyQuestion"), cmd, function(json) {
+					alert(json.returnCode);
+					if (json.returnCode == 0) {
+						Util.dialog.tips("复制问题完成！"); 
+					} 
+					else {
+						Util.dialog.tips("复制问题失败！");
+					}
+				});
+			});
+		});
+		
+		
+		//作废问题
+		$(function(){
+			$("#Invalid").click(function(){
+				
+				var cmd = {"QU_ID" : "29f8aa59-c34f-485c-a457-2dc0f8ad68a9"};
+				
+				Util.ajax.postJson(srvMap.get("invalidQuestion"), cmd, function(json) {
+					alert(json.returnCode);
+					if (json.returnCode == 0) {
+						Util.dialog.tips("作废问题完成！"); 
+					} 
+					else {
+						Util.dialog.tips("作废问题失败！"); 
+					}
+				});
+			});
+		});
+		*/
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>test js</title>
+<script type="text/javascript">
+    document.write("<head>标签中第一个内置js代码段，位于链接js的前面。"+"<br />");
+</script>
+<script type="text/javascript" src="a1.js"></script>
+<script type="text/javascript" src="a2.js"></script>
+<script type="text/javascript">
+    document.write("<head>标签中第二个内置js代码段，位于链接js的后面。"+"<br />");
+</script>
+</head>
+
+<body onload="b()">
+    <script defer>
+        document.write("defer中的代码段。"+"<br />");
+    </script>
+    
+    <script>
+        document.write("body 中的 js 代码段。"+"<br />");
+    </script>
+    
+    <script>
+        function b(){
+            // document.write("b函数中的js代码段。最后执行"+"<br />");
+        }
+    </script>
+    
+    <script>
+        document.write("body 中的第二个 js 代码段。"+"<br />");
+    </script>
+    
+</body>
+<script>
+    document.write("body 之外的 js 代码段。"+"<br />");
+</script>
+</html>
+<script>
+    document.write("html 之外的 js 代码段。"+"<br />");
+</script>

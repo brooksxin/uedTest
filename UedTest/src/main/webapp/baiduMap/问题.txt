@@ -1,0 +1,6 @@
+1，引入js：<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=sGZOkeDdDDh55kIiuYC2qUg1"></script>
+2，创建实例：var map = new BMap.Map("allmap");
+3，坐标转换：
+	1 获取原始的北斗或GPS的坐标值
+	2 将坐标点发送到api.map.baidu.com/ag/coord/convert?...
+	3 有返回值后调用回调函数，将转换后的坐标点给你

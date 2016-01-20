@@ -1,0 +1,10 @@
+{
+	"returnCode": "0",
+	"returnMessage": "success",
+	"beans":[
+		{
+			"MAKT_ID":"1001",
+			"MAKT_CONT":"2015.01.03-2015.04.30买酷派送100M流量"
+		}
+	]
+}

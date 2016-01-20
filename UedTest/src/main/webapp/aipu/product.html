@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>产品 - 亚信开源社区</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/js/dialog/6.0.5/ui-dialog.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+<div class="glob-top">
+	<div class="wrap fn-clear">
+		<a class="logo fn-clear" href="index.html" hidefocus="true">
+			<span class="logo-name">AIOSC</span>
+			<span class="logo-name2">亚信开源社区</span>
+		</a>
+		<div class="login-bar fn-clear">
+			<a href="javascript:;" hidefocus="true" class="login" id="J_userInfo">
+				<span><i class="iconfont" title="用户"></i> zhangsan3</span>
+			</a>
+			<a href="javascript:;" hidefocus="true" class="regist" id="J_logOut">
+				<span>退出</span>
+			</a>
+			<a href="javascript:;" hidefocus="true" class="regist">
+				<span>个人中心</span>
+			</a>
+			<a href="javascript:;" hidefocus="true" class="maintain">
+				<span>社区维护后台</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="glob-contain">
+	<div class="wrap fn-clear">
+		<div class="glob-left prod-wrap">
+			<div class="menu-bar">
+				<div class="prod-icon">
+					<img src="ui/theme/img/ipu_logo.png">
+					<p>亚信艾扑</p>
+					<a href="javascript:;" hidefocus="true" class="ui-button ui-button-orange" id="J_addProd_btn"><span>申请加入产品</span></a>
+				</div>
+
+				<div class="menu-list" id="J_prod_menu">
+					
+				</div>
+			</div>
+		</div>
+
+		<div class="glob-right prod-wrap-r">
+			<div id="J_prod_conten" class="J_prod_conten">
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<textarea class="fn-hide" id="T_prod_menu">
+<dl>
+	{{#each_with_index prodMenu}}
+	<dd>
+		<div class="item" data-id="{{id}}">
+			<i class="icon-open-close"></i><span>{{name}}</span>
+		</div>
+		<ul data-type="{{index}}">
+			{{#each sub}}
+			<li>
+				<a href="javascript:;" hidefocus="true" data-id="{{id}}"><span>{{name}}</span></a>
+			</li>
+			{{/each}}
+		</ul>
+	</dd>
+	{{/each_with_index}}
+</dl>
+</textarea>
+
+<textarea class="fn-hide" id="T_prod_xuanchuan">
+<div id="J_slide" class="J_slide">
+	{{#each imgs}}
+	<img src="{{img}}">
+	{{/each}}
+	<a href="javascript:;" hidefocus="true" class="slidesjs-previous slidesjs-navigation">
+	</a>
+	<a href="javascript:;" hidefocus="true" class="slidesjs-next slidesjs-navigation">
+	</a>
+</div>
+<div class="container">
+	<h2>产品介绍</h2>
+	<dl class="fn-clear">
+		{{#each prodDes}}
+		<dt>{{ver}}</dt>
+		<dd>
+			{{#each content}}
+			<p>{{words}}</p>
+			{{/each}}
+		</dd>
+		{{/each}}
+	</dl>
+</div>
+</textarea>
+
+<textarea class="fn-hide" id="T_prod_version">
+<div class="container">
+	<h2>产品信息</h2>
+	<div class="box">
+		<table class="prod_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+			<colgroup>
+				<col width="18%" />
+				<col width="32%" />
+				<col width="18%" />
+				<col width="" />
+			</colgroup>
+			<tbody>
+				<tr>
+					<td><label class="des">产品全称：</label></td>
+					<td><span>{{prodInfo.name}}</span></td>
+					<td><label class="des">产品管理者：</label></td>
+					<td><span>{{prodInfo.owner}}</span></td>
+				</tr>
+				<tr>
+					<td><label class="des">产品创建时间：</label></td>
+					<td colspan="3"><span>{{prodInfo.createDate}}</span></td>
+				</tr>
+				<tr>
+					<td><label class="des">产品介绍：</label></td>
+					<td colspan="3"><span>{{prodInfo.des}}</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<h2>版本信息</h2>
+	<div class="box">
+		<table class="prod_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+			<colgroup>
+				<col width="18%" />
+				<col width="32%" />
+				<col width="18%" />
+				<col width="" />
+			</colgroup>
+			<tbody>
+				<tr>
+					<td><label class="des">版本名称：</label></td>
+					<td><span>{{verInfo.name}}</span></td>
+					<td><label class="des">版本号：</label></td>
+					<td><span>{{verInfo.version}}</span></td>
+				</tr>
+				<tr>
+					<td><label class="des">版本创建时间：</label></td>
+					<td colspan="3"><span>{{verInfo.createDate}}</span></td>
+				</tr>
+				<tr>
+					<td><label class="des">版本说明：</label></td>
+					<td colspan="3"><span>{{verInfo.des}}</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>	
+</div>
+</textarea>
+
+<textarea class="fn-hide" id="T_prod_word">
+<div class="container fn-clear">
+	{{#each rows}}
+	<div class="block {{retRight @index}}">
+		<div class="head">
+			<h2 title="{{tit}}">{{tit}}</h2>
+			<a href="javascript:;" hidefocus="true" class="ui-button"><span>多选下载</span></a>
+		</div>
+		<div class="list">
+			<div class="zui-tinyscroll zuiscroll">
+			    <div class="scrollbar"><div class="track"><div class="thumb"></div></div></div>
+			    <div class="viewport">
+			        <div class="overview">
+			            <ul>
+			            	{{#each list}}
+			            	<li data-id="{{id}}" data-url="{{url}}">
+			            		<i class="icon check"></i>
+			            		<i class="logo"></i>
+			            		<span class="name" title="{{name}}">{{name}}</span>
+			            		<span class="des" title="{{des}}">描述：{{des}}</span>
+			            		<span class="num">({{num}})</span>
+			            		<i class="download"></i>
+			            	</li>
+			            	{{/each}}
+			            </ul>
+			        </div>
+			    </div>
+			</div>
+		</div>
+	</div>
+	{{/each}}
+</div>
+</textarea>
+
+<script src="ui/js/jquery/1.8.3/jquery.js"></script>
+<script src="ui/js/dialog/6.0.5/dialog-min.js"></script>
+<script src="ui/js/jqueryForm/jquery.form.js"></script>
+<script src="ui/js/json2/json2.js"></script>
+<script src="ui/js/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="ui/js/handlebars/handlebars.js"></script>
+<script src="ui/js/handlebars/helpers.js"></script>
+<script src="ui/js/blockUI/jquery.blockUI.js"></script>
+<script src="ui/js/slides/3.0.3/jquery.slides.min.js"></script>
+<script src="ui/js/tinyscrollbar/tinyscrollbar.js"></script>
+<script src="ui/js/common.js"></script>
+
+<script type="text/javascript">
+
+var prod_id = "";
+	
+$(function(){
+	prod_id = $.getUrlVar("prod_id") ? $.getUrlVar("prod_id") : "";
+
+	srvMap.add('prod_menu', 'prod_menu.json','');//产品左侧目录
+	getProdMenu();
+
+	srvMap.add('prod_xuanchuan', 'prod_xuanchuan.json','');//产品宣传
+
+	srvMap.add('prod_version', 'prod_version.json','');//产品版本
+
+	srvMap.add('prod_word', 'prod_word.json','');//文档下载
+
+	srvMap.add('prod_qa', 'prod_qa.json','');//Q&A
+
+	srvMap.add('prod_word_online', 'prod_word_online.json','');//在线文档
+
+})
+
+function getProdMenu(){
+	$.PostJson(srvMap.get("prod_menu"), "prod_id="+prod_id, function(state, json){
+		if(state == 'success'){
+			if(json && json.rtnCode == '0'){
+				$("#J_prod_menu").temp($("#T_prod_menu"), json);
+
+				$("#J_prod_menu").find(".item").click(function(){
+					var $this = $(this);
+					if($this.find("i.icon-open-close").hasClass("close")){
+						$this.find("i.icon-open-close").removeClass("close");
+						$this.siblings("ul").slideDown();
+					}else{
+						$this.find("i.icon-open-close").addClass("close");
+						$this.siblings("ul").slideUp();
+					}
+				})
+
+				$("#J_prod_menu").find("a").click(function(){
+					var $this = $(this);
+					var type = $this.parent().parent().data("type");
+					var _id = $this.data("id");
+					$("#J_prod_menu").find("a").removeClass("cur");
+					$this.addClass("cur");
+
+					createBlock("J_prod_conten");
+
+					switch (parseInt(type, 10)){
+						case 1 :
+							getXuanchuan();
+							break;
+						case 2 :
+							getProd_version(_id);
+							break;
+						case 3 :
+							getProd_word(_id);
+							break;
+						case 4 :
+							getProd_qa();
+							break;
+						case 5 :
+							getProd_word_online();
+							break;
+						default :
+							break;
+					}
+				}).eq(0).click();
+				// })
+			}
+		}
+	})
+}
+
+function getXuanchuan(){
+	$.PostJson(srvMap.get("prod_xuanchuan"), "prod_id="+prod_id, function(state, json){
+		if(state == 'success'){
+			if(json && json.rtnCode == '0'){
+				$("#J_prod_conten").temp($("#T_prod_xuanchuan"), json);
+
+				//轮播广告
+				if($("#J_slide img").length > 1){
+					$("#J_slide").slidesjs({
+				        width: 770,
+				        height: 230,
+				        navigation: false,
+				        play: {
+							auto: true
+						}
+				    });
+				}else{
+					$("#J_slide").find("a.slidesjs-navigation").remove();
+				}
+			}else{
+				result_prompt(json.retMsg || "获取产品宣传信息失败！");
+			}
+		}else{
+			result_prompt(json.retMsg || "系统错误，请稍后再试！");
+		}
+
+		unBlock("J_prod_conten");
+	})
+}
+
+function getProd_version(id){
+	$.PostJson(srvMap.get("prod_version"), "prod_id="+prod_id+"&versionId="+id, function(state, json){
+		if(state == 'success'){
+			if(json && json.rtnCode == '0'){
+				$("#J_prod_conten").temp($("#T_prod_version"), json);
+			}else{
+				result_prompt(json.retMsg || "获取产品版本信息失败！");
+			}
+		}else{
+			result_prompt(json.retMsg || "系统错误，请稍后再试！");
+		}
+		unBlock("J_prod_conten");
+	})
+}
+
+function getProd_word(id){
+	$.PostJson(srvMap.get("prod_word"), "prod_id="+prod_id+"&wordId="+id, function(state, json){
+		if(state == 'success'){
+			if(json && json.rtnCode == '0'){
+				$("#J_prod_conten").temp($("#T_prod_word"), json);
+
+				//滚动条
+				$("#J_prod_conten .block").each(function(){
+					var $zuiscroll = $(this).find(".zuiscroll");
+					zuiScroll($zuiscroll, 370, 300);
+				})
+
+				//checkbox
+				$("#J_prod_conten .block .list i.check").click(function(){
+					$(this).toggleClass("checked");
+				})
+
+				//单个下载
+				$("#J_prod_conten .block .list i.download").click(function(){
+					var url = $(this).parent().data("url");
+					alert(url);
+				})
+
+				//多个下载
+				$("#J_prod_conten .block .head .ui-button").click(function(){
+					var $this = $(this);
+					$this.parent().siblings(".list").find("i.checked").each(function(){
+						var url = $(this).parent().data("url");
+						window.open(url);
+					})
+				})
+				
+			}else{
+				result_prompt(json.retMsg || "获取产品文档信息失败！");
+			}
+		}else{
+			result_prompt(json.retMsg || "系统错误，请稍后再试！");
+		}
+		unBlock("J_prod_conten");
+	})
+}
+
+function getProd_qa(){
+	alert("Q&A");
+}
+
+function getProd_word_online(){
+	alert("在线文档");
+}
+
+Handlebars.registerHelper("retCur", function(index, fn) {
+    if(index == 1){
+        return "cur";
+    }
+    return "";
+});
+
+Handlebars.registerHelper("retRight", function(index, fn) {
+    if(index == 1 || index % 2 == 1){
+        return "right";
+    }
+    return "";
+});
+</script>
+
+</body>
+</html>

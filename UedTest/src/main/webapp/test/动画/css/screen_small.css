@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.container_p .column{
+	width: auto;
+	float: none;
+	padding: 5px 0px 0px 0px;
+}
+.container_p .info{
+	/*margin-bottom: 20px;*/
+	width: 100%;
+	float: none;
+}

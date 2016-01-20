@@ -1,0 +1,30 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": "数据加载成功！！！",
+    "bean": {
+        "DEPT_ID": "1000000000102",
+        "ZG": "王俊卿",
+        "leaderId": "1000000000010",
+        "BM": "营销1班"
+    },
+    "beans": [
+              {"DEPT_ID": "1000000000102",
+               "ZG": "王俊卿",
+               "leaderId": "1000000000010",
+               "BM": "营销1班"
+               },
+               {"DEPT_ID": "1000000000103",
+               "ZG": "王俊卿",
+               "leaderId": "1000000000010",
+               "BM": "营销1班"},
+               {"DEPT_ID": "1000000000104",
+               "ZG": "王俊卿",
+               "leaderId": "1000000000010",
+               "BM": "营销1班"}
+               
+             ],
+    "object": null
+}

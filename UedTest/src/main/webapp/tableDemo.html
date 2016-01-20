@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<script src="jquery.js" type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #fff;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+table th {text-align: left;}
+.ui-record-table thead th{border-bottom:1px solid #ccc;height:30px;line-height:30px;background:#f5f5f5;background:-moz-linear-gradient(top,#f8f8f8,#f2f2f2);background:-webkit-gradient(linear,left top,left bottom,color-stop(0,#f8f8f8),color-stop(1,#f2f2f2));filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f8f8f8',endColorstr='#f2f2f2',GradientType='0')}
+.ui-record-table tr.split{background-color:#fbfbfb}
+.ui-record-table tbody td{vertical-align:top;padding:6px 0;border-bottom:1px solid #e6e6e6;}
+
+.ui-record-table .indexid {padding-left: 20px;text-align: left;width: 40px;}
+.ui-record-table .brandid{padding-left:20px;text-align:left}
+.ui-record-table .time{padding-left:20px;width:60px;text-align:left}
+.ui-record-table td.memo{text-align:center}
+.security-tips{border-top:1px dashed #ffbb76;margin-top:5px;padding-top:5px;color:#878787}
+.ui-record-table td.name,.ui-record-table td.other,.ui-record-table td.tradeNo{padding-right:10px}
+.ui-record-table td.name,.ui-record-table td.tradeNo,.memo-info{word-break:break-all;word-wrap:break-word}
+.ui-record-table td .consume-title a{color:#4d4d4d;outline:0 none}
+.ui-record-table td .consume-title a:hover{color:#08c}
+.ui-record-table td .consume-bizNo a{color:#9a9a9a;outline:0 none}
+.ui-record-table .consume-bizNo a:hover{color:#9a9a9a;cursor:default}
+.ui-record-table .consume-bizNo a.hover{text-decoration:underline}
+.ui-record-table td.name .consume-bizNo .J-tradeNo-copy{display:inline-block}
+.ui-record-table .ft-gray{color:#9a9a9a}
+.ui-record-table td.detail{text-align:left;padding-left:10px}
+.ui-record-table td.detail a{float:left;margin-right:10px;margin-top:2px}
+.ui-record-table .amount,.ui-record-table .status{text-align:right}
+.ui-record-table .action{padding-right:20px;text-align:right}
+.ui-record-table .refund{height:20px;padding-top:7px;border-top:1px dashed #ccc}
+.ui-record-table .action .refund{padding-right:20px}
+.ui-record-table tr.no-border td{border-bottom:0 none;padding-bottom:0}
+
+#toogleTbl{cursor: pointer;}
+.fn-hide {display: none;}
+.subTblContain {
+	border: 1px solid #e6e6e6;
+	padding: 10px;
+	width: 70%;
+	margin: 0 auto;
+}
+</style>
+</head>
+<body>
+
+<div>
+	<table class="ui-record-table" cellpadding="0" cellspacing="0"	border="0" width="100%">
+		<colgroup>
+			<col width="10%" >
+			<col width="8%" >
+			<col width="8%" >
+			<col width="8%" >
+			<col width="8%" >
+			<col width="8%" >
+			<col width="8%" >
+			<col width="8%" >
+			<col width="10%" >
+			<col width="8%" >
+			<col width="" >
+		</colgroup>
+		<thead>
+			<tr>
+				<th>申请单编号</th>
+				<th>申请单名称</th>
+				<th>区域</th>
+				<th>申请人</th>
+				<th>集团名称</th>
+				<th>申请单类别</th>
+				<th>产品类别</th>
+				<th>状态</th>
+				<th>创建时间</th>
+				<th>数量</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>100100</td>
+				<td>XXXX</td>
+				<td>杭州</td>
+				<td>亚信</td>
+				<td>移动</td>
+				<td>xxx</td>
+				<td>E网</td>
+				<td>待确认</td>
+				<td>2014/05/24</td>
+				<td>1</td>
+				<td>处理</td>
+			</tr>
+			<tr class="split" id="toogleTbl">
+				<td>100122</td>
+				<td>XXXX22</td>
+				<td>杭州2</td>
+				<td>亚信2</td>
+				<td>移动2</td>
+				<td>XXX</td>
+				<td>E网2</td>
+				<td>撤单完成</td>
+				<td>2014/05/24</td>
+				<td>2</td>
+				<td>处理</td>
+			</tr>
+			<tr>
+				<td colspan="11" id="subTblContain" class="fn-hide">
+					<div class="subTblContain">
+						<table class="" cellpadding="0" cellspacing="0"	border="0" width="100%">
+							<colgroup>
+								<col width="25%" >
+								<col width="25%" >
+								<col width="25%" >
+								<col width="" >
+							</colgroup>
+							<thead>
+								<tr>
+									<th>订单编号</th>
+									<th>订单名称</th>
+									<th>区域</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>子单</td>
+									<td>子单</td>
+									<td>子单</td>
+									<td>子单</td>
+								</tr>
+								<tr>
+									<td>子单</td>
+									<td>子单</td>
+									<td>子单</td>
+									<td>子单</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>10010033</td>
+				<td>XXXX33</td>
+				<td>杭州33</td>
+				<td>亚信33</td>
+				<td>移动33</td>
+				<td>xxx33</td>
+				<td>E网33</td>
+				<td>待确认33</td>
+				<td>2014/05/24</td>
+				<td>1</td>
+				<td>处理33</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("#toogleTbl").on("click", function(){
+		$("#subTblContain").toggleClass("fn-hide");
+	})
+});
+</script>
+</body>
+</html>

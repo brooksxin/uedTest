@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>客户管理模板</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+  <#include "../../tpl/sys_top.tpl" />
+    <div class="wrapper">
+        <div id="J_topMenu"  class="menu fn-clear">
+        <#include "../../tpl/sys_topMenu.tpl" />
+        </div>
+        <!-- left start -->
+        <div class="left">
+            <div class="leftInner" id="">
+        <#include "../../tpl/cust_left.tpl" />
+            </div>
+            <div class="middle" id="mainMiddle">&nbsp;</div>
+        </div>
+        <!-- left END -->
+        <!-- right start -->
+        <div class="right" id="mainRight" style="overflow:auto;*position:relative">
+            <div id="mainRight_child" style="height:100%;">
+
+
+              <div class="formItem">
+                <div class="titleArea">
+                    <h2>钱大华的接触历史</h2>
+                </div>
+                
+                <div class="formArea-B">
+                <table width="100%">
+                    <tbody>
+                        <tr>
+                            <td width="120" valign="top"><span class="tc-c2">开始时间：</span></td>
+                            <td width="">2015-02-01 10:50:20</td>
+                            <td width="120" valign="top"><span class="tc-c2">结束时间：</span></td>
+                            <td width="">2015-02-01 10:53:43</td>
+                        </tr>
+                        <tr>
+                            <td valign="top"><span class="tc-c2">持续时间：</span></td>
+                            <td>03'23''</td>
+                            <td valign="top"><span class="tc-c2"></span></td>
+                            <td></td>
+                        </tr>
+                        <tr class="formArea-A-dashed">
+                            <td valign="top"><span class="tc-c2">处理人：</span></td>
+                            <td>张三</td>
+                            <td valign="top"><span class="tc-c2">工号：</span></td>
+                            <td>x10086</td>
+                        </tr>
+                        <tr>
+                            <td valign="top"><span class="tc-c2">接触类型：</span></td>
+                            <td>购买</td>
+                            <td valign="top"><span class="tc-c2"></span></td>
+                            <td></td>
+                        </tr>
+                           
+                        <tr>
+                          <td valign="top"><span class="tc-c2">订单号码：</span></td>
+                            <td> CM201503188825824</td>
+                            <td valign="top"><span class="tc-c2"></span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td valign="top"><span class="tc-c2">商品名称：</span></td>
+                            <td>酷派大神F1plus 移动4G（智铂银）</td>
+                            <td valign="top"><span class="tc-c2"></span></td>
+                            <td></td>
+                        </tr>
+                        <tr class="formArea-A-dashed">
+                            <td valign="top"><span class="tc-c2">产品数量：</span></td>
+                            <td>1</td>
+                            <td valign="top"><span class="tc-c2"></span></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td valign="top"><span class="tc-c2">收货人姓名：</span></td>
+                            <td>张晓峰</td>
+                            <td valign="top"><span class="tc-c2">收货人电话：</span></td>
+                            <td>13810998686</td>
+                        </tr>
+                        <tr class="formArea-A-dashed">
+                            <td valign="top"><span class="tc-c2">收货地址：</span></td>
+                            <td>山东省威海市荣成东乡镇滨海大街32号5层501</td>
+                            <td valign="top"><span class="tc-c2">支付方式：</span></td>
+                            <td>未支付</td>
+                        </tr>
+                        <tr>
+                            <td valign="top"><span class="tc-c2">物流状态：</span></td>
+                            <td>未发货</td>
+                            <td valign="top"><span class="tc-c2">运单号：</span></td>
+                            <td>无</td>
+                        </tr>
+                     </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="formBtnArea">
+                <table width="100%">
+                  <tr>
+                    <td>
+                      <div class="normalBtnArea fn-center">
+                          <a class="normalBtn disable" href="javascript:;" id="J_search" >查看物流信息</a>
+                      </div>
+                  </td>
+                  </tr>
+                </table>
+              </div>
+
+
+          </div>
+        </div>
+        <!-- right stop -->
+    </div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+//页面加载完开始执行
+$(function () {
+    
+});
+</script>
+</body>
+</html>

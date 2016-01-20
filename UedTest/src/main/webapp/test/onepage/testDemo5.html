@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<link rel="stylesheet" type="text/css" href="alice.css">
+<link rel="stylesheet" type="text/css" href="jquery.fullPage.css">
+<script src="jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+<script src="jquery.fullPage.min.js" type="text/javascript"></script>
+<style type="text/css">
+body {
+	font:normal 12px/1.5  \5fae\8f6f\96c5\9ed1, Verdana, Arial, \5b8b\4f53, sans-serif; 
+}
+/*advertisePage.html  fany   start*/
+.yyz-ad .ad-top{
+	position: relative;
+	height: 60px;
+	background-color: #000;
+	position: fixed;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	box-shadow: 0 0 5px #000;
+	border-bottom: 1px solid #000;
+}
+.yyz-ad .ad-content{
+	margin-top: 60px;
+}
+.yyz-ad .ad-top>ul{
+	margin: 0 100px 0 0;
+	font-size: 16px;
+}
+.yyz-ad ul.ad-first > li{
+	float: right;
+}
+.yyz-ad ul.ad-first > li >a{
+	height: 58px;
+	line-height: 53px;
+	color: #ADADAD;
+	display: block;
+	padding: 0 20px;
+}
+.yyz-ad .ad-first > li>a.hover{
+	/*border-top: 2px solid red;*/
+}
+.yyz-ad .ad-first > li > a:hover{
+	color: #fff;
+	text-decoration: none;
+}
+.yyz-ad .ad-first > .platform-intro:hover .triangle, .yyz-ad .ad-first > .platform-intro:hover .ad-second{
+	display: block;
+}
+.yyz-ad .ad-second{
+	height: 30px;
+	background-color: #ECECEC;
+	display: none;
+	position: absolute;
+	top: 60px;
+	left: 0px;
+	width: 100%;
+	border-bottom: 1px solid #DBDBDB;
+}
+.yyz-ad .ad-second ul{
+	margin-right: 98px;
+}
+.yyz-ad .ad-second ul li{
+	float: right;
+	-webkit-transition: all .5s;
+	transition: all .5s;
+}
+.yyz-ad .ad-second ul li a{
+	display: block;
+	color: #ADADAD;
+	padding: 0 20px;
+	margin: 3px 0;
+	font-size: 14px;
+	border-right: 1px solid #DBDBDB;
+}
+.yyz-ad .ad-second ul li a:hover, .yyz-ad .ad-second ul li.active a{
+	color: #FF6E00;
+	text-decoration: none;
+}
+.yyz-ad .ad-logo{
+	float: left;
+	width: 277px;
+	height: 35px;
+	background: url(ad_logo.png) no-repeat 0 0;
+	margin: 12px 0 0 104px;
+}
+.yyz-ad .ad-top .triangle{
+	position: absolute;
+	right: 250px;
+	top: 53px;
+	background: url(bg-arrow.png);
+	display: none;
+	width: 14px;
+	height: 7px;
+}
+.yyz-ad .ad-content div{
+	height: 480px;
+	width: 100%;
+}
+.yyz-ad .ad1{
+	background-color: #99CBE2;
+}
+.yyz-ad .ad2{
+	background-color: #F6F6F6;
+}
+.yyz-ad .ad3{
+	background-color: #7ECD46;
+}
+.yyz-ad .ad4{
+	background-color: #F7E668;
+}
+.yyz-ad .ad5{
+	background-color: #F2F2F2;
+}
+#gotoTop{
+	display:none;
+	position:fixed;
+	top:75%;
+	left:55%;
+	cursor:pointer;
+	margin-left:520px;
+	width: 50px;
+	height: 48px;
+	background-image: url(img/gotoTop.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+#gotoTop.hover{
+	background-position: 0 -48px;
+}
+.yyz-ad .ad-first > li:hover, .yyz-ad .ad-first > li.cur {
+	border-top: 2px solid red;
+}
+.yyz-ad .ad-first > li:hover > a, .yyz-ad .ad-first > li.cur > a {
+	margin-top: -2px;
+	color: #fff;
+}
+.yyz-ad .cur .triangle {
+	display: block;
+}
+/*advertisePage.html  fany   end*/
+.section { text-align: center;padding-top: 30px;}
+.part1 .item { 
+	background: #05041a;
+	height: 475px;
+}
+.part2 .item {
+	background: #fcf5c6;
+	height: 475px;
+}
+.part3 .item {
+	background: #e2e9e8;
+	height: 475px;
+}
+.part4 .item {
+	background: #577a85;
+	height: 475px;
+}
+.part5 .item {
+	background: #adaba3;
+	height: 475px;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	$.fn.fullpage({
+		slidesColor: ['#ddd', '#ddd', '#ddd', '#ddd', '#ddd'],
+		anchors: ['page1', 'page2', 'page3', 'page4', 'page5'],
+		navigation: true
+	});
+});
+</script>
+</head>
+<body class="yyz-ad">
+
+<div class="section part1">
+	<div class="ad-top">
+		<div class="ad-logo"></div>
+		<ul class="ad-first fn-clear">
+			<li><a href="javascript:;">联系我们</a></li>
+			<li class="platform-intro">
+				<a href="javascript:;">
+					平台介绍
+				</a>
+				<div class="ad-second">
+					<ul class="fn-clear">
+						<li><a href="javascript:;">平台特性</a></li>
+						<li><a href="javascript:;">平台角色识别</a></li>
+						<li><a href="javascript:;">功能概览</a></li>
+					</ul>
+				</div>
+				<div class="triangle"></div>
+			</li>
+			<li class="cur"><a href="javascript:;">能力开放与产品互联</a></li>
+			<li><a href="javascript:;">首页</a></li>
+		</ul>
+	</div>
+	<div class="item"><img src="ad_s1.png" width="1300" height="475"></div>
+</div>
+<div class="section part2">
+	<div class="ad-top">
+		<div class="ad-logo"></div>
+		<ul class="ad-first fn-clear">
+			<li><a href="javascript:;">联系我们</a></li>
+			<li class="platform-intro">
+				<a href="javascript:;">
+					平台介绍
+				</a>
+				<div class="ad-second">
+					<ul class="fn-clear">
+						<li><a href="javascript:;">平台特性</a></li>
+						<li><a href="javascript:;">平台角色识别</a></li>
+						<li><a href="javascript:;">功能概览</a></li>
+					</ul>
+				</div>
+				<div class="triangle"></div>
+			</li>
+			<li class="cur"><a href="javascript:;">能力开放与产品互联</a></li>
+			<li><a href="javascript:;">首页</a></li>
+		</ul>
+	</div>
+	<div class="item"><img src="ad_s2.png" width="1300" height="475"></div>
+</div>
+<div class="section part3">
+	<div class="ad-top">
+		<div class="ad-logo"></div>
+		<ul class="ad-first fn-clear">
+			<li><a href="javascript:;">联系我们</a></li>
+			<li class="platform-intro">
+				<a href="javascript:;">
+					平台介绍
+				</a>
+				<div class="ad-second">
+					<ul class="fn-clear">
+						<li><a href="javascript:;">平台特性</a></li>
+						<li><a href="javascript:;">平台角色识别</a></li>
+						<li><a href="javascript:;">功能概览</a></li>
+					</ul>
+				</div>
+				<div class="triangle"></div>
+			</li>
+			<li class="cur"><a href="javascript:;">能力开放与产品互联</a></li>
+			<li><a href="javascript:;">首页</a></li>
+		</ul>
+	</div>
+	<div class="item"><img src="ad_s3.png" width="1300" height="475"></div>
+</div>
+<div class="section part4">
+	<div class="ad-top">
+		<div class="ad-logo"></div>
+		<ul class="ad-first fn-clear">
+			<li><a href="javascript:;">联系我们</a></li>
+			<li class="platform-intro">
+				<a href="javascript:;">
+					平台介绍
+				</a>
+				<div class="ad-second">
+					<ul class="fn-clear">
+						<li><a href="javascript:;">平台特性</a></li>
+						<li><a href="javascript:;">平台角色识别</a></li>
+						<li><a href="javascript:;">功能概览</a></li>
+					</ul>
+				</div>
+				<div class="triangle"></div>
+			</li>
+			<li class="cur"><a href="javascript:;">能力开放与产品互联</a></li>
+			<li><a href="javascript:;">首页</a></li>
+		</ul>
+	</div>
+	<div class="item"><img src="ad_s4.png" width="1300" height="475"></div>
+</div>
+<div class="section part5">
+	<div class="ad-top">
+		<div class="ad-logo"></div>
+		<ul class="ad-first fn-clear">
+			<li><a href="javascript:;">联系我们</a></li>
+			<li class="platform-intro">
+				<a href="javascript:;">
+					平台介绍
+				</a>
+				<div class="ad-second">
+					<ul class="fn-clear">
+						<li><a href="javascript:;">平台特性</a></li>
+						<li><a href="javascript:;">平台角色识别</a></li>
+						<li><a href="javascript:;">功能概览</a></li>
+					</ul>
+				</div>
+				<div class="triangle"></div>
+			</li>
+			<li class="cur"><a href="javascript:;">能力开放与产品互联</a></li>
+			<li><a href="javascript:;">首页</a></li>
+		</ul>
+	</div>
+	<div class="item"><img src="ad_s5.png" width="1300" height="475"></div>
+</div>
+
+<div class="ad-footer">
+	
+</div>
+
+
+<script type="text/javascript">
+$(function(){
+	gotoTop();//回到顶部
+	var zISIE7 = navigator.userAgent.indexOf('MSIE 7') > 0;
+	if(zISIE7){
+		resizeSection();
+		$(window).resize(function(){
+			resizeSection();
+		});
+	}
+});
+//回到顶部
+function gotoTop(min_height){
+    var gotoTop_html = '<div id="gotoTop"></div>';
+    $("body").append(gotoTop_html);
+    $("#gotoTop").click(
+        function(){$('html,body').animate({scrollTop:0},300);
+    }).hover(
+        function(){$(this).addClass("hover");},
+        function(){$(this).removeClass("hover");
+    });
+    min_height ? min_height = min_height : min_height = 300;
+    $(window).scroll(function(){
+        var s = $(window).scrollTop();
+        if( s > min_height){
+            $("#gotoTop").fadeIn(100);
+        }else{
+            $("#gotoTop").fadeOut(200);
+        };
+    });
+};
+
+function resizeSection(){
+	var height = document.body.clientHeight;
+	if(height > 475) {
+		var top = (height - 475)/2;
+		$(".section").css({"height": height, "position": "relative"});
+		$(".item").css({"position": "relative", "top": top});
+	}
+}
+</script>
+</body>
+</html>

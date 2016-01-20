@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>预览</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+      <div class="formItem">
+      	<div id="J_import_file">
+          <div class="normalBtnArea fn-center mt-50">
+            <a id="J_impport" class="normalBtn BGgray" href="javascript:;">导入文件</a>
+          </div>
+          
+         <div class="testdivtwocolor fn-center mt-30" style="color: red;">文件格式限.xls</div>   
+         <div class="fn-center mt-50">
+			   <a class="normalBtn BGgray" id="J_download" href="O2OPayOrder.xls">下载模板</a>
+		    </div>
+      	</div>
+        
+        <!-- 导入解析中提示 -->
+        <div id="J_parse_file" class="ui-processDialog fn-hide">
+          <div class="processRate_title">正在解析数据，可能需要些时间，解析过程中请您不要进行其它操作或离开本页面。</div>
+          <div class="rateBarArea" style="margin-left:0;">
+                     <div class="rateBar">
+                         <div class="rateBg"></div>
+                         <div class="rateProcess" style="width:0;"></div>
+                     </div>
+                 </div>
+          <div class="processRate">
+            <span id="J_rate"></span>(已解析
+            <span id="J_progress"></span>/
+            <span id="J_total"></span>)
+          </div>
+        </div>
+
+        <!-- 导入成功内容 -->
+     		<div id="J_import_done" class="ui-sucessDialog fn-hide">
+     			<div class="sucessDialog_text">恭喜！导入成功！</div>
+     			<div class="sucessDialog_fileShow">
+     				<div class="fileList"><div class="fileName">导入文件：<span class="fn-center mt-50" id="J_fileNameOrder"></span></div><!--<a href="javascript:;" class="reImport">重新导入</a> --></div>
+     			</div>
+     		</div>     
+  
+  
+          <!-- 导入失败内容 -->
+     		<div id="J_import_fail" class="ui-failureDialog fn-hide">
+     			<div class="failureDialog_text">订单导入失败。</div>
+     			<div class="failureDialog_fileShow">
+     				<div class="normalBtnArea mtb20"><!-- <a id="J_return" class="normalBtn BGgray" href="javascript:;">重新导入</a> --></div>
+     			</div>
+    			<div class="failureReason">
+    				<h2>失败原因：</h2>
+    				<span class="fn-center mt-50" id="faileCount" value="导入模板格式不对或导入数据不全！请按模板格式导入"></span>
+    			</div>
+     		</div> 
+      </div>
+  <!-- right stop -->
+<#include "../../tpl/res_js.tpl" />
+<script src="../../lib/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript">
+
+srvMap.add('uploadO2OOrder', 'uploadO2OOrder.json', 'front/sh/order!uploadO2OOrder?uid=upl01');//上传文件
+var id="", fileUpload='';
+$(function () {
+   id=Util.browser.getParameter("id");
+
+  var param = {
+     "url" : srvMap.get('uploadO2OOrder'),
+     "btn_url" : '../../css/images/upload_btn1.png',
+     "post_params" : {},
+     "btn_width" : "80",
+     "btn_height" : "32",
+     "btn_id" : "J_impport",
+     "imgFlag" : fileUpload,
+     "fileDialogComplete" : fileDialogComplete,
+     "uploadStart" : uploadStart,
+     "uploadError" : uploadError,
+     "uploadSuccess" : uploadSuccess
+  };
+  //初始化上传控件
+  uploadImg(param);
+  
+});
+
+//初始化上传图片SWFUpload插件
+function uploadImg(param){
+  var settings = {
+    flash_url : "../../lib/swfupload/1.0.0/2.5/swfupload.swf",
+      upload_url: param.url,
+      post_params: param.post_params,
+      use_query_string: false,
+      file_size_limit : "5 MB",
+      file_types : "*.xls;",  //允许所有类型时请使用 *.*
+      file_types_description : "All Files",
+      file_upload_limit : 0,
+      file_queue_limit : 0,
+      debug: false,
+      // Button settings
+      button_image_url: param.btn_url,
+      button_width: param.btn_width,
+      button_height: param.btn_height,
+      button_placeholder_id: param.btn_id,
+      button_text_left_padding: 12,
+      button_text_top_padding: 3,
+      button_cursor : SWFUpload.CURSOR.HAND,
+      file_queued_handler : fileQueued,
+      file_dialog_complete_handler : param.fileDialogComplete,
+      upload_start_handler : param.uploadStart,
+      upload_error_handler : param.uploadError,
+      upload_success_handler : param.uploadSuccess
+  };
+  param.imgFlag = new SWFUpload(settings);
+}
+
+function fileQueued(file){
+	$('#J_fileNameOrder').text(file.name);
+	//$('#J_fileName').append($("<p>" + file.name + "</p>"));
+}
+
+//上传准备完成
+function fileDialogComplete(numFilesSelected, numFilesQueued){
+  try {
+	 //Util.dialog.tips(1);
+      this.startUpload();
+  } catch (ex)  {
+        this.debug(ex);
+  }
+}
+//上传前
+function uploadStart(file){
+  /*if (file.size > 5242880) {
+    Util.dialog.tips('文件大小超过5M,请重新上传！');
+    return false;
+  };*/
+  return true;
+}
+//上传出错
+function uploadError(file, errorCode, message){
+  try {
+    Util.dialog.tips('上传失败！');
+    $('#J_parse_file').hide();
+	$("#J_import_fail").show();
+	$("#J_import_done").hide();
+	$('#J_import_file').hide();
+  } catch (ex) {
+        this.debug(ex);
+    }
+}
+
+//上传成功之后回调方法
+function uploadSuccess(file, serverData) {
+	//Util.dialog.tips(serverData);
+	serverData = JSON.parse(serverData);
+	var fileName=serverData.bean.fileName;
+	if (serverData.returnCode != '0') {
+		$('#J_parse_file').hide();
+		$('#faileCount').text(serverData.returnMessage);
+		$("#J_import_fail").show();
+		$("#J_import_done").hide();
+		$('#J_import_file').hide();
+		Util.dialog.tips("导入失败！");
+	}else{
+		$('#J_parse_file').hide();
+		$("#J_import_fail").hide();
+		$("#J_import_done").show();
+		$('#J_import_file').hide();
+		Util.dialog.tips("导入成功！");
+	}
+}
+
+//上一步
+$("#J_return").bind("click",function(){
+	alert("aaa");
+	$('#J_parse_file').hide();
+	$("#J_import_fail").hide();
+	$("#J_import_done").hide();
+	$('#J_import_file').show();
+});
+</script>
+</body>
+</html>

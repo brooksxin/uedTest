@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>css效率</title>
+<link rel="stylesheet" type="text/css" href="reset.css" />
+<style type="text/css">
+/*
+*
+*/
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+.pcontent{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: #002b36;
+	color: #839496;
+}
+
+.ui-header{
+	height: 20%;
+	border: solid 1px lime;
+}
+</style>
+
+</head>
+<body>
+	<div class="ui-header">
+		<p class="pcontent">
+			这是header，通常和footer一样，是页面公用性最强的地方，尽量写成公用样式。
+			需要私有的话命名为：ui-headerSelf
+		</p>
+
+		<div class="ui-header-logo">
+			logo
+		</div>
+
+		<div class="ui-header-nav">
+			导航
+		</div>
+
+		<div class="ui-header-search">
+			搜索
+		</div>
+
+		<div class="ui-header-sidebar">
+			侧边栏
+		</div>
+	</div>
+
+	<div class="ui-container">
+		<h1>这是container</h1>
+		
+	</div>
+
+	<div class="ui-footer">
+		<h1>这是footer</h1>
+	</div>
+
+</body>
+</html>
+<!-- <div>
+	<p class="pcontent">
+		一，Sprite：
+		<br />
+		1，建议按页面做，而不将整个网站的图标都扔到一张图上。每个页面有自己的sprite。
+	</p>
+	<br />
+	<p class="pcontent">
+		二，CSS选择器命名：
+		<br />
+		1，建议使用 标识+功能 的方式：
+	</p>
+	<br />
+	<pre class="prettyprint">
+	<code>
+		例如按钮：
+		&lt;a class="ui-btn" href="javascript:;" hidefocus="true"&gt;<br />					&lt;span class="ui-btn-text"&gt;查 询&lt;/span&gt;<br />				&lt;/a&gt;
+	</code>
+	</pre>
+
+精简高效CSS命名之“三无原则”
+此“三无原则”就是：无ID，无层级，无标签
+</div> -->

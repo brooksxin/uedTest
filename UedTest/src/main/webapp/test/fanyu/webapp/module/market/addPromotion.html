@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>创建商品促销</title>
+<#include "../../tpl/res_css.tpl" />
+<link rel="stylesheet" href="../../css/common.css">
+<link rel="stylesheet" href="../../css/tablepay.css" />
+<link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+</head>
+<body>
+	
+	<div class="formItem">
+		 <div class="titleArea fn-clear"> <a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a>
+		  <h2 class="ui-textIndentStyle fn-left">创建商品促销</h2>
+		 </div>
+		 <div class="formAreaD">
+		    <div class="flowSteps_four none-bottom">
+		        <!--第二步样式改为current_2-->
+		        <ul id="titleStyle" class="current_1 fn-clear">
+		            <li class="FirstStep">
+		                <a href="javascript:;">基本信息</a>
+		            </li>
+		            <li class="SecondStep">
+		                <a href="javascript:;">选择商品</a>
+		            </li>
+		            <li class="ThirdStep">
+		                <a href="javascript:;">优惠信息</a>
+		            </li>
+		            <li class="FourStep">
+		                <a href="javascript:;">保存促销</a>
+		            </li>
+		        </ul>
+		    </div>
+		
+		 </div>
+		
+	</div>
+	
+	<div id="step1" class="step" >
+		 <div>
+		  <table  class="form_table mt-10" width="100%">
+		   <tr>
+		    <td><span class="fn-high">*</span>促销渠道</td>
+		    <td><select  class="selectStyle w160"  id="BELG_CHNL_ID1" name="BELG_CHNL_ID1">
+		      	<option>请选择</option>
+		     </select>
+		     <select  class="selectStyle w160" id="BELG_CHNL_ID" name="BELG_CHNL_ID">
+		      	<option>请选择</option>
+		     </select></td>
+		   </tr>
+		   <tr>
+		    <td><span class="fn-high">*</span>适用范围</td>
+		    <td><select  class="selectStyle w323">
+		      <option value="01">营销活动</option>
+		     </select></td>
+		   </tr>
+		   <tr>
+		    <td width="90" valign="top"><span class="fn-high">*</span>项目描述</td>
+		    <td><textarea id="introductionInfo" class="form_textarea"></textarea></td>
+		   </tr>
+		   <tr>
+		    <td></td>
+		    <td class="txt_gray"><span id="introdDescCount">最多可输入500字</span></td>
+		   </tr>
+		  </table>
+		 </div>
+		
+		
+		<div class="formBtnArea bd-top">
+		 <table width="100%">
+		  <tr>
+		   <td><div class="normalBtnArea"> <a class="normalBtn BGblue largeBtn" onclick="insertIntroduction(2)" href="javascript:;" id="Next">下一步</a> </div></td>
+		   <td><div class="normalBtnArea fn-right"> <a href="javascript:window.history.go(-1)" class="formLink"><span>取消</span></a> </div></td>
+		  </tr>
+		 </table>
+		</div>
+	</div>
+	
+	<div id="step2" class="step" style="display:none">
+		<div class="ml-15 mr-15">
+		    <div class="mt-20">
+		      <h2 class="ft-14">优惠商品</h2>
+		    </div>
+		    
+		    <div method="post" action="#" class="cmxform" >
+                   <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+                      <div class="record-search-cate">
+            				<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+								<tbody>
+									<tr>
+										<td width="80"><label class="description">商品编号</label></td>
+										<td width="150">
+											<input class="inputWidth inputText" type="text"  id="mcdsUnitId" name="mcdsUnitId" maxlength="255" value="" />
+										</td>
+										<td width="80"><label class="description">商品名称</label></td>
+										<td width="200">
+											<input class="inputWidth inputText" type="text"  id="mcdsUnitNm" name="mcdsUnitNm" maxlength="255" value="" />
+										</td>
+										<td width="">
+                                        <div class="normalBtnArea w82">
+                                        	<a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a>
+                                        </div>
+										</td>
+                                    </tr>
+								</tbody>
+            				</table>
+                        </div>
+                    </form>
+                </div>
+                
+              <div class="tablewidth mg_t_10">
+				<table class="ui-record-table table_radius table-bordered table-striped" >
+					<thead>
+						<tr>
+							<th width="30">选择</th>
+							<th width="90">商品编号</th>
+							<th width="50">商品名称</th>
+							<th width="40">价格(元)</th>
+						</tr>
+	                       </thead>
+	                       <tbody id="J_tabletpl">
+					</tbody>
+				</table>
+ 	          </div>
+		
+		<!--翻页及功能按钮区域开始-->
+            <DIV class="amount-bottom">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+                    <tr>
+                      <td>
+                          <DIV class="fn-clear action-other  action-other-show">
+                                  <DIV id=Pagination class="page pagination fn-right"> </DIV>
+                                  <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                          </DIV></td>
+                    </tr>
+                  </table>
+            </DIV>
+		    
+	  </div>  
+	  <div class="formBtnArea bd-top mt-30">
+	   <table width="100%">
+	    <tr>
+	     <td><div class="normalBtnArea"> <a class="normalBtn BGgray largeBtn" href="javascript:selStep(1)" id="">上一步</a> <a class="normalBtn BGblue largeBtn" onclick="selProductInfo(3)" href="javascript:;" id="Next">下一步</a> </div></td>
+	     <td><div class="normalBtnArea fn-right"> <a href="javascript:window.history.go(-1)" class="formLink"><span>取消</span></a> </div></td>
+	    </tr>
+	   </table>
+	  </div>
+	</div>
+	
+	
+	<form id="J_form_addPromotion">
+		<!-- 区域ID -->
+		<input type="hidden" name="REGION_ID" id="REGION_ID" value="" />
+		<!-- 渠道ID -->
+		<input type="hidden" name="CHANNEL_ID" id="CHANNEL_ID" value="" />
+		<!-- 促销类型代码  (默认普通促销-04) -->
+		<input type="hidden" name="PMT_TYPE_CD" id="PMT_TYPE_CD" value="04" />
+		<!-- 促销适用类型代码  (默认 营销活动-01) -->
+		<input type="hidden" name="PMT_SUIT_TYPE_CD" id="PMT_SUIT_TYPE_CD" value="01" />
+		<!-- 促销简介  -->
+		<textarea style="display:none"  name="PMT_INTRODUCTION" id="PMT_INTRODUCTION" rows="10" cols="3"></textarea>
+		<!-- 商品ID  -->
+		<input type="hidden" name="MCDS_UNIT_ID" id="MCDS_UNIT_ID" value="" />
+		<!-- 促销名称，暂存商品名称  -->
+		<input type="hidden" name="PMT_NM" id="PMT_NM" value="" />
+		<!-- 营销计划ID  (默认 0) -->
+		<input type="hidden" name="MARKET_PLAN_ID" id="MARKET_PLAN_ID" value="0" />
+	
+	<div id="step3" class="step"  style="display:none">
+			<div class="ml-15 mr-15">
+			    <div class="mt-20">
+			      <h2 class="ft-14">优惠商品</h2>
+			    </div>
+			    <div class="fn-mt10 mb-20">
+			      <table class="ui-record-table table_radius table-bordered table-striped">
+			        <thead>
+			          <tr>
+			            <th width="300">商品编号</th>
+			            <th>商品名称</th>
+			            <th width="100">价格（元）</th>
+			          </tr>
+			        </thead>
+			        <tbody id="J_tabletpl">
+			          <tr>
+			            <td class="proCode"></td>
+			            <td><a href="javascript:" class="proName"></a></td>
+			            <td class="proPrice" id="selProPrice"></td>
+			          </tr>
+			        </tbody>
+			      </table>
+			    </div>
+			  </div>
+			  <div class="ml-15 mr-15 ui-topQuDashed">
+			    <div class="mt-20">
+			      <h2 class="ft-14">优惠内容</h2>
+			    </div>
+			    <div class="ft-left mt-15">
+			    	<!-- <span class="table_select"><input id="discountFlag" name="DEPRE_DIS_FLAG" type="checkbox" value="1" checked="checked" /> 打折或降价</span> -->
+			        <span class="ml-30">设置促销价格：</span>
+			        <span class="mr-10"><input type="radio" id="depreciate" name="DEPRE_OR_DIS" value="01" checked="checked" /> 降价</span>
+			        <span><input type="radio" id="discount" name="DEPRE_OR_DIS" value="02" /> 折扣</span>
+			    </div>
+			    <div id="depreciateShow" class="mt-15 yh-centerBack">
+			    	<span class="gray_text">商品编号：</span><span class="proCode"></span>
+			        <span class="gray_text ml-15">商品名称：</span><span class="mr-30 proName" ></span>
+			        <span class="gray_text ml-15">降价额度</span><span class="ml-20"><input type="text" id="DEPRECIATE_AMOUNT" name="DEPRECIATE_AMOUNT" onblur="checkReduceInputPrice()" value="" /> 元</span>
+			        <span class="gray_text ml-10">促销价：</span><span class="ft-16 fn-high" id="depreciateFinalPrice" >&yen;1989</span>
+			    </div>
+			    <div id="discountShow" class="mt-15 yh-centerBack" style="display:none">
+			    	<span class="gray_text">商品编号：</span><span class="proCode"></span>
+			        <span class="gray_text ml-15">商品名称：</span><span class="mr-30 proName" ></span>
+			        <span class="gray_text ml-15">打</span><span class="ml-20"><input type="text" id="DISCOUNT_UNIT" name="DISCOUNT_UNIT" onblur="checkDiscountInputPrice()" value="" /> %折</span>
+			        <span class="gray_text ml-10">促销价：</span><span class="ft-16 fn-high" id="discountFinalPrice">&yen;1989</span>
+			    </div>
+			  </div>
+			  <div class="formBtnArea bd-top mt-30">
+			   <table width="100%">
+			    <tr>
+			     <td><div class="normalBtnArea"> <a class="normalBtn BGgray largeBtn" onclick="selStep(2)" href="javascript:;" id="Next">上一步</a> 
+			     <a class="normalBtn BGblue largeBtn" href="javascript:;"  id="submitReview">保存促销</a> </div></td>
+			     <td><div class="normalBtnArea fn-right"> <a href="javascript:window.history.go(-1)" class="formLink"><span>取消</span></a> </div></td>
+			    </tr>
+			   </table>
+			  </div>
+	</div>
+	
+	</form>
+	
+	<div id="step4" class="step" style="display:none">
+		<div class="excelImportBtn none_bortop">
+			  <div id="J_step5_1">
+			    <i class="importIcon"></i>
+			    <span class="fn-center">促销已经提交，正在审核。</span>
+			  </div>
+			</div>
+			  <div class="formBtnArea bd-top fn-center">
+			 <table width="100%">
+			  <tr>
+			   <td><div class="normalBtnArea"> <a class="normalBtn BGblue largeBtn" href="javascript:;" id="Finish">完成</a> </div></td>
+			  </tr>
+			 </table>
+		</div>
+	</div>
+
+<#include "../../tpl/res_js.tpl" />	
+	
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+            <td><div class="table_select"><input class="selProduct" type="radio" name="prod" value="{{MCDS_UNIT_ID}}" data-chnl="{{channels}}"  data-keyid='{{MCDS_UNIT_ID}}'/></div></td>
+            <td>{{MCDS_UNIT_ID}}</td>
+			<td>{{MCDS_UNIT_NM}}</td>
+            <td><div class="gridNum">{{UPRC}}</div></td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="9">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+
+<script type="text/javascript">
+srvMap.add('queryRegnCodeBySuperRegnCode', 'query.json','front/sh/order!execute?uid=o007');//根据上级地址编码查询地址信息
+srvMap.add('queryMcdsUnitList', 'queryMcdsUnitList.json' ,'front/sh/prod!execute?uid=p009');//查询商品列表
+srvMap.add('savePromotion', 'save.json','front/sh/market!index?uid=mhl001');		   //创建商品促销
+srvMap.add('queryChnl', 'query.json', 'front/sh/user!getChnl?uid=u003');//获取渠道列表
+
+var G_params = {
+	    url : srvMap.get('queryMcdsUnitList'),
+	    items_per_page : 5 ,   		// 每页数     @param : limit
+	    page_index : 0 , 				//当前页  @param : start
+	    pagination : "Pagination" , 	//分页id
+	    searchformId : "J_formSearch",  //搜索表单的id
+	    tabletpl : "T_tabletpl", 		//表格模板
+	    tablewrap : "J_tabletpl" 		//表格容器
+};
+
+//页面加载完开始执行
+$(document).ready(function () {
+	//点击完成跳转到创建促销管理页面
+	$('#Finish').bind('click',function(){ window.location.href="createPmtManager.html"; });
+	//初始化省级区域
+	Util.ajax.postJson(srvMap.get("queryRegnCodeBySuperRegnCode"),{addrLvlCd:'1',suprRegnCode:'-1'},function(data){
+        var strHtml = "";
+        strHtml += "<option value=''>请选择</option>";
+		for(var i=0;i<data.beans.length;i++){
+			strHtml += "<option value='"+data.beans[i].regnCode+"'>"+data.beans[i].regnNm+"</option>";
+        }
+		$("#province").html(strHtml);
+     });
+	
+    //省级联动查询市级区域信息
+    $("#province").change(function(){
+    	getCityInfoClickProvince($(this));
+    });	
+    
+  	//渠道初始化
+	var json = null;
+	$J_prov=$("#BELG_CHNL_ID1");
+	$J_city=$("#BELG_CHNL_ID");
+	Util.ajax.postJsonSync(srvMap.get("queryChnl"),'',function(json1,status){
+		json=json1.object;
+		//json=[{"PTY_NM":"10085电话营销","PTY_LVL_CD":"01","CHNL_ID":"1001"},{"PTY_NM":"社会代理","PTY_LVL_CD":"01","CHNL_ID":"1010","subList":[{"PTY_NM":"众包平台","PTY_LVL_CD":"02","CHNL_ID":"1012"}]}]
+		//console.log(json);
+		for (var i = 0; i < json.length; i++) {
+			//alert(json[i]['CHNL_ID']);
+			$J_prov.append("<option value='"+json[i]['CHNL_ID']+"'>"+json[i]['PTY_NM']+"</option>");
+		};
+	})
+
+	$J_prov.on('change',function(){
+		$J_city.empty();
+		var select_val = $(this).children('option:selected').val();
+			for (var i = 0; i < json.length; i++) {
+				if(select_val==json[i]['CHNL_ID']){
+					//放入促销渠道隐藏域中
+					$("#CHANNEL_ID").val(select_val);
+					var secondjson=json[i].subList;
+					if(secondjson!=null&&secondjson!='undefined'){
+						$J_city.show();
+						for (var j = 0; j < secondjson.length; j++) {
+							$J_city.append("<option value='"+secondjson[j]['CHNL_ID']+"'>"+secondjson[j]['PTY_NM']+"</option>");
+							if(j==0){
+								//放入促销渠道隐藏域中
+								$("#CHANNEL_ID").val(secondjson[j]['CHNL_ID']);
+							}
+						}
+					}else{
+						$J_city.hide();
+					}
+				}
+				if(select_val=='请选择'){
+					$J_city.show();
+					$J_city.append("<option >请选择</option>");
+				}
+					
+			};
+		
+	});
+	
+	$("#BELG_CHNL_ID").change(function(){
+		//放入促销渠道隐藏域中
+		$("#CHANNEL_ID").val($(this).val());
+	});
+	
+	
+	
+	/**
+	 * 查询商品列表
+	 */
+	//全局数组
+    selected_array = [];
+    //查询按钮事件
+	$('#J_search').bind('click',function(){
+		selected_array = [];
+		G_params.page_index=0;
+        var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+       // console.log(str);
+        //分页获取数据
+        Util.pagination(0, true , G_params , str );
+    });
+	$('#J_search').trigger("click");
+	
+	
+	/*
+	* 降价或折扣切换
+	*/
+	/*$("#discountFlag").click(function(){
+		if($(this).attr("checked")){
+			$('#DISCOUNT_UNIT').removeAttr('disabled');
+			$('#DEPRECIATE_AMOUNT').removeAttr('disabled');
+			$('#depreciate').removeAttr('disabled');
+			$('#discount').removeAttr('disabled');
+			//$("#discountArea").show();
+		}else{
+			//$("#discountArea").hide();
+			
+			$('#depreciate').attr('disabled','disabled');
+			$('#discount').attr('disabled','disabled');
+			$('#DEPRECIATE_AMOUNT').attr('disabled','disabled');
+			$('#DISCOUNT_UNIT').attr('disabled','disabled');
+		}
+		
+	});*/
+	
+	$("#depreciate").click(function(){
+		$("#depreciateShow").show();
+		$("#discountShow").hide();
+	});
+	$("#discount").click(function(){
+		$("#discountShow").show();
+		$("#depreciateShow").hide();
+	});
+	
+	//（保存促销）提交审核
+	$("#submitReview").click(function(){
+		var passFlag = true;
+		//打折或促销标志是否选中
+		//if($("#discountFlag").attr("checked")){
+			if($("#depreciate").attr("checked") && $("#DEPRECIATE_AMOUNT").val()==""){
+				passFlag = false;
+				alert("请输入降价额度!");
+			}
+			if($("#discount").attr("checked") && $("#DISCOUNT_UNIT").val()==""){
+				passFlag = false;
+				alert("请输入折扣!");
+			}
+// 		}else{
+// 			alert("请勾选打折或降价");
+// 		}
+		if(passFlag){
+			savePromotion();
+		}
+	});
+	//项目描述绑定失去焦点事件 (改变最多可输入汉字数)
+	$('#introductionInfo').bind('blur',function changeCharSum(){
+		//首先获取项目描述的汉字数目
+		var str = $('#introductionInfo').val();
+		var length = 500 - str.length;
+		if(length<0){
+			alert("项目描述不能超过500字符");
+			return;
+		}
+		var content = "最多可输入"+length+"字"; 
+		//改变项目描述汉字数
+		$('#introdDescCount').html(content);
+	});
+	
+});
+
+	/**
+	 * 省级联动查询市级区域信息
+	 */
+	function getCityInfoClickProvince(nowObj){
+		var cityRegnCode = $(nowObj).val();
+		if(cityRegnCode!=''){
+			Util.ajax.postJson(srvMap.get("queryRegnCodeBySuperRegnCode"),{addrLvlCd:"2",suprRegnCode:cityRegnCode},function(data){
+		        $("#city").remove();
+				var strHtml = "";
+		        strHtml += "<select id='city' name='city' >";
+				for(var i=0;i<data.beans.length;i++){
+					strHtml += "<option value='"+data.beans[i].regnCode+"'>"+data.beans[i].regnNm+"</option>";
+				}
+				strHtml += "</select>";
+				$("#province").after(strHtml);
+		     });
+		}else{
+			$("#city").remove();
+		}
+		
+	}
+	
+	
+	
+	
+	/**
+	 * 选择步骤
+	 */
+	function selStep(num){
+		if($("#introductionInfo").val()==""){
+			alert("项目描述不能为空");
+			return false;
+		};
+		$(".step").hide();
+		$("#step"+num).show();
+		$("#titleStyle").removeClass();
+		$("#titleStyle").addClass("current_"+num+" fn-clear");
+	}
+
+	/**
+	 * 选择促销主商品
+	 */
+	function selProductInfo(num){
+		var selProObj = $(".selProduct:checked");
+		if($(selProObj).length>0){
+			var selProTr = $(selProObj).parent().parent().parent();
+			var proCode = $(selProTr).find("td").eq(1).html();
+			var proName = $(selProTr).find("td").eq(2).html();
+			var proPrice = $(selProTr).find("td").eq(3).find("div").html();
+			$(".proCode").html(proCode);
+			$(".proName").html(proName);
+			$(".proPrice").html(proPrice);
+			//放入降价和折扣促销价中
+			$("#depreciateFinalPrice").html("&yen;"+proPrice);
+			$("#discountFinalPrice").html("&yen;"+proPrice);
+			//商品ID放入隐藏域中
+			$("#MCDS_UNIT_ID").val(proCode);
+			//商品名称放入促销名称隐藏域中
+			$("#PMT_NM").val(proName);
+			//进入下一步
+			selStep(num);
+		}else{
+			alert("请选择一件商品.");
+		}
+	}
+	
+	var submitFlag = true;
+	//保存商品促销
+	function savePromotion(){
+		submitFlag = checkReduceInputPrice()&&checkDiscountInputPrice();
+		if(submitFlag){
+			$("#saveInfoDialog").show();
+			submitFlag=false;
+			var param = $("#J_form_addPromotion").serialize();
+			Util.ajax.postJsonSync(srvMap.get("savePromotion"),param,function(json,status){
+	  		if(status){
+	  			//alert("保存成功!");
+	  			selStep(4);
+	  			//window.location.href="shProdList.html";
+	  		}
+	  		else {
+	  			alert("保存失败");
+	  		}
+	  		$("#saveInfoDialog").hide();
+	  		submitFlag=true;
+	  	});
+		}
+	
+	}
+	
+	
+	/**
+	*  促销简介插入隐藏域中
+	*/
+	function insertIntroduction(num){
+		if($("#CHANNEL_ID").val()==''){
+			alert("请选择促销渠道.");
+			return;
+		} 
+		selStep(num);
+		//促销简介插入隐藏域中
+		$("#PMT_INTRODUCTION").html($("#introductionInfo").val());
+	}
+	
+	/**
+	*  验证输入的价格格式
+	*/
+	function checkReduceInputPrice(){
+		var flag = true;
+		var selProPrice = $("#selProPrice").html();
+		//输入降价额度不为空
+		if($("#DEPRECIATE_AMOUNT").val()!=''){
+			var re = /^[1-9]\d*$/ ; 
+			//判断是否是正整数 注： 程序中正则表达式格式： /上面的正则表达式(不带双引号)/ 
+			var result = re.test($("#DEPRECIATE_AMOUNT").val()); //测试 返回true或false 
+			if(!result){
+				alert("请输入正整数.");
+				flag = false;
+			}else{
+				var depreciate_amount = $("#DEPRECIATE_AMOUNT").val();
+				if(parseFloat(depreciate_amount)>=parseFloat($("#selProPrice").html())){
+					alert("降价额度大于或等于商品价格.");
+					flag = false;
+				}else{
+					var depreciateFinalPrice = parseFloat($("#selProPrice").html())-parseFloat(depreciate_amount);
+					$("#depreciateFinalPrice").html("&yen;" + Math.floor(depreciateFinalPrice).toFixed(2));
+				}
+			}
+			return flag;
+		}else if($("#DEPRECIATE_AMOUNT").val()==""){ //如果没有输入的降价额度的话促销价改为商品的原价
+
+			$("#depreciateFinalPrice").html("&yen;" + $("#selProPrice").html());
+			return flag;
+		}
+	}
+	/**
+	*  验证折扣输入的价格格式
+	*/
+	function checkDiscountInputPrice(){
+		var flag = true;
+		var selProPrice = $("#selProPrice").html();
+		//折扣
+		if($("#DISCOUNT_UNIT").val()!=''){
+			var re = /^[1-9]\d*$/ ; 
+			var result = re.test($("#DISCOUNT_UNIT").val()); //测试 返回true或false 
+			if(!result){
+				alert("请输入正整数.");
+				flag = false;
+			}else{
+				var discount = parseFloat($("#DISCOUNT_UNIT").val());
+				if(discount>0&&discount<100){
+					var selProPrice = parseFloat($("#selProPrice").html());
+					var discountPrice = selProPrice * discount * 0.01;
+					//console.log(Math.floor(discountPrice).toFixed(2));
+					$("#discountFinalPrice").html("&yen;" +(discountPrice).toFixed(2));
+				}else{
+					alert("请输入0~100之间的数字.");
+					flag = false;
+				}
+			}
+			return flag;
+		}else if($("#DISCOUNT_UNIT").val()==""){ //如果没有输入的打折力度的话促销价该为商品的原价
+		
+			$("#discountFinalPrice").html("&yen;" + $("#selProPrice").html());
+			return flag;
+		}
+	}
+</script>
+</body>
+</html>

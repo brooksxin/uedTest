@@ -1,0 +1,57 @@
+﻿{
+  "returnCode": "0",
+  "returnMessage": "success",
+  "beans": [
+  {
+      "type": "coopNm",
+      "name": "商家",
+      "options": [
+          {"text": "全部", "className": "click"},
+          {"text": "小米公司"},
+          {"text": "天语公司"},
+          {"text": "魅族科技"},
+          {"text": "北京终端"},
+          {"text": "酷派公司"},
+          {"text": "广东终端"}]
+   }, {
+      "type": "brand",
+      "name": "品牌",
+      "options": [
+          {"text": "全部", "className": "click"},
+          {"text": "苹果"},
+          {"text": "三星"},
+          {"text": "华为"},
+          {"text": "酷派"},
+          {"text": "魅族"},
+          {"text": "魅蓝"},
+          {"text": "小米"},
+          {"text": "红米"},
+          {"text": "联想"},
+          {"text": "TCL"},
+          {"text": "天语"},
+          {"text": "中兴"},
+          {"text": "海尔"},
+          {"text": "华森"},
+          {"text": "HTC"},
+          {"text": "诺基亚"},
+          {"text": "乐视"}]
+    }, {
+      "type": "priceRange",
+      "name": "价格区间",
+      "options": [{"text": "全部", "className": "click"},
+        {"text": "1000以下"},
+        {"text": "1000-1999"},
+        {"text": "2000-2999"},
+        {"text": "3000-3999"},
+        {"text": "4000-4999"},
+        {"text": "5000以上"}]
+    }, {
+      "type": "screenSize",
+      "name": "屏幕",
+      "options": [{"text": "全部", "className": "click"},
+        {"text": "4'以下"},
+        {"text": "4'-4.9'"},
+        {"text": "5'-5.9'"},
+        {"text": "6'以上"}]
+      }]
+}

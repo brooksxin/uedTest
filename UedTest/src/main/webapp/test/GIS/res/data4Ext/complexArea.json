@@ -1,0 +1,151 @@
+{
+    "returncode": "1",
+    "parentjson": {
+        "node": {
+            "id": "G11269",
+            "pid": "G11268",
+            "name": "根节点"
+        },
+        "rows": {
+            "drawingmodes": "polygon",
+            "points": [
+                {
+                    "lng": 120.183443,
+                    "lat": 30.257996
+                },
+                {
+                    "lng": 120.201553,
+                    "lat": 30.253005
+                },
+                {
+                    "lng": 120.196091,
+                    "lat": 30.242522
+                },
+                {
+                    "lng": 120.181143,
+                    "lat": 30.23778
+                },
+                {
+                    "lng": 120.174532,
+                    "lat": 30.250759
+                }
+            ],
+            "param": {
+                "strokecolor": "blue",
+                "fillcolor": "blue",
+                "strokeweight": 3,
+                "strokeopacity": 0.8,
+                "fillopacity": 0.3,
+                "strokestyle": "solid"
+            }
+        }
+    },
+    "selfjson": {
+        "node": {
+            "id": "G11383",
+            "pid": "G11269",
+            "name": "new node3"
+        },
+        "rows": {
+            "drawingmodes": "polygon",
+            "points": [
+                {
+                    "lng": 120.193791,
+                    "lat": 30.254502
+                },
+                {
+                    "lng": 120.194079,
+                    "lat": 30.253005
+                },
+                {
+                    "lng": 120.198103,
+                    "lat": 30.251757
+                }
+            ],
+            "params": {
+                "strokecolor": "red",
+                "fillcolor": "red",
+                "strokeweight": 3,
+                "strokeopacity": 0.8,
+                "fillopacity": 0.3,
+                "strokestyle": "solid"
+            }
+        }
+    },
+    "rows": [
+        {
+            "areajson": {
+                "node": {
+                    "id": "G11381",
+                    "pid": "G11269",
+                    "name": "new node1"
+                },
+                "rows": {
+                    "drawingmodes": "polygon",
+                    "points": [
+                        {
+                            "lng": 120.185455,
+                            "lat": 30.254253
+                        },
+                        {
+                            "lng": 120.177981,
+                            "lat": 30.249261
+                        },
+                        {
+                            "lng": 120.182868,
+                            "lat": 30.239527
+                        },
+                        {
+                            "lng": 120.196666,
+                            "lat": 30.249511
+                        }
+                    ],
+                    "param": {
+                        "strokecolor": "blue",
+                        "fillcolor": "blue",
+                        "strokeweight": 3,
+                        "strokeopacity": 0.8,
+                        "fillopacity": 0.3,
+                        "strokestyle": "solid"
+                    }
+                }
+            },
+            "treenodeid": "G11381"
+        },
+        {
+            "areajson": {
+                "node": {
+                    "id": "G11382",
+                    "pid": "G11269",
+                    "name": "new node2"
+                },
+                "rows": {
+                    "drawingmodes": "polygon",
+                    "points": [
+                        {
+                            "lng": 120.192929,
+                            "lat": 30.246266
+                        },
+                        {
+                            "lng": 120.191204,
+                            "lat": 30.24377
+                        },
+                        {
+                            "lng": 120.195803,
+                            "lat": 30.244519
+                        }
+                    ],
+                    "param": {
+                        "strokecolor": "blue",
+                        "fillcolor": "blue",
+                        "strokeweight": 3,
+                        "strokeopacity": 0.8,
+                        "fillopacity": 0.3,
+                        "strokestyle": "solid"
+                    }
+                }
+            },
+            "treenodeid": "G11382"
+        }
+    ]
+}

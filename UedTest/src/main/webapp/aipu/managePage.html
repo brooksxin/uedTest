@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>管理 - 亚信开源社区</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/js/dialog/6.0.5/ui-dialog.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+<div class="glob-top">
+	<div class="wrap fn-clear">
+		<a class="logo fn-clear" href="index.html" hidefocus="true">
+			<span class="logo-name">AIOSC</span>
+			<span class="logo-name2">亚信开源社区</span>
+		</a>
+		<div class="login-bar fn-clear">
+			<a href="javascript:;" hidefocus="true" class="login" id="J_userInfo">
+				<span><i class="iconfont" title="用户"></i> zhangsan3</span>
+			</a>
+			<a href="javascript:;" hidefocus="true" class="regist" id="J_logOut">
+				<span>退出</span>
+			</a>
+			<a href="javascript:;" hidefocus="true" class="regist">
+				<span>个人中心</span>
+			</a>
+			<a href="javascript:;" hidefocus="true" class="maintain">
+				<span>社区维护后台</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="glob-contain">
+	<div class="wrap fn-clear managePage">
+		<div class="glob-left prod-wrap">
+			<div class="menu-bar">
+
+				<div class="menu-list" id="J_prod_menu">
+					
+				</div>
+			</div>
+		</div>
+
+		<div class="glob-right prod-wrap-r">
+			<iframe id="J_prod_conten" marginwidth="0" marginheight="0" scrolling="no"  
+			  framespacing="0" vspace="0" hspace="0" frameborder="0" width="780" height="600"   
+			  src=""></iframe>   
+		</div>
+	</div>
+</div>
+
+<textarea class="fn-hide" id="T_prod_menu">
+<dl>
+	{{#each_with_index prodMenu}}
+	<dd>
+		<div class="item">
+			<i class="icon-open-close"></i><span>{{name}}</span>
+		</div>
+		<ul>
+			{{#each sub}}
+			<li>
+				<a href="javascript:;" hidefocus="true" data-url="{{url}}" data-title="{{name}}"><span>{{name}}</span></a>
+			</li>
+			{{/each}}
+		</ul>
+	</dd>
+	{{/each_with_index}}
+</dl>
+</textarea>
+
+
+<script src="ui/js/jquery/1.8.3/jquery.js"></script>
+<script src="ui/js/dialog/6.0.5/dialog-min.js"></script>
+<script src="ui/js/jqueryForm/jquery.form.js"></script>
+<script src="ui/js/json2/json2.js"></script>
+<script src="ui/js/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="ui/js/handlebars/handlebars.js"></script>
+<script src="ui/js/handlebars/helpers.js"></script>
+<script src="ui/js/blockUI/jquery.blockUI.js"></script>
+<script src="ui/js/slides/3.0.3/jquery.slides.min.js"></script>
+<script src="ui/js/tinyscrollbar/tinyscrollbar.js"></script>
+<script src="ui/js/common.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+
+	srvMap.add('prod_menu2', 'prod_menu2.json','');//管理目录
+	getProdMenu();
+
+})
+
+// 自动获取高度
+function initIframe(){
+    var iframe = $("#J_prod_conten");
+    try{
+    	var i_height =  $(iframe).height();
+    	var b_height = $(iframe).contents().find('body').height();
+    	if(b_height > i_height)
+    		$(iframe).height(b_height);
+
+    }catch (ex){
+        //console.log("iframe 高度获取失败...")
+    }
+}
+window.setInterval("initIframe()", 400);
+
+function getProdMenu(){
+	$.PostJson(srvMap.get("prod_menu2"), "", function(state, json){
+		if(state == 'success'){
+			if(json && json.rtnCode == '0'){
+				$("#J_prod_menu").temp($("#T_prod_menu"), json);
+
+				$("#J_prod_menu").find(".item").click(function(){
+					var $this = $(this);
+					if($this.find("i.icon-open-close").hasClass("close")){
+						$this.find("i.icon-open-close").removeClass("close");
+						$this.siblings("ul").slideDown();
+					}else{
+						$this.find("i.icon-open-close").addClass("close");
+						$this.siblings("ul").slideUp();
+					}
+				})
+
+				$("#J_prod_menu").find("a").click(function(){
+					var $this = $(this);
+					var url = $this.data("url");
+					var title = $this.data("title");
+					$("#J_prod_menu").find("a").removeClass("cur");
+					$this.addClass("cur");
+
+					$("#J_prod_conten").attr({"src": url});
+
+					document.title = title;
+				})
+			}
+		}
+	})
+}
+
+</script>
+
+</body>
+</html>

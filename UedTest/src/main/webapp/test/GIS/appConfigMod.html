@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>应用配置修改</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/opui/om-default.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/opui/2.1/operamasks-ui.src.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body>
+<div class="openwin">
+	<form id="busi_form" class="bz_manage" width="100%">
+	<div class="bulk" >
+			<table class="infoTable" cellpadding="0" cellspacing="0" border="0" width="100%">
+				<colgroup>
+					<col width="12%">
+					<col width="">
+				</colgroup>  
+				<tbody>
+				<tr>
+					<td>应用名称：</td>
+				    <td >
+				       <input class="normalinput" maxlength="20" type="text" value="" id="appName" name="appName"/>
+				       <input name="id" id="appid" type="hidden"/>
+				    </td>
+				</tr>
+
+				<tr>
+					<td>描述：</td>
+					<td colspan="3">
+						<textarea name="desc" rows="3" maxlength="120" style="width: 91%;" id="appDescription"></textarea>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		
+	</div>
+
+	<div class="bulk fn-clear">
+		<dl>
+			<dt>选择树</dt>
+			<dd>
+				<ul id="select_tree">
+					
+				</ul>
+			</dd>
+		</dl>
+	</div>
+
+	<div class="bulk fn-clear">
+		<dl>
+			<dt>选择节点类型</dt>
+			<dd>
+				<ul id="select_node" >
+					
+				</ul>
+			</dd>
+		</dl>
+	</div>
+	</form>
+	<div class="bz_btn_list" >
+		<a class="btn_normal fn-mr-20" href="#nogo" id="J_save"><em>保存</em></a>
+		<a class="btn_normal " href="#nogo" onclick="closeDialog();return false;"><em>关闭</em></a>
+	</div>
+
+</div>
+
+<textarea class="fn-hide" id="markerType_tpl">
+{{#each rows}}
+<li>
+	<input type="checkbox" value="{{nodeId}}" name="treeid" id="tree{{nodeId}}"/>
+	<label for="tree{{nodeId}}">{{nodeName}}</label>
+</li>
+{{/each}}
+</textarea>
+
+<textarea class="fn-hide" id="markerType_tpl1">
+{{#each rows}}
+<li>
+	<input type="checkbox" value="{{id}}" name="sign" id="sign{{id}}"/>
+	<label for="sign{{id}}">{{name}}</label>
+</li>
+{{/each}}
+</textarea>
+
+<script type="text/javascript" >
+$(function(){
+	var id = art.dialog.data("id");
+	var name = art.dialog.data("name");
+	var treeid=art.dialog.data("treeid");
+	var signTypeId=art.dialog.data("signTypeId");
+	var treeRootId=art.dialog.data("treeid");
+	treeRootId=treeRootId.substring(1,treeRootId.length-1);
+	var treeIds=treeRootId.split(",");
+	$("#appName").val(name).next().hide().siblings("span").show();
+	$("#appid").val(id);
+	
+	var arr = eval('(' + signTypeId + ')');
+
+	placeholder("#appName","长度小于20个字符");
+  	placeholder("#appDescription","长度小于120个字符",true);
+  	textareaLimit();
+	//通过应用ID查找对应的描述信息
+	$.PostJson(REQURLS.appConfig_getAppById,"id="+id,function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+            	$("#appDescription").val(json.appdesc).css("color","black");
+            	setTimeout(function(){ 
+            		str1 = $("#busi_form").serialize();
+            	},800);  
+            }else{
+                result_prompt(0,json.returnMessage||"描述信息查找失败！");
+            }
+        }else{
+            result_prompt(0,"系统错误！");
+        }
+    });
+	
+	$.PostJson(REQURLS.tree_getAllRoot,"",function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+				$("#select_tree").temp($("#markerType_tpl"), json);  
+				for(var i=0;i<treeIds.length;i++){
+					var id = "#tree"+treeIds[i].replace(/[ ]/g,"") ;
+					$(id).attr("checked",true);
+				}
+            }else{
+                result_prompt(0,json.returnMessage||"组织树查找失败！");
+            }
+        }else{
+            result_prompt(0,"系统错误！");
+        }
+    });
+	
+	$.PostJson(REQURLS.markerType_getAll,"",function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+				$("#select_node").temp($("#markerType_tpl1"), json);  
+				for(var i=0;i<arr.length;i++){
+					var id = "#sign"+arr[i] ;
+					$(id).attr("checked",true);
+				}
+            }else{
+                result_prompt(0,json.returnMessage||"节点类型查找失败！");
+            }
+        }else{
+            result_prompt(0,"系统错误！");
+        }
+    });
+	
+    $("#J_save").click(function(){
+    	var markertypedes = $("#appDescription").val();
+        if(markertypedes == "" || markertypedes == "长度小于120个字符"){
+        	$("#appDescription").val("");
+        }
+    	var str2 = $("#busi_form").serialize();
+    	var attr = [], $btn = $(this);
+    	var appname = $("#appName").val();
+    	$("input[type='checkbox'][name='sign']:checked").each(function(){
+			attr.push($(this).val());
+		});
+		var apptreerootid=[];
+		$("input[type='checkbox'][name='treeid']:checked").each(function(){
+			apptreerootid.push($(this).val());
+		});
+		var str = "&"+$("#busi_form").serialize()+"&apptreerootid="+apptreerootid+"&signTypeId=" + attr;        
+		if($.trim($("#appName").val())==""){
+    		result_prompt(2,"应用名称不能为空！");
+    		return false;
+    	}else if(str1 == str2){
+    		result_prompt(2,"未做任何修改！");
+    		return false;
+    	}else if(appname == "长度小于20个字符"){
+    		result_prompt(2,"请输入合法的应用的名称！");	
+    		return false;
+    	}else{
+    		toggleButtonStyle($btn,true);
+    		$.PostJson(REQURLS.appConfig_updTemplate,str,function(state,json){
+                if(state=="success"){
+                    if(json&&json.returnCode=="1"){
+                        result_prompt(1,"修改成功");
+                        parent.gridReload("mytable");
+                    }else{
+                        result_prompt(0,json.returnMessage||json.rtnMsg||"修改失败！");
+                    }
+                }else{
+                    result_prompt(0,"系统错误！");
+                }
+                toggleButtonStyle($btn,false);
+            });
+    	}
+		
+    })
+   
+})
+
+</script>
+
+</body>
+</html>
+
+

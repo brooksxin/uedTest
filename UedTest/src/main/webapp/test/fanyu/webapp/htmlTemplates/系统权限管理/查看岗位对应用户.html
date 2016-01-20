@@ -1,0 +1,143 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>查看岗位对应用户</title>
+        <#include "../../tpl/res_css.tpl" />
+        
+    </head>
+    <body>
+
+         <div class="listTopBtn">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td><h1>话务员岗位列表</h1></td>
+                <td>
+                    <div class="normalBtnArea ft-right">
+                       <a class="normalBtn BGblue" href="#">授权新用户</a>
+                    </div>
+                </td>
+              </tr>
+            </table>
+        </div>
+        <div method="post" action="#" class="cmxform" >
+              <div class="record-search-cate" style="margin-bottom:20px;">
+                    <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td><label class="description">工号</label></td>
+                                            <td>
+                                                <input class="inputText" type="text" maxlength="255" value=""/>
+                                            </td>
+                                            <td><label class="description">姓名</label></td>
+                                            <td>
+                                                <input class="inputText" type="text" maxlength="255" value=""/>
+                                            </td>
+                                            <td><label class="description">班组</label></td>
+                                            <td>
+                                                <input class="inputText" type="text" maxlength="255" value=""/>
+                                            </td>
+                                            <td>
+                                                <div class="normalBtnArea">
+                                                     <a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                    </table>
+                </div>
+        </div>
+                 
+                 
+                
+    
+        
+        
+        <div class="tablewidth mg_t_10">
+                        <table class="ui-record-table table_radius table-bordered table-striped"  >
+                            <thead>
+                                <tr>
+                                    <th width="25"><div class="table_select"></div></th>
+                                    <th width="60">工号</th>
+                                    <th width="60">姓名</th>
+                                    <th width="">团队</th>
+                                    <th width="160">授权时间</th>
+                                    <th width="80">用户状态</th>
+                                </tr>
+                             </thead>
+                             <tbody id="J_tabletpl">
+                                <tr>
+                                    <td><div class="table_select"><input type="checkbox" /></div></td>
+                                    <td>X009051</td>
+                                    <td>黄厚生</td>
+                                    <td>外呼一部，外呼一组</td>
+                                    <td>2015年4月12日 08:21:12</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td><div class="table_select"><input type="checkbox" /></div></td>
+                                    <td>X009051</td>
+                                    <td>黄厚生</td>
+                                    <td>外呼一部，外呼一组</td>
+                                    <td>2015年4月12日 08:21:12</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td><div class="table_select"><input type="checkbox" /></div></td>
+                                    <td>X009051</td>
+                                    <td>黄厚生</td>
+                                    <td>外呼一部，外呼一组</td>
+                                    <td>2015年4月12日 08:21:12</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td><div class="table_select"><input type="checkbox" /></div></td>
+                                    <td>X009051</td>
+                                    <td>黄厚生</td>
+                                    <td>外呼一部，外呼一组</td>
+                                    <td>2015年4月12日 08:21:12</td>
+                                    <td>正常</td>
+                                </tr>
+                                <tr>
+                                    <td><div class="table_select"><input type="checkbox" /></div></td>
+                                    <td>X009051</td>
+                                    <td>黄厚生</td>
+                                    <td>外呼一部，外呼一组</td>
+                                    <td>2015年4月12日 08:21:12</td>
+                                    <td>正常</td>
+                                </tr>
+                            </tbody>
+                        </table>
+        </div>
+        
+            <!--翻页及功能按钮区域开始-->
+    <DIV class="amount-bottom">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+          <tr>
+            <td width="60">
+                <input type="checkbox" class="selectAll" id="selectAll" /> <label for="selectAll">全选</label> 
+            </td>
+            <td>已选2</td>
+            <td>
+                <div class="normalBtnArea"><!--不附加ft-right样式，默认左对齐-->
+                    <a class="normalBtn BGgray" href="#">解除授权</a>
+                </div>
+            </td>
+            <td width="50%">
+                <DIV class="fn-clear action-other  action-other-show ">
+                        <DIV id=Pagination class="page pagination fn-right"> </DIV>
+                        <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                </DIV></td>
+          </tr>
+        </table>
+    </DIV>	
+<#include "../../tpl/res_js.tpl" />  
+    <script type="text/javascript">
+        //页面加载完开始执行
+        $(document).ready(function () {
+            //初始化函数
+        });
+    </script>
+    </body>
+    </html>

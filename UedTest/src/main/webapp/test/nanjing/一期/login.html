@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>登陆</title>
+<link rel="stylesheet" type="text/css" href="alice.css">
+<link rel="stylesheet" type="text/css" href="common.css">
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+
+<!--顶部-->
+<div class="global-top">
+	<!--左侧logo-->
+	<div class="logo"></div>
+
+	<!--右侧按钮-->
+	<div class="un-log-in">
+		<a class="ui-button ui-button-blue" href="javascript:;" hidefocus="true" id=""><span>登 陆</span></a>
+		<a class="ui-button ui-button-gray" href="javascript:;" hidefocus="true" id=""><span>登 陆</span></a>
+		<a class="ui-button ui-button-red" href="javascript:;" hidefocus="true" id=""><span>登 陆</span></a>
+		<a class="ui-button ui-button-disable" href="javascript:;" hidefocus="true" id=""><span>登 陆</span></a>
+		<a class="ui-button ui-button-green" href="javascript:;" hidefocus="true" id=""><span>找回密码</span></a>
+	</div>
+</div>
+
+<!--body-->
+<div class="login-body">
+	<form id="loginForm" class="ui-form login-form">
+		<div class="title">
+			<h1>开发者登陆</h1>
+		</div>
+
+		<div class="login-input-wrap">
+			<label for="loginID">输入账号</label>
+			<input type="text" id="loginID" class="ui-input login-id" tabindex="1" />
+		</div>
+
+		<div class="login-input-wrap">
+			<label for="loginPwd">输入密码</label>
+			<input type="password" id="loginPwd" class="ui-input login-pwd" tabindex="2" />
+			<a href="javascript:;" class="find-pwd"><span>找回密码</span></a>
+		</div>
+
+		<div class="login-input-wrap">
+			<label for="loginSecPwd">输入验证码</label>
+			<input type="text" id="loginSecPwd" class="ui-input login-sec-pwd" maxlength="4" tabindex="3" />
+			<img src="" alt="验证码" id="loginSecPwdImg" class="loginSecPwdImg" />
+		</div>
+
+		<div class="login-input-wrap">
+			<input type="checkbox" id="loginRemPwd" class="login-rem-pwd" tabindex="4" />
+			<label for="loginRemPwd" class="login-rem-pwd-label">记住账号</label>
+		</div>
+	</form>
+
+	<div class="login-arrow"></div>
+
+	<div class="login-btn">
+		<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="J_login" tabindex="5"><span>确 定</span></a>
+		<a class="ui-button ui-button-green" href="javascript:;" hidefocus="true" id="J_register"><span>注 册</span></a>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+	$("#loginForm .ui-input").keyup(function(e){
+		var _self = $(this);
+		var _place = _self.prev("label");
+		if(e.which==13){
+		    $("#J_login").click(); 
+		    return false;
+		}
+		if( _self.val().length ){
+			_place.css("visibility","hidden");
+		}else{
+			_place.css("visibility","visible");
+		}
+	}).focus(function(){
+		var _self = $(this);
+		var _place = _self.prev("label");
+		_place.css("visibility","hidden");
+	}).blur(function(){
+		var _self = $(this);
+		var _place = _self.prev("label");
+		if( _self.val().length ){
+			_place.css("visibility","hidden");
+		}else{
+			_place.css("visibility","visible");
+		}
+	});
+
+	$("#J_login").click(function(){
+		var loginID = $("#loginID").val();
+		var loginPwd = $("#loginPwd").val();
+		var loginSecPwd = $("#loginSecPwd").val();
+		if(!loginID){
+			$("#loginID").focus();
+			return false;
+		}
+		if(!loginPwd){
+			$("#loginPwd").focus();
+			return false;
+		}
+		if(!loginSecPwd){
+			$("#loginSecPwd").focus();
+			return false;
+		}
+
+		var data = "&loginID="+loginID+"&loginPwd="+loginPwd+"&loginSecPwd="+loginSecPwd;
+
+		$.PostJson("",data,function(state,json){
+			if(state=='success'){
+				if(json&&json.returnCode=='0'){
+					alert("成功")
+				}else{
+					alert("失败")
+				}
+			}else{
+				alert("系统错误！");
+			}
+		});
+	});
+});
+</script>
+</body>
+</html>

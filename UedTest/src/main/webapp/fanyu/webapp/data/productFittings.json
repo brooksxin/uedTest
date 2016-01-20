@@ -1,0 +1,31 @@
+{
+ "returnCode":"0",
+ "returnMessage":"success",
+ "beans":[{
+   "mcds_unit_id":" 2897",
+   "mcds_unit_nm":" JBL 立体声耳机",
+   "mcds_price":"320.00元",
+   "mcds_pic_url":"",
+   "accessories_attr_1":"商品名称：JBL E10",
+   "accessories_attr_2":"商品编号：116043",
+   "accessories_attr_3":"品牌：JBL",
+   "accessories_attr_4":"上架时间：2014-07-10 15:20:30",
+   "accessories_attr_5":"商品毛重：78.00g",
+   "accessories_attr_6":"商品产地：中国大陆",
+   "accessories_attr_7":"功能用途：音乐耳机",
+   "accessories_attr_8":"佩戴方式：入耳式"
+  }, {
+     "mcds_unit_id":" 116043",
+     "mcds_unit_nm":" 小米移动电源 金色",
+     "mcds_price":"320.00元",
+     "mcds_pic_url":"",
+     "accessories_attr_1":"商品名称：小米移动电源",
+     "accessories_attr_2":"商品编号：116043",
+     "accessories_attr_3":"品牌：小米",
+     "accessories_attr_4":"上架时间：2014-07-10 15:20:30",
+     "accessories_attr_5":"商品毛重：280.00g",
+     "accessories_attr_6":"商品产地：中国大陆",
+     "accessories_attr_7":"功能用途：通用",
+     "accessories_attr_8":"容量：10001-13000毫安"
+    }]
+}

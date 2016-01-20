@@ -1,0 +1,61 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": null,
+    "bean": {
+        "total": "6"
+    },
+    "beans": [
+        {
+            "CRT_TIME": "2015-07-07 11:43:24.0",
+            "LVL_NAME": "12",
+            "LVL_SCORE": "12.00",
+            "CRT_USER_ID": "1000001",
+            "ASCORE_ITEM_ID": "1000001",
+            "ASCORE_ITEM_NM": "1000001"
+        },
+        {
+            "CRT_TIME": "2015-07-16 11:43:41.0",
+            "LVL_NAME": "12",
+            "LVL_SCORE": "12.00",
+            "CRT_USER_ID": "1000002",
+            "ASCORE_ITEM_ID": "1000002",
+            "ASCORE_ITEM_NM": "1000002"
+        },
+        {
+            "CRT_TIME": "2015-07-15 13:52:45.0",
+            "LVL_NAME": "sfsdfs,fsdfsdf",
+            "LVL_SCORE": "1.00,2.00",
+            "CRT_USER_ID": "111111",
+            "ASCORE_ITEM_ID": "111111",
+            "ASCORE_ITEM_NM": "111111"
+        },
+        {
+            "CRT_TIME": "2015-07-15 13:51:35.0",
+            "LVL_NAME": "sfsf",
+            "LVL_SCORE": "20.00",
+            "CRT_USER_ID": "222222",
+            "ASCORE_ITEM_ID": "222222",
+            "ASCORE_ITEM_NM": "222222"
+        },
+        {
+            "CRT_TIME": "2015-07-08 11:39:48.0",
+            "LVL_NAME": "23",
+            "LVL_SCORE": "2.00",
+            "CRT_USER_ID": "333333",
+            "ASCORE_ITEM_ID": "333333",
+            "ASCORE_ITEM_NM": "333333"
+        },
+        {
+            "CRT_TIME": "2015-07-16 11:40:44.0",
+            "LVL_NAME": "34",
+            "LVL_SCORE": "3.00",
+            "CRT_USER_ID": "444444",
+            "ASCORE_ITEM_ID": "444444",
+            "ASCORE_ITEM_NM": "444444"
+        }
+    ],
+    "object": null
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>授权新用户</title>
+<#include "../../tpl/res_css.tpl" />
+<link rel="stylesheet" href="../../dest/ecp.min.css" />
+<link rel="stylesheet" href="../../css/common.css" />
+<link rel="stylesheet" href="../../css/tablepay.css" />
+<link rel="stylesheet" href="../../lib/jqueryui/jquery-ui.min.css" />
+<link rel="stylesheet" href="../../lib/dialog/6.0.4/css/ui-dialog.css" />
+<link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+
+</head>
+<body>
+
+	<div style="height: 450px; width: 200px; border: 1px solid #DFDFDF; float: left; margin-top: 5px;"></div>
+	<div style="float: left;">
+		<div method="post" action="#" class="cmxform">
+			<div class="record-search-cate" style="margin-bottom: 20px;">
+				<table class="search_table" cellpadding="0" cellspacing="0"
+					border="0" width="100%">
+					<tbody>
+						<tr>
+							<td><label class="description">工号</label></td>
+							<td><input class="inputText" type="text" maxlength="255"
+								id="USER_LOGIN_ID" name="USER_LOGIN_ID" /></td>
+							<td><label class="description">姓名</label></td>
+							<td><input class="inputText" type="text" maxlength="255"
+								id="PTY_NM" name="PTY_NM"/></td>
+							<td><label> <input type="checkbox" id="NO_AUTH" name="NO_AUTH" value="1">仅显示未授权的
+							</label></td>
+							<td><label> <input type="checkbox" id="NO_REPEAT" name="NO_REPEAT" value="1">去除重复
+							</label></td>
+							<td>
+								<div class="normalBtnArea">
+									<a class="searchBtn" href="javascript:;" id="J_search"><i></i>查询</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+
+
+
+
+		<div class="tablewidth mg_t_10">
+			<table
+				class="ui-record-table table_radius table-bordered table-striped">
+				<thead>
+					<tr>
+						<th width="25"><div class="table_select"></div></th>
+						<th width="70">工号</th>
+						<th width="60">姓名</th>
+						<th width="">岗位</th>
+						<th width="80">用户状态</th>
+					</tr>
+				</thead>
+				<tbody id="J_tabletpl">
+					<tr>
+						<td><div class="table_select">
+								<input type="checkbox" />
+							</div></td>
+						<td>X009654</td>
+						<td>黄厚生</td>
+						<td>话务员、质检员</td>
+						<td>正常</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<!--翻页及功能按钮区域开始-->
+		<DIV class="amount-bottom">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0"
+				class="gridBottom">
+				<tr>
+					<td width="60">已选择3</td>
+					<td><a href="#">清空</a></td>
+					<td width="50%">
+						<DIV class="fn-clear action-other  action-other-show ">
+							<DIV id=Pagination class="page pagination fn-right"></DIV>
+							<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+						</DIV>
+					</td>
+				</tr>
+			</table>
+		</DIV>
+		
+		<div class="formBtnArea">
+	        <div class="normalBtnArea fn-center">
+	           <a class="normalBtn BGblue largeBtn" href="javascript:;" id="SAVERL" >确定</a>
+	           <a class="normalBtn BGgray largeBtn" href="javascript:;" id="CANCELRL" >取消</a>   
+	        </div>
+    	</div>
+	</div>
+	
+	
+
+
+	<#include "../../tpl/res_js.tpl" />
+	<script type="text/javascript">
+        //页面加载完开始执行
+        $(document).ready(function () {
+            //初始化函数
+        });
+    </script>
+</body>
+</html>

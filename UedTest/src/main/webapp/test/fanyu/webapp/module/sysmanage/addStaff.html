@@ -1,0 +1,174 @@
+      <!DOCTYPE html>
+      <html>
+      <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>添加员工</title>
+      <#include "../../tpl/res_css.tpl" />
+      <body>
+      <div class="formItem">
+         
+                <div class="titleArea">
+                    <h2>编辑员工信息</h2>
+                </div>
+         <div class="formArea">
+                <table class="form_table">
+                                <tbody>
+                              		<tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 员工编号</label></td>
+                                        <td width=""><input class="FormInputText width100" type="text" id="PTY_NO" name="PTY_NO" value=""/></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span>姓名</label></td>
+                                        <td width=""><input class="FormInputText width100" type="text" id="PTY_NM" name="PTY_NM" value=""/></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span>所属部门</label></td>
+                                        <td width="">部门：洛阳呼叫中心 > 外呼一部 > 呼叫一组 <a href="###">修改</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 员工类型</label></td>
+                                        <td width="">
+                                             <select class="inputSelect" id="STAFF_TYPE_CD" name="STAFF_TYPE_CD">
+						                    </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span>证件类型</label></td>
+                                        <td width="">
+                                           <select class="inputSelect" id="MARK_TYPE_CD" name="MARK_TYPE_CD">
+						                    </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 证件号码</label></td>
+                                        <td><input class="FormInputText width100" type="text" id="MARK_NUMI" name="MARK_NUMI" value=""/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span>手机号码</label></td>
+                                        <td width=""><input class="FormInputText width100" type="text" id="MARK_NUMP" name="MARK_NUMP" value=""/></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription">电子邮箱</label></td>
+                                        <td width=""><input class="FormInputText width100" type="text" id="EMAIL_ADDR" name="EMAIL_ADDR" value=""/></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription">入职时间</label></td>
+                                         <td>
+                            <input id="ENTRY_DATE" name="ENTRY_DATE"  class="element text Wdate" type="text" 
+                            onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{\'2010-01-01 00:00:00\'}'})"/>
+                          </td>     
+                         </tr>
+                                </tbody>
+                </table>
+                <hr/>
+                <div class="formBtnArea">
+                      <table width="100%">
+                        <tr>
+                          <td>
+                            <div class="normalBtnArea fn-center">
+                                <a class="normalBtn BGblue largeBtn" href="javascript:;" id="Save" >下一步</a>
+                            </div>
+                          </td>
+                          <td>
+                              <div class="normalBtnArea fn-right">
+                                <a href="#" class="formLink" id="Cancel"><span>取消</span></a>
+                              </div>
+                          </td>
+                        </tr>
+                      </table>
+                </div>
+                                                 
+      </div>
+      
+   </div>   
+      
+      
+      <script id="STAFF_TYPE_CD" type="text/x-handlebars-template">
+		<option value="">全部</option>
+		{{#if beans}}
+            {{#each beans}}
+                 <option value="{{CD_VAL}}">{{CMN_CD_VAL_NM}}</option>
+             {{/each}}
+   		{{/if}}
+	</script>
+	
+	 <script id="MARK_TYPE_CD" type="text/x-handlebars-template">
+		<option value="">全部</option>
+		{{#if beans}}
+            {{#each beans}}
+                 <option value="{{CD_VAL}}">{{CMN_CD_VAL_NM}}</option>
+             {{/each}}
+   		{{/if}}
+	</script>
+      
+      
+      
+      <#include "../../tpl/res_js.tpl" />    
+      <script type="text/javascript">
+      srvMap.add('insertStuff', '','front/sh/user!index?uid=stuff001');//添加员工
+          
+          //取消
+		$(function(){
+			$("#Cancel").click(function(){
+				window.location.href="addStaff.html";
+			});
+		
+		//保存问题按钮
+			$("#Save").click(function(){
+		var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定继续该操作吗？</div></div></div>');
+				var params = {
+      		          top:top,
+      		          content: elem,
+      		          width: "300px",
+      		          height: "120px",
+      		          modal: true,
+      		          okVal:'确定',
+      		          okCallback:function(){
+						PTY_NO = Util.browser.getParameter("PTY_NO");
+						var cmd;						
+						if($("#PTY_NM").val() == null || $("#PTY_NM").val() == "" || $("#PTY_NM").val() == undefined){
+							Util.dialog.tips("没有输入用户姓名,无法继续操作！");
+							return;
+						}
+										
+							//参数
+						var cmd = {
+										 "PTY_NO" : $("#PTY_NO").val(), 
+										 "PTY_NM" : $("#PTY_NM").val(), 
+										 "DEPT_ID" : $("#DEPT_ID").val(), 
+										 "STAFF_TYPE_CD" : $("#STAFF_TYPE_CD").val(), 
+										 "MARK_TYPE_CD" : $("#MARK_TYPE_CD").val(), 
+										 "MARK_NUMI" : $("#MARK_NUMI").val(),
+										 "MARK_NUMP" : $("#MARK_NUMP").val(),
+										 "EMAIL_ADDR" : $("#EMAIL_ADDR").val(),
+										 "ENTRY_DATE" : $("#ENTRY_DATE").val(), 			
+										 };
+						 						
+						
+						
+						
+							Util.ajax.postJson(srvMap.get("insertStuff"), cmd, function(json) {
+								if (json.returnCode == 0) {
+									Util.dialog.tips("保存问题完成！");
+									window.location.href="orgManage.html";
+								} 
+								else {
+									Util.dialog.tips(json.returnMessage);
+								}
+							});
+						
+      		        },
+					cancelVal:'取消',
+		            cancelCallback:function(){}
+				}
+				Util.dialog.openDiv(params); 
+				
+			});
+			
+		
+		});
+
+      </script>
+      </body>
+      </html>

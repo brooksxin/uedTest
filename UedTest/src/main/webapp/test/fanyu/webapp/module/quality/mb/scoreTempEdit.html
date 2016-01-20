@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>质量管理模块——编辑评分模板</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+
+<body>
+<!-- 面包屑 begain -->
+<div class="breadcrumb"></div>
+<!-- 面包屑end -->
+<div class="formItem">
+    <div class="pt-10 pb-10">
+        <a href="###" class="formItem_jiantou-tu normalLink">返回</a>
+    </div>
+    <div class="titleArea">
+        <h2>编辑评分模板</h2>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../res/common/NiceTools.js"></script>
+<script type="text/javascript" src="../../res/common/common.js"></script>
+<div method="post" action="#" class="cmxform" >
+    <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+        <div class="formItem">
+            <hr/>
+            <table class="form_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td align="right" width="100">
+                            <label class="formDescription"><span class="fn-high">*</span>模板名称：</label>
+                        </td>
+                        <td>
+                            <input type="text" class="FormInputText width100" placeholder="促销活动回访评分模版" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <label class="formDescription">模板描述：</label>
+                        </td>
+                        <td>
+                            <textarea rows="4" class="width100"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="formDescription"><span class="fn-high">*</span>评分项：</label>
+                        </td>
+                        <td>
+                            <div>
+                                <p><span>服务用语</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="###">修改类型</a></p>
+                            </div>
+                            <div class="tablewidth mg_t_10">
+                                <table class="ui-record-table table_radius table-bordered table-striped" >
+                                    <thead>
+                                        <tr>
+                                            <th width="25">序号</th>
+                                            <th width="100">评分项</th>
+                                            <th>等级名称</th>
+                                            <th width="80">等级分值</th>
+                                            <th width="80">权重</th>
+                                            <th width="80">排序</th>
+                                            <th width="50">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="J_tabletpl">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                <a class="item-text" href="javascript:;">基本用语</a>
+                                            </td>
+                                            <td>优秀/良好/及格/不及格</td>
+                                            <td align="right">100/70/40/0</td>
+                                            <td align="right"><a class="item-text" href="javascript:;">10%</a>
+                                            </td>
+                                            <td>
+                                                <a href="###" class="upIcon"></a>
+                                                <a href="###" class="downIcon"></a>
+                                            </td>
+                                            <td><a href="###">删除</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="amount-bottom">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+                                    <tr>
+                                        <td>
+                                            <div class="fn-clear action-other  action-other-show ">
+                                                <div id="Pagination" class="page pagination fn-right"></div>
+                                                <div class="fn-right fn-pt5 fn-pr10"><a class="normalBtn BGgray" href="#">添加评分项</a></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <div>
+                                <p><span>业务要求</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="###">修改类型</a></p>
+                            </div>
+                            <div class="tablewidth mg_t_10">
+                                <table class="ui-record-table table_radius table-bordered table-striped" >
+                                    <thead>
+                                        <tr>
+                                            <th width="25">序号</th>
+                                            <th width="100">评分项</th>
+                                            <th>等级名称</th>
+                                            <th width="80">等级分值</th>
+                                            <th width="80">权重</th>
+                                            <th width="80">排序</th>
+                                            <th width="50">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="J_tabletpl">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                <a class="item-text" href="javascript:;">基本用语</a>
+                                            </td>
+                                            <td>优秀/良好/及格/不及格</td>
+                                            <td align="right">100/70/40/0</td>
+                                            <td align="right"><a class="item-text" href="javascript:;">10%</a>
+                                            </td>
+                                            <td>
+                                                <a href="###" class="upIcon"></a>
+                                                <a href="###" class="downIcon"></a>
+                                            </td>
+                                            <td><a href="###">删除</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="amount-bottom">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+                                    <tr>
+                                        <td>
+                                            <div class="fn-clear action-other  action-other-show ">
+                                                <div id="Pagination" class="page pagination fn-right"></div>
+                                                <div class="fn-right fn-pt5 fn-pr10"><a class="normalBtn BGgray" href="#">添加评分项</a></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td align="right"><p>说明：所有评分项权重累计相加应为100%</p></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <p class="labelContent">评分类型：</p>
+                            <select class="labelContent">
+                                <option>请选择评分类型</option>
+                                <option>服务用语</option>
+                                <option>服务技巧</option>
+                                <option>业务要求</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>       
+    </form>
+</div>
+<!--翻页及功能按钮区域开始-->
+<hr/>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+      //页面加载完开始执行
+      $(document).ready(function () {
+          //初始化函数
+      });
+  </script>
+</body>
+</html>

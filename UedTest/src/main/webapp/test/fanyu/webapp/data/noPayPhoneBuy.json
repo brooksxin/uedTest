@@ -1,0 +1,39 @@
+{
+	"returnCode": "0000",
+	"returnMessage": "success",
+	"total": "100",
+	"beans":[
+		{
+			"orderId":"0001",
+			"goodsName":"iphone",
+			"price":"6000",
+			"userName":"毛泽东",
+			"userCallPhoneNum":"13899999999",
+			"addDate":"2015-12-5 12:24:35",
+		},
+		{
+			"orderId":"0001",
+			"goodsName":"iphone",
+			"price":"6000",
+			"userName":"毛泽东",
+			"userCallPhoneNum":"13899999999",
+			"addDate":"2015-12-5 12:24:35",
+		},
+		{
+			"orderId":"0001",
+			"goodsName":"iphone",
+			"price":"6000",
+			"userName":"毛泽东",
+			"userCallPhoneNum":"13899999999",
+			"addDate":"2015-12-5 12:24:35",
+		},
+		{
+			"orderId":"0001",
+			"goodsName":"iphone",
+			"price":"6000",
+			"userName":"毛泽东",
+			"userCallPhoneNum":"13899999999",
+			"addDate":"2015-12-5 12:24:35",
+		}
+	]
+}

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>积分兑换</title>
+<link rel="stylesheet" type="text/css" href="hum.css">
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="ThreeCanvas.js"></script>
+<script type="text/javascript" src="Snow.js"></script>
+
+<style type="text/css">
+.wrap {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.btn {
+    position: absolute;
+    top: 21%;
+    left: 3%;
+    width: 24%;
+    height: 58%;
+}
+.btn span {
+    text-indent: -9999px;
+    display: block;
+}
+.btn2 {
+    left: 31%;
+}
+.btn3 {
+    left: 59%;
+}
+.btn4 {
+    left: 87%;
+    width: 13%;
+}
+
+.fn-hide {
+    display: none;
+}
+
+.btn5 {
+    width: 22%;
+    height: 7%;
+    top: 59%;
+    left: 28%;
+}
+.btn6 {
+    width: 22%;
+    height: 7%;
+    top: 59%;
+    left: 50%;
+}
+
+.meter { 
+    height: 20px;  /* Can be anything */
+    position: relative;
+    margin: 60px 0 20px 0; /* Just for demo spacing */
+    background: #555;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    padding: 10px;
+    -webkit-box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+    -moz-box-shadow   : inset 0 -1px 1px rgba(255,255,255,0.3);
+    box-shadow        : inset 0 -1px 1px rgba(255,255,255,0.3);
+}
+.meter > span {
+    display: block;
+    height: 100%;
+       -webkit-border-top-right-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+           -moz-border-radius-topright: 8px;
+        -moz-border-radius-bottomright: 8px;
+               border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        -webkit-border-top-left-radius: 20px;
+     -webkit-border-bottom-left-radius: 20px;
+            -moz-border-radius-topleft: 20px;
+         -moz-border-radius-bottomleft: 20px;
+                border-top-left-radius: 20px;
+             border-bottom-left-radius: 20px;
+    background-color: rgb(43,194,83);
+    background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0, rgb(43,194,83)),
+      color-stop(1, rgb(84,240,84))
+     );
+    background-image: -moz-linear-gradient(
+      center bottom,
+      rgb(43,194,83) 37%,
+      rgb(84,240,84) 69%
+     );
+    -webkit-box-shadow: 
+      inset 0 2px 9px  rgba(255,255,255,0.3),
+      inset 0 -2px 6px rgba(0,0,0,0.4);
+    -moz-box-shadow: 
+      inset 0 2px 9px  rgba(255,255,255,0.3),
+      inset 0 -2px 6px rgba(0,0,0,0.4);
+    box-shadow: 
+      inset 0 2px 9px  rgba(255,255,255,0.3),
+      inset 0 -2px 6px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+}
+.meter > span:after, .animate > span > span {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background-image: 
+       -webkit-gradient(linear, 0 0, 100% 100%, 
+          color-stop(.25, rgba(255, 255, 255, .2)), 
+          color-stop(.25, transparent), color-stop(.5, transparent), 
+          color-stop(.5, rgba(255, 255, 255, .2)), 
+          color-stop(.75, rgba(255, 255, 255, .2)), 
+          color-stop(.75, transparent), to(transparent)
+       );
+    background-image: 
+        -moz-linear-gradient(
+          -45deg, 
+          rgba(255, 255, 255, .2) 25%, 
+          transparent 25%, 
+          transparent 50%, 
+          rgba(255, 255, 255, .2) 50%, 
+          rgba(255, 255, 255, .2) 75%, 
+          transparent 75%, 
+          transparent
+       );
+    z-index: 1;
+    -webkit-background-size: 50px 50px;
+    -moz-background-size: 50px 50px;
+    background-size: 50px 50px;
+    -webkit-animation: move 2s linear infinite;
+    -moz-animation: move 2s linear infinite;
+       -webkit-border-top-right-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+           -moz-border-radius-topright: 8px;
+        -moz-border-radius-bottomright: 8px;
+               border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        -webkit-border-top-left-radius: 20px;
+     -webkit-border-bottom-left-radius: 20px;
+            -moz-border-radius-topleft: 20px;
+         -moz-border-radius-bottomleft: 20px;
+                border-top-left-radius: 20px;
+             border-bottom-left-radius: 20px;
+    overflow: hidden;
+}
+
+.animate > span:after {
+    display: none;
+}
+
+@-webkit-keyframes move {
+    0% {
+       background-position: 0 0;
+    }
+    100% {
+       background-position: 50px 50px;
+    }
+}
+
+@-moz-keyframes move {
+    0% {
+       background-position: 0 0;
+    }
+    100% {
+       background-position: 50px 50px;
+    }
+}
+
+.orange > span {
+    background-color: #f1a165;
+    background-image: -moz-linear-gradient(top, #f1a165, #f36d0a);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #f1a165),color-stop(1, #f36d0a));
+    background-image: -webkit-linear-gradient(#f1a165, #f36d0a); 
+}
+
+.meter {
+    box-sizing: content-box;
+    margin: 0;
+    width: 25%;
+    top: 82%;
+    left: 37%;
+    height: 4%;
+    position: absolute;
+    padding: 5px;
+}
+.loading {
+    height: 0;
+}
+
+#gotoBuy {
+    position: absolute;
+    top: 31%;
+    right: 2%;
+    width: 13%;
+    height: 5%;
+    text-indent: -9999px;
+}
+.back {
+    position: absolute;
+    top: 4%;
+    left: 2%;
+    width: 8%;
+    height: 8%;
+    text-indent: -9999px;
+}
+.back2 {
+    left: 94%;
+    width: 4%;
+}
+</style>
+
+</head>
+<body>
+
+<div class="loading">
+    <!--游戏logo-->
+    <img src="img/Catch11.png" width="100%" height="100%" class="fn-hide" id="load1">
+    <!--游戏加载页面-->
+    <img src="img/Catch12.png" width="100%" height="100%" class="fn-hide" id="load2">
+    <!--游戏加载页面进度条-->
+    <div class="meter fn-hide">
+        <span style="width: 25%"></span>
+    </div>
+    <!--游戏界面-->
+    <img src="img/Catch13.png" width="1131" height="638" class="fn-hide" id="load3">
+    <a id="gotoBuy" class="fn-hide" href="javascript:;" hidefocus="true"><span>购买</span></a>
+</div>
+
+<div class="wrap fn-hide" id="wrap1">
+    <img src="img/Catch2f.png" width="100%" height="100%">
+    <a class="btn btn1" href="javascript:;" hidefocus="true" data-point="300" data-bone="500"><span>300积分</span></a>
+    <a class="btn btn2" href="javascript:;" hidefocus="true" data-point="600" data-bone="1200"><span>600积分</span></a>
+    <a class="btn btn3" href="javascript:;" hidefocus="true" data-point="1200" data-bone="2500"><span>1200积分</span></a>
+    <a class="btn btn4" href="javascript:;" hidefocus="true" data-point="2800" data-bone="6500"><span>2800积分</span></a>
+    <a class="back back1" href="javascript:;" hidefocus="true"><span>返回</span></a>
+    <a class="back back2" href="javascript:;" hidefocus="true"><span>返回</span></a>
+</div>
+<div class="wrap fn-hide" id="wrap2">
+    <img src="" width="100%" height="100%" id="target">
+    <a class="btn btn5" href="javascript:;" hidefocus="true"><span>取消</span></a>
+    <a class="btn btn6" href="javascript:;" hidefocus="true"><span>兑换</span></a>
+</div>
+
+<script type="text/javascript">
+
+(function($){
+    $.extend({
+        PostJson: function(url, datas , callback) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data : datas +"&_=" + (new Date()).getTime(),
+                cache: false,
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.overrideMimeType("text/plain; charset=utf-8");
+                },
+                success: function(json) {
+                    callback("success", json);
+                },
+                error: function(e) {
+                    callback("error", null);
+                }
+            });
+        }
+    });
+})(jQuery);
+
+var _point, _bone;
+$(function(){
+
+    $("img").css({"width": $(window).width(), "height": $(window).height()});
+
+    //加载页面
+    getLoading();
+
+    $("#wrap1 .btn").each(function(i){
+        $(this).click(function(){
+            $("#wrap1").addClass("fn-hide");
+            $("#wrap2").removeClass("fn-hide");
+            _point = $(this).data("point");
+            _bone = $(this).data("bone");
+            $("#target").attr({"src": "img/Catch2"+i+".png"});
+        })
+    });
+
+    $(".btn5").click(function(){
+        $("#wrap1").removeClass("fn-hide");
+        $("#wrap2").addClass("fn-hide");
+    });
+
+    $(".btn6").click(function(){
+        $.PostJson("test.json?1=1","point="+_point+"&bone="+_bone,function(state,json){
+            if(state=='success'){
+                if(json&&json.retCode == '0'){
+                    alert("花费"+_point+"积分兑换"+_bone+"宝石成功！");
+                    $("#wrap1").removeClass("fn-hide");
+                    $("#wrap2").addClass("fn-hide");
+                }
+            }
+        })
+    })
+
+    $("#gotoBuy").click(function(){
+        $(".loading").addClass("fn-hide");
+        $("#wrap1").removeClass("fn-hide");
+        $("canvas").remove();
+        clearInterval(zInterval);
+    })
+
+    $(".back").click(function(){
+        $(".loading").removeClass("fn-hide");
+        $("#wrap1").addClass("fn-hide");
+        loadSnow();
+    })
+})
+
+function getLoading(){
+    $("#load1").fadeIn(3000);
+    setTimeout(function(){
+        $("#load1").fadeOut(1000);
+        $("#load2").fadeIn(2000);
+    }, 3000);
+    setTimeout(function(){
+        $(".meter").removeClass("fn-hide");
+        $(".meter").find("span").animate({"width": "30%"}, 1000)
+            .animate({"width": "55%"}, 1000)
+            .animate({"width": "90%"}, 4000)
+            .animate({"width": "100%"}, 1000, function(){
+                $("#load2, .meter").fadeOut(2000);
+                $("#load3").fadeIn(1000);
+                $("#gotoBuy").removeClass("fn-hide");
+                loadSnow();
+            });
+    }, 4000);
+}
+
+var zInterval;
+
+var SCREEN_WIDTH = window.innerWidth - 30;
+var SCREEN_HEIGHT = window.innerHeight - 30;
+
+var container;
+
+var particle;
+
+var camera;
+var scene;
+var renderer;
+
+var mouseX = 0;
+var mouseY = 0;
+
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = window.innerHeight / 2;
+
+var particles = []; 
+var particleImage = new Image();//THREE.ImageUtils.loadTexture( "img/ParticleSmoke.png" );
+particleImage.src = 'img/ParticleSmoke.png'; 
+
+
+function loadSnow() {
+
+    container = document.createElement('div');
+    document.body.appendChild(container);
+
+    camera = new THREE.PerspectiveCamera( 75, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000 );
+    camera.position.z = 1000;
+
+    scene = new THREE.Scene();
+    scene.add(camera);
+        
+    renderer = new THREE.CanvasRenderer();
+    renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+    var material = new THREE.ParticleBasicMaterial( { map: new THREE.Texture(particleImage) } );
+        
+    for (var i = 0; i < 500; i++) {
+
+        particle = new Particle3D( material);
+        particle.position.x = Math.random() * 2000 - 1000;
+        particle.position.y = Math.random() * 2000 - 1000;
+        particle.position.z = Math.random() * 2000 - 1000;
+        particle.scale.x = particle.scale.y =  1;
+        scene.add( particle );
+        
+        particles.push(particle); 
+    }
+
+    container.appendChild( renderer.domElement );
+
+
+    // document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+    // document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+    // document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+    
+    zInterval = setInterval( loop, 1000 / 20 );
+    
+}
+
+function onDocumentMouseMove( event ) {
+
+    mouseX = event.clientX - windowHalfX;
+    mouseY = event.clientY - windowHalfY;
+}
+
+function onDocumentTouchStart( event ) {
+
+    if ( event.touches.length == 1 ) {
+
+        event.preventDefault();
+
+        mouseX = event.touches[ 0 ].pageX - windowHalfX;
+        mouseY = event.touches[ 0 ].pageY - windowHalfY;
+    }
+}
+
+function onDocumentTouchMove( event ) {
+
+    if ( event.touches.length == 1 ) {
+
+        event.preventDefault();
+
+        mouseX = event.touches[ 0 ].pageX - windowHalfX;
+        mouseY = event.touches[ 0 ].pageY - windowHalfY;
+    }
+}
+
+//
+
+function loop() {
+
+for(var i = 0; i<particles.length; i++)
+    {
+
+        var particle = particles[i]; 
+        particle.updatePhysics(); 
+
+        with(particle.position)
+        {
+            if(y<-1000) y+=2000; 
+            if(x>1000) x-=2000; 
+            else if(x<-1000) x+=2000; 
+            if(z>1000) z-=2000; 
+            else if(z<-1000) z+=2000; 
+        }               
+    }
+
+    camera.position.x += ( mouseX - camera.position.x ) * 0.05;
+    camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
+    camera.lookAt(scene.position); 
+
+    renderer.render( scene, camera );
+
+    
+}
+</script>
+
+</body>
+</html>

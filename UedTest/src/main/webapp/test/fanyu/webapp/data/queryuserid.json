@@ -1,0 +1,54 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": "数据加载成功！！！",
+    "bean": {},
+    "beans": [
+        {
+            "DEPT_ID": "1000000000106",
+            "DIMSN_DATE": "2017-12-12 00:00:00",
+            "CRT_TIME": "2015-05-15 16:59:37.0",
+            "STAFF_TYPE_CD": "1003",
+            "PTY_NM": "程丹丹",
+            "PTY_NO": "X008614",
+            "CRT_APP_SYS_ID": "1001",
+            "STAFF_ID": "1000000000004",
+            "CRT_USER_ID": "superadmin",
+            "USER_ID": "U1000000000004",
+            "ENTRY_DATE": "2014-12-15 00:00:00",
+            "TELNUM": "18238810085"
+        },
+        {
+            "DEPT_ID": "1000000000106",
+            "CRT_TIME": "2015-05-15 16:59:37.0",
+            "STAFF_TYPE_CD": "1003",
+            "PTY_NM": "系统管理员",
+            "PTY_NO": "superadmin",
+            "STAFF_ID": "100000000000X",
+            "USER_ID": "U100000000000X",
+            "TELNUM": "13676917030",
+            "DIMSN_DATE": "2017-12-12 00:00:00",
+            "PRSN_ENCRG_CNTT": "生活赋予我们巨大的和无限高贵的礼品，这就是青春；充满着力量，充满着期待志愿，充满着求知和斗争的志向，充满着希望信心和青春.禁修改",
+            "CRT_APP_SYS_ID": "1001",
+            "CRT_USER_ID": "superadmin",
+            "ENTRY_DATE": "2014-12-15 00:00:00"
+        },
+        {
+            "DEPT_ID": "1000000000106",
+            "DIMSN_DATE": "2017-12-12 00:00:00",
+            "CRT_TIME": "2015-05-15 16:59:37.0",
+            "STAFF_TYPE_CD": "1003",
+            "PTY_NM": "申培峰",
+            "PTY_NO": "X006896",
+            "CRT_APP_SYS_ID": "1001",
+            "STAFF_ID": "1000000000035",
+            "CRT_USER_ID": "superadmin",
+            "USER_ID": "U1000000000035",
+            "ENTRY_DATE": "2014-12-15 00:00:00",
+            "TELNUM": "13703790294"
+        }
+    ],
+    "object": null
+}

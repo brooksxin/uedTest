@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>组织树修改</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/zTree/zTreeStyle.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/zTree/3.5.16/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="res/lib/zTree/3.5.16/jquery.ztree.excheck-3.5.js"></script>
+<script type="text/javascript" src="res/lib/zTree/3.5.16/jquery.ztree.exedit-3.5.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<!-- base64 -->
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/core-min.js"></script>
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/enc-base64-min.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+
+<style type="text/css">
+.ztree li span.button.switch.level0 {visibility:hidden; width:1px;}
+.ztree li ul.level0 {padding:0; background:none;}
+</style>
+</head>
+<body>
+<div class="openwin">
+
+	<div class="ztreeConfig">
+		<ul id="treeDemo" class="ztree"></ul>
+	</div>
+
+	<div class="bz_btn_list">
+		<a class="btn_normal fn-mr-20" href="#nogo" id="J_save"><em>保存</em></a>
+		<a class="btn_normal " href="#nogo" onclick="closeDialog();return false;"><em>关闭</em></a>
+	</div>
+</div>
+
+<script type="text/javascript" >
+var setting = {
+	view: {
+		expandSpeed:"",
+		addHoverDom: addHoverDom,
+		removeHoverDom: removeHoverDom, 
+		selectedMulti: false,
+		showIcon:true,
+		dblClickExpand: dblClickExpand
+	},
+	edit: {
+		enable: true,
+		showRemoveBtn: setRemoveBtn
+	},
+	data: {
+		simpleData: {
+			enable: true,
+			idKey: "id",
+			pIdKey: "pId"
+		}
+	},
+	callback: {
+		beforeRemove: beforeRemove,
+		beforeRename: beforeRename,
+		onClick:function(event,treeId,treeNode){
+			var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+			var nodes = treeObj.transformToArray(treeObj.getNodes());
+    		var remove = $("#treeDemo" + "_1_remove");
+    		remove.hide();
+		}
+	}
+};
+removeArr = [];
+function filter(treeId, parentNode, childNodes) {
+	if (!childNodes) return null;
+	for (var i=0, l=childNodes.length; i<l; i++) {
+		childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+	}
+	return childNodes;
+}
+function setRemoveBtn(treeId, treeNode) {
+	return !(treeNode.pId == null);
+}
+function dblClickExpand(treeId, treeNode) {
+	return treeNode.level > 0;
+}
+function beforeRemove(treeId, treeNode) {
+	if(confirm("确认删除 节点 -- " + treeNode.name + " 吗？")){
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+		zTree.selectNode(treeNode);
+		var data = {
+			"id":treeNode.id,
+			"pid":treeNode.pId,
+			"name":treeNode.name,
+			"flag":treeNode.flag
+		}
+		removeArr.push(data);
+		return true;
+	};
+	return false;
+}
+function beforeRename(treeId, treeNode, newName) {
+	if (newName.length == 0) {
+		result_prompt(2,"节点名称不能为空！");
+		return false;
+	}
+	if (newName.length > 20) {
+		result_prompt(2,"节点名称长度不能超过20个字符！");
+		return false;
+	}
+	return true;
+}
+
+var newCount = 1;
+function addHoverDom(treeId, zNodes) {
+	var sObj = $("#" + zNodes.tId + "_span");
+	if (zNodes.editNameFlag || $("#addBtn_"+zNodes.tId).length>0) return;
+	var addStr = "<span class='button add' id='addBtn_" + zNodes.tId
+		+ "' title='新增' onfocus='this.blur();'></span>";
+	sObj.after(addStr);
+	var btn = $("#addBtn_"+zNodes.tId);
+	if (btn) btn.bind("click", function(){
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+		zTree.addNodes(zNodes, {id:(100 + newCount), pId:zNodes.id, name:"新增节点" + (newCount++), isAdd:'true'});
+		return false;
+	});
+}; 
+function removeHoverDom(treeId, treeNode) {
+	$("#addBtn_"+treeNode.tId).unbind().remove();
+};
+
+var zNodes ="";
+$(function(){
+	var treeid = art.dialog.data("treeid");
+	var treename = art.dialog.data("name");
+	var str = "nodeId=" + treeid;
+
+	//$.PostJson("res/data/treeConfigMod.json",str,function(state,json){
+	$.PostJson(REQURLS.tree_upTreeNodesquery,str,function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+                zNodes = json.rows;
+            	$.fn.zTree.init($("#treeDemo"), setting,zNodes);
+            	var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+            	var nodes = treeObj.transformToArray(treeObj.getNodes());
+            	str1 = "";
+            	for(var i = 0; i < nodes.length; i++){
+            		str1 += nodes[i].id + nodes[i].pId + nodes[i].name;
+            	}
+            }else{
+                result_prompt(0,json.returnMessage||"获取组织树失败！");
+            }
+        }else{
+            result_prompt(0,"系统错误！");
+        }
+    });
+
+    $("#J_save").click(function(){
+    	var $btn=$(this);
+    	var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+		var nodes = treeObj.transformToArray(treeObj.getNodes());
+		str2 = "";
+    	for(var i = 0; i < nodes.length; i++){
+    		str2 += nodes[i].id + nodes[i].pId + nodes[i].name;
+    	}
+        if(str1 == str2){
+        	result_prompt(2,"未做任何修改！");
+        	return false;
+        }
+
+		var G_json = {},rows = [],removeRows = [];
+		for(var i = 0; i < nodes.length; i++){
+			var attr = {};
+			attr.id = nodes[i].id,
+			attr.pid = nodes[i].pId,
+			attr.name = nodes[i].name,
+			attr.isAdd = nodes[i].isAdd
+			rows.push(attr);
+		}
+		G_json.rows = rows;
+		for(var i = 0; i < removeArr.length; i++){
+			if(removeArr[i].flag == 1){
+				var attr = {};
+				attr.id = removeArr[i].id;
+				attr.pid = removeArr[i].pId;
+				attr.name = removeArr[i].name;
+				attr.flag = removeArr[i].flag;
+				removeRows.push(attr);
+			}
+		}
+		G_json.removeRows = removeRows;
+		var str = JSON.stringify(G_json);
+		
+		str = encodeURIComponent(str);
+        str = encodeBase64(str);
+
+        toggleButtonStyle($btn,true);
+		$.PostJson(REQURLS.tree_updTreeNodes,"updTreeJson="+str,function(state,json){
+			if(state=="success"){
+			    if(json&&json.returnCode=="1"){
+			        result_prompt(1,"修改成功");
+			        parent.gridReload("mytable");
+			    }else{
+			        result_prompt(0,json.returnMessage||"修改失败！");
+			    }
+			}else{
+			    result_prompt(0,"系统错误！");
+			}
+			toggleButtonStyle($btn,false);
+		}); 
+    })
+})
+
+</script>
+</body>
+
+</html>

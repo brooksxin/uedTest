@@ -1,0 +1,31 @@
+{
+	"returnCode": "0",
+	"returnMessage": "success",
+	"bean":{
+		"msisdn":"13676917030",
+		"cityCode":"0371",
+		"entDt":"2015.01.03",
+		"custBrandName":"全球通",
+		"custFamilyName":"钱大华",
+		"address":"河南省郑州市高新区科学大道长椿路029号",
+		"birthDt":"1990.01.01",
+		"subsStatType":"1010",
+		"unusualFlag":"0",
+		"stuFlag":"0",
+		"usimFlag":"0",
+		"custLevelName":"钻石卡",
+		"orgName":"",
+		"curValidCredits":"1000",
+		"termEqpmtId":"三星NOTE4",
+		"termUsedMons":"36",
+		"basicFeeName":"4G飞享188套餐",
+		"uniDataFeeCnt":"1",
+		"uniDataFeeAmt":"600",
+		"lastBillPeriod":"2015.01.01",
+		"lastBillCost":"400.00",
+		"meanTotalCost":"100.00",
+		"mean4gCost":"100.00",
+		"meanDataAmt":"500"
+
+	}
+}

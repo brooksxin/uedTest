@@ -1,0 +1,481 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>10085系统</title>
+    <link rel="stylesheet" href="../../css/common.css" /><link rel="stylesheet" href="../../css/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+
+
+
+</head>
+
+<body>
+
+    <!-- header start -->
+    <div class="header">
+        <div class="headerInner">
+            	<div class="taskArea">
+            		今日目标完成度：<em>8/10</em>&nbsp;&nbsp;本人排名：<em>8/72</em>&nbsp;&nbsp;小组排名：<em>2/8</em>
+            	</div>
+        </div>
+    </div>
+    <!-- header stop -->
+    
+
+
+
+    <div class="wrapper">
+    	
+        <div class="menu outCallMenu fn-clear">
+
+
+<div class="menuArea">
+	<ul>
+		<li><span class="stateTime">当前状态：<br/>整理 14:23</span></li>
+		<li id="btnCtAfterCallStatus" class="icon_outcall"><a onClick="openCustomMenuAction(this)" func="AiCtFBH.setAfterCallStatus()" class="disable" > <span class="icon icon1"></span> <span>整理</span> </a></li>
+		<li id="btnCtLogin" class="icon_outcall"><a onClick="openCustomMenuAction(this)" func="AiCtFBH.sign()"> <span class="icon icon2"></span> <span>签出</span> </a></li>
+		<li id="btnCtCallOut" class="icon_outcall"><a onClick="openCustomMenuAction(this)" func="AiCtFBH.dialOut()" > <span class="icon icon3"></span> <span>呼出</span> </a></li>
+		<li id="btnCtRelease" class="icon_outcall"><a onClick="openCustomMenuAction(this)" func="AiCtFBH.releaseCall()" > <span class="icon icon4"></span> <span>挂机</span> </a></li>
+		<li id="btnCtHold" class="icon_outcall widthAdd"><a onClick="openCustomMenuAction(this)" func="AiCtFBH.holdProxy()" > <span class="icon icon5"></span> <span>保持通话</span> </a></li>
+		<li id="btnCtFree" class="icon_outcall widthAdd"><a onClick="openCustomMenuAction(this)" func="AiCtFBH.sayFree()" > <span class="icon icon6"></span> <span>请求来话</span> </a></li>
+		<li id="btnCtACW" class="icon_outcall widthAdd"><a onClick="openCustomMenuAction(this)" func="AiCtFBH.sayACW()" > <span class="icon icon7"></span> <span>进整理态</span> </a></li>
+	</ul>
+</div>
+<!--            <div class="menuArea2">
+            	<div class="fn-clear">
+                 <ul>
+                    <li><a href="javascript:;"><i class="icon icon1"></i><span>整理</span></a></li>
+                    <li><a href="javascript:;"><i class="icon icon2"></i><span>签入</span></a></li>
+                    <li><a href="javascript:;"><i class="icon icon3"></i><span>呼出</span></a></li>
+                    <li><a href="javascript:;"><i class="icon icon4"></i><span>挂机</span></a></li>
+                    <li class="largeText"><a href="javascript:;"><i class="icon icon5"></i><span class="doubLine">保持通话<br /><em>12:04</em></span></a></li>
+                    <li class="largeText"><a href="javascript:;"><i class="icon icon6"></i><span>进整理态</span></a></li>
+                    <li class="largeText"><a href="javascript:;" class="disable"><i class="icon icon7"></i><span>请求来话</span></a></li>
+                </ul>
+                </div>
+            </div>-->
+            
+            <div class="callProcess">
+
+                <a href="javascript:;" class="selected"><h3>13676917030</h3><div class="callStates3">通话中</div></a>
+                <div class="callTips">10人等待接入...</div>
+            </div>
+        </div>
+
+
+
+       <!-- left start -->
+       	<div class="left">
+            <div class="leftInner" id="mainLeft">
+            	<div class="outCallLeft">
+
+
+
+<!--左侧来电号码-->
+    <div class="custNumber">
+        <div class="phoneNumberArea fn-clear">
+            <a href="javascript:;" class="phoneNumber">13676917030</a>
+            <!--当添加其它号码时代码改为
+            <a  href="javascript:;" class="phoneNumber_small">136...7030</a>
+            <a  href="javascript:;" class="phoneNumber_curren">13676917030</a>
+            -->
+        </div>
+        <a class="seeOtherNumber" href="javascript:;" onclick="showDom('.OtherNumber');$(this).toggleClass('seeOtherNumberSelected')">查找其它号码</a>
+        <div class="OtherNumber fn-hide">
+            <div class="keyTips fn-hide">您输入的电话号码不正确，请重新输入...</div>
+            <div class="otherPhone"><input type="text" class="otherPhoneInput" /><A class="normalBtn BGblue" href="javascript:;">查询</A></div>
+        </div>
+    </div>
+<!--左侧来电号码END-->
+
+
+
+<!--来电归属地-->
+    <div class="custInfo">
+    	<!-- 顾客标签 -->
+		<div class="custTag">
+			<span>黄牛</span><span>骚扰电话</span>
+		</div>
+        <div>
+            <div  class="attribution">
+                归属地：<span class="attributionValue">山东</span>
+                
+                     <!-- <a href="javascript:;" onclick="showDom('.seeOtherArea');$(this).toggleClass('otherAttributionSelected')" class="otherAttribution">其它地区</a> -->
+                               
+            </div>
+            <!-- 
+            <div class="seeOtherArea fn-hide">
+                <input type="text" class="subguessAttrib" />
+                <ul>
+                    <li><a href="javascript:;">北京</a></li>
+                    <li><a href="javascript:;">上海</a></li>
+                    <li><a href="javascript:;">广东</a></li>
+                    <li><a href="javascript:;">江苏</a></li>
+                    <li><a href="javascript:;">山东</a></li>
+                    <li><a href="javascript:;">河南</a></li>
+                </ul>
+            </div>
+             -->
+        </div>
+
+        <div class="promotion">
+        <!--没有可参加的营销活动请附加class="promotion bgRed"样式-->
+            <p>顾客可参加营销活动</p><div>2015.01.03-2015.04.30买酷派送100M流量</div>
+        </div>
+
+        <div class="custDetail">
+            <h1>钱大华</h1>
+            <div class="custDetailReal">实名认证 </div>
+            <div class="custDetailArea">
+                <label>客户级别：</label><span>全球通</span>
+                <label>当前套餐：</label><span>4G飞享188套餐</span>
+                <label>当前手机：</label><span>三星NOTE3</span>
+                <label>4G用户：</label><span>是</span>
+                <label>月均流量：</label><span>1GB</span>
+                <label>月均话费：</label><span>300.00元</span>
+            </div>
+            <div class="custDetailMore"><a href="javascript:;">更多信息</a></div>
+        </div>
+    </div>
+
+<!--订单历史-->
+    <div class="historyList" style="z-index: 170">
+            <h1>订单历史</h1>
+            <ul class="listArea">
+                <li><a href="javascript:;">[0210]三星NOTE3</a></li>
+                <li><a href="javascript:;">[0210]三星NOTE3</a></li>
+            </ul>
+            <div class="historyListMore">
+                <a href="javascript:;">还有2条</a>
+            </div>
+    </div>
+
+
+<!--接触历史-->
+    <div class="historyList" style="z-index: 160">
+            <h1>接触历史</h1>
+            <ul class="listArea">
+                <li><a href="javascript:;">[0210]A20120通话3'20</a></li>
+            </ul>
+            <div class="historyListMore">
+                <a href="javascript:;">还有2条</a>
+            </div>
+    </div>
+
+
+<!--预约历史-->
+    <div class="historyList" style=" z-index: 150">
+            <h1>接触历史</h1>
+            <ul class="listArea">
+                <li><a href="javascript:;">[0210]A20120通话3'20</a></li>
+            </ul>
+            <div class="historyListMore">
+                <a href="javascript:;">还有2条</a>
+            </div>
+    </div>
+    
+<!--转接按钮-->
+<div class="changeBtn" style=" z-index: 140">
+	<div class="normalBtnArea fn-center"><a href="javascript:;" class="normalBtn BGgray">转接</a></div>
+</div>
+
+
+                </div>
+            </div>
+            
+            <div class="middle" id="mainMiddle">&nbsp;</div>
+            
+        </div><!-- left END -->
+        
+        <!-- right start -->
+        <div class="right" id="mainRight" style="overflow:auto;*position:relative">
+            <div id="mainRight_child" style="height:100%;">
+            	
+
+
+
+
+
+<!-- 话务右侧内容区域开始 -->
+<div class="outCallRight_Container">
+
+    <div class="productsFilter">
+        <div class="filterTitle fn-clear">
+            <div class="tabsBtn"><a href="javascript:;" class="normalBtn BGgray">TA关注的(2)</a><a href="javascript:;" class="normalBtn BGblue">对比(2)</a></div>
+            <div class="tabs">
+
+            <!-- ui-tab  -->
+            <div class="ui-tab">
+                <ul class="ui-tab-items">
+                    <li class="ui-tab-item ui-tab-item-current">
+                        <a href="javascript:;">终端业务</a>
+                    </li>
+                    <li class="ui-tab-item">
+                        <a href="javascript:;">话费和套餐业务</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- ui-tab  -->
+
+            </div>
+        </div>
+
+        <div class="productFilter">
+            <div class="filterResult">
+                <!--点击筛选时，除了将productsFilterMore展示外，还请给A链接附加openMore样式-->
+                <a onclick="showDom('#filterMore');$(this).toggleClass('openMore')" href="###"  class="filterBtn">筛选</a>
+                <span class="filterLabel">排序：</span>
+                <span class="filterPrice">价格<a href="javascript:;" class="sortUp">&nbsp;</a></span>
+                <span class="filterStock">库存<a href="javascript:;" class="sortDown">&nbsp;</a></span>
+                <span class="filterSales">销量<a href="javascript:;">&nbsp;</a></span>
+            </div>
+            <div class="keyWordEnter"><input type="text" placeholder="输入关键字检索" class="keyWord" /></div>
+        </div>
+
+
+        <!--更多筛选条件开始,默认隐藏-->
+        <div id="filterMore" class="productsFilterMore fn-hide">
+
+            <div class="filterMoreArea">
+                <div class="searchType fn-clear">
+                    <dl>
+                        <dt>卖点：</dt>
+                        <dd>
+                            <ul>
+                                <li><a class="click" href="#">全部</a></li>
+                                <li><a href="#">超长待机</a></li>
+                                <li><a href="#">大屏幕</a></li>
+                                <li><a href="#">拍照效果好</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+
+                <div class="searchType fn-clear">
+                    <dl>
+                        <dt>品牌：</dt>
+                        <dd>
+                            <ul>
+                                <li><a class="click" href="#">全部</a></li>
+                                <li><a href="#">苹果</a></li>
+                                <li><a href="#">华为</a></li>
+                                <li><a href="#">酷派</a></li>
+                                <li><a href="#">三星</a></li>
+                                <li><a href="#">OPPO</a></li>
+                                <li><a href="#">其它</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+
+                <div class="searchType fn-clear">
+                    <dl>
+                        <dt>价格区间：</dt>
+                        <dd>
+                            <ul>
+                                <li><a class="click" href="#">全部</a></li>
+                                <li><a href="#">1000以下</a></li>
+                                <li><a href="#">1000-1999</a></li>
+                                <li><a href="#">2000-2999</a></li>
+                                <li><a href="#">3000-3999</a></li>
+                                <li><a href="#">4000-4999</a></li>
+                                <li><a href="#">5000以上</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+
+                <div class="searchType fn-clear">
+                    <dl>
+                        <dt>屏幕：</dt>
+                        <dd>
+                            <ul>
+                                <li><a class="click" href="#">全部</a></li>
+                                <li><a href="#">4'以下</a></li>
+                                <li><a href="#">4'-4.9'</a></li>
+                                <li><a href="#">5'-5.9'</a></li>
+                                <li><a href="#">6'以上</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+
+            </div>
+        </div>
+        <!--更多筛选条件END-->
+
+    </div>
+
+
+<!-- 展示终端内容区域开始 -->
+    <div class="productsList" id="easyTab_1">
+        <div class="fn-clear">
+
+            <div class="productsItem">
+                <div class="fn-clear">
+                    <div class="productPic"><img src="productTemp.gif" /></div>
+                    <div class="productInfo">
+                        <h4>Iphone 6 plus 16G黑色机身</h4>
+                        <div class="productPrice">价格：<span>&yen;1999.00</span></div>
+
+                        <div class="stock">库存：<span>32</span></div>
+                    </div>
+                </div>
+                <div class="productProcess"><a class="formLink" href="#">取消对比</a><span>|</span><a class="formLink" href="#">取消对比</a><a class="normalBtn BGblue" href="#">立即购买</a></div>
+            </div>
+
+            <div class="productsItem">
+                <div class="fn-clear">
+                    <div class="productPic"><img src="productTemp.gif" /></div>
+                    <div class="productInfo">
+                        <h4>Iphone 6 plus 16G黑色机身</h4>
+                        <div class="productPrice">价格：<span>&yen;1999.00</span></div>
+
+                        <div class="stock">库存：<span>32</span></div>
+                    </div>
+                </div>
+                <div class="productProcess"><a class="formLink" href="#">取消对比</a><span>|</span><a class="formLink" href="#">取消对比</a><a class="normalBtn BGblue" href="#">立即购买</a></div>
+            </div>
+
+            <div class="productsItem">
+                <div class="fn-clear">
+                    <div class="productPic"><img src="productTemp.gif" /></div>
+                    <div class="productInfo">
+                        <h4>Iphone 6 plus 16G黑色机身</h4>
+                        <div class="productPrice">价格：<span>&yen;1999.00</span></div>
+
+                        <div class="stock">库存：<span>32</span></div>
+                    </div>
+                </div>
+                <div class="productProcess"><a class="formLink" href="#">取消对比</a><span>|</span><a class="formLink" href="#">取消对比</a><a class="normalBtn BGblue" href="#">立即购买</a></div>
+            </div>
+
+            <div class="productsItem">
+                <div class="fn-clear">
+                    <div class="productPic"><img src="productTemp.gif" /></div>
+                    <div class="productInfo">
+                        <h4>Iphone 6 plus 16G黑色机身</h4>
+                        <div class="productPrice">价格：<span>&yen;1999.00</span></div>
+
+                        <div class="stock">库存：<span>32</span></div>
+                    </div>
+                </div>
+                <div class="productProcess"><a class="formLink" href="#">取消对比</a><span>|</span><a class="formLink" href="#">取消对比</a><a class="normalBtn BGblue" href="#">立即购买</a></div>
+            </div>
+
+            <div class="productsItem">
+                <div class="fn-clear">
+                    <div class="productPic"><img src="productTemp.gif" /></div>
+                    <div class="productInfo">
+                        <h4>Iphone 6 plus 16G黑色机身</h4>
+                        <div class="productPrice">价格：<span>&yen;1999.00</span></div>
+
+                        <div class="stock">库存：<span>32</span></div>
+                    </div>
+                </div>
+                <div class="productProcess"><a class="formLink" href="#">取消对比</a><span>|</span><a class="formLink" href="#">取消对比</a><a class="normalBtn BGblue" href="#">立即购买</a></div>
+            </div>
+
+            <div class="productsItem">
+                <div class="fn-clear">
+                    <div class="productPic"><img src="productTemp.gif" /></div>
+                    <div class="productInfo">
+                        <h4>Iphone 6 plus 16G黑色机身</h4>
+                        <div class="productPrice">价格：<span>&yen;1999.00</span></div>
+
+                        <div class="stock">库存：<span>32</span></div>
+                    </div>
+                </div>
+                <div class="productProcess"><a class="formLink" href="#">取消对比</a><span>|</span><a class="formLink" href="#">取消对比</a><a class="normalBtn BGblue" href="#">立即购买</a></div>
+            </div>
+
+            <div class="productsItem">
+                <div class="fn-clear">
+                    <div class="productPic"><img src="productTemp.gif" /></div>
+                    <div class="productInfo">
+                        <h4>Iphone 6 plus 16G黑色机身</h4>
+                        <div class="productPrice">价格：<span>&yen;1999.00</span></div>
+
+                        <div class="stock">库存：<span>32</span></div>
+                    </div>
+                </div>
+                <div class="productProcess"><a class="formLink" href="#">取消对比</a><span>|</span><a class="formLink" href="#">取消对比</a><a class="normalBtn BGblue" href="#">立即购买</a></div>
+            </div>
+
+            <div class="productsItem">
+                <div class="fn-clear">
+                    <div class="productPic"><img src="productTemp.gif" /></div>
+                    <div class="productInfo">
+                        <h4>Iphone 6 plus 16G黑色机身</h4>
+                        <div class="productPrice">价格：<span>&yen;1999.00</span></div>
+
+                        <div class="stock">库存：<span>32</span></div>
+                    </div>
+                </div>
+                <div class="productProcess"><a class="formLink" href="#">取消对比</a><span>|</span><a class="formLink" href="#">取消对比</a><a class="normalBtn BGblue" href="#">立即购买</a></div>
+            </div>
+
+        </div>
+        
+	    <!--翻页及功能按钮区域开始-->
+	    <DIV class="amount-bottom">
+	        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+	          <tr>
+	            <td>
+	                <DIV class="fn-clear action-other  action-other-show ">
+	                        <DIV id=Pagination class="page pagination fn-right"> </DIV>
+	                        <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+	                </DIV></td>
+	          </tr>
+	        </table>
+	    </DIV>    
+  
+    </div>
+<!-- 展示终端内容区域END -->
+
+
+    <!-- 话费和套餐业务内容区域开始 -->
+    <div id="easyTab_2" class="fn-hide">话费和套餐业务内容未确定</div><!-- 话费和套餐业务内容区域END -->
+
+</div>
+<!-- 话务右侧内容区域END -->
+
+
+
+
+          </div>
+        </div>
+        <!-- right stop -->
+
+    </div>
+    
+    
+<script src="../../lib/jquery/1.8.1/jquery.js"></script>
+<script src="../../lib/json2/1.0.0/json2.js"></script>
+<script src="../../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../../lib/handlebars/1.3.0/helpers.js"></script>
+<script src="../../lib/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="../../lib/blockUI/2.64/jquery.blockUI.js"></script>
+<script src="../../common/frameInit.js"></script>
+<script src="../../lib/dialog/4.1.7/artDialog.js"></script>
+<script src="../../lib/dialog/4.1.7/iframeTools.js"></script>
+<script src="../../common/config.js"></script>
+<script src="../../common/common.js"></script>    
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+
+		
+			
+    });
+    
+    function showDom(domTag){
+    	$(domTag).toggle();        
+    }
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+	"returnCode": "0",
+	"rerturnMessage": "success",
+	"bean":{
+		"STAFF_ID":"1001",
+		"STAFF_NAME":"张三",
+		"SALE_VOLUME":"20",
+		"RANK":"6",
+		"False":"43",//首页左上区域中的“今日目标数量”,
+		"STAFF-ALL-COUNTS":"100"
+	},
+	"beans":[ 
+		{
+			"STAFF_ID":"1001",
+			"STAFF_NAME":"张三",
+			"SALE_VOLUME":"100",
+			"RANK":"1",
+			"STAFF-ALL-COUNTS":"100"
+		},
+		{
+			"STAFF_ID":"1001",
+			"STAFF_NAME":"张三",
+			"SALE_VOLUME":"90",
+			"RANK":"2",
+			"STAFF-ALL-COUNTS":"100"
+		},
+		{
+			"STAFF_ID":"1001",
+			"STAFF_NAME":"张三",
+			"SALE_VOLUME":"80",
+			"RANK":"3",
+			"STAFF-ALL-COUNTS":"100"
+		}
+	],
+}

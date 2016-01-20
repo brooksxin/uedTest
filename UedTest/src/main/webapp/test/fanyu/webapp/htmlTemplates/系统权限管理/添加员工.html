@@ -1,0 +1,102 @@
+      <!DOCTYPE html>
+      <html>
+      <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>添加员工</title>
+      <#include "../../tpl/res_css.tpl" />
+      <body>
+      <div class="formItem">
+         
+                <div class="titleArea">
+                    <h2>编辑员工信息</h2>
+                </div>
+         <div class="formArea">
+                <table class="form_table">
+                                <tbody>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 员工编号</label></td>
+                                        <td width=""><input class="FormInputText width100" type="text" value="X10085"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span>姓名</label></td>
+                                        <td width=""><input class="FormInputText width100" type="text" value="黄厚生"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span>所属部门</label></td>
+                                        <td width="">部门：洛阳呼叫中心 > 外呼一部 > 呼叫一组 <a href="###">修改</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 员工类型</label></td>
+                                        <td width="">
+                                             <select class="FormInputText width100">
+                                                 <option>语音</option>
+                                                 <option>众包</option>
+                                                 <option>O2O</option>
+                                             </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span>证件类型</label></td>
+                                        <td width="">
+                                             <select class="FormInputText width100">
+                                                 <option>请选择</option>
+                                                 <option>身份证</option>
+                                                 <option>驾照</option>
+                                             </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 证件号码</label></td>
+                                        <td><input class="FormInputText width100" type="text" value="1234567890"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span>手机号码</label></td>
+                                        <td width=""><input class="FormInputText width100" type="text" value="13812345678"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription">电子邮箱</label></td>
+                                        <td width=""><input class="FormInputText width100" type="text" value="huanghousheng@139.com"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription">入职时间</label></td>
+                                        <td width=""><input class="FormInputText width100 Wdate" type="text"/></td>
+                                    </tr>
+                                </tbody>
+                </table>
+                <hr/>
+                <div class="formBtnArea">
+                      <table width="100%">
+                        <tr>
+                          <td>
+                            <div class="normalBtnArea fn-center">
+                                <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" >下一步</a>
+                            </div>
+                          </td>
+                          <td>
+                              <div class="normalBtnArea fn-right">
+                                <a href="#" class="formLink"><span>取消</span></a>
+                              </div>
+                          </td>
+                        </tr>
+                      </table>
+                </div>
+                                                 
+      </div>
+      
+   </div>   
+      
+      
+      
+      
+      
+      
+      <#include "../../tpl/res_js.tpl" />    
+      <script type="text/javascript">
+          //页面加载完开始执行
+          $(document).ready(function () {
+              //初始化函数
+          });
+      </script>
+      </body>
+      </html>

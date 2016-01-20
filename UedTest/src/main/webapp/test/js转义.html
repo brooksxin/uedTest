@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<link rel="stylesheet" type="text/css" href="alice.css">
+<script src="jquery.js" type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+
+<textarea id="v1" style="width: 80%; height: 300px"></textarea>
+<button id="btn" value="转换" style="width: 80%; height: 50px;">转换</button>
+<textarea id="v2" style="width: 80%; height: 300px"></textarea>
+
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(function(){
+		$("#v2").val(html_encode($("#v1").val()))
+	})
+});
+
+//html转义
+function html_encode(str){   
+  var s = "";   
+  if (str.length == 0) return "";   
+  s = str.replace(/&/g, "&gt;");   
+  s = s.replace(/</g, "&lt;");   
+  s = s.replace(/>/g, "&gt;");   
+  s = s.replace(/ /g, "&nbsp;");   //看情况是否需要转义空格
+  s = s.replace(/\'/g, "&#39;");   
+  s = s.replace(/\"/g, "&quot;");   
+  s = s.replace(/\n/g, "<br>");   
+  return s;   
+}   
+
+//反转义
+function html_decode(str){   
+  var s = "";   
+  if (str.length == 0) return "";   
+  s = str.replace(/&gt;/g, "&");   
+  s = s.replace(/&lt;/g, "<");   
+  s = s.replace(/&gt;/g, ">");   
+  s = s.replace(/&nbsp;/g, " ");   
+  s = s.replace(/&#39;/g, "\'");   
+  s = s.replace(/&quot;/g, "\"");   
+  s = s.replace(/<br>/g, "\n");   
+  return s;   
+}
+
+</script>
+</body>
+</html>

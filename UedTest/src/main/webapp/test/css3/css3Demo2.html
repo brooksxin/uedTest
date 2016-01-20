@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="../icon.jpg">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>css3-demo-伪类</title>
+
+<style type="text/css">
+/*
+ 其中E为元素;pseudo-class为伪类名称;property是css的属性;value为css的属性值
+*E:pseudo-class {property:value}
+ a:link {color:red;}
+*E.class:pseudo-class{property:value}
+ a.selected:hover {color: blue;}
+*/
+body{
+	width: 900px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+	height: 20px;
+}
+.demo {
+	border: 1px solid #ccc;
+	padding: 10px;
+	line-height: 20px;
+}
+.demo ul{
+	overflow: hidden;
+}
+.demo li {
+	border: 1px solid #ccc;
+	padding: 2px;
+	float: left;
+	margin-right:4px;
+	list-style-type: none;
+}
+.demo a {
+	float: left;
+	display: block;
+	width: 20px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	text-align: center;
+	background: #f36;
+	color: green;
+	text-decoration: none;
+}
+
+/*
+*一、动态伪类
+*爱恨原则LoVe/HAte,也就是Link--visited--hover--active。
+*/
+.demo a:link {color:gray;}/*链接没有被访问时前景色为灰色*/
+.demo a:visited{color:yellow;}/*链接被访问过后前景色为黄色*/
+.demo a:hover{color:green;}/*鼠标悬浮在链接上时前景色为绿色*/
+.demo a:active{color:blue;}/*鼠标点中激活链接那一下前景色为蓝色*/
+/*
+*二、UI元素状态伪类
+*我们把":enabled",":disabled",":checked"伪类称为UI元素状态伪类，这些主要是针对于HTML中的Form元素操作。
+*/
+input[type="text"]:disabled {border:1px solid #999;background-color: #fefefe;}
+/*
+*三、CSS3的:nth选择器
+:fist-child选择某个元素的第一个子元素；
+:last-child选择某个元素的最后一个子元素；
+:nth-child()选择某个元素的一个或多个特定的子元素；
+	length可改n不能改！"n"只能是"n"，不能使用其他字母代替，不然会没有任何效果的。
+	length 表示第几个！只能为整数。
+	:nth-child(length);参数是具体数字
+	:nth-child(n);参数是n,n从0开始计算
+	:nth-child(n*length)/*n的倍数选择，n从0开始算
+	:nth-child(n+length);/*选择大于length后面的元素
+	:nth-child(-n+length)/*选择小于length前面的元素
+	:nth-child(n*length+1);/*表示隔几选一
+	:nth-child(2n)也等于":nth-child(even)"效果。
+	:nth-child(2n+1)也等于":nth-child(odd)"效果。
+
+:nth-last-child()选择某个元素的一个或多个特定的子元素，从这个元素的最后一个子元素开始算；
+:nth-of-type()选择指定的元素；
+:nth-last-of-type()选择指定的元素，从元素的最后一个开始计算；
+:first-of-type选择一个上级元素下的第一个同类子元素；
+:last-of-type选择一个上级元素的最后一个同类子元素；
+
+:only-child选择的元素是它的父元素的唯一一个了元素；
+:only-of-type选择一个元素是它的上级元素的唯一一个相同类型的子元素；
+:empty是用来选择没有任何内容的元素。
+	这里没有内容指的是一点内容都没有，哪怕是一个空格，比如说，你有三个段落，其中一个段落什么都没有，完全是空的，你想这个p不显示，那你就可这样来写：p:empty {display: none;}
+*/
+.demo li:first-child {background: green; border: 1px dotted blue;}
+.demo li:nth-child(3) {background: lime;}
+.demo li:nth-child(4n+1) {background: black;}/*隔3变色*/
+.demo .post p {background: lime;}
+.demo .post p:only-child {background: red;}
+
+/*
+*三、否定选择器（:not）
+*否定选择器和jq中的:not选择器一模一样
+*/
+input:not([type="submit"]) {border: 1px solid red;}
+
+/*
+*四、伪元素
+*CSS中的伪元素大家以前看过：:first-line,:first-letter,:before,:after;
+ 那么在CSS3中，在以前的基础上增加了一个“：”也就是现在变成了“::first-letter,::first-line,::before,::after”
+ 另外他还增加了一个“::selection”,两个“：：”和一个“：”css3中主要用来区分伪类和伪元素。
+ 到目前来说，这两种方式都是被接受的，也就是说不管使用哪种写法所起的作用都是一样的，只是一个书写格式不同而以。
+
+*::first-line选择元素的第一行，比如说改变每个段落的第一行文本的样式，我们就可以使用这个
+	p::first-line {font-weight:bold;}
+*::first-letter选择文本块的第一个字母，除非在同一行里面包含一些其它元素，不过这个主要运用于段落排版上多，比如说首字下沉，
+	p::first-letter {font-size: 56px;float:left;margin-right:3px;}
+*::before和::after这两个主要用来给元素的前面或后面插入内容，这两个常用"content"配合使用，见过最多的就是清除浮动，
+	.clearfix:before,.clearfix:after {
+    	content: ".";
+     	display: block;
+     	height: 0;
+     	visibility: hidden;
+  	}
+ 	.clearfix:after {clear: both;}
+ 	.clearfix {zoom: 1;}
+*::selection用来改变浏览网页选中文的默认效果
+	浏览器对选中的文本默认样式都是统一的，Windows下是一个深蓝色的背景，白字的前景，而在Mac下是一个淡蓝色背景，白色字体。
+	“::selection”只能设置两个属性，一个就是background,另一个就是color属性，设置其他属性是没有任何效果的。
+	Webkit,Opera9.5+,Ie9+
+    ::selection {
+		background: 颜色值；
+		color:颜色值；
+    }
+    Mozilla Firefox
+    ::-moz-selection {
+		background: 颜色值；
+		color:颜色值；
+    }
+*/
+
+/*
+*选择器的优化
+*浏览器读取你的选择器，遵循的原则是从选择器的右边到左边读取。换句话说，浏览器读取选择器的顺序是由右到左进行。
+ div.nav > ul li a[title]
+ 浏览器首先会尝试在你的HTML标签中寻找“a[title]”元素，接着在匹配“li和ul”，最后在去匹配“div.nav”。
+ 选择器的最后一部分（在这个例子中就是a[title]部分）被称为“关键选择器”，它将决定你的选择器的效率如何？是高还是低。
+
+*越具体的关键选择器，其性能越高
+ id选择器（#myid）
+ 类选择器（.myclassname）
+ 标签选择器（div,h1,p）
+ 相邻选择器（h1+p）
+ 子选择器（ul > li）
+ 后代选择器（li a）
+ 通配符选择器（*）
+ 属性选择器（a[rel="external"]）
+ 伪类选择器（a:hover,li:nth-child）
+
+*div #myid 的效率要比下面的高：#myid div
+*在类名或ID名前面加上标签也会致使选择器效率变低的
+ #myid或者.myclassname的效率是高于：p#myid或p.myclassname的。
+
+*建议：
+ 避免普遍规则
+ 不要在ID选择器前加标签名或类名
+ 不要在类名选择器前加标签名
+ 尽可能使用具体的类别
+ 避免使用后代选择器
+ 标签分类规则中不应该包含一个子选择器
+ 子选择器的问题
+ 借助相关继承关系
+ 使用范围内的样式表
+*/
+
+</style>
+
+</head>
+<body>
+	<div class="demo clearfix">
+	  	<ul class="clearfix">
+			<li class="first links odd" id="first"><a href="">1</a></li>
+			<li class="links even"><a href="">2</a></li>
+			<li class="links odd"><a href="">3</a></li>
+			<li class="links even"><a href="">4</a></li>
+			<li class="links odd"><a href="">5</a></li>
+			<li class="links even"><a href="">6</a></li>
+			<li class="links odd"><a href="">7</a></li>
+			<li class="links even"><a href="">8</a></li>
+			<li class="links odd"><a href="">9</a></li>
+			<li class="links even last" id="last"><a href="">10</a></li>
+		</ul>
+
+		<div class="post">
+	    	<p>Lorem ipsum dolor sit amet, consectetur</p>
+	    	<p>Lorem ipsum dolor sit amet, consectetur</p>
+	    </div>
+	    <div class="post">
+	    	<p>Lorem ipsum dolor sit amet, consectetur</p>
+	    </div>
+	</div>
+</body>
+</html>

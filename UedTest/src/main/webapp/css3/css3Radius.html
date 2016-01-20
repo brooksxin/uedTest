@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="../zw.ico">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>css3-radius</title>
+
+<style type="text/css">
+/*
+*
+*/
+body{
+	width: 900px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+.pcontent{
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: #002b36;
+	color: #839496;
+}
+.demo {
+  	width: 150px;
+  	height: 80px;
+  	border: 2px solid #f36;
+  	background: #ccc;
+  	-webkit-border-radius: 15px;
+  	-moz-border-radius: 15px;
+  	-o-border-radius: 15px;
+  	border-radius: 15px;
+  	/*“/”前是指圆角的水平半径，而“/”后是指圆角的垂直半径，他们两都遵循TRBL的顺序原则。*/
+}
+.border-big {
+	width: 150px;
+	height: 80px;
+   	border: 15px solid green;
+   	border-radius: 15px;
+}
+.border-small {
+	width: 150px;
+	height: 80px;
+   	border: 15px solid green;
+   	border-radius: 25px;
+}
+
+.member-list{
+	position: relative;
+}
+.member-list a{
+	float: left;
+	height: 50px;
+	width: 50px;
+	overflow: hidden;
+	margin: 5px 5px 0 0;
+	position: relative;
+}
+.bg-blink{
+	position: absolute;
+	left: -100%;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	transform: skewx(-25deg);
+	-o-transform: skewx(-25deg);
+	-moz-transform: skewx(-25deg);
+	-webkit-transform: skewx(-25deg);
+	background-image: -webkit-linear-gradient(0deg,rgba(255,255,255,0),rgba(255,255,255,.5),rgba(255,255,255,0));
+}
+
+::-webkit-scrollbar-track-piece{width:15px;border-right:1px solid #EEE;border-left:1px solid #e4e4e4;background-color:#f0f0f0;background-image:-webkit-linear-gradient(left,#f0f0f0,#FFF)}
+::-webkit-scrollbar{width:15px;height:15px}
+::-webkit-scrollbar-thumb{position:relative;min-height:25px;border-radius: 50px;background:linear-gradient(#F36639,#efcc43) repeat scroll 0 0 #F36639;background-clip:padding-box}
+::-webkit-scrollbar-thumb:vertical{border-top:0 solid transparent;border-right:2px solid transparent;border-bottom:0 solid transparent;border-left:3px solid transparent}
+::-webkit-scrollbar-thumb:horizontal{border-top:3px solid transparent;border-right:0 solid transparent;border-bottom:2px solid transparent;border-left:0 solid transparent}
+/** 圆圈加载 **/
+#circle{ background-color:rgba(0, 0, 0, 0); border:5px solid rgba(10, 10, 10, 0.9); opacity:.9; border-right:5px solid rgba(0, 0, 0, 0); border-left:5px solid rgba(0, 0, 0, 0); border-radius:50px; box-shadow:0 0 35px #808080; width:60px; height:60px; margin:0 auto; position:fixed; left:30px; bottom:30px; -moz-animation:spinPulse 1s infinite linear; -webkit-animation:spinPulse 1s infinite linear; -o-animation:spinPulse 1s infinite linear; -ms-animation:spinPulse 1s infinite linear; }
+#circle1{ background-color:rgba(0, 0, 0, 0); border:6px solid rgba(20, 20, 20, 0.9); opacity:.9; border-left:6px solid rgba(0, 0, 0, 0); border-right:6px solid rgba(0, 0, 0, 0); border-radius:50px; box-shadow:0 0 15px #202020; width:40px; height:40px; margin:0 auto; position:fixed; left:39px; bottom:39px; -moz-animation:spinoffPulse 1s infinite linear; -webkit-animation:spinoffPulse 1s infinite linear; -o-animation:spinoffPulse 1s infinite linear; -ms-animation:spinoffPulse 1s infinite linear; }
+#circletext{ width:46px; height:20px; margin:0 auto; position:fixed; left:46px; bottom:53px; }
+</style>
+
+</head>
+<body>
+	<div class="demo"></div>
+	<br />
+	<div class="border-big"></div>
+	<br />
+	<div class="border-small"></div>
+	<p class="pcontent">
+		border-radius的内径值是等于外径值减去边框厚度值，
+		当他们的值为负时，内径默认为0,最前面讲border-radius取值时就说过其值不能为负值。
+		同时也说明border-radius的内外曲线的圆心并不一定是一致的。
+		只有当边框厚度为0时，我们内外曲线的圆心才会在同一位置。
+	</p>
+	<br />
+
+	<div class="member-list">
+		<a href="javascript:;">
+			<img src="../zw.ico">
+			<i class="bg-blink"></i>
+		</a>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<div id="circle"></div>
+	<div id="circletext">完成了</div>
+	<div id="circle1"></div>
+</body>
+</html>

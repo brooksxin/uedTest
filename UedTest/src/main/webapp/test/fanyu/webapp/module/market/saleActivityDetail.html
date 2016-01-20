@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>营销活动详情</title>
+    <#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<div class="promotionArea">
+    <div class="promotionTitle" >
+		<span id="J_actName"></span>
+       <div class="nextTAskBtn">
+            <a href="#" class="normalBtn BGblue" onclick="NextTask()" id="NextTask">营销结束</a>
+        </div>
+    </div>
+    
+    <div class="promotionBgArea">
+        <div class="promotionBg">
+            <div class="promotionTitleTxt" id="J_cmpgnNm"></div>
+            <div class="promotionDate" id="J_date"></div>
+            <div class="promotionImg">
+                <img src="#" width="120" height="244" id="J_largepic"/>
+                <input type="text" id="RSVT_ODR_MCDS_UNIT_ID" value="" style="display: none;"/>
+                <input type="text" id="CMPGN_TYPE_CD" value="" style="display: none;"/>
+            </div>
+        </div>
+    </div>
+    
+    <div class="promotionContent">
+        <h2>营销话术</h2>
+        <div class="promotionText" id="J_capgnDesc"></div>
+    </div>
+
+<!--
+    <div class="promotionProduct">
+        <div class="productPic">
+            <img src="#" width="50"  id="J_smallpic"/>
+        </div>
+        <div class="productDetail">
+            <h2 id="J_bbbctName"></h2>
+            <div class="productPrice">
+                &yen;<em id="UPRC"></em><span>京东：&yen;<em id="jdPrice"></em></span>
+            </div>
+            
+            <div class="productDetailItem fn-clear" id="prodContainer">
+                <ul>
+                    <li><span class="detailLabelTxt" style="width:30px">尺寸</span><span
+                            class="labelContent" id="J_size" style="width:105px"></span></li>
+                    <li><span class="detailLabelTxt" style="width:40px">分辨率</span><span
+                            class="labelContent" id="J_srcRatio" style="width:93px"></span></li>
+                    <li><span class="detailLabelTxt"style="width:55px">主摄像头</span><span
+                            class="labelContent" id="J_cameraAfter" style="width:80px"></span></li>
+                    <li><span class="detailLabelTxt" style="width:30px">续航</span><span
+                            class="labelContent" id="J_standbyTime" style="width:100px"></span></li>
+                    <li><span class="detailLabelTxt" style="width:55px">CPU型号</span><span
+                            class="labelContent" id="J_cpumode"  style="width:80px"></span></li>
+                    <li><span class="detailLabelTxt" style="width:30px">RAM</span><span
+                            class="labelContent" id="J_runMemry" style="width:106px"></span></li>
+                    <li><span class="detailLabelTxt" style="width:30px">ROM</span><span
+                            class="labelContent" id="J_mchnMemry" style="width:106px"></span></li>
+                </ul>
+            </div>
+        	
+        </div>
+    </div>
+-->
+    
+		<!-- 展示终端内容区域开始 -->
+		<div class="productsList">
+			<div class="fn-clear">
+			
+				<div class="productsItem">
+					<div class="fn-clear">
+						<div class="productPic"><img src="productTemp.gif" /></div>
+						<div class="productInfo">
+							<h4 id="J_bbbctName"></h4>
+							<div class="productPrice">价格：<span >&yen;<span id="UPRC"></span></span></div>
+							<div class="stock">库存：<span id="SKU_QTY"></span></div>
+						</div>
+					</div>
+					<div class="productProcess"><a class="normalBtn BGblue" href="#">立即购买</a></div>
+				</div>
+				
+				<!-- <div class="productsItem">
+					<div class="fn-clear">
+						<div class="productPic"><img src="productTemp.gif" /></div>
+						<div class="productInfo">
+							<h4 >Iphone 6 plus 16G黑色机身</h4>
+							<div class="productPrice">价格：<span>&yen;1999.00</span></div>
+							<div class="stock">库存：<span>32</span></div>
+						</div>
+					</div>
+					<div class="productProcess"><a class="normalBtn BGblue" href="#">立即购买</a></div>
+				</div> -->
+				
+			</div>
+		</div>   
+    <div id="J_confirm" class="fn-hide">
+    	<h1>暂无商品</h1>
+    </div>
+</div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+    srvMap.add('queryProdDetail', 'prod.json', 'front/sh/prod!execute?uid=p022');//查询商品详情
+    srvMap.add('queryCmpgnDetail', 'query.json', 'front/sh/market!index?uid=my004');//查询活动详情
+    srvMap.add('queryCmpgnDetailID', 'query.json', 'front/sh/market!index?uid=mwq003');//根据活动id查询商品id
+    srvMap.add('save', 'myTask.json', 'front/sh/market!index?uid=mt007');//营销结果保存
+    //页面加载完开始执行
+    var cmd = "";
+    var campId = "";
+    var campgnType="";
+    var goodId="";
+    var call_no="";
+    $(document).ready(function () {
+        //初始化函数
+        campId = Util.browser.getParameter("CMPGN_ID");
+        call_no= Util.browser.getParameter("call_no");
+        cmd = {
+            "CMPGN_ID": campId
+        };
+        //查询活动的详情
+        Util.ajax.postJson(srvMap.get("queryCmpgnDetail"), cmd, function (jsona) {
+            if (jsona.beans != null && jsona.returnCode == 0) {
+                //放到活动的div下面
+                var cmpgnNm = jsona.beans[0].CMPGN_NM;
+                var startTime = jsona.beans[0].CMPGN_EFF_DATE;
+                var String = startTime.split(" ");
+                var endTime = jsona.beans[0].CMPGN_INVLD_DATE;
+                var end = endTime.split(" ");
+                 campgnType = jsona.beans[0].CMPGN_TYPE_CD;
+                var capgnDesc = jsona.beans[0].CMPGN_DESC;
+                var date = String[0] + "至" + end[0];
+
+                $("#J_cmpgnNm").html(cmpgnNm);
+               	$("#J_actName").html(cmpgnNm);
+                $("#J_date").html(date);
+                $("#J_capgnDesc").html(capgnDesc);
+            }
+        });
+        
+        Util.ajax.postJson(srvMap.get("queryCmpgnDetailID"), cmd, function (json) {
+            if (json.returnCode == 0) {
+                var beans = json.beans;
+                if (beans != null) {
+                    var cmds = {
+                        "prodId": beans[0].MCDS_ID
+                    };
+                }
+                Util.ajax.postJson(srvMap.get("queryProdDetail"), cmds, function (jsons) {
+                    //放到productDetailItem fn-clear这个底下
+                    console.log(jsons);
+                    if (jsons.returnCode == 0) {
+                    	console.log(jsons.bean);
+                    	$("#J_bbbctName").html(jsons.bean.MCDS_UNIT_NM);
+                        $("#jdPrice").html(jsons.bean.jdPrice);
+                        $("#UPRC").html(jsons.bean.UPRC);
+                        $("#SKU_QTY").html(jsons.bean.SKU_QTY);
+                        
+                        var picSrc = "http://211.138.17.200:20500/" + jsons.bean.PIC_STO_URL_ADDR;
+                        $("#J_largepic").attr("src", picSrc);
+                        $("#J_smallpic").attr("src", picSrc);
+                    }
+                });
+            }
+        });
+    });
+    function NextTask(){
+    	top.CtiUtils.API.refreshUserHasActivity(call_no);
+    }
+</script>
+</body>
+</html>

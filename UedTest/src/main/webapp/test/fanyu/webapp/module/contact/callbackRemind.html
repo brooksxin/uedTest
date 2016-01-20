@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10085系统</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+    <div class="formItem">
+       
+        <div class="titleArea">
+            <h2>添加回拨提醒</h2>
+            <hr/>
+        </div>
+
+        <table class="form_table">
+            <tbody>
+                <tr>
+                    <td width="90"><label class="formDescription"><span class="fn-high">*</span>电话号码：</label></td>
+                    <td width=""><input class="FormInputText width100" type="text" /></td>
+                    
+                </tr>
+                
+                <tr>
+                     <td><label class="formDescription"><span class="fn-high">*</span>时间选择：</label></td>
+                     <td><input id="param-eDate" class="element text Wdate" type="text" value="2015-12-04" onFocus="WdatePicker()"  />或<input id="param-eDate" class="element text Wdate" type="text" value="2015-12-04" onFocus="WdatePicker()"  />分钟
+                    </td>               
+                </tr>
+                <tr>
+                    <td valign="top"><label class="formDescription"><span class="fn-high">*</span>回拨理由：</label></td>
+                    <td>
+                      <textarea rows="8" cols="40" id="REMARK" name="REMARK" class="width100"></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr/>
+                      <div class="formBtnArea">
+      <table width="100%">
+        <tr>
+          <td>
+            <div class="normalBtnArea fn-center">
+                <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" >添加回拨提醒</a>
+                <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_search" >取消</a>
+            </div>
+        </td>
+        </tr>
+      </table>
+    </div>
+        </div>
+    </div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+//页面加载完开始执行
+$(function () {
+});
+</script>
+</body>
+</html>

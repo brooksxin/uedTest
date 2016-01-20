@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>创建质检计划</title>
+    <#include "../../tpl/res_css.tpl" />
+
+</head>
+
+<body>
+
+<!-- 面包屑 begain -->
+<div class="breadcrumb"></div>
+<!-- 面包屑end -->
+
+<div class="formItem">
+    <div class="titleArea bd-bottom fn-clear">
+        <a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a><h2 class="ui-textIndentStyle fn-left">创建质检计划</h2>
+    </div>
+
+
+    <div class="ml-15 mr-15">
+    	<div class="mt-20"><h2 class="ft-14">基本信息</h2></div>
+    	<div class="importProcess" id="J_step5_2">
+            <div class="rateBar">
+                    <div class="borgray"></div>
+                    <div class="borblue"></div>
+            </div>
+        </div>
+      
+      	<div class="onlin_borBot pb-10">
+          <table  class="form_table mt-10" width="100%">
+              <tr>
+                  <td width="90"><span class="fn-high">*</span> 计划名称</td>
+                  <td><input type="text" class="FormInputText w314" /></td>
+              </tr>
+              <tr>
+                  <td width="90" valign="top">计划描述</td>
+                  <td><textarea class="form_textarea"></textarea></td>
+              </tr>
+              <tr>
+                  <td><span class="fn-high">*</span>执行时间</td>
+                  <td><input id="startDate" name="startDate" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'endDate\')}'})" type="text"> 至 <input id="endDate" name="endDate" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{$dp.$D(\'startDate\',{d:1})||\'2010-01-01 23:59:59\'}'})" type="text">
+                  </td>  
+              </tr>
+          </table>
+        </div>
+    </div>
+	<div class="ml-15 mr-15">
+    	<div class="mt-20"><h2 class="ft-14">质检条件</h2></div>
+    	<div class="importProcess" id="J_step5_2">
+            <div class="rateBar">
+                    <div class="borgray"></div>
+                    <div class="borblue"></div>
+            </div>
+        </div>
+    	<div class="onlin_borBot pb-10">
+          <table  class="form_table mt-10" width="100%">
+              <!--<tr>
+                  <td><span class="fn-high">*</span>质检项目</td>
+                  <td>
+                      <div class="normalBtnArea">
+                        <a class="normalBtn BGblue largeBtn" href="javascript:;">选择质检项目</a>
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td><span class="fn-high">*</span>抽取策略</td>
+                  <td>
+                      <div class="normalBtnArea">
+                        <a class="normalBtn BGblue largeBtn" href="javascript:;">设置抽取策略</a>
+                      </div>
+                  </td>
+              </tr>若后期配置可显示-->
+               <tr>
+                  <td><span class="fn-high">*</span>质检项目</td>
+                  <td>
+                      <div id="CMPGN_ID">
+                      	 <input type="text" value="CMPGN_NAME" id="CMPGN_ID" />
+                      </div>
+
+                  </td>
+                  <td>
+                      <div class="normalBtnArea">
+                        <a class="normalBtn BGblue largeBtn" href="javascript:;" onclick="Dialog_project_item()">设置质检项目</a>
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td><span class="fn-high">*</span>抽取频率</td>
+                  <td>
+                      <div id="">
+                      	 
+                      </div>
+                      <div id=""  class="fn-hide">
+                      </div>
+                  </td>
+                  <td>
+                       <div class="normalBtnArea">
+                        <a id="chooseFre" class="normalBtn BGblue largeBtn" href="javascript:;" onclick="Dialog_fre_item()">设置抽取频率</a>
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td><span class="fn-high">*</span>评分模板</td>
+                  <td>
+                      <div id="ASCORE_TMPLT_NM">
+                      	 
+                      </div>
+                      <div id="ASCORE_TMPLT_ID"  class="fn-hide">
+                      </div>
+                  </td>
+                  <td>
+                      <div class="normalBtnArea">
+                        <a id="chooseScore" class="normalBtn BGblue largeBtn" href="javascript:;" onclick="Dialog_score_item()">设置评分维度</a>
+                      </div>
+                  </td>
+              </tr>
+          </table>
+        </div>
+    </div>
+    <div class="ml-15 mr-15">
+    	<div class="mt-20"><h2 class="ft-14">考评关系</h2></div>
+    	<div class="importProcess" id="J_step5_2">
+            <div class="rateBar">
+                    <div class="borgray"></div>
+                    <div class="borblue"></div>
+            </div>
+        </div>
+    	<div class="pb-20">
+          <div class="pt-20">
+          	<span class="fn-high">*</span>执行部门
+          </div>
+          <div class="ml-20">
+            <div class="pt-10 pb-10"><a href="#"></a><span class="table_select"><input type="checkbox" /></span> 北京客服中心</div>
+            <div class="pt-10 pb-10"><a href="#"></a><span class="table_select"><input type="checkbox" /></span> 河南客服中心</div>
+            <div class="pt-10 pb-10"><a href="#"></a><span class="table_select"><input type="checkbox" /></span> 山东客服中心</div>
+          </div>      
+        </div>
+        <div class="pb-20">
+          <div>
+          	<span class="fn-high">*</span>被测团队
+          </div>
+          <div class="ml-20">
+            <div class="pt-10 pb-10"><a href="#"></a><span class="table_select"><input type="checkbox" /></span> 北京客服中心</div>
+            <div class="pt-10 pb-10"><a href="#"></a><span class="table_select"><input type="checkbox" /></span> 河南客服中心</div>
+            <div class="pt-10 pb-10"><a href="#"></a><span class="table_select"><input type="checkbox" /></span> 山东客服中心</div>
+          </div>      
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="formBtnArea bd-top fn-clear">
+    <div class="normalBtnArea fn-center">
+        <a class="normalBtn BGblue largeBtn" href="javascript:;">发布</a>
+        <a href="#" class="formLink fn-right"><span>取消创建</span></a>
+    </div>
+</div>
+
+
+</div>
+
+<!-- 添加质检项目，弹出层数据 -->
+<div id="DialogProjectItem" class="fn-hide">
+	<div method="post" action="#" class="cmxform" >
+	  <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_project_formSearch" name="J_project_formSearch" >
+	    <div class="record-search-cate">
+	        <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+	            <tbody>
+	                <tr>
+	                    <td width="100"><label class="description">项目名称</label></td>
+	                    <td width="200">
+	                        <input class="inputWidthDataPoint element text" type="text">
+	                    </td>
+	                   
+	                    <td><label class="description">业务类型</label></td>
+	                    <td>
+	                        <select>
+	                            <option>语音外乎类</option>
+	                            <option>语音接听类</option>
+	                            <option>工单类</option>
+	                            <option>互联网投诉类</option>
+	                        </select>
+	                    </td>
+	                    <td>
+	                        <div class="normalBtnArea w82"> <a class="searchBtn" href="javascript:;" id="J_search"  onclick="searchProjectBtn();" ><i></i>查询</a> 
+	                        </div>
+	                    </td>
+	                    <td>&nbsp;</td>
+	                </tr>
+	            </tbody>
+	        </table>
+	    </div>
+	  </form>
+	</div>
+	<div class="tablewidth mg_t_10">
+		<table	class="ui-record-table table_radius table-bordered table-striped">
+			<thead>
+				<tr>
+					<th width="25">&nbsp;</th>
+					<th width="">项目ID</th>
+					<th width="">项目名称</th>
+					<th width="">操作</th>
+				</tr>
+			</thead>
+			<tbody id="J_tabletpl">
+
+			</tbody>
+		</table>
+	</div>
+	<!--翻页及功能按钮区域开始-->
+	<DIV class="amount-bottom">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+	    <tr>
+	      <td width="50%"><DIV class="fn-clear action-other  action-other-show ">
+	          <DIV id=Pagination1 class="page pagination fn-right"></DIV>
+	          <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+	        </DIV></td>
+	    </tr>
+	  </table>
+	</DIV>
+</div>
+
+<!-- 添加设置策略项，弹出层数据 -->
+<div id="DialogFreItem" class="fn-hide">
+	<div method="post" action="#" class="cmxform" >
+	  <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_fre_formSearch" name="J_fre_formSearch" >
+	    <div class="record-search-cate">
+	      <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+	        <tbody>
+	          <tr>
+	            <td width="100"><label class="description">策略项名称</label></td>
+	            <td width="200">
+	                <select class="inputSelect w160">
+	                 <option>全部</option>
+	                 <option>10085通话服务质量检测</option>
+	                 <option>2015年6月第一周质量检测</option>
+	                </select>
+	            </td>
+	            <td width="100"></td>
+	            <td width="200"></td>
+	            <td width="100"></td>
+	            <td width="200"></td>
+	            <td><div class="normalBtnArea w82"> <a class="searchBtn" href="javascript:;" id="J_search"   onclick="searchFreBtn();" ><i></i>查询</a> </div></td>
+	          </tr>
+	          
+	          <tr>
+	          	<td width="75"><label class="description">开始时间</label></td>
+	       		<td width="100"><input id="startDate" name="startDate" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'endDate\')}'})" type="text"></td>
+	            <td width="100"><label class="description">结束时间</label></td>
+	            <td width="200"><input id="endDate" name="endDate" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{$dp.$D(\'startDate\',{d:1})||\'2010-01-01 23:59:59\'}'})" type="text"></td>
+	            <td width="100"><label class="description">发布工号</label></td>
+	           	<td width="200">
+	                <select class="inputSelect w160">
+	                 <option>不限</option>
+	                 <option>x009051</option>
+	                </select>
+	            </td>
+	            <td></td>
+	          </tr>
+	        </tbody>
+	      </table>
+	    </div>
+	    <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+	  </form>
+	</div>
+	<div class="tablewidth mg_t_10">
+	  <table class="ui-record-table table_radius table-bordered table-striped"  >
+	    <thead>
+	      <tr>
+	        <th>策略项名称</th>
+	        <th>策略类型</th>
+	        <th width="150">创建时间</th>
+	        <th width="80">发布工号</th>
+	        <th width="180">操作</th>
+	      </tr>
+	    </thead>
+	    <tbody id="J_Fre_tabletpl">
+	      
+	    </tbody>
+	  </table>
+	</div>
+	
+	<!--翻页及功能按钮区域开始-->
+	<DIV class="amount-bottom">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+	    <tr>
+	      <td width="50%"><DIV class="fn-clear action-other  action-other-show ">
+	          <DIV id=Pagination2 class="page pagination fn-right"></DIV>
+	          <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+	        </DIV></td>
+	    </tr>
+	  </table>
+	</DIV>
+</div>
+
+
+<!-- 添加评分模板，弹出层数据 -->
+<div id="DialogScoreItem" class="fn-hide">
+	<div method="post" action="#" class="cmxform" >
+	  <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_score_formSearch" name="J_score_formSearch" >
+	    <div class="record-search-cate">
+	      <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+	        <tbody>
+	          <tr>
+	            <td width="100"><label class="description">评分模板名称</label></td>
+	            <td width="200">
+	                <select class="inputSelect w160">
+	                 <option>全部</option>
+	                 <option>10085通话服务质量检测</option>
+	                 <option>2015年6月第一周质量检测</option>
+	                </select>
+	            </td>
+	            <td width="100"></td>
+	            <td width="200"></td>
+	            <td width="100"></td>
+	            <td width="200"></td>
+	            <td><div class="normalBtnArea w82"> <a class="searchBtn" href="javascript:;" id="J_search"   onclick="searchScoreBtn();" ><i></i>查询</a> </div></td>
+	          </tr>
+	          
+	          <tr>
+	          	<td width="75"><label class="description">开始时间</label></td>
+	       		<td width="100"><input id="startDate" name="startDate" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'endDate\')}'})" type="text"></td>
+	            <td width="100"><label class="description">结束时间</label></td>
+	            <td width="200"><input id="endDate" name="endDate" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{$dp.$D(\'startDate\',{d:1})||\'2010-01-01 23:59:59\'}'})" type="text"></td>
+	            <td width="100"><label class="description">发布工号</label></td>
+	           	<td width="200">
+	                <select class="inputSelect w160">
+	                 <option>不限</option>
+	                 <option>x009051</option>
+	                </select>
+	            </td>
+	            <td></td>
+	          </tr>
+	        </tbody>
+	      </table>
+	    </div>
+	    <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+	  </form>
+	</div>
+	<div class="tablewidth mg_t_10">
+	  <table class="ui-record-table table_radius table-bordered table-striped"  >
+	    <thead>
+	      <tr>
+	        <th>评分模版名称</th>
+	        <th width="150">创建时间</th>
+	        <th width="80">发布工号</th>
+	        <th width="180">操作</th>
+	      </tr>
+	    </thead>
+	    <tbody id="J_ScoreMb_tabletpl">
+	      
+	    </tbody>
+	  </table>
+	</div>
+	
+	<!--翻页及功能按钮区域开始-->
+	<DIV class="amount-bottom">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+	    <tr>
+	      <td width="50%"><DIV class="fn-clear action-other  action-other-show ">
+	          <DIV id=Pagination3 class="page pagination fn-right"></DIV>
+	          <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+	        </DIV></td>
+	    </tr>
+	  </table>
+	</div>
+</div>
+
+
+
+
+
+<#include "../../tpl/res_js.tpl" />   
+<script type="text/javascript">
+	srvMap.add('queryProject' , 'query.json','front/sh/market!index?uid=my009');  //质检项目加载
+	srvMap.add('queryFre' , 'query.json','front/sh/market!index?uid=my012');  //质检项目弹出层
+	srvMap.add('queryScoreMb' , 'query.json','front/sh/quality!execute?uid=qlmb003');  //评分模板弹出层
+	
+	
+	//添加抽取策略弹出层数据
+	var G_fre_params = {
+		url : srvMap.get('queryFre'),
+		searchformId : "J_fre_formSearch",
+		items_per_page : 5, // 每页数     @param : limit
+		page_index : 0, //当前页  @param : start
+		pagination : "Pagination2", //分页id
+		tabletpl : "T_Fre_tabletpl", //表格模板
+		tablewrap : "J_Fre_tabletpl" //表格容器
+	};
+	//添加评分模板弹出层数据
+	var G_Score_params = {
+		url : srvMap.get('queryScoreMb'),
+		searchformId : "J_score_formSearch",
+		items_per_page : 5, // 每页数     @param : limit
+		page_index : 0, //当前页  @param : start
+		pagination : "Pagination3", //分页id
+		tabletpl : "T_ScoreMb_tabletpl", //表格模板
+		tablewrap : "J_ScoreMb_tabletpl" //表格容器
+	};
+	var _dialog = null;
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        $(".qBox").mouseover(function() {
+          $(this).addClass("qBoxHover");
+          $(this).find(".qEditIcon").show();
+
+        }).mouseout(function() {
+          $(this).removeClass("qBoxHover");
+          $(this).find(".qEditIcon").hide();
+        });
+        
+       	/**选择质检项目
+       	$('#chooseProject').bind('click',function(){
+     		window.location.href="chooseQuaTerm.html"; 
+       	});
+       	//选择抽取策略
+       	$('#chooseFre').bind('click',function(){
+     		window.location.href="checkStraTemp.html"; 
+       	});
+       	//选择评分模板
+       	$('#chooseScore').bind('click',function(){
+     		window.location.href="chooseScoreTemp.html"; 
+       	});*/
+    	function searchBtn1(){
+			var str = $("#" + G_params.searchformId).serialize();
+			Util.pagination(G_params.page_index, true, G_params, str);
+		}
+
+    });
+    
+    //查询质检项目
+	function searchProjectBtn(){
+		//质检项目弹出层数据
+		var G_project_params = {
+			url : srvMap.get('queryProject'),
+			searchformId : "J_project_formSearch",
+			items_per_page : 5, // 每页数     @param : limit
+			page_index : 0, //当前页  @param : start
+			pagination : $("#Pagination1", _dialog.node), //分页id
+			tabletpl : $("#T_tabletpl"), //表格模板
+			tablewrap : $('#J_tabletpl', _dialog.node) //表格容器
+		};
+		var str = $("#" + G_project_params.searchformId).serialize();
+		Util.pagination(G_project_params.page_index, true, G_project_params, str);
+	}
+	
+    //查询抽取策略
+	function searchFreBtn(){
+		var str = $("#" + G_fre_params.searchformId).serialize();
+		Util.pagination(G_fre_params.page_index, true, G_fre_params, str);
+	}
+	 //查询质检模板
+	function searchScoreBtn(){
+		var str = $("#" + G_Score_params.searchformId).serialize();
+		Util.pagination(G_Score_params.page_index, true, G_Score_params, str);
+	}
+ 
+    
+	//添加项目弹出层 
+	function Dialog_project_item() {
+	var project_elem=$('#DialogProjectItem').html();
+		var paramsdiv = {
+			top : top,
+			content : project_elem,
+			title : "质检项目列表",
+			width : "980px",
+			height : "atuo",
+			modal : true,
+			okVal : '确定',
+			okCallback : function() {
+				
+				var $checkeds = $('input[type=checkbox]:checked', _dialog.node);
+				var $names = $('input[type=checkbox]:checked', _dialog.node);
+				//name
+				var idArr = $.map($checkeds, function(box, i) { return $(box).val(); });
+				var nameArr = $.map($checkeds, function(box, i) { return $(box).parents('tr').find('.name').html();  });
+				var idStr= idArr.join(',');
+				var nameStr= nameArr.join(',');
+				$('#CMPGN_ID').html(idStr)
+				$('#CMPGN_NAME').html(nameStr)
+				_dialog.close();
+				//console.log(nameArr)
+				return false;
+			},
+			cancelVal : '取消',
+			cancelCallback : function() {
+			}
+		}
+		_dialog = Util.dialog.openDiv(paramsdiv);
+	}
+	//添加抽取策略弹出层 
+	function Dialog_fre_item() {
+	var fre_elem=$('#DialogFreItem').html();
+		var paramsdiv = {
+			top : top,
+			content : fre_elem,
+			title : "抽取策略列表",
+			width : "980px",
+			height : "atuo",
+			modal : true,
+			okVal : '确定',
+			okCallback : function() {
+
+			},
+			cancelVal : '取消',
+			cancelCallback : function() {
+			}
+		}
+		 Util.dialog.openDiv(paramsdiv);
+	}
+	//添加评分模板弹出层 
+	function Dialog_score_item() {
+	var score_elem=$('#DialogScoreItem').html();
+		var paramsdiv = {
+			top : top,
+			content : score_elem,
+			title : "评分模板列表",
+			width : "980px",
+			height : "atuo",
+			modal : true,
+			okVal : '确定',
+			okCallback : function() {
+
+			},
+			cancelVal : '取消',
+			cancelCallback : function() {
+			}
+		}
+		 Util.dialog.openDiv(paramsdiv);
+	}
+	
+	
+    Handlebars.registerHelper("isInto", function(ASCORE_TMPLT_ID){
+  		 buffer ='<a class="item-text" href="javascript:;" onclick="detail('+"'"+ASCORE_TMPLT_ID+"'"+')">查看模板</a><a class="item-text" href="javascript:;" onclick="useMb('+"'"+ASCORE_TMPLT_ID+"'"+')">使用模板</a>';  	  
+  	  	return new Handlebars.SafeString(buffer);
+  	  
+    });
+    
+    Handlebars.registerHelper('dataToJSON', function(obj) {
+  	    return JSON.stringify(obj);
+  	  });
+</script>
+
+ <!-- 质检项目列表 -->
+<script id="T_tabletpl" type="text/x-handlebars-template">
+    {{#if beans}}
+        {{#each beans}} 
+			<tr>
+ 				<td>
+					<div class="table_select">
+					<input  data-keyid='{{CMPGN_ID}}' type="checkbox" name="prod" value='{{CMPGN_ID}}'/></div>
+                </td>
+                <td>{{CMPGN_ID}}</td>
+                <td class="name">{{CMPGN_NM}}</td>
+				<td width="90">
+					<div class="gridRowBtn" data='{{dataToJSON this}}'>
+                       {{isInto CMPGN_ID}}
+                    </div>
+                </td>
+            </tr> 
+         {{/each}}
+    {{else}}
+		<tr>
+			<td colspan="8">
+				<div class="ui-tips-box tipsBox">
+					<div class="ui-icon-noData"></div>
+					<div class="ui-tips-text">暂无数据记录！</div>
+				</div>
+			</td>
+		</tr>
+    {{/if}}
+</script>
+ <!-- 策略模板弹出层模板 -->
+<script id="T_Fre_tabletpl" type="text/x-handlebars-template">
+    {{#if beans}}
+        {{#each beans}} 
+			<tr>
+                <td>{{STG_TMPLT_NM}}</td>
+                <td>{{STG_TMPLT_TYPE_CD}}</td>
+                <td>{{CRT_TIME}}</td>
+                <td>{{CRT_USER_ID}}</td>
+				<td width="90">
+					<div class="gridRowBtn" data='{{dataToJSON this}}'>
+                       {{isInto STG_TMPLT_ID}}
+                    </div>
+                </td>
+            </tr> 
+         {{/each}}
+    {{else}}
+		<tr>
+			<td colspan="8">
+				<div class="ui-tips-box tipsBox">
+					<div class="ui-icon-noData"></div>
+					<div class="ui-tips-text">暂无数据记录！</div>
+				</div>
+			</td>
+		</tr>
+
+    {{/if}}
+</script>
+ <!-- 评分模板弹出层模板 -->
+<script id="T_ScoreMb_tabletpl" type="text/x-handlebars-template">
+    {{#if beans}}
+        {{#each beans}} 
+			<tr>
+                <td>{{ASCORE_TMPLT_NM}}</td>
+                <td>{{CRT_TIME}}</td>
+                <td>{{CRT_USER_ID}}</td>
+				<td width="90">
+					<div class="gridRowBtn" data='{{dataToJSON this}}'>
+                       {{isInto ASCORE_TMPLT_ID}}
+                    </div>
+                </td>
+            </tr> 
+         {{/each}}
+    {{else}}
+		<tr>
+			<td colspan="8">
+				<div class="ui-tips-box tipsBox">
+					<div class="ui-icon-noData"></div>
+					<div class="ui-tips-text">暂无数据记录！</div>
+				</div>
+			</td>
+		</tr>
+
+    {{/if}}
+</script>
+
+</body>
+</html>

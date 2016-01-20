@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>质量管理模块——评分模板</title>
+<#include "../../tpl/res_css.tpl" />
+<style type="text/css">
+	.delbtn:hover{color:red;}
+	/*评分类型*/
+	.scopetypelist li{border:1px solid #ddd;border-radius:3px;text-align:center;position:relative;float:left;padding:10px 15px;margin:5px 10px;cursor:pointer;}
+	.scopetypelist li input[type=radio]{position:absolute;right:2px;top:5px;}
+	.scopetypelist li span{padding:2px 5px;}
+	/**/
+	.in-eidt{border:none;text-align:right;height:100%;padding-right:5px;}
+</style>
+</head>
+<body>
+<!-- 面包屑 begain -->
+<div class="breadcrumb"></div>
+<!-- 面包屑end -->
+<div class="formItem">
+    <div class="pt-10 pb-10">
+        <a href="javascript:history.go(-1)" class="formItem_jiantou-tu normalLink">返回</a>
+    </div>
+    <div class="titleArea">
+        <h2>编辑评分模板</h2>
+    </div>
+</div>
+</body>
+<div method="post" action="#" class="cmxform" >
+    <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+        <div class="formItem">
+            <hr/>
+            <table class="form_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td align="right" width="100">
+                            <label class="formDescription"><span class="fn-high">*</span>模板名称：</label>
+                        </td>
+                        <td>
+                            <input type="text" class="FormInputText width100" id="J_temp_NM" name="ASCORE_TMPLT_NM" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <label class="formDescription">模板描述：</label>
+                        </td>
+                        <td>
+                            <textarea rows="4" class="width100" id="J_temp_DS" name="ASCORE_TMPLT_DESC"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <label class="formDescription"><span class="fn-high">*</span>评分类型：</label>
+                        </td>
+                        <td>服务用语、服务技巧、业务要求</td>
+                    </tr>
+                    <tr class="fn-hide">
+                        <td align="right">&nbsp;</td>
+                        <td>
+                            <a href="###" class="normalBtn BGgray">编辑评分类型</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>       
+<div class="tablewidth mg_t_10" id="J_table_serve">
+</div>
+    </form>
+</div>
+<hr/>
+<!-- 添加评分类型按钮 -->
+		<div class="fn-pt5 fn-pl10 fn-hide" style="margin:15px 0 0 30px;">
+			<a class="normalBtn BGgray" href="javascript:void(0)" onclick="Dialog_score_type()">添加评分类型</a>
+		</div>
+<div class="form_btn">
+<a href="javascript:void(0)" class="normalBtn BGblue largeBtn" onclick="save()">完成</a>
+</div>
+<!-- 添加评分项类型,选择项弹出层数据 -->
+<div id="J_score" class="fn-hide">
+	<ul class="scopetypelist" id="J_scoretype">
+	</ul>
+</div>
+<!-- 添加评分项，弹出层数据 -->
+<div id="DialogScoreItem" class="fn-hide">
+	<!-- 面包屑 begain -->
+	<div class="breadcrumb"></div>
+	<!-- 面包屑end -->
+	<div method="post" action="#" class="cmxform">
+		<form method="get" action=""
+			class="record-search-form record-search-min record-search-form-border"
+			id="J_formSearch" name="J_formSearch">
+			<div class="record-search-cate">
+				<table class="search_table" cellpadding="0" cellspacing="0"
+					border="0" width="100%">
+					<tbody>
+						<tr>
+							<td width="100"><label class="description">评分项名称</label></td>
+							<td colspan="2" width="200"><input name="ascore_item_nm"
+								id="ascore_item_nm" class="inputWidth inputText" type="text"
+								maxlength="255" value="" /></td>
+							<td colspan="3">&nbsp;</td>
+							<td><a class="btn_search" href="javascript:;" id="J_search" onclick="searchBtn();">查询</a>
+							</td>
+						</tr>
+						<tr>
+							<td><label class="description">创建时间起</label></td>
+							<td><input id="query_ben_date" name="query_ben_date"
+								class="element text Wdate" type="text" onFocus="WdatePicker()" />
+							</td>
+							<td><label class="description">创建时间止</label></td>
+							<td><input id="query_end_date" name="query_end_date"
+								class="element text Wdate" type="text" onFocus="WdatePicker()" />
+							</td>
+							<td><label class="description">发布工号</label></td>
+							<td><select class="inputSelect w160" id="crt_user_id"
+								name="crt_user_id">
+
+							</select></td>
+							<td>&nbsp;</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</form>
+	</div>
+	<div class="tablewidth mg_t_10">
+		<table
+			class="ui-record-table table_radius table-bordered table-striped">
+			<thead>
+				<tr>
+					<th width="25">&nbsp;</th>
+					<th width="">评分项</th>
+					<th width="">等级名称</th>
+					<th width="">等级分值</th>
+					<th width="">创建时间</th>
+					<th width="">发布工号</th>
+					<th width="">操作</th>
+				</tr>
+			</thead>
+			<tbody id="J_tabletpl">
+
+			</tbody>
+		</table>
+	</div>
+
+	<!--翻页及功能按钮区域开始-->
+	<div class="amount-bottom">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0"
+			class="gridBottom">
+			<tr>
+				<td width="60"><input type="checkbox" class="selectAll"
+					id="selectAll" /> <label for="selectAll" onclick="triggerbox(this);" style="cursor:pointer;">全选</label></td>
+				<td>
+					<div class="normalBtnArea fn-hide">
+						<!--不附加ft-right样式，默认左对齐-->
+						<a class="normalBtn BGgray"  href="javascript:;" onclick="itemList()">使用评分项</a>
+					</div>
+				</td>
+				<td width="50%">
+					<div class="fn-clear action-other  action-other-show ">
+						<div id="Pagination" class="page pagination fn-right"></div>
+						<div class="fn-right fn-pt5 fn-pr10"></div>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+	srvMap.add("scoreitem", "scoreitem.json","front/sh/quality!execute?uid=qlmb005");//评分项编辑 
+	srvMap.add("scoretype", "scoretype.json","front/sh/quality!execute?uid=qlmb006");//评分项类型 
+	srvMap.add('query', 'queryscoreitem.json', 'front/sh/quality!execute?uid=pfx001'); //查询服务
+	srvMap.add('queryUser', 'queryuser.json', 'front/sh/user!userinfo?uid=u005'); //查询工号
+	srvMap.add('delScore', '', 'front/sh/quality!execute?uid=pfx002');//批量删除
+	srvMap.add('save', '', 'front/sh/quality!execute?uid=qlmb002');//保存
+	var $el=null;
+	var score_param = {
+		ASCORE_TMPLT_ID : "111111"
+	};
+	Util.ajax.postJson(srvMap.get('scoreitem'), score_param, function(json,status) {
+		if (status) {
+			console.log(json);
+			if (json.bean) {
+				$('#J_temp_NM').val(json.bean.ASCORE_TMPLT_NM);
+				$('#J_temp_DS').val(json.bean.ASCORE_TMPLT_DESC);
+			}
+			var $object = json.object;
+			Util.ajax.loadTemp('#J_table_serve', $('#T_table_serve'), json);
+		}
+	});
+	//删除一行评分项 
+	var del_list_id = [];//删除的数据 
+	var add_list_id=[];//添加评分项数据 
+	function delRow(obj, itemtId, typeId) {
+		$(obj).parent().parent().remove();
+		console.log(itemtId+"/n"+typeId);
+		//if(!itemtId||!typeId) return;
+		var data = {
+			ASCORE_ITEM_ID : itemtId,
+			ASCORE_TYPE_CD : typeId
+		};
+		del_list_id.push(data);
+		console.log(del_list_id);
+	}
+	//将索引增加1
+	Handlebars.registerHelper('addone', function(index) {
+		this.index = index + 1;
+		return this.index;
+	});
+	//评分类型 
+	var scoretypehtml = '';
+	var elem = '';
+	Util.ajax.postJson(
+					srvMap.get('scoretype'),
+					'',
+					function(json, status) {
+						if (status) {
+							var beans = json.beans;
+							for (var i = 0; i < beans.length; i++) {
+								scoretypehtml += "<li><span>"
+										+ beans[i].CMPGN_NM
+										+ "</span><input type='radio' name='scoretype' id='"+beans[i].CMPGN_ID+"'/> </li>";
+							}
+							$('#J_scoretype').html(scoretypehtml);
+							elem = $('#J_score').html();
+
+						}
+					});
+
+	//根据字段ASCORE_TYPE_CD分数据
+	Handlebars.registerHelper('compare',
+			function(ASCORE_TYPE_CD, val, options) {
+				if (ASCORE_TYPE_CD == val) {
+					return options.fn(this);
+				} else {
+					return options.inverse(this);
+				}
+			});
+	//添加评分类型弹出层
+	function Dialog_score_type() {
+		var paramsdiv = {
+			top : top,
+			content : elem,
+			title : "添加评分类型",
+			width : "400px",
+			height : "atuo",
+			modal : true,
+			okVal : '确定',
+			okCallback : function() {
+
+			},
+			cancelVal : '取消',
+			cancelCallback : function() {
+			}
+		}
+		var d = Util.dialog.openDiv(paramsdiv);
+		$('.ui-dialog-content', d.node).on('click', 'ul>li span', function(e) {
+			var $element = $(e.currentTarget);
+			var $radio = $element.next();
+			$radio.attr('checked', true);
+		});
+	}
+	//添加评分项弹出层 
+	
+	function Dialog_score_item(o,type_id) {
+		var obj=$(o);
+		var thisdom=obj.parents('.amount-bottom').prev();
+		var score_elem=$('#DialogScoreItem').html();
+		var paramsdiv = {
+			top : top,
+			content : score_elem,
+			title : "评分项列表",
+			width : "980px",
+			height : "atuo",
+			modal : true,
+			okVal : '确定',
+			okCallback : function() {
+				return itemList(thisdom,type_id);
+			},
+			cancelVal : '取消',
+			cancelCallback : function() {
+			}
+		}
+		 $el=Util.dialog.openDiv(paramsdiv);
+		//全选checkbox
+		$('#selectAll',$el.node).change(function() {
+			var ck = this.checked;
+			$("#J_tabletpl input[type='checkbox']").each(function(i, ele) {
+				this.checked = ck;
+			});
+		});
+	}
+	//全选
+	function triggerbox(obj){
+		var chek=$(obj).siblings("input[type='checkbox']").prop("checked");
+		$(obj).siblings("input[type='checkbox']").attr("checked",!chek);
+		$('#selectAll',$el.node).trigger("change");
+	}
+	//评分项弹出层数据
+	var G_params = {
+		url : srvMap.get('query'),
+		searchformId : "J_formSearch",
+		items_per_page : 5, // 每页数     @param : limit
+		page_index : 0, //当前页  @param : start
+		pagination : "Pagination", //分页id
+		tabletpl : "T_tabletpl", //表格模板
+		tablewrap : "J_tabletpl" //表格容器
+	};
+	//编辑问题
+	function update(CMPGN_ID) {
+		//TODO 进入编辑页面
+		window.location.href = "NewScoreGrade.html?id=" + CMPGN_ID;
+	}
+	//使用评分项
+			var itemList=function(thisdom,typeId) {
+					var testrowelement='';//初始化参数 
+					var $boxes = $('#J_tabletpl',$el.node).find(
+							'input[type=checkbox]:checked');
+					if($boxes.length<1){
+						Util.dialog.tips('没有选中的内容!');
+						return false;
+					}
+					var idStr =[];
+					var objs=[];
+					$.each($boxes, function(p0, p1, p3) {
+						idStr.push($(p1).val());
+						objs.push(JSON.parse($(p1).attr('data')));
+					});
+					idStr = "SCORE_ITEM_IDS=" + idStr;
+					//eval(objs);
+					//在评分项按钮上面增加一行 
+					var index=parseInt(thisdom.find("tr").last().find("td").eq(0).html());
+					var itemtId=[];
+					for(var i=0;i<objs.length;i++){
+						itemtId.push(objs[i].ASCORE_ITEM_ID);
+						testrowelement+='<tr><input type="hidden" name="ASCORE_ITEM_ID" value="'+objs[i].ASCORE_ITEM_ID+'"/><td align="center">'+eval(index+i+1)+'</td><td align="center"><a class="item-text" href="javascript:;">'+objs[i].ASCORE_ITEM_NM+'</a></td><td align="center">'+objs[i].LVL_NAME+'</td><td align="right">'+objs[i].LVL_SCORE+'</td><td align="right" style="padding:0"><input type="text" class="in-eidt" name="WTFCT_VAL" value="0"/></td><td><a href="###" class="upIcon"></a><a href="###" class="downIcon"></a></td><td><a href="javascript:" class="delbtn J_delbtn" onclick="delRow(this,\''+objs[i].ASCORE_ITEM_ID+'\',\''+typeId+'\')">删除</a></td></tr>';
+					}
+					//console.log(objs);
+					thisdom.append(testrowelement);
+					var data = {
+							ASCORE_ITEM_ID : itemtId,
+							ASCORE_TYPE_CD : typeId
+						};
+					add_list_id.push(data);
+					//console.log(add_list_id);
+			};
+	//页面加载完开始执行
+	$(document).ready(
+			function() {
+				//新建评分项 
+				//$('#CreateScore').bind('click', function() {
+				//	window.location.href = "NewScoreGrade.html";
+				//});
+				$('#J_search').trigger("click");	
+				//初始化发布工单
+				var cmd = {
+					"DEPT_ID" : 1000000000106
+				};
+				Util.ajax.postJson(srvMap.get('queryUser'),'', function(json,status) {
+					if (status) {
+						Util.ajax.loadTemp("#crt_user_id", $("#T_crt_user_id"),json);
+					} else {
+						//window.location.href = "NewScoreGrade.html";
+					}
+				});
+			});
+	function searchBtn(){
+			var str = $("#" + G_params.searchformId).serialize();
+			Util.pagination(G_params.page_index, true, G_params, str);
+	}
+
+	Handlebars.registerHelper('dataToJSON', function(obj) {
+		return JSON.stringify(obj);
+	});
+	//完成后保存数据
+	var save=function(){
+		var tojson=toJSON();
+		var save_params={
+					"add_list_id":add_list_id,
+					"del_list_id":del_list_id,
+					"tojson":tojson
+				};
+		//var str=$('#J_formSearch').serialize();
+		Util.ajax.postJson(srvMap.get('save'),save_params, function(json,status) {
+			if (status) {
+				Util.dialog.tips("保存成功！");
+			}else{
+				Util.dialog.tips("保存失败！");
+			}
+		});
+	}
+	var toJSON=function(){
+		var ASCORE_TMPLT_NM=$('#J_temp_NM').val();
+		var ASCORE_TMPLT_DESC=$('#J_temp_DS').val();
+		var strjson=[];
+		strjson.push({ASCORE_TMPLT_NM:ASCORE_TMPLT_NM,ASCORE_TMPLT_DESC:ASCORE_TMPLT_DESC});
+		$('#J_table_serve>table').each(function(i,obj){
+			$(obj).find("tbody>tr").each(function(index,o){
+				var WTFCT_VAL=$(o).find("td input[name='WTFCT_VAL']").val();//权重值 
+				var ASCORE_ITEM_ID=$(o).find("input[name='ASCORE_ITEM_ID']").val();//项目ID
+				var ASCORE_TYPE_ID=$(o).find("input[name='ASCORE_TYPE_ID']").val();//项目ID
+				strjson.push({ASCORE_ITEM_ID:ASCORE_ITEM_ID,ASCORE_TYPE_ID:ASCORE_TYPE_ID,WTFCT_VAL:WTFCT_VAL});
+			});
+		});
+		return strjson;
+	}
+</script>
+  
+ <!--服务要求 模板 -->
+ <script id="T_table_serve" type="text/x-handlebars-template">
+{{#if object}}
+	{{#each object}}
+		{{#if beans}}
+		<table
+		class="ui-record-table table_radius table-bordered table-striped">
+		<caption style="line-height: 30px;">{{ASCORE_TYPE_CD_NM}}</caption>
+		<thead>
+			<tr>
+				<th width="25">序号</th>
+				<th width="200">评分项</th>
+				<th>等级名称</th>
+				<th width="200">等级分值</th>
+				<th width="100">权重</th>
+				<th width="100">排序</th>
+				<th width="150">操作</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{{#each beans}}
+ 		 <tr>	
+				<input type="hidden" name="ASCORE_ITEM_ID" value="{{ASCORE_ITEM_ID}}"/>
+				<input type="hidden" name="ASCORE_TYPE_ID" value="{{ASCORE_TYPE_ID}}"/>
+                <td align="center">{{addone @index}}</td>
+                <td align="center">
+                    <a class="item-text" href="javascript:;">{{ASCORE_ITEM_NM}}</a>
+                </td>
+                <td align="center">{{LVL_NAME}}</td>
+                <td align="right">{{LVL_SCORE}}</td>
+                <td align="right" style="padding:0"><input type="text" class="in-eidt" name="WTFCT_VAL" value="{{WTFCT_VAL}}"/>
+                </td>
+                <td>
+                    <a href="###" class="upIcon"></a>
+                    <a href="###" class="downIcon"></a>
+                </td>
+                <td><a href="javascript:" class="delbtn J_delbtn" onclick="delRow(this,'{{ASCORE_ITEM_ID}}','{{ASCORE_TYPE_ID}}')">删除</a></td>
+            </tr>
+			{{/each}}
+		 </tbody>
+			</table>
+			 <!--翻页及功能按钮区域开始-->
+<div class="amount-bottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+        <tr>
+            <td>
+                <div class="fn-clear action-other  action-other-show ">
+                    <div class="fn-right fn-pt5 fn-pr10"><a class="normalBtn BGgray" href="javascript:" onclick="Dialog_score_item(this,'{{ASCORE_TYPE_CD}}')">添加评分项</a></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+		{{/if}}
+	{{/each}}
+{{else}}
+	<tr><td colspan="6" align="center">暂时没有评分项!<td></tr>
+{{/if}}
+ </script>
+ 
+ <!-- 评分项列表 -->
+<script id="T_tabletpl" type="text/x-handlebars-template">
+    {{#if beans}}
+        {{#each beans}} 
+			<tr>
+                <td>
+				<div class="table_select">
+				<input  data-keyid='{{ASCORE_ITEM_ID}}' data='{{dataToJSON this}}' type="checkbox" name="prod" value='{{ASCORE_ITEM_ID}}'/></div>
+                 </td>
+                <td><a class="item-text" href="javascript:;" onclick="update('{{ASCORE_ITEM_ID}}')">{{ASCORE_ITEM_NM}}</a></td>
+                <td>{{LVL_NAME}}</td>
+                <td><div>{{LVL_SCORE}}</div></td>
+                <td>{{CRT_TIME}}</td>
+                <td>{{CRT_USER_ID}}</td>
+                <td>
+                    <div class="gridRowBtn" data='{{dataToJSON this}}'>
+                       <a class="item-text" href="javascript:;" onclick="update('{{ASCORE_ITEM_ID}}')">编辑</a>
+                    </div>
+                </td>
+            </tr> 
+         {{/each}}
+    {{else}}
+	<tr>
+		<td colspan="8">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+
+    {{/if}}
+</script>
+
+ <script id="T_crt_user_id" type="text/x-handlebars-template">
+		<option value="">请选择</option>
+		{{#if beans}}
+            {{#each beans}}
+                 <option value="{{USER_ID}}">{{PTY_NO}} {{PTY_NM}}</option>
+             {{/each}}
+   		{{/if}}
+</script>
+</body>
+</html>

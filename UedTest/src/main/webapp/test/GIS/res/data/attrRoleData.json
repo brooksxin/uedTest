@@ -1,0 +1,14 @@
+{
+        "returnCode": "1",
+        "total": "11",
+        "rows": [
+            {
+                "roleId": "1111",
+                "roleName": "营业厅厅长"
+            },
+            {
+                "roleId": "1112",
+                "roleName": "营业员"
+            }
+        ]
+}

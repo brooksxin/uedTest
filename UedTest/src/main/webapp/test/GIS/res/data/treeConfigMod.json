@@ -1,0 +1,27 @@
+﻿{
+	"returnCode":1,
+
+	"rows":[
+		{
+			"name": "叶子节点111",
+        	"pId":0,
+            "id": 112,
+            "isParent":"true",
+            "flag":1,
+            "open":"true"
+		},
+		{
+			"name": "叶子节点111",
+        	"pId":112,
+            "id": 113,
+            "flag":1
+		},
+		{
+			"name": "叶子节点111",
+        	"pId":112,
+            "id": 114,
+            "flag":1
+		}
+	
+	]
+}

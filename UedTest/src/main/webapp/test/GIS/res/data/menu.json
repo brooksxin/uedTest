@@ -1,0 +1,38 @@
+{
+    "total": "8",
+    "returnCode": "1",
+    "rows": [
+        {
+            "url": "appConfig.html",
+            "name": "应用配置"
+        },
+        {
+            "url": "dynamicAttr.html",
+            "name": "实时属性配置"
+        },
+        {
+        	"url": "synchroAttr.html",
+        	"name":"同步属性配置"
+        },
+        {
+            "url": "markerInfoSearch.html",
+            "name": "标记点信息配置"
+        },
+        {
+            "url": "markerType.html",
+            "name": "标记点类型配置"
+        },
+        {
+            "url": "markerTypeTpl.html",
+            "name": "标记点类型模板配置"
+        },
+        {
+            "url": "treeConfig.html",
+            "name": "组织节点树配置"
+        },
+        {
+            "url": "busiInfoConfig.html",
+            "name": "业务信息配置"
+        }
+    ]
+}

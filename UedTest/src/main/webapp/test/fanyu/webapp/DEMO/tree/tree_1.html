@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Untitled Form</title>
+<#include "../../tpl/res_css.tpl" />
+<link rel="stylesheet" type="text/css" href="../../lib/ztree/3.5.01/zTreeStyle/zTreeStyle.css"/>
+<link href="../../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+</head>
+<body id="main_body" onload="prettyPrint()" >
+	
+<div class="form_container">
+	<div class="zui">
+		<ul id="J_zTree" class="ztree ability-catalog-list fn-clear"></ul>
+	</div>
+
+	<pre class="prettyprint mg_t_20 fn-clear" id="html">
+	
+	</pre>
+</div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript" src="../../lib/pretty/prettify.js"></script>
+<script src="../../lib/ztree/3.5.01/jquery.ztree.core-3.5.js"></script>
+<script src="../../lib/ztree/3.5.01/jquery.ztree.excheck-3.5.js"></script>
+<script type="text/javascript">
+srvMap.add('queryAlldept', 'alldept.json', 'front/sh/user!userinfo?uid=u007');//查询树
+var setting = {
+	view: {
+		showLine: false //不显示虚线
+	},
+    data: {
+        key:{
+        	children:"subList",		//json中树子节点的key值
+        	name:"PTY_NM"			//json中需要展示树的key值
+        }
+    },
+	callback: {
+		beforeClick: beforeClick,	//点击前回调函数
+		onClick: zTreeClick			//点击事件
+	}
+};
+
+$(function(){
+	//初始化树结构
+	Util.ajax.postJson(srvMap.get('queryAlldept'),'',function(json, status) {
+		if (status) {
+			/*
+				param1：树的容器id
+				param2：树的配置参数
+				param3：树的json数据
+			*/
+		    $.fn.zTree.init($("#J_zTree"), setting, json.object);
+		}
+	});
+
+})
+
+function beforeClick(treeId, treeNode) {
+	//如果是父节点，则展开或收缩子节点
+	if(treeNode.isParent){
+    	$.fn.zTree.getZTreeObj(treeId).expandNode(treeNode, null, true);
+	}
+	return true;
+}
+function zTreeClick(event, treeId, treeNode){
+	alert(treeNode.BASE_PTY_ID)
+}
+</script>
+</body>
+</html>

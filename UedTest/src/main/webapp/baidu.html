@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<link rel="stylesheet" type="text/css" href="alice.css">
+<script src="jquery.js" type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+
+<iframe src ="photoDemo.html" frameborder="0" marginheight="0" marginwidth="0" frameborder="0" scrolling="auto" id="ifm" name="ifm" onload="dyniframesize('ifm');" width="100%"> 
+</iframe> 
+
+<script type="text/javascript">
+$(function(){
+	
+
+});
+
+function dyniframesize(down) {
+	var pTar = null;
+	if (document.getElementById){
+		pTar = document.getElementById(down);
+	}else{
+		eval('pTar = ' + down + ';');
+	}
+
+	if (pTar && !window.opera){
+		//begin resizing iframe
+		pTar.style.display="block";
+		if (pTar.contentDocument && pTar.contentDocument.body.offsetHeight){
+			//ns6 syntax
+			pTar.height = pTar.contentDocument.body.offsetHeight +20;
+			pTar.width = pTar.contentDocument.body.scrollWidth+20;
+		}else if (pTar.Document && pTar.Document.body.scrollHeight){
+			//ie5+ syntax
+			pTar.height = pTar.Document.body.scrollHeight;
+			pTar.width = pTar.Document.body.scrollWidth;
+		}
+	}
+}
+
+</script>
+</body>
+</html>

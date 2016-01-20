@@ -1,0 +1,46 @@
+{
+	"returnCode": "0",
+	"rerturnMessage": "success",
+	"beans":[
+		{
+			"addId":"100",
+			"name":"钱大华",
+			"province":"河南省",
+			"city":"郑州市",
+			"region":"高新区",
+			"addr":"长椿路玉兰街中国移动客服中心",
+			"phoneNum":"13912345678",
+			"email":"qiandahua@163.com"
+		},
+		{
+			"addId":"101",
+			"name":"钱大华",
+			"province":"河南省",
+			"city":"郑州市",
+			"region":"高新区",
+			"addr":"长椿路玉兰街中国移动客服中心",
+			"phoneNum":"13912345678",
+			"email":"qiandahua@163.com"
+		},
+		{
+			"addId":"102",
+			"name":"钱大华",
+			"province":"河南省",
+			"city":"郑州市",
+			"region":"高新区",
+			"addr":"长椿路玉兰街中国移动客服中心",
+			"phoneNum":"13912345678",
+			"email":"qiandahua@163.com"
+		},
+		{
+			"addId":"103",
+			"name":"钱大华",
+			"province":"河南省",
+			"city":"郑州市",
+			"region":"高新区",
+			"addr":"长椿路玉兰街中国移动客服中心",
+			"phoneNum":"13912345678",
+			"email":"qiandahua@163.com"
+		}
+	]
+}

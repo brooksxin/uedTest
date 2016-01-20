@@ -1,0 +1,45 @@
+{
+    "rows": [
+        {
+            "ABILITY_CODE": "OPEN_GROUP",
+            "ABILITY_ID": 998,
+            "ABILITY_NAME": "集团用户开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        },
+        {
+            "ABILITY_CODE": "OPEN",
+            "ABILITY_ID": 999,
+            "ABILITY_NAME": "CRM开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        },
+        {
+            "ABILITY_CODE": "OPEN",
+            "ABILITY_ID": 999,
+            "ABILITY_NAME": "CRM开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        },
+        {
+            "ABILITY_CODE": "OPEN",
+            "ABILITY_ID": 999,
+            "ABILITY_NAME": "CRM开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        },
+        {
+            "ABILITY_CODE": "OPEN",
+            "ABILITY_ID": 999,
+            "ABILITY_NAME": "CRM开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        }
+    ],
+    "total": 200
+}

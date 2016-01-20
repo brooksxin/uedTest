@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>话务模板</title>
+<#include "../../tpl/res_css.tpl" />
+
+</head>
+<body>
+<!-- 展示终端内容区域开始 -->
+<div class="productsList" id="easyTab_1">
+    <div class="productFilter">
+        <div class="op-filters filterResult">
+            <!--点击筛选时，除了将productsFilterMore展示外，还请给A链接附加openMore样式-->
+            <a onclick="showDom('#filterMore');$(this).toggleClass('openMore')" href="###"  class="filterBtn">筛选</a>
+            <span class="filterLabel">排序：</span>
+            <span class="filterPrice data-sortType" data-type="price">
+                价格<a href="javascript:;" class="noSort">&nbsp;</a>
+            </span>
+            <span class="filterStock data-sortType" data-type="stock">
+                库存<a href="javascript:;" class="noSort">&nbsp;</a>
+            </span>
+            <span class="filterSales data-sortType" data-type="sales">
+                销量<a href="javascript:;" class="noSort">&nbsp;</a>
+            </span>
+        </div>
+        <div class="op-filters keyWordEnter">
+            <input type="text" id="keyword" placeholder="输入关键字检索" class="keyWord" />
+        </div>
+        <div class="op-goback filterResult fn-hide">
+            <a href="#" class="filterBtn" onclick="softphone.favorites.hide()"> &lt;&lt; 返回</a>
+        </div>
+    </div>
+
+    <!--更多筛选条件开始,默认隐藏-->
+    <div id="filterMore" class="productsFilterMore fn-hide">
+        <div class="filterMoreArea" id="J_filterMore">
+            <!-- 模板json: filterOptions.json -->
+        </div>
+    </div>
+    <!--更多筛选条件END-->
+
+    <div id="J_termList" class="fn-clear">
+        <div class="ui-loading"><h1><img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等 ...</h1></div>
+    </div>
+    
+    <!--翻页及功能按钮区域开始-->
+    <DIV class="amount-bottom" style="padding:10px 0;">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+              <tr>
+                <td>
+                    <DIV class="fn-clear action-other  action-other-show ">
+                        <DIV id="Pagination" class="page pagination fn-right"></DIV>
+                        <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                    </DIV>
+                </td>
+              </tr>
+        </table>
+    </DIV>    
+</div>
+<div id="sendSMSDialog" class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要发送短信吗?</div></div></div>
+<!-- 展示终端内容区域END -->
+<!-- 手机列表模板 -->
+<script id="T_termList" type="text/x-handlebars-template">
+    {{#if beans.length}}
+        {{#each beans}}
+            <div class="productsItem" data-id="{{mcds_unit_id}}">
+                <div class="fn-clear">
+                    <div class="productPic">
+                        <a href="javascript:;" onclick="skipToDtl('{{mcds_unit_id}}')">
+                            <img src="{{../bean.ftpUrl}}{{mcds_pic_url}}" /></a>
+                    </div>
+                    <div class="productInfo">
+                        <h4><a href="javascript:;" onclick="skipToDtl('{{mcds_unit_id}}')">{{mcds_unit_nm}}</a></h4>
+                        <div class="productPrice">
+                            价格：<span>&yen;{{mcds_price}}</span>
+                        </div>
+                        <div class="stock">
+                            库存：<span>{{mcds_sku_qty}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="productProcess">
+                    <a class="formLink" href="javascript:void(0);" onclick="softphone.favorites.{{favop}}('{{mcds_unit_id}}', this)">{{favtext}}</a> |
+                    <a class="formLink" href="javascript:void(0);" onclick="softphone.compare.toggle('{{mcds_unit_id}}', this)">{{optext}}</a>
+					<a class="normalBtn BGblue" href="javascript:void(0);" onclick="doBuyTerminal('{{mcds_unit_id}}','{{mcds_unit_nm}}','{{mcds_price}}')">立即购买</a>  
+				</div>
+            </div>
+        {{/each}}
+    {{else}}
+    {{/if}}
+</script>
+
+<div class="popInformationO fn-hide" id="J_popup" style="height:340px;">
+</div>
+<script id="T_popup" type="text/x-handlebars-template">
+
+    <div class="popInforShear">
+    </div>
+    <div class="popInformationO_top">
+        <span>{{mcds_unit_nm}}</span>
+    </div>
+    <div class="popInformationO_bot">
+        <div class="PriceComparison">
+            <div class="PriceCompTit">价格对比(元)</div>
+            <div class="PriceCompCen">
+                促销价：<span class="popinforRight PriceCompTextR">&yen;{{mcds_price}}</span>
+                京东：<span class="popinforRight PriceCompTextR">&yen;{{refer_price}}</span>
+
+            </div>
+        </div>
+        <div class="PriceComparison" style="border-bottom: none;">
+            <div class="PriceCompTit fn-clear">
+                手机参数
+                <div class="fn-right">
+                    <a href="#" class="phonenumbAb">
+    				<!--
+						短信发给顾客                 
+                        <div class="phonenumbBjt fn-right"></div>
+					-->   
+                    </a>
+                </div>
+            </div>
+
+            <div class="priceCompItemList">
+                <div class="listLabel">屏幕尺寸:</div>
+                <div class="listTxt">{{scr_size}}英寸</div>
+                <div class="listLabelSmall">CPU:</div>
+                <div class="listTxtLarge">{{cpu_model}}</div>
+            </div>
+
+            <div class="priceCompItemList">
+                <div class="listLabel">摄像头:</div>
+                <div class="listTxt">{{b_camera}}</div>
+                <div class="listLabelSmall">分辨率:</div>
+                <div class="listTxtLarge">{{scrRatio}}</div>
+            </div>
+
+            <div class="priceCompItemList">
+                <div class="listLabel">RAM:</div>
+                <div class="listTxt">{{runMemry}}</div>
+                <div class="listLabelSmall">ROM:</div>
+                <div class="listTxtLarge">{{mchn_memry}}GB</div>
+            </div>
+
+            <div class="priceCompItemList">
+                <div class="listLabel">续航:</div>
+                <div class="listTxt_half">{{wait_time}}</div>
+            </div>
+
+        </div>
+        <div class="sendSmsArea">
+			<a class="normalBtn BGblue" href="javascript:void(0);" onclick="sendInfo('{{mcds_unit_id}}')">发送短信</a>  
+		</div>
+    </div>
+</script>
+
+<!-- 动态生成搜索选项: softphone_search.js 中加载，数据见 data/filterOptions.json -->
+<script id="T_filterMore" type="text/x-handlebars-template">
+    {{#each beans}}
+    <div class="searchType fn-clear" data-type="{{type}}">
+        <dl>
+            <dt>{{name}}：</dt>
+            <dd>
+                <ul>
+                    {{#each ./options}}
+                    <li><a class="{{./className}}" href="#">{{./text}}</a></li>
+                    {{/each}}
+                </ul>
+            </dd>
+        </dl>
+    </div>
+    {{/each}}
+</script>
+
+
+<#include "../../tpl/res_js.tpl" />
+
+<!-- 页面交互与业务逻辑实现 -->
+<script type="text/javascript" src="js/softphone_impl.js"></script>
+<script type="text/javascript">
+srvMap.add('sendproductInfo', '', "front/sh/prod!execute?uid=t0010");
+softphone.search.init();
+softphone.compare.update();
+var queFlag = true;
+$(function () {
+    $(".popInformationO").softphonePopup({
+        container: "#easyTab_1"
+    });
+    
+    var QNR_ID = Util.browser.getParameter('QNR_ID');
+
+    top.$('.tabs .ui-tab-items li').unbind('click').click(function(){
+        var _this = $(this);
+        _this.addClass('ui-tab-item-current').siblings().removeClass('ui-tab-item-current');
+        var index = _this.index();
+        top.$('#J_iframe_tab .ui-busi-item').eq(index).show().siblings('.ui-busi-item').hide();
+        /* if (index == 3) {
+            if (queFlag) {
+                queFlag = false;
+                require(['common/questionnaire/ques_start'],function(fn){
+                    var obj = new fn.init(QNR_ID?QNR_ID:'');
+                    obj.startManage = function(options){
+                        require(['common/questionnaire/questionnaire'],function(fn){
+                            fn.init(options.tempVal);
+                            var tpl = fn.getTpl;
+                            top.$('#J_questionnaire').html(tpl);
+                        })
+                    }
+                    top.$('#J_questionnaire').html(obj.$el);
+                })
+            };
+        }; */
+    })
+});
+function doBuyTerminal(mcds_unit_id,mcds_unit_nm,mcds_price){
+   var params = {
+        "mcds_unit_id":mcds_unit_id,
+        "mcds_unit_nm":mcds_unit_nm,
+        "mcdsUnitPrice":mcds_price
+    }
+    params = JSON.stringify(params);
+    eval("var g_aaa = '"+ params +"';");
+    top.$("#termlist_param").val(g_aaa);
+	window.location.href ="../orders/orderSelectQty.html";
+}
+
+function skipToDtl(prodId){
+    top.$('.tabs .ui-tab-items .ui-tab-item a').eq(0).text('手机综述');
+    top.$('.tabs .ui-tab-items .ui-tab-item a').eq(1).text('图文信息');
+    window.location.href = '../product/phoneDetail.html?st=1&prodId='+prodId;
+}
+
+function sendInfo(prodId){
+	if(top.CtiUtils.API.judgeAgentTalking() == "3"){
+		var custResvTelNum = top.CtiUtils.API.getCurPhoneMobile();
+		var parameters = {
+			"prodId": prodId,
+			"custResvTelNum":custResvTelNum
+		};
+		var dialog = document.getElementById("sendSMSDialog")||top.document.getElementById("sendSMSDialog");
+		var params = {
+	         top:top,
+	         content: dialog,
+	         width: "400px",
+	         height: "200px",
+	         modal: true,
+	         okVal:'确定',
+	         okCallback:function(){
+				Util.ajax.postJson(srvMap.get("sendproductInfo"), parameters, function(json,flag){
+					if(flag){
+						alert("短信已发送");
+					}else {
+						alert("短信发送失败");
+					}
+				});
+			},
+			cancelVal : '取消',
+			cancelCallback : jQuery.noop
+		};
+		Util.dialog.openDiv(params);
+	}else{
+		alert("电话未接通");
+		return false;
+	}
+}
+
+</script>
+</body>
+</html>

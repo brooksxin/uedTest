@@ -1,0 +1,9 @@
+{
+	"rtnCode": "0",
+	"rtnMsg": "success",
+	"bean":{
+		"lessauth":"郑州市公安局",
+		"startime":"2010.11.12",
+		"endtime":"2030.11.12"
+	}
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>产品对比 - 10085系统-外呼</title>
+	<#include "../../tpl/res_css.tpl" />
+  </head>
+  <body>
+      <!-- 右内容区域 B -->
+      <div class="formItem">
+          <div class="pt-10 pb-10 ui-fhw"><a href="javascript:history.go(-1);" class="formItem_jiantou-tu normalLink">返回</a></div>
+          <div class="titleArea">
+              <h2>对比产品</h2>
+          </div>
+          <div id="J_compareList">
+              <div class="ui-loading"><h1><img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等 ...</h1></div>
+          </div>
+      </div>
+  <#include "../../tpl/res_js.tpl" />
+  <script id="T_compareList" type="text/x-handlebars-template">
+    <table  class="form_table_gray tableMode" border="1" width="100%" >
+        <tbody>
+        <tr>
+            <td width="90">产品图片</td>
+            {{#each beans}}
+            <td>
+                <div class="gray-colse">
+                    <a href="javascript:void(0)" onclick="softphone.compare.remove('{{MCDS_UNIT_ID}}')" class="gray-close_btu"></a>
+                    <div class="fn-center "><img src="{{ftpUrl}}{{image150x270}}" width="82" height="96"></div>
+                    <div>{{MCDS_UNIT_NM}}</div>
+                </div>
+            </td>
+            {{/each}}
+        </tr>
+        {{#each compareRows}}
+            <tr>
+                <td>{{./name}}</td>
+                {{#each ./values }}
+                <td>{{{./text}}}</td>
+                {{/each}}
+            </tr>
+        {{/each}}
+        <tr>
+            <td>&nbsp </td>
+            {{#each beans}}
+            <td><a class="normalLink" href="javascript:void(0);" onclick="doBuyTerminal('{{MCDS_UNIT_ID}}','{{MCDS_UNIT_NM}}','{{UPRC}}')">立即购买</a></td>
+            {{/each}}
+        </tr>
+        </tbody>
+    </table>
+    </script>
+    <script type="text/javascript" src="../contact/js/softphone_impl.js"></script>
+    <script type="text/javascript">
+        softphone.compare.setDisplayNames({
+            "color": "颜色",
+            "listedYearMon": "上市日期",
+            "inputMode": "输入法",
+            "opSys": "操作系统",
+            "osModel": "系统版本",
+            "cpuModel": "CPU型号",
+            "cpuFrqry": "CPU频率",
+            "cpuCodeCnt": "CPU核数",
+            "mchnMemry": "机身内存",
+            "runMemry": "运行内存",
+            "UPRC": "价格",
+            "maxStoCardExtd": "内存扩展大小",
+            "cameraFront": "前置摄像头",
+            "cameraAfter": "后置摄像头",
+            "batteryType": "电池类型",
+            "bluetooth": "蓝牙协议版本",
+            "waitTime": "待机时长",
+            "playVideo": "视频播放",
+            "playMusic": "音乐播放",
+            "wifi": "无线WIFI",
+            "wifiHot": "无线热点",
+            "layinCardType": "内置卡类型",
+            "simCardSize": "SIM卡类型",
+            "scrPixel": "屏幕像素密度",
+            "gSensor": "重力感应",
+            "brandName":"品牌名称",
+            "wait_time":"待机时间",
+            "mobileSize":"手机尺寸",
+            "cameraAfter":"前置摄像头",
+            "MCDS_UNIT_NM":"商品名称",
+            "svrSize":"屏幕尺寸",
+            "SKU_QTY":"库存",
+            "telTime":"理论通话时间",
+            "cellChange":"电池更换",
+            "gyroscope":"陀螺仪",
+            "jdPrice":"京东价",
+            "sensorType":"传感器类型",
+            "scrMtial":"屏幕材质",
+            "scrCol":"屏幕色彩",
+            "mobileWeight":"机身重量(g)",
+            "cellSize":"电池容量",
+            "flashlight":"闪光灯",
+            "myopFctyFlagOrCntt":"运营商标志或内容",
+            "gpsModule":"GPS功能",
+            "headsetConn":"耳机接口",
+            "network4G":"4G网络制式",
+            "network3G":"3G网络制式",
+            "network2G":"2G网络制式",
+            "cellType":"电池类型",
+            "bluetoothVersion":"蓝牙功能",
+            "saleAfter":"售后保障",
+            "networkFreq":"网络频率",
+            "simSize":"SIM卡尺寸",
+            "packInv":"包装清单",
+            "scrRatio":"分辨率",
+            "dataLine":"数据线",
+            "nfc":"NFC",
+            "radio":"收音机",
+            "lightSensor":"光线感应",
+            
+            
+            
+        });
+        softphone.compare.init();
+        
+	function doBuyTerminal(mcds_unit_id,mcds_unit_nm,mcds_price){
+	   var params = {
+	        "mcds_unit_id":mcds_unit_id,
+	        "mcds_unit_nm":mcds_unit_nm,
+	        "mcdsUnitPrice":mcds_price
+	    }
+	    params = JSON.stringify(params);
+	    eval("var g_aaa = '"+ params +"';");
+	    top.$("#termlist_param").val(g_aaa);
+		window.location.href ="../orders/orderSelectQty.html";
+	}
+    </script>
+</body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>bootstrapDemo</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/bootstrap.js" type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body {
+	padding: 60px 0;
+}
+.bs-footer {
+	position: fixed;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 1030;
+	border-top: 1px solid #ccc;
+	background-color: #f0f0f0;
+	padding: 10px;
+	text-align: center;
+}
+.scrollspy-example {
+	position: relative;
+	height: 200px;
+	margin-top: 10px;
+	overflow: auto;
+}
+
+/**手机**/
+@media (max-width: 767px) {
+	body{ background: red;}
+}
+/**平板**/
+@media (min-width: 768px) and (max-width: 991px) {
+	body{ background: blue;}
+}
+/**PC**/
+@media (min-width: 992px) {
+	body{ background: orange;}
+}
+.glyphicons {
+	font-family: 'Glyphicons Halflings';
+	font-size: 2em;
+}
+</style>
+</head>
+<body>
+
+<header class="navbar navbar-inverse navbar-fixed-top" role="nav">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="javascript:;" class="navbar-brand">Bootstrap</a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="javascript:;">起步</a>
+        </li>
+        <li>
+          <a href="javascript:;">CSS</a>
+        </li>
+        <li class="active">
+          <a href="javascript:;">组件</a>
+        </li>
+        <li class="dropdown">
+          <a id="drop1" href="javascript:;" role="button" class="dropdown-toggle" data-toggle="dropdown">JavaScript插件<b class="caret"></b></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:;">Action</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:;">Another action</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:;">Something else here</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:;">靠左</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="javascript:;">定制</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+        <a id="drop2" href="javascript:;" role="button" class="dropdown-toggle" data-toggle="dropdown">关于<b class="caret"></b></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:;">Action</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:;">Another action</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:;">Something else here</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:;">靠右</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- <div style="display: block; height: 60px; width: 100%;"></div> -->
+<div class="container visible-xs">
+	<div class="row">
+		<div class="col-xs-12">767px下可见</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-3 col-sm-3 col-md-3">
+			<form role="form">
+			  <div class="form-group">
+			    <label for="exampleInputEmail1">用户名</label>
+			    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="用户名">
+			  </div>
+			  <div class="form-group">
+			    <label for="inputPassword" class="control-label">密码</label>
+					<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+			  </div>
+			  <button type="submit" class="btn btn-primary">登陆</button>
+			</form>
+		</div>
+		<div class="col-xs-9 col-sm-9 col-md-9">
+			<div class="row">
+				<div class="col-md-6 panel panel-default">
+					<a class="thumbnail" href="javascript:;">
+			        	<img src="http://v3.bootcss.com/examples/screenshots/starter-template.jpg" alt="" class="img-responsive">
+			        </a>
+			        <p>col-md-6</p>
+				</div>
+				<div class="col-md-6 panel panel-default">
+					<a class="thumbnail" href="javascript:;">
+			        	<img src="http://v3.bootcss.com/examples/screenshots/starter-template.jpg" alt="">
+			        </a>
+			        <p>col-md-6</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 panel panel-default">
+					<a class="thumbnail" href="javascript:;">
+			        	<img src="http://v3.bootcss.com/examples/screenshots/starter-template.jpg" alt="">
+			        </a>
+			        <p>col-md-6</p>
+				</div>
+				<div class="col-md-6 panel panel-default">
+					<a class="thumbnail" href="javascript:;">
+			        	<img src="http://v3.bootcss.com/examples/screenshots/starter-template.jpg" alt="">
+			        </a>
+			        <p>col-md-6</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-9 col-sm-6 col-md-6">
+			<div class="btn-group">
+        <button type="button" class="btn btn-default">5</button>
+        <button type="button" class="btn btn-default">6</button>
+        <button type="button" class="btn btn-default">7</button>
+      </div>
+		</div>
+		<div class="col-xs-3 col-sm-6 col-md-6">
+			<button type="button" class="btn btn-default">1</button>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-3 col-md-3">
+	      <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+	        Launch demo modal
+	      </button>
+
+	      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	        <div class="modal-dialog">
+	          <div class="modal-content">
+	            <div class="modal-header">
+	              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	            </div>
+	            <div class="modal-body">
+	              ...
+	            </div>
+	            <div class="modal-footer">
+	              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	              <button type="button" class="btn btn-primary">Save changes</button>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+		</div>
+
+
+		<div class="col-sm-9 col-md-9 panel panel-default">
+			<nav id="navbar-example2" class="navbar navbar-default navbar-static" role="navigation">
+			  <div class="navbar-header">
+			    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-js-navbar-scrollspy">
+			      <span class="sr-only">Toggle navigation</span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			    </button>
+			    <a class="navbar-brand" href="javascript:;">Project Name</a>
+			  </div>
+			  <div class="collapse navbar-collapse bs-js-navbar-scrollspy">
+			    <ul class="nav navbar-nav">
+			      <li><a href="#fat">@fat</a></li>
+			      <li><a href="#mdo">@mdo</a></li>
+			      <li class="dropdown">
+			        <a href="javascript:;" id="navbarDrop1" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+			        <ul class="dropdown-menu" role="menu" aria-labelledby="navbarDrop1">
+			          <li><a href="#one" tabindex="-1">one</a></li>
+			          <li><a href="#two" tabindex="-1">two</a></li>
+			          <li class="divider"></li>
+			          <li><a href="#three" tabindex="-1">three</a></li>
+			        </ul>
+			      </li>
+			    </ul>
+			  </div>
+			</nav>
+
+			<div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="scrollspy-example">
+			  <h4 id="fat">@fat</h4>
+			  <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic. Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+			  <h4 id="mdo">@mdo</h4>
+			  <p>Veniam marfa mustache skateboard, adipisicing fugiat velit pitchfork beard. Freegan beard aliqua cupidatat mcsweeney's vero. Cupidatat four loko nisi, ea helvetica nulla carles. Tattooed cosby sweater food truck, mcsweeney's quis non freegan vinyl. Lo-fi wes anderson +1 sartorial. Carles non aesthetic exercitation quis gentrify. Brooklyn adipisicing craft beer vice keytar deserunt.</p>
+			  <h4 id="one">one</h4>
+			  <p>Occaecat commodo aliqua delectus. Fap craft beer deserunt skateboard ea. Lomo bicycle rights adipisicing banh mi, velit ea sunt next level locavore single-origin coffee in magna veniam. High life id vinyl, echo park consequat quis aliquip banh mi pitchfork. Vero VHS est adipisicing. Consectetur nisi DIY minim messenger bag. Cred ex in, sustainable delectus consectetur fanny pack iphone.</p>
+			  <h4 id="two">two</h4>
+			  <p>In incididunt echo park, officia deserunt mcsweeney's proident master cleanse thundercats sapiente veniam. Excepteur VHS elit, proident shoreditch +1 biodiesel laborum craft beer. Single-origin coffee wayfarers irure four loko, cupidatat terry richardson master cleanse. Assumenda you probably haven't heard of them art party fanny pack, tattooed nulla cardigan tempor ad. Proident wolf nesciunt sartorial keffiyeh eu banh mi sustainable. Elit wolf voluptate, lo-fi ea portland before they sold out four loko. Locavore enim nostrud mlkshk brooklyn nesciunt.</p>
+			  <h4 id="three">three</h4>
+			  <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic. Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+			  <p>Keytar twee blog, culpa messenger bag marfa whatever delectus food truck. Sapiente synth id assumenda. Locavore sed helvetica cliche irony, thundercats you probably haven't heard of them consequat hoodie gluten-free lo-fi fap aliquip. Labore elit placeat before they sold out, terry richardson proident brunch nesciunt quis cosby sweater pariatur keffiyeh ut helvetica artisan. Cardigan craft beer seitan readymade velit. VHS chambray laboris tempor veniam. Anim mollit minim commodo ullamco thundercats.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<div id="tooltip">
+		        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="左侧提示">左侧Tooltip</button>
+		        <a id="tooltipDemo" >js调用</a>
+
+      		</div>
+		</div>
+		<div class="col-md-9 panel panel-default">
+			<ul id="myTab" class="nav nav-tabs">
+			  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+			  <li><a href="#profile" data-toggle="tab">Profile</a></li>
+			  <li class="dropdown">
+			    <a href="javascript:;" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+			    <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+			      <li><a href="#dropdown1" tabindex="-1" data-toggle="tab">@fat</a></li>
+			      <li><a href="#dropdown2" tabindex="-1" data-toggle="tab">@mdo</a></li>
+			    </ul>
+			  </li>
+			</ul>
+			<div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="home">
+          <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+        </div>
+        <div class="tab-pane fade" id="profile">
+          <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+        </div>
+        <div class="tab-pane fade" id="dropdown1">
+          <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+        </div>
+        <div class="tab-pane fade" id="dropdown2">
+          <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
+        </div>
+      </div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-6 col-md-4">ddd</div>
+		<div class="col-xs-6 col-md-4">zzzz</div>
+		<div class="col-xs-6 col-md-4">222222222</div>
+		<div class="col-xs-8">222222222</div>
+	</div>
+</div>
+
+<div>
+	<div class="jumbotron">
+	  <h1>Hello, world!</h1>
+	  <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+	  <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+	</div>
+</div>
+
+<div class="container">
+	<div class="progress">
+	  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+	    <span class="sr-only">40% Complete (success)</span>
+	  </div>
+	</div>
+	<div class="progress">
+	  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+	    <span class="sr-only">20% Complete</span>
+	  </div>
+	</div>
+	<div class="progress">
+	  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+	    <span class="sr-only">60% Complete (warning)</span>
+	  </div>
+	</div>
+	<div class="progress">
+	  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+	    <span class="sr-only">80% Complete</span>
+	  </div>
+	</div>
+</div>
+
+<form class="form-inline" role="form">
+  <div class="form-group">
+    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="用户名">
+  </div>
+  <div class="form-group">
+		<input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-primary">登陆</button>
+</form>
+
+<form class="form-inline" role="form">
+  <div class="form-group">
+    <label class="sr-only" for="exampleInputEmail2">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+  </div>
+</form>
+
+<div class="container">
+	<span class="glyphicons glyphicon-align-right"></span>
+	<span class="glyphicons glyphicon-arrow-down"></span>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="progress progress-striped active">
+			  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" id="progressBar">
+			    <span class="sr-only">60% Complete</span>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="bs-footer" role="contentinfo">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">footer</div>
+		</div>
+	</div>
+</footer>
+<script type="text/javascript">
+$(function(){
+	$("button[data-target='#myModal']").on("click", function(){
+		
+	})
+	var options = {
+		backdrop:true,//显示阴影
+		keyboard:true,//可以使用esc关闭弹窗
+		show:false//是否自动弹窗
+	}
+	$('#myModal').modal(options);
+
+	$('#tooltip button').tooltip();
+
+	var _width = 60;
+	var interval = setInterval(function () {
+		_width += Math.floor(Math.random()*10+1);
+		if(_width==100){
+			clearInterval(interval);
+		}
+		$('#progressBar').css({"width":_width+"%"});				
+	}, 1000);
+
+	var options = {
+	  title:  "button标签无法使用",
+	  placement: "right" 
+	}
+	$("#tooltipDemo").tooltip(options);
+
+});
+
+$(function () {
+  $('.tooltip-demo.well').tooltip({
+    selector: "a[rel=tooltip]"
+  })
+})
+
+</script>
+</body>
+</html>

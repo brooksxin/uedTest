@@ -1,0 +1,20 @@
+
+{
+	"returnCode": "0",
+	"returnMessage": "", 
+	"bean":{
+		"QU_ID":"99",
+		"QU_CNTT":"这里是开篇内容"
+
+	}, 
+	"beans":[
+		{
+			"QU_ID":"100", 
+			"QU_CNTT":"结束语内容0", 
+		},
+		{
+			"QU_ID":"101", 
+			"QU_CNTT":"结束语内容1", 
+		},
+	]
+}

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>补充订单信息-表单检查</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+    <#include "../../tpl/outCall_top.tpl" />
+    <div class="wrapper">
+        <#include "../../tpl/outCall_topMenu.tpl" />
+        <!-- left start -->
+        <div class="left">
+            <div class="leftInner" id="mainLeft">
+                <#include "../../tpl/outCall_left.tpl" />
+            </div>
+            <div class="middle" id="mainMiddle">&nbsp;</div>
+        </div>
+        <!-- left END -->
+        <!-- right start -->
+        <div class="right" id="mainRight" style="overflow:auto;*position:relative">
+            <div id="mainRight_child" style="height:100%;">
+            	<div class="formItem">
+				<div class="pt-10 pb-10 ui-fhw"><a href="Javascript:history.go(-1);void(0);" class="formItem_jiantou-tu normalLink">返回</a></div>
+                    
+                    <div class="titleArea">
+                        <h2>补充订单信息</h2>
+                    </div>
+                    <div class="formArea-A pt-30">
+                        <div class="fn-clear mb-30" style="display:block">
+                            <div id="J_addrInfo">
+                                <div class="ui-loading"><h1><img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等 ...</h1></div>
+                            </div>
+                        </div>
+                    	<div class="pt-30 pb-30 onlin_borTop">
+                       	  <span class="text_gray-666">支付方式：</span>
+                           	  <span class="ri_all_margin">
+                            	  <label>
+                            	    <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_0" />
+                            	    <span class="pl-10 pr-20">货到付款</span>
+                                  </label>
+                            	  <label>
+                            	    <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_1" />
+                            	    <span class="pl-10 pr-20">在线支付</span>
+                                  </label>
+                            	  <label>
+                            	    <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_1" />
+                            	    <span class="pl-10 pr-20">支付宝支付</span>
+                                  </label>
+                       	    	</span>
+                        </div>
+                        <div class="pd_bo-dashed">
+                        	<span class="text_gray-666">发票开具：</span>
+                            <span class="ri_all_margin">
+                            	<input name="" type="checkbox" value="" checked /><span class="pl-10">开具发票</span>
+                            </span>
+                            <div class="ui-margin115 mt-10">发票类型
+                            	<select class="FormInputSelect ml-10 mr-30">
+                                	<option>个人</option>	
+                                </select>
+                                <span class="fn-high mr-10">*</span>发票抬头
+                                <input type="text" class="FormInputText ml-10"/>
+                            </div>
+                        </div>
+                        <div class="pd_bo-dashed">
+                        	<span class="text_gray-666">短信模板：</span>
+                            <span class="ri_all_margin">
+                            	  <label>
+                            	    <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_0" />
+                            	    <span class="pl-10 pr-30">标准版</span>
+                                  </label>
+                            	  <label>
+                            	    <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_1" />
+                            	    <span class="pl-10 pr-30">卖萌版</span>
+                                  </label>
+                            	  <label>
+                            	    <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_1" />
+                            	    <span class="pl-10 pr-30">江湖版</span>
+                                  </label>
+                                  <label>
+                            	    <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_1" />
+                            	    <span class="pl-10 pr-30">科幻版</span>
+                                  </label>
+                       	    </span>
+                            <div class="ui-margin115">
+                            	<p class="ui-noteCenter">钱大华先生您好！您购买的"华为 AscendMate7月光银 移动4G手机"已下单，请注意物流变化。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="formBtnArea">
+                    <table width="100%">
+                        <tr>
+                            <td>
+                            <div class="normalBtnArea fn-center">
+                                <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" >下一步</a>
+                            </div>
+                	        </td>
+                        </tr>
+                  </table>
+                </div>
+            </div>
+        </div>
+        <!-- right stop -->
+    </div>
+    <!-- 弹出层dom结构 -->
+    <div id="T_addAddr" class="fn-hide">
+        <div style="height:400px;overflow:auto;">
+            <form id="J_form" name="J_form">
+                <div class="formItem">
+                    <table class="form_table">
+                        <tbody>
+                            <tr>
+                                <td width="110">
+                                    <label for="phoneNum" class="formDescription">
+                                        <span class="fn-high">*</span>
+                                        手机号码：
+                                    </label>
+                                </td>
+                                <td>
+                                    <input type="text" id="phoneNum" name="phoneNum" class="FormInputText width100" value="" />
+                                </td>
+                                <td class="fn-high">请输入收货人手机号码</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="name" class="formDescription">
+                                        <span class="fn-high">*</span>
+                                        收货人姓名：
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="name" name="name" class="FormInputText width100" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="formDescription">
+                                        <span class="fn-high">*</span>
+                                        所在地区：
+                                    </label>
+                                </td>
+                                <td>
+                                    <select class="inputSelect">
+                                        <option>山东</option>
+                                    </select>
+                                    <select class="inputSelect">
+                                        <option>菏泽</option>
+                                    </select>
+                                    <select class="inputSelect">
+                                        <option>请选择</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="addr" class="formDescription">
+                                        <span  class="fn-high">*</span>
+                                        详细地址：
+                                    </label>
+                                </td>
+                                <td>
+                                    <textarea rows="8" cols="40" id="addr" name="addr" class="width100"></textarea>
+                                </td>
+                                <td class="fn-high">请输入收货人详细地址</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="secondPhoneNum" class="formDescription">第二联系电话：</label>
+                                </td>
+                                <td>
+                                    <input id="secondPhoneNum" name="secondPhoneNum" class="FormInputText width100" type="text" />
+                                </td>
+                                <td class="fn-high">请输入收货人备用号码</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="formBtnArea">
+                        <table width="100%">
+                            <tr>
+                                <td>
+                                    <div class="normalBtnArea fn-center">
+                                        <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_add">
+                                            添 加
+                                        </a>
+                                        <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_cancel">
+                                            取消
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script id="T_addrInfo" type="text/x-handlebars-template">
+    {{#if beans.length}}
+        {{#each beans}}
+
+<div class="ui-Address_labelA">
+    <div class="AdressContent">
+        <a href="#" class="ui-close_btu" onclick="delAddr(this,'{{addrId}}')"></a>
+        <div class="gray-colse">
+            <h1>{{name}}</h1>
+            <div class="gray_text">{{province}} {{province}} {{region}} {{addr}}</div>
+            <div class="AdressPhoneNum">{{phoneNum}}<span>{{email}}</span></div>
+        </div>
+    </div>
+</div>
+
+        {{/each}}
+    {{else}}
+
+    {{/if}}
+    <div class="ui-Address_labelB ft-center">
+        <a id="J_addBrand" href="javascript:;">
+            <div class="ui-BlueCross"></div>
+            <div class="mt-20">添加一个标签</div>
+        </a>
+    </div>
+    </script>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+srvMap.add('billInfo', 'billInfo.json','');//查询地址列表
+srvMap.add('addAddr', 'addAddr.json','');//添加地址
+srvMap.add('delAddr', 'delAddr.json','');//删除地址
+
+$(function(){
+    loadAddr();//初始化页面
+
+    //添加按钮
+    $('#J_add').click(function(){
+        var str = $("#J_form").serialize();
+        Util.ajax.postJson(srvMap.get('billInfo'),'datas='+str,function(json,status){
+            if (status) {
+                Util.dialog.tips('添加成功！');
+                loadAddr();//添加成功后，重新加载地址列表
+                Util.dialog.close('D_addAddr');
+            }else{
+                Util.dialog.tips(json.returnMessage||'查询失败，请重试！');
+            }
+        })
+    })
+    //取消按钮
+    $('#J_cancel').click(function(){
+        Util.dialog.close('D_addAddr');
+    })
+})
+
+function loadAddr(){
+    Util.ajax.postJson(srvMap.get('billInfo'),'',function(json,status){
+        if (status) {
+            Util.ajax.loadTemp('#J_addrInfo',$('#T_addrInfo'),json);//加载模板
+
+            //添加标签
+            //因为J_addBrand结点在模板内定义，所以要模板加载出来之后在绑定事件$('#')
+            $('#J_addBrand').click(function(){
+                var elem = document.getElementById('T_addAddr');
+                var params = {
+                    id:'D_addAddr',
+                    title:'添加收货地址',
+                    content: elem,
+                    width: 800,
+                    modal: true
+                }
+                Util.dialog.openDiv(params);
+            })
+        }else{
+            Util.dialog.tips(json.returnMessage||'查询失败，请重试！');
+        }
+    })
+}
+
+//删除地址
+function delAddr(obj,addrId){
+    Util.dialog.confirm({
+        content:'确认删除？',
+        okCallback:function(){
+            Util.ajax.postJson(srvMap.get('delAddr'),'addrId='+addrId,function(json,status){
+                if (status) {
+                    Util.dialog.tips('删除成功！');
+                    $(obj).parents('.ui-Address_labelA').remove();
+                }else{
+                    Util.dialog.tips(json.returnMessage||'查询失败，请重试！');
+                }
+            })
+        }
+    });
+}
+</script>
+</body>
+</html>

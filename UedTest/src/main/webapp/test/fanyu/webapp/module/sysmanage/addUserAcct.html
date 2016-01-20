@@ -1,0 +1,107 @@
+      <!DOCTYPE html>
+      <html>
+      <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>添加用户_step1_基本信息</title>
+      <#include "../../tpl/res_css.tpl" />
+      
+      </head>
+      
+      <body>
+      <div class="formItem">
+         
+                <div class="titleArea">
+                    <h2>创建活动</h2>
+                </div>
+          <div class="formArea">
+                <table class="form_table">
+                                <tbody>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 员工编号</label></td>
+                                        <td width=""><input class="FormInputText width100" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 所属渠道</label></td>
+                                        <td width="">
+                                             <select class="FormInputText width100">
+                                                 <option>语音</option>
+                                                 <option>众包</option>
+                                                 <option>O2O</option>
+                                             </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 登录方式</label></td>
+                                        <td><span><input type="radio" name=""/>手机号</span>
+                                            <span><input type="radio" name=""/>邮箱</span>
+                                            <span><input type="radio" name=""/>自定义</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 工号 </label></td>
+                                        <td width=""><input class="FormInputText width100" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription">别名</label></td>
+                                        <td width=""><input class="FormInputText width100" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription">手机</label></td>
+                                        <td width="">
+                                                <input class="FormInputText width100" type="text" value="13897867654" style="background-color:#BDBBBB;" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription">邮箱</label></td>
+                                        <td width="">
+                                                 <input class="FormInputText width100" type="text" value="13897867654@139.com" style="background-color:#BDBBBB;"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span>登录密码</label></td>
+                                        <td width=""><input class="FormInputText width100" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span>确认密码</label></td>
+                                        <td width=""><input class="FormInputText width100" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top"><label class="formDescription"><span class="fn-high">*</span> 活动描述：</label></td>
+                                        <td>此处插入文本编辑器</td>
+                                    </tr>
+                                </tbody>
+                </table>
+                <hr/>
+                <div class="formBtnArea">
+                    <table width="100%">
+                      <tr>
+                        <td>
+                          <div class="normalBtnArea fn-center">
+                              <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" >下一步</a>
+                          </div>
+                        </td>
+                        <td>
+                            <div class="normalBtnArea fn-right">
+                              <a href="#" class="formLink"><span>取消</span></a>
+                            </div>
+                        </td>
+                      </tr>
+                    </table>
+                </div>
+                                                 
+      </div>
+      
+   </div>   
+     
+     
+      
+      <#include "../../tpl/res_js.tpl" />    
+      <script type="text/javascript">
+          //页面加载完开始执行
+          $(document).ready(function () {
+              //初始化函数
+          });
+      </script>
+      </body>
+      </html>

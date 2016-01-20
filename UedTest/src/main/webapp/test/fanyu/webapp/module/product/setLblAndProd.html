@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>配置标签对应商品</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+
+<!-- 面包屑 begain -->
+<div class="breadcrumb"></div>
+<!-- 面包屑end -->
+
+<div class="formItem">
+	<div class="titleArea bd-bottom fn-clear">
+        <a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a><h2 class="ui-textIndentStyle fn-left">配置标签对应商品</h2>
+    </div>
+
+    <div method="post" action="#" class="cmxform" >
+      <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+        <input id="lblInclude" name="LBL_ID" value=""/>
+        <div class="record-search-cate">
+        <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td width="100"><label class="description">商品编号</label></td>
+                    <td width="150">
+                        <input class="inputText" type="text" maxlength="255"  name="MCDS_UNIT_ID" value=""/>
+                    </td>      
+                    <td width="100"><label class="description">商品名称</label></td>
+                    <td width="150">
+                        <input class="inputText" type="text" maxlength="255"  name="MCDS_UNIT_NM" value=""/>
+                    </td>
+                    <td width="100"><label class="description">商家</label></td>
+                    <td width="150">
+                     <select class="inputSelect w160" id="partner" name="PTY_ID" >
+                     </select>
+                      <script type="text/x-handlebars-template" id="p_partner">
+                    	<option value="">全部</option>
+							{{#each beans}}
+                    			<option value={{PTY_ID}}>{{PTY_NM}}</option>
+                    		{{/each}}
+            			</script>
+                     </td>  
+                    <td>
+                    <div class="normalBtnArea">
+                        <a class="searchBtn w82" href="javascript:;" id="J_search" ><i></i>查询</a>
+                    </div>
+                    </td>
+               </tr>
+            </tbody>
+        </table>
+      </div>
+      </form>
+    </div>
+    <div class="tablewidth mg_t_10">
+      <table class="ui-record-table table_radius table-bordered table-striped"  >
+        <thead>
+          <tr>
+            <th width="100">标签名称</th>
+            <th width="80">商品编号</th>
+            <th width="100">商品名称</th>
+            <th width="100">商家</th>
+            <th width="60">价格（元）</th>
+            <th width="120">添加时间</th>
+            <th width="100">操作</th>
+          </tr>
+        </thead>
+        <tbody id="J_tabletpl">
+         
+        </tbody>
+      </table>
+    </div>
+    <div class="normalBtnArea ft-right mt-10 mr-10">
+       <a class="normalBtn BGblue" href="javascript:;" id="J_create" >添加新的商品</a>
+    </div>
+    
+     <!--翻页及功能按钮区域开始-->
+ <DIV class="amount-bottom">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+   <tr>
+    <td width="50%"><DIV class="fn-clear action-other  action-other-show ">
+      <DIV id=Pagination class="page pagination fn-right"></DIV>
+      <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+     </DIV></td>
+   </tr>
+  </table>
+ </DIV>
+</div>
+ <div id="popupSku" class="fn-hide">
+     <div id="T_importProd" class="fn-hide">
+     	<div class="formItem">
+	<div class="titleArea fn-clear">
+        <h2 class="ui-textIndentStyle fn-center">选择标签对应商品</h2>
+    </div>
+
+    <div method="post" action="#" class="cmxform" >
+      <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearchClude" name="J_formSearchClude" >
+        <input id="lbl" type="hidden" name="LBL_ID" value=""/>
+        <div class="record-search-cate">
+        <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td width="80"><label class="description">商品编号</label></td>
+                    <td width="120">
+                        <input class="inputText" type="text" maxlength="255" value="" name="MCDS_UNIT_ID"/>
+                    </td>      
+                    <td width="80"><label class="description">商品名称</label></td>
+                    <td width="120">
+                        <input class="inputText" type="text" maxlength="255" value="" name="MCDS_UNIT_NM"/>
+                    </td>
+                    <td width="80"><label class="description" name="">商家</label></td>
+                    <td width="120">
+                      <select class="inputSelect w160" id="partner1" name="PTY_ID" >
+                     </select>
+                      <script type="text/x-handlebars-template" id="p_partner1">
+                    	<option value="">全部</option>
+							{{#each beans}}
+                    			<option value={{PTY_ID}}>{{PTY_NM}}</option>
+                    		{{/each}}
+            			</script>
+                     </td>  
+                    <td>
+                    <div class="normalBtnArea">
+                        <a class="searchBtn w82" href="javascript:;" id="J_searchClude" ><i></i>查询</a>
+                    </div>
+                    </td>
+               </tr>
+            </tbody>
+        </table>
+      </div>
+      </form>
+    </div>
+    <div class="tablewidth mg_t_10">
+      <table class="ui-record-table table_radius table-bordered table-striped"  >
+        <thead>
+          <tr>
+            <th width="45">选择</th>
+            <th width="80">商品编号</th>
+            <th width="100">商品名称</th>
+            <th width="60">价格（元）</th>
+            <th width="100">商家</th>
+          </tr>
+        </thead>
+        <tbody id="J_tabletplClude">
+    	
+        </tbody>
+      </table>
+    </div>
+<script id="T_tabletplClude" type="text/x-handlebars-template">
+	{{#if beans}}
+    	{{#each beans}}
+			<tr>
+            <td><div class="table_select"><input type="checkbox" name="chkItem" value='{{TGT_MCDS_UNIT_ID}}' onclick="selectl();"/></div></td>
+            <td>{{TGT_MCDS_UNIT_ID}}</td>
+            <td><div class="text_yinc"><a href="#">{{MCDS_UNIT_NM}}</a></div></td>
+            <td>{{UPRC}}</td>
+            <td><div class="text_yinc">{{PTY_NM}}</div></td>
+          </tr>
+	{{/each}}
+{{else}}
+	<tr>
+		<td colspan="4">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text" >暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+
+    <!--翻页及功能按钮区域开始-->
+    <DIV class="amount-bottom">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+   <tr>
+   		<td width="60" id="selectNum">
+             已选择0条
+          </td>
+          <td>
+            <div class="normalBtnArea"><!--不附加ft-right样式，默认左对齐-->
+                
+                <a href="javascript:;" id="deleteAllCheckbox">清空</a>
+            </div>
+          </td>
+    <td width="50%"><DIV class="fn-clear action-other  action-other-show ">
+      <DIV id="Pagination1" class="page pagination fn-right"></DIV>
+      <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+     </DIV></td>
+   </tr>
+  </table>
+</div>
+     	
+     	
+     </div>
+</div>
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr class="ui-record-table table_radius table-bordered table-striped">
+			<td>{{LBL_NM}}</td>
+			<td>{{TGT_MCDS_UNIT_ID}}</td>
+			<td>{{MCDS_UNIT_NM}}</td>
+			<td>{{PTY_NM}}</td>
+			<td>{{UPRC}}</td>
+			<td>{{CRT_TIME}}</td>
+			<td><a href="javascript:;" onclick="deleteProd('{{TGT_MCDS_UNIT_ID}}');">删除</a></td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="7">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text" >暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+	var LBL_ID = Util.browser.getParameter('LBL_ID');
+	$('#lbl').val(LBL_ID);
+	$('#lblInclude').val(LBL_ID);
+	srvMap.add('prod', 'prod.json','front/sh/prod!index?uid=nxz01');
+	srvMap.add('prodClude', 'prodClude.json','front/sh/prod!index?uid=nxz03');
+	srvMap.add('partner', 'partner.json','front/sh/user!partnerInfo?uid=u001');
+	srvMap.add('del', 'del.json','front/sh/prod!index?uid=nxz02');
+	srvMap.add('inser', 'inser.json','front/sh/prod!index?uid=nxz04');
+	
+//分页数据2
+var G_params2 = {
+	url : srvMap.get('prodClude'),
+	items_per_page : 7,   		// 每页数     @param : limit
+	page_index : 0 , 				//当前页  @param : start
+	pagination : "Pagination1" , 	//分页id
+	searchformId : "J_formSearchClude",  //搜索表单的id
+	tabletpl : "T_tabletplClude", 		//表格模板
+	tablewrap : "J_tabletplClude", 		//表格容器
+		
+}
+
+
+	var J_add_form = $("#J_add_form");
+	var validate1 = J_add_form.validate({
+    showErrors:function(){
+        this.defaultShowErrors();
+    },
+    success: function(currentDom){
+        $(currentDom).html("<img src='../../css/images/validate-right.png' class='right-img'>");
+    }
+});
+	var D_newSkuQty = $("#newSkuQty");
+	var elem = $("#T_importProd");
+	function updateSku() {
+		
+		var params = {
+			id : 'A_importProd',
+			content : elem,
+			width : 950,
+			height : 550,
+			modal : true,
+			okVal : '确定',
+			okCallback : okDialog,
+			cancelVal : '取消',
+			cancelCallback : closeDialog
+		}
+		Util.dialog.openDiv(params);
+		//商家信息
+		Util.ajax.postJson(srvMap.get('partner'),'',function(json,status){
+			Util.ajax.loadTemp('#partner1',$('#p_partner1'),json);//加载模板
+		});
+		var str = $("#"+G_params2.searchformId).serialize(); //把form序列化
+    	Util.pagination(0,true,G_params2,str);
+
+	}
+	/*
+    点击弹出框中的取消按钮之后的回调事件
+ */
+ 
+ 
+function closeDialog() {
+	
+}
+	
+function okDialog(){
+	var mcds_id = '';
+	var $prods = $(":checkbox[name='chkItem']:checked","#J_tabletplClude");
+	 $.each($prods, function(i, n){
+		 mcds_id += n.value;
+		  if(i < $prods.length - 1){
+			  mcds_id += ",";
+		  }
+	  });
+	 var ins = {'LBL_ID':LBL_ID,'MCDS_UNIT_IDS':mcds_id};
+	Util.ajax.postJson(srvMap.get('inser'),ins,function(json,status){
+		if(status){
+			 var str = $("#"+G_params2.searchformId).serialize(); //把form序列化
+	         Util.pagination(0, true , G_params2 , str );
+		}
+	});
+}
+function selectl(){
+	var mcdsUnitIds = 0;
+	var $prods = $(":checkbox[name='chkItem']:checked","#J_tabletplClude");
+	 $.each($prods, function(i, n){
+		  mcdsUnitIds += 1;
+	  });
+	 $('#selectNum').html('已选择'+mcdsUnitIds+'条');
+}
+//全不选
+$("#deleteAllCheckbox").bind("click", function () {
+    $("[name = chkItem]:checkbox").attr("checked", false);
+    $('#selectNum').html('已选择0条');
+});
+	//商家信息
+		function loadPartnerData(){
+		Util.ajax.postJson(srvMap.get('partner'),'',function(json,status){
+		   Util.ajax.loadTemp('#partner',$('#p_partner'),json);//加载模板
+		});
+	}
+	//分页数据
+	var G_params1 = {
+    	url : srvMap.get('prod'),
+    	items_per_page : 10,   		// 每页数     @param : limit
+    	page_index : 0 , 				//当前页  @param : start
+    	pagination : "Pagination" , 	//分页id
+    	searchformId : "J_formSearch",  //搜索表单的id
+    	tabletpl : "T_tabletpl", 		//表格模板
+    	tablewrap : "J_tabletpl", 		//表格容器
+	};
+	
+	
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        loadPartnerData();
+        $('#J_create').bind('click',updateSku);
+        $('#J_searchClude').bind('click',function(){
+        	var str = $("#"+G_params2.searchformId).serialize(); //把form序列化
+        	Util.pagination(0,true,G_params2,str);
+        })
+    	$('#J_search').bind('click',function(){
+            var str = $("#"+G_params1.searchformId).serialize(); //把form序列化
+            Util.pagination(0, true , G_params1 , str );
+        });
+    });
+    function deleteProd(mcds_id){
+    	var del = {'LBL_ID':LBL_ID,'MCDS_UNIT_ID':mcds_id};
+		Util.ajax.postJson(srvMap.get('del'),del,function(json,status){
+			if(status){
+				 var str = $("#"+G_params1.searchformId).serialize(); //把form序列化
+		         Util.pagination(0, true , G_params1 , str );
+			}
+		});
+		}
+</script>
+</body>
+</html>

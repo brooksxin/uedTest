@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<title>Uploader Example</title>
+	<script type="text/javascript" >
+// 扩展API加载完毕后调用onPlusReady回调函数 
+document.addEventListener( "plusready", onPlusReady, false );
+var task = null;
+// 扩展API加载完毕，现在可以正常调用扩展API 
+function onPlusReady() {
+}
+// 监听上传任务状态
+function onStateChanged( upload, status ) {
+	if ( upload.state == 4 && status == 200 ) {
+		// 上传完成
+		alert( "Upload success: " + upload.getFileName() );
+	}
+}
+// 创建上传任务
+function createUpload() {
+	var task = plus.uploader.createUpload( "http://www.test.com/upload.do" );
+	task.addFile( "_www/a.doc", {key:"testdoc"} );
+	task.addData( "string_key", "string_value" );
+	task.addEventListener( "statechanged", onStateChanged, false );
+	task.start();
+}
+// 暂停上传任务
+function pauseUpload() {
+	task.pause();
+}
+// 取消上传任务
+function abortUpload() {
+	task.pause();
+}
+	</script>
+	</head>
+	<body >
+		<input type="button" value="Create upload task" onclick="createUpload();" ></input>
+		<input type="button" value="Pause upload task" onclick="pauseUpload();" ></input>
+		<input type="button" value="Abort upload task" onclick="abortUpload();" ></input>
+	</body>
+</html>

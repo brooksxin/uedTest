@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>典型案例</title>
+</head>
+<body>
+    <div method="post" action="#" class="cmxform" >
+        <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+            <div class="record-search-cate">
+                <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label class="description">案例编号</label>
+                            </td>
+                            <td width="150">
+                                <input class="inputText" type="text" maxlength="255" value=""/>
+                            </td>
+                            <td>
+                                <label class="description">案例类型</label>
+                            </td>
+                            <td colspan="3">
+                                <select class="inputSelect inputWidthDataPoint">
+                                    <option>全部</option>
+                                    <option>优秀</option>
+                                    <option>有重大问题</option>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="normalBtnArea">
+                                     <a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label class="description">开始申诉时间：</label></td>
+                            <td>
+                                <input id="param-eDate" class="element text Wdate" type="text" value="2015-12-04" onFocus="WdatePicker()"  />
+                            </td> 
+                            <td><label class="description">截止申诉时间：</label></td>
+                            <td>  
+                                <input id="param-eDate" class="element text Wdate" type="text" value="2015-12-04" onFocus="WdatePicker()"  />
+                            </td>
+                            <td>
+                                <label class="description">业务类别</label>
+                            </td>
+                            <td>
+                                <select class="inputSelect inputWidthDataPoint">
+                                    <option>不限</option>
+                                    <option>语音外呼</option>
+                                    <option>语音接听</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+        </form>
+    </div>
+             
+             
+             <div class="listTopBtn">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="800"><h3>共1500条记录</h3></td>
+            <td><div class="normalBtnArea ft-right"><a class="normalBtn BGblue" href="#">导出订单</a></div></td>
+          </tr>
+        </table>
+    </div>
+    <div class="tablewidth mg_t_10">
+        <table class="ui-record-table table_radius table-bordered table-striped"  >
+            <thead>
+                <tr>
+                    <th width="25">&nbsp;</th>
+                    <th width="160">案例编号</th>
+                    <th width="80">案例类型</th>
+                    <th width="80">业务类别</th>
+                    <th width="120">发布时间</th>
+                    <th width="80">发布工号</th>
+                    <th>操作</th>
+                </tr>
+             </thead>
+             <tbody id="J_tabletpl">
+                <tr>
+                    <td>
+                        <div class="table_select"><input type="checkbox" /></div>
+                    </td>
+                    <td>20150708001</td>
+                    <td>优秀</td>
+                    <td>语音外呼类</td>
+                    <td>2015.04.14 09:00:23</td>
+                    <td>X009051</td>
+                    <td width="">
+                        <div class="gridRowBtn">
+                            <a class="item-text" href="javascript:;">听录音</a><a class="item-text" href="javascript:;" onclick="cancelReservation()" >修改案例</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+        <!--翻页及功能按钮区域开始-->
+<div class="amount-bottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+        <tr>
+            <td width="60">
+                <input type="checkbox" class="selectAll" id="selectAll" /> <label for="selectAll">全选</label> 
+            </td>
+            <td>
+                <div class="normalBtnArea"><!--不附加ft-right样式，默认左对齐-->
+                <select>
+                    <option>请选择操作</option>
+                    <option>删除</option>
+                    <option>导出</option>
+                </select>
+                </div>
+            </td>
+            <td width="50%">
+              <div class="fn-clear action-other  action-other-show ">
+                  <div id="Pagination" class="page pagination fn-right"> </div>
+                  <div class="fn-right fn-pt5 fn-pr10"></div>
+              </div>
+            </td>
+        </tr>
+    </table>
+</div>    
+<script src="../../common/frameInit.js"></script>
+<#include "../../tpl/res_js.tpl" />
+<script src="../../common/config.js"></script>
+<script src="../../common/common.js"></script>    
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+    });
+    
+function cancelReservation(){
+    artDialog({
+        id: 'Confirm',
+        lock: true,
+        opacity: .1,
+        content: '您确定要取消此预约单吗？',
+        ok: function (here) {
+            art.dialog.tips('已取消');
+        },
+        cancel: function (here) {
+            return;
+        }
+    });
+    
+    
+}
+</script>
+</body>
+</html>

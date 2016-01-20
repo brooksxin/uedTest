@@ -1,0 +1,36 @@
+{
+    "point_list": [
+        {
+            "latitude": "30.255219",
+            "longitude": "120.19027",
+            "point_address": "嘉兴市七星大道农贸市场东侧",
+            "point_busi_id": "10030959",
+            "point_icon": "1",
+            "point_id": "656100673",
+            "point_name": "嘉兴嘉禾七星营业厅",
+            "point_type": "1",
+            "static_data": [
+                {
+                    "prop_label": "静态属性1",
+                    "prop_value": "aaa"
+                },
+                {
+                    "prop_label": [],
+                    "prop_value": []
+                }
+            ]
+        },
+        {
+            "latitude": "30.265219",
+            "longitude": "120.18027",
+            "point_address": [],
+            "point_busi_id": "10000667",
+            "point_icon": "1",
+            "point_id": "656101574",
+            "point_name": "诸几第二营业厅",
+            "point_pyte": "1",
+            "static_data": []
+        }
+    ],
+    "returncode": "1"
+}

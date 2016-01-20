@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>问卷管理</title> <#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+	<div class="breadcrumb"></div>
+	<div class="listTopBtn">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><h1>问卷管理</h1></td>
+				<td><div class="normalBtnArea ft-right">
+						<a id="Creat" class="normalBtn BGblue" href="javascript:;">创建问卷</a>
+					</div></td>
+			</tr>
+		</table>
+	</div>
+
+	<div method="post" action="#" class="cmxform">
+		<form method="get" action="" class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch">
+			<div class="record-search-cate">
+				<table class="search_table" cellpadding="0" cellspacing="0" border="0" style="width: 100%">
+					<tr>
+						<td width="80"><label class="description" >问卷名称</label></td>
+						<td><input class="inputWidth inputText" id="QNR_NM" name="QNR_NM" type="text" /></td>
+
+						<td width="80"><label class="description">问卷类型</label></td>
+						<td><select class="inputWidth inputSelect" id="QNR_TYPE_CD" name="QNR_TYPE_CD">
+								<option value="">请选择</option>
+								<option value="01">营销类</option>
+								<option value="02">调研类</option>
+								<option value="03">通知类</option>
+								<option value="04">关怀类</option>
+								<option value="05">投诉类</option>
+						</select></td>
+
+						<td width="80"><label class="description">问卷状态</label></td>
+						<td><select class="inputWidth inputSelect" id="QNR_STS_CD" name="QNR_STS_CD">
+								<option value="">请选择</option>
+								<option value="10D">新建</option>
+								<option value="10A">发布</option>
+								<option value="10X">失效</option>
+						</select></td>
+
+						<td width="100">
+							<div class="normalBtnArea w82">
+								<a class="searchBtn" href="javascript:;" id="J_search"><i></i>查询</a>
+							</div>
+						</td>
+					</tr>
+					<tbody id="J_searchMore" class="searchMore">
+
+						<td width="80"><label class="description">发布工号</label></td>
+						<td><select class="inputWidth inputSelect" id="CRT_USER_ID" name="CRT_USER_ID">
+
+						</select></td>
+
+						<td width="80"><label class="description">一级渠道</label></td>
+						<td><select class="inputWidth inputSelect" id="FIR_SUIT_RNG_ID" name="FIR_SUIT_RNG_ID">
+
+						</select></td>
+
+						<td width="80"><label class="description">二级渠道</label></td>
+						<td><select class="inputWidth inputSelect" id="SEC_SUIT_RNG_ID" name="SEC_SUIT_RNG_ID">
+
+						</select></td>
+						<tr>
+							<td><label class="description">开始时间</label></td>
+							<td><input id="CRT_START_DATE" name="CRT_START_DATE" class="inputWidth element text Wdate" type="text"
+								onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'CRT_END_DATE\')}'})" /></td>
+							<td><label class="description">结束时间</label></td>
+							<td><input id="CRT_END_DATE" name="CRT_END_DATE" class="inputWidth element text Wdate" type="text"
+								onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'CRT_START_DATE\',{d:1})||\'2010-01-01 23:59:59\'}'})" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="seeMoreFilter">
+				<a href="#" class="down"></a>
+			</div>
+		</form>
+	</div>
+
+	<div class="tablewidth mg_t_10">
+		<table class="ui-record-table table_radius table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>问卷编号</th>
+					<th>问卷名称</th>
+					<th width="80">适用渠道</th>
+					<th width="80">问卷类型</th>
+					<th width="120">发布时间</th>
+					<th width="80">发布来源</th>
+					<th width="80">问卷状态</th>
+					<th width="190">操作</th>
+				</tr>
+			</thead>
+			<tbody id="J_tabletpl">
+			</tbody>
+		</table>
+	</div>
+
+	<!--翻页及功能按钮区域开始-->
+	<DIV class="amount-bottom">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+			<tr>
+				<td>
+					<DIV class="fn-clear action-other  action-other-show ">
+						<DIV id=Pagination class="page pagination fn-right"></DIV>
+						<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+					</DIV>
+				</td>
+			</tr>
+		</table>
+	</DIV>
+	<script id="T_tabletpl" type="text/x-handlebars-template">
+    {{#if beans}}
+        {{#each beans}}
+            <tr>
+                <td>{{QNR_ID}}</td>
+                <td>{{QNR_NM}}</td>
+                <td>{{SUIT_RNG_ID}}</td>
+				<td>{{QNR_TYPE_CD}}</td>
+                <td>{{CRT_TIME}}</td>
+                <td>{{CRT_USER_ID}}</td>
+				<td>{{QNR_STS_PARSE QNR_STS_CD}}</td>
+
+				<td>
+                    <div class="gridRowBtn">
+						{{{choictBtn QNR_STS_CD}}}
+						<input type="hidden" id="{{QNR_ID}}" QNR_STS_CD="{{QNR_STS_CD}}" />
+                   </div>
+                </td>
+            </tr>
+         {{/each}}
+    {{else}}
+	<tr>
+		<td colspan="8">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+    {{/if}}
+</script>
+
+	<script id="T_CRT_USER_ID" type="text/x-handlebars-template">
+		<option value="">请选择发布工号</option>
+		{{#if beans}}
+            {{#each beans}}
+                 <option value="{{CRT_USER_ID}}">{{PTY_NO}} {{PTY_NM}}</option>
+             {{/each}}
+   		{{/if}}
+	</script>
+
+	<script id="T_FIR_SUIT_RNG_ID" type="text/x-handlebars-template">
+		<option value="">请选择一级渠道</option>
+		{{#if beans}}
+            {{#each beans}}
+                 <option value="{{CHNL_ID}}">{{PTY_NM}}</option>
+             {{/each}}
+   		{{/if}}
+	</script>
+
+	<script id="T_SEC_SUIT_RNG_ID" type="text/x-handlebars-template">
+		<option value="">请选择二级渠道</option>
+		{{#if beans}}
+            {{#each beans}}
+                 <option value="{{CHNL_ID}}">{{PTY_NM}}</option>
+             {{/each}}
+   		{{/if}}
+	</script>
+
+	<#include "../../tpl/res_js.tpl" />
+
+	<script type="text/javascript">
+		srvMap.add('unionDeleteQuestionaire', '','front/sh/questionaire!index?uid=qnrwq002');//删除问卷
+		srvMap.add('modifyQuestionaire', '','front/sh/questionaire!index?uid=qnrwq003');//修改问卷
+		srvMap.add('previewQuestionaire', '','front/sh/questionaire!index?uid=qnrwq004');//预览问卷
+		srvMap.add('cloneQuestionaire', '','front/sh/questionaire!index?uid=qnrwq005');//复制问卷
+		srvMap.add('queryQuestionaire', 'questionaire/queryQuestionaire.json','front/sh/questionaire!index?uid=qnrwq006');//查询问卷
+		srvMap.add('invalidQuestionaire', '','front/sh/questionaire!index?uid=qnrwq008');//作废问卷
+		srvMap.add('queryUser', '','front/sh/user!userinfo?uid=u005');//查询所有的本部门员工
+		
+		var G_params = {
+			url : srvMap.get('queryQuestionaire'),
+			searchformId : "J_formSearch",
+			items_per_page : 10, // 每页数     @param : limit
+			page_index : 0, //当前页  @param : start
+			pagination : "Pagination", //分页id
+			tabletpl : "T_tabletpl", //表格模板
+			tablewrap : "J_tabletpl" //表格容器
+		};
+
+		//页面加载完开始执行
+		$(document).ready(
+				function() {
+					var cmd = {
+						"DEPT_ID" : userInfo.bean.deptId
+					};
+					
+					//加载当前本部门下的员工到下拉列表
+					Util.ajax.postJson(srvMap.get('queryUser'), cmd, function(json, status) {
+						if (status) {
+							Util.ajax.loadTemp("#CRT_USER_ID",$("#T_CRT_USER_ID"), json);
+						}
+					});
+					
+					//初始化函数
+					var str = $("#" + G_params.searchformId).serialize();
+					Util.pagination(0, true, G_params, str);
+
+					$('#J_search').bind('click',function() {
+								if ($("#CRT_START_DATE").val() != null&& $("#CRT_START_DATE").val() != ''&& $("#CRT_END_DATE").val() != null&& $("#CRT_END_DATE").val() != '') {
+									if ($("#CRT_START_DATE").val() >= $("#CRT_END_DATE").val()) {
+										Util.dialog.tips("开始时间不能等于大于结束时间");
+										return;
+									}
+								}
+								var str = $("#" + G_params.searchformId).serialize();
+								Util.pagination(0, true, G_params, str);
+							});
+				});
+		
+		
+		
+		function deleteQnr(QNR_ID, QNR_STS_CD) {
+			if (QNR_STS_CD != "10D") {
+				Util.dialog.tips("非新建状态的问卷，不能删除！");
+				return;
+			} else {
+				var cmd = {"QNR_ID" : QNR_ID};
+				Util.ajax.postJson(srvMap.get("unionDeleteQuestionaire"), cmd,
+						function(json) {
+							if (json.returnCode == 0) {
+								var str = $("#" + G_params.searchformId).serialize();
+								Util.pagination(0, true, G_params, str);
+								Util.dialog.tips("删除成功！");
+							} else {
+								Util.dialog.tips("删除失败！");
+							}
+						});
+			}
+		}
+		
+		function invalidQnr(QNR_ID, QNR_STS_CD) {
+			if (QNR_STS_CD != "10A") {
+				Util.dialog.tips("非发布状态的问卷，不能作废！");
+				return;
+			} else {
+				var cmd = {"QNR_ID" : QNR_ID};
+				Util.ajax.postJson(srvMap.get("invalidQuestionaire"), cmd,
+						function(json) {
+							if (json.returnCode == 0) {
+								var str = $("#" + G_params.searchformId).serialize();
+								Util.pagination(0, true, G_params, str);
+								Util.dialog.tips("作废成功！");
+							} else {
+								Util.dialog.tips("作废失败！");
+							}
+						});
+			}
+		}
+		
+		function modifyQnr(QNR_ID, QNR_STS_CD) {
+			if (QNR_STS_CD != "10D") {
+				Util.dialog.tips("非新建状态的问卷，不能编辑！");
+				return;
+			} else {
+				window.location.href="addQuestionaire.html?"+"QNR_ID="+QNR_ID; 
+			}
+		}
+
+		Handlebars.registerHelper("QNR_STS_PARSE", function(QNR_STS_PARSE){
+			return { '10D':'新建','10A':'发布','10X':'作废' }[QNR_STS_PARSE];
+		});
+
+		Handlebars.registerHelper("choictBtn", function(status){
+		    var _content;
+		    switch(status){
+		        case "10D":
+		        	//新建
+		             _content    = "<a class=\"item-text\" href=\"javascript:;\" onclick=\"Qpreview(this)\">预览</a>";
+		             _content	+= "<a class=\"item-text\" href=\"javascript:;\" onclick=\"Qcopy(this)\">复制</a>";
+		             _content	+= "<a class=\"item-text\" href=\"javascript:;\" onclick=\"Qedit(this)\">编辑</a>";
+		             _content	+= "<a class=\"item-text\" href=\"javascript:;\" onclick=\"Qstop(this)\">作废</a>";
+		             _content	+= "<a class=\"item-text\" href=\"javascript:;\" onclick=\"Qdel(this)\">删除</a>";
+		             //console.log(_content);
+		            return _content;
+		            break;
+		        case "10A":
+		        	//发布
+		             _content    = "<a class=\"item-text\" href=\"javascript:;\" onclick=\"Qpreview(this)\">预览</a>";
+		             _content	+= "<a class=\"item-text\" href=\"javascript:;\" onclick=\"Qcopy(this)\">复制</a>";
+		             _content	+= "<a class=\"disable-text\" href=\"javascript:;\">编辑</a>";
+		             _content	+= "<a class=\"item-text\" href=\"javascript:;\" onclick=\"Qstop(this)\">作废</a>";
+		             _content	+= "<a class=\"disable-text\" href=\"javascript:;\">删除</a>";
+		            return _content;
+		            break;
+		        case "10X":
+		        	//作废
+		             _content    = "<a class=\"item-text\" href=\"javascript:;\" onclick=\"Qpreview(this)\">预览</a>";
+		             _content	+= "<a class=\"item-text\" href=\"javascript:;\" onclick=\"Qcopy(this)\">复制</a>";
+		             _content	+= "<a class=\"disable-text\" href=\"javascript:;\">编辑</a>";
+		             _content	+= "<a class=\"item-text\" href=\"javascript:;\" onclick=\"Qstop(this)\">作废</a>";
+		             _content	+= "<a class=\"disable-text\" href=\"javascript:;\">删除</a>";
+		            return _content;
+		            break;
+		    }
+		});
+
+
+var _QNR_ID,_QNR_STS_CD;
+    
+/*打开问题预览*/
+var Qpreview = function(obj){
+    _QNR_ID = $(obj).next().attr('id');
+    //调用樊宇已有模块
+    alert('当前问卷ID为：'+_QNR_ID);
+}
+
+
+/*复制问题*/
+var Qcopy = function(obj){
+    _QNR_ID = $(obj).next().attr('id');
+    
+    //调用秉哲问题编辑模块
+    alert('当前问卷ID为：'+_QNR_ID);
+}
+
+/*编辑问题*/
+var Qedit = function(obj){
+    _QNR_ID = $(obj).next().attr('id');
+    
+    //调用秉哲问题编辑模块
+    alert('当前问卷ID为：'+_QNR_ID);
+}
+
+/*作废问题*/
+var Qstop = function(obj){
+    _QNR_ID = $(obj).next().attr('id');
+	_QNR_STS_CD = $(obj).next().attr('QNR_STS_CD');
+
+	if (_QNR_STS_CD != "10A") {
+		Util.dialog.tips("非发布状态的问卷，不能作废！");
+		return;
+	} else {
+		var cmd = {"QNR_ID" : _QNR_ID};
+		Util.ajax.postJson(srvMap.get("invalidQuestionaire"), cmd,
+				function(json) {
+					if (json.returnCode == 0) {
+						var str = $("#" + G_params.searchformId).serialize();
+						Util.pagination(0, true, G_params, str);
+						Util.dialog.tips("作废成功！");
+					} else {
+						Util.dialog.tips("作废失败！");
+					}
+				});
+	}
+}
+
+
+
+var Qdel = function(obj){
+	_QNR_ID = $(obj).next().attr('id');
+	_QNR_STS_CD = $(obj).next().attr('QNR_STS_CD');
+	
+	if (_QNR_STS_CD != "10D") {
+		Util.dialog.tips("亲，只有新建状态的问卷才能被删除！");
+		return;
+	} else {
+		var cmd = {"QNR_ID" : _QNR_ID};
+		Util.ajax.postJson(srvMap.get("unionDeleteQuestionaire"), cmd,
+			function(json) {
+				if (json.returnCode == 0) {
+					var str = $("#" + G_params.searchformId).serialize();
+					Util.pagination(0, true, G_params, str);
+					Util.dialog.tips("删除成功！");
+				} else {
+					Util.dialog.tips("删除失败！");
+				}
+			});
+	}
+}
+	</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Hello, World</title>
+	<style type="text/css">
+		html{height:100%}
+		body{height:100%;margin:0px;padding:0px} 
+		#container{height:100%}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=B9rh7bp6lgTsqSWzAxG7pBoO"></script>
+</head>
+<body>
+	<div id="container"></div>
+	<script type="text/javascript">
+		var map = new BMap.Map("container");
+		var point = new BMap.Point(116.393292, 39.913478);//创建点坐标
+		map.centerAndZoom(point, 15);               // 初始化地图，设置中心点坐标和地图级别
+		
+		// 添加地图控件
+	   /***
+		* Control：控件的抽象基类，所有控件均继承此类的方法、属性。通过此类您可实现自定义控件
+		* NavigationControl：地图平移缩放控件，PC端默认位于地图左上方，它包含控制地图的平移和缩放的功能。
+		* 移动端提供缩放控件，默认位于地图右下方
+		* OverviewMapControl：缩略地图控件，默认位于地图右下方，是一个可折叠的缩略地图
+		* ScaleControl：比例尺控件，默认位于地图左下方，显示地图的比例关系
+		* MapTypeControl：地图类型控件，默认位于地图右上方
+		* CopyrightControl：版权控件，默认位于地图左下方
+		* GeolocationControl：定位控件，针对移动端开发，默认位于地图左下方
+		**/ 
+		map.addControl(new BMap.OverviewMapControl());
+		map.addControl(new BMap.ScaleControl());
+		
+		//标注
+		var marker = new BMap.Marker(point);        // 创建标注
+		map.addOverlay(marker);                     // 将标注添加到地图中
+		marker.addEventListener('click',function(){ //点击事件
+			//alert('your clicked.');
+		});
+		//可托拽的标注
+		marker.enableDragging();
+		marker.addEventListener('dragend',function(e){ //托拽事件
+			//alert('current point:'+e.point.lng+','+e.point.lat);
+			var rtn = document.getElementById('rs');
+			rtn.innerHTML = 'current point:'+e.point.lng+','+e.point.lat;
+		});
+		
+		var point1 = new BMap.Point(116.405725, 39.913921);//创建点坐标
+		//标注
+		var marker1 = new BMap.Marker(point1);        // 创建标注
+		map.addOverlay(marker1); 
+		//可托拽的标注
+		marker1.enableDragging();
+		marker1.addEventListener('dragend',function(e){ //托拽事件
+			var rtn = document.getElementById('rs');
+			rtn.innerHTML += 'current point1:'+e.point.lng+','+e.point.lat;
+		});
+		var output = "";
+		var BMAP_STATUS_SUCCESS = 0;
+		var searchComplete = function(results){
+			//alert(transit.getStatus());
+			if(transit.getStatus()!=BMAP_STATUS_SUCCESS){
+				return;
+			}
+			var plan = results.getPlan(0);
+			output = "<b style='color:red;'>"+plan.getDistance(true) + "</b>"
+			alert(plan.getDistance(true));
+		}
+		//测距
+		var transit = new BMap.DrivingRoute(map,{renderOptions:{map:map},
+			onSearchComplete:searchComplete,
+			onPolyLinesSet:function(){
+				setTimeout(function(){document.getElementId('rs1').innerHTML = output;},500);
+			}
+		});
+		
+		function getDistance(){
+			transit.search(marker.getPosition(),marker1.getPosition());
+		}
+		
+		//添加折线
+		/**
+		var plyline = new BMap.Polyline([
+			new BMap.Point(116.399,39.910),
+			new BMap.Point(116.405,39.920)
+		],
+		{strokeColor:'blue',strokeWeight:6,strokeOpacity:0.5}
+		);
+		map.addOverlay(plyline);
+		**/
+		/***
+		var local = new BMap.LocalSearch(map,{
+			renderOptions:{map:map,panel:'results'}
+		});
+		local.search('振华路200号');
+		***/
+	</script>
+	<div id="rs"></div>
+	<div id="rs1"></div>
+	<input type="button" value="测距" onclick="getDistance();" />
+</body>
+</html>

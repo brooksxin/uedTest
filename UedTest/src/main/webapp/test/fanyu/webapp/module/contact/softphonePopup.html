@@ -1,0 +1,46 @@
+<div class="popInformationO fn-hide" id="J_popup">
+</div>
+<script id="T_popup" type="text/x-handlebars-template">
+
+    <div class="popInforShear">
+    </div>
+    <div class="popInformationO_top">
+        <span>{{mcds_unit_nm}}</span>
+    </div>
+    <div class="popInformationO_bot">
+        <div class="PriceComparison">
+            <div class="PriceCompTit">价格对比(元)</div>
+            <div class="PriceCompCen">
+                促销价：<span class="popinforRight PriceCompTextR">&yen;{{mcds_price}}</span>
+                京东：<span class="popinforRight PriceCompTextR">&yen;{{refer_price}}</span>
+
+            </div>
+        </div>
+        <div class="PriceComparison" style="border-bottom: none;">
+            <div class="PriceCompTit fn-clear">
+                手机参数
+                <div class="fn-right">
+                    <a href="#" class="phonenumbAb">
+                        短信发给顾客
+                        <div class="phonenumbBjt fn-right"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="PriceCompCen">
+                屏幕尺寸：<span class="popinforRight PriceTextH">{{scr_size}}</span>
+                CPU：<span class="popinforRight PriceTextH">{{cpu_model}}</span>
+            </div>
+            <div class="PriceCompCen">
+                摄像头：<span class="popinforRight PriceTextH">{{b_camera}}</span>
+                分辨率 ：<span class="popinforRight PriceTextH">{{scrPixel}}</span>
+            </div>
+            <div class="PriceCompCen">
+                RAM：<span class="popinforRight PriceTextH">{{run_memry}}</span>
+                ROM：<span class="popinforRight PriceTextH">{{mchn_memry}}</span>
+            </div>
+            <div class="PriceCompCen">
+                续航：<span class="popinforRight PriceTextH">{{wait_time}}</span>
+            </div>
+        </div>
+    </div>
+</script>

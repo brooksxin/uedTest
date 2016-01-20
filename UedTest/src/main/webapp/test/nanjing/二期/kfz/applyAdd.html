@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>应用创建</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/jquery-easyui-1.4/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/dialog/4.1.6/skins/blue.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/ztree/3.5.12/zTreeStyle/zTreeStyle.css"/>
+<link rel="stylesheet" type="text/css" href="ui/theme/magnific-popup.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+
+<script type="text/javascript" src="ui/js/jquery.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/js/jquery.form.js"></script>
+<script type="text/javascript" src="ui/js/json2.js"></script>
+<script type="text/javascript" src="ui/pagination/1.2.1/jquery.pagination.js"></script>
+<script type="text/javascript" src="ui/js/handlebars.js"></script>
+<script type="text/javascript" src="ui/js/helpers.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="ui/js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="ui/js/jquery.slides.min.js"></script>
+<script type="text/javascript" src="ui/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="ui/ztree/3.5.01/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="ui/ztree/3.5.01/jquery.ztree.excheck-3.5.js"></script>
+<script type="text/javascript" src="ui/js/tinyscrollbar.js"></script>
+<script type="text/javascript" src="ui/js/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="ui/js/common.js"></script>
+</head>
+<body>
+
+<!--顶部-->
+<div class="global-top">
+	<div class="top-content">
+		<!--左侧logo-->
+		<div class="fn-left">
+			<span class="logo"></span>
+		</div>
+
+		<!--中间-->
+		<div class="menutitle" id="menutitle">
+			<span class="active">首页</span>
+			<span class="item">应用管理</span>
+			<span class="item">能力查询</span>
+			<span class="item">申请查询</span>
+			<span class="item">其他</span>
+		</div>
+
+		<!--右侧-->
+		<div class="fn-right">
+			<div class="helpDoc" title="帮助中心"></div>
+			<div class="devDoc" title="开发文档"></div>
+			<div class="user-info" id="userInfo" title="用户信息">
+				<div class="user-info-more" id="userInfoMore">
+					<i class="iconfont" title="上三角形"></i>
+					<ul>
+						<li>
+							<a href="javascript:;" hidefocus="true" id="userInfoBase">基本信息</a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true">修改密码</a>
+						</li>
+						<li class="last">
+							<a href="javascript:;" hidefocus="true">联系人</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="msgInfo" title="站内信"></div>
+		</div>
+	</div>
+</div>
+
+<div class="menu-list" id="menuList"></div>
+
+<div class="global-content">
+	<div class="container apply-add">
+		<!--应用创建面包屑-->
+		<div class="zui-step">
+			<div id="step_1" class="step-page">
+				<div class="title">
+					<ol class="ui-step ui-step-5">
+					    <li class="ui-step-start ui-step-active">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">1</i>
+					            <span class="ui-step-text">填写内容</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">2</i>
+					            <span class="ui-step-text">选择关联能力</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">3</i>
+					            <span class="ui-step-text">沙箱测试</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">4</i>
+					            <span class="ui-step-text">确认提交</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-end">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">5</i>
+					            <span class="ui-step-text">创建结果</span>
+					        </div>
+					    </li>
+					</ol>
+				</div>
+
+				<div class="content">
+					<h2>应用详情</h2>
+					<div class="fn-clear">
+						<div class="logo-container fn-left">
+							<img src="" id="apply_logo_img" alt="" width="100" height="100">
+							<span id="apply_logo_add"></span>
+						</div>
+						<div class="apply-info fn-left">
+							<table cellpadding="0" cellspacing="0" border="0" width="100%" class="search_table">
+								<tbody>
+									<tr>
+										<td width="13%" class="des">
+											<label>应用名称：</label>
+										</td>
+										<td width="37%">
+											<input type="text" id="" class="ui-input fn-w-190" name="inputDemo" />
+										</td>
+										<td width="13%" class="des">
+											<label>应用平台：</label>
+										</td>
+										<td>
+											<select class="easyui-combobox" name="" id="">
+										        <option value="AL">Alabama</option>
+										        <option value="AK">Alaska</option>
+										        <option value="CA">California</option>
+										        <option value="CO">Colorado</option>
+										    </select>
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>应用分类：</label>
+										</td>
+										<td>
+											<select class="easyui-combobox" name="" id="">
+										        <option value="AL">Alabama</option>
+										        <option value="AK">Alaska</option>
+										        <option value="CA">California</option>
+										        <option value="CO">Colorado</option>
+										    </select>
+										</td>
+										<td class="des">
+											<label>加密类型：</label>
+										</td>
+										<td>
+											<select class="easyui-combobox" name="" id="">
+										        <option value="AL">Alabama</option>
+										        <option value="AK">Alaska</option>
+										        <option value="CA">California</option>
+										        <option value="CO">Colorado</option>
+										    </select>
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>绑定域名：</label>
+										</td>
+										<td colspan="3">
+											<input type="text" id="" class="ui-input fn-w-190 domain-name" name="inputDemo" />
+											<span class="fn-gray">多个以“,”分割</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>应用简介：</label>
+										</td>
+										<td colspan="3">
+											<textarea class="ui-textarea"></textarea>
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>应用IP：</label>
+										</td>
+										<td colspan="3">
+											<input type="text" id="applyId" class="ui-input fn-w-190 apply-ip" name="inputDemo" />
+											<a class="ui-button ui-button-normal fn-mr-20" href="javascript:;" hidefocus="true" id="J_addIp">
+												<i class="iconfont" title="添加IP"></i>
+												<span>添加</span>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="ip-list">
+								<ul></ul>
+							</div>
+						</div>
+					</div>
+					<h2>应用图片</h2>
+					<div class="apply-img-container fn-clear">
+						<ul id="applyImgList">
+							<li id="applyImgAddBtn">
+								<span id="apply_img_add"></span>
+							</li>
+						</ul>
+					</div>
+					<div class="handler">
+						<a class="ui-button ui-button-green" href="javascript:;" hidefocus="true" id="go_step_2">
+							<span>下一步</span>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div id="step_2" class="step-page fn-hide">
+				<div class="title">
+					<ol class="ui-step ui-step-5">
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">1</i>
+					            <span class="ui-step-text">填写内容</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start ui-step-active">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">2</i>
+					            <span class="ui-step-text">选择关联能力</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">3</i>
+					            <span class="ui-step-text">沙箱测试</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">4</i>
+					            <span class="ui-step-text">确认提交</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-end">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">5</i>
+					            <span class="ui-step-text">创建结果</span>
+					        </div>
+					    </li>
+					</ol>
+				</div>
+
+				<div class="content">
+					<p class="apply-name">
+						<i></i>
+						<span>
+							请确认 <b>移动生活小窍门</b> ，密钥：<b class="fn-high">123456</b> 
+						</span>
+					</p>
+					<h2>请选择 <span class="fn-high">移动生活小窍门</span> 关联能力</h2>
+					
+					<div class="fn-clear">
+						<div class="ability-catalog fn-left">
+							<h3>能力目录快速选择</h3>
+							<div class="zui">
+							    <ul id="abilityTree" class="ztree ability-catalog-list fn-clear"></ul>
+							</div>
+						</div>
+						<div class="ability-quick fn-left">
+							<div class="quick-search">
+								<label>能力搜索：</label>
+								<input type="text" name="" class="ui-input" id="abilityParam" />
+								<i></i>
+							</div>
+							<div class="search-res fn-hide">
+								<div>
+									<span>搜索结果：</span>
+								</div>
+								<div id="searchResListScrollbar" class="zui-tinyscroll">
+								    <div class="scrollbar">
+								        <div class="track">
+								            <div class="thumb">
+								            </div>
+								        </div>
+								    </div>
+								    <div class="viewport">
+								        <div class="overview">
+											<ul class="fn-clear" id="searchResList">
+
+											</ul>
+								        </div>
+								    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<h2>已选能力</h2>
+					<div class="hasChoseAbility-content">
+						<ul id="hasChoseAbility" class="fn-clear">
+							
+						</ul>
+					</div>
+					<div class="handler">
+						<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="ret_step_1">
+							<span>上一步</span>
+						</a>
+						<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="go_step_3">
+							<span>下一步</span>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div id="step_3" class="step-page fn-hide">
+				<div class="title">
+					<ol class="ui-step ui-step-5">
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">1</i>
+					            <span class="ui-step-text">填写内容</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">2</i>
+					            <span class="ui-step-text">选择关联能力</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start ui-step-active">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">3</i>
+					            <span class="ui-step-text">沙箱测试</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">4</i>
+					            <span class="ui-step-text">确认提交</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-end">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">5</i>
+					            <span class="ui-step-text">创建结果</span>
+					        </div>
+					    </li>
+					</ol>
+				</div>
+
+				<div class="content">
+					<div class="sandbox-test fn-clear">
+						<div class="fn-left">
+							<i class="sandbox-logo"></i>
+						</div>
+						<div class="fn-left">
+							<h2>请完成 <span class="fn-high"> 移动生活小窍门 </span> 沙箱测试</h2>
+							<p>
+								如有疑问请至 <a href="javascript:;" hidefocus="tre">帮助中心</a>
+							</p>
+						</div>
+					</div>
+					
+					<div class="handler">
+						<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="ret_step_2">
+							<span>上一步</span>
+						</a>
+						<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="go_step_4">
+							<span>下一步</span>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div id="step_4" class="step-page fn-hide confirm-info">
+				<div class="title">
+					<ol class="ui-step ui-step-5">
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">1</i>
+					            <span class="ui-step-text">填写内容</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">2</i>
+					            <span class="ui-step-text">选择关联能力</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">3</i>
+					            <span class="ui-step-text">沙箱测试</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start ui-step-active">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">4</i>
+					            <span class="ui-step-text">确认提交</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-end">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">5</i>
+					            <span class="ui-step-text">创建结果</span>
+					        </div>
+					    </li>
+					</ol>
+				</div>
+
+				<div class="content">
+					<h2>请核对您将要提交的应用信息</h2>
+
+					<div class="info-list" id="step_part1">
+						<div class="info-list-tit fn-clear">
+							<i>1</i>
+							<h3>应用基础信息</h3>
+							<a class="ui-button ui-button-normal fn-mr-20" href="javascript:;" hidefocus="true" id="inof_ret_step_1">
+								<span>返回该步骤修改</span>
+							</a>
+						</div>
+						<div class="base-info fn-clear">
+							<div class="fn-left apply-logo"></div>
+							<div class="fn-left">
+								<table cellpadding="0" cellspacing="0" border="0" width="100%" class="list_table">
+									<tbody>
+										<tr>
+											<td width="11%">
+												<label>能力名称：</label>
+											</td>
+											<td width="39%">
+												<span class="des">缴费开户</span>
+											</td>
+											<td width="11%">
+												<label>能力简述：</label>
+											</td>
+											<td>
+												<span class="des">***********</span>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label>能力名称：</label>
+											</td>
+											<td>
+												<span class="des">缴费开户</span>
+											</td>
+											<td>
+												<label>能力简述：</label>
+											</td>
+											<td>
+												<span class="des">***********</span>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label>应用图片：</label>
+											</td>
+											<td colspan="3">
+												<div id="J_apply_img_prev"></div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<div class="info-list" id="step_part2">
+						<div class="info-list-tit fn-clear">
+							<i>2</i>
+							<h3>关联能力 <span> （应用密钥：<span class="fn-high">123456</span>）</span></h3>
+							<a class="ui-button ui-button-normal fn-mr-20" href="javascript:;" hidefocus="true" id="inof_ret_step_2">
+								<span>返回该步骤修改</span>
+							</a>
+						</div>
+						<div class="ability-info">
+							<div id="abilityInfoScrollbar" class="zui-tinyscroll">
+							    <div class="scrollbar">
+							        <div class="track">
+							            <div class="thumb">
+							            </div>
+							        </div>
+							    </div>
+							    <div class="viewport">
+							        <div class="overview">
+										<ul class="fn-clear" id="abilityInfo">
+											
+										</ul>
+							        </div>
+							    </div>
+							</div>
+						</div>
+					</div>
+
+					<div class="info-list" id="step_part3">
+						<div class="info-list-tit fn-clear">
+							<i>3</i>
+							<h3>沙箱测试</h3>
+						</div>
+						<div class="sandbox-res fn-clear">
+							<div class="title fn-left">
+								<span>沙箱测试结果反馈：</span>
+							</div>
+							<div class="des fn-left">
+								<span>
+									***************************************************************************************************************************************************************************************************************************
+								</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="handler">
+						<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="ret_step_3">
+							<span>上一步</span>
+						</a>
+						<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="go_step_5">
+							<span>确认提交</span>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div id="step_5" class="step-page fn-hide">
+				<div class="title">
+					<ol class="ui-step ui-step-5">
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">1</i>
+					            <span class="ui-step-text">填写内容</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">2</i>
+					            <span class="ui-step-text">选择关联能力</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">3</i>
+					            <span class="ui-step-text">沙箱测试</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-start">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">4</i>
+					            <span class="ui-step-text">确认提交</span>
+					        </div>
+					    </li>
+					    <li class="ui-step-end ui-step-active">
+					        <div class="ui-step-line">-</div>
+					        <div class="ui-step-icon">
+					            <i class="zui-setp-bg"></i>
+					            <i class="ui-step-number">5</i>
+					            <span class="ui-step-text">创建结果</span>
+					        </div>
+					    </li>
+					</ol>
+				</div>
+
+				<div class="result-content">
+					<div class="success">
+						<div class="header">
+							<i></i>
+							<span>恭喜您，创建成功！</span>
+						</div>
+						<table cellpadding="0" cellspacing="0" border="0" width="100%" class="res_table">
+							<tbody>
+								<tr>
+									<td width="50%">
+										<label>能力名称：</label>
+										<span>缴费开户</span>
+									</td>
+									<td>
+										<label>ID：</label>
+										<span>1872158****</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>创建时间：</label>
+										<span>2014-11-04</span>
+									</td>
+									<td>
+										<label>当前状态：</label>
+										<span>待审核</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="handler">
+							<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="">
+								<span>再次创建</span>
+							</a>
+							<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="">
+								<span>回到首页</span>
+							</a>
+						</div>
+					</div>
+					<div class="fail">
+						<div class="header">
+							<i></i>
+							<span>真抱歉！创建失败了...</span>
+						</div>
+						<table cellpadding="0" cellspacing="0" border="0" width="100%" class="res_table">
+							<tbody>
+								<tr>
+									<td>
+										<label>失败原因：</label>
+										<span>网络故障</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="handler">
+							<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="">
+								<span>回到首页</span>
+							</a>
+							<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="">
+								<span>重新创建</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="global-footer">
+	<div class="foot-wrap">
+		<div class="contract">
+			<a href="javascript:;" hidefocus="true">联系我们</a>
+			<a href="javascript:;" hidefocus="true">投诉举报</a>
+			<a href="javascript:;" hidefocus="true">Complaint  Guidlines</a>
+			<a href="javascript:;" hidefocus="true" class="last">移动能力开放平台</a>
+		</div>
+		<div>
+			<p>Copyright  ©  1998-2050  China  Mobile. All Rights  Reserved.</p>
+		</div>
+	</div>
+</div>
+
+<!--目录-->
+<textarea class="fn-hide" id="menuList_tpl">
+{{#each this}}
+<div class="navparts fn-clear fn-hide">
+	{{#each list}}
+	<dl>
+		<dt>{{title}}</dt>
+		{{#each item}}
+		<dd>
+			<a href="{{url}}" hidefocus="true"><span>{{name}}</span></a>
+		</dd>
+		{{/each}}
+	</dl>
+	{{/each}}
+</div>
+{{/each}}
+</textarea>
+
+<!--能力搜索列表-->
+<textarea class="fn-hide" id="ability_tpl">
+{{#each this}}
+<li data-id="{{id}}" data-name="{{name}}" data-url="{{url}}" data-store="{{store}}" class="{{retLastClass @index}}" onclick="choseAbility(this, 2, event);">
+	<img src="{{url}}" width="90" height="90">
+	<p class="name">{{name}}</p>
+	<p class="des">{{id}}</p>
+	<i></i>
+	<p class="blockDiv">
+		{{#if_eq store compare='1' }}
+		<a href="javascript:;" hidefocus="true" onclick="addMyCollection('{{ABILITY_ID}}');">
+			<span class="blockDivSpan">收 藏</span>
+		</a>
+		{{else}}
+		<a href="javascript:;" hidefocus="true" onclick="addMyCollection('{{ABILITY_ID}}');">
+			<span class="blockDivSpan">取消收藏</span>
+		</a>
+		{{/if_eq}}
+		<a href="javascript:;" hidefocus="true" onclick="showBase('{{ABILITY_ID}}');return false;"><span class="blockDivSpan">详 情</span></a>
+		<em></em>
+	</p>
+</li>
+{{/each}}
+</textarea>
+<!--已选择能力列表-->
+<textarea class="fn-hide" id="abilityHas_tpl">
+{{#each this}}
+<li data-id="{{id}}" data-name="{{name}}" data-url="{{url}}" data-store="{{store}}" class="active" onclick="choseAbility(this, 3, event);">
+	<img src="{{url}}" width="90" height="90">
+	<p class="name">{{name}}</p>
+	<p class="des">{{id}}</p>
+	<i></i>
+	<p class="blockDiv">
+		{{#if_eq store compare='1' }}
+		<a href="javascript:;" hidefocus="true" onclick="addMyCollection('{{ABILITY_ID}}');">
+			<span class="blockDivSpan">收 藏</span>
+		</a>
+		{{else}}
+		<a href="javascript:;" hidefocus="true" onclick="addMyCollection('{{ABILITY_ID}}');">
+			<span class="blockDivSpan">取消收藏</span>
+		</a>
+		{{/if_eq}}
+		<a href="javascript:;" hidefocus="true" onclick="showBase('{{ABILITY_ID}}');return false;"><span class="blockDivSpan">详 情</span></a>
+		<em></em>
+	</p>
+</li>
+{{/each}}
+</textarea>
+<!--确定已选择能力列表-->
+<textarea class="fn-hide" id="confirmAbilityHas_tpl">
+{{#each this}}
+<li data-id="{{id}}" data-name="{{name}}" class="active">
+	<img src="{{url}}" width="90" height="90">
+	<p class="name">{{name}}</p>
+	<p class="des">{{id}}</p>
+</li>
+{{/each}}
+</textarea>
+
+
+<script type="text/javascript">
+//能力目录树
+var treeObj;
+
+$(function(){
+	//用户信息
+	$("#userInfo").bind("mouseenter",function(){
+		$("#userInfoMore").show();
+	}).bind("mouseleave",function(){
+		$("#userInfoMore").hide();
+	});
+	$("#userInfoBase").click(function(){
+		openWindow("个人信息","searchDemo.html",800,300);
+	});
+
+	//目录列表
+	$.PostJson("ui/json/menu.json?1=1","",function(state,json){
+		if(state=='success'){
+			if(json){
+				$("#menuList").temp($("#menuList_tpl").val(), json);
+				$("#menutitle").find("span.item").each(function(i){
+					$(this).click(function(){
+						if($("#menuList").find(".navparts:eq("+i+")").is(":hidden")){
+							$(this).addClass("active").siblings().removeClass("active");
+							$(".navparts").slideUp();
+							$("#menuList").css({"display": "block"}).find(".navparts:eq("+i+")").slideDown();
+						}else{
+							$('#menuList').slideUp().find(".navparts").slideUp();
+						}
+					})
+				})
+			}
+		}
+	})
+	$(document).on('click',function(e){
+		var e = window.event || e;
+        var tar = $(e.srcElement || e.target);
+        if(tar.hasClass('menutitle') || tar.parents().hasClass('menutitle') || tar.hasClass('menu-list') || tar.parents().hasClass('menu-list')){
+
+        }else{
+            $('#menuList').slideUp().find(".navparts").slideUp();
+        }
+    })
+
+    //下一步
+    $("#go_step_2").click(function(){
+    	//判断是否全部填写
+    	if(1){
+    		$(".step-page").addClass("fn-hide");
+    		$("#step_2").removeClass("fn-hide");
+    	}
+
+    })
+    $("#go_step_3").click(function(){
+    	$(".step-page").addClass("fn-hide");
+    	$("#step_3").removeClass("fn-hide");
+    })
+    $("#go_step_4").click(function(){
+    	$(".step-page").addClass("fn-hide");
+    	$("#step_4").removeClass("fn-hide");
+
+    	//展示创建信息
+    	var testJson = [{"id": "0", "name": "sub0", "url": "ui/theme/img/icon_company.png", "store": "1"}, {"id": "1", "name": "sub1", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "2", "name": "sub2", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "3", "name": "sub3", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "4", "name": "sub4", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "5", "name": "sub5", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "6", "name": "sub6", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "7", "name": "sub7", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "8", "name": "sub8", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "9", "name": "sub9", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "10", "name": "sub10", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "8", "name": "sub8", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "9", "name": "sub9", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "10", "name": "sub10", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "8", "name": "sub8", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "9", "name": "sub9", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "10", "name": "sub10", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "11", "name": "sub1", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "21", "name": "sub12", "url": "ui/theme/img/icon_company.png", "store": "0"}, {"id": "22", "name": "sub13", "url": "ui/theme/img/icon_company.png", "store": "1"}, {"id": "23", "name": "sub14", "url": "ui/theme/img/icon_company.png", "store": "1"} ];
+    	$("#abilityInfo").temp($("#confirmAbilityHas_tpl").val(), testJson);
+    	$("#abilityInfoScrollbar").tinyscrollbar();
+
+    	//应用图片预览
+    	apply_img_prev();
+    	
+    })
+    $("#go_step_5").click(function(){
+    	$(".step-page").addClass("fn-hide");
+    	$("#step_5").removeClass("fn-hide");
+    })
+
+    //上一步
+    $("#ret_step_1, #inof_ret_step_1").click(function(){
+    	$(".step-page").addClass("fn-hide");
+    	$("#step_1").removeClass("fn-hide");
+    })
+    $("#ret_step_2, #inof_ret_step_2").click(function(){
+    	$(".step-page").addClass("fn-hide");
+    	$("#step_2").removeClass("fn-hide");
+    })
+    $("#ret_step_3").click(function(){
+    	$(".step-page").addClass("fn-hide");
+    	$("#step_3").removeClass("fn-hide");
+    })
+
+	$("#applyId").bind('keyup',function(e){
+        if(e.which==13){
+            $("#J_addIp").click();
+            return false;
+        }
+    })
+	$("#J_addIp").click(function(){
+		var applyId = $("#applyId").val();
+		if(applyId){
+			var _li = '<li><span class="item">'+applyId+'</span><i class="iconfont delIp" title="删除" onclick="delThis(this);"></i></li>'
+			$(".ip-list ul").append(_li);
+
+		    $(".ip-list li").each(function(){
+		    	$(this).bind("mouseenter", function(){
+			    	$(this).find(".delIp").show();
+			    }).bind("mouseleave", function(){
+			    	$(this).find(".delIp").hide();
+			    })
+		    })
+		}
+	})
+
+	createZtree();
+
+	$(".quick-search i").click(function(){
+		$("#searchResList").html("");
+		getAbility();
+	})
+	$("#abilityParam").bind("keyup",function(e){
+		if(e.which==13){
+		    $(".quick-search i").click();
+		    return false;
+		}
+	})
+
+})
+
+//创建树
+function createZtree(){
+	var setting = {  
+		view: {
+			dblClickExpand: false, //去除双击事件，单击展开收缩
+			showLine: false //不显示虚线
+		},
+        check: {  
+            enable: true  //是否启用 复选框  
+        },  
+        data: {  
+            simpleData: {  
+                enable: true  
+            }  
+        },
+		callback: {
+			beforeClick: zui_beforeClick,
+			onCheck: zui_zTreeOnCheck
+		}
+    };  
+    var zNodes =[  
+        { id:1, pId:0, name:"随意勾选 1", open:true}, //pId 的 值就是上一级的id值  
+        { id:11, pId:1, name:"sub1", open:true},  
+        { id:12, pId:1, name:"sub2", open:true},  
+        { id:2, pId:0, name:"随意勾选 2", open:true},  
+        { id:21, pId:2, name:"sub12"},  
+        { id:22, pId:2, name:"sub13", open:true},  
+        { id:23, pId:2, name:"sub14"},  
+        {id:23, pId:2, name:"sub14"}
+    ];  
+    function zui_beforeClick(treeId, treeNode) {
+    	if(treeNode.isParent){
+	    	$.fn.zTree.getZTreeObj(treeId).expandNode(treeNode, null, true);
+    	}
+    	return false;
+	}
+	function zui_zTreeOnCheck(e, treeId, treeNode) {
+		if(treeNode.isParent){
+			var childrenNodes = treeNode.children;
+	        if (childrenNodes) {
+	            for (var i = 0; i < childrenNodes.length; i++) {
+                	var _tJson = {
+                		"id": childrenNodes[i].id,
+                		"url": childrenNodes[i].url,
+                		"name": childrenNodes[i].name,
+                		"store": childrenNodes[i].store
+                	}
+                	var _zJson = [];
+                	_zJson.push(_tJson);
+	                if(treeNode.checked){//如果父节点选中
+	                	choseAbility(_zJson, 1, 1);
+	                }else{
+	                	choseAbility(_zJson, 1, 2);
+	                }
+	            }
+	        }
+		}else {
+			var _tJson = {
+				"id": treeNode.id,
+				"url": treeNode.url,
+				"name": treeNode.name,
+				"store": treeNode.store
+			}
+	    	var _zJson = [];
+	    	_zJson.push(_tJson);
+	    	if(treeNode.checked){//如果父节点选中
+	    		choseAbility(_zJson, 1, 1);
+	    	}else{
+	    		choseAbility(_zJson, 1, 2);
+	    	}
+		}
+	}
+    $.fn.zTree.init($("#abilityTree"), setting, zNodes);
+	treeObj = $.fn.zTree.getZTreeObj("abilityTree");
+}
+
+//搜索
+function getAbility(){
+	$(".search-res").removeClass("fn-hide");
+	var params = $("#abilityParam").val();
+	$.PostJson("ui/json/ability.json?1=1","params="+abilityParam,function(state, json){
+		if(state=='success'){
+			if(json){
+				$("#searchResList").temp($("#ability_tpl").val(), json);
+
+				$("#searchResListScrollbar").tinyscrollbar();
+
+			    $("#searchResList li").each(function(){
+			    	var _id = $(this).attr("data-id");
+			    	var node = treeObj.getNodeByParam("id", _id, null);
+			    	if(node && !node.isParent && node.checked){
+			    		$(this).addClass("active");
+			    	}
+			    });
+			}
+		}
+	})
+}
+
+Handlebars.registerHelper("retLastClass", function(index, fn) {
+	if(index == 4 || index % 5 == 4) {
+		return "last";
+	}
+	return "";
+});
+
+//应用logo上传
+var swfu;
+$(function(){
+	var settings = {
+		flash_url : "ui/swfupload/1.0.0/2.5/swfupload.swf",
+		upload_url: "ui/json/test.json",
+		post_params: "",
+		use_query_string: true,
+		file_size_limit : "1 MB",
+		file_types : "*.jpg;*.png;*.gif;*.jpeg",  //允许所有类型时请使用 *.*
+		file_types_description : "All Files",
+		file_upload_limit : 0,
+		file_queue_limit : 0,
+		debug: false,
+
+		// Button settings
+		button_image_url: "ui/swfupload/1.0.0/vendor/file_img.png",
+		button_width: "62",
+		button_height: "22",
+		button_placeholder_id: "apply_logo_add",
+		button_text: '',
+		button_text_style: ".theFont { font-size: 16; }",
+		button_text_left_padding: 12,
+		button_text_top_padding: 3,
+		button_cursor : SWFUpload.CURSOR.HAND,
+		
+		// The event handler functions are defined in handlers.js
+		file_dialog_complete_handler : fileDialogComplete,
+		upload_start_handler : uploadStart,
+		upload_error_handler : uploadError,
+		upload_success_handler : uploadSuccess,
+		upload_complete_handler : upload_complete_handler 
+	};
+
+	swfu = new SWFUpload(settings);
+});
+
+function fileDialogComplete(numFilesSelected, numFilesQueued) {
+	try {
+		this.startUpload();
+	} catch (ex)  {
+        this.debug(ex);
+	}
+}
+function uploadStart(file) {
+	alert("开始");
+	return true;
+}
+function uploadSuccess(file, serverData) {
+	try {
+		serverData = JSON.parse(serverData);
+    	if (serverData.returnCode=='0') {
+    		$("#apply_logo_img").attr({"src": "ui/swfupload/1.0.0/vendor/file_img.png"})
+    	}else{
+    		alert("失败");
+    	}
+	} catch (ex) {
+		this.debug(ex);
+	}
+}
+
+function uploadError(file, errorCode, message) {
+	try {
+    	alert("上传失败!");
+	} catch (ex) {
+        this.debug(ex);
+    }
+}
+
+//应用图片上传
+var swfu2;
+$(function(){
+	var settings2 = {
+		flash_url : "ui/swfupload/1.0.0/2.5/swfupload.swf",
+		upload_url: "ui/json/test.json",
+		post_params: "",
+		use_query_string: true,
+		file_size_limit : "1 MB",
+		file_types : "*.jpg;*.png;*.gif;*.jpeg",  //允许所有类型时请使用 *.*
+		file_types_description : "All Files",
+		file_upload_limit : 5,
+		file_queue_limit : 5,
+		debug: false,
+
+		// Button settings
+		button_image_url: "ui/swfupload/1.0.0/vendor/apply_img_add.png",
+		button_width: "135",
+		button_height: "190",
+		button_placeholder_id: "apply_img_add",
+		button_text: '',
+		button_text_style: ".theFont { font-size: 16; }",
+		button_text_left_padding: 10,
+		button_text_top_padding: 10,
+		button_cursor : SWFUpload.CURSOR.HAND,
+		
+		// The event handler functions are defined in handlers.js
+		file_dialog_complete_handler : fileDialogComplete2,
+		upload_start_handler : uploadStart2,
+		upload_error_handler : uploadError2,
+		upload_success_handler : uploadSuccess2,
+		upload_complete_handler : upload_complete_handler 
+	};
+
+	swfu2 = new SWFUpload(settings2);
+});
+
+function upload_complete_handler(file){
+	this.startUpload();
+}
+
+function fileDialogComplete2(numFilesSelected, numFilesQueued) {
+	try {
+		if(numFilesSelected > 5){
+			result_prompt(0, "一次性只能上传五张图片！");
+		}else{
+			this.startUpload();
+		}
+	} catch (ex)  {
+        this.debug(ex);
+	}
+}
+
+function uploadStart2(file) {
+	console.log(file)
+	if(file.size > 3145728){
+		result_prompt(0, "图片大小不能超过3M！");
+		return false;
+	}
+	var _liLength = $("#applyImgList li").length;
+	if(_liLength == 6) {
+		result_prompt(0, "只能上传5张图片！");
+		return false;
+	}
+	return true;
+}
+function uploadSuccess2(file, serverData) {
+	try {
+		var _imgUrl = 'ui/swfupload/1.0.0/vendor/logo_add.png';
+		var _li = '<li><img src="'+_imgUrl+'" width="135" height="190" alt="应用图片" /><i class="iconfont delImg" title="删除" onclick="delThis(this);"></i></li>';
+		$("#applyImgList").prepend(_li);
+
+	    $("#applyImgList li").not("#applyImgAddBtn").each(function(){
+	    	$(this).bind("mouseenter", function(){
+		    	$(this).find(".delImg").show();
+		    }).bind("mouseleave", function(){
+		    	$(this).find(".delImg").hide();
+		    })
+	    })
+	} catch (ex) {
+		this.debug(ex);
+	}
+}
+function uploadError2(file, errorCode, message) {
+	try {
+    	// result_prompt(2,errorCode||"");
+    	console.log(file)
+	} catch (ex) {
+        this.debug(ex);
+    }
+}
+
+function delThis(obj){
+	result_comfirm("是否删除？", function(){
+    	$(obj).parent().remove();
+	})
+}
+
+//选择或删除能力
+function choseAbility(data, type1, type2){
+	if(type1 === 1){//点击树节点
+		if(type2 === 1){//新增
+			var _tpl = $("#abilityHas_tpl").val();
+			var _template = Handlebars.compile(_tpl); 
+	    	var _html = _template(data);
+			$("#hasChoseAbility").append(_html);
+
+			//给搜索结果添加选中样式
+			$("#searchResList li").each(function(){
+				var _id = $(this).attr("data-id");
+            	if(_id == data[0].id) {
+        			$(this).addClass("active");
+            	}
+			})
+			//调整树节点选中样式
+	    	var nodes = treeObj.getNodesByParam("id", data[0].id, null);
+	    	for(var k=0,length=nodes.length; k<length; k++){
+	    		if(nodes[k] && !nodes[k].isParent){
+			    	treeObj.checkNode(nodes[k], true, true);
+		    	}
+	    	}
+	    	
+		}else{//删除
+			$("#hasChoseAbility li").each(function(){
+				var _id = $(this).attr("data-id");
+				if(_id == data[0].id){
+					$(this).remove();
+				}
+			})
+
+			//给搜索结果清除选中样式
+			$("#searchResList li").each(function(){
+				var _id = $(this).attr("data-id");
+            	if(_id == data[0].id) {
+        			$(this).removeClass("active");
+            	}
+			})
+
+			//调整树节点选中样式
+	    	var nodes = treeObj.getNodesByParam("id", data[0].id, null);
+	    	for(var k=0,length=nodes.length; k<length; k++){
+	    		if(nodes[k] && !nodes[k].isParent){
+			    	treeObj.checkNode(nodes[k], false, true);
+		    	}
+	    	}
+		}
+
+
+	}else if(type1 === 2){//点击搜索结果
+		var e = window.event || type2;
+        var tar = $(e.srcElement || e.target);
+        if(tar.hasClass('blockDiv') || tar.parents().hasClass('blockDiv') || tar.hasClass('blockDivSpan')){
+        	return false;
+        }
+		var tid = $(data).attr("data-id");
+		if($(data).hasClass("active")){//删除
+			$("#hasChoseAbility li").each(function(){
+				var _id = $(this).attr("data-id");
+				if(_id == tid){
+					$(this).remove();
+				}
+			})
+			$(data).removeClass("active");
+
+		}else{//新增
+			var _tJson = {
+				"id": $(data).data("id"),
+				"url": $(data).data("url"),
+				"name": $(data).data("name"),
+				"store": $(data).data("store")
+			}
+	    	var _zJson = [];
+	    	_zJson.push(_tJson);
+			var _tpl = $("#abilityHas_tpl").val();
+			var _template = Handlebars.compile(_tpl); 
+	    	var _html = _template(_zJson);
+			$("#hasChoseAbility").append(_html);
+			$(data).addClass("active");
+
+		}
+		//调整树节点选中样式
+    	var nodes = treeObj.getNodesByParam("id", tid, null);
+    	for(var k=0,length=nodes.length; k<length; k++){
+    		if(nodes[k] && !nodes[k].isParent){
+		    	treeObj.checkNode(nodes[k], null, true);
+	    	}
+    	}
+
+	}else if (type1 === 3){//点击已选能力列表
+		var e = window.event || type2;
+        var tar = $(e.srcElement || e.target);
+        if(tar.hasClass('blockDiv') || tar.parents().hasClass('blockDiv') || tar.hasClass('blockDivSpan')){
+        	return false;
+        }
+		var tid = $(data).attr("data-id");
+		//给搜索结果清除选中样式
+		$("#searchResList li").each(function(){
+			var _id = $(this).attr("data-id");
+        	if(_id == tid) {
+    			$(this).removeClass("active");
+        	}
+		})
+		//调整树节点选中样式
+    	var nodes = treeObj.getNodesByParam("id", tid, null);
+    	for(var k=0,length=nodes.length; k<length; k++){
+    		if(nodes[k] && !nodes[k].isParent){
+		    	treeObj.checkNode(nodes[k], null, true);
+	    	}
+    	}
+    	$(data).remove();
+	}
+}
+
+function apply_img_prev(){
+	console.log(JSON.stringify(apply_img_json));
+	var _html = "";
+	for(var i=0,length=apply_img_json.length; i<length; i++){
+		_html += '<a href="'+apply_img_json[i]+'" hidefocus="true" class="fn-images-preview" style="margin-right: 5px; border: 1px solid #E9E9EC; display: inline-block;"><img src="'+apply_img_json[i]+'" width="50" height="50" /></a>'
+	}
+	$("#J_apply_img_prev").html(_html).magnificPopup({
+		delegate: 'a',
+		type: 'image',
+		tLoading: 'Loading image #%curr%...',
+		mainClass: 'mfp-img-mobile',
+		gallery: {
+			enabled: true,
+			navigateByImgClick: true,
+			preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+		},
+		image: {
+			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+			titleSrc: function(item) {
+				return item.el.attr('title') ;
+			}
+		}
+	});
+}
+
+
+</script>
+</body>
+</html>

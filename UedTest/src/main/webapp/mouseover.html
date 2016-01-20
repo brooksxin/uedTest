@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<script src='jquery.js' type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+li{
+	list-style: none;
+	float: left;
+	margin: 0 5px;
+}
+a{
+	position: relative;
+	width: 32px;
+	height: 32px;
+	overflow: hidden;
+	float: left;
+	display: block;
+}
+img{
+	float: left;
+}
+span{
+	width: 32px;
+	height: 16px;
+	background-color: #FFF;
+	color: #000;
+	cursor: pointer;
+	position: absolute;
+	left: 0;
+	top: 32px;
+}
+
+</style>
+</head>
+<body>
+<div>
+	<ul>
+		<li>
+			<a href="javascript:;">
+				<img src="zw.ico" />
+				<span>描述1</span>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:;">
+				<img src="zw.ico" />
+				<span>描述2</span>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:;">
+				<img src="zw.ico" />
+				<span>描述3</span>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:;">
+				<img src="zw.ico" />
+				<span>描述4</span>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<script type="text/javascript">
+$(function(){
+	$("ul li a").bind("mouseover",function(i){
+		$(this).find("span").css({"top":"16px"});
+	}).bind("mouseout",function(i){
+		$(this).find("span").css({"top":"32px"});
+	});
+})
+</script>
+</body>
+</html>

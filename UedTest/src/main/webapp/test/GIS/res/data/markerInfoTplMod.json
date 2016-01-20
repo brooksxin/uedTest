@@ -1,0 +1,56 @@
+{
+    "markerType": "1",
+    "markerTypeName": "三墩营业厅",
+    "returnCode": "1",
+    "rows": [
+        {
+            "templateId": "1",
+            "type": "4",
+            "name": "businessId",
+            "label": "业务ID",
+            "templateStatus": "1",
+            "propvalue": "111"
+        },
+        {
+            "templateId": "2",
+            "type": "4",
+            "name": "name",
+            "label": "名称",
+            "templateStatus": "1",
+            "propvalue": "2"
+        },
+        {
+            "templateId": "3",
+            "type": "4",
+            "name": "lng",
+            "label": "经度",
+            "templateStatus": "1",
+            "propvalue": "3"
+        },
+        {
+            "templateId": "4",
+            "type": "4",
+            "name": "lat",
+            "label": "纬度",
+            "templateStatus": "1",
+            "propvalue": "4"
+        },
+        {
+            "templateId": "5",
+            "type": "4",
+            "name": "icon",
+            "label": "图标",
+            "templateStatus": "1",
+            "propvalue": "5"
+        },
+        {
+            "templateId": "6",
+            "type": "4",
+            "name": "address",
+            "label": "地址",
+            "templateStatus": "1",
+            "propvalue": "6"
+        }
+    
+    ]
+}

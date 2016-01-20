@@ -1,0 +1,23 @@
+{
+	"returnCode": "0000",
+	"returnMessage": "success",
+	"bean":{
+		"total": "4"
+	},
+	"beans":[
+		{
+			"CustID":"0001",
+			"Cust_Date":"2015-04-20 10:03",
+			"Cust_phone":"18838086870",
+			"Cust_Name":"张先生",
+			"Dail_Content":"确认是否收货"
+		},
+		{
+			"CustID":"0001",
+			"Cust_Date":"2015-04-20 10:03",
+			"Cust_phone":"18838086870",
+			"Cust_Name":"张先生",
+			"Dail_Content":"确认是否收货"
+		}
+	]
+}

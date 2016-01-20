@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>查看更多接触历史</title>
+    <link rel="stylesheet" href="../../css/common.css"><link rel="stylesheet" href="../../css/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+
+
+</head>
+
+<body>
+    <div class="titleArea">
+       <h2 class="ml-15">钱大华的接触历史</h2>
+    </div>
+	
+    <div method="post" action="#" class="cmxform" >
+       <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+          <div class="record-search-cate">
+				<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+								<tbody>
+									<tr>
+                                        <td width="60"><label class="description">时间选择</label></td>
+                                        <td colspan="3">
+                                        	<input id="param-eDate2" class="element text Wdate" type="text" value="2015-12-04" onfocus="WdatePicker()"  /> 至 
+                                        	<input id="param-eDate" class="element text Wdate" type="text" value="2015-12-04" onFocus="WdatePicker()"  />
+                                        </td>     
+                                        <td width="90"><label class="description">工号</label></td>
+										<td width="300">
+											<input class="inputText" type="text" maxlength="255" value=" x10082"/>
+										</td>
+                                        <td width="500"><a class="btn_search" href="javascript:;" id="J_search" >查询</a></td>
+									</tr>
+								</tbody>
+				</table>
+            </div>
+            <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+        </form>
+    </div>
+
+             
+             
+          
+    
+	
+    <div class="tablewidth mg_t_10">
+					<table class="ui-record-table table_radius table-bordered table-striped" >
+						<thead>
+							<tr>
+								<th width="200">日期</th>
+								<th width="200">开始时间</th>
+								<th width="200">结束时间</th>
+								<th width="200">接触标记</th>
+                                <th width="200">持续时间</th>
+								<th width="80">处理人工号</th>
+                                <th width="">操作</th>
+							</tr>
+                         </thead>
+                         <tbody id="J_tabletpl">
+                            <tr>
+                                <td>2015-12-05</td>
+                                <td>10:50:20</td>
+                                <td>10:53:40</td>
+                                <td>咨询类</td>
+                                <td>3'20''</td>
+                                <td>x10086</td>
+                                <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">查看</a></div></td>
+                            </tr>
+                            <tr>
+                                <td>2015-12-04</td>
+                                <td>10:50:20</td>
+                                <td>10:53:40</td>
+                                <td>咨询类</td>
+                                <td>3'20''</td>
+                                <td>x10086</td>
+                                <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">查看</a></div></td>
+                            </tr>
+						</tbody>
+					</table>
+    </div>
+    
+       
+<script src="../../lib/jquery/1.8.1/jquery.js"></script>
+<script src="../../lib/json2/1.0.0/json2.js"></script>
+<script src="../../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../../lib/handlebars/1.3.0/helpers.js"></script>
+<script src="../../lib/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="../../lib/blockUI/2.64/jquery.blockUI.js"></script>
+<script src="../../common/frameInit.js"></script>
+<script src="../../lib/dialog/4.1.7/artDialog.js"></script>
+<script src="../../lib/dialog/4.1.7/iframeTools.js"></script>
+<script src="../../common/config.js"></script>
+<script src="../../common/common.js"></script>    
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+    });
+</script>
+</body>
+</html>

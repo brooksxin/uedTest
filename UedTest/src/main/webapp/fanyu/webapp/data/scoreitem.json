@@ -1,0 +1,77 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": null,
+    "bean": {
+        "ASCORE_TMPLT_NM": "sfsdfsf",
+        "ASCORE_TMPLT_DESC": "sfsf"
+    },
+    "beans": null,
+    "object": [
+        {
+            "beans": [
+                {
+                    "WTFCT_VAL": "10.00",
+                    "ASCORE_ITEM_DESC": "13131",
+                    "LVL_NAME": "sfsf",
+                    "LVL_SCORE": "20.00",
+                    "ASCORE_ITEM_ID": "222111",
+                    "ASCORE_ITEM_NM": "1313",
+                    "ASCORE_TYPE_CD": "08"
+                },{
+                    "WTFCT_VAL": "10.00",
+                    "ASCORE_ITEM_DESC": "13131",
+                    "LVL_NAME": "sfsf",
+                    "LVL_SCORE": "20.00",
+                    "ASCORE_ITEM_ID": "222222",
+                    "ASCORE_ITEM_NM": "1313",
+                    "ASCORE_TYPE_CD": "01"
+                }
+            ],
+            "ASCORE_TYPE_CD": "01",
+            "ASCORE_TYPE_NM": "服务业务"
+        },
+        {
+            "beans": [
+                {
+                    "WTFCT_VAL": "20.00",
+                    "ASCORE_ITEM_DESC": "3123121231",
+                    "LVL_NAME": "fsdfsdf,sfsdfs",
+                    "LVL_SCORE": "2.00,1.00",
+                    "ASCORE_ITEM_ID": "111111",
+                    "ASCORE_ITEM_NM": "1313",
+                    "ASCORE_TYPE_CD": "02"
+                }
+            ],
+            "ASCORE_TYPE_CD": "02",
+             "ASCORE_TYPE_NM": "业务要求"
+        },
+           {
+            "beans": [
+                {
+                    "WTFCT_VAL": "10.00",
+                    "ASCORE_ITEM_DESC": "133343",
+                    "LVL_NAME": "sfsf",
+                    "LVL_SCORE": "20.00",
+                    "ASCORE_ITEM_ID": "67676",
+                    "ASCORE_ITEM_NM": "1313",
+                    "ASCORE_TYPE_CD": "09"
+                },
+                 {
+                    "WTFCT_VAL": "10.00",
+                    "ASCORE_ITEM_DESC": "133343",
+                    "LVL_NAME": "sfsf",
+                    "LVL_SCORE": "20.00",
+                    "ASCORE_ITEM_ID": "222222",
+                    "ASCORE_ITEM_NM": "1313",
+                    "ASCORE_TYPE_CD": "01"
+                }
+            ],
+            "ASCORE_TYPE_CD": "03",
+             "ASCORE_TYPE_NM": "投诉处理能力"
+        },
+        {}
+    ]
+}

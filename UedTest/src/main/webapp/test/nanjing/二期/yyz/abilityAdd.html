@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>能力创建</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/jquery-easyui-1.4/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/dialog/4.1.6/skins/blue.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+
+<script type="text/javascript" src="ui/js/jquery.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/js/jquery.form.js"></script>
+<script type="text/javascript" src="ui/js/json2.js"></script>
+<script type="text/javascript" src="ui/pagination/1.2.1/jquery.pagination.js"></script>
+<script type="text/javascript" src="ui/js/handlebars.js"></script>
+<script type="text/javascript" src="ui/js/helpers.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="ui/js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="ui/js/common.js"></script>
+</head>
+<body>
+
+<!--顶部-->
+<div class="global-top">
+	<div class="top-content">
+		<!--左侧logo-->
+		<div class="fn-left">
+			<span class="logo"></span>
+			<span class="title">能力开放平台</span>
+		</div>
+
+		<!--右侧-->
+		<div class="fn-right">
+			<div class="user-info" id="userInfo">
+				<i class="iconfont user-icon"></i>
+				<span class="user-name">用户名</span>
+				<i class="more"></i>
+				<div class="user-info-more" id="userInfoMore">
+					<ul>
+						<li>
+							<a href="javascript:;" hidefocus="true" id="userInfoBase">基本信息</a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true">修改密码</a>
+						</li>
+						<li class="last">
+							<a href="javascript:;" hidefocus="true">联系人</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<a href="javascript:;" hidefocus="true" class="logout"><span>退出</span></a>
+		</div>
+	</div>
+</div>
+
+<div class="global-content">
+	<div class="container">
+		<!--目录-->
+		<div class="menu-bar" id="menuBar">
+			<ul>
+				<li class="p-item">
+					<a class="menu-tit" href="javascript:;" hidefocus="true" id="">
+						<i class="ability-icon"></i>
+						<span>能力管理</span>
+						<i class="close"></i>
+					</a>
+					<ul class="sub-item">
+						<li>
+							<a href="javascript:;" hidefocus="true"><span>sub1</span></a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true"><span>sub1</span></a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true"><span>sub1</span></a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true"><span>sub1</span></a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true"><span>sub1</span></a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true"><span>sub1</span></a>
+						</li>
+					</ul>
+				</li>
+				<li class="p-item">
+					<a class="menu-tit" href="javascript:;" hidefocus="true" id="">
+						<i class="todo-icon"></i>
+						<span>代办审核</span>
+						<i class="close"></i>
+					</a>
+					<ul class="sub-item">
+						<li>
+							<a href="javascript:;" hidefocus="true"><span>sub1</span></a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true"><span>sub1</span></a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true"><span>sub1</span></a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true"><span>sub1</span></a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true"><span>sub1</span></a>
+						</li>
+					</ul>
+				</li>
+				<li class="p-item last">
+					<a class="menu-tit" href="javascript:;" hidefocus="true" id="">
+						<i class="contract-icon"></i>
+						<span>合约管理</span>
+						<i class="close"></i>
+					</a>
+					<ul class="sub-item">
+						<li>
+							<a href="javascript:;" hidefocus="true"><span>sub1</span></a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true"><span>sub1</span></a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true"><span>sub1</span></a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<!--右侧内容区-->
+		<div class="container-block">
+			<div class="zui-step">
+				<div id="step_1" class="step-page">
+					<div class="title">
+						<ol class="ui-step ui-step-5">
+						    <li class="ui-step-start ui-step-active">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">1</i>
+						            <span class="ui-step-text">基础信息</span>
+						        </div>
+						    </li>
+						    <li class="">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">2</i>
+						            <span class="ui-step-text">关联服务</span>
+						        </div>
+						    </li>
+						    <li class="">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">3</i>
+						            <span class="ui-step-text">能力配额</span>
+						        </div>
+						    </li>
+						    <li class="">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">4</i>
+						            <span class="ui-step-text">确认提交</span>
+						        </div>
+						    </li>
+						    <li class="ui-step-end">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">5</i>
+						            <span class="ui-step-text">创建结果</span>
+						        </div>
+						    </li>
+						</ol>
+					</div>
+
+					<div class="content">
+						<table cellpadding="0" cellspacing="0" border="0" width="100%" class="search_table">
+							<tbody>
+								<tr>
+									<td width="13%" class="des">
+										<label>能力名称：</label>
+									</td>
+									<td colspan="3">
+										<input type="text" id="" class="ui-input fn-w-190" name="inputDemo" />
+									</td>
+								</tr>
+								<tr>
+									<td class="des">
+										<label>能力简述：</label>
+									</td>
+									<td colspan="3">
+										<textarea class="ui-textarea"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td class="des">
+										<label>能力分类：</label>
+									</td>
+									<td >
+										<select class="easyui-combobox" name="" id="">
+									        <option value="AL">Alabama</option>
+									        <option value="AK">Alaska</option>
+									        <option value="CA">California</option>
+									        <option value="CO">Colorado</option>
+									    </select>
+									</td>
+									<td class="des">
+										<label>能力目录：</label>
+									</td>
+									<td >
+										<select class="easyui-combobox" name="" id="">
+									        <option value="AL">Alabama</option>
+									        <option value="AK">Alaska</option>
+									        <option value="CA">California</option>
+									        <option value="CO">Colorado</option>
+									    </select>
+									</td>
+								</tr>
+								<tr>
+									<td class="des">
+										<label>能力编码：</label>
+									</td>
+									<td>
+										<input type="text" id="" class="ui-input fn-w-190" name="inputDemo" />
+									</td>
+									<td class="des">
+										<label>能力地址：</label>
+									</td>
+									<td>
+										<input type="text" id="" class="ui-input fn-w-190" name="inputDemo" />
+									</td>
+								</tr>
+								<tr>
+									<td class="des">
+										<label>备注（选填）：</label>
+									</td>
+									<td colspan="3">
+										<textarea class="ui-textarea"></textarea>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="handler">
+							<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="go_step_2">
+								<span>下一步</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="step_2" class="fn-hide step-page">
+					<div class="title">
+						<ol class="ui-step ui-step-5">
+						    <li class="ui-step-start ui-step-done">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">1</i>
+						            <span class="ui-step-text">基础信息</span>
+						        </div>
+						    </li>
+						    <li class="ui-step-active">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">2</i>
+						            <span class="ui-step-text">关联服务</span>
+						        </div>
+						    </li>
+						    <li class="">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">3</i>
+						            <span class="ui-step-text">能力配额</span>
+						        </div>
+						    </li>
+						    <li class="">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">4</i>
+						            <span class="ui-step-text">确认提交</span>
+						        </div>
+						    </li>
+						    <li class="ui-step-end">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">5</i>
+						            <span class="ui-step-text">创建结果</span>
+						        </div>
+						    </li>
+						</ol>
+					</div>
+
+					<div class="content">
+						<div class="tit">
+							<h2>服务编排</h2>
+							<a class="ui-button ui-button-normal fn-mr-20" href="javascript:;" hidefocus="true" id="J_addService">
+								<i class="iconfont" title="增加服务"></i>
+								<span>增加服务</span>
+							</a>
+							<a class="ui-button ui-button-disable fn-mr-20" href="javascript:;" hidefocus="true" id="J_changeService">
+								<i class="iconfont" title="切换服务"></i>
+								<span>切换服务</span>
+							</a>
+						</div>
+						<table cellpadding="0" cellspacing="0" border="0" width="100%" class="fuwu_table">
+							<thead>
+								<tr>
+									<th width="30%" class="fuwu-first">服务名</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody id="fuwu_tbody">
+								<tr>
+									<td colspan="4">&nbsp;</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="tit ability-obj fn-clear">
+							<h2>服务开放对象</h2>
+							<div class="zui-btn-list fn-disp-inline" id="abilityObj">
+								<a href="javascript:;" hidefocus="true" data-zvalue="0" class="item first active">网厅</a>
+								<a href="javascript:;" hidefocus="true" data-zvalue="1" class="item">商城</a>
+								<a href="javascript:;" hidefocus="true" data-zvalue="2" class="item">CRM前台</a>
+								<a href="javascript:;" hidefocus="true" data-zvalue="3" class="item last">互联网</a>
+							</div>
+						</div>
+						<div class="tit access-ways fn-clear">
+							<h2>请求协议</h2>
+							<table cellpadding="0" cellspacing="0" border="0" width="100%" class="search_table">
+								<tbody>
+									<tr>
+										<td width="13%" class="des">
+											<label>接入模式：</label>
+										</td>
+										<td colspan="3">
+											<div class="zui-btn-list fn-disp-inline" id="accessWays">
+												<a href="javascript:;" hidefocus="true" data-zvalue="0" class="item first active">HTTP</a>
+												<a href="javascript:;" hidefocus="true" data-zvalue="1" class="item">SOCKET</a>
+												<a href="javascript:;" hidefocus="true" data-zvalue="2" class="item last">WEBSERVICE</a>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>报文解析器：</label>
+										</td>
+										<td>
+											<div class="zui-btn-list fn-disp-inline" id="messageParser">
+												<a href="javascript:;" hidefocus="true" data-zvalue="0" class="item first last active">通用</a>
+											</div>
+										</td>
+										<td class="des">
+											<label>报文类型：</label>
+										</td>
+										<td>
+											<div class="zui-btn-list fn-disp-inline" id="mesgType">
+												<a href="javascript:;" hidefocus="true" data-zvalue="0" class="item first active">JSON</a>
+												<a href="javascript:;" hidefocus="true" data-zvalue="2" class="item last">XML</a>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>请求示例：</label>
+										</td>
+										<td colspan="3">
+											<span>********************************</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>响应示例：</label>
+										</td>
+										<td colspan="3">
+											<span>*******************</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="handler">
+							<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="ret_step_1">
+								<span>上一步</span>
+							</a>
+							<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="go_step_3">
+								<span>下一步</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="step_3" class="fn-hide step-page">
+					<div class="title">
+						<ol class="ui-step ui-step-5">
+						    <li class="ui-step-start ui-step-done">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">1</i>
+						            <span class="ui-step-text">基础信息</span>
+						        </div>
+						    </li>
+						    <li class="ui-step-done">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">2</i>
+						            <span class="ui-step-text">关联服务</span>
+						        </div>
+						    </li>
+						    <li class="ui-step-active">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">3</i>
+						            <span class="ui-step-text">能力配额</span>
+						        </div>
+						    </li>
+						    <li class="">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">4</i>
+						            <span class="ui-step-text">确认提交</span>
+						        </div>
+						    </li>
+						    <li class="ui-step-end">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">5</i>
+						            <span class="ui-step-text">创建结果</span>
+						        </div>
+						    </li>
+						</ol>
+					</div>
+
+					<div class="content">
+						<div class="tit fn-clear">
+							<table cellpadding="0" cellspacing="0" border="0" width="100%" class="search_table">
+								<tbody>
+									<tr>
+										<td width="13%" class="des">
+											<label>配额类型：</label>
+										</td>
+										<td colspan="3">
+											<div class="zui-btn-list fn-disp-inline" id="quotaType">
+												<a href="javascript:;" hidefocus="true" data-zvalue="0" class="item first last active">周期性</a>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>周期：</label>
+										</td>
+										<td colspan="3">
+											<select class="easyui-combobox" name="" id="">
+										        <option value="AL">Alabama</option>
+										        <option value="AK">Alaska</option>
+										        <option value="CA">California</option>
+										        <option value="CO">Colorado</option>
+										    </select>
+										</td>
+									</tr>
+									<tr>
+										<td width="13%" class="des">
+											<label>计量依据：</label>
+										</td>
+										<td colspan="3">
+											<div class="zui-btn-list fn-disp-inline" id="calculateBase">
+												<a href="javascript:;" hidefocus="true" data-zvalue="0" class="item first last active">全部调用</a>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>配额额度：</label>
+										</td>
+										<td colspan="3">
+											<input type="text" id="" class="ui-input fn-w-190" name="inputDemo" />
+										</td>
+									</tr>
+									<tr>
+										<td class="des">
+											<label>说明：</label>
+										</td>
+										<td colspan="3">
+											<textarea class="ui-textarea"></textarea>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="handler">
+							<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="ret_step_2">
+								<span>上一步</span>
+							</a>
+							<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="go_step_4">
+								<span>下一步</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="step_4" class="fn-hide confirm-info step-page">
+					<div class="title">
+						<ol class="ui-step ui-step-5">
+						    <li class="ui-step-start ui-step-done">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">1</i>
+						            <span class="ui-step-text">基础信息</span>
+						        </div>
+						    </li>
+						    <li class="ui-step-done">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">2</i>
+						            <span class="ui-step-text">关联服务</span>
+						        </div>
+						    </li>
+						    <li class="ui-step-done">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">3</i>
+						            <span class="ui-step-text">能力配额</span>
+						        </div>
+						    </li>
+						    <li class="ui-step-active">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">4</i>
+						            <span class="ui-step-text">确认提交</span>
+						        </div>
+						    </li>
+						    <li class="ui-step-end">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">5</i>
+						            <span class="ui-step-text">创建结果</span>
+						        </div>
+						    </li>
+						</ol>
+					</div>
+
+					<div class="content">
+						<div class="tit">
+							<h2>请核对您当前创建的信息</h2>
+						</div>
+						<div class="info-list" id="step_part1">
+							<div class="info-list-tit fn-clear">
+								<i>1</i>
+								<h3>能力基础信息</h3>
+								<a class="ui-button ui-button-normal fn-mr-20" href="javascript:;" hidefocus="true" id="inof_ret_step_1">
+									<span>返回该步骤修改</span>
+								</a>
+							</div>
+							<table cellpadding="0" cellspacing="0" border="0" width="80%" class="list_table">
+								<tbody>
+									<tr>
+										<td width="11%">
+											<label>能力名称：</label>
+										</td>
+										<td width="39%">
+											<span class="des">缴费开户</span>
+										</td>
+										<td width="11%">
+											<label>能力简述：</label>
+										</td>
+										<td>
+											<span class="des">***********</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label>能力名称：</label>
+										</td>
+										<td>
+											<span class="des">缴费开户</span>
+										</td>
+										<td>
+											<label>能力简述：</label>
+										</td>
+										<td>
+											<span class="des">***********</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label>能力名称：</label>
+										</td>
+										<td>
+											<span class="des">缴费开户</span>
+										</td>
+										<td>
+											<label>能力简述：</label>
+										</td>
+										<td>
+											<span class="des">***********</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="info-list" id="step_part2">
+							<div class="info-list-tit fn-clear">
+								<i>2</i>
+								<h3>能力关联服务</h3>
+								<a class="ui-button ui-button-normal fn-mr-20" href="javascript:;" hidefocus="true" id="inof_ret_step_2">
+									<span>返回该步骤修改</span>
+								</a>
+							</div>
+							<table cellpadding="0" cellspacing="0" border="0" width="80%" class="list_table">
+								<tbody>
+									<tr>
+										<td width="11%">
+											<label>能力名称：</label>
+										</td>
+										<td width="39%">
+											<span class="des">缴费开户</span>
+										</td>
+										<td width="11%">
+											<label>能力简述：</label>
+										</td>
+										<td>
+											<span class="des">***********</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label>能力名称：</label>
+										</td>
+										<td>
+											<span class="des">缴费开户</span>
+										</td>
+										<td>
+											<label>能力简述：</label>
+										</td>
+										<td>
+											<span class="des">***********</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label>能力名称：</label>
+										</td>
+										<td>
+											<span class="des">缴费开户</span>
+										</td>
+										<td>
+											<label>能力简述：</label>
+										</td>
+										<td>
+											<span class="des">***********</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="info-list last" id="step_part3">
+							<div class="info-list-tit fn-clear">
+								<i>3</i>
+								<h3>能力配额信息</h3>
+								<a class="ui-button ui-button-normal fn-mr-20" href="javascript:;" hidefocus="true" id="inof_ret_step_3">
+									<span>返回该步骤修改</span>
+								</a>
+							</div>
+							<table cellpadding="0" cellspacing="0" border="0" width="80%" class="list_table">
+								<tbody>
+									<tr>
+										<td width="11%">
+											<label>能力名称：</label>
+										</td>
+										<td width="39%">
+											<span class="des">缴费开户</span>
+										</td>
+										<td width="11%">
+											<label>能力简述：</label>
+										</td>
+										<td>
+											<span class="des">***********</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label>能力名称：</label>
+										</td>
+										<td>
+											<span class="des">缴费开户</span>
+										</td>
+										<td>
+											<label>能力简述：</label>
+										</td>
+										<td>
+											<span class="des">***********</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label>能力名称：</label>
+										</td>
+										<td>
+											<span class="des">缴费开户</span>
+										</td>
+										<td>
+											<label>能力简述：</label>
+										</td>
+										<td>
+											<span class="des">***********</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="handler">
+							<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="ret_step_3">
+								<span>上一步</span>
+							</a>
+							<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="go_step_5">
+								<span>确认提交</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="step_5" class="fn-hide step-page">
+					<div class="title">
+						<ol class="ui-step ui-step-5">
+						    <li class="ui-step-start ui-step-done">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">1</i>
+						            <span class="ui-step-text">基础信息</span>
+						        </div>
+						    </li>
+						    <li class="ui-step-done">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">2</i>
+						            <span class="ui-step-text">关联服务</span>
+						        </div>
+						    </li>
+						    <li class="ui-step-done">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">3</i>
+						            <span class="ui-step-text">能力配额</span>
+						        </div>
+						    </li>
+						    <li class="ui-step-done">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">4</i>
+						            <span class="ui-step-text">确认提交</span>
+						        </div>
+						    </li>
+						    <li class="ui-step-end ui-step-active">
+						        <div class="ui-step-line">-</div>
+						        <div class="ui-step-icon">
+						            <i class="zui-setp-bg"></i>
+						            <i class="ui-step-number">5</i>
+						            <span class="ui-step-text">创建结果</span>
+						        </div>
+						    </li>
+						</ol>
+					</div>
+					<div class="result-content">
+						<div class="success fn-hide">
+							<div class="header">
+								<i></i>
+								<span>恭喜您，创建成功！</span>
+							</div>
+							<table cellpadding="0" cellspacing="0" border="0" width="100%" class="res_table">
+								<tbody>
+									<tr>
+										<td width="50%">
+											<label>能力名称：</label>
+											<span>缴费开户</span>
+										</td>
+										<td>
+											<label>ID：</label>
+											<span>1872158****</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label>创建时间：</label>
+											<span>2014-11-04</span>
+										</td>
+										<td>
+											<label>当前状态：</label>
+											<span>待审核</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="handler">
+								<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="">
+									<span>回到首页</span>
+								</a>
+								<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="">
+									<span>能力查询</span>
+								</a>
+							</div>
+						</div>
+						<div class="fail">
+							<div class="header">
+								<i></i>
+								<span>真抱歉！创建失败了...</span>
+							</div>
+							<table cellpadding="0" cellspacing="0" border="0" width="100%" class="res_table">
+								<tbody>
+									<tr>
+										<td>
+											<label>失败原因：</label>
+											<span>网络故障</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="handler">
+								<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="">
+									<span>回到首页</span>
+								</a>
+								<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="">
+									<span>重新创建</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--右侧内容区 end-->
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+	//下一步
+	$("#go_step_2").click(function(){
+		//判断是否全部填写
+		if(1){
+			$(".step-page").addClass("fn-hide");
+			$("#step_2").removeClass("fn-hide");
+		}
+
+	})
+	$("#go_step_3").click(function(){
+		$(".step-page").addClass("fn-hide");
+		$("#step_3").removeClass("fn-hide");
+	})
+	$("#go_step_4").click(function(){
+		$(".step-page").addClass("fn-hide");
+		$("#step_4").removeClass("fn-hide");
+	})
+	$("#go_step_5").click(function(){
+		$(".step-page").addClass("fn-hide");
+		$("#step_5").removeClass("fn-hide");
+	})
+
+	//上一步
+	$("#ret_step_1, #inof_ret_step_1").click(function(){
+		$(".step-page").addClass("fn-hide");
+		$("#step_1").removeClass("fn-hide");
+	})
+	$("#ret_step_2, #inof_ret_step_2").click(function(){
+		$(".step-page").addClass("fn-hide");
+		$("#step_2").removeClass("fn-hide");
+	})
+	$("#ret_step_3, #inof_ret_step_3").click(function(){
+		$(".step-page").addClass("fn-hide");
+		$("#step_3").removeClass("fn-hide");
+	})
+
+	//按钮列表
+	$(".zui-btn-list").find("a.item").click(function(){
+		$(this).addClass("active").siblings(".item").removeClass("active");
+	})
+
+	//增加服务
+	$("#J_addService").click(function(){
+		if($(this).hasClass("ui-button-disable")){
+			return false;
+		}else{
+			result_prompt(1,"添加服务");
+			var _tr = '<tr><td width="30%">开户流程服务</td><td>'+
+				'<a href="javascript:;" hidefocus="true" class="fuwu_param_mod"><span>参数修改</span><i class="iconfont" title="提示"></i></a>'+
+				'<a href="javascript:;" hidefocus="true" class="fuwu_param_detail"><span>查看详情</span></a>'+
+				'</td></tr>'
+			$("#fuwu_tbody").html(_tr);
+			$(this).removeClass("ui-button-normal").addClass("ui-button-disable");
+			$("#J_changeService").addClass("ui-button-normal").removeClass("ui-button-disable");
+		}
+	})
+	//切换服务
+	$("#J_changeService").click(function(){
+		if($(this).hasClass("ui-button-disable")){
+			return false;
+		}else{
+			result_prompt(2,"修改服务");
+			var _tr = '<tr><td width="30%">开户流程服务222222</td><td>'+
+				'<a href="javascript:;" hidefocus="true" class="fuwu_param_mod"><span>参数修改</span><i class="iconfont" title="提示"></i></a>'+
+				'<a href="javascript:;" hidefocus="true" class="fuwu_param_detail"><span>查看详情</span></a>'+
+				'</td></tr>'
+			$("#fuwu_tbody").html(_tr);
+		}
+	})
+});
+
+</script>
+</body>
+</html>

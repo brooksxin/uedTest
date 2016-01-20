@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<link rel="stylesheet" type="text/css" href="jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="jquery.multiSelect.css">
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="jquery.combobox.js"></script>
+<script type="text/javascript" src="jquery.multiselect.js"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+
+.element,.text{
+	border-bottom:1px solid #ddd;
+	border-left:1px solid #c3c3c3;
+	border-right:1px solid #c3c3c3;
+	border-top:1px solid #7c7c7c;
+	color:#333;
+	font-size:100%;
+	margin:0;
+	padding:2px;
+	width:225px;
+	line-height:1.2;
+	background-color:#fff;
+}
+
+</style>
+</head>
+<body>
+
+<!--多选框测试-->
+<div>
+	<select class="element text" id="my-select" name="my-select">
+		<option value='elem_1'>elem 1</option>
+		<option value='elem_2'>elem 2</option>
+		<option value='elem_3'>elem 3</option>
+		<option value='elem_4'>elem 4</option>
+		<option value='elem_100'>elem 100</option>
+	</select>
+</div>
+<div>
+	<select class="element text" id="my-select2" name="my-select">
+		<option value='elem_1'>elem 1</option>
+		<option value='elem_2'>elem 2</option>
+		<option value='elem_3'>elem 3</option>
+		<option value='elem_4'>elem 4</option>
+		<option value='elem_100'>elem 100</option>
+	</select>
+</div>
+
+
+<!--combobox测试-->
+<div>
+	<select class="element text" id="my-select3" name="my-select">
+		<option value='elem_1'>elem 1</option>
+		<option value='elem_2'>elem 2</option>
+		<option value='elem_3'>elem 3</option>
+		<option value='elem_4'>elem 4</option>
+		<option value='elem_100'>elem 100</option>
+	</select>
+</div>
+
+
+
+<div>
+	<button id="test">测试</button>
+</div>
+
+<script type="text/javascript">
+$(function(){
+
+	var _str = "";
+	for(var i=0,length=10; i<length; i++){
+		_str += '<option value="elem_'+i+'">elem '+i+'</option>';
+	}
+	$('#my-select').html(_str).attr({"multiple":"multiple"}).multiselect();
+	$('#my-select2').attr({"multiple":"multiple"}).multiselect().multiselect("uncheckAll");
+	$("#my-select3").combobox();
+
+	
+	$("#test").click(function(){
+		console.log($('#my-select').val())
+		console.log($('#my-select2').val())
+		console.log($('#my-select3').val())
+	})
+
+
+
+});
+</script>
+</body>
+</html>

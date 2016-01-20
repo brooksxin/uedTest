@@ -1,0 +1,13 @@
+{
+	"returnCode": "1",
+    "rows": [
+        {
+            "propLabel": "排队人数",
+            "propValue": "20"
+        },
+        {
+            "propLabel": "预约人数",
+            "propValue": "40"
+        }
+    ]
+}

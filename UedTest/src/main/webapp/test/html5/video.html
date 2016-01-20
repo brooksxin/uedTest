@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>video</title>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script type="text/javascript" src="../jquery.js"></script>
+<style type="text/css">
+body {
+	background: #f0f0f0;
+}
+</style>
+</head>
+<body>
+<!--
+controls="controls"：如果出现该属性，则向用户显示控件，比如播放按钮。
+autoplay="autoplay"：一旦视频就绪马上开始播放
+loop="loop"：循环播放
+preload="auto"：如果设置了 autoplay 属性，则忽略该属性
+				auto - 当页面加载后载入整个视频
+				meta - 当页面加载后只载入元数据
+				none - 当页面加载后不载入视频
+-->
+<video width="320" controls="controls" preload="auto" id="myVideo">
+	<source src="http://www.w3school.com.cn/i/movie.ogg" type="video/ogg">
+	<source src="http://www.w3school.com.cn/i/movie.mp4" type="video/mp4">
+	Your browser does not support the video tag.
+</video>
+<button onclick="playPause()">播放/暂停</button>
+<button onclick="makeBig()">大</button>
+<button onclick="makeNormal()">中</button>
+<button onclick="makeSmall()">小</button>
+<button onclick="muted()">静音</button>
+
+<div></div>
+
+<script type="text/javascript">
+$(function(){
+	var myVideo = $("video");
+})
+
+function playPause(){
+	if (myVideo.paused)
+		myVideo.play();
+	else
+		myVideo.pause();
+}
+
+function makeBig(){
+	myVideo.width=560;
+}
+
+function makeSmall(){
+	myVideo.width=320;
+}
+
+function makeNormal(){
+	myVideo.width=420;
+}
+
+function muted(){
+	myVideo.muted = true;
+}
+</script>
+</body>
+</html>

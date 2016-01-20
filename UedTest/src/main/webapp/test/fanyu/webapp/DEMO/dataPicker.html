@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>日期选择组件</title>
+
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/tablepay.css" />
+    <link rel="stylesheet" href="../lib/dialog/4.1.7/skins/blue.css" />
+	<link href="../lib/pretty/prettify.css" type="text/css" rel="stylesheet">
+    
+
+	
+<style>
+.standard {
+	margin:0px 20px
+}
+.standard h1 {
+	font-size:20px;
+	margin:10px 0px;
+	font-weight:bold
+}
+.standard p {
+	line-height:150%;
+	margin:20px 0px 10px 0px;
+}
+</style>
+</head>
+<body id="main_body" onload="prettyPrint()">
+<div class="standard">
+  <H1>日期选择组件</H1>
+  <p><strong>示例</strong></p>
+  
+  <div>
+    <form class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+      <div class="record-search-cate">
+        <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+          <tbody>
+            <tr>
+           	<!--每行最多三个查询条件-->
+              <td width="100"><label class="description">正常日期选择</label></td>
+              <td width="150">
+                <!-- 不添加任何限制，自由选择日期 -->
+                <input id="date" type="text" class="FormInputText inputWidth Wdate" onFocus="WdatePicker()"/>
+              </td>
+              <!--日期开始与结束选择分开放置-->
+              <td width="90"><label class="description">日期起</label></td>
+              <td width="150">
+              	<input type="text"  id='start' name='start'  class="FormInputText inputWidth Wdate" value="" onFocus="WdatePicker({
+                    onpicked:function(){end.focus();},//选择后自动打开id为end的日期选择
+                    startDate:'%y-%M-%d',//初始化从今天开始
+                    realDateFmt:'yyyy-MM-dd',//格式化后的值
+                    dateFmt:'yyyy-MM-dd',//显示的格式
+                    minDate:'%y-%M-%d',//选择的最小值是今天
+                    maxDate:'#F{$dp.$D(\'end\')}'//选择的最大值不能大过ID为end的值
+                    })"/>
+              </td>
+              <td width="90"><label class="description">日期止</label></td>
+              <td width="150">
+              <input type="text"  id='end' name='end'  class="FormInputText inputWidth Wdate" value="" onFocus="WdatePicker({
+                  startDate:'%y-%M-%d',
+                  realDateFmt:'yyyy-MM-dd',
+                  dateFmt:'yyyy-MM-dd',
+                  minDate:'#F{$dp.$D(\'start\')}',//选择的最小值不能小于ID为start的值
+                  })"/>
+              </td>
+              <td><div class="normalBtnArea w82"> <a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a> </div></td>
+            </tr>
+            <tr>
+              <td width="100"><label class="description">商家名称</label></td>
+              <td width="150"><input class="inputText" type="text" maxlength="255" value=""/></td>
+              <td width="90"><label class="description">精确日期起</label></td>
+              <td width="150">
+                <input type="text"  id='start1' name='start1'  class="inputWidthDataPoint FormInputText  Wdate" value="" onFocus="WdatePicker({
+                    onpicked:function(){end1.focus();},//选择后自动打开id为end1的日期选择
+                    startDate:'%y-%M-%d',//初始化从今天开始
+                    realDateFmt:'yyyy-MM-dd HH:mm:ss',//格式化后的值
+                    dateFmt:'yyyy-MM-dd HH:mm:ss',//显示的格式
+                    minDate:'%y-%M-%d',//选择的最小值是今天
+                    maxDate:'#F{$dp.$D(\'end1\')}'//选择的最大值不能大过ID为end的值
+                    })"/>
+              </td>
+              <td width="90"><label class="description">精确日期止</label></td>
+              <td width="150">
+              <input type="text"  id='end1' name='end1'  class="inputWidthDataPoint FormInputText Wdate" value="" onFocus="WdatePicker({
+                  startDate:'%y-%M-%d',
+                  realDateFmt:'yyyy-MM-dd HH:mm:ss',
+                  dateFmt:'yyyy-MM-dd HH:mm:ss',
+                  minDate:'#F{$dp.$D(\'start1\')}',//选择的最小值不能小于ID为start的值
+                  })"/>
+              </td>
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </form>
+  </div>
+  
+  
+  
+  <p><strong>代码</strong></p>
+  
+  <pre class="prettyprint mg_t_20 fn-clear" id="html">
+
+        &lt;table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%"&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+            &lt;!--每行最多三个查询条件--&gt;
+              &lt;td width="100"&gt;&lt;label class="description"&gt;正常日期选择&lt;/label&gt;&lt;/td&gt;
+              &lt;td width="150"&gt;
+                &lt;!-- 不添加任何限制，自由选择日期 --&gt;
+                &lt;input id="date" type="text" class="FormInputText inputWidth Wdate" onFocus="WdatePicker()"/&gt;
+              &lt;/td&gt;
+              &lt;!--日期开始与结束选择分开放置--&gt;
+              &lt;td width="90"&gt;&lt;label class="description"&gt;日期起&lt;/label&gt;&lt;/td&gt;
+              &lt;td width="150"&gt;
+                &lt;input type="text"  id='start' name='start'  class="FormInputText inputWidth Wdate" value="" onFocus="WdatePicker({
+                    onpicked:function(){end.focus();},//选择后自动打开id为end的日期选择
+                    startDate:'%y-%M-%d',//初始化从今天开始
+                    realDateFmt:'yyyy-MM-dd',//格式化后的值
+                    dateFmt:'yyyy-MM-dd',//显示的格式
+                    minDate:'%y-%M-%d',//选择的最小值是今天
+                    maxDate:'#F{$dp.$D(\'end\')}'//选择的最大值不能大过ID为end的值
+                    })"/&gt;
+              &lt;/td&gt;
+              &lt;td width="90"&gt;&lt;label class="description"&gt;日期止&lt;/label&gt;&lt;/td&gt;
+              &lt;td width="150"&gt;
+              &lt;input type="text"  id='end' name='end'  class="FormInputText inputWidth Wdate" value="" onFocus="WdatePicker({
+                  startDate:'%y-%M-%d',
+                  realDateFmt:'yyyy-MM-dd',
+                  dateFmt:'yyyy-MM-dd',
+                  minDate:'#F{$dp.$D(\'start\')}',//选择的最小值不能小于ID为start的值
+                  })"/&gt;
+              &lt;/td&gt;
+              &lt;td&gt;&lt;div class="normalBtnArea w82"&gt; &lt;a class="searchBtn" href="javascript:;" id="J_search" &gt;&lt;i&gt;&lt;/i&gt;查询&lt;/a&gt; &lt;/div&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td width="100"&gt;&lt;label class="description"&gt;商家名称&lt;/label&gt;&lt;/td&gt;
+              &lt;td width="150"&gt;&lt;input class="inputText" type="text" maxlength="255" value=""/&gt;&lt;/td&gt;
+              &lt;td width="90"&gt;&lt;label class="description"&gt;精确日期起&lt;/label&gt;&lt;/td&gt;
+              &lt;td width="150"&gt;
+                &lt;input type="text"  id='start1' name='start1'  class="inputWidthDataPoint FormInputText  Wdate" value="" onFocus="WdatePicker({
+                    onpicked:function(){end1.focus();},//选择后自动打开id为end1的日期选择
+                    startDate:'%y-%M-%d',//初始化从今天开始
+                    realDateFmt:'yyyy-MM-dd HH:mm:ss',//格式化后的值
+                    dateFmt:'yyyy-MM-dd HH:mm:ss',//显示的格式
+                    minDate:'%y-%M-%d',//选择的最小值是今天
+                    maxDate:'#F{$dp.$D(\'end1\')}'//选择的最大值不能大过ID为end的值
+                    })"/&gt;
+              &lt;/td&gt;
+              &lt;td width="90"&gt;&lt;label class="description"&gt;精确日期止&lt;/label&gt;&lt;/td&gt;
+              &lt;td width="150"&gt;
+              &lt;input type="text"  id='end1' name='end1'  class="inputWidthDataPoint FormInputText Wdate" value="" onFocus="WdatePicker({
+                  startDate:'%y-%M-%d',
+                  realDateFmt:'yyyy-MM-dd HH:mm:ss',
+                  dateFmt:'yyyy-MM-dd HH:mm:ss',
+                  minDate:'#F{$dp.$D(\'start1\')}',//选择的最小值不能小于ID为start的值
+                  })"/&gt;
+              &lt;/td&gt;
+              &lt;td&gt;&nbsp;&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+	</pre>
+</div>
+
+
+    
+
+	<script src="../lib/jquery/1.8.1/jquery.js"></script>
+	<script type="text/javascript" src="../lib/pretty/prettify.js"></script>
+	<script src="../lib/datepicker/4.8.b2/WdatePicker.js"></script>
+	
+</body>
+</html>

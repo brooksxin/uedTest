@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>质量管理模块——评分类型</title>    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+
+</head>
+
+<body>
+<!-- 面包屑 begain -->
+<div class="breadcrumb"></div>
+<!-- 面包屑end -->
+<div class="titleArea">
+    <div class="listTopBtn fn-clear">
+        <h2 class="fn-left">评分类型</h2>
+        <div class="normalBtnArea mb-10 ft-right">
+            <a class="normalBtn BGblue" href="#">新建评分类型</a>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="../../res/lib/ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="../../res/lib/validate/1.10.0/jquery.validate.js"></script>
+<script type="text/javascript" src="../../res/lib/datepicker/4.8.b2/WdatePicker.js"></script>
+<script type="text/javascript" src="../../res/lib/json/1.0/json2.js"></script>
+<script type="text/javascript" src="../../res/lib/dialog/4.1.6/artDialog.js"></script>
+<script type="text/javascript" src="../../res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="../../res/lib/opui/2.0.1/operamasks-ui.js"></script>
+<script type="text/javascript" src="../../res/lib/blockUI/2.64/jquery.blockUI.js"></script>
+<script type="text/javascript" src="../../res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="../../res/lib/handlebars/1.0.rc.3/helpers.js"></script>
+<script type="text/javascript" src="../../res/lib/slides/3.0/jquery.slides.min.js"></script>
+<script type="text/javascript" src="../../res/lib/pagination/1.2.1/jquery.pagination.js" ></script>
+<script type="text/javascript" src="../../res/lib/underscore/1.4.4/underscore-min.js" ></script>
+<script type="text/javascript" src="../../res/lib/jqui/1.9.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../../res/lib/jqui/1.9.2/jquery.combobox.js"></script>
+<script type="text/javascript" src="../../res/lib/jqui/1.9.2/jquery.multiselect.js"></script>
+<script type="text/javascript" src="../../res/common/NiceTools.js"></script>
+<script type="text/javascript" src="../../res/common/common.js"></script>
+<div method="post" action="#" class="cmxform" >
+    <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+        <div class="record-search-cate">
+            <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="100"><label class="description">类型名称</label></td>
+                        <td colspan="2" width="200">
+                            <select class="inputSelect w160">
+                                <option>全部</option>
+                                <option>10085通话服务质量检测</option>
+                                <option>2015年6月第一周质量检测</option>
+                            </select>
+                        </td>
+                        <td colspan="3">&nbsp;</td>
+                        <td>
+                            <a class="btn_search" href="javascript:;" id="J_search" >查询</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="description">创建时间起</label>
+                        </td>
+                        <td>
+                            <input id="param-eDate" class="element text Wdate" type="text"onFocus="WdatePicker()"  />
+                        </td>
+                        <td>
+                            <label class="description">创建时间止</label>
+                        </td>
+                        <td>
+                           <input id="param-eDate" class="element text Wdate" type="text" onFocus="WdatePicker()"  />
+                        </td>
+                        <td>
+                            <label class="description">发布工号</label>
+                        </td>
+                        <td>
+                            <select class="inputSelect w160">
+                                <option>不限</option>
+                                <option>X009051</option>
+                            </select>
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </form>
+</div>
+<div class="tablewidth mg_t_10">
+    <table class="ui-record-table table_radius table-bordered table-striped" >
+        <thead>
+            <tr>
+                <th width="25">&nbsp;</th>
+                <th width="150">评分类型</th>
+                <th>创建时间</th>
+                <th width="200">发布工号</th>
+                <th width="200">操作</th>
+            </tr>
+        </thead>
+        <tbody id="J_tabletpl">
+            <tr>
+                <td>
+                    <div class="table_select"><input type="checkbox" /></div>
+                </td>
+                <td><a class="item-text" href="javascript:;">服务用语</a></td>
+                <td align="center">2015.05.15 09:00:23</td>
+                <td>X009051</td>
+                <td>
+                    <div class="gridRowBtn">
+                        <a class="item-text" href="javascript:;">编辑</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!--翻页及功能按钮区域开始-->
+<div class="amount-bottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+        <tr>
+            <td width="60">
+                <input type="checkbox" class="selectAll" id="selectAll" />
+                <label for="selectAll">全选</label>
+            </td>
+            <td>
+                <div class="normalBtnArea"><!--不附加ft-right样式，默认左对齐-->
+                    <a class="normalBtn BGgray" href="#">删除评分类型</a>
+                </div>
+            </td>
+            <td width="50%">
+                <div class="fn-clear action-other  action-other-show ">
+                    <div id="Pagination" class="page pagination fn-right"></div>
+                    <div class="fn-right fn-pt5 fn-pr10"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+      //页面加载完开始执行
+      $(document).ready(function () {
+          //初始化函数
+      });
+  </script>
+</body>
+</html>

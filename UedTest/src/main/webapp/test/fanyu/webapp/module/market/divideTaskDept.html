@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10085系统</title>
+<#include "../../tpl/res_css.tpl" />
+
+<style>
+	.listTopBtn .titleColumn { width:580px; }
+	.listTopTips .dateColumn { width:580px; }
+	.disabled { background-color:#ddd; }
+</style>
+</head>
+
+<body>
+
+		<div class="breadcrumb"></div>
+
+		<div class="listTopBtn">
+	    	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	          	<tr>
+		            <td class="titleColumn"><h1><span id="CMPGN_NM"></span></h1></td>
+		            <td><!--<label class="color-red">距任务结束：</label><span id="clock">加载中...<span>--></td>
+	          	</tr>
+	        </table>
+	    </div>
+				
+	    <div class="listTopTips">
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			    <tr>
+			         <td class="dateColumn"><span id="CMPGN_EFF_DATE"></span>——<span id="CMPGN_INVLD_DATE"></span></td>
+			         <td>任务数量：<span id="count"></span></td>
+			    </tr>
+			</table>
+	    </div>
+   
+		<form id="divideTask">
+	     	<div class="tablewidth mg_t_10">
+				<table class="ui-record-table table_radius table-bordered table-striped" >
+					<thead>
+						<tr>
+							<th width="50"></th>
+							<th width="">员工工号</th>
+							<th width="">员工姓名</th>
+							<th width="">配给数量</th>
+						</tr>
+                    </thead>
+                    <tbody id="J_tabletpl"></tbody>
+				</table>
+	    		<input type="hidden" name="uid" value="mt001" />
+	    		<input type="hidden" name="type" value="1" />
+	    		<input type="hidden" class="VALID_BGN_DATE" name="VALID_BGN_DATE"  />
+				<input type="hidden" class="VALID_END_DATE" name="VALID_END_DATE"  />
+				<input type="hidden" class="CMPGN_ID" name="CMPGN_ID"  />
+			</div>
+		</form>
+
+
+	    <!--翻页及功能按钮区域开始-->
+	    <DIV class="amount-bottom">
+	        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+	          <tr>
+	            <td width="60">
+	                <input type="checkbox" class="selectAll" id="selectAll" checked="checked" />
+	                <label for="selectAll">全选</label> 
+	            </td>
+	            <td width="100">剩余配给量:<span class="surplus">0</span></td>
+	            <td width="100">
+	                <DIV class="normalBtnArea">
+	                    <a class="normalBtn BGgray" id="J_distr_again" href="javascript:;">重新分配</a>
+	                </DIV>
+	            </td>
+	            <td>
+	                <DIV class="fn-clear action-other  action-other-show " style="width:410px">
+                        <DIV id=Pagination class="page pagination fn-right"> </DIV>
+                        <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+	                </DIV></td>
+	          </tr>
+	        </table>
+	    </DIV>
+	    
+	    <div class="normalBtnArea fn-center">
+	    	<a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" >确定</a>
+	    </div>
+	
+	<#include "../../tpl/res_js.tpl" />	
+	<!--以下为该页面私有js-->
+	<script src="../../lib/underscore/1.8.3/m.js"></script>
+	<script src="../../lib/jqueryPlugin/jquery.countdown/2.0.2/m.js"></script>
+    <script src="../../common/market/common.js"></script>
+
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+	{{#each beans}}
+	    <tr>
+			<td>
+				<div class="table_select">
+					<input type="checkbox" checked="checked" onchange="checkStaff(this)" />
+				</div>
+			</td>
+            <input type="hidden" name="STAFF_ID" class="hideBox" value={{STAFF_ID}}>
+			<td align="center">{{PTY_NO}}</td>
+			<td align="center">{{PTY_NM}}</td>
+			<td align="center">
+				<div style="line-height:0px">
+					<a herf="#" class="order_productDiva" onclick="decrease(this)">-</a>
+					<input type="text" name="count" class="ui-count-ipt order_productinput fn-mtl-5" lastVal="" onchange="changeTaskIpt(this)" onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')"  />
+					<a herf="#" class="order_productDiva fn-mtl-5" onclick="increase(this)">+</a>
+				</div>
+			</td>
+	    </tr>
+	{{/each}}
+{{else}}
+	<tr>
+		<td colspan="4">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+
+{{/if}}
+</script>
+<script type="text/javascript">
+var CMPGN_ID =Util.browser.getParameter("CMPGN_ID");//活动ID
+var CMPGN_NM=  decodeURI(Util.browser.getParameter("CMPGN_NM"));//活动名称
+var CMPGN_EFF_DATE=  decodeURI(Util.browser.getParameter("CMPGN_EFF_DATE"));//活动结束日期
+var CMPGN_INVLD_DATE=  decodeURI(Util.browser.getParameter("CMPGN_INVLD_DATE"));//活动结束日期 
+
+/* var CMPGN_ID = '20150508'//活动ID
+var CMPGN_INVLD_DATE= '2015-05-08' //活动结束日期
+var CMPGN_EFF_DATE= '2015-05-08' //活动结束日期
+var CMPGN_NM ="情满七夕 优惠钜献 大型促销活动"; */
+$("#CMPGN_NM").text(CMPGN_NM);
+$("#CMPGN_EFF_DATE").text(CMPGN_EFF_DATE);
+$("#CMPGN_INVLD_DATE").text(CMPGN_INVLD_DATE);
+$(".CMPGN_ID").val(CMPGN_ID);
+$(".VALID_BGN_DATE").val(CMPGN_EFF_DATE);
+$(".VALID_END_DATE").val(CMPGN_INVLD_DATE);
+srvMap.add('getcount', 'count.json', 'front/sh/market!index');//班组长查询未分配任务数量
+srvMap.add('stafflist', 'staf.json', 'front/sh/user!userinfo');//班组长查询所在部门的员工列表
+srvMap.add('divide', 'divide.json', 'front/sh/market!index');//分配任务
+
+var count = "",num = '';
+
+$(function() {
+	var DEPT_ID=userInfo.bean.deptId;//
+	var STAFF_ID=userInfo.bean.userId;//当前登录用户ID
+	//获取任务数量
+	var param1={"uid":"mc001","CMPGN_ID":CMPGN_ID,"STAFF_ID":STAFF_ID,"type":"1"};
+	Util.ajax.postJsonSync(srvMap.get('getcount'),param1,function(json,status) {
+		
+		if (status) {
+			count = json.bean.count;
+			$('#count').text(json.bean.count);
+			
+			var param2={"uid":"u005","DEPT_ID":DEPT_ID};
+			//查询员工列表
+			Util.ajax.postJson(srvMap.get('stafflist'), param2, function(json, status) {
+				if (status) {
+					num=json.beans.length;
+					Util.ajax.loadTemp('#J_tabletpl', $('#T_tabletpl'), json);
+
+					distributeTask();
+				}else{
+
+				}
+			});
+		}else{
+
+		}
+	});
+	
+	//全选checkbox
+	$('#selectAll').change(function() {
+		var ck=this.checked;
+		$("#J_tabletpl input[type='checkbox']").each(function(i,ele){
+			this.checked=ck;
+			checkStaff(ele);
+		});
+	});
+
+	$("#J_search").bind("click",function(e){
+		
+		if ($(this).attr('class').indexOf('disable') > -1) {
+			return false;
+		}
+		//分配任务
+		var str2= $("#divideTask").serialize(); //把form序列化
+		Util.ajax.postJsonSync(srvMap.get('divide'), str2, function(json, status) {
+			if (status) {
+				if(json.returnCode=='0'){
+					Util.dialog.tips("成功分配任务哦");
+					window.location.href = "campgnListGrLdr.html";
+				}
+			}else{
+
+			}
+		});
+	});
+	
+	//给任务数量文本框注册事件
+	$('#J_tabletpl').on('propertychange keyup input paste blur set', 'tr td .ui-count-ipt', function(e){
+		numSign(e.currentTarget);
+	})
+
+	/*
+	//倒计时
+	var countdownParam = {};
+	Util.ajax.postJson(srvMap.get('stafflist'), countdownParam, function(json, status) {
+		if (status) {
+			//json
+		}
+	});
+	$('#clock').countdown('2015/6/1', function(event) {
+		$(this).html(event.strftime('%D 天 %H:%M:%S'));
+	});*/
+});
+
+//分配任务
+function distributeTask(){
+	
+	var $tbody = $('#J_tabletpl');
+	var $trs = $tbody.children();
+	var $trCheckeds = _.filter($trs, function(tr) {
+		var $tr = $(tr);
+		return $tr.find('input[type=checkbox]').is(':checked');
+	});
+	if($trCheckeds==null||$trCheckeds==''){
+		Util.dialog.tips("请选择成员");
+	}else{
+	var checkedNum = $trCheckeds.length;
+	var averageTask = parseInt(parseInt(count)/checkedNum),//平均分配
+		surplusTask = parseInt(parseInt(count)%checkedNum);//取余
+	
+	$('.ui-count-ipt', $trCheckeds).val(averageTask).attr('lastVal',averageTask)
+		.eq(0).val(averageTask+surplusTask).attr('lastVal',averageTask+surplusTask);
+    //$('input[type=checkbox]').attr('checked','checked');
+    $('.surplus').html(0);
+	canDistribute();
+	}
+}
+
+//递减
+function decrease(obj){
+	if ($(obj).attr('class').indexOf('disabled')>-1){
+		return false;
+	}
+	var obj = $(obj),surplus = parseInt($('.surplus').html());
+	var curTask = parseInt(obj.siblings('input').val());
+	if (curTask>0) {
+		curTask--;
+		surplus++;
+		obj.siblings('input').val(curTask).attr('lastVal',curTask);
+		$('.surplus').html(surplus);
+	};
+	canDistribute(obj);
+}
+
+//递增
+function increase(obj){
+	if ($(obj).attr('class').indexOf('disabled')>-1){
+		return false;
+	}
+	obj = $(obj);
+	var surplus = parseInt($('.surplus').html());
+	var curTask = parseInt(obj.siblings('input').val());
+	if (surplus>0) {
+		surplus--;
+		curTask++;
+		obj.siblings('input').val(curTask).attr('lastVal',curTask);
+		$('.surplus').html(surplus);
+	};
+	
+	var surplus = parseInt($('.surplus').html());
+	
+	if (surplus) {
+		$('#J_distr_again').removeClass('disable').attr('onclick','distributeTask()');
+		$('#J_search').addClass('disable');
+		//J_search
+	}else{
+		$('#J_distr_again').addClass('disable').removeAttr('onclick');
+		$('#J_search').removeClass('disable');
+	}
+}
+//改变input的任务量值
+function changeTaskIpt(obj){
+	obj = $(obj);
+	var	lastVal = parseInt(obj.attr('lastVal')),
+	curVal = parseInt(obj.val()),
+	surplus = parseInt($('.surplus').html());
+	if (curVal > lastVal) {
+		var DVal = curVal - lastVal;
+		if (DVal > surplus) {
+			Util.dialog.tips('剩余配给量不足！');
+			obj.val(lastVal);
+		}else{
+			$('.surplus').html(surplus - DVal);
+			obj.attr('lastVal',curVal);
+		}
+	}else{
+		var DVal = lastVal - curVal;
+		$('.surplus').html(surplus + DVal);
+		obj.attr('lastVal',curVal);
+	}
+	canDistribute(obj);
+}
+//是否选中员工
+function checkStaff(obj){
+	obj = $(obj);
+	var curIpt = obj.parents('tr').find('.ui-count-ipt'),
+		curVal = parseInt(curIpt.val()),
+		surplus = parseInt($('.surplus').html()), 
+		$tr = obj.parents('tr'), 
+		$box = $('input[type=text]', $tr), 
+		$hideBox = $('.hideBox', $tr), 
+		$plus = $('.order_productDiva', $tr);
+	if (!obj.attr('checked')) {
+		$('.surplus').html(surplus+curVal);
+		curIpt.val(0);
+		$box.attr('disabled', 'disabled');
+		$plus.addClass('disabled');
+		$hideBox.attr('disabled', 'disabled');
+	}else{
+		$box.removeAttr('disabled');
+		$plus.removeClass('disabled');
+		$hideBox.removeAttr('disabled');
+	}
+	canDistribute(obj);
+	obj.parents('tr').find('.ui-count-ipt').attr('lastVal',0);
+}
+
+//判断重新分配按钮是否可用
+function canDistribute(obj){
+	var $trCheckeds = checkedGets(true);
+	var surplus = parseInt($('.surplus').html());
+	if (surplus || $trCheckeds.length > 0) {
+		$('#J_distr_again').removeClass('disable').attr('onclick','distributeTask()');
+		$('#J_search').addClass('disable');
+		//J_search
+	}else{
+		$('#J_distr_again').addClass('disable').removeAttr('onclick');
+		$('#J_search').removeClass('disable');
+	}
+	numSign(obj);
+	/*
+	if (obj) {
+		var curIpt = obj.parents('tr').find('.ui-count-ipt'),
+			curCheckbox = obj.parents('tr').find('input[type="checkbox"]');
+		//是否选中checkbox
+		if (parseInt(curIpt.val())) {
+			curCheckbox.attr('checked','checked');
+		}else{
+			curCheckbox.removeAttr('checked');
+		}
+	}*/
+	
+}
+</script>
+</body>
+</html>

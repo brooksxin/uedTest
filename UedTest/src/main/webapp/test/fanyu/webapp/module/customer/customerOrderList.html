@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>客户管理模板</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+  <#include "../../tpl/sys_top.tpl" />
+    <div class="wrapper">
+        <div id="J_topMenu"  class="menu fn-clear">
+        <#include "../../tpl/sys_topMenu.tpl" />
+        </div>
+        <!-- left start -->
+        <div class="left">
+            <div class="leftInner" id="">
+        <#include "../../tpl/cust_left.tpl" />
+            </div>
+            <div class="middle" id="mainMiddle">&nbsp;</div>
+        </div>
+        <!-- left END -->
+        <!-- right start -->
+        <div class="right" id="mainRight" style="overflow:auto;*position:relative">
+            <div id="mainRight_child" style="height:100%;">
+                 
+                 <div class="titleArea">
+                    <h2 class="ml-15">钱大华的订单时间</h2>
+                 </div>
+                <div method="post" action="#" class="cmxform" >
+                   <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+                      <div class="record-search-cate">
+                    <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <tbody>
+                              <tr>
+                                <td width="60"><label class="description">开始时间</label></td>
+                                <td>
+                                  <input id="param-eDate2" class="inputWidth  element text Wdate" type="text" value="2015-12-04" onfocus="WdatePicker()" />
+                                </td>
+                                <td width="60"><label class="description">结束时间</label></td> 
+                                <td>
+                                  <input id="param-eDate" class="inputWidth  element text Wdate" type="text" value="2015-12-04" onFocus="WdatePicker()"  />
+                                </td>   
+                                <td width="60"><label class="description">工号</label></td>
+                                <td width="150">
+                                  <input class="inputWidth  inputText" type="text" maxlength="255" value=" x10082" />
+                                </td>
+                                <td width="120"><a class="btn_search" href="javascript:;" id="J_search" >查询</a></td>
+                              </tr>
+                            </tbody>
+                    </table>
+                        </div>
+                        <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+                    </form>
+                </div>
+            
+                         
+                         
+                      
+                
+              
+                <div class="tablewidth mg_t_10">
+                      <table class="ui-record-table table_radius table-bordered table-striped" >
+                        <thead>
+                          <tr>
+                            <th width="120">订单编号</th>
+                            <th width="120">商品名称</th>
+                            <th width="60">金额（元）</th>
+                            <th width="80">下单时间</th>
+                            <th width="60">下单人</th>
+                            <th width="50">物流状态</th>
+                            <th width="">操作</th>
+                          </tr>
+                                     </thead>
+                                     <tbody id="J_tabletpl">
+                                        <tr>
+                                            <td>CM20150318825824</td>
+                                            <td>苹果（Apple）iPhone6</td>
+                                            <td><div class="fn-right">1779.00</div></td>
+                                            <td>2015-12-05 12:24:12</td>
+                                            <td>20203</td>
+                                            <td>已发货</td>
+                                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">查看</a><a class="item-text" href="javascript:;">拨打电话</a></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>CM20150318825824</td>
+                                            <td>苹果（Apple）iPhone6</td>
+                                            <td><div class="fn-right">1779.00</div></td>
+                                            <td>2015-12-05 12:24:12</td>
+                                            <td>20203</td>
+                                            <td>已发货</td>
+                                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">查看</a><a class="item-text" href="javascript:;">拨打电话</a></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>CM20150318825824</td>
+                                            <td>苹果（Apple）iPhone6</td>
+                                            <td><div class="fn-right">1779.00</div></td>
+                                            <td>2015-12-05 12:24:12</td>
+                                            <td>20203</td>
+                                            <td>已发货</td>
+                                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">查看</a><a class="item-text" href="javascript:;">拨打电话</a></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>CM20150318825824</td>
+                                            <td>苹果（Apple）iPhone6</td>
+                                            <td><div class="fn-right">1779.00</div></td>
+                                            <td>2015-12-05 12:24:12</td>
+                                            <td>20203</td>
+                                            <td>已发货</td>
+                                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">查看</a><a class="item-text" href="javascript:;">拨打电话</a></div></td>
+                                        </tr>
+                                        
+                        
+                                      
+                        </tbody>
+                      </table>
+                </div>
+                
+                    <!--翻页及功能按钮区域开始-->
+                <DIV class="amount-bottom">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+                      <tr>
+                        
+                        <td width="50%">
+                            <DIV class="fn-clear action-other  action-other-show ">
+                                    <DIV id=Pagination class="page pagination fn-right"> </DIV>
+                                    <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                            </DIV></td>
+                      </tr>
+                    </table>
+                </DIV>
+
+          
+
+
+          </div>
+        </div>
+        <!-- right stop -->
+    </div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+//页面加载完开始执行
+$(function () {
+    
+});
+</script>
+</body>
+</html>

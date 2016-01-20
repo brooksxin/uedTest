@@ -1,0 +1,11 @@
+{
+    "returnCode": "1",
+    "rows": [
+        {
+            "propValue": "23",
+            "propLabel": "属性label",
+            "businessId": "1",
+            "propName": "queuNum"
+        }
+    ]
+}

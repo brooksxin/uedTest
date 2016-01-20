@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Untitled Form</title>
+<link href="../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../css/tablepay.css" media="all">
+<link rel="stylesheet" type="text/css" href="../lib/dialog/6.0.4/css/ui-dialog.css">
+<script src="../lib/jquery/1.8.1/jquery.js"></script>
+<script type="text/javascript" src="../lib/pretty/prettify.js"></script>
+<style>
+
+.standard {
+	margin:0px 20px
+}
+.standard h1 {
+	font-size:20px;
+	margin:10px 0px;
+	font-weight:bold
+}
+.standard p {
+	line-height:150%;
+	margin:20px 0px 10px 0px;
+}
+</style>
+</head>
+<body id="main_body" onload="prettyPrint()" style="background-color:#f5f5f5;">
+<div class="standard">
+
+  <H1>数据集列表页面规范代码</H1>
+
+	<p><strong>示例</strong></p>
+	
+	
+        	<!--
+            #############################
+            数据表
+			1、列宽度根据实际情况进行调整,内容最长的单元格不定义宽度
+            2、部分字段内容使用<div class='gridNum'></div>包含。金额，如12.00 、材料单位如：台/克均使用gridNum的DIV包含，确保此中文字居右对齐；
+            3、复选框列，统一使用此<div class="table_select"><input type="checkbox" /></div>包含，确保此中文字居中对齐
+            ##################
+            -->
+<div class="tablewidth mg_t_10">
+    <table class="ui-record-table table_radius table-bordered table-striped" >
+        <thead>
+            <tr>
+                <th width="25">选择</th>
+                <!--列宽度根据实际情况进行调整,内容最长的单元格不定义宽度-->
+                <th><div class="sort"><span>类似商品名称的长字段可以不定义宽度</span><a href="javascript:;" class="sort_icon">&nbsp;</a></div></th>
+                <th width="60">价格（元）</th>
+                <th width="90"><div class="sort"><span>名称</span><a href="javascript:;" class="sort_icon">&nbsp;</a></div></th>
+                <th width="50">已出售</th>
+                <th width="50">库存</th>
+                <th width="120">添加时间</th>
+                <th width="50">添加者</th>
+                <th width="120">操作</th>
+            </tr>
+         </thead>
+         <tbody id="J_tabletpl">
+         <!--模板引擎循环内容-->
+                <tr>
+                    <td>
+                        <!--第一列选择统一使用此div包含，确保此中文字居中对齐；-->
+                        <div class="table_select"><input type="checkbox" /></div>
+                    </td>
+                    <td>此列不定义宽度可以自适应页面宽度</td>
+                    <td><div class="gridNum">1299</div></td>
+                    <td>酷派</td>
+                    <!--金额，如12.00 、材料单位如：台/克均使用gridNum的DIV包含，确保此中文字居右对齐；-->
+                    <td><div class="gridNum">80</div></td>
+                    <td><div class="gridNum">100</div></td>
+                    <td>2015-12-5 12:24:35</td>
+                    <td>朱允炆</td>
+                    <!--此列宽度根据实际情况进行宽度定义-->
+                    <td width="80">
+                    	<!--行内处理链接标准格式-->
+                        <div class="gridRowBtn">
+                            <a class="item-text" href="javascript:;">导出数据</a>
+                            <a class="disable-text" href="javascript:;">删除</a>
+                        </div>
+                    </td>
+                </tr>
+         </tbody>
+    </table>
+</div>
+            
+<!--翻页及功能按钮区域开始-->
+<div class="amount-bottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+      <tr>
+        <td width="60">
+            <input type="checkbox" class="selectAll" id="selectAll" /> <label for="selectAll">全选</label> 
+        </td>
+        <td>
+            <div class="normalBtnArea"><!--不附加ft-right样式，默认左对齐-->
+                <a class="normalBtn BGgray" href="#">批量下架</a>
+                <a class="normalBtn BGgray" href="#">灰色按钮</a>
+                <a class="normalBtn disable" href="#">不可用按钮</a>
+            </div>
+        </td>
+        <td width="50%">
+            <DIV class="fn-clear action-other  action-other-show ">
+                    <DIV id="Pagination" class="page pagination fn-right"><!--分页组件会自动完成数据分页信息,无需做任务更改--></DIV>
+                    <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+            </DIV></td>
+      </tr>
+    </table>
+</div> 
+            
+  <pre class="prettyprint mg_t_20 fn-clear" id="html">
+
+&lt;div class="tablewidth mg_t_10"&gt;
+    &lt;table class="ui-record-table table_radius table-bordered table-striped" &gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th width="25"&gt;选择&lt;/th&gt;
+                &lt;!--列宽度根据实际情况进行调整,内容最长的单元格不定义宽度--&gt;
+                &lt;th&gt;&lt;div class="sort"&gt;&lt;span&gt;类似商品名称的长字段可以不定义宽度&lt;/span&gt;&lt;a href="javascript:;" class="sort_icon"&gt;&nbsp;&lt;/a&gt;&lt;/div&gt;&lt;/th&gt;
+                &lt;th width="60"&gt;价格（元）&lt;/th&gt;
+                &lt;th width="90"&gt;&lt;div class="sort"&gt;&lt;span&gt;名称&lt;/span&gt;&lt;a href="javascript:;" class="sort_icon"&gt;&nbsp;&lt;/a&gt;&lt;/div&gt;&lt;/th&gt;
+                &lt;th width="50"&gt;已出售&lt;/th&gt;
+                &lt;th width="50"&gt;库存&lt;/th&gt;
+                &lt;th width="120"&gt;添加时间&lt;/th&gt;
+                &lt;th width="50"&gt;添加者&lt;/th&gt;
+                &lt;th width="120"&gt;操作&lt;/th&gt;
+            &lt;/tr&gt;
+         &lt;/thead&gt;
+         &lt;tbody id="J_tabletpl"&gt;
+         &lt;!--模板引擎循环内容--&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;
+                        &lt;!--第一列选择统一使用此div包含，确保此中文字居中对齐；--&gt;
+                        &lt;div class="table_select"&gt;&lt;input type="checkbox" /&gt;&lt;/div&gt;
+                    &lt;/td&gt;
+                    &lt;td&gt;此列不定义宽度可以自适应页面宽度&lt;/td&gt;
+                    &lt;td&gt;&lt;div class="gridNum"&gt;1299&lt;/div&gt;&lt;/td&gt;
+                    &lt;td&gt;酷派&lt;/td&gt;
+                    &lt;!--金额，如12.00 、材料单位如：台/克均使用gridNum的DIV包含，确保此中文字居右对齐；--&gt;
+                    &lt;td&gt;&lt;div class="gridNum"&gt;80&lt;/div&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;div class="gridNum"&gt;100&lt;/div&gt;&lt;/td&gt;
+                    &lt;td&gt;2015-12-5 12:24:35&lt;/td&gt;
+                    &lt;td&gt;朱允炆&lt;/td&gt;
+                    &lt;!--此列宽度根据实际情况进行宽度定义--&gt;
+                    &lt;td width="80"&gt;
+                        &lt;!--行内处理链接标准格式--&gt;
+                        &lt;div class="gridRowBtn"&gt;
+                            &lt;a class="item-text" href="javascript:;"&gt;导出数据&lt;/a&gt;
+                            &lt;a class="disable-text" href="javascript:;"&gt;删除&lt;/a&gt;
+                        &lt;/div&gt;
+                    &lt;/td&gt;
+                &lt;/tr&gt;
+         &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+            
+&lt;!--翻页及功能按钮区域开始--&gt;
+&lt;div class="amount-bottom"&gt;
+    &lt;table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom"&gt;
+      &lt;tr&gt;
+        &lt;td width="60"&gt;
+            &lt;input type="checkbox" class="selectAll" id="selectAll" /&gt; &lt;label for="selectAll"&gt;全选&lt;/label&gt; 
+        &lt;/td&gt;
+        &lt;td&gt;
+            &lt;div class="normalBtnArea"&gt;&lt;!--不附加ft-right样式，默认左对齐--&gt;
+                &lt;a class="normalBtn BGgray" href="#"&gt;批量下架&lt;/a&gt;
+                &lt;a class="normalBtn BGgray" href="#"&gt;灰色按钮&lt;/a&gt;
+                &lt;a class="normalBtn disable" href="#"&gt;不可用按钮&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/td&gt;
+        &lt;td width="50%"&gt;
+            &lt;DIV class="fn-clear action-other  action-other-show "&gt;
+                    &lt;DIV id="Pagination" class="page pagination fn-right"&gt;&lt;!--分页组件会自动完成数据分页信息,无需做任务更改--&gt;&lt;/DIV&gt;
+                    &lt;DIV class="fn-right fn-pt5 fn-pr10"&gt;&lt;/DIV&gt;
+            &lt;/DIV&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt; 
+	</pre>
+    
+  
+</div>
+</body>
+</html>

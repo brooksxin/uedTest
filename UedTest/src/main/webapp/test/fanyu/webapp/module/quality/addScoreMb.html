@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>质量管理模块——评分模板</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+
+<body>
+<!-- 面包屑 begain -->
+<div class="breadcrumb"></div>
+<!-- 面包屑end -->
+<div class="formItem">
+    <div class="pt-10 pb-10">
+        <a href="###" class="formItem_jiantou-tu normalLink">返回</a>
+    </div>
+    <div class="titleArea">
+        <h2>编辑评分模板</h2>
+    </div>
+</div>
+</body>
+
+<!-- 添加评分项类型,选择项弹出层数据 -->
+<div id="J_score" class="fn-hide">
+	<ul class="scopetypelist" id="J_scoretype">
+	</ul>
+</div>
+
+<div method="post" action="#" class="cmxform" >
+    <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+        <div class="formItem">
+            <hr/>
+            <table class="form_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td align="right" width="100">
+                            <label class="formDescription"><span class="fn-high">*</span>模板名称：</label>
+                        </td>
+                        <td>
+                            <input type="text" class="FormInputText width100" placeholder="促销活动回访评分模版" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <label class="formDescription">模板描述：</label>
+                        </td>
+                        <td>
+                            <textarea rows="4" class="width100"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="formDescription"><span class="fn-high">*</span>评分项：</label>
+                        </td>
+                        <td>
+                            <div class="fn-left fn-pt5 fn-pr10"><a class="normalBtn BGgray" href="javascript:" onclick="Dialog_score_type()">添加评分类型</a></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>       
+    </form>
+</div>
+<!--翻页及功能按钮区域开始-->
+<hr/>
+<ul id="J_temp">
+	
+</ul>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+	srvMap.add("scoretype", "scoretype.json","front/sh/quality!execute?uid=qlmb006");//评分项类型 
+      //页面加载完开始执行
+      $(document).ready(function () {
+          //初始化函数
+      });
+      
+      var param=$('#J_temp').html();
+	function J_add_score_type(){
+			var params = {
+				id : 'd3',
+				top:top,
+				title : '普通对话框',
+				content : param,
+				width : '400',
+				height : '250',
+				modal : true,
+				okVal: '确定',
+			    okCallback: function () {
+			        
+			    },
+			    cancelVal: '取消',
+			    cancelCallback: function () {
+			    	
+			    }
+			}
+			Util.dialog.openDiv(params);
+		}
+	//评分类型
+	var scoretypehtml = '';
+	var elem = '';
+	Util.ajax.postJson(srvMap.get('scoretype'),'',function(json, status) {
+			if (status) {
+					var beans = json.beans;
+					for (var i = 0; i < beans.length; i++) {
+						scoretypehtml += "<li><span>"
+								+ beans[i].ASCORE_TYPE_NM
+								+ "</span><input type='radio' name='scoretype' id='"+beans[i].ASCORE_TYPE_ID+"'/> </li>";
+					}
+					$('#J_scoretype').html(scoretypehtml);
+					elem = $('#J_score').html();
+				}else{
+					
+				}
+			});
+	
+	//添加评分类型弹出层
+	function Dialog_score_type() {
+		var paramsdiv = {
+			top : top,
+			content : elem,
+			title : "添加评分类型",
+			width : "400px",
+			height : "atuo",
+			modal : true,
+			okVal : '确定',
+			okCallback : function() {
+				
+			},
+			cancelVal : '取消',
+			cancelCallback : function() {
+			}
+		}
+		var d = Util.dialog.openDiv(paramsdiv);
+		
+	}
+	
+  </script>
+
+</body>
+</html>

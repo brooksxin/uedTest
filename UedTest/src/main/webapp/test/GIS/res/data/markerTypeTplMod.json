@@ -1,0 +1,105 @@
+{
+    "markerType": "1101",
+    "markerTypeName": "三墩营业厅",
+    "returnCode": "1",
+    "rows": [
+        {
+            "templateId": "1",
+            "type": "4",
+            "name": "businessId",
+            "label": "业务ID",
+            "templateStatus": "1",
+            "propOrder": "1"
+        },
+        {
+            "templateId": "2",
+            "type": "4",
+            "name": "name",
+            "label": "名称",
+            "templateStatus": "1",
+            "propOrder": "2"
+        },
+        {
+            "templateId": "3",
+            "type": "4",
+            "name": "lng",
+            "label": "经度",
+            "templateStatus": "1",
+            "propOrder": "3"
+        },
+        {
+            "templateId": "4",
+            "type": "4",
+            "name": "lat",
+            "label": "纬度",
+            "templateStatus": "1",
+            "propOrder": "4"
+        },
+        {
+            "templateId": "5",
+            "type": "4",
+            "name": "icon",
+            "label": "图标",
+            "templateStatus": "1",
+            "propOrder": "5"
+        },
+        {
+            "templateId": "6",
+            "type": "4",
+            "name": "address",
+            "label": "地址",
+            "templateStatus": "1",
+            "propOrder": "6"
+        },
+        {
+            "templateId": "7",
+            "templateStatus": "1",
+            "type": "1",
+            "propOrder": "7",
+            "name": "11",
+            "label": "22",
+            "url": "",
+            "key": ""
+        },
+        {
+            "templateId": "8",
+            "templateStatus": "1",
+            "type": "2",
+            "propOrder": "8",
+            "name": "1101",
+            "label": "",
+            "url": "",
+            "key": ""
+        },
+        {
+            "templateId": "8",
+            "templateStatus": "1",
+            "type": "2",
+            "propOrder": "8",
+            "name": "1100",
+            "label": "",
+            "url": "",
+            "key": ""
+        },
+        {
+            "templateId": "8",
+            "templateStatus": "1",
+            "type": "2",
+            "propOrder": "8",
+            "name": "1101",
+            "label": "",
+            "url": "",
+            "key": ""
+        },
+        {
+            "templateId": "9",
+            "templateStatus": "1",
+            "type": "3",
+            "propOrder": "9",
+            "name": "33",
+            "label": "44",
+            "url": "555",
+            "key": "66"
+        }
+    ]
+}

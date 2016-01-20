@@ -1,0 +1,53 @@
+ {
+                                "returnCode": "1",
+                                "points": [
+                                    {
+                                        "pointId":"123",
+                                        lng: 120.326884,
+                                        lat: 30.279206,
+                                        title:"kak",
+                                        staticData: [
+                                            {
+                                                name: "精通数据1",
+                                                value: "xxx"
+                                            },
+                                            {
+                                                name: "静态数据2",
+                                                value: 222
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "pointId":"222",
+                                        lng: 120.336658,
+                                        lat: 30.255002,
+                                        title:"kaka",
+                                        staticData: [
+                                            {
+                                                name: "精通数据1",
+                                                value: "yyyy"
+                                            },
+                                            {
+                                                name: "静态数据2",
+                                                value: 222
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "pointId":"333",
+                                        lng: 120.315673,
+                                        lat: 30.253255,
+                                        title:"kakaka",
+                                        staticData: [
+                                            {
+                                                name: "精通数据1",
+                                                value: "zzzz"
+                                            },
+                                            {
+                                                name: "静态数据2",
+                                                value: 33333
+                                            }
+                                        ]
+                                    }
+                                ],
+                            }

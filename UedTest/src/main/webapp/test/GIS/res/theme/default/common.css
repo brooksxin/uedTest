@@ -1,0 +1,271 @@
+/*layout*/ 
+.main {margin:0 auto;padding:0;width:100%;background-color:#F5F5F5;}
+.content{height:100%;margin-left:220px;min-width: 800px;_width:expression((document.documentElement.clientWidth||document.body.clientWidth)<800?"800px":"")}
+.aside{width:220px; height:100%;position: absolute;top: 60px;}
+#wrapContent{height:600px;}
+/*ztree layout*/
+.ztree_wrap{width:100%;float:left;}
+.ztree_content{height:100%;margin-left:270px;}
+.ztree_aside{width:270px; height:100%;float:left;}
+.ztree_aside_cd{background:#efefef;padding:10px;}
+.ztree_content_cd{padding:0 10px;margin:0 10px;}
+/*head*/
+#hnav{
+	height:60px;
+	overflow:hidden;
+	position:relative;
+	background:url(images/new/bg_right.png) repeat-x left top;
+}
+.hnav_logo{
+	position:absolute;
+	left:0;
+	top:0;
+	width:800px;
+	height:60px;
+	background:url(images/new/nav.png) no-repeat left top;
+}
+#nav{
+	position:absolute;
+	left:310px;
+	top:12px;
+}
+#nav li{
+	float:left;
+	width:81px;
+	display:inline;
+	text-align:center;
+	margin-left:6px;
+	margin-top:0px;
+}
+#nav li a{
+	display:block;
+	padding:4px;
+	color:#FFF;
+	text-align:center;
+}
+#nav li img{
+	display:block;
+	width:48px;
+	margin:0 auto;
+}
+#nav li.active a,#nav li a:hover{
+	color:#FFF;
+	text-decoration:none;
+	background:url(images/banner/icon_hover_bg.gif) no-repeat left top;
+}
+/* @menu */
+.aside a.tit{
+	display:block;
+	color:#444444;
+	font-weight:bold;
+	width:100%;
+	height:32px;
+	line-height:32px;
+	text-indent:20px;
+	border-bottom:1px solid #EAE7E7;
+	cursor:pointer;
+	text-decoration:none;
+}
+.aside a.tit:hover{
+	text-decoration:none;
+}
+.aside .titlist{
+	overflow:hidden;
+	width:100%;
+	display:none;
+}
+.aside li.active a.tit{
+	background-image:url(images/left_dh_hover.png);
+}
+.aside li.active .titlist{
+	display:block;
+}
+.aside .titlist li{
+	float:left;
+	width:100%;
+	height:50px;
+	line-height:50px;
+	display:block;
+	text-indent:40px;
+	overflow:hidden;
+}
+.aside .titlist li a{
+	color:#16608B;
+	display:block;
+	background:#F7F5F5 url(images/new/item.png) no-repeat 2px -51px;
+	font-size: 12px;
+	font-weight: bold;
+}
+.aside .titlist li a:hover,.aside .titlist li.cur,.aside .titlist li.cur a{
+	background-position: 2px 0;
+	text-decoration:none;
+}
+/* @path */
+.pathhome{
+	padding-left:10px;
+	height:31px;
+	line-height:31px;
+}
+.pathhome h4{
+	background:url(images/home.png) no-repeat left 6px;
+	text-indent:22px;
+	font-weight:normal;
+}
+/* body wrap */
+.bz_manage{
+	padding:5px 5px 0 5px;
+}
+.qj_wrap{
+	padding:5px;
+}
+.bz_btn_list{
+	text-align: left;
+}
+.openwin .bz_btn_list{
+	text-align: center;
+	padding: 15px 0;
+}
+.tab_cd{
+	margin-top:10px;
+}
+.bz_btn_add{
+	padding:2px 0;
+}
+.error_color{
+	color:red;
+}
+/*input &button*/
+.normalinput {
+	width: 140px;
+	border: 1px solid #999;
+	height: 20px;
+	line-height: 20px;
+	padding-left: 4px;
+}
+
+.normalinputlong {
+	width: 360px;
+	border: 1px solid #999;
+	height: 20px;
+	line-height: 20px;
+	padding-left: 4px;
+}
+.normaltext{
+	width: 300px;
+	border: 1px solid #999;
+	height: 50px;
+	padding-top: 4px;
+	padding-left: 4px;
+}
+.normaltext99{
+	border: 1px solid #999;
+	height:40px;
+	width:98%;
+	padding-top: 4px;
+	padding-left: 4px;
+}
+.inputread{
+	background:#eee;
+	color:#666;
+}
+.btn_normal {
+	display: inline-block;
+	background: url(images/button.gif) no-repeat left -54px;
+	height: 27px;
+	color:#fff;
+	line-height: 27px;
+	font-size: 12px;
+	font-weight: normal;
+	cursor: pointer;
+	text-decoration: none;
+	padding-left: 20px;
+}
+.btn_normal:hover {
+	color: #333;
+	background-position:left top;
+	text-decoration: none;
+}
+.btn_normal:hover em{
+	color: #333;
+	background-position:right -27px;
+}
+.btn_normal em {
+	display: inline-block;
+	background: url(images/button.gif) no-repeat right -81px;
+	height: 27px;
+	line-height: 27px;
+	color:#fff;
+	font-size: 12px;
+	font-weight: normal;
+	cursor: pointer;
+	text-decoration: none;
+	padding-right: 20px;
+} 
+
+.fn-mr-20 {margin-right: 20px;}
+.fn-vtop {vertical-align: top;}
+.fn-center {text-align: center;}
+.fn-hide {display: none;}
+.fn-left {float: left;}
+select {width: 125px; padding: 3px 0;}
+.openwin {padding: 0 10px;}
+/**查询table --begin**/
+.openwin .bz_manage .infoTable {background: #fff;}
+.bz_manage .infoTable {background: #E5EBF2;}
+.bz_manage .infoTable td {padding: 13px 6px; }
+.openwin .bz_manage .infoTable td {padding: 6px; }
+.bz_manage .infoTable .description {width: 65px;}
+#upbusi_form table{width:327px; margin-left:235px;}
+.openwin .ui-box {margin-bottom: 10px;}
+.openwin .ui-box .ui-box-content label{margin-right: 20px; line-height: 20px;}
+/**查询table --end**/
+
+/**Grid 操作列按钮 --begin**/
+.om-grid div.hDiv{background: #fafafa url(images/new/head-bg.png) repeat-x bottom; border-bottom: none; height: 35px;}
+.om-grid-row .grid-btn{color: #08c;text-decoration: underline;}
+.om-grid-row .grid-btn:hover {color: #000; text-decoration: underline;}
+.om-grid div.bDiv tr.evenRow {background: #F5F5F5;}
+.om-grid div.hDiv th, div.colCopy {height: 35px;}
+.om-grid div.hDiv th div {font-weight: bold; color: #4D4D4D;}
+/**Grid 操作列按钮 --end**/
+.markertypetpl select {width: 80px;}
+.markertypetpl .markertypetpl-top {margin-bottom: 5px; padding-bottom: 5px; border-bottom: 1px solid #ccc;}
+.markertypetpl .markertypetplbtn {margin-right: 5px;}
+
+/**新增应用配置**/
+.openwin .bulk {border-bottom: solid 1px #ccc; padding-bottom: 20px;}
+.bulk dl dt{margin:10px;}
+.bulk dl li{display:inline-block; margin-left:30px; float: left;word-break:keep-all; white-space:nowrap;} 
+.bulk ul input {vertical-align: middle;line-height: 30px; height: 30px;}
+.bulk ul label {line-height: 30px; height: 30px;}
+
+/**新增节点树配置**/
+.ztreeConfig {height: 400px; overflow-y: auto;}
+
+/**组织区域配置**/
+.area_config .areaConfig {float:left;width:25%;height: 380px;overflow: auto;}
+.area_config .mapContain {float:left;width:70%;height:380px;}
+.area_config .suggest_input {height: 35px; line-height: 35px;}
+.area_config .bz_btn_list {margin-top: 15px;}
+
+
+
+/**标记点绑定**/
+.marker_bind .ztree {width: 200px; height: 450px; overflow: auto; border-right: 1px solid #ccc;}
+.marker_bind .bz_manage {width: 740px;}
+.marker_bind .bz_manage .infoTable td {padding: 12px 6px;}
+.marker_bind .infoTable {margin-bottom: 15px;border-bottom: 1px solid #ccc;}
+.marker_bind .bz_btn_list {padding: 0;text-align: left;}
+.marker_bind .chooseAll {margin: -6px 0 9px 7px}
+.marker_bind .chooseAll input {vertical-align: middle;}
+
+/**标记点信息新增修改**/
+.markerMod .bz_manage {float:left; width:30%;}
+.markerMod .mapcontainer {float:left; width: 67%;}
+.markerMod .search_con label {height: 46px; line-height: 46px; display: inline-block;}
+
+/**loading**/
+.artLoading {background: #F7F7F7 url(images/loading.gif) no-repeat; padding-left: 20px;}
+
+/**同步属性配置**/
+#intfUrl{width:350px;}

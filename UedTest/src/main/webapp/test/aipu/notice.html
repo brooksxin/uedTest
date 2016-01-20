@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>消息 - 亚信开源社区</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/js/dialog/6.0.5/ui-dialog.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+<div class="glob-top">
+	<div class="wrap fn-clear">
+		<a class="logo fn-clear" href="index.html" hidefocus="true">
+			<span class="logo-name">AIOSC</span>
+			<span class="logo-name2">亚信开源社区</span>
+		</a>
+		<div class="login-bar fn-clear">
+			<a href="javascript:;" hidefocus="true" class="login" id="J_login">
+				<span><i class="iconfont" title="用户"></i> 登录</span>
+			</a>
+			<a href="javascript:;" hidefocus="true" class="regist" id="J_regist">
+				<span>注册</span>
+			</a>
+			<a href="javascript:;" hidefocus="true" class="maintain">
+				<span>社区维护后台</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="glob-contain">
+	<div class="wrap fn-clear">
+		<div class="glob-left notice-wrap">
+			<div class="noticeRole">
+				<div class="notice-contain">
+					<ul id="J_noticeRole">
+						
+					</ul>
+				</div>
+				<a href="javascript:;" hidefocus="true" class="slidesjs-previous slidesjs-navigation" id="achievementBtnT">
+				</a>
+				<a href="javascript:;" hidefocus="true" class="slidesjs-next slidesjs-navigation" id="achievementBtnB">
+				</a>
+				<div class="curBlock" id="J_curBlock"></div>
+			</div>
+		</div>
+
+		<div class="glob-right notice-wrap-r">
+			<h2>消息通知</h2>
+			<!--分页table-->
+			<div class="data-table" id="dataTable">
+				<table class="ui-table" cellpadding="0" cellspacing="0" border="0" width="100%">
+					<colgroup>
+						<col width="8%" />
+						<col width="18%" />
+						<col width="18%" />
+						<col width="" />
+						<col width="11%" />
+						<col width="11%" />
+					</colgroup>
+					<thead>
+						<tr>
+							<th class="dataTbl-first">序号</th>
+							<th>标题</th>
+							<th>发布者</th>
+							<th>内容</th>
+							<th>注册时间</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="dataTbody"></tbody>
+				</table>
+
+				<div class="dataTbl-bottom fn-hide fn-clear">
+			        <div class="page pagination fn-left" id="Pagination">
+			        	<!-- pagination -->
+			        </div>
+			        <div class="paginationTools fn-right">
+			        	<span class="des">跳转到第</span>
+			        	<input id="gotoPage" value="" type="text" class="ui-input" />
+			        	<span class="des">页</span>
+			        	<a class="ui-button ui-button-normal" href="javascript:;" hidefocus="true" id="">
+			        		<span>确定</span>
+			        	</a>
+			        </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<textarea class="fn-hide" id="T_noticeRole">
+{{#each this}}
+<li>
+	<a href="javascript:;" hidefocus="true" data-id="{{id}}">
+		<img src="{{img}}">
+		<p>{{name}}</p>
+	</a>
+</li>
+{{/each}}
+</textarea>
+
+<!--分页数据容器-->
+<textarea class="fn-hide" id="dataTbl_tpl">
+{{#each rows}}
+<tr>
+	<td class="dataTbl-first">{{indexAdd @index}}</td>
+	<td>{{ABILITY_CODE}}</td>
+	<td class="sender">{{ABILITY_NAME}}</td>
+	<td><span class="noticeContent fn-ellip">{{ABILITY_URL}}</span></td>
+	<td>{{REMARKS}}</td>
+	<td>
+		<a href="javascript:;" hidefocus="true" onclick="showDetail(this, '{{ABILITY_CODE}}', '{{ABILITY_URL}}'); return false;">详情</a>
+	</td>
+</tr>
+{{/each}}
+</textarea>
+
+<script src="ui/js/jquery/1.8.3/jquery.js"></script>
+<script src="ui/js/dialog/6.0.5/dialog-min.js"></script>
+<script src="ui/js/jqueryForm/jquery.form.js"></script>
+<script src="ui/js/json2/json2.js"></script>
+<script src="ui/js/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="ui/js/handlebars/handlebars.js"></script>
+<script src="ui/js/handlebars/helpers.js"></script>
+<script src="ui/js/blockUI/jquery.blockUI.js"></script>
+<script src="ui/js/slides/3.0.3/jquery.slides.min.js"></script>
+<script src="ui/js/common.js"></script>
+
+<script type="text/javascript">
+var ajaxFlag = 0;
+	
+$(function(){
+
+	srvMap.add('noticeRole', 'noticeRole.json','');//左侧角色列表
+	srvMap.add('notice', 'tableData.json','');//右侧消息列表
+
+	//获取消息
+	getNoticeRole();
+
+})
+
+function getNoticeRole(){
+	$.PostJson(srvMap.get("noticeRole"), "", function(state, json){
+		if(state == 'success'){
+			if(json && json.rtnCode == '0'){
+				$("#J_noticeRole").temp($("#T_noticeRole"), json.rows);
+
+				setTimeout(function(){
+					//重新计算容器的宽度
+					var eachHeight = $("#J_noticeRole li").outerHeight()+1;
+					var J_noticeRole_length = $("#J_noticeRole li").length * eachHeight;
+					$("#J_noticeRole").css({"height":J_noticeRole_length});
+				    $("#achievementBtnT").click(function(){
+				    	var _mr_top = Math.abs(parseInt($("#J_noticeRole").css("margin-top").slice(0, -2), 10));
+				    	if(J_noticeRole_length >= _mr_top+(eachHeight * 4)){
+					    	$("#J_noticeRole").stop(true,true).animate({"margin-top": "-="+(eachHeight * 3)});
+				    	}else {
+				    		$("#J_noticeRole").stop(true,true).animate({"margin-top": "0"});
+				    	}
+				    })
+				    $("#achievementBtnB").click(function(){
+						var _mr_top = Math.abs(parseInt($("#J_noticeRole").css("margin-top").slice(0, -2), 10));
+						if(_mr_top > eachHeight){
+					    	$("#J_noticeRole").stop(true,true).animate({"margin-top": "+="+(eachHeight * 3)});
+						}else {
+							$("#J_noticeRole").stop(true,true).animate({"margin-top": "-"+(J_noticeRole_length - eachHeight)});
+						}
+					})
+
+					$("#J_noticeRole li a").click(function(){
+						if(!ajaxFlag){//防止多次点击触发
+							ajaxFlag = 1;
+							var _top = $(this).offset().top - eachHeight/2;
+							window._IE == 7 ? _top = _top + 45 : _top;//调整ie7下的位置
+							$("#J_curBlock").offset({"top": _top});
+							var id = $(this).data("id");
+							console.log(id)
+							getNotice(id);
+						}
+					}).eq(0).click();
+				}, 300)
+			}
+		}
+	})
+}
+
+function getNotice(id){
+
+	var str = "id="+id;
+	var pageParam = {
+		url: "ui/json/tableData.json?1=1",
+		formStr: str
+	}
+	//分页查询
+	getPage(pageParam, function(){
+		ajaxFlag = 0;
+	});
+}
+
+function showDetail(obj, id, content){
+
+	//这里只是说明一下result_comfirm的用法，到时候自行删除
+	result_comfirm("是否查看详情？", function(){
+		result_normalDiv("详情", content, 560);
+	}, function(){
+		alert("你选择了取消");
+	})
+}
+</script>
+
+</body>
+</html>

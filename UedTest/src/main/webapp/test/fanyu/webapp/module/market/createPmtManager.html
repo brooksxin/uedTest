@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>促销管理-促销管理</title>
+
+    <#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<div class="formItem">
+ <div class="titleArea">
+  <div class="listTopBtn fn-clear">
+   <h2 class="fn-left">促销管理</h2>
+   <div class="normalBtnArea mb-10 ft-right"><a id="CreateMcdsPmt" class="normalBtn BGblue" href="javascript:;">创建商品促销</a></div>
+  </div>
+ </div>
+ <div method="post" action="#" class="cmxform" >
+  <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+   <div class="record-search-cate">
+    <table id="J_formSearch" class="search_table" width="100%">
+     <tbody>
+      <tr>
+		<td width="80"><label class="description">商品编号</label></td>
+       <td><input name="MCDS_ID" class="inputText" type="text" maxlength="255"/></td>
+       <!-- <td width="80"><label class="description">商品名称</label></td>
+       <td><input name="MCDS_UNIT_NM" class="inputText" type="text" maxlength="255"/></td> -->
+       <td width="80"><label class="description">渠道</label></td>
+       <td> <select id="BELG_CHNL_ID1" class="inputSelect" style="width:100px;" name="CHNL_ID1">
+       			<option value="">全部</option>
+        	</select>
+        </td>
+         <td> <select id="BELG_CHNL_ID" class="inputSelect" style="width:100px;" name="CHNL_ID">
+       			<option value="">全部</option>
+        	</select>
+        </td>
+       <td width="100"><div class="normalBtnArea w82"> <a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a> </div></td>
+      </tr>
+      <tr>
+     <!--   <td width="80"><label class="description">状态</label></td>
+	   <td>
+	   		<select class="inputSelect" style="width:100px;" name="">
+         		<option value="">全部</option>
+         		<option value="">已发布</option>
+         		<option value="">待审核</option>
+         		<option value="">已驳回</option> 
+         	</select>
+        </td>
+        <td width="80"><label class="description">创建人</label></td>
+       <td><input class="inputText" type="text" maxlength="255" value="" /></td>
+       <td width="80"><label class="description">审核人</label></td>
+       <td><input class="inputText" type="text" maxlength="255" value="" /></td> -->
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="tablewidth mg_t_10" style="margin-top:50px;">
+   <table class="ui-record-table table_radius table-bordered table-striped"  >
+    <thead>
+     <tr>
+      <th>商品编号</th>
+      <th>促销商品</th>
+      <th width="100">渠道</th>
+      <!-- <th width="80">创建人</th>
+      <th width="80">审核人</th>
+      <th width="120">审核通过时间</th>
+      <th width="80">状态</th> -->
+      <th width="80">操作</th>
+     </tr>
+    </thead>
+     <tbody id="J_tabletpl">
+    </tbody>
+   </table>
+   </div>
+  </form>
+ </div>
+</div>
+
+<!--翻页及功能按钮区域开始-->
+<DIV class="amount-bottom">
+ <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+  <tr>
+   <td><DIV class="fn-clear action-other  action-other-show ">
+     <DIV id=Pagination class="page pagination fn-right"> </DIV>
+     <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+    </DIV></td>
+  </tr>
+ </table>
+</DIV>
+<#include "../../tpl/res_js.tpl" />
+
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+			<td>{{MCDS_ID}}</td>
+			<td>{{MCDS_UNIT_NM}}</td>
+			<td>{{PTY_NM}}</td>
+			<td><a href="/ecp/module/market/pmtDetailPublish.html?pmt_ID={{PMT_ID}}">查看</a>
+			    <a href="/ecp/module/market/updatePromotion.html?PMT_ID={{PMT_ID}}">编辑</a>
+			</td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="14">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+	</script>
+	<script type="text/javascript">
+	   srvMap.add('queryChnl', 'query.json', 'front/sh/user!getChnl?uid=u003');//获取渠道列表
+	   srvMap.add('queryDept', 'query.json', 'front/sh/user!userinfo?uid=u011');//查询所属机构列表
+	   srvMap.add('querylist','query.json','front/sh/market!index?uid=zzh001');//
+   //分页数据
+ 	var G_params = {
+     	url :  srvMap.get('querylist'),
+     	items_per_page : 10,   		// 每页数     @param : limit
+     	page_index : 0 , 				//当前页  @param : start
+     	pagination : "Pagination" , 	//分页id
+     	searchformId : "J_formSearch",  //搜索表单的id
+     	tabletpl : "T_tabletpl", 		//表格模板
+     	tablewrap : "J_tabletpl", 		//表格容器
+ 	}; 
+	//查询渠道数据
+   //页面加载完开始执行
+    $(document).ready(function () {  
+    	//渠道初始化
+    	var json = null;
+    	var bean=null;
+    	$J_prov=$("#BELG_CHNL_ID1");
+    	$J_city=$("#BELG_CHNL_ID");
+		Util.ajax.postJsonSync(srvMap.get("queryChnl"),'',function(json1,status){
+			json=json1.object;
+			//json=[{"PTY_NM":"10085电话营销","PTY_LVL_CD":"01","CHNL_ID":"1001"},{"PTY_NM":"社会代理","PTY_LVL_CD":"01","CHNL_ID":"1010","subList":[{"PTY_NM":"众包平台","PTY_LVL_CD":"02","CHNL_ID":"1012"}]}]
+			console.log(json);
+			for (var i = 0; i < json.length; i++) {
+				//alert(json[i]['CHNL_ID']);
+				$J_prov.append("<option value='"+json[i]['CHNL_ID']+"'>"+json[i]['PTY_NM']+"</option>");
+			}
+		});
+	
+		$J_prov.on('change',function(){
+			$J_city.empty();
+			var select_val = $(this).children('option:selected').val();
+				for (var i = 0; i < json.length; i++) {
+					if(select_val==json[i]['CHNL_ID']){
+						var secondjson=json[i].subList;
+						if(secondjson!=null&&secondjson!='undefined'){
+							$J_city.show();
+							for (var j = 0; j < secondjson.length; j++) {
+								$J_city.append("<option value='"+secondjson[j]['CHNL_ID']+"'>"+secondjson[j]['PTY_NM']+"</option>");
+							}
+						}else{
+							$J_city.hide();
+						}
+					}
+					if(select_val=='请选择'){
+						$J_city.show();
+						$J_city.append("<option >请选择</option>");
+					}
+						
+				};
+			
+		});
+		
+		//所属机构初始化
+		var jsonDpet = null;
+    	$J_chan=$("#BELG_BRNCH_ID1");
+    	$J_chanseconde=$("#BELG_BRNCH_ID");
+		Util.ajax.postJsonSync(srvMap.get("queryDept"),'',function(json1,status){
+			jsonDpet=json1.bean;
+//			console.log(jsonDpet);
+			//for (var i = 0; i < jsonDpet.length; i++) {
+				//alert(json[i]['CHNL_ID']);
+				$J_chan.append("<option value='"+jsonDpet['BASE_PTY_ID']+"'>"+jsonDpet['PTY_NM']+"</option>");
+			//};
+		});
+		
+			$J_chanseconde.on('change',function(){
+			$J_city.empty();
+			var select_val = $(this).children('option:selected').val();
+// 			alert(select_val);
+				for (var i = 0; i < jsonDpet.length; i++) {
+					if(select_val==jsonDpet[i]['CHNL_ID']){
+						var secondjson=jsonDpet[i].subList;
+						//console.log(secondjson);
+						if(secondjson!=null&&secondjson!='undefined'){
+							$J_chanseconde.show();
+							for (var j = 0; j < secondjson.length; j++) {
+								$J_chanseconde.append("<option value='"+secondjson[j]['CHNL_ID']+"'>"+secondjson[j]['PTY_NM']+"</option>");
+							}
+						}else{
+							$J_chanseconde.hide();
+						}
+					}
+					if(select_val=='请选择'){
+						$J_chanseconde.show();
+						$J_chanseconde.append("<option >请选择</option>");
+					}
+						
+				};
+			
+		}); 
+		//绑定事件到查询按钮
+		$('#J_search').bind('click',function(){
+			
+             var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+             Util.pagination(0, true , G_params , str );
+        });
+		$("#J_search").trigger("click");
+		$('#CreateMcdsPmt').bind('click',function(){
+			window.location.href="addPromotion.html";
+		});
+    });
+</script>
+</body>
+</html>

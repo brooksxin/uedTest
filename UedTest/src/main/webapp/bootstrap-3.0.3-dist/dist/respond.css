@@ -1,0 +1,10 @@
+@media (min-width: 900px) {
+  .container {
+    background: #F7B52D;
+  }
+}
+.container {
+  height: 200px;
+  width: 200px;
+  border: 1px solid #ccc;
+}

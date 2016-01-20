@@ -1,0 +1,111 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>组织机构管理——查看员工</title>
+        <#include "../../tpl/res_css.tpl" />
+    </head>
+    <body>
+
+    <div class="listTopBtn">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td><h1>查看信息</h1></td>
+            <td>
+                <div class="normalBtnArea ft-right">
+                   <a class="normalBtn BGblue" href="editStaff.html">编辑</a>
+                </div>
+            </td>
+          </tr>
+        </table>
+    </div>
+
+
+    <div>
+        <table class="firsttable" width="90%"  height="100%"> 
+            <tr>
+                <td class="ontd" width="90">员工编号</td>
+                <td class="uptd" id="item1">2248</td>
+            </tr>
+            <tr>
+                <td class="ontd">姓名</td>
+                <td class="uptd" id="item2">黄厚生</td>
+            </tr>
+            <tr>
+                <td class="ontd">所属部门</td>
+                <td class="uptd" id="item3">洛阳呼叫中心 &gt; 外呼一部 &gt; 呼叫一组</td>
+            </tr>
+            <tr>
+                <td class="ontd">员工类型</td>
+                <td class="uptd" id="item4"></td>
+            </tr>
+            <tr>
+                <td class="ontd">证件类型</td>
+                <td class="uptd" id="item5">身份证</td>
+            </tr>
+            <tr>
+                <td class="ontd">证件号码</td>
+                <td class="uptd" id="item6">12313213</td>
+            </tr>
+            <tr>
+                <td class="ontd">手机号码</td>
+                <td class="uptd" id="item7">13812345678</td>
+            </tr>
+            <tr>
+                <td class="ontd">电子邮箱</td>
+                <td class="uptd" id="item8">huanghousheng@139.com</td>
+            </tr>
+            <tr>
+                <td class="ontd">入职时间</td>
+                <td class="uptd" id="item9">2015年6月12日</td>
+            </tr>
+            <tr>
+                <td class="ontd">状态</td>
+                <td class="uptd" id="item10">在职</td>
+            </tr>
+
+        </table>
+    </div>
+        
+   <#include "../../tpl/res_js.tpl" />   
+   <script type="text/javascript">
+  		srvMap.add('queryStuff', 'query.json','front/sh/user!index?uid=stuff004');//根据id查询单个员工信息
+   var G_params = {
+			url : srvMap.get('queryLoginLog'),
+			searchformId : "J_formSearch",
+			items_per_page : 10, // 每页数     @param : limit
+			page_index : 0, //当前页  @param : start
+			pagination : "Pagination", //分页id
+			tabletpl : "T_tabletpl", //表格模板
+			tablewrap : "J_tabletpl" //表格容器
+		};
+      var staffId=Util.browser.getParameter("STAFF_ID"); 
+      var  cmd={
+    		"STAFF_ID":staffId
+        };
+      Util.ajax.postJson(srvMap.get("queryStuff"), cmd, function (json,status) {
+      	if(status){
+	      	if(json.returnCode=='0'){
+	      		console.log(json.beans);
+	      		 var bean=json.beans[0];
+	      		 $('#item1').html(bean.PTY_NO);
+	      		 $('#item2').html(bean.PTY_NM);
+	      		 $('#item3').html(bean.DEPT_ID);
+	      		 $('#item4').html(bean.STAFF_TYPE_CD);
+	      		 $('#item5').html(bean.MARK_TYPE_CD);
+	      		 $('#item6').html(bean.MARK_NUM);
+	      		 $('#item7').html(bean.TELNUM);
+	      		 $('#item8').html(bean.DEPT_ID);
+	      		 $('#item9').html(bean.ENTRY_DATE);
+	      		 $('#item10').html(bean.VALID_STS_CD);
+	      		 console.log(bean.VALID_STS_CD+"dd"+bean.PTY_NM);
+	      	}
+      	}
+      	else{
+      		//alert(11111111111);
+      	}
+      });
+      
+  </script>
+    </body>
+    </html>

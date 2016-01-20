@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="no" name="apple-mobile-web-app-capable">
+<meta content="width=350,target-densitydpi=device-dpi,user-scalable=no" name="viewport">
+<title>红包</title>
+<link rel="stylesheet" type="text/css" href="hum.css">
+<script type="text/javascript" src="jquery.js"></script>
+
+<style type="text/css">
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,textarea,p,blockquote,th,td,a { padding: 0;margin: 0;  text-decoration:none; font:24px/150% '微软雅黑';-webkit-text-size-adjust:none;}
+table { border-collapse: collapse;border-spacing: 0;}
+fieldset,img { border: 0;}
+address,caption,cite,code,dfn,em,th,var { font-weight: normal;font-style: normal;}
+ol,ul { list-style: none outside none;}
+caption { text-align: left;}
+h1,h2,h3,h4,h5,h6 {font-weight: normal;font-size: 100%;}
+q:before,q:after {content:'';}
+a{outline:none;}
+*,*:before,*:after{box-sizing:border-box;/*-webkit-user-select:none;-moz-user-select:none;*/}
+img{vertical-align: top;}
+a, img ,p{-webkit-touch-callout: none;}
+a, button ,p{-webkit-tap-highlight-color:rgba(255,255,255,0);-webkit-tap-highlight-color: transparent;}
+.fn-hide {
+    display: none;
+}
+input,button,select,textarea, input:focus,button:focus,select:focus,textarea:focus {
+    outline:none
+}
+html,body{height:100%;width:350px;margin:0 auto;position:relative;}
+.send-wrap {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 350px;
+    height:100%;
+    overflow: hidden;
+    background: #212121;
+    margin: 0 auto;
+}
+#num, #total, #words {
+    position: absolute;
+    top: 0;
+    left: 31px;
+    padding: 3px;
+    width: 260px;
+    border: none;
+    font-size: 16px;
+}
+#num {
+    top: 81px;
+}
+#total {
+    top: 139px;
+}
+#words {
+    top: 229px;
+    width: 297px;
+    height: 95px;
+    resize: none;
+    left: 25px;
+    padding: 10px;
+}
+#send {
+    position: absolute;
+    top: 397px;
+    left: 51px;
+    width: 250px;
+    display: inline-block;
+    height: 40px;
+    text-indent: -9999px;
+}
+
+
+.get-wrap {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 350px;
+    height:100%;
+    overflow: hidden;
+    margin: 0 auto;
+    background: #EFF1F0;
+}
+#get {
+    position: absolute;
+    top: 300px;
+    left: 97px;
+    width: 160px;
+    height: 42px;
+    text-indent: -9999px;
+}
+#res {
+    position: absolute;
+    top: 300px;
+    left: 27px;
+    width: 300px;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+#res p {
+    padding: 5px 0;
+}
+#res span {
+    display: inline-block;
+    padding-top: 6px;
+    vertical-align: middle;
+}
+span#amount {
+    font-size: 38px;
+    padding-top: 0;
+    margin-right: 5px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="send-wrap">
+    <input id="num" name="num" type="text" value="" placeholder="发多少个红包" />
+    <input id="total" name="total" type="text" value="" placeholder="共发多少流量" />
+    <textarea id="words" name="words" value="" placeholder="移动4G特别快，分你点流量一起看美剧吧！"></textarea>
+    <a id="send" href="javascript:;" hidefocus="true"><span>发 布</span></a>
+    <img src="img/hongbao1.png" width="350">
+</div>
+
+<div class="get-wrap fn-hide">
+    <div class="get1">
+        <a id="get" href="javascript:;" hidefocus="true"><span>抢红包</span></a>
+        <img src="img/hongbao3.png" width="350">
+    </div>
+
+    <div class="get2 fn-hide">
+        <img src="img/hongbao2.png" width="350">
+        <div id="res">
+            <p>恭喜您抢到了</p>
+            <p><span id="amount">200</span><span>流量红包！</span></p>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+(function($){
+    $.extend({
+        PostJson: function(url, datas , callback) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data : datas +"&_=" + (new Date()).getTime(),
+                cache: false,
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.overrideMimeType("text/plain; charset=utf-8");
+                },
+                success: function(json) {
+                    callback("success", json);
+                },
+                error: function(e) {
+                    callback("error", null);
+                }
+            });
+        }
+    });
+})(jQuery);
+
+(function($){
+    $.extend({
+        getUrlVars: function(){
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for(var i = 0; i < hashes.length; i++)
+            {
+              hash = hashes[i].split('=');
+              vars.push(hash[0]);
+              vars[hash[0]] = hash[1];
+            }
+            return vars;
+        },
+        getUrlVar: function(name){
+            return $.getUrlVars()[name];
+        }
+    });
+})(jQuery)
+
+var num,//发多少个红包
+    total,//共发多少流量
+    words;//跟好友说的话
+$(function(){
+    // alert(window.location.href)
+    var _getFlag = $.getUrlVar("flag")?$.getUrlVar("flag"):"";
+    if(_getFlag){//抢红包
+        document.title = '抢红包';
+        $(".get-wrap, .get1").removeClass("fn-hide");
+        $(".send-wrap, .get2").addClass("fn-hide");
+        num = $.getUrlVar("num")?$.getUrlVar("num"):"";
+        total = $.getUrlVar("total")?$.getUrlVar("total"):"";
+        words = $.getUrlVar("words")?$.getUrlVar("words"):"";
+        $("#get").click(function(){
+            //返回一个随机数
+            //以兆为单位
+            $(".get1").addClass("fn-hide");
+            $(".get2").removeClass("fn-hide");
+            $("#amount").text(getRandom(parseInt(total, 10)*1024)+"M");
+        });
+
+    }else{//发红包
+        document.title = '发红包';
+        $("#num, #total").bind("keyup", function(e){
+            var _self = $(this);
+            var newVal = _self.val().replace(/[^\d]/g,'');
+            _self.val(newVal);
+        })
+        $("#send").click(function(){
+            num = $("#num").val();
+            total = $("#total").val();
+            words = $("#words").val();
+            window.location.href = "hongbao.html?flag=true&num="+num+"&total="+total+"&words="+words;
+        })
+    }
+})
+
+function getRandom(number){
+    return Math.floor(Math.random() * (number+1));
+}
+</script>
+
+</body>
+</html>

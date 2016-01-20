@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10085_商品管理_上传商品_上传手机_01选择商品分类</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+                <div class="formItem">
+                    <div class="titleArea fn-clear">
+                        <a href="#" class="ui-getBackJ fn-left">
+                        </a>
+                        <h2 class="ui-textIndentStyle fn-left">
+                            上传新商品
+                        </h2>
+                    </div>
+                    
+                  <form id="J_form_addProd">
+                 	<input type="hidden" id="catgUnitId1" name="catgUnitId1" value=""/>
+                 	<input type="hidden" id="catgUnitId2" name="catgUnitId2" value=""/>
+                    <div class="formAreaD">
+                        <div class="flowSteps">
+                            <ul class="current_1">
+                                <li class="FirstStep">
+                                    <a href="#">
+                                        基本信息
+                                    </a>
+                                </li>
+                                <li class="SecondStep">
+                                    <a href="#">
+                                        详细信息
+                                    </a>
+                                </li>
+                                <li class="ThirdStep">
+                                    <a href="#">
+                                        图文信息
+                                    </a>
+                                </li>
+                                <div class="clearfloat">
+                                </div>
+                            </ul>
+                        </div>
+                        <div class="ui-Oline_padding">
+                            <div class="fn-clear">
+                                <div class="fn-left pt-10">
+                                    当前选择分类：
+                                    <a href="#" style="color:#333">
+                                        <span id="J_span_catgUnitName1"></span>
+                                    </a>
+                                    >
+                                    <a href="#" style="color:#333">
+                                         <span id="J_span_catgUnitName2"></span>
+                                    </a>
+                                </div>
+                                <div class="normalBtnArea ft-right mb-20">
+                                    <a class="normalBtn BGblue" href="#" id="J_a_chooseCatgUnit">
+                                        修改商品分类
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ui-topQuDashed">
+                                <div class="titleArea pt-5 pd_10">
+                                    商品基本信息
+                                </div>
+                                <table width="100%">
+                                    <tr>
+                                        <td class="formAreaD_PB">
+                                            <span class="fn-high">
+                                                *
+                                            </span>
+                                            商家名称
+                                        </td>
+                                        <td class="formAreaD_PB">
+                                            <select class="FormInputSelect" id="ptyId" name="ptyId">
+                                                <option value="A01">
+                                                   		 宇龙计算机通信科技（深圳）有限公司
+                                                </option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="formAreaD_PB">
+                                            <span class="fn-high">
+                                                *
+                                            </span>
+                                            商家品牌
+                                        </td>
+                                        <td class="formAreaD_PB">
+                                            <select class="FormInputSelect" id="brandId" name="brandId">
+                                                <option value="06">
+                                                		    酷派大神
+                                                </option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="formAreaD_PB">
+                                            <span class="fn-high">
+                                                *
+                                            </span>
+                                            商品名称
+                                        </td>
+                                        <td class="formAreaD_PB">
+                                            <input class="FormInputText" id="mcdnUnitNm" name="mcdnUnitNm"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="formAreaD_PB">
+                                            <span class="fn-high">
+                                                *
+                                            </span>
+                                            销售价格
+                                        </td>
+                                        <td class="formAreaD_PB" >
+                                            <input class="FormInputText" id="uprc" name="uprc"/>
+                                            元
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="fn-high">
+                                                *
+                                            </span>
+                                            库存
+                                        </td>
+                                        <td>
+                                            <input class="FormInputText" id="skuQty" name="skuQty"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                  </form>
+                    
+                    <div class="formBtnArea pt-20 fn-clear">
+                        <div class="normalBtnArea fn-left">
+                            <a class="normalBtn BGblue largeBtn" href="javascript:void(0)" id="J_add">
+                                下一步
+                            </a>
+                        </div>
+                        <div class="normalBtnArea fn-right">
+                            <a href="#" class="formLink">
+                                <span>
+                                    取消上传
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+    
+<div id="T_transferPage" class="fn-hide">
+	 	<div class="ui-tab">
+		    <ul id = "J_openIvr" class="ui-tab-items">
+		        <li class="ui-tab-item  ui-tab-item-current">
+		            <a href="javascript:;">IVR转接</a>
+		        </li>
+		        <li class="ui-tab-item">
+		            <a href="javascript:;">人工技能</a>
+		        </li>
+		        <li class="ui-tab-item">
+		            <a href="javascript:;">座席转接</a>
+		        </li>
+		    </ul>
+    	<div class="ui-tab-wrap">
+	        <div>
+				<div method="post" action="#" class="cmxform" >
+				    <form class="record-search-form record-search-min record-search-form-border" id="J_formIVRSearch" name="J_formIVRSearch" >
+				       <div class="record-search-cate">
+							<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+								<tr>
+									<td width="100"><label class="description">IVR流程名称</label></td>
+									<td width="150">
+										<input id="busiName" name="busiName" class="inputText" type="text" maxlength="255" value=""/>
+									</td>
+							              <td>
+							                  <div class="normalBtnArea w82">
+							                  	<a class="searchBtn" href="javascript:;" id="J_searchIvr" ><i></i>查询</a>
+							                  </div>
+							              </td>
+								</tr>
+							</table>
+					    </div>
+				     </form>
+				 </div>
+ 
+	 	<div class="tablewidth mg_t_10">
+			<table class="ui-record-table table_radius table-bordered table-striped" >
+				<thead>
+					<tr>
+						<th width="100"><span>IVR流程名称</span></th>
+						<th width="40">转接码</th>
+						<th width="100">流程描述</th>
+			            <th width="30">操作</th>
+					</tr>
+			     </thead>
+			     <tbody id="J_Ivrtabletpl">
+			      <tr>
+			            <td>话费充值</td>
+			            <td><div class="gridNum">000001888888002000</div></td>
+			            <td><div class="gridNum">转接到话费充值IVR自助充值</div></td>
+			            <td width="30">
+                		<div class="gridRowBtn"><a class="item-text" href="javascript:;" onclick="doTransferIvr('000001888888002000')">转接</a>
+			                </div>
+			            </td>
+			        </tr>
+			        <tr>
+			            <td>转10085IVR</td>
+			            <td><div class="gridNum">10085</div></td>
+			            <td><div class="gridNum">转接10085</div></td>
+			            <td width="30">
+                		<div class="gridRowBtn"><a class="item-text" href="javascript:;" onclick="doTransferIvr('10085')">转接</a>
+			                </div>
+			            </td>
+			        </tr>
+			         <tr>
+			            <td>转10085IVR</td>
+			            <td><div class="gridNum">1111111</div></td>
+			            <td><div class="gridNum">转接1111111</div></td>
+			            <td width="30">
+                		<div class="gridRowBtn"><a class="item-text" href="javascript:;" onclick="doTransferIvr('1111111')">转接</a>
+			                </div>
+			            </td>
+			        </tr>
+			     </tbody>
+			</table>
+		  </div>
+	  
+		  <!--翻页及功能按钮区域开始-->
+            <DIV class="amount-bottom">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+                  <tr>
+                    <td width="60">
+                    </td>
+                    <td>
+                    </td>
+                    <td width="50%">
+                        <DIV class="fn-clear action-other  action-other-show ">
+                                <DIV id="PaginationIvr" class="page pagination fn-right"></DIV>
+                                <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                        </DIV></td>
+                  </tr>
+                </table>
+            </DIV>
+		</div>
+	        <div class="fn-hide">
+	        	 <!--技能队列-->
+				 <div method="post" action="#" class="cmxform" >
+				    <form class="record-search-form record-search-min record-search-form-border" id="J_formQueueSearch" name="J_formQueueSearch" >
+				       <div class="record-search-cate">
+							<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+								<tr>
+									<td width="100"><label class="description">技能队列名称</label></td>
+									<td width="150">
+										<input id="busiName" name="busiName" class="inputText" type="text" maxlength="255" value=""/>
+									</td>
+							              <td>
+							                  <div class="normalBtnArea w82">
+							                  	<a class="searchBtn" href="javascript:;" id="J_searchQueue" ><i></i>查询</a>
+							                  </div>
+							              </td>
+								</tr>
+							</table>
+					    </div>
+				     </form>
+				 </div>
+ 
+			 	<div class="tablewidth mg_t_10">
+					<table class="ui-record-table table_radius table-bordered table-striped" >
+						<thead>
+							<tr>
+								<th width="100"><span>技能队列名称</span></th>
+								<th width="40">转接码</th>
+								<th width="80">队列描述</th>
+					            <th width="30">操作</th>
+							</tr>
+					     </thead>
+					     <tbody id="J_Queuetabletpl"></tbody>
+					</table>
+				  </div>
+	  
+				  <!--翻页及功能按钮区域开始-->
+			            <DIV class="amount-bottom">
+			                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+			                  <tr>
+			                    <td width="60">
+			                    </td>
+			                    <td>
+			                    </td>
+			                    <td width="50%">
+			                        <DIV class="fn-clear action-other  action-other-show ">
+			                                <DIV id="PaginationQueue" class="page pagination fn-right"></DIV>
+			                                <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+			                        </DIV></td>
+			                  </tr>
+			                </table>
+			            </DIV>
+	        </div>
+	        <div class="fn-hide">
+	        	 <!--Agent-->
+				<div method="post" action="#" class="cmxform" >
+				    <form class="record-search-form record-search-min record-search-form-border" id="J_formAgentSearch" name="J_formQueueSearch" >
+				       <div class="record-search-cate">
+							<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+								<tr>
+									  <td ui-alltextidth="30"><label class="description">座席班组</label></td>
+						              <td ui-alltextidth="30">
+						                  <select>
+						                          <option>全部</option>
+						                  </select>
+						              </td>
+						              <td wtidth="30"><label class="description">姓名</label></td>
+						              <td ui-alltextidth="30"><input class="inputText2" type="text"  value=""/></td>
+						              <td ui-alltextidth="30"><label class="description">工号</label></td>
+						              <td ui-alltextidth="30"><input class="inputText2" type="text" value=""/></td>
+						              <td>
+						                  <div class="normalBtnArea w82">
+							                  	<a class="searchBtn" href="javascript:;" id="J_searchAgent" ><i></i>查询</a>
+						                  </div>
+						              </td>
+								</tr>
+							</table>
+					    </div>
+				     </form>
+				 </div>
+			 	<div class="tablewidth mg_t_10">
+					<table class="ui-record-table table_radius table-bordered table-striped" >
+						<thead>
+							<tr>
+								<th width="40"><span>座席姓名</span></th>
+								<th width="40">座席工号</th>
+								<th width="30">座席状态</th>
+								<th width="40">所属班组</th>
+					            <th width="30">操作</th>
+							</tr>
+					     </thead>
+					     <tbody id="J_Agenttabletpl"></tbody>
+					</table>
+				  </div>
+				  <!--翻页及功能按钮区域开始-->
+		            <DIV class="amount-bottom">
+		                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+		                  <tr>
+		                    <td width="60">
+		                    </td>
+		                    <td>
+		                    </td>
+		                    <td width="50%">
+		                        <DIV class="fn-clear action-other  action-other-show ">
+		                                <DIV id="PaginationAgent" class="page pagination fn-right"></DIV>
+		                                <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+		                        </DIV></td>
+		                  </tr>
+		                </table>
+		            </DIV>
+		       </div>
+		    </div>
+			</div>
+		</div>
+    
+    
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+
+srvMap.add('saveProd', 'query.json','front/sh/prod!execute?uid=p001');		//新增商品
+
+//页面加载完开始执行
+$(function () {
+	
+	 //初始化分类
+	 $("#J_span_catgUnitName1").text(decodeURI(Util.browser.getParameter("catgUnitName1")));
+	 $("#J_span_catgUnitName2").text(decodeURI(Util.browser.getParameter("catgUnitName2")));
+	 $("#catgUnitId1").val(Util.browser.getParameter("catgUnitId1"));
+	 $("#catgUnitId2").val(Util.browser.getParameter("catgUnitId2"));
+	
+	 
+	 $('#J_a_chooseCatgUnit').click(function(){
+        
+     });
+	 
+	 
+	 
+      $("#J_add").bind("click",function(){
+    	  
+    	  if($("#ptyId").val()==''){
+    		  alert("请选择商家!");
+    		  return ;
+    	  }
+    	  
+    	  if($("#brandId").val()==''){
+    		  alert("请选择品牌!");
+    		  return ;
+    	  }
+    	  
+    	  if($("#mcdnUnitNm").val()==''){
+    		  alert("请输入商品名称!");
+    		  return ;
+    	  }
+    	  
+    	  if($("#uprc").val()==''){
+    		  alert("请输入销售价格!");
+    		  return ;
+    	  }
+    	  
+    	  if($("#skuQty").val()==''){
+    		  alert("请输入库存!");
+    		  return ;
+    	  }
+    	  
+    	  
+    	  var params={
+    			  catgUnitId1:$("#catgUnitId1").val(),   //一级分类
+    			  catgUnitId2:$("#catgUnitId2").val(),	 //二级分类
+    			  ptyId:$("#ptyId").val(),				//商家编号
+    			  brandId:$("#brandId").val(),			//品牌编号
+    			  mcdnUnitNm:$("#mcdnUnitNm").val(),	//商品名称
+    			  uprc:$("#uprc").val(),				//销售价格
+    			  skuQty:$("#skuQty").val()				//库存
+ 	      };
+    	  
+    	  //保存商品基本信息
+    	  Util.ajax.postJson(srvMap.get("saveProd"),params,function(json,status){
+    		  if(status){
+    			  alert("新增成功");
+    			  var mcdsUnitId = json.bean.mcdsUnitId;
+    			  var mcdsUnitId2 = json.bean.mcdsUnitId2;
+    			  var skuId = json.bean.skuId;
+    			  window.location.href="addPhone3.html?mcdsUnitId="+mcdsUnitId+"&mcdsUnitId2="+mcdsUnitId2+"&skuId="+skuId+"&catgUnitId1="
+    					  			  +$("#catgUnitId1").val()+"&catgUnitId2="+$("#catgUnitId2").val()+"&ptyId="+$("#ptyId").val()+"&brandId="
+    					  			  +$("#brandId").val()+"&mcdnUnitNm="+encodeURI($("#mcdnUnitNm").val())+"&uprc="+$("#uprc").val()
+    					  			  +"&skuQty="+$("#skuQty").val();
+    					  			  				  			  
+    		  }
+    		  else {
+    			  alert("新增失败");
+    		  }
+    		  
+    	  });
+    	 
+        });
+      
+      
+      
+      
+});
+</script>
+</body>
+</html>

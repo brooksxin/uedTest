@@ -1,0 +1,343 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="../icon.jpg">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>css3-渐变图片</title>
+
+<style type="text/css">
+body{
+	width: 900px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font:normal 12px/1.5 Verdana, Arial, \5b8b\4f53, sans-serif;
+}
+.pcontent{
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: #002b36;
+	color: #839496;
+}
+.pcontent a{
+	color: #839496;
+}
+.pcontent a:link{
+	color: gray;
+}
+.pcontent a:visited{
+	color: yellow;
+}
+.pcontent a:hover{
+	color: green;
+}
+.pcontent a:link{
+	color:blue;
+}
+/*
+*CSS3的线性渐变
+*/
+.example1 {
+   width: 150px;
+   height: 80px;
+   background: -webkit-linear-gradient( top,#ccc,#000);
+   background: -moz-linear-gradient( top,#ccc,#000);
+   background: -o-linear-gradient( top,#ccc,#000);
+   background: linear-gradient( top,#ccc,#000);
+   float: left;
+   color: #FFF;
+}
+.example2 {
+   width: 150px;
+   height: 80px;
+   background: -webkit-linear-gradient( left,#ccc,#000);
+   background: -moz-linear-gradient( left,#ccc,#000);
+   background: -o-linear-gradient( left,#ccc,#000);
+   background: linear-gradient( left,#ccc,#000);
+   float: left;
+   color: #FFF;
+}
+.example3 {
+   width: 150px;
+   height: 80px;
+   background: -webkit-linear-gradient( left top,#ccc,#000);
+   background: -moz-linear-gradient( left top,#ccc,#000);
+   background: -o-linear-gradient( left top,#ccc,#000);
+   background: linear-gradient( left top,#ccc,#000);
+   float: left;
+   color: #FFF;
+}
+.example4 {
+   width: 150px;
+   height: 80px;
+   /* Firefox 3.6+ */ 
+   background: -moz-linear-gradient(left, #ace, #f96, #ace, #f96, #ace); 
+   /* Safari 4-5, Chrome 1-9 */ 
+   background: -webkit-gradient(linear, left top, right top, from(#ace), color-stop(0.25, #f96), color-stop(0.5, #ace), color-stop(0.75, #f96), to(#ace)); 
+   /* Safari 5.1+, Chrome 10+ */ 
+   background: -webkit-linear-gradient(left, #ace, #f96, #ace, #f96, #ace); 
+   /* Opera 11.10+ */ 
+   background: -o-linear-gradient(left, #ace, #f96, #ace, #f96, #ace);
+   float: left;
+   color: #FFF;
+}
+.example5 {
+   width: 150px;
+   height: 80px;
+   /* Firefox 3.6+ */ 
+   background: -moz-linear-gradient(left, #ace, #f96 5%, #ace, #f96 95%, #ace); 
+   /* Safari 4-5, Chrome 1-9 */ 
+   background: -webkit-gradient(linear, left top, right top, from(#ace), color-stop(0.05, #f96), color-stop(0.5, #ace), color-stop(0.95, #f96), to(#ace)); 
+   /* Safari 5.1+, Chrome 10+ */ 
+   background: -webkit-linear-gradient(left, #ace, #f96 5%, #ace, #f96 95%, #ace); 
+   /* Opera 11.10+ */ 
+   background: -o-linear-gradient(left, #ace, #f96 5%, #ace, #f96 95%, #ace);
+   float: left;
+   color: #FFF;
+}
+.example6 {
+	/*角度
+	*当指定的角度，是一个由水平线与渐变线产生的的角度，逆时针方向。
+	*因此，使用0deg将产生一个左到右横向梯度，而90度将创建一个从底部到顶部的垂直渐变。
+	*/
+   width: 150px;
+   height: 80px;
+   background: -moz-linear-gradient(left 30deg, #ace, #f96);
+   background: -webkit-gradient(linear, 0 0, 100% 100%, from(#ace),to(#f96));
+   background: -o-linear-gradient(30deg, #ace, #f96);
+   float: left;
+   color: #FFF;
+}
+/*
+*CSS3的径向渐变
+*/
+.example7 {
+   width: 150px;
+   height: 80px;
+   float: left;
+   color: #FFF;
+   background: -moz-radial-gradient(#ace, #f96, #1E90FF);
+   background: -webkit-radial-gradient(#ace, #f96, #1E90FF);
+}
+.example8 {
+   width: 150px;
+   height: 80px;
+   float: left;
+   color: #FFF;
+   background: -moz-radial-gradient(#ace 5%, #f96 25%, #1E90FF 50%);
+   background: -webkit-radial-gradient(#ace 5%, #f96 25%, #1E90FF 50%);
+}
+.example9 {
+   	width: 150px;
+   	height: 80px;
+   	float: left;
+   	color: #FFF;
+   	background: -moz-radial-gradient(bottom left, ellipse, #ace, #f96, #1E90FF);
+   	background: -webkit-radial-gradient(bottom left, ellipse, #ace, #f96, #1E90FF);
+}
+.example10 {
+   	width: 150px;
+   	height: 80px;
+   	float: left;
+   	color: #FFF;
+   	background: -moz-radial-gradient(ellipse closest-side, #ace, #f96 10%, #1E90FF 50%, #f96);
+   	background: -webkit-radial-gradient(ellipse closest-side, #ace, #f96 10%, #1E90FF 50%, #f96);
+}
+.example11 {
+   	width: 150px;
+   	height: 80px;
+   	float: left;
+   	color: #FFF;
+   	background: -moz-radial-gradient(ellipse farthest-corner, #ace, #f96 10%, #1E90FF 50%, #f96);
+   	background: -webkit-radial-gradient(ellipse farthest-corner, #ace, #f96 10%, #1E90FF 50%, #f96);
+}
+.example12 {
+   	width: 150px;
+   	height: 80px;
+   	float: left;
+   	color: #FFF;
+   	background: -moz-radial-gradient(circle closest-side, #ace, #f96 10%, #1E90FF 50%, #f96);
+   	background: -webkit-radial-gradient(circle closest-side, #ace, #f96 10%, #1E90FF 50%, #f96);
+}
+.example13 {
+   	width: 150px;
+   	height: 80px;
+   	float: left;
+   	color: #FFF;
+   	background: -moz-radial-gradient(circle farthest-side, #ace, #f96 10%, #1E90FF 50%, #f96);
+   	background: -webkit-radial-gradient(circle farthest-side, #ace, #f96 10%, #1E90FF 50%, #f96);
+}
+.example14 {
+   	width: 150px;
+   	height: 80px;
+   	float: left;
+   	color: #FFF;
+   	background: -moz-radial-gradient(#ace, #f96, #1E90FF);
+   	background: -webkit-radial-gradient(#ace, #f96, #1E90FF);
+}
+.example15 {
+   	width: 150px;
+   	height: 80px;
+   	float: left;
+   	color: #FFF;
+   	background: -moz-radial-gradient(contain, #ace, #f96, #1E90FF);
+   	background: -webkit-radial-gradient(contain, #ace, #f96, #1E90FF);
+}
+
+ul {
+  overflow: hidden;
+  float: left;
+  margin: 0 0 0 -40px;
+}
+li{
+  width: 150px;
+  height: 80px;
+  float: left;
+  background: #ace;
+  -webkit-background-size: 20px 20px;
+  -moz-background-size: 20px 20px;
+  background-size: 20px 20px; 
+  list-style: none;
+}
+    
+li.gradient1 {
+  background-image: -webkit-gradient(
+    linear,
+    0 100%, 100% 0,
+    color-stop(.25, rgba(255, 255, 255, .2)), 
+    color-stop(.25, transparent),
+    color-stop(.5, transparent), 
+    color-stop(.5, rgba(255, 255, 255, .2)),
+    color-stop(.75, rgba(255, 255, 255, .2)), 
+    color-stop(.75, transparent),
+    to(transparent)
+    );
+  background-image: -moz-linear-gradient(
+    45deg, 
+    rgba(255, 255, 255, .2) 25%, 
+    transparent 25%,
+    transparent 50%, 
+    rgba(255, 255, 255, .2) 50%, 
+    rgba(255, 255, 255, .2) 75%,
+    transparent 75%, 
+    transparent
+    );
+  background-image: -o-linear-gradient(
+    45deg, 
+    rgba(255, 255, 255, .2) 25%, 
+    transparent 25%,
+    transparent 50%, 
+    rgba(255, 255, 255, .2) 50%, 
+    rgba(255, 255, 255, .2) 75%,
+    transparent 75%, 
+    transparent
+  );
+  background-image: linear-gradient(
+    45deg, 
+    rgba(255, 255, 255, .2) 25%, 
+    transparent 25%,
+    transparent 50%, 
+    gba(255, 255, 255, .2) 50%, 
+    rgba(255, 255, 255, .2) 75%,
+    transparent 75%, 
+    transparent
+    );
+}
+
+li.gradient2 {
+   background-image: -webkit-gradient(linear, 0 0, 100% 100%,
+      color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent),
+      color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)),
+      color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent),
+      to(transparent));
+   background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+      transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+      transparent 75%, transparent);
+   background-image: -o-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+      transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+      transparent 75%, transparent);
+   background-image: linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+      transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+      transparent 75%, transparent);
+}
+    
+li.gradient3 {
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent));
+  background-image: -moz-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+  background-image: -o-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+  background-image: linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+}
+    
+li.gradient4 {
+  background-image: -webkit-gradient(linear, 0 0, 100% 0, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent));
+  background-image: -moz-linear-gradient(0deg, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+  background-image: -o-linear-gradient(0deg, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+  background-image: linear-gradient(0deg, rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+}
+    
+li.gradient5 {
+  background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, #555), color-stop(.25, transparent), to(transparent)),
+      -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #555), color-stop(.25, transparent), to(transparent)),
+      -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #555)),
+      -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, transparent), color-stop(.75, #555));
+  background-image: -moz-linear-gradient(45deg, #555 25%, transparent 25%, transparent),
+     -moz-linear-gradient(-45deg, #555 25%, transparent 25%, transparent),
+     -moz-linear-gradient(45deg, transparent 75%, #555 75%),
+     -moz-linear-gradient(-45deg, transparent 75%, #555 75%);
+  background-image: -o-linear-gradient(45deg, #555 25%, transparent 25%, transparent),
+     -o-linear-gradient(-45deg, #555 25%, transparent 25%, transparent),
+     -o-linear-gradient(45deg, transparent 75%, #555 75%),
+     -o-linear-gradient(-45deg, transparent 75%, #555 75%);
+  background-image: linear-gradient(45deg, #555 25%, transparent 25%, transparent),
+    linear-gradient(-45deg, #555 25%, transparent 25%, transparent),
+    linear-gradient(45deg, transparent 75%, #555 75%),
+    linear-gradient(-45deg, transparent 75%, #555 75%);
+}
+    
+li.gradient6 {
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, transparent), color-stop(.5, rgba(200, 0, 0, .5)), to(rgba(200, 0, 0, .5))),
+     -webkit-gradient(linear, 0 0, 100% 0, color-stop(.5, transparent), color-stop(.5, rgba(200, 0, 0, .5)), to(rgba(200, 0, 0, .5)));
+  background-image: -moz-linear-gradient(transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5)),
+     -moz-linear-gradient(0deg, transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5));
+  background-image: -o-linear-gradient(transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5)),
+     -o-linear-gradient(0deg, transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5));
+  background-image: linear-gradient(transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5)),
+     linear-gradient(0deg, transparent 50%, rgba(200, 0, 0, .5) 50%, rgba(200, 0, 0, .5));
+}
+
+</style>
+
+</head>
+<body>
+	<p class="pcontent">
+		CSS3 Gradient分为linear-gradient(线性渐变)和radial-gradient(径向渐变)。
+		<a href="http://www.colorzilla.com/gradient-editor/" target="_balnk">http://www.colorzilla.com/gradient-editor/</a>
+	</p>
+	<div class="example example1">上-->下</div>
+	<div class="example example2">左-->右</div>
+	<div class="example example3">左上-->右下</div>
+	<div class="example example4">Linear Gradient</div>
+	<div class="example example5">with Specified Arbitrary Stops</div>
+	<div class="example example6">角度(Angle)</div>
+	<br />
+	<div class="example example7"></div>
+	<div class="example example8"></div>
+	<div class="example example9"></div>
+	<div class="example example10"></div>
+	<div class="example example11"></div>
+	<div class="example example12"></div>
+	<div class="example example13"></div>
+	<div class="example example14"></div>
+	<div class="example example15"></div>
+	<br />
+	<ul>
+	   <li class="gradient gradient1"></li>
+	   <li class="gradient gradient2"></li>
+	   <li class="gradient gradient3"></li>
+	   <li class="gradient gradient4"></li>
+	   <li class="gradient gradient5"></li>
+	   <li class="gradient gradient6"></li>
+    </ul>
+</body>
+</html>

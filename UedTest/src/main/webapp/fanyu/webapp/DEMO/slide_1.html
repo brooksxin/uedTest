@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Untitled Form</title>
+<link href="../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../css/common.css" media="all">
+<script src="../lib/jquery/1.8.1/jquery.js"></script>
+<script type="text/javascript" src="../lib/pretty/prettify.js"></script>
+<script type="text/javascript" src="../lib/slides/3.0/jquery.slides.min.js"></script>
+<script type="text/javascript" src="../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../common/common.js"></script>
+<style>
+
+    #slides {
+      display: none
+    }
+
+    #slides .slidesjs-navigation {
+      margin-top:3px;
+    }
+
+    #slides .slidesjs-previous {
+      margin-right: 5px;
+      float: left;
+    }
+
+    #slides .slidesjs-next {
+      margin-right: 5px;
+      float: left;
+    }
+
+    .slidesjs-pagination {
+      margin: 6px 0 0;
+      float: right;
+      list-style: none;
+    }
+
+    .slidesjs-pagination li {
+      float: left;
+      margin: 0 1px;
+    }
+
+    .slidesjs-pagination li a {
+      display: block;
+      width: 13px;
+      height: 0;
+      padding-top: 13px;
+      background-image: url(img/pagination.png);
+      background-position: 0 0;
+      float: left;
+      overflow: hidden;
+    }
+
+    .slidesjs-pagination li a.active,
+    .slidesjs-pagination li a:hover.active {
+      background-position: 0 -13px
+    }
+
+    .slidesjs-pagination li a:hover {
+      background-position: 0 -26px
+    }
+
+    #slides a:link,
+    #slides a:visited {
+      color: #333
+    }
+
+    #slides a:hover,
+    #slides a:active {
+      color: #9e2020
+    }
+
+    .navbar {
+      overflow: hidden
+    }
+</style>
+
+</head>
+<body id="main_body" onload="prettyPrint()" >
+	
+<div class="form_container">
+
+
+
+
+	<!-- ui-box -->
+	<div class="ui-box">
+	    <div class="ui-box-head">
+	        <div class="ui-box-head-border">
+	            <h3 class="ui-box-head-title">商品小图</h3>
+	        </div>
+	    </div>
+	    <div class="ui-box-container">
+	        <div class="ui-box-content">
+	        	<div style="width:160px;">
+	        	  <!-- SlidesJS Required: Start Slides -->
+				  <!-- The container is used to define the width of the slideshow -->
+				  <div class="container">
+				    <div id="slides-small">
+				      <img src="img/small/example-slide-1.jpg" alt="提示">
+				      <img src="img/small/example-slide-2.jpg" alt="提示">
+				      <img src="img/small/example-slide-3.jpg" alt="提示">
+				      <img src="img/small/example-slide-4.jpg" alt="提示">
+				      <img src="img/small/example-slide-2.jpg" alt="提示">
+				      <a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left icon-large"></i></a>
+				      <a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right icon-large"></i></a>
+				    </div>
+				  </div>
+				  <!-- End SlidesJS Required: Start Slides -->
+				 </div>
+	        </div>
+	    </div>
+	</div>
+	<!-- ui-box -->
+
+
+	<!-- ui-box -->
+	<div class="ui-box mg_t_10">
+	    <div class="ui-box-head">
+	        <div class="ui-box-head-border">
+	            <h3 class="ui-box-head-title">商品中图</h3>
+	        </div>
+	    </div>
+	    <div class="ui-box-container">
+	        <div class="ui-box-content">
+	        	<div style="width:400px;">
+	        	  <!-- SlidesJS Required: Start Slides -->
+				  <!-- The container is used to define the width of the slideshow -->
+				  <div class="container">
+				    <div id="slides-mid">
+				      <img src="img/mid/example-slide-1.jpg" alt="提示">
+				      <img src="img/mid/example-slide-2.jpg" alt="提示">
+				      <img src="img/mid/example-slide-3.jpg" alt="提示">
+				      <img src="img/mid/example-slide-4.jpg" alt="提示">
+				      <img src="img/mid/example-slide-2.jpg" alt="提示">
+				      <a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left icon-large"></i></a>
+				      <a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right icon-large"></i></a>
+				    </div>
+				  </div>
+				  <!-- End SlidesJS Required: Start Slides -->
+				 </div>
+	        </div>
+	    </div>
+	</div>
+	<!-- ui-box -->
+
+
+	
+	<!-- ui-box -->
+	<div class="ui-box mg_t_10">
+	    <div class="ui-box-head">
+	        <div class="ui-box-head-border">
+	            <h3 class="ui-box-head-title">商品大图</h3>
+	        </div>
+	    </div>
+	    <div class="ui-box-container">
+	        <div class="ui-box-content">
+	        	<div style="width:800px;">
+	        	  <!-- SlidesJS Required: Start Slides -->
+				  <!-- The container is used to define the width of the slideshow -->
+				  <div class="container">
+				    <div id="slides-big">
+				      <img src="img/big/example-slide-1.jpg" alt="提示">
+				      <img src="img/big/example-slide-2.jpg" alt="提示">
+				      <img src="img/big/example-slide-3.jpg" alt="提示">
+				      <img src="img/big/example-slide-4.jpg" alt="提示">
+				      <img src="img/big/example-slide-2.jpg" alt="提示">
+				      <a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left icon-large"></i></a>
+				      <a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right icon-large"></i></a>
+				    </div>
+				  </div>
+				  <!-- End SlidesJS Required: Start Slides -->
+				 </div>
+	        </div>
+	    </div>
+	</div>
+	<!-- ui-box -->
+
+
+	  <script>
+	    $(function() {
+	    	
+	      $('#slides-small').slidesjs({
+	        width: 160,
+	        height: 160,
+	        navigation: false
+	      });
+
+	      $('#slides-mid').slidesjs({
+	        width: 400,
+	        height: 400,
+	        navigation: false
+	      });
+
+
+	      $('#slides-big').slidesjs({
+	        width: 800,
+	        height: 800,
+	        navigation: false
+	      });
+
+
+	      $('#slides-mid').click(function(){
+	      		var idx = $('#slides-small img').index( $('#slides-small img:visible') );
+	      		alert(idx)
+	      })
+	      
+	    });
+	  </script>
+
+
+
+
+</div>
+
+
+
+	
+
+</body>
+</html>

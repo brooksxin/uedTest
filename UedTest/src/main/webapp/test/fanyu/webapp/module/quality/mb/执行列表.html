@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>执行列表</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+
+<!-- 面包屑 begain -->
+<div class="breadcrumb"></div>
+<!-- 面包屑end -->
+
+<div class="formItem">
+	<div class="titleArea bd-bottom fn-clear">
+        <a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a><h2 class="ui-textIndentStyle fn-left">返回</h2>
+    </div>
+
+    <div method="post" action="#" class="cmxform" >
+      <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+        <div class="record-search-cate">
+            <div class="pb-10">第十周通话服务质量检测</div>
+            <div class="fn-clear pb-10">
+                <div class="fn-left">开始时间：2015年4月14日 09:00 — 2015年5月15日 09:00</div>
+                <div class="fn-left ml-50">抽查通话数量：10000 次通话</div>
+            </div>
+            <div>抽查项目：全部</div>
+        </div>
+        <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+      </form>
+    </div>
+    <div class="tablewidth mg_t_10">
+      <table class="ui-record-table table_radius table-bordered table-striped"  >
+        <thead>
+          <tr>
+            <th width="100">项目编号</th>
+            <th width="80">项目名称</th>
+            <th width="60">项目类型</th>
+            <th width="40">录音时长</th>
+            <th width="60">综合得分</th>
+            <th width="100">操作</th>
+          </tr>
+        </thead>
+        <tbody id="J_tabletpl">
+          <tr>
+            <td>A0820150615</td>
+            <td>双11促销活动</td>
+            <td>营销</td>
+            <td>10'59''</td>
+            <td>－</td>
+            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">评审</a></div></td>
+          </tr>
+          <tr>
+            <td>A0820150614</td>
+            <td>双11促销活动</td>
+            <td>营销</td>
+            <td>14'50''</td>
+            <td>－</td>
+            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">评审</a></div></td>
+          </tr>
+          <tr>
+            <td>A0820150610</td>
+            <td>双11促销活动</td>
+            <td>营销</td>
+            <td>10'05''</td>
+            <td>－</td>
+            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">评审</a></div></td>
+          </tr>
+          <tr>
+            <td>A0820150610</td>
+            <td>双11促销活动</td>
+            <td>营销</td>
+            <td>11'59''</td>
+            <td>－</td>
+            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">评审</a></div></td>
+          </tr>
+          <tr>
+            <td>A0820150610</td>
+            <td>双11促销活动</td>
+            <td>营销</td>
+            <td>10'59''</td>
+            <td>10</td>
+            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">评审</a></div></td>
+          </tr>
+          <tr>
+            <td>A0820150610</td>
+            <td>双11促销活动</td>
+            <td>营销</td>
+            <td>10'59''</td>
+            <td>10</td>
+            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">评审</a></div></td>
+          </tr>
+          <tr>
+            <td>A0820150610</td>
+            <td>双11促销活动</td>
+            <td>营销</td>
+            <td>10'59''</td>
+            <td>10</td>
+            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">评审</a></div></td>
+          </tr>
+          <tr>
+            <td>A0820150610</td>
+            <td>动感地带用户满意度调查</td>
+            <td>调研</td>
+            <td>8'54''</td>
+            <td>5</td>
+            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">评审</a></div></td>
+          </tr>
+          <tr>
+            <td>A0820150610</td>
+            <td>动感地带用户满意度调查</td>
+            <td>调研</td>
+            <td>8'54''</td>
+            <td>5</td>
+            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">评审</a></div></td>
+          </tr>
+          <tr>
+            <td>A0820150610</td>
+            <td>动感地带用户满意度调查</td>
+            <td>调研</td>
+            <td>5'59''</td>
+            <td>0</td>
+            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">评审</a></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!--翻页及功能按钮区域开始-->
+    <DIV class="amount-bottom">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+        <tr>
+          <td width="50%"><DIV class="fn-clear action-other  action-other-show ">
+              <DIV id=Pagination class="page pagination fn-right">共1500条记录 </DIV>
+              <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+            </DIV></td>
+        </tr>
+      </table>
+    </DIV>
+</div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+    });
+</script>
+</body>
+</html>

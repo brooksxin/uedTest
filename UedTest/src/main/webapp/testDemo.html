@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<link rel="stylesheet" href="alice.css">
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+
+<div>
+	
+</div>
+
+<script src="jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	var str = [{"colorId":"10003800","specId":2000904,"id":"0|0|0","skuID":"","prodspectype":""},{"colorId":"10003718","specId":2001038,"id":"0|0|0","skuID":"","prodspectype":""},{"colorId":"10003716","specId":2001038,"id":"0|0|0","skuID":"","prodspectype":""},{"colorId":"10003461","specId":2000926,"id":"0|0|0","skuID":"","prodspectype":""},{"colorId":"10003221","specId":2000810,"id":"0|0|0","skuID":"","prodspectype":""}];
+	str = JSON.stringify(str);
+	console.log(str);
+	str = str.replace(/(")/g,'\\"');
+	console.log(str)
+});
+
+</script>
+</body>
+</html>

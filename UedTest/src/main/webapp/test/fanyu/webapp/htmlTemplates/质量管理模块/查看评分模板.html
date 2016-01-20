@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>查看评分模板</title>
+
+<#include "../../tpl/res_css.tpl" />
+
+</head>
+
+<body>
+<div class="onlin_borBot pb-10 mb-10">
+    <h2 class="fn-center">查看评分模板</h2>
+</div>
+
+<div class="formItem">
+
+    <div class="ml-15 mr-15 mb-30">
+      	<div class="pb-10">
+          <table  class="form_table mt-10" width="100%">
+              <tr>
+                  <td width="90"> <span class="attributionValue fn-right">评分模板名称：</span></td>
+                  <td>通话服务质量检测模版1</td>
+              </tr>
+              <tr>
+                  <td width="90" valign="top"> <span class="attributionValue fn-right">模版描述：</span></td>
+                  <td>改模版包括8个评分维度，每个维度都包括优秀、良好、及格、不及格4个等级</td>
+              </tr>
+              <tr>
+                  <td width="90"> <span class="attributionValue fn-right">评分类型：</span></td>
+                  <td>服务用语、服务技巧、业务要求</td>  
+              </tr>
+          </table>
+        </div>
+        <div class="tablewidth mg_t_10">
+            <table class="ui-record-table table_radius table-bordered table-striped" >
+                <thead>
+                    <tr>
+                        <th width="45">序号</th>
+                        <th width="100">评分项</th>
+                        <th width="">等级名称</th>
+                        <th width="">等级分值</th>
+                        <th width="80">权重（%）</th>
+                        <th width="150">排序</th>
+                    </tr>
+                 </thead>
+                 <tbody id="J_tabletpl">
+                    <tr>
+                        <td>1</td>
+                        <td>基本用语</td>
+                        <td>优秀/良好/及格/不及格</td>
+                        <td>100/70/40/0</td>
+                        <td>10</td>
+                        <td><div class="gridRowBtn fn-center"><a class="" href="javascript:;"></a><a class="sortDown" href="javascript:;"></a></div></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>规范用语</td>
+                        <td>优秀/良好/及格/不及格</td>
+                        <td>100/70/40/0</td>
+                        <td>10</td>
+                        <td><div class="gridRowBtn fn-center"><a class="sortUp" href="javascript:;"></a><a class="sortDown" href="javascript:;"></a></div></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>服务态度</td>
+                        <td>优秀/良好/及格/不及格</td>
+                        <td>100/70/40/0</td>
+                        <td>10</td>
+                        <td><div class="gridRowBtn fn-center"><a class="sortUp" href="javascript:;"></a><a class="sortDown" href="javascript:;"></a></div></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>引导技巧</td>
+                        <td>优秀/良好/及格/不及格</td>
+                        <td>100/70/40/0</td>
+                        <td>10</td>
+                        <td><div class="gridRowBtn fn-center"><a class="sortUp" href="javascript:;"></a><a class="sortDown" href="javascript:;"></a></div></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>业务介绍</td>
+                        <td>优秀/良好/及格/不及格</td>
+                        <td>100/70/40/0</td>
+                        <td>10</td>
+                        <td><div class="gridRowBtn fn-center"><a class="sortUp" href="javascript:;"></a><a class="sortDown" href="javascript:;"></a></div></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>操作规范</td>
+                        <td>优秀/良好/及格/不及格</td>
+                        <td>100/70/40/0</td>
+                        <td>10</td>
+                        <td><div class="gridRowBtn fn-center"><a class="sortUp" href="javascript:;"></a><a class="sortDown" href="javascript:;"></a></div></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>脚本执行</td>
+                        <td>优秀/良好/及格/不及格</td>
+                        <td>100/70/40/0</td>
+                        <td>10</td>
+                        <td><div class="gridRowBtn fn-center"><a class="sortUp" href="javascript:;"></a><a class="sortDown" href="javascript:;"></a></div></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>问卷填写</td>
+                        <td>优秀/良好/及格/不及格</td>
+                        <td>100/70/40/0</td>
+                        <td>10</td>
+                        <td><div class="gridRowBtn fn-center"><a class="sortUp" href="javascript:;"></a></div></td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+    </div>
+	
+
+</div>
+
+
+
+<div class="formBtnArea bd-top fn-clear">
+    <div class="normalBtnArea fn-center">
+        <a class="normalBtn BGblue largeBtn" href="javascript:;">使用模版</a>
+        <a href="#" class="formLink fn-right"><span>取消创建</span></a>
+    </div>
+</div>
+
+
+</div>
+
+
+
+
+
+<#include "../../tpl/res_js.tpl" />   
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        $(".qBox").mouseover(function() {
+          $(this).addClass("qBoxHover");
+          $(this).find(".qEditIcon").show();
+
+        }).mouseout(function() {
+          $(this).removeClass("qBoxHover");
+          $(this).find(".qEditIcon").hide();
+        });;
+    });
+</script>
+</body>
+</html>

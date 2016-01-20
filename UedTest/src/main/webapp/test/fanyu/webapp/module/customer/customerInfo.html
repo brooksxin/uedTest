@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>客户管理模板</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+  <#include "../../tpl/sys_top.tpl" />
+    <div class="wrapper">
+        <div id="J_topMenu"  class="menu fn-clear">
+        <#include "../../tpl/sys_topMenu.tpl" />
+        </div>
+        <!-- left start -->
+        <div class="left">
+            <div class="leftInner" id="">
+        <#include "../../tpl/cust_left.tpl" />
+            </div>
+            <div class="middle" id="mainMiddle">&nbsp;</div>
+        </div>
+        <!-- left END -->
+        <!-- right start -->
+        <div class="right" id="mainRight" style="overflow:auto;*position:relative">
+            <div id="mainRight_child" style="height:100%;">
+              <div class="formItem">
+   
+                  <div class="titleArea">
+                      <h2>钱大华的更多信息</h2>
+                  </div>
+                  
+                  <div class="formArea-B">
+                  <table width="100%">
+                      <tbody>
+                      
+                          <tr>
+                              <td width="120" valign="top"><span class="tc-c2">年龄：</span></td>
+                              <td width=""> 24</td>
+                              <td width="120" valign="top"><span class="tc-c2">是否学生：</span></td>
+                              <td>是</td>
+                          </tr>
+                          <tr class="formArea-A-dashed">
+                              <td valign="top"><span class="tc-c2">当前手机：</span></td>
+                              <td>三星Note3</td>
+                              <td valign="top"><span class="tc-c2">实名认证：</span></td>
+                              <td>是</td>
+                          </tr>
+                          
+                          <tr>
+                              <td valign="top"><span class="tc-c2">客户星级：</span></td>
+                              <td></td>
+                              <td valign="top"><span class="tc-c2">当前状态：</span></td>
+                              <td>正常</td>
+                          </tr>
+                          <tr>
+                              <td valign="top"><span class="tc-c2">入网时间：</span></td>
+                              <td>2014年4月18日 12:24:35</td>
+                              <td valign="top"><span class="tc-c2">归属地：</span></td>
+                              <td>河南省洛阳市</td>
+                          </tr>
+                           <tr>
+                              <td valign="top"><span class="tc-c2">当前套餐：</span></td>
+                              <td>全球通180包月</td>
+                              <td valign="top"><span class="tc-c2">是否4G用户：</span></td>
+                              <td>是</td>
+                          </tr>
+                          <tr>
+                              <td valign="top"><span class="tc-c2">月均流量：</span></td>
+                              <td>1GB</td>
+                              <td valign="top"><span class="tc-c2">月均费用：</span></td>
+                              <td>300.00元</td>
+                          </tr>
+                      </tbody>
+                   </table>
+                   
+                  </div>
+              </div>
+
+
+
+          </div>
+        </div>
+        <!-- right stop -->
+    </div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+//页面加载完开始执行
+$(function () {
+    
+});
+</script>
+</body>
+</html>

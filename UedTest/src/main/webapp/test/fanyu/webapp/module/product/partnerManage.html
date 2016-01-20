@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>商家信息管理</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+                <div class="listTopBtn borderBottom">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td>
+                                <h1>
+                                    商家列表
+                                </h1>
+                            </td>
+                            <td>
+                                <div class="normalBtnArea ft-right">
+                                    <a class="normalBtn BGblue" href="addPartner.html">
+                                        添加商家信息
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="cmxform">
+                    <form class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch">
+                        <div class="record-search-cate">
+                            <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td width="60">
+                                            <label class="description">
+                                                商家名称
+                                            </label>
+                                        </td>
+                                        <td width="150">
+                                            <input class="inputWidth inputText" type="text"  id="PTY_NM" name="PTY_NM" maxlength="255" value=""/>
+                                        </td>
+                                        <td width="120">
+                                            <div class="normalBtnArea w82">
+							                  	<a class="searchBtn" href="javascript:;" id="J_search">
+                                                    <i>
+                                                    </i>
+                                                    查询
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="tablewidth mg_t_10">
+                    <table class="ui-record-table table_radius table-bordered table-striped">
+                        <thead>
+                            <tr>
+<!--                                 <th width="45">序号</th> -->
+                                <th>商家名称</th>
+<!--                                 <th width="120"> -->
+<!--                                     品牌 -->
+<!--                                 </th> -->
+                                <th>
+                                    支付方式
+                                </th>
+                                <th width="45">
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="J_tabletpl">
+                        </tbody>
+                    </table>
+                </div>
+                <!--翻页及功能按钮区域开始-->
+                <DIV class="amount-bottom">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+                        <tr>
+<!--                             <td width="60"> -->
+<!--                                 <input type="checkbox" class="selectAll" id="selectAll" onclick="selectAll(this)" -->
+<!--                                 /> -->
+<!--                                 <label for="selectAll"> -->
+<!--                                     全选 -->
+<!--                                 </label> -->
+<!--                             </td> -->
+<!--                             <td> -->
+<!--                                 <td> -->
+<!--                                     <div class="normalBtnArea"> -->
+<!--                                         <a class="normalBtn BGgray -->
+<!--                                         " href="#"> -->
+<!--                                             删除 -->
+<!--                                         </a> -->
+<!--                                     </div> -->
+<!--                                 </td> -->
+                          
+                            <td width="50%">
+                                <DIV class="fn-clear action-other  action-other-show ">
+                                    <DIV id=Pagination class="page pagination fn-right">
+                                    </DIV>
+                                    <DIV class="fn-right fn-pt5 fn-pr10">
+                                    </DIV>
+                                </DIV>
+                            </td>
+                        </tr>
+                    </table>
+                </DIV>
+<#include "../../tpl/res_js.tpl" />
+
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+			<!--
+            <td><div class="table_select"><input type="checkbox" value={{PTY_ID}}/></div></td>
+			-->
+            <td>{{PTY_NM}}</td>
+			<!--
+            <td>{{CATG_UNIT_NM}}</td>
+			-->
+            <td>{{PAYMN_MODE_NM}}</td>
+            <td>
+                <div class="gridRowBtn">
+                    <a class="item-text" href="javascript:;" onclick="edit('{{PTY_ID}}')">编辑</a>
+					<!--
+                    <a class="item-text" href="javascript:;" onclick="detailProd({{PTY_ID}})">查看</a>
+					-->
+                </div>
+            </td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="6">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>	
+
+<script type="text/javascript">
+
+	//查询库存商品
+	srvMap.add('queryCoopPrnrList', 'query.json' ,'front/sh/prod!execute?uid=t0002');//查询服务
+	var G_params = {
+		    url : srvMap.get('queryCoopPrnrList'),
+		    items_per_page : 10 ,   		// 每页数     @param : limit
+		    page_index : 0 , 				//当前页  @param : start
+		    pagination : "Pagination" , 	//分页id
+		    searchformId : "J_formSearch",  //搜索表单的id
+		    tabletpl : "T_tabletpl", 		//表格模板
+		    tablewrap : "J_tabletpl" 		//表格容器
+		};
+	
+     //页面加载完开始执行
+    $(document).ready(function () {
+        //查询按钮事件
+    	$('#J_search').bind('click',function(){
+    		G_params.page_index=0;
+            var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+            console.log(str);
+            //分页获取数据
+            Util.pagination(0, true , G_params , str );
+        });
+    	$('#J_search').trigger("click");
+    	
+    });
+     
+    function edit(obj){
+		window.location.href="addPartner.html?id="+obj;
+	}
+
+</script>
+</body>
+</html>

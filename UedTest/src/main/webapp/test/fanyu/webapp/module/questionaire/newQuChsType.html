@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>调查问卷-新建问题（空白）</title>
+    <#include "../../tpl/res_css.tpl" />
+</head>
+
+<body>
+<div class="formItem">
+    <div class="pt-10 ui-fhw"><a href="Javascript:history.go(-1);void(0);" class="formItem_jiantou-tu normalLink">返回</a></div>
+</div>
+
+<div class="formItem bd-bottom">
+    <div class="titleArea fn-posr">
+        <h2>添加题目</h2>
+    </div>
+</div>
+
+
+<div class="problemNowC fn-clear">
+    <div id="danxt" class="rectangleline fn-left mr-30">
+    	<div class="rectangleBack ellipsePosition"></div>
+        <div class="pt-20 ft-center">单选题</div>
+    </div>
+    <div id="pdt" class="rectangleline fn-left mr-30">
+    	<div class="rectangleBack rectY_Position"></div>
+        <div class="pt-20 ft-center">判断题</div>
+    </div>
+    <div id="duoxt" class="rectangleline fn-left">
+    	<div class="rectangleBack rectV_Position"></div>
+        <div class="pt-20 ft-center">多选题</div>
+    </div>
+    <div id="tkt" class="rectangleline fn-left mr-30">
+    	<div class="rectangleBack rectC_Position"></div>
+        <div class="pt-20 ft-center">填空题</div>
+    </div>
+    <div id="wdt" class="rectangleline fn-left mr-30">
+    	<div class="rectangleBack rectW_Position"></div>
+        <div class="pt-20 ft-center">问答题</div>
+    </div>
+    <div id="rqt" class="rectangleline fn-left">
+    	<div class="rectangleBack rectR_Position"></div>
+        <div class="pt-20 ft-center">日期题</div>
+    </div>
+    
+</div>
+
+
+<div class="formBtnArea bd-top">
+    <table width="100%">
+        <tr>
+            <td>
+                <div class="normalBtnArea fn-center">
+                    <a id="Cancel" class="normalBtn BGblue largeBtn" href="javascript:;" >取消编辑</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+
+
+
+<#include "../../tpl/res_js.tpl" />  
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+      
+        //单选题
+        $('#danxt').bind('click', function () {
+            window.location.href="choiceQuestion.html";
+        }); 
+        
+        //判断题
+        $('#pdt').bind('click', function () {
+            window.location.href="judgmentQuestion.html";
+        });
+        
+        //多选题
+        $('#duoxt').bind('click', function () {
+            window.location.href="moreChoiceQuestion.html";
+        }); 
+        
+        //填空题
+        $('#tkt').bind('click', function () {
+            window.location.href="tktQuestion.html";
+        }); 
+        
+        //问答题
+        $('#wdt').bind('click', function () {
+            window.location.href="wdtQuestion.html";
+        });
+         
+        //日期题
+        $('#rqt').bind('click', function () {
+            window.location.href="addDateQuestion.html";
+        });
+      
+      
+        //取消编辑
+        $('#Cancel').bind('click', function () {
+            window.location.href="questionList.html";
+        });      
+    });
+</script>
+</body>
+</html>

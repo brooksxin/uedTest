@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>创建能力 - 新增</title>
+<link rel="stylesheet" type="text/css" href="alice.css">
+<link rel="stylesheet" type="text/css" href="jquery-easyui-1.4/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="common.css">
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="jquery-easyui-1.4/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="handlebars/1.0.rc.3/helpers.js"></script>
+<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+
+<form id="" name="J_formSearch" style="margin-bottom: 20px;" class="fn-pd-10">
+	<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+		<tbody>
+			<tr>
+				<td width="11%">
+					<label>权限名：</label>
+				</td>
+				<td colspan="5">
+					<input type="text" value="" id="J_name" class="ui-input" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6">
+					<div class="ui-box-tab">
+						<div class="ui-tab">
+						    <ul class="ui-tab-items">
+						        <li class="ui-tab-item ui-tab-item-current">
+						            <a href="javascript:;">权限内容</a>
+						        </li>
+						    </ul>
+						</div>
+			        	<table id="powerTable" class="ui-record-table" width="97%"></table>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6" class="fn-center">
+					<a class="ui-button ui-button-blue" href="javascript:;" hidefocus="true" id="J_saved"><span>确 定</span></a>
+					<a class="ui-button ui-button-gray" href="javascript:;" hidefocus="true" id="J_cancel"><span>取 消</span></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+
+
+<script type="text/javascript">
+$(function(){
+
+	getPagination("");
+	
+	$("#J_saved").click(function(){
+		var name = $("#J_name").val();
+		var rows = $('#powerTable').datagrid('getSelections');
+		var ids = [],
+		dataP = "";
+		if (rows.length){
+			for(var i=0,length=rows.length; i<length; i++){
+				ids.push(rows[i].itemid);
+			}
+		}
+		console.log(ids);
+		dataP = "name="+name+"ids="+ids;
+		$.PostJson("test.json?1=1",dataP,function(state,json){
+			if(state=='success'){
+				if(json){
+					addPowerTr(json);
+					$('#dlg').dialog('close');
+				}else{
+					alert("错误");
+				}
+			}
+		})
+	});
+
+	$("#J_cancel").click(function(){
+		$('#dlg').dialog('close');
+	})
+
+});
+
+function getPagination(dataP){
+	$('#powerTable').datagrid({
+		url: 'paginationTest.json?1=1',
+		fitColumns: true,
+		nowrap:false,
+		queryParams: dataP,
+		idField: "itemid",
+		columns:[[
+			{field:'ck',checkbox:true,width:'3%'},//显示多选列
+			{field:'itemid',title:'ID',width:'12%',align:'left'},
+			{field:'productid',title:'productid',width:'15%',align:'left'}
+		]],
+		singleSelect:false,//是否可多选
+		pagination:true,
+		pagePosition:'bottom',
+		pageSize:5,    // 每页显示的记录条数，默认为10  
+		pageList:[20,40,60], //可以设置每页记录条数的列表  
+		rownumbers:true
+	}).datagrid('getPager').pagination({ 
+        beforePageText: '第',//页数文本框前显示的汉字  
+        afterPageText: '页    共 {pages} 页',  
+        displayMsg: '当前显示 {from} - {to} 条记录，共 {total} 条记录'
+	});
+}
+
+</script>
+</body>
+</html>

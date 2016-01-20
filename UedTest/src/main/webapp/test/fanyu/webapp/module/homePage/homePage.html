@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>欢迎登录10085 - 美好一天即将开始</title>
+<#include "../../tpl/res_css.tpl" />
+<style type="text/css">
+.ui-loading{
+
+    margin: 95px auto;
+}
+.ui-no-data{
+    margin:20px;width:115px;font-size:14px;
+} 
+.rateBar .rateProcess{width: 0;}
+.ui-dialog-content{overflow: auto;}
+.createQuestionnarie { display:none; }
+</style>
+<script>
+    //创建新的问卷
+    var createQuestionnarie = function(){
+        var $mainRight = $('#mainRight_child');
+        $mainRight.html('加载中...')
+        require(['common/questionnaire/builder'], function(builder){
+            //builder.init({ questionnaireID:'5062eb07-9dee-4071-a6b6-63b34098e9f5' });
+            //builder.init();
+            $mainRight.html('').append(new builder().render().el);
+        });
+    }
+    //配置问卷
+    var routerQuestionnarie = function(){
+        var $mainRight = $('#mainRight_child');
+        $mainRight.html('加载中...')
+        require(['common/questionnaire/router'], function(router){
+            //builder.init({ questionnaireID:'5062eb07-9dee-4071-a6b6-63b34098e9f5' });
+            //builder.init();
+            $mainRight.html('').append(new router().render().el);
+        });
+    }
+
+</script>
+</head>
+<body>
+
+	<#include "../../tpl/sys_top.tpl" />
+    <!--
+    <div class="toolLoadingCenter" style=" display:table;  border-radius: 3px;  text-align: center;position:absolute; left:100px; top:100px; background-color:#f0fbff; border:1px solid #a8c9db; padding:12px 40px; textAlign:left; max-width:300px; ">
+        
+        <span style="display:table-cell; width:35px; vertical-align: middle; text-align:left;  "><img src="../../css/images/loading.gif" style="  " /></span>
+        <span style=" display:table-cell; font-size: 16px; ">加载中...</span>
+    </div>
+    -->
+
+    <div class="wrapper">
+        <!-- 顶部菜单容器 -->
+        <div id="J_topMenu" class="menu fn-clear"></div>
+        <div id="J_homePage">
+             <!-- left start -->
+                <div class="mainLeft" style="background:#fff;">
+                 <div class="mainLeftInner">
+                 <div class="mainLeftMenu">
+                     <h2>常用功能</h2>
+                     <ul>
+                         <!-- <li><a href="javascript:;"><i class="icon icon1"></i><span>顾客信息查询</span></a></li> -->
+                         <li>
+                             <a href="javascript:;" url="../contact/custTouchRecManage.html" onclick="skip(this,'1')"><i class="icon icon2"></i><span>通话记录查询</span></a>
+                         </li>
+                         
+                         <li class="fn-hide" id="createCmpgn">
+                             <a href="javascript:;" url="../market/newCampgnNew.html" menuId="" onclick="skip(this,'2')"><i class="icon icon7"></i><span>创建活动</span></a>
+                         </li>
+                         <li class="fn-hide" id="createOrderD">
+                             <a href="javascript:;" url="../market/orderdividtoday.html" menuId="" onclick="skip(this,'3')"><i class="icon icon5"></i><span>创建团队目标</span></a>
+                         </li>
+                         <li>
+                             <a href="javascript:;" onclick="new ActiveXObject('wscript.shell').run('calc');"><i class="icon icon3"></i><span>计算器</span></a>
+                         </li>
+                         <li>
+                             <a href="javascript:;" onclick="new ActiveXObject('wscript.shell').run('notepad.exe');"><i class="icon icon4"></i><span>记事本</span></a>
+                         </li>
+                         <!-- <li><a href="javascript:;"><i class="icon icon6"></i><span>分配预约服务</span></a></li> -->
+
+                         <li class="createQuestionnarie">
+                             <a href="javascript:;" onclick="createQuestionnarie();"><i class="icon icon4"></i><span>创建问卷</span></a>
+                         </li>
+                     </ul>
+                 </div>
+                 </div>
+                 
+                 
+             </div><!-- left stop -->
+             <!-- left stop -->
+             <!-- right start -->
+             <div class="right" id="mainRight" style="overflow:auto;margin-left:156px;background:#EDF0F2;">
+                 <div id="mainRight_child" style="height:100%;">
+                 <div class="mainRightContent fn-clear">
+
+                     <!--提示语-->
+                     <div class="mainBox userTarget">
+                         <div class="niceTxt" style="">
+                             <p>生活赋予我们巨大的和无限高贵的礼品，这就是青春：充满 着力量，充满着期待志愿，充满着求知和斗争的志向，充满 着希望信心和青春。</p>
+                         </div>
+                         <!-- <div class="compass">
+                             <img src="../../css/framePlat/images/temp.gif">
+                         </div>
+                         <div class="todayTarget fn-clear">
+                             <span><em>今日目标</em><i class="iconBg_gray">32</i></span>
+                             <span>
+                                 <em class="ml-30">今日目标完成度</em><i class="iconBg_orange">18</i>
+                             </span>
+                         </div> -->
+                         <div class="ui-today-chart fn-clear">
+                             <h3 class="fn-left">今日目标完成度</h3>
+                             <div class="orderBar fn-left">
+                                 <div class="rateBar">
+                                     <div class="rateBg" SALE_VOLUME="{{SALE_VOLUME}}">
+                                         <div class="rateProcess" style="width:0px;"></div>
+                                         <div class="ui-tdy-circle"></div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <!-- <span class="ui-task-zero">0台</span> -->
+                             <span class="ui-task-today"><span>0</span>台</span>
+                         </div>
+
+                         <div class="ui-hp-loginBtu">
+                             <a href="javascript:;" onclick="openSoftphonePage();" class="normalBtnChang BGblue">签入</a>
+                         </div>
+                     </div>
+                     <!--我的待办-->
+                     <div class="mainBox">
+                         <h2 class="boxTitle">
+                             我的待办
+                             <!-- <a class="ui-hp-more" href="javascript:;">更多</a> -->
+                         </h2>
+                         <div class="boxContent">
+                             <ul class="newLists" id="J_newlist">
+                                 <div class="ui-loading"><h1><img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等 ...</h1></div>
+                             </ul>
+                         </div>
+                     </div>
+
+                     <div class="mainBox itemOrderBy">
+                         <h2 class="boxTitle">当前小组销售排名</h2>
+                         <div class="boxContent" id="J_group_Rank">
+                             <div class="ui-loading"><h1><img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等 ...</h1></div>
+                         </div>
+                     </div>
+                     <div class="mainBox itemOrderBy">
+                         <h2 class="boxTitle">当前本人销售排名</h2>
+                         <div class="boxContent" id="J_person_Rank">
+                             <div class="ui-loading"><h1><img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等 ...</h1></div>
+                         </div>
+                     </div>
+                 </div>
+               </div>
+             </div>
+             <!-- right stop -->
+        </div>
+
+        <div class="fn-hide" id="busi_right">
+             <!-- left start -->
+                <div class="left">
+                 <!-- 左侧菜单容器 -->
+                 <div class="leftInner" id="J_leftMenu"></div>
+                 <div class="middle" id="mainMiddle">&nbsp;</div>
+             </div>
+             <!-- left stop -->
+             <!-- right start -->
+             <div class="right" id="mainRight" style="overflow:auto">
+                 <div id="mainRight_child" style="height:100%;">
+                     <iframe id="J_busi_iframe" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+                     <div id="J_busi_div" class="fn-hide"></div>
+                 </div>
+             </div>
+             <!-- right stop -->
+        </div>
+    </div>
+
+
+
+<script id="T_newlist" type="text/text/x-handlebars-template">
+{{#if beans.length}}
+    {{#each beans}}
+        <li cmpgn_id="{{cmpgn_id}}" cmpgn_sts_cd="{{cmpgn_sts_cd}}">
+            <a href="javascript:;" class="newsTxt" title="{{cmpgn_name}}">
+                <span class="newsTxt-key fn-text-overflow">[{{activeType cmpgn_type_cd}}]&nbsp;&nbsp;</span>
+                <span class="newsTxt-value fn-text-overflow">{{cmpgn_name}}</span>
+            </a>
+            <a class="newsNumber" href="javascript:;">{{task_count}}</a>
+            <a class="icon_phone" href="javascript:;" onclick="toSoftPhone('{{cmpgn_id}}','{{qnr_id}}')"></a>
+        </li>
+    {{/each}}
+{{else}}
+    <div class="ui-tips-box tipsBox">
+        <div class="ui-icon-noData"></div>
+        <div class="ui-tips-text">您没有待办事项！</div>
+    </div>
+{{/if}}
+</script>
+
+<script id="T_person_Rank" type="text/text/x-handlebars-template">
+    {{#if beans.length}}
+        {{#each beans}}
+            <div class="orderListItem fn-clear">
+                <div class="orderListTxt">
+                    <a href="javascript:;" class="orderListTxt" title="">
+                        {{RANK}}<span>{{STAFF_NAME}}</span>{{SALE_VOLUME}}台
+                    </a>
+                </div>
+                <div class="orderBar">
+                    <div class="rateBar">
+                        <div class="rateBg" SALE_VOLUME="{{SALE_VOLUME}}"></div>
+                        <div class="rateProcess"></div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        <div class="ui-no-data">暂无排名</div>
+    {{/if}}
+    <h2 class="selfOrderBy">[本人排名]</h2>
+    {{#if bean.SALE_VOLUME}}
+        <div class="orderListItem fn-clear">
+            <div class="orderListTxt">
+                <a href="javascript:;" class="orderListTxt" title="">
+                    {{bean.RANK}}<span>{{bean.STAFF_NAME}}</span>{{bean.SALE_VOLUME}}台
+                </a>
+            </div>
+            <div class="orderBar">
+                <div class="rateBar">
+                    <div class="rateBg" SALE_VOLUME="{{bean.SALE_VOLUME}}"></div>
+                    <div class="rateProcess"></div>
+                </div>
+            </div>
+        </div>
+        {{#if_gt bean.RANK compare='3'}}
+            <div class="orderHello">还没有闯入前三名哦！大家努力啊！</div>
+        {{else}}
+            <div class="orderHello">成绩不错，请继续保持！</div>
+        {{/if_gt}}
+    {{else}}
+        <div class="ui-no-data">暂无本人排名</div>
+    {{/if}}
+</script>
+
+
+<script id="T_group_Rank" type="text/text/x-handlebars-template">
+    {{#if beans.length}}
+        {{#each beans}}
+            <div class="orderListItem fn-clear">
+                <div class="orderListTxt">
+                    <a href="javascript:;" class="orderListTxt" title="">
+                        {{RANK}}<span>{{DEPT_NM}}</span>{{TSK_SUCC_QTY}}台
+                    </a>
+                </div>
+                <div class="orderBar">
+                    <div class="rateBar">
+                        <div class="rateBg" TSK_SUCC_QTY="{{TSK_SUCC_QTY}}"></div>
+                        <div class="rateProcess"></div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        <div class="ui-no-data">暂无排名</div>
+    {{/if}}
+    <h2 class="selfOrderBy">[本组排名]</h2>
+    {{#if bean.TSK_SUCC_QTY}}
+        <div class="orderListItem fn-clear">
+            <div class="orderListTxt">
+                <a href="javascript:;" class="orderListTxt" title="">
+                    {{bean.RANK}}<span>{{bean.DEPT_NM}}</span>{{bean.TSK_SUCC_QTY}}台
+                </a>
+            </div>
+            <div class="orderBar">
+                <div class="rateBar">
+                    <div class="rateBg" TSK_SUCC_QTY="{{bean.TSK_SUCC_QTY}}"></div>
+                    <div class="rateProcess"></div>
+                </div>
+            </div>
+        </div>
+        {{#if_gt bean.RANK compare='3'}}
+            <div class="orderHello">还没有闯入前三名哦！大家努力啊！</div>
+        {{else}}
+            <div class="orderHello">成绩不错，请继续保持！</div>
+        {{/if_gt}}
+    {{else}}
+        <div class="ui-no-data">暂无本人排名</div>
+    {{/if}}
+</script>
+<#include "../../tpl/res_js.tpl" />
+
+<script src="../../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../../lib/handlebars/1.3.0/helpers.js"></script>
+
+<script>
+
+
+srvMap.add('myTask', 'myTask.json','front/sh/market!index?uid=my016');//我的待办
+srvMap.add('personRank', 'personRank.json','front/sh/market!index?uid=my021');//本人销售排名
+srvMap.add('todayTaskCount', 'personRank.json','front/sh/market!index?uid=my014');//今日目标量
+srvMap.add('groupRank', 'groupRank.json','front/sh/market!index?uid=my020');//班组排名
+srvMap.add('contact','query.json','front/sh/market!index?uid=mwt002');
+srvMap.add('info', 'userinfo.json','front/sh/user!userinfo');
+srvMap.add('role', 'role.json','front/sh/login!getRole');//首页左边栏控制
+
+//话务页面打开标示
+var objWin;
+var param={'uid':'u001'};
+$(function () {
+
+    $(window).on("click", function(){
+        $('#J_dropDown').hide();
+    });
+
+    //判断首页左边栏权限
+    var paramrole={'uid':'l001'};
+    Util.ajax.postJson(srvMap.get("role"), paramrole, function(json,flag){
+        if(flag){
+        	var beans=json.beans;
+        	//console.log(beans);
+        	for(var i=0;i<beans.length;i++){
+        		if(beans[i].ROLE_ID==2){
+        			$("#createCmpgn").removeClass("fn-hide");
+        		}
+        		if(beans[i].ROLE_ID==4){
+        			$("#createOrderD").removeClass("fn-hide");
+        		}
+        	}
+        }
+    });
+    
+    
+    var param={'uid':'u002','STAFF_ID':userInfo.bean.staffId};
+    Util.ajax.postJson(srvMap.get("info"), param, function(json,flag){
+        if(flag){
+            $("p").html(json.bean.PRSN_ENCRG_CNTT);
+        }
+    });
+    //框架初始化
+    //setWindow();
+    //我的待办
+    Util.ajax.postJson(srvMap.get('myTask'),'',function(json,status){
+        if (status) {
+            Util.ajax.loadTemp('#J_newlist',$('#T_newlist'),json);//加载模板
+        }else{
+            $('#J_newlist').html('<div class="ui-tips-box tipsBox"><div class="ui-icon-noData"></div><div class="ui-tips-text">'+json.returnMessage||'查询失败，请重试！'+'</div></div>');
+        }
+    })
+
+    //本人排名
+    Util.ajax.postJson(srvMap.get('personRank'),'',function(json,status){
+        if (status) {
+            Util.ajax.loadTemp('#J_person_Rank',$('#T_person_Rank'),json);
+            if (json.beans.length) {
+                var maxTask = json.beans[0]['STAFF-ALL-COUNTS'],
+                  maxLen = 223,
+                  percent = '';
+                $('#J_person_Rank .orderBar').each(function(){
+                  var _this = $(this),
+                      rateBg = _this.find('.rateBg'),
+                      rateProcess = _this.find('.rateProcess'),
+                      SALE_VOLUME = rateBg.attr('SALE_VOLUME');
+                      rate = SALE_VOLUME/maxTask;
+                  rateProcess.css('width',maxLen*rate);
+                });
+
+                var todayTaskCount=null;
+                //今日目标量
+                Util.ajax.postJsonSync(srvMap.get('todayTaskCount'),'',function(json,status){
+                    if (status) {
+                        todayTaskCount=json.bean.False?json.bean.False:0;
+                    }
+                })
+                //获取完成订单数
+                var todayOrderCount = json.bean.SALE_VOLUME;
+                $('.ui-tdy-circle').text(todayOrderCount);
+                $('.ui-task-today span').text(todayTaskCount);
+                var rate = parseInt(todayOrderCount)/parseInt(todayTaskCount);
+                if (rate>=1) {
+                    $('.ui-today-chart .rateProcess').css({
+                        'width':'200',
+                        'background':'red'
+                    });
+                    $('.ui-tdy-circle').css('left',200-25);
+                }else{
+                    $('.ui-today-chart .rateProcess').css('width',rate*200);
+                    $('.ui-tdy-circle').css('left',rate*200-14);   
+                }
+            };
+        }else{
+            $('#J_person_Rank').html('<div class="ui-tips-box tipsBox"><div class="ui-icon-noData"></div><div class="ui-tips-text">'+json.returnMessage||'查询失败，请重试！'+'</div></div>');
+        }
+    })
+
+    //组排名
+    Util.ajax.postJson(srvMap.get('groupRank'),'',function(json,status){
+        if (status) {
+            Util.ajax.loadTemp('#J_group_Rank',$('#T_group_Rank'),json);
+            if (json.beans.length) {
+                var maxTask = parseInt(json.beans[0]['GROUP-ALL-COUNTS']),
+                    maxLen = 223,
+                    percent = ''; 
+                $('#J_group_Rank .orderBar').each(function(){
+                    var _this = $(this),
+                        rateBg = _this.find('.rateBg'),
+                        rateProcess = _this.find('.rateProcess'),
+                        TSK_SUCC_QTY = parseInt(rateBg.attr('TSK_SUCC_QTY'));
+                        rate = TSK_SUCC_QTY/maxTask;
+                    rateProcess.css('width',maxLen*rate);
+                })
+            }
+        }else{
+            $('#J_group_Rank').html('<div class="ui-tips-box tipsBox"><div class="ui-icon-noData"></div><div class="ui-tips-text">'+json.returnMessage||'查询失败，请重试！'+'</div></div>');
+        }
+    })
+    window.setInterval("initIframe()", 1500);
+});
+
+//打开软电话页面
+function openSoftphonePage(){
+	var softphoneUrl = "../contact/softphoneManage.html";
+	//判断是否打开
+	if (objWin == null || objWin.closed) {
+		 objWin = window.open(softphoneUrl,"","menubar=no,status=no,resizable=yes,scrollbars=no,toolbar=no,top=0,left=0,width="+ (window.screen.availWidth)+ ",height=" +(window.screen.availHeight-30));
+	} else {
+		objWin.focus();
+	}
+}
+
+function skip(obj,flag){
+    var _this = $(obj),
+        url = _this.attr('url'),
+        title = _this.find('span').text(),
+        menuId = _this.attr('menuId');
+    if (flag === '1') {
+        require(['common/contact/custTouchRecManage'],function(fn){
+            fn();
+        })
+    }else if(flag === '2'){
+        $('#busi_right').show();
+        $('#J_homePage').hide();
+        $('#J_topMenu li').eq(1).find('a').click();
+    }else if(flag === '3'){
+        require(['common/homePage/createGroupGoal'], function(obj){
+            obj.init();
+        });
+    }
+}
+
+function toSoftPhone(cmpgn_id,qnr_id){
+	var softphoneUrl = "../contact/softphoneManage.html?CMPGN_ID=" + cmpgn_id+"&QNR_ID="+qnr_id;
+	//判断是否打开
+	if (objWin == null || objWin.closed) {
+		 objWin = window.open(softphoneUrl,"","menubar=no,status=no,resizable=yes,scrollbars=no,toolbar=no,top=0,left=0,width="+ (window.screen.availWidth)+ ",height=" +(window.screen.availHeight-30));
+	} else {
+		objWin.focus();
+	}
+}
+
+Handlebars.registerHelper("activeType", function(str,fn){
+    var buffer = "";
+    if(str == '11'){
+       buffer = '外呼活动';
+    }else if(str == '12'){
+       buffer = '订单活动';
+    }else if(str == '21'){
+       buffer = '调研活动';
+    }
+    else if(str == '22'){
+        buffer = '调研活动';
+     }
+    else if(str == '23'){
+        buffer = '调研活动';
+     }
+    return buffer;
+});
+
+</script>
+</body>
+</html>

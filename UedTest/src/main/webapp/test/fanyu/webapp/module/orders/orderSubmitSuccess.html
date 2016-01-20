@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>10085系统</title> <#include "../../tpl/res_css.tpl" />
+	</head>
+	<!--订单提交成功提交提示-->
+	<input type="hidden" id="payMode" name="payMode" value=""/>
+	<input type="hidden" id="odrId" name="odrId" value=""/>
+	<input type="hidden" id="type" name="type" value=""/>
+	<input type="hidden" id="identityCard" name="identityCard" value=""/>
+	<input type="hidden" id="bankCard" name="" value="bankCard"/>
+	<div id="J_odrSucc"  style="display:none">
+		<div class="formItem">
+
+			<div class="onlin_borBot">
+				<div class="ui-hangupTop fn-clear">
+					<div class="ui-successfulGreen fn-left"></div>
+					<div class="ui-hangupText fn-left">
+						恭喜！订单已成功提交
+					</div>
+				</div>
+			</div>
+
+
+			<div class="onlin_borBot ui-SuPaOnlinCenter fn-hide">
+				<div class="ui-SuPageCenter ft-14">
+					<div class="fn-clear" id="rankInfo">
+						<div class="ui-SuPageWidth fn-left">
+							<span class="text_gray-666">您的本日目标完成进度：</span>
+							<span id="saleVolume"></span><span class="gray_text"
+								id="saleTaskVolume"></span>
+						</div>
+						<div>
+							<span class="text_gray-666"> 当前个人排名：</span>
+							<span class="ui-tOrange" id="rank"></span>
+						</div>
+					</div>
+
+					<div class="ui-SuPageTop fn-clear" id="rankGroupInfo">
+						<div class="ui-SuPageWidth fn-left">
+							<span class="text_gray-666">小组目标完成进度：</span>
+							<span id="groupSaleVolume"></span><span class="gray_text"
+								id="groupSaleTaskVolume"></span>
+						</div>
+						<div>
+							<span class="text_gray-666">当前小组排名：</span>
+							<span id="groupRank"></span>
+						</div>
+					</div>
+
+					</table>
+				</div>
+				<div class="gray_text ml-20 mr-20 pt-15 pb-15"
+					style="text-indent: 30px">
+					顾客已转入付款流程，电话已挂断，如需添加回拨提醒请点击“添加，点击“完成”或“回车”键自动转至下一来话。
+				</div>
+			</div>
+
+			<div class="onlin_borBot">
+				<div class="onlin_borBot ui-hangupCenter pt-30 pb-30">
+					<div class="ft-14 mb-10">
+						<span>本次通话已被自动标记为</span><span class="ui-tGreen ml-10">"购买"</span>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+		<div class="formBtnArea">
+			<div class="normalBtnArea fn-center">
+				<!-- <a class="normalBtn BGgray  largeBtn" href="#">添加回拨提醒</a> -->
+				<a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_IvrTransfer" style="display:none">转接支付</a>
+				<a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_finish">完成</a>
+			</div>
+		</div>
+	</div>
+	<!--订单提交成功提交提示END-->
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--预约成功提示start-->
+	<div id="J_rsvtOdrSucc" style="display:none">
+		<div class="formItem">
+
+			<div class="onlin_borBot">
+				<div class="ui-hangupTop fn-clear">
+					<div class="ui-successfulOrage fn-left"></div>
+					<div class="ui-hangupText fn-left">
+						恭喜！已成功预约。
+					</div>
+				</div>
+			</div>
+
+
+			<div class="onlin_borBot ui-SuPaOnlinCenter fn-hide">
+				<div class="ui-SuPageCenter ft-14">
+					<div class="fn-clear" id="Y_rankInfo">
+						<div class="ui-SuPageWidth fn-left">
+							<span class="text_gray-666">您的本日目标完成进度：</span>
+							<span id="Y_saleVolume"></span><span class="gray_text"
+								id="Y_saleTaskVolume"></span>
+						</div>
+						<div>
+							<span class="text_gray-666"> 当前个人排名：</span>
+							<span class="ui-tOrange" id="Y_rank"></span>
+						</div>
+					</div>
+
+					<div class="ui-SuPageTop fn-clear" id="Y_rankGroupInfo">
+						<div class="ui-SuPageWidth fn-left">
+							<span class="text_gray-666">小组目标完成进度：</span>
+							<span id="Y_groupSaleVolume"></span><span class="gray_text"
+								id="Y_groupSaleTaskVolume"></span>
+						</div>
+						<div>
+							<span class="text_gray-666">当前小组排名：</span>
+							<span id="Y_groupRank"></span>
+						</div>
+					</div>
+
+					</table>
+				</div>
+				<div class="gray_text ml-20 mr-20 pt-15 pb-15"
+					style="text-indent: 30px">
+					顾客已转入付款流程，电话已挂断，如需添加回拨提醒请点击"添加，点击"完成"或"回车"键自动转至下一来话。
+				</div>
+			</div>
+
+			<div class="onlin_borBot">
+				<div class="onlin_borBot ui-hangupCenter pt-30 pb-30">
+					<div class="ft-14 mb-10">
+						<span>本次通话已被自动标记为</span><span class="ui-tGreen ml-10">"预约"</span>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+		<div class="formBtnArea">
+			<div class="normalBtnArea fn-center">
+				<!-- <a class="normalBtn BGgray  largeBtn" href="#">添加回拨提醒</a> -->
+				<a class="normalBtn BGblue largeBtn" href="javascript:;"
+					id="Y_finish">完成</a>
+			</div>
+		</div>
+	</div>
+	<!--预约成功提示end-->
+
+
+
+
+
+
+
+
+
+
+
+	<hr />
+	<#include "../../tpl/res_js.tpl" />
+	<script type="text/javascript">
+//页面加载完开始执行
+srvMap.add('personRank', 'personRank.json', 'front/sh/market!index?uid=my014');//本人销售排名
+srvMap.add('groupRank', 'groupRank.json', 'front/sh/market!index?uid=my015');//班组排名
+srvMap.add('payIvr', '', 'front/sh/order!execute?uid=o023');//和包支付
+var type = 1;
+$(function() {
+	init();
+	//本人排名
+	/*Util.ajax.postJson(srvMap.get('personRank'), '', function(json, status) {
+		if (status) {
+			var saleVolume = json.bean.SALE_VOLUME;//完成任务量
+			var saleTaskVolume = json.bean.TSK_ALCT_QTY;//总任务量
+			var rank = json.bean.RANK;//组内排名
+			if (undefined == saleVolume){
+				$('#saleVolume').html('0');
+				$('#Y_saleVolume').html('0');
+			} else {
+				$('#saleVolume').html(saleVolume);
+				$('#Y_saleVolume').html(saleVolume);
+			}
+			if (undefined == saleTaskVolume){
+				$('#saleTaskVolume').html('/0');
+				$('#Y_saleTaskVolume').html('/0');
+			} else {
+				$('#saleTaskVolume').html('/' + saleTaskVolume);
+				$('#Y_saleTaskVolume').html('/' + saleTaskVolume);
+			}
+			if (undefined == rank){
+				$('#rank').html('0');
+				$('#Y_rank').html('0');
+			} else {
+				$('#rank').html(rank);
+				$('#Y_rank').html(rank);
+			}
+		} else {
+			$('#saleVolume').html('0');
+			$('#Y_saleVolume').html('0');
+			$('#saleTaskVolume').html('/0');
+			$('#Y_saleTaskVolume').html('/0');
+			$('#rank').html('0');
+			$('#Y_rank').html('0');
+			Util.dialog.tips(json.returnMessage || '查询销售业绩失败，请联系管理员 ！');
+		}
+	});*/
+
+	//组排名
+	/*Util.ajax.postJson(srvMap.get('groupRank'), '', function(json, status) {
+		if (status) {
+			var groupSaleVolume = json.bean.TSK_SUCC_QTY;//完成任务量
+			var groupSaleTaskVolume = json.bean.TSK_ALCT_QTY;//总任务量
+			var groupRank = json.bean.RANK;//组内排名
+			if (undefined == groupSaleVolume) {
+				$('#groupSaleVolume').html('0');
+				$('#Y_groupSaleVolume').html('0');
+			} else {
+				$('#groupSaleVolume').html(groupSaleVolume);
+				$('#Y_groupSaleVolume').html(groupSaleVolume);
+			}
+			if (undefined == groupSaleTaskVolume) {
+				$('#groupSaleTaskVolume').html('/0');
+				$('#Y_groupSaleTaskVolume').html('/0');
+			} else {
+				$('#groupSaleTaskVolume').html('/' + groupSaleTaskVolume);
+				$('#Y_groupSaleTaskVolume').html('/' + groupSaleTaskVolume);
+			}
+			if (undefined == ragroupRanknk) {
+				$('#groupRank').html('0');
+				$('#Y_groupRank').html('0');
+			} else {
+				$('#groupRank').html(groupRank);
+				$('#Y_groupRank').html(groupRank);
+			}
+		} else {
+			$('#groupSaleVolume').html('0');
+			$('#Y_groupSaleVolume').html('0');
+			$('#groupSaleTaskVolume').html('/0');
+			$('#Y_groupSaleTaskVolume').html('/0');
+			$('#groupRank').html('0');
+			$('#Y_groupRank').html('0');
+			Util.dialog.tips(json.returnMessage || '查询小组销售业绩失败，请重试！');
+		}
+	});*/
+});
+//点完成回车事件处理
+document.onkeydown=function(event) { 
+	e = event ? event :(window.event ? window.event : null); 
+	if(e.keyCode==13){
+		var type = $("#type").val()||"2";
+		if(Number(type) == 2){
+			$("#J_finish").trigger("click");
+		}else {
+			$("#Y_finish").trigger("click");
+		}
+	} 
+} 
+function init() {
+	var type = Util.browser.getParameter("type");
+	$("#type").val(type);
+	var odrId = Util.browser.getParameter("odrId");
+	$("#odrId").val(odrId);
+	var payMode = Util.browser.getParameter("payMode");
+	if(payMode == '01'){
+		$("#J_IvrTransfer").show();
+	}
+	if(payMode){
+		$("#payMode").val(payMode);
+	}
+	
+	var odrId = "";
+	if (Number(type) == 1) {//预约成功
+		$("#J_odrSucc").hide();
+		$("#J_rsvtOdrSucc").show();
+		odrId = Util.browser.getParameter("odrId")||"";
+		top.CtiUtils.API.setHangupPageType(3,odrId);
+	} else {//下单成功
+		$("#J_rsvtOdrSucc").hide();
+		$("#J_odrSucc").show();
+		odrId = Util.browser.getParameter("odrId")||"";
+		top.CtiUtils.API.setHangupPageType(2,odrId);
+	}
+
+	$("#J_finish").bind("click", function() {
+		window.location.href = "../contact/termList.html";
+	});
+	
+	$("#J_IvrTransfer").bind("click", function() {
+		var payMode = $("#payMode").val();
+		if(payMode == '01'){
+			top.CtiUtils.API.transferToAndIvr({"preNo":odrId});
+		}
+		window.location.href = "../contact/termList.html";
+	});
+	
+	$("#Y_finish").bind("click", function() {
+		window.location.href = "../contact/termList.html";
+	});
+}
+</script>
+	</body>
+</html>

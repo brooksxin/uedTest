@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10085系统</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<div class="breadcrumb"></div>
+                <div class="cmxform" >
+                   <form class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+                      <div class="record-search-cate">
+<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr>
+		<td width="70"><label class="description"> 开始时间 </label></td>
+		<td><input id="startDate" name= "startDate" class="inputWidth element text Wdate" type="text" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'endDate\')}'})"/></td>
+		<td width="80"><label class="description">结束时间</label></td>
+		<td><input id="endDate" name="endDate" class="inputWidth element text Wdate" type="text" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{$dp.$D(\'startDate\',{d:1})||\'2010-01-01 23:59:59\'}'})" /></td>
+		<td width="110"><label class="description"> 客户来电号码 </label></td>
+		<td width="100"><input id = "callingNum"  name = "callingNum" class="inputWidth inputText" type="text" maxlength="255" value="" /></td>
+		<td><div class="normalBtnArea w82"> <a class="searchBtn" href="javascript:;" id="J_search"> <i> </i> 查询 </a> </div></td>
+	</tr>
+	<tbody id="J_searchMore" class="searchMore">
+		
+		<tr>
+			<td><label class="description"> 订单编号 </label></td>
+			<td><input id="orderId" name = "orderId" class="inputWidth inputText" type="text" maxlength="255" value="" /></td>
+			<td><label class="description"> 活动信息 </label></td>
+			<td><div id="J_campgn">
+					<select class="inputWidth inputSelect"  id="cmpgnId" name = "cmpgnId">
+					</select>
+				</div></td>
+			<td><label class="description" id="paymnType"> 支付方式 </label></td>
+			<td><div id="J_paymnType">
+					<select class="inputWidth inputSelect" id="paymnType" name = "paymnType">
+					</select>
+				</div></td>
+				<td></td>
+		</tr>
+		<tr>
+		    <td><label class="description"> 商品名称 </label></td>
+			<td><input id="mcdsNm" name = "mcdsNm" class="inputWidth inputText" type="text" maxlength="255" value=""/></td>
+			<td><label class="description"> 客户姓名 </label></td>
+			<td><input id="custNm" name = "custNm" class="inputWidth inputText" type="text" maxlength="255" value="" /></td>
+			<td><label class="description"> 收货客户电话 </label></td>
+			<td><input id = "callingNum"  name = "mobnum" class="inputWidth inputText" type="text" maxlength="255" value="" /></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><label class="description" id="chnlId">渠道 </label></td>
+			<td><div id="J_chnl">
+				<select class="inputWidth inputSelect" id="chnlId" name = "chnlId">
+				</select>
+			</div></td>
+			<td><label class="description">O2O源渠道订单号</label></td>
+			<td><input id = "coopPrnrOdrNo"  name = "coopPrnrOdrNo" class="inputWidth inputText" type="text" maxlength="255" value="" /></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+                        </div>
+                        <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+                    </form>
+                </div>
+                
+                <div class="listTopBtn">
+                	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td>
+                        	<div class="normalBtnArea ft-right mb-10">
+                        		<a class="normalBtn BGblue" href="#"  id="exportFile">物流监控预警订单导出</a>
+                        	</div>
+                        </td>
+                      </tr>
+                    </table>
+                </div>
+                <div class="tablewidth mg_t_10">
+            		<table class="ui-record-table table_radius table-bordered table-striped"  >
+            			<thead>
+            				<tr>
+            					<th width="25"></th>
+            					<th width="80">订单编号</th>
+            					<th>商品名称</th>
+            					<th width="40">金额</th>
+            					<th width="50">客户姓名</th>
+            					<th width="70">来电号码</th>
+            					<th width="80">下单时间</th>
+            					<th width="50">订单状态</th>
+            					<th width="50">渠道</th>
+            					<th width="76">操作</th>
+            				</tr>
+                         </thead>
+                         <tbody id="J_tabletpl"></tbody>
+            		</table>
+                </div>
+                <!--翻页及功能按钮区域开始-->
+                <DIV class="amount-bottom">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+                      <tr>
+                        <td width="60">
+                            <!-- 
+                            <input type="checkbox" class="selectAll" id="selectAll" /> <label for="selectAll">全选</label> 
+                             -->
+                        </td>
+                        <td>
+                        </td>
+                        <td width="50%">
+                            <DIV class="fn-clear action-other  action-other-show ">
+                                    <DIV id="Pagination" class="page pagination fn-right"></DIV>
+                                    <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                            </DIV></td>
+                      </tr>
+                    </table>
+                </DIV>
+    <script id="T_tabletpl" type="text/x-handlebars-template">
+    {{#if beans}}
+        {{#each beans}}
+            <tr>
+                <td><div class="table_select"><input type="checkbox" /></div></td>
+                <td>{{odrId}}</td>
+                <td>{{mcdsUnitNm}}</td>
+                <td><div class="gridNum">{{odrOrigAmt}}</div></td>
+                <td>{{custName}}</td>
+                <td>{{custResvTelNum}}</td>
+                <td>{{crtTime}}</td>
+				<td>{{odrStsNm}}</td>
+				<td>{{chnlNm}}</td>
+                <td>
+                    <div class="gridRowBtn">
+                        <a class="item-text" href="javascript:;" onclick="exportForm('{{odrId}}')">查看</a>
+                    </div>
+                </td>
+            </tr>
+        {{/each}}
+    {{else}}
+       	<tr>
+		<td colspan="9">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+    {{/if}}
+    </script>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+//页面加载完开始执行
+/*
+    服务配置
+    param1: 服务名
+    param2: 假数据路径
+    param3: 后台服务路径
+*/
+srvMap.add('queryWarnOrderList', 'orders/warnOrderList.json','front/sh/order!queryWarnOrderList?uid=o001');//查询服务
+srvMap.add('allPayMode', 'allPayMode.json','front/sh/common!execute?uid=c002');//查询所有支付方式
+srvMap.add('allEhsState', 'allSendMode.json','front/sh/common!execute?uid=c004');//查询物流状态
+srvMap.add('allCampgn', 'allCampgn.json','front/sh/market!index?uid=my009');//查询所有活动
+srvMap.add('prepaidOrderStatus', '','front/sh/common!execute?uid=c007');//查询已支付订单状态
+srvMap.add('budan', '','front/sh/order!placeOrder?uid=o002');//补单
+srvMap.add('cancelOrderById', 'cancelOrderById.json','front/sh/order!execute?uid=o020');//根据订单ID取消订单
+srvMap.add('exportWebExcel', '','front/sh/common!exportWebExcel?uid=c001');//根据订单ID取消订单
+srvMap.add('allChnlId', 'allChnlId.json','front/sh/user!getChnl?uid=u001');//查询物流状态
+
+var G_params = {
+    url : srvMap.get('queryWarnOrderList'),
+    items_per_page : 10 ,   // 每页数     @param : limit
+    page_index : 0 , //当前页  @param : start
+    pagination : "Pagination" , //分页id
+    searchformId : "J_formSearch", //搜索表单的id
+    tabletpl : "T_tabletpl", //表格模板
+    tablewrap : "J_tabletpl", //表格容器
+    pageCallback:function(){
+		require(['common/buttonAuthority'], function(fn) {
+			fn.init($('#J_tabletpl'));
+		});
+    }
+};
+
+//页面加载完开始执行
+$(function () {
+	 //展开更多查询
+    $("#J_toggleSearch").toggle(
+        function(){$("#JS_filterMore").show();$("#J_toggleSearch").removeClass("down").addClass("up");},
+        function(){$("#JS_filterMore").hide();$("#J_toggleSearch").removeClass("up").addClass("down");}
+    );
+
+
+    //动态加载支付方式
+    $("#J_paymnType").NiceSelect({
+          url:srvMap.get('allPayMode'),
+          data:"",
+          id:"paymnType",
+          name:"paymnType",
+          all:"请选择",
+          key:"VAL",
+          value:"NAME"
+    });
+    //动态活动信息
+     $("#J_campgn").NiceSelect({
+        	url:srvMap.get('allCampgn'),
+            datas : "",
+            id : "cmpgnId",
+            name : "cmpgnId",
+            all:"请选择",
+            key:"CMPGN_ID",
+            value:"CMPGN_NM"
+      });
+     $("#J_chnl").NiceSelect({
+   	  	url:srvMap.get('allChnlId'),
+   	      datas : "",
+   	      id : "chnlId",
+   	      name : "chnlId",
+   	      all:"请选择",
+   	      key:"CHNL_ID",
+   	      value:"PTY_NM"
+    	});
+    $('#J_search').bind('click',function(){
+        var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+        //分页获取数据
+        Util.pagination(0, true , G_params , str );
+    });
+    $('#J_search').trigger("click");
+});
+
+function exportForm(brandId){
+    window.location.href = "warnOrderDetail.html?brandId="+brandId;
+}
+
+//订单导出
+$('#exportFile').bind('click',function(){
+	 var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+     window.location.href="../../front/sh/common!exportWebExcel?uid=c009&"+str;
+ 
+});
+</script>
+</body>
+</html>

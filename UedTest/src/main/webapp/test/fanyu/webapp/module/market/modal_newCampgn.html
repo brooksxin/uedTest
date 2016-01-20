@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>创建活动</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+
+<body>
+<div class="formItem">
+         <div class="titleArea">
+             <h2>基本信息</h2>
+             
+         </div>
+		 <hr/>
+		 <form id="new_camp">
+          <table class="form_table">
+              <tbody>
+                  <tr>
+                      <td width="90"><label class="formDescription"><span class="fn-high">*</span> 活动名称：</label></td>
+                      <td width=""><input name="CMPGN_NM" class="FormInputText width100" type="text" /></td>
+                      
+                  </tr>
+                  
+                  <tr>
+                       <td><label class="formDescription"><span class="fn-high">*</span> 活动时间：</label></td>
+                       <td><input id="param-eDate" name="CMPGN_EFF_DATE" class="element text Wdate" type="text"  /> 至 <input id="param-eDate" name="CMPGN_INVLD_DATE" class="element text Wdate" type="text"   />
+                          </td>               
+                      </tr>
+                      <tr>
+                          <td valign="top"><label class="formDescription"><span class="fn-high">*</span> 活动描述：</label></td>
+						  <td>
+					<textarea rows="8" cols="40"  id="CMPGN_DESC"  class="width100" name="CMPGN_DESC" style="width:100%"></textarea>
+						   </td>
+                      </tr>
+                  </tbody>
+              </table>
+              </form>
+    		<hr/>
+                                           
+</div>
+
+
+
+
+
+
+<div class="formBtnArea">
+  <table width="100%">
+    <tr>
+      <td>
+        <div class="normalBtnArea fn-center">
+        	<a class="normalBtn disable largeBtn" href="#">上一步</a>
+            <a class="normalBtn BGblue largeBtn" href="javascript:;" id="Next" >下一步</a>
+            <a class="normalBtn BGblue largeBtn" href="javascript:;" id="Save" >保存草稿</a>
+        </div>
+	  </td>
+      <td>
+          <div class="normalBtnArea fn-right">
+            <a href="#" class="formLink"><span>取消上传</span></a>
+          </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<script src="../../lib/jquery/1.8.1/jquery.js"></script>
+<script src="../../lib/json2/1.0.0/json2.js"></script>
+<script src="../../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../../lib/handlebars/1.3.0/helpers.js"></script>
+<script src="../../lib/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="../../lib/blockUI/2.64/jquery.blockUI.js"></script>
+<script src="../../common/frameInit.js"></script>
+<script src="../../lib/dialog/4.1.7/artDialog.js"></script>
+<script src="../../lib/dialog/4.1.7/iframeTools.js"></script>
+<script src="../../common/config.js"></script>
+<script src="../../common/common.js"></script> 
+<script id="T_errorMsg" type="text/x-handlebars-template">
+<div>{{bean.errorMsg}}</div>
+</script>   
+<script type="text/javascript">
+/*
+服务配置
+param1: 服务名
+param2: 假数据路径
+param3: 后台服务路径
+*/
+ srvMap.add('insert', 'query.json','/front/sh/market!index?uid=my002');//插入草稿的服务
+ srvMap.add('query' , 'query.json','/front/sh/market!index?uid=my004');//查询草稿的服务
+ srvMap.add('update', 'query.json','/front/sh/market!index?uid=my006');//更新草稿的服务
+ 
+ var params = {
+			CMPGN_NM : $("input[name='CMPGN_NM']").val(),
+			CMPGN_EFF_DATE : $("input[name='CMPGN_EFF_DATE']").val(),
+			CMPGN_INVLD_DATE :$("input[name='CMPGN_INVLD_DATE']").val(),
+			CMPGN_DESC:$("#CMPGN_DESC").val()		
+	};
+ var id="";
+ 
+    //页面加载完开始执行
+   /*  $(document).ready(function () { */
+        //初始化函数
+        $(function () {
+        	//以后写要有判断，是否有id
+        	 id=Util.browser.getParameter("id"); 
+        	
+        //	id="1";
+        //判断是否为草稿页面编辑跳过来的。
+        	if(id!=null&&id!=""&&id!="undefined"){
+        		
+        		 var cmd = {CMPGN_ID:id};
+        //假设为1
+        //	var cmd={CMPGN_ID:"1"};
+            var type=Util.browser.getParameter("type"); 
+        	//新页面上增加增加类型（比如订单和活动），to do将它变为不可编辑
+        //	$("#CMPGN_TYPE").val(type);
+        	Util.ajax.postJson(srvMap.get("query"),cmd,function(json){
+        		console.log(JSON.stringify(json));//这个只支持谷歌和火狐浏览器
+        		/* var bean = json.bean; */
+        		var beans=json.beans;//传回的值为list
+        		/* $("input[name='CMPGN_NM']").val(bean.CMPGN_NM);
+        		$("input[name='CMPGN_EFF_DATE']").val(bean.CMPGN_EFF_DATE);
+        		$("input[name='CMPGN_INVLD_DATE']").val(bean.CMPGN_INVLD_DATE);
+        		$("input[name='CMPGN_DESC']").val(bean.CMPGN_DESC); */
+        	//	console.log(bean.CMPGN_NM);
+        		
+        		 for(var i=0;i<beans.length;i++){
+        			//$("CMPGN_NM").val(beans[0].name);
+        			$("input[name='CMPGN_NM']").val(beans[i].CMPGN_NM);
+            		$("input[name='CMPGN_EFF_DATE']").val(beans[i].CMPGN_EFF_DATE);
+            		$("input[name='CMPGN_INVLD_DATE']").val(beans[i].CMPGN_INVLD_DATE);
+            		$("#CMPGN_DESC").val(beans[i].CMPGN_DESC);
+        		} 
+        		/* document.getElementById("CMPGN_NM").value=;
+        		document.getElementById("CMPGN_NM").value=;
+        		document.getElementById("CMPGN_NM").value=; */
+        	}
+        	);
+    
+        	//这是草稿页面跳转的，点击下一步
+        	$('#Next').bind('click',function(){
+        	 Util.ajax.postJson(srvMap.get("update"),params,function(json){
+        		//to do更新 玩之后不知道了，跳转到下一个页面。
+        		Util.dialog.tips(json);
+        	 }); 
+        	});
+        	//点击保存草稿之后
+        	$('#Save').bind('click',function(){
+        		 Util.ajax.postJson(srvMap.get("update"),params,function(json){
+             		
+             	 });
+        		 
+        	 Util.ajax.postJson(srvMap.get("query"),cmd,function(json){
+        		 var beans=json.beans;
+        		 for(var i=0;i<beans.length;i++){
+         			$("input[name='CMPGN_NM']").val(beans[i].CMPGN_NM);
+             		$("input[name='CMPGN_EFF_DATE']").val(beans[i].CMPGN_EFF_DATE);
+             		$("input[name='CMPGN_INVLD_DATE']").val(beans[i].CMPGN_INVLD_DATE);
+             		$("#CMPGN_DESC").val(beans[i].CMPGN_DESC);
+         		} 
+        		         	 });
+        	});
+        	$('#Return').bind('click',function(){
+        		//to do跳回上一步页面
+        		if(id==null&&id==""){
+        		 Util.ajax.postJson(srvMap.get("insert"),params,function(json){
+        			 var bean=json.bean;
+        			 var id=bean.CMPGN_ID;
+        			 //to do跳转页面
+        			 
+             	 });
+        		}else{
+        			var param={CMPGN_NM : $("input[name='CMPGN_NM']").val(),
+        					CMPGN_EFF_DATE : $("input[name='CMPGN_EFF_DATE']").val(),
+        					CMPGN_INVLD_DATE :$("input[name='CMPGN_INVLD_DATE']").val(),
+        					CMPGN_DESC:$("#CMPGN_DESC").val(),
+        					CMPGN_ID:id
+        			}
+        			Util.ajax.postJson(srvMap.get("update"),param,function(json){
+        			var   bean=json.bean;
+        				
+        		});
+        		}
+        	});
+       }else{
+    	   
+    	   //这是首页新建页面跳转过来的。
+    	   
+        $('#Save').bind('click',function(){
+        	//这是插入
+        	
+    	Util.ajax.postJson(srvMap.get("insert"),$("#new_camp").serialize(),function(data){
+    		//让他后台生成id，并且带回前台。
+    		//将id赋值
+    		var bean=data.bean;
+    		var id=bean.CMPGN_ID;
+    		var returnCode=bean.returnCode;
+    	});
+        	
+    	var cmd = {CMPGN_ID:id};
+    	
+        Util.ajax.postJson(srvMap.get("query"),cmd,function(data){
+        	
+              var beans =data.beans; 
+              for(var i=0;i<beans.length;i++){
+            	$("input[name='CMPGN_NM']").val(beans[i].CMPGN_NM);
+           		$("input[name='CMPGN_EFF_DATE']").val(beans[i].CMPGN_EFF_DATE);
+           		$("input[name='CMPGN_INVLD_DATE']").val(beans[i].CMPGN_INVLD_DATE);
+           		$("#CMPGN_DESC").val(beans[i].CMPGN_DESC);
+              }
+        });
+        if(returnCode="0"){
+        	Util.dialog.tips("保存成功");
+    		//to do跳转到保存草稿首页
+    	}else{
+    		Util.dialog.tips("保存失败");
+    		//to do跳转到保存草稿首页 
+    	}
+              
+    });
+        $('#Next').bind('click',function(){
+        	 Util.ajax.poatJson(srvMap.get("update"),params,function(data){
+               //to do 跳转到下一个页面。0表示类型为普通，1表示类型为订单。
+               if(type=0){
+            	   //这是跳转普通活动下一个页面
+            	   Util.dialog.tips("1");
+               }else{
+            	   //这是跳转订单活动下一个页面
+            	   Util.dialog.tips("2");
+               }
+        	 });
+        	 
+    	
+    });
+        
+        }
+        });
+        /* )}; */
+</script>
+</body>
+</html>

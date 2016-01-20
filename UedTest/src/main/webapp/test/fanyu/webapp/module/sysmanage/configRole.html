@@ -1,0 +1,458 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>配置岗位对应角色</title>
+        <#include "../../tpl/res_css.tpl" />
+        
+    </head>
+    <body>
+    <div class="formItem">
+                 <div class="listTopBtn">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td><h1>配置岗位对应角色</h1></td>
+                      </tr>
+                    </table>
+                </div>
+
+            <div class="formArea">
+                <div class="listTopBtn">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td><h1 id="SHOW_MSG"></h1></td>
+                      </tr>
+                    </table>
+                </div>
+                
+                
+
+                
+                
+                <div class="tablewidth mg_t_10">
+                                <table class="ui-record-table table_radius table-bordered table-striped"  >
+                                    <thead>
+                                        <tr>
+                                            <th width="35">序号</th>
+                                            <th width="60">角色编号</th>
+                                            <th width="80">角色名称</th>
+                                            <th width="">角色描述</th>
+                                            <th width="120">操作</th>
+                                        </tr>
+                                     </thead>
+                                     <tbody id="J_tabletpl">                                     	
+                                    </tbody>
+                                </table>
+                </div>
+                                <div class="normalBtnArea" style="text-align:right;margin-top:30px;">
+                                   <a class="normalBtn BGblue largeBtn" href="javascript:;" id="ADD_ROLE" >添加角色</a>
+                                </div>
+            </div>    
+                    <!--翻页及功能按钮区域开始-->
+
+            </hr>
+            <div class="formBtnArea">
+                <div class="normalBtnArea" style="text-align:center;">
+                   <a class="normalBtn BGblue largeBtn" href="javascript:;" id="SAVE" >保存</a>
+                </div>
+            </div>	
+    </div>
+
+
+	<div id="addRole" class="fn-hide">
+		<div method="post" action="#" class="cmxform">
+		<form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+			<div class="record-search-cate" style="margin-bottom: 20px;">
+				<table class="search_table" cellpadding="0" cellspacing="0"
+					border="0" width="100%">
+					<tbody>
+						<tr>
+							<td><label class="description">角色编号</label></td>
+							<td><input class="inputText" type="text" maxlength="255"
+								id="ROLE_ID" name="ROLE_ID"/></td>
+							<td><label class="description">角色名称</label></td>
+							<td><input class="inputText" type="text" maxlength="255"
+								id="ROLE_NM" name="ROLE_NM"/></td>
+							<td>
+								<div class="normalBtnArea">
+									<a class="searchBtn" href="javascript:;" id="J_search"><i></i>查询</a>
+								</div>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			</form>
+		</div>
+
+		<div class="tablewidth mg_t_10">
+			<table
+				class="ui-record-table table_radius table-bordered table-striped">
+				<thead>
+					<tr>
+						<th width="25"><div class="table_select">
+								<!-- <input type="checkbox" /> -->选择
+							</div></th>
+						<th width="70">角色编号</th>
+						<th width="50">角色名称</th>
+						<th width="">角色描述</th>
+						<th width="60">创建人</th>
+						<th width="120">创建时间</th>
+					</tr>
+				</thead>
+				<tbody id="J_tabletpl1">
+					<!-- 
+                                <tr>
+                                    <td><div class="table_select"><input type="checkbox" /></div></td>
+                                    <td>js1234</td>
+                                    <td>通话</td>
+                                    <td>进行话务操作、进行班组管理</td>
+                                    <td>x10085</td>
+                                    <td>2015-06-24 10:20:12</td>
+                                </tr>
+                                 -->
+				</tbody>
+			</table>
+		</div>
+
+		<!--翻页及功能按钮区域开始-->
+		<DIV class="amount-bottom">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0"
+				class="gridBottom">
+				<tr>
+					<td width="60" id="chosen">已选择 0</td>
+					<td><a href="#" id="empty">清空</a></td>
+					<td width="50%">
+						<DIV class="fn-clear action-other  action-other-show ">
+							<DIV id=Pagination class="page pagination fn-right"></DIV>
+							<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+						</DIV>
+					</td>
+				</tr>
+			</table>
+		</DIV>
+		<div class="formBtnArea">
+                  <div class="normalBtnArea fn-center">
+                     <a class="normalBtn BGblue largeBtn" href="javascript:;" id="SAVERL" >确定</a>
+                     <a class="normalBtn BGgray largeBtn" href="javascript:;" id="CANCELRL" >取消</a>   
+                  </div>
+        </div>
+	</div>
+
+
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+            <td>
+				<div class="table_select">
+				<input type="checkbox" name="ROLE_ID" ROLE_ID={{ROLE_ID}} ROLE_NM={{ROLE_NM}} onclick="countSelect(this)"/>
+				</div>
+			</td>
+            <td>{{ROLE_ID}}</td>
+            <td>{{ROLE_NM}}</td>
+			<td>{{ROLE_DESC}}</td>
+			<td>{{CRT_USER_ID}}</td>
+			<td>{{CRT_TIME}}</td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="3">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+    
+    
+    
+    
+    <#include "../../tpl/res_js.tpl" />    
+    <script type="text/javascript">
+					srvMap.add('queryRole', 'query.json','front/sh/user!index?uid=sys0015');//查询某个岗位对应的角色 
+					srvMap.add('delRL', '', 'front/sh/user!index?uid=sys0016');//解除岗位对应的角色
+					srvMap.add('queryRoleForBind', 'query.json', 'front/sh/user!index?uid=sys0017');//查询角色
+					srvMap.add('bindPostRoleRL', '', 'front/sh/user!index?uid=sys0018');//岗位绑定角色 
+					
+					
+					var T_tabletpl = $("#T_tabletpl");
+					var J_tabletpl = $("#J_tabletpl1");
+					var J_formSearch = $("#J_formSearch");
+					var Pagination = $("#Pagination");
+					var J_add = $("#ADD_ROLE");
+					var J_search = $('#J_search');
+					var G_params = {
+						    url : srvMap.get('queryRoleForBind'),
+						    items_per_page : 4 ,   		// 每页数     @param : limit
+						    page_index : 0 , 				//当前页  @param : start
+						    pagination : Pagination , 	//分页id
+						    searchformId : "J_formSearch",  //搜索表单的id
+						    tabletpl : T_tabletpl, 		//表格模板
+						    tablewrap : J_tabletpl	//表格容器
+					}
+
+					//页面加载完开始执行
+					$(document).ready(function() {
+										var PRIV_POST_ID = Util.browser.getParameter("PRIV_POST_ID");
+										var POST_NM = decodeURI(Util.browser.getParameter("POST_NM"));
+										$("#SHOW_MSG").html(POST_NM + "岗位对应的角色");
+
+										var cmd = {
+											"PRIV_POST_ID" : PRIV_POST_ID
+										};
+
+										Util.ajax.postJson(srvMap.get("queryRole"),cmd,function(json) {
+															if (json.returnCode == 0) {
+																var str = "";
+																for (var i = 0; i < json.beans.length; i++) {
+																	var obj = json.beans[i];
+																	str += "<tr>";
+																	str += "<td>"
+																			+ (i + 1)
+																			+ "</td>"
+																			+ "<td>"
+																			+ obj.ROLE_ID
+																			+ "</td>"
+																			+ "<td>"
+																			+ obj.ROLE_NM
+																			+ "</td>"
+																			+ "<td>"
+																			+ obj.ROLE_DESC
+																			+ "</td>";
+																	str += "<td><div class='gridRowBtn'><a class='item-text' href='javascript:;' onclick='delRL(this)'>解除绑定</a></div></td>";
+																	str += "</tr>";
+																}
+																
+																$("#J_tabletpl").html(str);
+															} else {
+																Util.dialog.tips(json.returnMessage);
+															}
+														});
+									});
+
+					//解除绑定关系
+					function delRL(obj) {
+						var PRIV_POST_ID = Util.browser.getParameter("PRIV_POST_ID");
+						var POST_NM = decodeURI(Util.browser.getParameter("POST_NM"));
+						var trObj = obj.parentNode.parentNode.parentNode;
+						var role_id = trObj.cells[1].innerHTML.trim();
+						var role_nm = trObj.cells[2].innerHTML.trim();
+						var cmd = {
+							"PRIV_POST_ID" : PRIV_POST_ID,
+							ROLE_ID : role_id
+						};
+
+						var elem = $("<div class='fn-hide'><div class='warn-wrapper'><div class='warn-logo'></div><div class='warn-text'>确定要将角色 "
+								+ "\""
+								+ role_nm
+								+ "\""
+								+ " 与岗位 \""
+								+ POST_NM
+								+ "\" 除绑定吗？</div></div></div>");
+						var params = {
+							top : top,
+							content : elem,
+							width : "300px",
+							height : "120px",
+							modal : true,
+							okVal : "确定解除",
+							okCallback : function() {Util.ajax.postJson(srvMap.get("delRL"),cmd,function(json) {
+													if (json.returnCode == 0) {
+														Util.dialog.tips("解除绑定成功");
+														cmd = {
+															"PRIV_POST_ID" : PRIV_POST_ID
+														};
+
+														Util.ajax.postJson(srvMap.get("queryRole"),cmd,	function(json) {
+																			if (json.returnCode == 0) {
+																				var str = "";
+																				for (var i = 0; i < json.beans.length; i++) {
+																					var obj = json.beans[i];
+																					str += "<tr>";
+																					str += "<td>"
+																							+ (i + 1)
+																							+ "</td>"
+																							+ "<td>"
+																							+ obj.ROLE_ID
+																							+ "</td>"
+																							+ "<td>"
+																							+ obj.ROLE_NM
+																							+ "</td>"
+																							+ "<td>"
+																							+ obj.ROLE_DESC
+																							+ "</td>";
+																					str += "<td><div class='gridRowBtn'><a class='item-text' href='javascript:;' onclick='delRL(this)'>解除绑定</a></div></td>";
+																					str += "</tr>";
+																				}
+																				
+																				$("#J_tabletpl").html(str);
+																			} else {
+																			}
+																		});
+													} else {
+														Util.dialog.tips(json.returnMessage);
+													}
+												});
+							},
+							cancelVal : "取消",
+							cancelCallback : function() {
+							}
+						};
+						Util.dialog.openDiv(params);
+					}
+					
+					
+					var roleSelect = document.getElementById('addRole');
+					var params = {
+						  top:top,
+					    id:'D_roleSelect',
+					    title:'选择角色',
+					    content: roleSelect,
+					    width: 900,
+					    height:450,
+					    modal: true
+					}
+					
+					//添加按钮
+				    $("#ADD_ROLE").click(function(){
+				        if (top && top.$("#J_formSearch").length) {
+				          top.$("#J_formSearch")[0].reset();
+				        };
+				        Util.dialog.openDiv(params);
+				        $(J_search).trigger("click");
+				    });
+					
+					
+					//分页查询出角色
+				     $(J_search).bind('click',function(){
+				    	 var PRIV_POST_ID = Util.browser.getParameter("PRIV_POST_ID");
+				    	 var str = top.$("#J_formSearch").serialize(); //把form序列化
+				         G_params.page_index = 0;
+				         //分页获取数据
+				         Util.pagination(G_params.page_index,true,G_params,str+"&PRIV_POST_ID="+PRIV_POST_ID);
+				     });
+					
+					
+					//清空
+					$("#empty").click(function(){
+						top.$("input[name='ROLE_ID']:checked").each(function(){
+							$(this).removeAttr("checked");
+					   	});
+						$("#chosen").html("已选择 0");
+					});
+					
+					
+					function countSelect(obj){
+						var checked = 0;
+						top.$("input[name='ROLE_ID']:checked").each(function(){
+					           checked = checked + 1;
+					   	});
+						$("#chosen").html("已选择 "+checked);
+					}
+					
+					
+					//取消按钮
+				    $('#CANCELRL').click(function(){
+				    	 Util.dialog.close("D_roleSelect",top);
+				    	 $("#chosen").html("已选择 0");
+				    });
+					
+				    //确认选中的角色
+				    $('#SAVERL').bind("click",function(){
+				    	var PRIV_POST_ID = Util.browser.getParameter("PRIV_POST_ID");
+				    	//取出选中的角色
+				    	var checked = 0;
+				    	var ROLE_ID = "";
+				    	top.$("input[name='ROLE_ID']:checked").each(function(){
+				           checked = checked + 1;
+				           var roleId = $(this).attr("ROLE_ID");
+				           ROLE_ID += roleId;
+				           ROLE_ID += ",";
+				           $(this).attr("checked",false);
+				   		}); 
+				    	if(checked == 0){
+				         	   alert("请选择要添加的角色");
+				         	   return;
+				        }
+				    	ROLE_ID = ROLE_ID.substring(0,ROLE_ID.lastIndexOf(","));				    	
+				    	//alert(ROLE_ID);
+				    	//保存岗位角色关系
+				    	var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">确定继续该操作吗？</div></div></div>');
+        		  		var flag = 0;
+		        		  var params = {
+		          		          top:top,
+		          		          content: elem,
+		          		          width: "300px",
+		          		          height: "120px",
+		          		          modal: true,
+		          		          okVal:'确定',
+		          		          okCallback:function(){    					 	
+		    					 	//参数
+		    						var cmd = {"PRIV_POST_ID" : PRIV_POST_ID, "ROLE_ID" : ROLE_ID};
+		    						Util.ajax.postJsonSync(srvMap.get("bindPostRoleRL"), cmd, function(json) {
+										if (json.returnCode == 0) {
+											Util.dialog.tips("绑定角色成功!");
+						         			Util.dialog.close("D_roleSelect",top);
+						         			$("#chosen").html("已选择 0");
+						         	
+						         	
+							         	//var PRIV_POST_ID = Util.browser.getParameter("PRIV_POST_ID");
+										var POST_NM = decodeURI(Util.browser.getParameter("POST_NM"));
+										$("#SHOW_MSG").html(POST_NM + "岗位对应的角色");
+										//alert(POST_NM);
+										cmd = {
+											"PRIV_POST_ID" : PRIV_POST_ID
+										};
+				
+										Util.ajax.postJson(srvMap.get("queryRole"),cmd,function(json) {
+															if (json.returnCode == 0) {
+																var str = "";
+																for (var i = 0; i < json.beans.length; i++) {
+																	var obj = json.beans[i];
+																	str += "<tr>";
+																	str += "<td>"
+																			+ (i + 1)
+																			+ "</td>"
+																			+ "<td>"
+																			+ obj.ROLE_ID
+																			+ "</td>"
+																			+ "<td>"
+																			+ obj.ROLE_NM
+																			+ "</td>"
+																			+ "<td>"
+																			+ obj.ROLE_DESC
+																			+ "</td>";
+																	str += "<td><div class='gridRowBtn'><a class='item-text' href='javascript:;' onclick='delRL(this)'>解除绑定</a></div></td>";
+																	str += "</tr>";
+																}
+																
+																$("#J_tabletpl").html(str);
+															} else {
+																Util.dialog.tips(json.returnMessage);
+															}
+														});
+										} 
+										else {
+											Util.dialog.tips(json.returnMessage);
+										}
+									});
+		          		          },
+		    					  cancelVal:'取消',
+		    		              cancelCallback:function(){}
+		    				};
+		    				Util.dialog.openDiv(params); 
+			         	
+			    	});
+				    
+				    
+				    $("#SAVE").click(function(){
+				    	window.location.href="privPostList.html";
+				    });
+				</script>
+    </body>
+    </html>

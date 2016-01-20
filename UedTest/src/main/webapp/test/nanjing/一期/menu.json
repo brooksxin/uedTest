@@ -1,0 +1,37 @@
+[
+    {
+        "title": "任务区",
+        "item": [
+            {
+                "url": "xx.html",
+                "name": "sub1"
+            },{
+                "url": "xx.html",
+                "name": "sub1"
+            },{
+                "url": "xx.html",
+                "name": "sub1"
+            },{
+                "url": "xx.html",
+                "name": "sub1"
+            }
+        ]
+    },{
+        "title": "开发者管理",
+        "item": [
+            {
+                "url": "xx.html",
+                "name": "sub1"
+            },{
+                "url": "xx.html",
+                "name": "sub1"
+            },{
+                "url": "xx.html",
+                "name": "sub1"
+            },{
+                "url": "xx.html",
+                "name": "sub1"
+            }
+        ]
+    }
+]

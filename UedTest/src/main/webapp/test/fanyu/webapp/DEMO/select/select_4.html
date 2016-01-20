@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>select</title>
+<#include "../../tpl/res_css.tpl" />
+<link href="../../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+</head>
+<body id="main_body" onload="prettyPrint()" >
+	
+	<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+		<tbody>
+			<tr>
+				<td >
+					默认：<div id="J_select"></div>
+				</td>
+				<td >
+					显示“所有”：<div id="J_select2"></div>
+				</td>
+				<td >
+					不显示“所有”和“请选择”：<div id="J_select3"></div>
+				</td>
+				<td >
+					自定义：<div id="J_select4"></div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<pre class="prettyprint mg_t_20 fn-clear" id="html">
+
+	&lt;div id="J_select"&gt;&lt;/div&gt;
+
+
+	
+	$("#J_select").NiceSelect({
+		url:"data/json.json",
+		datas:"codeType=test",
+		id:"testId",
+		name:"testId"
+	});
+
+	
+	$("#J_select2").NiceSelect({
+		url:"data/json.json",
+		datas:"codeType=test",
+		id:"testId2",
+		name:"testId2",
+		all:true
+	});
+	
+
+	
+	$("#J_select3").NiceSelect({
+		url:"data/json.json",
+		datas:"codeType=test",
+		id:"testId3",
+		name:"testId3",
+		all: "" 
+	});
+
+
+	
+	$("#J_select4").NiceSelect({
+		url:"data/json.json",
+		datas:"codeType=test",
+		id:"testId3",
+		name:"testId3",
+		all: "自定义" ,
+		allVal: "nima"
+	});
+	
+	</pre>
+</div>
+
+
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript" src="../../lib/pretty/prettify.js"></script>
+<script>
+$(function(){
+	
+	
+	$("#J_select").NiceSelect({
+		url:"../../data/selectDatas.json",
+		datas:"codeType=test",
+		id:"testId",
+		name:"testId"
+	});
+
+	
+	$("#J_select2").NiceSelect({
+		url:"../../data/selectDatas.json",
+		datas:"codeType=test",
+		id:"testId2",
+		name:"testId2",
+		all:true
+	});
+	
+
+	
+	$("#J_select3").NiceSelect({
+		url:"../../data/selectDatas.json",
+		datas:"codeType=test",
+		id:"testId3",
+		name:"testId3",
+		all: "" 
+	});
+
+
+	
+	$("#J_select4").NiceSelect({
+		url:"../../data/selectDatas.json",
+		datas:"codeType=test",
+		id:"testId3",
+		name:"testId3",
+		all: "自定义" ,
+		allVal: "nima"
+	});
+	
+	
+})
+</script>
+</body>
+</html>

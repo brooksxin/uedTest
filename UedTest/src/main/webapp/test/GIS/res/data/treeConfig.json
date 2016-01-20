@@ -1,0 +1,15 @@
+{
+    "total": 126,
+    "returnCode": "1",
+    "rows": [
+        {
+            "treeid": "1100",         
+            "treename": "三墩营业厅"
+        },
+        {
+            "treeid": "1101",           
+            "treename": "杭州某集团"
+            
+        }
+    ]
+}

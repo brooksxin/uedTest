@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>AIMap地图--高德</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/zTree/3.5.16/jquery.ztree.core-3.5.min.js"></script>
+<script type="text/javascript" src="res/lib/AIMap/1.0.0/AIMap.js"></script>
+</head>
+<style>
+@media (max-width: 900px){
+    #iCenter {
+        width: 100%;
+        height: 420px;
+
+    }
+}
+
+@media (max-width: 1900px) and (min-width: 900px) {
+    #iCenter {
+        width: 900px;
+        height: 420px;
+    }
+}
+#iCenter {
+    _width: 900px;
+    _height: 420px;
+    float: left;
+}
+.fn-hide {display: none;}
+#infowindow {
+    border:solid 1px #6699FF; background-color:#FFFFFF; white-space: nowrap; overflow:visible
+}
+.amap-info {
+    width: auto;
+}
+</style>
+<body onload="AIMap_loadScript('1')">
+
+<div id="iCenter"></div>
+
+
+</body>
+<script>
+var mapObj;
+
+function AIMap_encapsulateBMap() {
+    AIMap_loadTools();
+}
+
+function AIMap_init(){
+    mapObj = new AIMap.Map("iCenter",{
+        rotateEnable:true,
+        dragEnable:true,
+        zoomEnable:true,
+        zooms:[3,18],
+        //二维地图显示视口
+        view: new AIMap.View2D({
+            center:new AIMap.LngLat(116.397428,39.90923),//地图中心点
+            zoom:13 //地图显示的缩放级别
+        })
+    });
+    AMap.event.addListener(mapObj,'complete',function(){
+        mapLoadCallback();//地图加载完成
+    });
+}
+
+function mapLoadCallback(){
+
+    //加载麻点图插件
+    var  hotspot;
+    mapObj.plugin('AMap.HotSpot', function () {//这里AMap不能改
+        hotspot = new AIMap.HotSpot(mapObj);
+        AIMap.event.addListener(hotspot, 'click', openInfo);
+    });
+
+
+    //加载工具条
+    mapObj.plugin(["AMap.ToolBar"],function(){
+        var tool = new AIMap.ToolBar();
+        mapObj.addControl(tool);   
+    });
+
+
+    //加载鹰眼--缩略图
+    mapObj.plugin(["AMap.OverView"],function(){
+        view = new AIMap.OverView();
+        mapObj.addControl(view);
+    });
+
+
+    //圆形区域
+    var circle = new AIMap.Circle({
+        map: mapObj,
+        center:new AIMap.LngLat("116.40332221984863","39.90025505675715"),
+        radius:1000,
+        strokeColor: "#F33",
+        strokeOpacity: 1,
+        strokeWeight: 3,
+        fillColor: "ee2200",
+        fillOpacity: 0.35
+    });
+     
+    mapObj.plugin(["AMap.CircleEditor"],function(){
+        circleEditor = new AIMap.CircleEditor(mapObj,circle);
+        circleEditor.open();
+    });
+
+
+    //编辑折线
+    var arr=new Array();//经纬度坐标数组
+    arr.push(new AMap.LngLat("116.368904","39.913423"));
+    arr.push(new AMap.LngLat("116.382122","39.901176"));
+    arr.push(new AMap.LngLat("116.387271","39.912501"));
+    arr.push(new AMap.LngLat("116.398258","39.904600"));
+    //定义折线对象
+    polyline=new AMap.Polyline({
+        path:arr,     //设置折线的节点数组
+        strokeColor:"#F00",
+        strokeOpacity:0.4,
+        strokeWeight:3,
+        strokeStyle:"dashed",
+        strokeDasharray:[10,5]
+    });
+    polyline.setMap(mapObj);//地图上添加折线
+    //构造折线编辑对象，并开启折线的编辑状态
+    mapObj.plugin(["AMap.PolyEditor"],function(){
+        polylineEditor = new AMap.PolyEditor(mapObj,polyline);
+        polylineEditor.open();
+    });
+
+
+    //获取当前位置
+    AIMap.service.getLocation(mapObj,function(data){
+        alert(data.lng+"         "+data.lat);
+    });
+
+
+    //地图选点获取坐标
+    AIMap.service.getPoint(mapObj,function(data){
+        alert(data.lng+"        "+data.lat)
+    });
+    
+}
+
+
+/*
+ *打开信息窗体
+ */
+function openInfo(result) {
+    //实例化信息窗体
+    var infoWindow = new AMap.InfoWindow({
+        isCustom:true,  //使用自定义窗体
+        autoMove:false,
+        content:'<div id="infowindow">'+ result.name + '</div>', //信息窗体显示内容
+        offset:new AMap.Pixel(-15, -10) //设置偏移量
+    });
+    infoWindow.open(mapObj, result.lnglat);
+}
+
+</script>
+</html>

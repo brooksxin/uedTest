@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>结果代码表</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<div class="formItem">
+ <div class="titleArea">
+  <div class="listTopBtn fn-clear">
+   <h2 class="fn-left">结果代码表</h2>
+   <div class="normalBtnArea mb-10 ft-right"><a class="normalBtn BGblue" target="erroriframe" href="/ecp/front/sh/report!createExcel?uid=0006">导出Excel</a></div>
+  </div>
+ </div>
+ <div method="post" action="#" class="cmxform" >
+  <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+   <div class="record-search-cate">
+    <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+     <tbody>
+      <tr>
+       <td width="100"><label class="description">项目名称</label></td>
+       <td width="200"><select class="inputSelect inputWidth" id="category" name="PROJ" style="width:324px"></select>
+			  <script type="text/x-handlebars-template" id="p_category">
+					 <option value="">--全部--</option>
+					 {{#each beans}}
+            		 <option value="{{CMPGN_ID}}">{{CMPGN_NM}}</option>
+                     {{/each}}
+              </script></td>
+       <td width="100"><div class="normalBtnArea"> <a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a> </div></td>
+      </tr>
+      <tr>
+       <td width="75"><label class="description">时间选择</label></td>
+       <td width="100"><input id="startDate" name="STDT" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'endDate\')}'})" type="text"> 
+       <span class="ml-5 mr-5">至</span> <input id="endDate" name="ENDT" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{$dp.$D(\'startDate\',{d:1})||\'2010-01-01 23:59:59\'}'})" type="text"></td>
+       <td></td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <!-- <div class="seeMoreFilter"><a href="#" class="down"></a></div> -->
+  </form>
+ </div>
+ <div class="tablewidth mg_t_10" style="overflow:scroll;overflow-y:hidden">
+  <table class="ui-record-table table_radius table-bordered table-striped text-hidden" >
+   <thead>
+    <tr>
+    <th width="160">项目名称</th>
+     <th width="60">电话中断</th>
+     <th width="140">客户拒绝访问（调查类）</th>
+     <th width="140">中途拒绝访问（调查类）</th>
+     <th width="140">成功调查（调查类）</th>
+     <th width="140">成功办理（营销类）</th>
+     <th width="60">成功访问</th>
+     <th width="140">拒绝业务推荐（营销类）</th>
+     <th width="60">预约呼叫</th>
+     <th width="60">客户关怀</th>
+     <th width="140">用户考虑（营销类）</th>
+     <th width="140">接通后无法正常通话</th>
+     <th width="140">关机或无法接通</th>
+     <th width="60">欠费停机</th>
+     <th width="140">呼叫转移（全时通）</th>
+     <th width="60">无应答</th>
+     <th width="60">空号</th>
+     <th width="60">用户挂断</th>
+     <th width="60">遇忙</th>
+     <th width="60">呼叫放弃</th>
+     <th width="60">呼出无声</th>
+     <th width="60">其他原因</th>
+    </tr>
+   </thead>
+   <tbody id="J_tabletpl">
+   </tbody>
+  </table>
+ </div>
+ 
+ <!--翻页及功能按钮区域开始-->
+ <DIV class="amount-bottom">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+   <tr>
+    <td width="50%"><DIV class="fn-clear action-other  action-other-show ">
+      <DIV id=Pagination class="page pagination fn-right"></DIV>
+      <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+     </DIV></td>
+   </tr>
+  </table>
+ </DIV>
+</div>
+<#include "../../tpl/res_js.tpl" />
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+			<td>{{CMPGN_NM}}</td>
+			<td>{{C1}}</td>
+			<td>{{C2}}</td>
+			<td>{{C3}}</td>
+			<td>{{C4}}</td>
+			<td>{{C5}}</td>
+			<td>{{C6}}</td>
+			<td>{{C7}}</td>
+			<td>{{C8}}</td>
+			<td>{{C9}}</td>
+			<td>{{C10}}</td>
+			<td>{{C11}}</td>
+			<td>{{C12}}</td>
+			<td>{{C13}}</td>
+			<td>{{C14}}</td>
+			<td>{{C15}}</td>
+			<td>{{C16}}</td>
+			<td>{{C17}}</td>
+			<td>{{C18}}</td>
+			<td>{{C19}}</td>
+			<td>{{C20}}</td>
+			<td>{{C21}}</td>
+ 		</tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="22">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+<script type="text/javascript">
+	srvMap.add('resultCodeReport','','front/sh/report!statement?uid=0006');
+	srvMap.add('queryCategory','','front/sh/market!index?uid=mgl001');
+	//格式化时间方法
+	Date.prototype.format = function(format){ 
+	var o = { 
+	"M+" : this.getMonth()+1, //month 
+	"d+" : this.getDate(), //day 
+	"h+" : this.getHours(), //hour 
+	"m+" : this.getMinutes(), //minute 
+	"s+" : this.getSeconds(), //second 
+	"q+" : Math.floor((this.getMonth()+3)/3), //quarter 
+	"S" : this.getMilliseconds() //millisecond 
+	} 
+	if(/(y+)/.test(format)) { 
+	format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+	} 
+	for(var k in o) { 
+	if(new RegExp("("+ k +")").test(format)) { 
+	format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length)); 
+	} 
+	} 
+	return format; 
+	};
+	//分页数据
+	var G_params = {
+	    url : srvMap.get('resultCodeReport'),
+	    items_per_page : 10,   		// 每页数     @param : limit
+	    page_index : 0 , 				//当前页  @param : start
+	    pagination : "Pagination" , 	//分页id
+	    searchformId : "J_formSearch",  //搜索表单的id
+	    tabletpl : "T_tabletpl", 		//表格模板
+	    tablewrap : "J_tabletpl", 		//表格容器
+	};
+	//查询服务类别
+	function loadCategoryData(){
+		Util.ajax.postJson(srvMap.get('queryCategory'),'',function(json,status){
+	  	 	Util.ajax.loadTemp('#category',$('#p_category'),json);//加载模板
+		});
+	}
+      //页面加载完开始执行
+      $(document).ready(function () {
+    	  //时间初始化
+    	  var end = new Date();
+          var start = new Date(new Date()-(7*86400000));
+          $('#endDate').val(end.format("yyyy-MM-dd hh:mm:ss"));
+          $('#startDate').val(start.format("yyyy-MM-dd hh:mm:ss"));
+    	  //初始化函数
+          loadCategoryData();
+          $('#J_search').bind('click',function(){
+              var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+              Util.pagination(0, true , G_params , str );
+          });
+      });
+      
+  function cancelReservation(){
+      artDialog({
+          id: 'Confirm',
+          lock: true,
+          opacity: .1,
+          content: '您确定要取消此预约单吗？',
+          ok: function (here) {
+              art.dialog.tips('已取消');
+          },
+          cancel: function (here) {
+              return;
+          }
+      });
+      
+      
+  }
+  </script>
+   <!-- 导出excel方法异常时 -->
+  <iframe id="erroriframe" name="erroriframe" style="width: 0px;height:0px;display: none;"></iframe>
+</body>
+</html>

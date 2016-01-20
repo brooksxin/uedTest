@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<style type="text/css">
+html,body{
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+.J_echarts {
+	height:300px; 
+	width: 500px; 
+	float: left; 
+	margin: 50px;
+}
+.drp-popup {
+	display: none;
+}
+</style>
+</head>
+<body>
+
+<div>
+	<select class='custom-date' name='select'>
+		<option value='7'>7 Days</option>
+		<option value='30'>30 Days</option>
+		<option value='90'>90 Days</option>
+		<option value='180'>180 Days</option>
+		<option value='365'>365 Days</option>
+		<option value='custom'>Custom</option>
+	</select>
+</div>
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" class="J_echarts"></div>
+<div id="main2" class="J_echarts"></div>
+<div id="main3" class="J_echarts"></div>
+<div id="main4" class="J_echarts"></div>
+<div id="main5" class="J_echarts"></div>
+
+<script src="jquery.js"></script>
+<script src="echartsZw.js"></script>
+<script src="calendar.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.custom-date').dateRangePicker();
+
+	
+	var data1 = {
+		dataItem: [
+			['2015-11-10 18:19', 2], 
+			['2015-11-10 18:22', 3], 
+			['2015-11-10 18:29', 4], 
+			['2015-11-10 18:39', 5], 
+			['2015-11-10 18:44', 2], 
+			['2015-11-10 18:56', 3]
+		],
+		text: '体温折线',
+		subtext: '纯属虚构',
+		name: "体温",
+		unit: "°C",
+		type: 1
+	};
+	var option = {
+	    title : {
+	        text: data1.text,
+	        subtext: data1.subtext
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        formatter : function (params) {
+	            var date = new Date(params.value[0]);
+	            data = date.getFullYear() + '-'
+	                   + (date.getMonth() + 1) + '-'
+	                   + date.getDate() + ' '
+	                   + date.getHours() + ':'
+	                   + date.getMinutes();
+	            return data + '<br/>'
+	                   + data1.name + "  "
+	                   + params.value[1];
+	        }
+	    },
+	    legend: {
+	        data:[data1.name]
+	    },
+	    toolbox: {
+	        show : true,
+	        feature : {
+	            dataView : {show: true, readOnly: false},
+	            magicType : {show: true, type: ['line', 'bar']},
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    dataZoom: {
+	        show: true,
+	        start : 0,//从哪个位置开始，百分比
+	        end: 100
+	    },
+	    grid: {
+	        y2: 80//距离底部
+	    },
+	    xAxis : [
+	        {
+	            type: 'time'
+	        }
+	    ],
+	    yAxis : [
+	        {
+	            type: 'value'
+	        }
+	    ],
+	    series : [
+	        {
+	            name:data1.name,
+	            type:'line',
+	            showAllSymbol: true,
+	            symbol:'circle',
+	            data:(function(){
+	            	var d = [];
+	            	for(var i=0,len=data1.dataItem.length; i<len; i++){
+	            		var time = new Date(data1.dataItem[i][0]);
+	            		var d2 = [];
+	            		d2.push(time, data1.dataItem[i][1]);
+	            		d.push(d2);
+	            		if(i == len-1)
+		            		return d;
+	            	}
+	            })()
+	        }
+	    ]
+	};
+	// 基于准备好的dom，初始化echarts图表
+	var myChart = echarts.init(document.getElementById('main')); 
+	// 为echarts对象加载数据 
+	myChart.setOption(option); 
+
+
+
+	var option2 = {
+	    legend: false,
+	    toolbox: {
+	        show : true,
+	        feature : {
+	            dataView : {show: true, readOnly: false},
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    series : [
+	        {
+	            type : 'pie',
+	            center : ['50%', '50%'],
+	            radius : [50, 55],
+	            x: '0%',
+	            itemStyle : {
+	                normal : {
+	                    label : {
+	                        formatter : function (params){
+	                            return 10000 - params.value
+	                        },
+	                        textStyle: {
+	                            baseline : 'top'
+	                        }
+	                    }
+	                }
+	            },
+	            data : [
+	                {
+	                	name:'other', 
+	                	value:3000, 
+	                	itemStyle : {
+		                    normal : {
+		                        color: '#ccc',
+		                        label : {
+		                            show : true,
+		                            position : 'center'
+		                        },
+		                        labelLine : {
+		                            show : false
+		                        }
+		                    }
+		                }
+	            	},
+	                {
+	                	name:'今日步数', 
+	                	value: 7000,
+	                	itemStyle : {
+						    normal : {
+						        label : {
+						            show : true,
+						            position : 'center',
+						            formatter : '{b}',
+						            textStyle: {
+						                baseline : 'bottom'
+						            }
+						        },
+						        labelLine : {
+						            show : false
+						        }
+						    }
+						}
+					}
+	            ]
+	        }
+	    ]
+	};
+
+
+	// 基于准备好的dom，初始化echarts图表
+	var myChart2 = echarts.init(document.getElementById('main2')); 
+	myChart2.showLoading({
+        text : '数据获取中',
+        effect: 'bubble'
+    });
+
+    setTimeout(function(){
+    	myChart2.hideLoading();
+    	// 为echarts对象加载数据 
+    	myChart2.setOption(option2); 
+    }, 2000)
+
+
+
+
+	var option3 = {
+	    title : {
+	        text: '一周体温',
+	        subtext: '纯属虚构'
+	    },
+	    tooltip : {
+	        trigger: 'item'
+	    },
+	    legend: {
+	        data:['最高体温','最低体温']
+	    },
+	    toolbox: {
+	        show : true,
+	        feature : {
+	        	dataView : {show: true, readOnly: false},
+	            magicType : {show: true, type: ['line', 'bar']},
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    xAxis : [
+	        {
+	            type : 'category',
+	            boundaryGap : false,
+	            data : ['周一','周二','周三','周四','周五','周六','周日']
+	        }
+	    ],
+	    yAxis : [
+	        {
+	            type : 'value',
+	            axisLabel : {
+	                formatter: '{value} °C'
+	            },
+	            min: 36,
+	            max: 43
+	        }
+	    ],
+	    dataZoom : {
+            show : true,
+            realtime : true,
+            start : 0,
+            end : 100
+        },
+	    series : [
+	        {
+	            name:'最高体温',
+	            type:'line',
+	            data:['37.9', '38.2', '39.8', '39.5', '41.3', '38.5', '37.7'],
+	            markPoint : {
+	                data : [
+	                    {type : 'max', name: '最大值'}
+	                ]
+	            }
+	        },
+	        {
+	            name:'最低体温',
+	            type:'line',
+	            data:['37.2', '37.1', '37.5', {value:'37.1', symbol:'emptyHeart',symbolSize:10}, '36.9', '37.1', '37.3'],
+	            markPoint : {
+	                data : [
+	                    {type : 'min', name: '最小值'}
+	                ]
+	            }
+	        }
+	    ]
+	};
+	// 基于准备好的dom，初始化echarts图表
+	var myChart3 = echarts.init(document.getElementById('main3')); 
+	// 为echarts对象加载数据 
+	myChart3.setOption(option3); 
+
+
+
+	var option4 = {
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    legend: {
+	        orient : 'vertical',
+	        x : 'right',
+	        y : '100',
+	        data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+	    },
+	    toolbox: {
+	        show : true,
+	        feature : {
+	            dataView : {show: true, readOnly: false},
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    series : [
+	        {
+	            name:'访问来源',
+	            type:'pie',
+	            radius : ['50%', '70%'],
+	            itemStyle : {
+	                normal : {
+	                    label : {
+	                        show : false
+	                    },
+	                    labelLine : {
+	                        show : false
+	                    }
+	                },
+	                emphasis : {
+	                    label : {
+	                        show : true,
+	                        position : 'center',
+	                        textStyle : {
+	                            fontSize : '30',
+	                            fontWeight : 'bold'
+	                        }
+	                    }
+	                }
+	            },
+	            data:[
+	                {value:335, name:'直接访问'},
+	                {value:310, name:'邮件营销'},
+	                {value:234, name:'联盟广告'},
+	                {value:135, name:'视频广告'},
+	                {value:1548, name:'搜索引擎'}
+	            ]
+	        }
+	    ]
+	};
+	// 基于准备好的dom，初始化echarts图表
+	var myChart4 = echarts.init(document.getElementById('main4')); 
+	// 为echarts对象加载数据 
+	myChart4.setOption(option4); 
+
+
+
+	var option5 = {
+	    title : {
+	        text: '蒸发量',
+	        subtext: '纯属虚构'
+	    },
+	    tooltip : {
+	        trigger: 'axis',
+	        axisPointer : {
+	            type : false
+	        }
+	    },
+	    legend: {
+	        data:['蒸发量']
+	    },
+	    toolbox: {
+	        show : true,
+	        feature : {
+	            dataView : {show: true, readOnly: false},
+	            magicType : {show: true, type: ['line', 'bar']},
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    xAxis : [
+	        {
+	            type : 'category',
+	            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+	        }
+	    ],
+	    yAxis : [
+	        {
+	            type : 'value'
+	        }
+	    ],
+	    dataZoom : {
+            show : true,
+            realtime : true,
+            start : 0,
+            end : 100
+        },
+	    series : [
+	        {
+	            name:'蒸发量',
+	            type:'bar',
+	            data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+	            markPoint : {
+	                data : [
+	                    {type : 'max', name: '最大值'},
+	                    {type : 'min', name: '最小值'}
+	                ]
+	            }
+	        }
+	    ]
+	};
+	// 基于准备好的dom，初始化echarts图表
+	var myChart5 = echarts.init(document.getElementById('main5')); 
+	// 为echarts对象加载数据 
+	myChart5.setOption(option5); 
+});
+
+</script>
+</body>
+</html>

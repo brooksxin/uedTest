@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>移动能力开放平台</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/jquery-easyui-1.4/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/dialog/4.1.6/skins/blue.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+
+<script type="text/javascript" src="ui/js/jquery.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/js/jquery.form.js"></script>
+<script type="text/javascript" src="ui/js/json2.js"></script>
+<script type="text/javascript" src="ui/pagination/1.2.1/jquery.pagination.js"></script>
+<script type="text/javascript" src="ui/js/handlebars.js"></script>
+<script type="text/javascript" src="ui/js/helpers.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="ui/js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="ui/js/jquery.slides.min.js"></script>
+<script type="text/javascript" src="ui/js/common.js"></script>
+<style type="text/css">
+.zui-sandglass {
+	margin: 50px auto;
+}
+</style>
+</head>
+<body>
+<div class="zui-sandglass">
+	<div class="round-bg"></div>
+	<div class="top count-bg"></div>
+	<div class="foot count-bg"></div>
+	<div class="sandglass-bg"></div>
+	<div class="cover-bg"></div>
+</div>
+
+<br>
+
+<input type="text" value="" id="zw" />
+<button id="btn">btn</button>
+
+<script type="text/javascript">
+$(function(){
+	var num = 50;//表示已使用
+	var obj = $(".zui-sandglass");
+	countPercent(num, obj);
+
+	$("#btn").click(function(){
+		countPercent($("#zw").val(), obj);
+	})
+})
+
+function countPercent(num, obj){
+	if(num < 0){
+		num = 0;
+	}
+	if(num > 0 && num <5){
+		num = 5;
+	}
+	if(num > 100){
+		num = 100;
+	}
+	//计算顶部的top负值
+	var _topH = (Math.round(Math.sqrt((100 - num)/100)*100)/100 * 48);
+	obj.find(".top").css({"height": _topH, "top": 60 - _topH});
+
+	//计算底部
+	var _footH = (Math.round(Math.sqrt((num)/100)*100)/100 * 48);
+	_footH = _footH < 5 ? 5 : _footH;
+	obj.find(".foot").css({"height": _footH - 5, "top": 115 - _footH});
+}
+</script>
+</body>
+</html>

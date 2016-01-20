@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>编辑标签</title>
+<style type="text/css">
+        .width100{width:285px;}
+</style>
+
+    <link rel="stylesheet" href="../../css/common.css"><link rel="stylesheet" href="../../css/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+</head>
+
+<body>
+<div class="formItem">
+   
+                                            <div class="titleArea fn-center">
+                                                <h2>编辑标签</h2>
+                                            </div>
+
+
+                                            <table class="form_table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 标签名称：</label></td>
+                                                        <td width=""><input class="FormInputText width100" type="text" /></td>
+                                                        
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                         <td><label class="formDescription">有效期：</label></td>
+                                                         <td><input id="param-eDate" class="element text Wdate" type="text" onFocus="WdatePicker()"  /> 至 <input id="param-eDate" class="element text Wdate" type="text" onFocus="WdatePicker()"  />
+                                                        </td>               
+                                                    </tr>
+                                                    <tr>
+                                                        <td valign="top"><label class="formDescription"><span class="fn-high">*</span> 标签描述：</label></td>
+									                    <td>
+										                <textarea rows="8" cols="40"  resize:none;" id="REMARK" name="REMARK" class="width100"></textarea>
+									                    </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <hr/>
+                                            <table class="form_table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="90" valign="top"><label class="formDescription"><span class="fn-high">*</span> 导入号码：</label></td>
+                                                        <td width="">共1600条</td>
+                                                        
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                         <td></td>
+                                                         <td>预约活动名单（1）.xls<a href="#" class="fn-high">删除</a></td>               
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+									                    <td>预约活动名单（2）.xls<a href="#" class="fn-high">删除</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+									                    <td>
+                                                        	<div class="normalBtnArea">
+        														<a class="normalBtn disable" href="#">导入文件</a>
+                                                        	</div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+									                    <td>文件格式限.xls，.csv</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <hr />
+                                           
+</div>
+
+
+
+
+
+
+<div class="formBtnArea">
+  <table width="100%">
+    <tr>
+      <td>
+        <div class="normalBtnArea fn-center">
+            <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" >确定</a>
+            <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_search" >取消</a>
+        </div>
+	  </td>
+    </tr>
+  </table>
+</div>
+
+<script src="../../lib/jquery/1.8.1/jquery.js"></script>
+<script src="../../lib/json2/1.0.0/json2.js"></script>
+<script src="../../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../../lib/handlebars/1.3.0/helpers.js"></script>
+<script src="../../lib/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="../../lib/blockUI/2.64/jquery.blockUI.js"></script>
+<script src="../../common/frameInit.js"></script>
+<script src="../../lib/dialog/4.1.7/artDialog.js"></script>
+<script src="../../lib/dialog/4.1.7/iframeTools.js"></script>
+<script src="../../common/config.js"></script>
+<script src="../../common/common.js"></script>    
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+    });
+</script>
+</body>
+</html>

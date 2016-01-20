@@ -1,0 +1,530 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>查看岗位对应用户</title> <#include "../../tpl/res_css.tpl" />
+
+</head>
+<body>
+
+	<div class="listTopBtn">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><h1 id="postUserName"></h1></td>
+				<td>
+					<div class="normalBtnArea ft-right">
+						<a class="normalBtn BGblue" href="#" id="authNewUser">授权新用户</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div method="post" action="#" class="cmxform">
+		<form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+		<div class="record-search-cate" style="margin-bottom: 20px;">
+			<table class="search_table" cellpadding="0" cellspacing="0"
+				border="0" width="100%">
+				<tbody>
+					<tr>
+						<td><label class="description">工号</label></td>
+						<td><input class="inputText" type="text" maxlength="255"
+							id="USER_LOGIN_ID" name="USER_LOGIN_ID"/></td>
+						<td><label class="description">姓名</label></td>
+						<td><input class="inputText" type="text" maxlength="255"
+							id="PTY_NM" name="PTY_NM"/></td>
+						<td><label class="description">班组</label></td>
+						<td><input class="inputText" type="text" maxlength="255"
+							id="DEPT_NM" name="DEPT_NM"/></td>
+						<td>
+							<div class="normalBtnArea">
+								<a class="searchBtn" href="javascript:;" id="J_search"><i></i>查询</a>
+							</div>
+						</td>
+
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</form>
+	</div>
+
+
+
+
+
+
+	<div class="tablewidth mg_t_10">
+		<table
+			class="ui-record-table table_radius table-bordered table-striped">
+			<thead>
+				<tr>
+					<th width="25"><div class="table_select"></div></th>
+					<th width="60">工号</th>
+					<th width="60">姓名</th>
+					<th width="">团队</th>
+					<th width="160">授权时间</th>
+					<th width="80">用户状态</th>
+				</tr>
+			</thead>
+			<tbody id="J_tabletpl">
+				<!--  
+				<tr>
+					<td><div class="table_select">
+							<input type="checkbox" />
+						</div></td>
+					<td>X009051</td>
+					<td>黄厚生</td>
+					<td>外呼一部，外呼一组</td>
+					<td>2015年4月12日 08:21:12</td>
+					<td>正常</td>
+				</tr>
+				-->
+			</tbody>
+		</table>
+	</div>
+
+	<!--翻页及功能按钮区域开始-->
+	<DIV class="amount-bottom">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0"
+			class="gridBottom">
+			<tr>
+				<td width="60"><input type="checkbox" class="selectAll"
+					id="selectAll" /> <label for="selectAll">全选</label></td>
+				<td id="selectedCount" width="60">已选0</td>
+				<td>
+					<div class="normalBtnArea">
+						<!--不附加ft-right样式，默认左对齐-->
+						<a class="normalBtn BGgray" href="#" id="delAuth">解除授权</a>
+					</div>
+				</td>
+				<td width="50%">
+					<DIV class="fn-clear action-other  action-other-show ">
+						<DIV id=Pagination class="page pagination fn-right"></DIV>
+						<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+					</DIV>
+				</td>
+			</tr>
+		</table>
+	</DIV>
+
+
+	<div id="addNewUser" class="fn-hide">
+		<div style="height: 450px; width: 200px; border: 1px solid #DFDFDF; float: left; margin-top: 5px;"></div>
+		<div style="float: left;">
+			<div method="post" action="#" class="cmxform">
+			<form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch1" name="J_formSearch1" >
+				<div class="record-search-cate" style="margin-bottom: 20px;">
+					<table class="search_table" cellpadding="0" cellspacing="0"
+						border="0" width="100%">
+						<tbody>
+							<tr>
+								<td><label class="description">工号</label></td>
+								<td><input class="inputText" type="text" maxlength="255"
+									id="USER_LOGIN_ID" name="USER_LOGIN_ID" /></td>
+								<td><label class="description">姓名</label></td>
+								<td><input class="inputText" type="text" maxlength="255"
+									id="PTY_NM" name="PTY_NM" /></td>
+								<td><label> <input type="checkbox" id="NO_AUTH"
+										name="NO_AUTH" value="1">仅显示未授权的
+								</label></td>
+								<td><label> <input type="checkbox" id="NO_REPEAT"
+										name="NO_REPEAT" value="1">去除重复
+								</label></td>
+								<td>
+									<div class="normalBtnArea">
+										<a class="searchBtn" href="javascript:;" id="J_search1"><i></i>查询</a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				</form>
+			</div>
+
+			<div class="tablewidth mg_t_10">
+				<table
+					class="ui-record-table table_radius table-bordered table-striped">
+					<thead>
+						<tr>
+							<th width="25"><div class="table_select">选择</div></th>
+							<th width="70">工号</th>
+							<th width="60">姓名</th>
+							<th width="">岗位</th>
+							<th width="80">用户状态</th>
+						</tr>
+					</thead>
+					<tbody id="J_tabletpl1">
+						<!-- 
+						<tr>
+							<td><div class="table_select">
+									<input type="checkbox" />
+								</div></td>
+							<td>X009654</td>
+							<td>黄厚生</td>
+							<td>话务员、质检员</td>
+							<td>正常</td>
+						</tr>
+						 -->
+					</tbody>
+				</table>
+			</div>
+
+
+			<!--翻页及功能按钮区域开始-->
+			<DIV class="amount-bottom">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0"
+					class="gridBottom">
+					<tr>
+						<td width="60" id="selectedNum">已选择0</td>
+						<td><a href="#" id="delAll">清空</a></td>
+						<td width="50%">
+							<DIV class="fn-clear action-other  action-other-show ">
+								<DIV id=Pagination1 class="page pagination fn-right"></DIV>
+								<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+							</DIV>
+						</td>
+					</tr>
+				</table>
+			</DIV>
+			
+
+			<div class="formBtnArea">
+				<div class="normalBtnArea fn-center">
+					<a class="normalBtn BGblue largeBtn" href="javascript:;"
+						id="SAVERL">确定</a> <a class="normalBtn BGgray largeBtn"
+						href="javascript:;" id="CANCELRL">取消</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script id="T_tabletpl" type="text/x-handlebars-template">
+		{{#if beans}}
+    		{{#each beans}}
+        		<tr>
+            		<td>
+						<div class="table_select">
+							<input type="checkbox" id="chkbox" name="USER_ID" USER_ID={{USER_ID}} onclick="countSelect(this)"/>
+						</div>
+					</td>
+            		<td>{{USER_LOGIN_ID}}</td>
+            		<td>{{PTY_NM}}</td>
+					<td>{{DEPT_ID}}</td>
+					<td>{{CRT_TIME}}</td>
+					<td>{{VALID_STS_CD}}</td>
+        		</tr>
+    		{{/each}}
+		{{else}}
+			<tr>
+				<td colspan="3">
+					<div class="ui-tips-box tipsBox">
+						<div class="ui-icon-noData"></div>
+						<div class="ui-tips-text">暂无数据记录！</div>
+					</div>
+				</td>
+			</tr>
+		{{/if}}
+	</script>
+	
+	
+	
+	<script id="T_tabletpl1" type="text/x-handlebars-template">
+		{{#if beans}}
+    		{{#each beans}}
+        		<tr>
+            		<td>
+						<div class="table_select">
+							<input type="checkbox" id="top_chkbox" name="USER_ID" USER_ID={{USER_ID}} onclick="sumSelect(this)"/>
+						</div>
+					</td>
+            		<td>{{USER_LOGIN_ID}}</td>
+            		<td>{{PTY_NM}}</td>
+					<td>{{POST_NM}}</td>
+					<td>{{VALID_STS_CD}}</td>
+        		</tr>
+    		{{/each}}
+		{{else}}
+			<tr>
+				<td colspan="3">
+					<div class="ui-tips-box tipsBox">
+						<div class="ui-icon-noData"></div>
+						<div class="ui-tips-text">暂无数据记录！</div>
+					</div>
+				</td>
+			</tr>
+		{{/if}}
+	</script>
+	
+	<#include "../../tpl/res_js.tpl" />
+	<script type="text/javascript">
+	
+		srvMap.add('queryUser', 'query.json','front/sh/user!index?uid=sys0019');//查询某个岗位对应的用户
+		srvMap.add('delPostUser', '','front/sh/user!index?uid=sys0020');//解除用户岗位授权
+	
+		var G_params = {
+				url : srvMap.get('queryUser'),
+			    searchformId :"J_formSearch",
+			    items_per_page : 10 ,   // 每页数     @param : limit
+			    page_index : 0 , //当前页  @param : start
+			    pagination : "Pagination" , //分页id
+			    tabletpl : "T_tabletpl",  //表格模板
+			    tablewrap :"J_tabletpl" //表格容器
+		};
+		
+		var PRIV_POST_ID = "";
+		var POST_NM = "";
+		
+        //页面加载完开始执行
+        $(document).ready(function () {
+        	PRIV_POST_ID = Util.browser.getParameter("PRIV_POST_ID");
+        	POST_NM = decodeURI(Util.browser.getParameter("POST_NM"));
+        	
+        	$("#postUserName").html(POST_NM + "岗位对应的用户");
+        	
+        	var str= $("#"+G_params.searchformId).serialize();
+      	  	Util.pagination(0, true , G_params , str+"&PRIV_POST_ID="+PRIV_POST_ID);
+        	 
+      	    $("#J_search").click(function(){
+      	    	str= $("#"+G_params.searchformId).serialize();
+  	        	Util.pagination(G_params.page_index, true , G_params , str+"&PRIV_POST_ID="+PRIV_POST_ID);
+      	    });
+        });
+        
+        
+		
+    	
+    	//var ROLE_ID = "";
+        //全选复选框
+        $("#selectAll").click(function(){
+        	var checked = 0;
+        	top.$("input[id='chkbox']").each(function(){
+        		   $(this).attr("checked",$("#selectAll").get(0).checked);
+		   	}); 
+        	top.$("input[id='chkbox']:checked").each(function(){
+		           checked = checked + 1;
+		   	});
+		   	$("#selectedCount").html("已选择 "+checked);
+        });
+        
+        function countSelect(obj){
+        	var num = 0;
+        	var selectednum = 0;
+        	//alert(obj.checked==true);
+        	if(obj.checked==true){
+        		obj.checked=true;
+        	}
+        	else{
+        		obj.checked=false;
+        	}
+        	top.$("input[id='chkbox']").each(function(){
+        		num = num + 1;
+		   	});
+        	top.$("input[id='chkbox']:checked").each(function(){
+        		selectednum = selectednum + 1;
+		   	});
+        	if(num == selectednum){
+        		$("#selectAll").attr("checked",true);
+        	}
+        	else{
+        		$("#selectAll").attr("checked",false);
+        	}
+        	$("#selectedCount").html("已选择 "+selectednum);
+        }
+        
+        
+        
+        
+        
+        function sumSelect(obj){
+        	//var num = 0;
+        	var selectednum = 0;
+        	//alert(obj.checked==true);
+        	if(obj.checked==true){
+        		obj.checked=true;
+        	}
+        	else{
+        		obj.checked=false;
+        	}
+        	top.$("input[id='top_chkbox']:checked").each(function(){
+        		selectednum = selectednum + 1;
+		   	});
+        	$("#selectedNum").html("已选择 "+selectednum);
+        }
+        
+        
+        $(function(){
+        	$("#delAll").click(function(){
+	        	top.$("input[id='top_chkbox']:checked").each(function(){
+	        		$(this).attr("checked",false);
+	        	});
+	        	$("#selectedNum").html("已选择 0");
+        	});
+        });
+        
+        
+        //解除授权
+        $("#delAuth").click(function(){
+        	var checked = 0;
+	    	var USER_ID = "";
+			top.$("input[name='USER_ID']:checked").each(function() {
+				checked = checked + 1;
+				var roleId = $(this).attr("USER_ID");
+				USER_ID += roleId;
+				USER_ID += ",";
+				$(this).attr("checked", false);
+			});
+			if(checked == 0){
+	         	   alert("请选择要解除授权的用户");
+	         	   return;
+	        }
+			USER_ID = USER_ID.substring(0,USER_ID.lastIndexOf(","));
+			
+			var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">确定继续该操作吗？</div></div></div>');
+  		  	var params = {
+    		          top:top,
+    		          content: elem,
+    		          width: "300px",
+    		          height: "120px",
+    		          modal: true,
+    		          okVal:'确定',
+    		          okCallback:function(){    					 	
+					 	//参数
+						var cmd = {"PRIV_POST_ID" : PRIV_POST_ID, "USER_ID" : USER_ID};
+						Util.ajax.postJson(srvMap.get("delPostUser"), cmd, function(json) {
+							if (json.returnCode == 0) {
+								Util.dialog.tips("解除用户岗位授权成功!");
+								var str= $("#"+G_params.searchformId).serialize();
+					      	  	Util.pagination(0, true , G_params , str+"&PRIV_POST_ID="+PRIV_POST_ID);
+							} 
+							else {
+								Util.dialog.tips(json.returnMessage);
+							}
+						});
+    		          },
+					  cancelVal:'取消',
+		              cancelCallback:function(){}
+			};
+			Util.dialog.openDiv(params); 
+		});
+        
+        
+        //以下为授权新用户
+        srvMap.add('queryUserForBind', 'query.json','front/sh/user!index?uid=sys0021');//授权新用户时查询用户信息
+        srvMap.add('bindNewUser', '','front/sh/user!index?uid=sys0022');//授权新用户
+        
+        
+        var T_tabletpl1 = $("#T_tabletpl1");
+		var J_tabletpl1 = $("#J_tabletpl1");
+		var J_formSearch1 = $("#J_formSearch1");
+		var Pagination1 = $("#Pagination1");
+		var J_add = $("#authNewUser");
+		var J_search1 = $("#J_search1");
+		var G_param = {
+			    url : srvMap.get("queryUserForBind"),
+			    items_per_page : 5 ,   		// 每页数     @param : limit
+			    page_index : 0 , 				//当前页  @param : start
+			    pagination : Pagination1 , 	//分页id
+			    searchformId : "J_formSearch1",  //搜索表单的id
+			    tabletpl : T_tabletpl1, 		//表格模板
+			    tablewrap : J_tabletpl1	//表格容器
+		};
+		
+		var userSelect = document.getElementById("addNewUser");
+		var params = {
+			top:top,
+		    id:"D_userSelect",
+		    title:"选择新用户",
+		    content: userSelect,
+		    width: 900,
+		    height:450,
+		    modal: true
+		};
+		
+		
+		//授权新用户按钮
+	    $("#authNewUser").click(function(){
+	        if (top && top.$("#J_formSearch1").length) {
+	          top.$("#J_formSearch1")[0].reset();
+	        };
+	        Util.dialog.openDiv(params);
+	        $(J_search1).trigger("click");
+	    });
+		
+	  	 //分页查询出用户
+	     $(J_search1).bind("click",function(){
+	    	 var PRIV_POST_ID = Util.browser.getParameter("PRIV_POST_ID");
+	    	 var str = top.$("#J_formSearch1").serialize(); //把form序列化
+	         
+	    	 // TODO 此处需完善 
+	    	 
+	         //分页获取数据
+	         Util.pagination(G_param.page_index,true,G_param,str+"&PRIV_POST_ID="+PRIV_POST_ID);
+	     });
+	  	 
+	  	 
+	  	 
+	  	 //绑定岗位用户关系
+	  	 $("#SAVERL").click(function(){
+	  		var checked = 0;
+	    	var USER_ID = "";
+	    	top.$("input[id='top_chkbox']:checked").each(function(){
+	           checked = checked + 1;
+	           var userId = $(this).attr("USER_ID");
+	           USER_ID += userId;
+	           USER_ID += ",";
+	           $(this).attr("checked",false);
+	   		}); 
+	    	if(checked == 0){
+	         	alert("请选择要添加的角色");
+	         	return;
+	        }
+	    	
+	    	USER_ID = USER_ID.substring(0,USER_ID.lastIndexOf(","));
+	    	var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">确定继续该操作吗？</div></div></div>');
+	    	
+	    	var params = {
+    		          top:top,
+    		          content: elem,
+    		          width: "300px",
+    		          height: "120px",
+    		          modal: true,
+    		          okVal:'确定',
+    		          okCallback:function(){    					 	
+					 	//参数
+						var cmd = {"PRIV_POST_ID" : PRIV_POST_ID, "USER_ID" : USER_ID};
+						Util.ajax.postJson(srvMap.get("bindNewUser"), cmd, function(json) {
+							if (json.returnCode == 0) {
+								Util.dialog.tips("授权新用户成功!");
+			         			Util.dialog.close("D_userSelect",top);
+			         			$("#selectedNum").html("已选择 0");
+			         	
+			         	
+					         	//var PRIV_POST_ID = Util.browser.getParameter("PRIV_POST_ID");
+								var POST_NM = decodeURI(Util.browser.getParameter("POST_NM"));
+								$("#postUserName").html(POST_NM + "岗位对应的用户");
+								
+								var str= $("#"+G_params.searchformId).serialize();
+					      	  	Util.pagination(0, true , G_params , str+"&PRIV_POST_ID="+PRIV_POST_ID);
+							} 
+							else {
+								Util.dialog.tips(json.returnMessage);
+							}
+						});
+    		          },
+					  cancelVal:'取消',
+		              cancelCallback:function(){}
+				};
+				Util.dialog.openDiv(params); 
+	  	 });
+	  	 
+	  	 
+	  	//取消
+	  	$("#CANCELRL").click(function(){
+	  		Util.dialog.close("D_userSelect",top);
+	  	 });
+	</script>
+</body>
+</html>

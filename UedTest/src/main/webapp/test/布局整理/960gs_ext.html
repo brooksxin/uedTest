@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>960gs_extDemo</title>
+<link rel="stylesheet" type="text/css" href="960gs.css">
+<script src="../jquery.js" type="text/javascript"></script>
+<style type="text/css">
+body {
+	margin: 0 auto;
+	background: #ccc;
+	width: 1200px;
+}
+.row .col, .sub .col { 
+    float: left; 
+    display: inline;
+    text-align: center;
+	color: #fff;
+}
+.row:after {
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+}
+.row {
+    zoom:1;
+}
+.row, .header .col, .footer .col { 
+    width: 1200px;
+}
+.left {
+    width: 300px;
+}
+.right {
+    width: 900px;
+}
+
+.header {
+	background: #F7B52D;
+	height: 75px;
+	line-height: 75px;
+}
+.footer {
+	background: #0099FF;
+	height: 75px;
+	line-height: 75px;
+}
+.left {
+	background: #1C3846;
+	height: 150px;
+	line-height: 150px;
+}
+.right {
+	background: #028E83;
+	height: 150px;
+	line-height: 150px;
+}
+
+
+.sub .lt {
+	background: #D56B6D;
+	width: 200px;
+	height: 75px;
+	line-height: 75px;
+}
+.sub .rt {
+	background: #FF1344;
+	width: 700px;
+	height: 75px;
+	line-height: 75px;
+}
+.sub .lb {
+	background: #F6BD0B;
+	width: 400px;
+	height: 100px;
+	line-height: 100px;
+}
+.sub .rb {
+	background: #887CDE;
+	width: 500px;
+	height: 75px;
+	line-height: 75px;
+}
+.sub .right {
+	height: 175px;
+	background: #ccc;
+}
+</style>
+</head>
+<body>
+
+<div class="row header">
+	<div class="col">
+		<div>header</div>
+	</div>
+</div>
+
+<div class="row container">
+	<div class="col left">
+		<div>left</div>
+	</div>
+
+	<div class="col right">
+		<div>right</div>
+	</div>
+</div>
+
+<div class="row footer">
+	<div class="col">
+		<div>footer</div>
+	</div>
+</div>
+
+<br>
+
+<div class="row header">
+	<div class="col">
+		<div>header</div>
+	</div>
+</div>
+
+<div class="row container">
+	<div class="col left">
+		<div>left</div>
+	</div>
+
+	<div class="sub">
+		<div class="col right">
+			<div class="col lt">
+				<div>左上角</div>
+			</div>
+			<div class="col rt">
+				<div>右上角</div>
+			</div>
+			<div class="col lb">
+				<div>左下角</div>
+			</div>
+			<div class="col rb">
+				<div>右下角</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row footer">
+	<div class="col">
+		<div>footer</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+	
+});
+</script>
+</body>
+</html>

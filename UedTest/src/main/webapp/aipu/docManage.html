@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>文档管理 - 亚信开源社区</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/js/dialog/6.0.5/ui-dialog.css">
+<link rel="stylesheet" type="text/css" href="ui/js/selectordie/0.1.8/selectordie.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+<div class="search_wrap approve prodManage">
+	<form id="J_formSearch" name="J_formSearch" class="formSearch">
+		<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tbody>
+				<tr>
+					<td width="10%">
+						<label>选择产品：</label>
+					</td>
+					<td width="40%">
+						<select id="J_province" name="J_province">
+							<option value="1">北京</option>
+							<option value="2">郑州</option>
+							<option value="3">南京</option>
+						</select>
+					</td>
+					<td width="10%">
+						<label>选择版本：</label>
+					</td>
+					<td>
+						<select id="J_version" name="J_version">
+							<option value="1">V1.0</option>
+							<option value="2">V2.0</option>
+							<option value="3">V3.0</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" class="fn-center">
+						<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="J_search">
+							<i class="iconfont" title="查询/搜索"></i>
+							<span>查 询</span>
+						</a>
+						<a class="ui-button ui-button-blue " href="javascript:;" hidefocus="true" id="J_reset">
+							<span>重 置</span>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+
+	<div class="tool-bar fn-clear">
+		<a class="ui-button ui-button-normal fn-mr-20" href="javascript:;" hidefocus="true" id="J_add">
+			<i class="iconfont" title=""></i>
+			<span>新增分类</span>
+		</a>
+	</div>
+
+	<div class="data-table" id="dataTable">
+		<table class="ui-table" cellpadding="0" cellspacing="0" border="0" width="100%">
+			<colgroup>
+				<col width="11%">
+				<col width="">
+				<col width="30%">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>分类名称</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody id="dataTbody"></tbody>
+		</table>
+	</div>
+</div>
+
+<div id="open_doc" class="fn-hide">
+	
+</div>
+
+<!--分类列表-->
+<textarea class="fn-hide" id="T_docItems">
+{{#each beans}}
+<tr>
+	<td>{{indexAdd @index}}</td>
+	<td>
+		{{name}}
+	</td>
+	<td>
+		<a href="javascript:;" hidefocus="true" onclick="modDocItem('2', '{{id}}', this);return false;"><span>修改分类</span></a>
+		<i class="split">|</i>
+		<a href="javascript:;" hidefocus="true" onclick="delDocItem('{{id}}', this);return false;"><span>删除分类</span></a>
+		<i class="split">|</i>
+		<a href="javascript:;" hidefocus="true" onclick="showDocItem('{{id}}', this);return false;"><span>查看文档</span></a>
+	</td>
+</tr>
+{{/each}}
+</textarea>
+
+<!--文档模板-->
+<textarea class="fn-hide" id="T_doc">
+<div id="J_docManage">
+	<div class="tool-bar fn-clear">
+		<a class="ui-button ui-button-normal fn-mr-20" href="javascript:;" hidefocus="true" id="J_add_doc">
+			<i class="iconfont" title=""></i>
+			<span>新增文档</span>
+		</a>
+
+		<a class="ui-button ui-button-normal fn-hide" href="javascript:;" hidefocus="true" id="J_add_doc_ret">
+			<span>返 回</span>
+		</a>
+	</div>
+
+	<div class="zui-tinyscroll zuiscroll">
+	    <div class="scrollbar"><div class="track"><div class="thumb"></div></div></div>
+	    <div class="viewport">
+	        <div class="overview">
+	            <div class="data-table">
+	            	<table class="ui-table" cellpadding="0" cellspacing="0" border="0" width="100%">
+	            		<colgroup>
+	            			<col width="11%">
+	            			<col width="22%">
+	            			<col width="">
+	            			<col width="11%">
+	            		</colgroup>
+	            		<thead>
+	            			<tr>
+	            				<th>序号</th>
+	            				<th>分类名称</th>
+	            				<th>描述</th>
+	            				<th>操作</th>
+	            			</tr>
+	            		</thead>
+	            		<tbody id="docTbody">
+	            			{{#each rows}}
+	            			<tr>
+	            				<td>{{indexAdd @index}}</td>
+	            				<td>{{ABILITY_CODE}}</td>
+	            				<td>描述：{{ABILITY_NAME}}</td>
+	            				<td>
+	            					<a href="javascript:;" hidefocus="true" onclick="delDoc('{{ABILITY_ID}}', this);return false;"><span>删除</span></a>
+	            				</td>
+	            			</tr>
+	            			{{/each}}
+	            		</tbody>
+	            	</table>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="add_doc_ret fn-hide" id="J_add_doc_ret_wrap">
+		<div class="fn-clear">
+			<div class="fn-left left">
+				<span id="J_addDoc_btn"></span>
+			</div>
+			<div class="fn-left right">
+				<p>
+					<label>文档名称：</label>
+					<input type="text" class="ui-input" id="docName" value="" />
+					<input type="hidden" class="ui-input" id="J_doc_url" value="" />
+				</p>
+				<p>
+					<label>描述：</label>
+					&lt;textarea class="ui-textarea" id="docDes"&gt;&lt;/textarea&gt;
+				</p>
+			</div>
+		</div>
+		<div class="fn-center">
+			<a class="ui-button ui-button-green" href="javascript:;" hidefocus="true" id="J_sub">
+				<span>提 交</span>
+			</a>
+		</div>
+	</div>
+</div>
+</textarea>
+
+<script src="ui/js/jquery/1.8.3/jquery.js"></script>
+<script src="ui/js/dialog/6.0.5/dialog-min.js"></script>
+<script src="ui/js/jqueryForm/jquery.form.js"></script>
+<script src="ui/js/json2/json2.js"></script>
+<script src="ui/js/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="ui/js/handlebars/handlebars.js"></script>
+<script src="ui/js/handlebars/helpers.js"></script>
+<script src="ui/js/blockUI/jquery.blockUI.js"></script>
+<script src="ui/js/slides/3.0.3/jquery.slides.min.js"></script>
+<script src="ui/js/selectordie/0.1.8/selectordie.js"></script>
+<script src="ui/js/datepicker/4.8.b2/WdatePicker.js"></script>
+<script src="ui/js/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script src="ui/js/tinyscrollbar/tinyscrollbar.js"></script>
+<script src="ui/js/common.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+
+	srvMap.add('approve', 'docManage.json','');//查询table
+	srvMap.add('approveHand', 'test.json','');//审批操作
+
+	//查询按钮
+	$("#J_search").click(function(){
+		var str = $("#J_formSearch").formSerialize();
+		//查询分类
+		searchDocItems(str);
+	})
+
+	$("#J_province, #J_version").selectOrDie();
+
+	//新增分类
+	$("#J_add").click(function(){
+		modDocItem('1');
+	})
+})
+
+function searchDocItems(str){
+	$.PostJson(srvMap.get("approve"), "dataP="+str, function(state, json){
+		if(state == 'success'){
+			if(json && json.rtnCode=='0'){
+				$("#dataTbody").temp($("#T_docItems").val(), json);
+			}else{
+				result_prompt(0, json.rtnMsg || "操作失败！");
+			}
+		}else{
+			result_prompt(0, json.rtnMsg || "系统错误！");
+		}
+	})
+}
+
+//新增、修改分类
+function modDocItem(type, id, obj){
+	var oldItemsName = "";
+	if(type == '2'){
+		oldItemsName = $(obj).parent().prev().text().replace(/^\s*(.*?)\s+$/g, "$1");
+	}
+	var d = dialog({
+		id: id || "D_modDocItem",
+	    title: '请输入分类名称',
+	    content: '<input type="text" value="" id="J_docItemsName" class="ui-input J_docItemsName" placeholder="'+oldItemsName+'" />',
+	    button: [
+            {
+                value: '取消',
+                callback: function () {
+    	    		this.close().remove();
+                },
+                autofocus: false
+            },
+            {
+                value: '确定',
+                callback: function () {
+                	var $this = this;
+            		var J_docItemsName = $("#J_docItemsName").val();
+            		if(!J_docItemsName){
+            			result_tips("请输入分类名称！", 1, function(){
+            				$("#J_docItemsName").focus();
+            			});
+            			return false;
+            		}else{
+            			var str = "name="+J_docItemsName;
+            			if(type == '2'){
+            				str += "&id="+id;
+            			}
+            			$.PostJson(srvMap.get("approveHand"), str, function(state, json){
+            				if(state == 'success'){
+            					if(json && json.rtnCode=='0'){
+            						result_tips(json.rtnMsg || "操作成功！");
+
+            						$(obj).parent().prev().text(J_docItemsName);
+            					}else{
+            						result_prompt(0, json.rtnMsg || "操作失败！");
+            					}
+            				}else{
+            					result_prompt(0, json.rtnMsg || "系统错误！");
+            				}
+            				$this.close().remove();
+            			})
+            		}
+                },
+                autofocus: true
+            }
+        ],
+	    cancel: false
+	});
+	d.addEventListener('close', function () {
+	    $(".zui-dialog-pop-modDocItem").remove();
+	});
+	d.show();
+	var zIndex = $("div[aria-describedby='content:D_confirm']").css("zIndex");
+	if(!$(".zui-dialog-pop-modDocItem").length){
+		var block = '<div style="opacity: 0.2;filter:alpha(opacity=20); background: none repeat scroll 0% 0% rgb(0, 0, 0); position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; -moz-user-select: none; z-index: '+(zIndex-1)+';" tabindex="0" class="ui-popup-backdrop zui-dialog-pop zui-dialog-pop-modDocItem"></div>';
+		$("body").append($(block));
+	}
+	setTimeout(function(){
+		$("#J_docItemsName").focus();
+	}, 300)
+}
+
+//删除分类
+function delDocItem(id, obj){
+	result_comfirm("是否删除该分类？", function(){
+		$.PostJson(srvMap.get("approveHand"), "id="+id, function(state, json){
+			if(state == 'success'){
+				if(json && json.rtnCode=='0'){
+					result_tips(json.rtnMsg || "操作成功！");
+					$(obj).parent().parent().remove();
+				}else{
+					result_prompt(0, json.rtnMsg || "操作失败！");
+				}
+			}else{
+				result_prompt(0, json.rtnMsg || "系统错误！");
+			}
+		})
+	});
+}
+
+//查看文档
+function showDocItem(id, obj){
+	$("#open_doc").html("");
+	//初始化弹窗内容
+	var D_param = {
+		id: "D_showDoc",
+		title: "查看文档",
+		content: $("#open_doc"),
+		width: 570
+	}
+	openWindowDiv(D_param, function(e){
+		//绑定关闭弹窗事件
+		dialog.get("D_showDoc").addEventListener('close', function(){
+			
+		})
+		$.PostJson(srvMap.get("approve"), "id="+id, function(state, json){
+			if(state == 'success'){
+				if(json && json.rtnCode=='0'){
+					$("#open_doc").temp($("#T_doc").val(), json);
+					
+					zuiScroll($(".zuiscroll"), 570, 300);
+					dialog.get("D_showDoc").reset();
+
+					//上传文档
+					$("#J_add_doc").click(function(){
+						$("#J_add_doc, .zuiscroll").addClass("fn-hide");
+						$("#J_add_doc_ret_wrap, #J_add_doc_ret").removeClass("fn-hide");
+						dialog.get("D_showDoc").reset();
+					})
+
+					//初始化上传
+					swfu2 = new SWFUpload(settings2);
+
+					//返回
+					$("#J_add_doc_ret").click(function(){
+						$("#J_add_doc, .zuiscroll").removeClass("fn-hide");
+						$("#J_add_doc_ret_wrap, #J_add_doc_ret").addClass("fn-hide");
+						dialog.get("D_showDoc").reset();
+					})
+
+					//上传提交
+					$("#J_sub").click(function(){
+						var docName = $("#docName").val();
+						var docDes = $("#docDes").val();
+						var J_doc_url = $("#J_doc_url").val();
+						if(!docName){
+							result_tips("请输入文档名称！", 1);
+							return false;
+						}
+						$.PostJson(srvMap.get("approveHand"), "id="+id+"&docName="+docName+"&docDes="+docDes+"&J_doc_url="+J_doc_url, function(state, json){
+							if(state == 'success'){
+								if(json && json.rtnCode=='0'){
+									result_tips(json.rtnMsg || "操作成功！");
+								}else{
+									result_prompt(0, json.rtnMsg || "操作失败！");
+								}
+							}else{
+								result_prompt(0, json.rtnMsg || "系统错误！");
+							}
+						})
+					})
+				}else{
+					result_prompt(0, json.rtnMsg || "操作失败！");
+				}
+			}else{
+				result_prompt(0, json.rtnMsg || "系统错误！");
+			}
+		})
+	})
+}
+
+//logo上传
+var swfu, swfu2, settings, settings2;
+$(function () {
+    settings = {
+        flash_url: "ui/js/swfupload/1.0.0/2.5/swfupload.swf",
+        upload_url: srvMap.get("prodLogo")+"?_v=" + (new Date()).getTime(),
+        post_params: "",
+        use_query_string: true,
+        file_size_limit: "3 MB",
+        file_types: "*.jpg;*.png;*.gif;*.jpeg",  //允许所有类型时请使用 *.*
+        file_types_description: "All Files",
+        file_upload_limit: 0,
+        file_queue_limit: 0,
+        debug: false,
+
+        // Button settings
+        button_image_url: "ui/js/swfupload/1.0.0/vendor/logo_add.png",
+        button_width: "94",
+        button_height: "94",
+        button_placeholder_id: "J_add_logo",
+        button_text: '',
+        button_text_left_padding: 12,
+        button_text_top_padding: 3,
+        button_cursor: SWFUpload.CURSOR.HAND,
+
+        // The event handler functions are defined in handlers.js
+        file_dialog_complete_handler: fileDialogComplete,
+        upload_start_handler: uploadStart,
+        upload_error_handler: uploadError,
+        upload_success_handler: uploadSuccess,
+        upload_complete_handler: upload_complete_handler
+    };
+
+    settings2 = {
+    	upload_url: srvMap.get("approveHand")+"?_v=" + (new Date()).getTime(),
+    	file_types: "*.doc;*.docx;",  //允许所有类型时请使用 *.*
+    	button_image_url: "ui/js/swfupload/1.0.0/vendor/add_file.png",
+    	button_width: "115",
+    	button_height: "40",
+    	button_placeholder_id: "J_addDoc_btn"
+    }
+    settings2 = $.extend({},settings,settings2);
+});
+
+/**
+ * 选择完文件后出发方法
+ */
+function fileDialogComplete(numFilesSelected, numFilesQueued) {
+    try {
+        this.startUpload();
+    } catch (ex) {
+        this.debug(ex);
+    }
+}
+
+/**
+ * 开始上传文件前校验方法
+ */
+function uploadStart(file) {
+    if (file.size > 3145728) {
+        result_prompt(0, "文件大小不能超过3M！");
+        return false;
+    }
+	result_tips("正在上传...");
+    return true;
+}
+
+/**
+ * 文件上传成功后预览图片
+ */
+function uploadSuccess(file, serverData) {
+    try {
+        serverData = JSON.parse(serverData);
+        if (serverData.rtnCode == '0') {
+           $("#J_doc_url").val("11111111111111");
+           result_tips("文档上传成功");
+        } else {
+            alert("文档上传失败");
+        }
+    } catch (ex) {
+        this.debug(ex);
+    }
+}
+
+function uploadError(file, errorCode, message) {
+    try {
+        alert("上传失败!");
+    } catch (ex) {
+        this.debug(ex);
+    }
+}
+function upload_complete_handler(file) {
+    if (this.getStats().files_queued > 0) {
+        this.startUpload();
+    }
+}
+</script>
+
+</body>
+</html>

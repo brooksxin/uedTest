@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>双飞翼</title>
+<script src="../jquery.js" type="text/javascript"></script>
+<style type="text/css">
+body {
+	background: #ccc;
+}
+.wrap {
+	width: 100%;
+	color: #fff;
+}
+.wrap .sub {
+	width:190px;
+	background:#F7B52D;
+	margin-left:-100%;
+}
+.wrap .main {
+	width:100%;
+	background:#028E83;
+}
+.wrap .main .container {
+	margin: 0 190px;
+}
+.wrap .extra {
+	width:190px;
+	background:#0099FF;
+	margin-left:-190px;
+}
+.wrap div {
+	float:left;
+	height: 100px;
+	line-height: 100px;
+}
+
+.test {
+	width: 100px;
+	height: 100px;
+	background: #f00;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -50px 0 0 -50px;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+	<div class="main">
+		<div class="container">
+			中间
+		</div>
+	</div>
+	<div class="sub">左</div>
+	<div class="extra">右</div>
+</div>
+
+<div class="test">
+	
+</div>
+
+<script type="text/javascript">
+$(function(){
+
+});
+</script>
+</body>
+</html>

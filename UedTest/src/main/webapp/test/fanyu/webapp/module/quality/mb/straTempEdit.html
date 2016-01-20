@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>评分类型-编辑策略模板</title>
+    <#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<div class="formItem">
+    <div class="titleArea">
+        <div class="listTopBtn fn-clear">
+            <h2 class="fn-left">新建抽取策略</h2>
+        </div>
+    </div>
+    <hr/>
+    <table  class="form_table" >                                            
+        <tbody>  
+            <tr>
+                <td width="120"><label class="formDescription"><span class="fn-high">*</span>模版名称：</label></td>
+                <td><input type="text"class="FormInputText width100"/></td>
+            </tr>
+            <tr>    
+                <td valign="top"><label class="formDescription">模版描述：</label></td>
+                <td>
+                    <textarea rows="8" cols="40"style="resize:none;" id="REMARK" name="REMARK" class="width100"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="formDescription"><span class="fn-high">*</span>策略类型：</label></td>
+                <td>
+                    <select class="FormInputText width100">
+                        <option>语音外呼类</option>
+                        <option>语音接听类</option>
+                        <option>工单类</option>
+                        <option>互联网投诉类</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label class="formDescription"><span class="fn-high">*</span>抽取频率：</label></td>
+                <td>
+                    <select class="FormInputText width100">
+                        <option>仅一次</option>
+                        <option>5分钟</option>
+                        <option>10分钟</option>
+                        <option>30分钟</option>
+                        <option>60分钟</option>
+                        <option>天</option>
+                        <option>月</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr class="mtb20" />
+    <table  class="form_table" width="100%">
+        <tr>
+            <td valign="top" width="120"><label class="formDescription"><span class="fn-high">*</span>策略功：</label></td>
+            <td>
+                <div>
+                    <p><a href="###" class="divcolor">删除策略项</a>按时长抽取</p>
+                    <div class="tablewidth mg_t_10">
+                        <table class="ui-record-table table_radius table-bordered table-striped" >
+                            <thead>
+                                <tr>
+                                    <th width="100">范围(最小值)</th>
+                                    <th width="">范围(最大值)</th>
+                                    <th width="100">抽取数量</th>
+                                    <th width="80">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="J_tabletpl">
+                                <tr>
+                                    <td>0</td>
+                                    <td>30</td>
+                                    <td>5</td>
+                                    <td><a href="###">添加描述</a><a href="###">删除</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="fn-clear">
+                        <p class="fn-left">说明：请在列表中输入具体小时（需精确到秒）</p>
+                        <div class="fn-right fn-pt5 fn-pr10">
+                            <a class="normalBtn BGgray" href="#">新增</a>
+                        </div>
+                    </div>
+                    <div class="mtb20" ></div>
+                </div>
+                <div>
+                    <p><a href="###" class="divcolor">删除策略项</a>按时间抽取</p>
+                    <div class="tablewidth mg_t_10">
+                        <table class="ui-record-table table_radius table-bordered table-striped" >
+                            <thead>
+                                <tr>
+                                    <th width="100">范围(最小值)</th>
+                                    <th width="">范围(最大值)</th>
+                                    <th width="100">抽取数量</th>
+                                    <th width="80">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="J_tabletpl">
+                                <tr>
+                                    <td>10:00:00</td>
+                                    <td>11:59:59</td>
+                                    <td>15</td>
+                                    <td><a href="###">添加描述</a><a href="###">删除</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="fn-clear">
+                        <p class="fn-left">说明：请在列表中输入具体日期</p>
+                        <div class="fn-right fn-pt5 fn-pr10">
+                            <a class="normalBtn BGgray" href="#">新增</a>
+                        </div>
+                    </div>
+                    <div class="mtb20" ></div>
+                </div>
+                <div>
+                    <p><a href="###" class="divcolor">删除策略项</a>按日期抽取</p>
+                    <div class="tablewidth mg_t_10">
+                        <table class="ui-record-table table_radius table-bordered table-striped" >
+                            <thead>
+                                <tr>
+                                    <th width="100">范围(最小值)</th>
+                                    <th width="">范围(最大值)</th>
+                                    <th width="100">抽取数量</th>
+                                    <th width="80">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="J_tabletpl">
+                                <tr>
+                                    <td>1</td>
+                                    <td>5</td>
+                                    <td>20</td>
+                                    <td><a href="###">添加描述</a><a href="###">删除</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="fn-clear">
+                        <p class="fn-left">说明：请在列表中输入具体百分数，各权重相加后应为100%</p>
+                        <div class="fn-right fn-pt5 fn-pr10">
+                            <a class="normalBtn BGgray" href="#">新增</a>
+                        </div>
+                    </div>
+                    <div class="mtb20" ></div>
+                </div>
+                <div>
+                    <p><a href="###" class="divcolor">删除策略项</a>按总条数抽取</p>
+                    <div class="tablewidth mg_t_10">
+                        <table class="ui-record-table table_radius table-bordered table-striped" >
+                            <thead>
+                                <tr>
+                                    <th width="100">抽取数量</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="J_tabletpl">
+                                <tr>
+                                    <td>20</td>
+                                    <td><a href="###">添加描述</a><a href="###">删除</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="fn-clear">
+                        <p class="fn-left">说明：请在列表中输入具体百分数，各权重相加后应为100%</p>
+                    </div>
+                    <div class="mtb20" ></div>
+                </div>
+                <hr class="mtb20" />
+                <div class="fn-pt5 fn-pr10">
+                    <a class="normalBtn BGgray" href="#">增加策略项</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<#include "../../tpl/res_js.tpl" />   
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+    });
+</script>
+</body>
+</html>

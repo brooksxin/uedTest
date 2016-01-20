@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>其他demo</title>
+<link rel="stylesheet" type="text/css" href="alice.css">
+<link rel="stylesheet" type="text/css" href="jquery-easyui-1.4/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="common.css">
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="jquery-easyui-1.4/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="jquery-easyui-1.4/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="handlebars/1.0.rc.3/helpers.js"></script>
+<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+
+<!--顶部-->
+<div class="global-top">
+	<!--左侧logo-->
+	<div class="logo"></div>
+
+	<!--右侧按钮-->
+	<div class="is-log-in">
+        <div class="ui-button-dropdown ui-button-dropdown-diy fn-mr-20" id="G_userInfo">
+			<a class="ui-button ui-button-swhite ui-dbutton ui-dbutton-white">
+			    <span class="ui-dbutton-self fn-text-overflow">
+			    	<i class="iconfont" title="用户"></i>
+			    	<span>李四</span>
+			    </span>
+			    <i class="ui-dbutton-arrow iconfont" title="下三角形"></i>
+			</a>
+		    <ul class="ui-button-dropdown-small fn-hide">
+		        <li class="ui-button-dropdown-item"><a href="javascript:;" id="userBaseInfo">基本资料</a></li>
+		        <li class="ui-button-dropdown-item"><a href="javascript:;" data-idx="2">找回密码</a></li>
+		        <li class="ui-button-dropdown-item"><a href="javascript:;" data-idx="3">退出</a></li>
+		    </ul>
+		    <input type="hidden" id="G_userInfoVal" value="1"/>
+		</div>
+		<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="">
+			<i class="iconfont" title="联系邮箱"></i>
+			<span>站内通知</span><em class="fn-high">12</em>
+		</a>
+	</div>
+</div>
+
+<!--中间大菜单-->
+<div class="menu-bar">
+	<ul>
+		<li>
+			<a class="icon cur" href="javascript:;" hidefocus="true" id=""><i class="iconfont" title="首页"></i><span>首页</span></a>
+		</li>
+		<li>
+			<a class="icon" href="javascript:;" hidefocus="true" id=""><i class="iconfont" title="开发文档"></i><span>开发文档</span></a>
+		</li>
+		<li>
+			<a class="icon" href="javascript:;" hidefocus="true" id=""><i class="iconfont" title="帮助中心"></i><span>帮助中心</span></a>
+		</li>
+		<li>
+			<a class="icon" href="javascript:;" hidefocus="true" id=""><i class="iconfont" title="管理中心"></i><span>管理中心</span></a>
+		</li>
+	</ul>
+</div>
+
+<!--body-->
+<div class="content">
+	<!--左侧menu-->
+    <div class="content-menu fn-clear">
+    	<ul>
+    		<li>
+    			<a class="" href="javascript:;" hidefocus="true" id=""><span>任务区</span></a>
+    		</li>
+    		<li class="cur">
+    			<a class="" href="javascript:;" hidefocus="true" id=""><span>开发者管理</span></a>
+    			<div class="tri-cur">
+    				<em class="left">◆</em>
+    			</div>
+    		</li>
+    		<li>
+    			<a class="" href="javascript:;" hidefocus="true" id=""><span>应用管理</span></a>
+    		</li>
+    		<li>
+    			<a class="" href="javascript:;" hidefocus="true" id=""><span>能力管理</span></a>
+    		</li>
+    	</ul>
+    </div>
+
+    <!--右侧主部分-->
+    <div class="content-wrap">
+		<h1 class="form-title">创建能力</h1>
+		<form id="J_formSearch" name="J_formSearch" style="margin-bottom: 20px;">
+			<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+				<tbody>
+					<tr>
+						<td width="11%"><label class="description" for="J_BRAND_ID">下拉框：</label></td>
+						<td width="22%">
+							<select class="easyui-combobox" name="J_BRAND_ID" id="J_BRAND_ID" style="width: 140px; height: 30px;" data-options="required:true">
+						        <option value="AL">Alabama</option>
+						        <option value="AK">Alaska</option>
+						        <option value="CA">California</option>
+						        <option value="CO">Colorado</option>
+						    </select>
+						</td>
+						<td width="11%"><label class="description" for="J_begin_date">起始时间：</label></td>
+						<td width="22%">
+							<input id="J_begin_date" name="J_begin_date" style="width:140px; height: 30px;">
+						</td>
+						<td width="11%"><label class="description" for="J_end_date">结束时间：</label></td>
+						<td width="22%">
+							<input id="J_end_date" name="J_end_date" class="easyui-datetimebox" style="width:140px; height: 30px;">
+						</td>
+					</tr>
+					<tr>
+						<td width="11%"><label class="description" for="">输入框：</label></td>
+						<td width="22%">
+							<input type="text" id="" class="ui-input" />
+						</td>
+						<td width="11%"><label class="description" for="">树：</label></td>
+						<td width="22%">
+							<input type="text" id="treeDemo" class="easyui-combotree" style="width:140px; height: 30px;" />
+						</td>
+					</tr>
+					<tr>
+						<td width="11%"><label class="description" for="">能力URL：</label></td>
+						<td colspan="5">
+							<input type="text" id="" class="ui-input" style="width: 88%;" />
+						</td>
+					</tr>
+					<tr>
+						<td width="11%"><label class="description" for="">支持格式：</label></td>
+						<td colspan="5">
+							<input type="checkbox" name="format" class="ui-checkbox" value="" id="check-v1" />
+							<label class="check-des" for="check-v1">JSON</label>
+							<input type="checkbox" name="format" class="ui-checkbox" value="" id="check-v2" />
+							<label class="check-des" for="check-v2">XML</label>
+							<input type="checkbox" name="format" class="ui-checkbox" value="" id="check-v3" />
+							<label class="check-des" for="check-v3">MML</label>
+						</td>
+					</tr>
+					<tr>
+						<td width="11%"><label class="description" for="">用户授权：</label></td>
+						<td colspan="5">
+							<input type="radio" name="authorization" class="ui-checkbox" value="" id="raido-v1" />
+							<label class="check-des" for="raido-v1">需要授权</label>
+							<input type="radio" name="authorization" class="ui-checkbox" value="" id="raido-v2" />
+							<label class="check-des" for="raido-v2">不需要授权</label>
+						</td>
+					</tr>
+					<tr>
+						<td width="11%"><label class="description" for="">授权信息：</label></td>
+						<td colspan="5">
+							<input type="text" id="" class="ui-input" style="width: 88%;" />
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="2" class="fn-va-top"><label class="description" for="">测试用例：</label></td>
+						<td colspan="5">
+							<input class="easyui-filebox" name="file1" data-options="buttonText: '请选择文件'" style="width:240px; height: 30px;">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="5">
+							<input class="easyui-filebox" name="file1" data-options="buttonText: '请选择文件'" style="width:240px; height: 30px;">
+						</td>
+					</tr>
+					<tr>
+						<td class="fn-va-top"><label class="description" for="">请求参数列表：</label></td>
+						<td colspan="5">
+							<a class="ui-button ui-button-blue fn-left" href="javascript:;" hidefocus="true" id="addParams"><span>增加参数</span></a>
+							<table class="ui-record-table" cellpadding="0" cellspacing="0" border="0" width="91%">
+								<colgroup>
+									<col width="30%">
+									<col width="10%">
+									<col width="15%">
+									<col width="20%">
+									<col width="">
+								</colgroup>
+								<thead>
+									<tr>
+										<td>字段名</td>
+										<td>非空</td>
+										<td>类型</td>
+										<td>描述</td>
+										<td>操作</td>
+									</tr>
+								</thead>
+								<tbody id="paramTBL"></tbody>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td class="fn-va-top"><label class="description" for="">能力权限：</label></td>
+						<td colspan="5">
+							<a class="ui-button ui-button-blue fn-left" href="javascript:;" hidefocus="true" id="addPower"><span>增加权限</span></a>
+							<input type="hidden" value="" id="currentObjId" />
+							<input type="hidden" value="" id="currentObjName" />
+							<table class="ui-record-table" cellpadding="0" cellspacing="0" border="0" width="91%">
+								<colgroup>
+									<col width="30%">
+									<col width="">
+								</colgroup>
+								<thead>
+									<tr>
+										<td>权限名</td>
+										<td>操作</td>
+									</tr>
+								</thead>
+								<tbody id="powerTBL"></tbody>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td class="fn-va-top"><label class="description" for="">能力服务信息：</label></td>
+						<td colspan="5">
+							<textarea class="ui-input" style="width: 89%; height: 40px; resize: none;"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="6" class="form-btn">
+							<a class="ui-button ui-button-blue fn-center fn-mr-20" href="javascript:;" hidefocus="true" id="J_save">
+								<span>保 存</span>
+							</a>
+							<a class="ui-button ui-button-red fn-center" href="javascript:;" hidefocus="true" id="J_search">
+								<span>提交审核</span>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		<!-- 右侧内容 end -->
+		<!--底部波浪-->
+		
+		<div class="foot-bolang"></div>
+    </div>
+
+    <!--底部logo-->
+    <div class="globe-foot">
+    	<span>版权信息</span>
+    </div>
+</div>
+
+<!--新增能力弹窗-->
+<div id="dlg" class="fn-hide"></div>
+
+<textarea class="fn-hide" id="power_tpl">
+<tr>
+	<td>{{name}}</td>
+	<td>
+		<a class="" href="javascript:;" hidefocus="true" onclick="detThisTr(this,'{{id}}', '{{name}}');"><span>详情</span></a>
+		<a class="" href="javascript:;" hidefocus="true" onclick="modThisTr(this,'{{id}}', '{{name}}');"><span>修改</span></a>
+		<a class="" href="javascript:;" hidefocus="true" onclick="delThiTr(this);"><span>删除</span></a>
+	</td>
+</tr>
+</textarea>
+
+<script type="text/javascript">
+$(function(){
+	//时间日期
+	$("#J_begin_date").datetimebox().combo({
+	    editable: false
+	});
+
+	//增加参数事件
+	var _tr = '<tr> <td>'+
+		'<input type="text" class="ui-input paramName" value="" />'+
+		'</td> <td>'+
+		'<select class="ui-input isNull" name="isNull" style="width: 140px; height: 30px;" data-options="required:true"> <option value="0">可空</option> <option value="1">不可空</option> </select>'+
+		'</td> <td>'+
+		'<select class="ui-input paramType" name="paramType" style="width: 140px; height: 30px;"> <option value="0">String</option> <option value="1">Int</option> </select>'+
+		'</td> <td>'+
+		'<input type="text" class="ui-input paramDes" class="ui-input" />'+
+		'</td><td>'+
+		'<a class="" href="javascript:;" hidefocus="true" onclick="delThiTr(this);"><span>删除</span></a>'+
+		'</td></tr>';
+	$("#addParams").click(function(){
+		$("#paramTBL").append(_tr);
+		$(".isNull, .paramType").each(function(){
+			if($(this).css("display") != 'none'){//如果没有被combox则进行easyui的下拉框转变
+				$(this).combobox();
+			}
+		})
+		$(".paramName").validatebox({
+		    required: true
+		});
+		$(".isNull").validatebox({
+		    required: true
+		});
+	})
+
+	$("#J_save").click(function(){
+		var jsonP = [];
+		$("#paramTBL").find("tr").each(function(){
+			var _self = $(this);
+			var attr = {};
+			var val1 = _self.find("td:eq(0)").find("input").val();
+			attr.val1 = val1;
+			jsonP.push(attr);
+		})
+		console.log(JSON.stringify(jsonP))
+	})
+
+	$("#addPower").click(function(){
+		$("#dlg").html("").show().dialog({
+		    title: '权限关联',
+		    width: 800,
+		    height: 500,
+		    closed: false,
+		    cache: false,
+		    href: 'powerCreateAdd.html',
+		    resizable: true,
+		    modal: true
+		});
+	})
+
+});
+
+function delThiTr(obj){
+	if(confirm("是否删除？")){
+		var _tr = $(obj).parent().parent();
+		_tr.remove();
+	}
+}
+
+function addPowerTr(data){
+	var tpl = $("#power_tpl").val();
+	var template = Handlebars.compile(tpl);
+	var html = template(data);
+	$("#powerTBL").append(html);
+}
+
+function modThisTr(obj, id, name){
+	$("#currentObjId").val(id);
+	$("#currentObjName").val(name);
+	$("#dlg").html("").show().dialog({
+	    title: '权限关联',
+	    width: 800,
+	    height: 500,
+	    closed: false,
+	    cache: false,
+	    href: 'powerCreateMod.html',
+	    resizable: true,
+	    modal: true
+	});
+}
+</script>
+</body>
+</html>

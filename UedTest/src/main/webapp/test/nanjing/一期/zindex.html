@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>首页demo</title>
+<link rel="stylesheet" type="text/css" href="alice.css">
+<link rel="stylesheet" type="text/css" href="jquery-easyui-1.4/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="common.css">
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="jquery-easyui-1.4/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="common.js"></script>
+</head>
+<body>
+
+<!--顶部-->
+<div class="global-top">
+	<!--左侧logo-->
+	<div class="logo"></div>
+
+	<!--右侧按钮-->
+	<div class="is-log-in">
+        <div class="ui-button-dropdown ui-button-dropdown-diy fn-mr-20" id="G_userInfo">
+			<a class="ui-button ui-button-swhite ui-dbutton ui-dbutton-white">
+			    <span class="ui-dbutton-self fn-text-overflow">
+			    	<i class="iconfont" title="用户"></i>
+			    	<span>李四</span>
+			    </span>
+			    <i class="ui-dbutton-arrow iconfont" title="下三角形"></i>
+			</a>
+		    <ul class="ui-button-dropdown-small fn-hide">
+		        <li class="ui-button-dropdown-item"><a href="javascript:;" id="userBaseInfo">基本资料</a></li>
+		        <li class="ui-button-dropdown-item"><a href="javascript:;" data-idx="2">找回密码</a></li>
+		        <li class="ui-button-dropdown-item"><a href="javascript:;" data-idx="3">退出</a></li>
+		    </ul>
+		    <input type="hidden" id="G_userInfoVal" value="1"/>
+		</div>
+		<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="">
+			<i class="iconfont" title="联系邮箱"></i>
+			<span>站内通知</span><em class="fn-high">12</em>
+		</a>
+	</div>
+</div>
+
+<!--中间大菜单-->
+<div class="menu-bar">
+	<ul>
+		<li>
+			<a class="icon cur" href="javascript:;" hidefocus="true" id=""><i class="iconfont" title="首页"></i><span>首页</span></a>
+		</li>
+		<li>
+			<a class="icon" href="javascript:;" hidefocus="true" id=""><i class="iconfont" title="开发文档"></i><span>开发文档</span></a>
+		</li>
+		<li>
+			<a class="icon" href="javascript:;" hidefocus="true" id=""><i class="iconfont" title="帮助中心"></i><span>帮助中心</span></a>
+		</li>
+		<li>
+			<a class="icon" href="javascript:;" hidefocus="true" id=""><i class="iconfont" title="管理中心"></i><span>管理中心</span></a>
+		</li>
+	</ul>
+</div>
+
+<!--body-->
+<div class="content">
+	<!--左侧menu-->
+    <div class="content-menu fn-clear">
+    	<ul>
+    		<li class="cur">
+    			<a class="" href="javascript:;" hidefocus="true" id=""><span>任务区</span></a>
+    			<div class="tri-cur">
+    				<em class="left">◆</em>
+    			</div>
+    		</li>
+    		<li>
+    			<a class="" href="javascript:;" hidefocus="true" id=""><span>开发者管理</span></a>
+    		</li>
+    		<li>
+    			<a class="" href="javascript:;" hidefocus="true" id=""><span>应用管理</span></a>
+    		</li>
+    		<li>
+    			<a class="" href="javascript:;" hidefocus="true" id=""><span>能力管理</span></a>
+    		</li>
+    	</ul>
+    </div>
+
+    <!--右侧主部分-->
+    <div class="content-wrap">
+		<div class="img-show">
+			<div class="fn-clear">
+				<div class="item">
+					<a class="item-block" href="javascript:;" hidefocus="true">
+						<img src="index/bg_1.jpg" width="378" height="164">
+						<span>任务区</span>
+					</a>
+				</div>
+				<div class="item">
+					<a class="item-block" href="javascript:;" hidefocus="true">
+						<img src="index/bg_2.jpg" width="188" height="164">
+						<span>开发者管理</span>
+					</a>
+				</div>
+				<div class="item">
+					<a class="item-block" href="javascript:;" hidefocus="true">
+						<img src="index/bg_3.jpg" width="378" height="164">
+						<span>应用管理</span>
+					</a>
+				</div>
+			</div>
+			
+			<div class="fn-clear">
+				<div class="item">
+					<a class="item-block" href="javascript:;" hidefocus="true">
+						<img src="index/bg_4.jpg" width="170" height="123">
+						<span>应用管理</span>
+					</a>
+				</div>
+				<div class="item">
+					<a class="item-block" href="javascript:;" hidefocus="true">
+						<img src="index/bg_5.jpg" width="397" height="123">
+						<span>应用管理</span>
+					</a>
+				</div>
+				<div class="item">
+					<a class="item-block" href="javascript:;" hidefocus="true">
+						<img src="index/bg_6.jpg" width="377" height="123">
+						<span>应用管理</span>
+					</a>
+				</div>	
+			</div>
+			
+			<div class="fn-clear">
+				<div class="item">
+					<a class="item-block" href="javascript:;" hidefocus="true">
+						<img src="index/bg_7.jpg" width="965" height="293">
+						<span>应用管理</span>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!--底部波浪-->
+		<div class="foot-bolang"></div>
+    </div>
+
+    <!--底部logo-->
+    <div class="globe-foot">
+    	<span>版权信息</span>
+    </div>
+</div>
+
+<div id="testWindow" class="fn-hide">
+	你好
+	<input type="text" id="" class="ui-input" />
+</div>
+
+
+<script type="text/javascript">
+$(function(){
+	$(".img-show .item .item-block").bind("mouseover",function(i){
+		$(this).find("span").css({"bottom":"5px"});
+	}).bind("mouseout",function(i){
+		$(this).find("span").css({"bottom":"-35px"});
+	});
+});
+</script>
+</body>
+</html>

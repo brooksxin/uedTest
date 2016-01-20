@@ -1,0 +1,167 @@
+{
+    "context": {
+        "provinceId": "",
+        "contextRoot": "",
+        "productMode": "false",
+        "x_resultinfo": "ok",
+        "subSysCode": "",
+        "x_resultcode": "0",
+        "contextName": "",
+        "version": "0"
+    },
+    "data": {
+        "returnCode": "0",
+        "beans": [
+            {
+                "CODE_VALUE": "50",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "0",
+                "CODE_NAME": "手机",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            },
+            {
+                "CODE_VALUE": "51",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "1",
+                "CODE_NAME": "网卡",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            },
+            {
+                "CODE_VALUE": "52",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "2",
+                "CODE_NAME": "上网本",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            },
+            {
+                "CODE_VALUE": "53",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "3",
+                "CODE_NAME": "数据卡",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            },
+            {
+                "CODE_VALUE": "54",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "4",
+                "CODE_NAME": "固话",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            },
+            {
+                "CODE_VALUE": "55",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "5",
+                "CODE_NAME": "家庭网关",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            },
+            {
+                "CODE_VALUE": "56",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "6",
+                "CODE_NAME": "非定制终端",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            },
+            {
+                "CODE_VALUE": "57",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "7",
+                "CODE_NAME": "移动座机",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            },
+            {
+                "CODE_VALUE": "58",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "8",
+                "CODE_NAME": "商务电话",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            },
+            {
+                "CODE_VALUE": "59",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "9",
+                "CODE_NAME": "有线电话",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            },
+            {
+                "CODE_VALUE": "60",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "10",
+                "CODE_NAME": "阅读终端(G3)",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            },
+            {
+                "CODE_VALUE": "65",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "11",
+                "CODE_NAME": "车务通",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            },
+            {
+                "CODE_VALUE": "66",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "12",
+                "CODE_NAME": "3G宜居通",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            },
+            {
+                "CODE_VALUE": "5",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "13",
+                "CODE_NAME": "3G POC",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            },
+            {
+                "CODE_VALUE": "6",
+                "CODE_TYPE_ALIAS": "资源类别",
+                "STATE": "U",
+                "EXTERN_CODE_TYPE": "90882",
+                "SORT_ID": "14",
+                "CODE_NAME": "3G商户管家",
+                "CODE_DESC": "PROD_SPEC_*",
+                "CODE_TYPE": "PROD_SPEC_MODE_TYPE"
+            }
+        ]
+    }
+}

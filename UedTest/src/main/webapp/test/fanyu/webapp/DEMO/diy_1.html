@@ -1,0 +1,565 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Untitled Form</title>
+<link href="../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../css/common.css" media="all">
+<script src="../lib/jquery/1.8.1/jquery.js"></script>
+<script type="text/javascript" src="../lib/pretty/prettify.js"></script>
+<script type="text/javascript" src="../lib/slides/3.0/jquery.slides.min.js"></script>
+<script type="text/javascript" src="../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../common/common.js"></script>
+
+<link href="opui/res/lib/jqui/1.9.2/jquery-ui.css" rel="stylesheet">
+<link href="opui/res/lib/jqui/1.9.2/jquery.multiselect.css" rel="stylesheet">
+
+<!-- <script src="../lib/datepicker/4.8.b2/WdatePicker.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="opui/res/lib/datepicker/4.8.b2/skin/WdatePicker.css" media="all"> -->
+
+<!-- <script type="text/javascript" src="opui/res/lib/jqui/1.9.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="opui/res/lib/jqui/1.9.2/jquery.combobox.js"></script>
+<script type="text/javascript" src="opui/res/lib/jqui/1.9.2/jquery.multiselect.js"></script>
+
+<script type="text/javascript" src="opui/res/lib/handlebars/1.0.rc.1/handlebars.js"></script>
+<script type="text/javascript" src="pretty/prettify.js"></script>
+<script type="text/javascript" src="js/NiceTools.js"></script>
+<script type="text/javascript" src="js/diyForms.js"></script> -->
+
+</head>
+<body id="main_body" onload="prettyPrint()" >
+	
+
+<div class="form_container">
+	<form id="form_642652" method="post" action="">
+
+		<div class="search_form">
+			<div class="search_form_wrap">
+				<div class="">
+					<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+						<tbody>
+							<tr>
+								<td ><label class="description" for="element_1">机器名称：</label></td>
+								<td ><input id="element_1" name="element_1" class="element text" type="text" maxlength="255" value="" /></td>
+								<td ><label class="description" for="element_2">机器类型：</label></td>
+								<td >
+									<!-- 日历选择框  -->
+									<input id="element_2" name="element_2" class="element text Wdate" type="text" maxlength="255" value="" onclick="WdatePicker()" />
+									<!-- 隐藏域  -->
+									<input type="hidden" value="" />
+
+								</td>
+								<td ><label class="description" for="element_3">申请类型：</label></td>
+								<td >
+									<select class="element text" id="element_3" name="element_3" >
+									  <option>请选择</option>	
+									  <option>事假</option>	
+									  <option>公假</option>
+									  <option>产假</option>
+									  <option>病假</option>
+									  <option>临时假临时</option>
+								   </select> 
+								</td>
+							</tr>
+							<tr>
+								<td ><label class="description" for="element_1">机器名称：</label></td>
+								<td ><input id="element_1" name="element_1" class="element text" type="text" maxlength="255" value="" /></td>
+								<td ><label class="description" for="element_2">机器类型：</label></td>
+								<td ><input id="element_2" name="element_2" class="element text" type="text" maxlength="255" value="" /></td>
+								<td ><label class="description" for="element_3">申请类型：</label></td>
+								<td >
+									<select id="combobox">
+										<option value="">所有</option>
+										<option value="ActionScript">[11359]三星</option>
+										<option value="AppleScript">12359诺基亚</option>
+										<option value="Asp">Asp</option>
+										<option value="BASIC">BASIC</option>
+										<option value="C">C</option>
+										<option value="C++">C++</option>
+										<option value="Clojure">Clojure</option>
+										<option value="COBOL">COBOL</option>
+										<option value="ColdFusion">ColdFusion</option>
+										<option value="Erlang">Erlang</option>
+										<option value="Fortran">Fortran</option>
+										<option value="Groovy">Groovy</option>
+										<option value="Haskell">Haskell</option>
+										<option value="Java">Java</option>
+										<option value="JavaScript">JavaScript</option>
+										<option value="Lisp">Lisp</option>
+										<option value="Perl">Perl</option>
+										<option value="PHP">PHP</option>
+										<option value="Python">Python</option>
+										<option value="Ruby">Ruby</option>
+										<option value="Scala">Scala</option>
+										<option value="Scheme">Scheme</option>
+									</select>
+									<!--
+									<select class="element text" id="element_3" name="element_3" >
+									  <option>请选择</option>	
+									  <option>事假</option>	
+									  <option>公假</option>
+									  <option>产假</option>
+									  <option>病假</option>
+									  <option>临时临时假</option>
+								   </select> 
+								    -->
+								</td>
+							</tr>
+							<tr>
+								<td ><label class="description" for="element_4">申请人：</label></td>
+								<td ><input class="element text" id="element_4" name="element_4" type="text" value="王小虎"  /></td>
+								<td ><label class="description" for="element_5">申请状态：</label></td>
+								<td >
+									<select class="element text" id="element_5" name="element_5">
+									  <option>请选择</option>	
+									  <option>待审批</option>
+									  <option>已审批</option>
+								   </select> 
+								</td>
+								<td colspan="2">
+									&nbsp;
+								</td>
+							</tr>
+							<tr>
+								<td valign="top"><label class="description" for="element_4">产品类型：</label></td>
+								<td colspan="5">
+									<select title="Basic example" multiple="multiple" name="example-basic" id="multiselect" size="2">
+										<option value="option1">选项1</option>
+										<option value="option2">选项2</option>
+										<option value="option3">选项3</option>
+										<option value="option4">选项4</option>
+										<option value="option5">选项5</option>
+										<option value="option6">选项6</option>
+										<option value="option7">选项7</option>
+										<option value="option8">选项8</option>
+										<option value="option9">选项9</option>
+										<option value="option10">选项10</option>
+										<option value="option11">选项11</option>
+										<option value="option12">选项12</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td valign="top"><label class="description" for="element_4">产品规格：</label></td>
+								<td colspan="5">
+									<input type="checkbox" name="a"/> 三星	
+									<input type="checkbox" name="a"/> 诺基亚
+									<input type="checkbox" name="a"/> 苹果
+									<input type="checkbox" name="a"/> HTC
+									<input type="checkbox" name="a"/> 三星	
+									<input type="checkbox" name="a"/> 诺基亚
+									<input type="checkbox" name="a"/> 苹果
+									<input type="checkbox" name="a"/> HTC
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div> 
+
+			</div>
+		</div>
+ 
+		<!-- buttun -->
+		<div class="form_btn">
+			<a class="W_btn_b mg_l_f_20" href="javascript:;" hidefocus="true">
+				<span>提 交</span>
+			</a>
+			<a class="W_btn_a mg_l_20" href="javascript:;" hidefocus="true">
+				<span>取 消</span>
+			</a>
+		</div>
+		<!-- buttun -->
+
+		
+	</form>
+
+</div>
+
+
+<h1> 下面表格通过JSON生成</h1>
+
+
+<div class="form_container">
+	<form id="form_search" method="post" action="">
+
+		<div class="search_form">
+			<div class="search_form_wrap">
+				<div class="" id="J_jsonform">
+					<!-- tpl -->
+				</div> 
+
+			</div>
+		</div>
+
+
+		<!-- buttun -->
+		<div class="form_btn">
+			<a class="W_btn_b mg_l_f_20" id="J_formbtn" href="javascript:;" hidefocus="true">
+				<span>查 询</span>
+			</a>
+			<a class="W_btn_a mg_l_20" href="javascript:;" hidefocus="true">
+				<span>取 消</span>
+			</a>
+		</div>
+		<!-- buttun -->
+
+	</form>
+
+</div>
+
+
+<table id="testTbl" border=1 width="50%">
+</table>
+
+
+
+
+
+<script>
+$(function() {
+	$("#combobox").combobox();
+	$("#multiselect").multiselect();
+
+	//测试提交数据
+	$("#J_formbtn").click(function(){
+		var str = $("#form_search").serialize();
+	    alert(str);
+	});
+});
+</script>
+
+
+<script>
+var jsons = {
+	"data":{"eles" : [
+			{
+				"KEY":"ele_1",
+				"NAME":"机器名称",
+				"MODULE_TYPE":"text",
+				"SHOW_TYPE":"",
+				"DADA_TYPE":"STRING",
+				"IS_EDITABLE":"N",
+				"DEFAULT_VALUE":"123",
+				"ON_CHANGE":"",
+				"MOUSE_OVER":"",
+				"MOUSE_CLICK":"",
+				"MOUSE_DOUBLECLICK":"",
+				"MOUSE_ON":"",
+				"MOUSE_DOWN":"",
+				"INIT":"",
+				"AUTH":"",
+				"VALIDATE_EVENT":"",
+				"EVENT_FUNCTION":[
+					{"KEY":"","VALUE":""}
+				]
+			},
+			{
+				"KEY":"ele_2",
+				"NAME":"机器类型",
+				"MODULE_TYPE":"date",
+				"SHOW_TYPE":"",
+				"DADA_TYPE":"STRING",
+				"IS_EDITABLE":"N",
+				"DEFAULT_VALUE":"",
+				"ON_CHANGE":"",
+				"MOUSE_OVER":"",
+				"MOUSE_CLICK":"",
+				"MOUSE_DOUBLECLICK":"",
+				"MOUSE_ON":"",
+				"MOUSE_DOWN":"",
+				"INIT":"",
+				"AUTH":"",
+				"VALIDATE_EVENT":"",
+				"EVENT_FUNCTION":[
+					{"KEY":"","VALUE":""}
+				]
+			},
+			{
+				"KEY":"ele_3",
+				"NAME":"申请类型",
+				"MODULE_TYPE":"date",
+				"SHOW_TYPE":"2",
+				"DADA_TYPE":"STRING",
+				"IS_EDITABLE":"Y",
+				"DEFAULT_VALUE":"",
+				"ON_CHANGE":"",
+				"MOUSE_OVER":"",
+				"MOUSE_CLICK":"",
+				"MOUSE_DOUBLECLICK":"",
+				"MOUSE_ON":"",
+				"MOUSE_DOWN":"",
+				"INIT":"",
+				"AUTH":"",
+				"VALIDATE_EVENT":"",
+				"EVENT_FUNCTION":[
+					{"KEY":"","VALUE":""}
+				]
+			},
+			{
+				"KEY":"ele_4",
+				"NAME":"机器名称",
+				"MODULE_TYPE":"date",
+				"SHOW_TYPE":"3",
+				"DADA_TYPE":"STRING",
+				"IS_EDITABLE":"Y",
+				"DEFAULT_VALUE":"",
+				"ON_CHANGE":"",
+				"MOUSE_OVER":"",
+				"MOUSE_CLICK":"",
+				"MOUSE_DOUBLECLICK":"",
+				"MOUSE_ON":"",
+				"MOUSE_DOWN":"",
+				"INIT":"",
+				"AUTH":"",
+				"VALIDATE_EVENT":"",
+				"EVENT_FUNCTION":[
+					{"KEY":"","VALUE":""}
+				]
+			},
+			{
+				"KEY":"ele_5",
+				"NAME":"机器类型",
+				"MODULE_TYPE":"date",
+				"SHOW_TYPE":"4",
+				"DADA_TYPE":"STRING",
+				"IS_EDITABLE":"Y",
+				"DEFAULT_VALUE":"",
+				"ON_CHANGE":"",
+				"MOUSE_OVER":"",
+				"MOUSE_CLICK":"",
+				"MOUSE_DOUBLECLICK":"",
+				"MOUSE_ON":"",
+				"MOUSE_DOWN":"",
+				"INIT":"",
+				"AUTH":"",
+				"VALIDATE_EVENT":"",
+				"EVENT_FUNCTION":[
+					{"KEY":"","VALUE":""}
+				]
+			},
+			{
+				"KEY":"ele_6",
+				"NAME":"申请类型",
+				"MODULE_TYPE":"date",
+				"SHOW_TYPE":"",
+				"DADA_TYPE":"STRING",
+				"IS_EDITABLE":"Y",
+				"DEFAULT_VALUE":"",
+				"ON_CHANGE":"",
+				"MOUSE_OVER":"",
+				"MOUSE_CLICK":"",
+				"MOUSE_DOUBLECLICK":"",
+				"MOUSE_ON":"",
+				"MOUSE_DOWN":"",
+				"INIT":"",
+				"AUTH":"",
+				"VALIDATE_EVENT":"",
+				"EVENT_FUNCTION":[
+					{"KEY":"","VALUE":""}
+				]
+			},
+			{
+				"KEY":"ele_7",
+				"NAME":"申请人",
+				"MODULE_TYPE":"select",
+				"SHOW_TYPE":"",
+				"DADA_TYPE":"STRING",
+				"IS_EDITABLE":"Y",
+				"DEFAULT_VALUE":"1",
+				"ON_CHANGE":"",
+				"MOUSE_OVER":"",
+				"MOUSE_CLICK":"",
+				"MOUSE_DOUBLECLICK":"",
+				"MOUSE_ON":"",
+				"MOUSE_DOWN":"",
+				"INIT":"",
+				"AUTH":"",
+				"VALIDATE_EVENT":"",
+				"DATA":[
+					{KEY:1,VALUE:"选项1"},
+					{KEY:2,VALUE:"选项2"},
+					{KEY:3,VALUE:"选项3"},
+					{KEY:4,VALUE:"选项4"}
+				],
+				"EVENT_FUNCTION":[
+					{"KEY":"","VALUE":""}
+				]
+			},
+			{
+				"KEY":"ele_8",
+				"NAME":"申请状态",
+				"MODULE_TYPE":"inputselect",
+				"SHOW_TYPE":"",
+				"DADA_TYPE":"STRING",
+				"IS_EDITABLE":"Y",
+				"DEFAULT_VALUE":"",
+				"ON_CHANGE":"",
+				"MOUSE_OVER":"",
+				"MOUSE_CLICK":"",
+				"MOUSE_DOUBLECLICK":"",
+				"MOUSE_ON":"",
+				"MOUSE_DOWN":"",
+				"INIT":"",
+				"AUTH":"",
+				"VALIDATE_EVENT":"",
+				"DATA":[
+					{KEY:1,VALUE:"选项1"},
+					{KEY:2,VALUE:"选项2"},
+					{KEY:3,VALUE:"选项3"},
+					{KEY:4,VALUE:"选项4"},
+					{KEY:5,VALUE:"选项5"},
+					{KEY:6,VALUE:"选项6"},
+					{KEY:7,VALUE:"选项7"}
+				],
+				"EVENT_FUNCTION":[
+					{"KEY":"","VALUE":""}
+				]
+			},
+			{
+				"KEY":"ele_9",
+				"NAME":"申请状态",
+				"MODULE_TYPE":"multiselect",
+				"SHOW_TYPE":"",
+				"DADA_TYPE":"STRING",
+				"IS_EDITABLE":"Y",
+				"DEFAULT_VALUE":"",
+				"ON_CHANGE":"",
+				"MOUSE_OVER":"",
+				"MOUSE_CLICK":"",
+				"MOUSE_DOUBLECLICK":"",
+				"MOUSE_ON":"",
+				"MOUSE_DOWN":"",
+				"INIT":"",
+				"AUTH":"",
+				"VALIDATE_EVENT":"",
+				"DATA":[
+					{KEY:1,VALUE:"选项1"},
+					{KEY:2,VALUE:"选项2"},
+					{KEY:3,VALUE:"选项3"},
+					{KEY:4,VALUE:"选项4"},
+					{KEY:5,VALUE:"选项5"},
+					{KEY:6,VALUE:"选项6"},
+					{KEY:7,VALUE:"选项7"}
+				],
+				"EVENT_FUNCTION":[
+					{"KEY":"","VALUE":""}
+				]
+			},
+			{
+				"KEY":"ele_9",
+				"NAME":"省市",
+				"MODULE_TYPE":"select",
+				"SHOW_TYPE":"",
+				"DADA_TYPE":"STRING",
+				"IS_EDITABLE":"Y",
+				"DEFAULT_VALUE":"3",
+				"ON_CHANGE":"",
+				"MOUSE_OVER":"",
+				"MOUSE_CLICK":"",
+				"MOUSE_DOUBLECLICK":"",
+				"MOUSE_ON":"",
+				"MOUSE_DOWN":"",
+				"INIT":"",
+				"AUTH":"",
+				"VALIDATE_EVENT":"",
+				"DATA":[
+					{KEY:1,VALUE:"选项1"},
+					{KEY:2,VALUE:"选项2"},
+					{KEY:3,VALUE:"选项3"},
+					{KEY:4,VALUE:"选项4"},
+					{KEY:5,VALUE:"选项5"},
+					{KEY:6,VALUE:"选项6"},
+					{KEY:7,VALUE:"选项7"}
+				],
+				"EVENT_FUNCTION":[
+					{"KEY":"change","VALUE":"DIY.bindChangeEvent(this,{'url':'city.json','extraData':'abc=1','targetId':'ele_10'})"}
+				] 
+			},
+			{
+				"KEY":"ele_10",
+				"NAME":"县市",
+				"MODULE_TYPE":"select",
+				"SHOW_TYPE":"",
+				"DADA_TYPE":"STRING",
+				"IS_EDITABLE":"Y",
+				"DEFAULT_VALUE":"",
+				"MOUSE_OVER":"",
+				"MOUSE_CLICK":"",
+				"MOUSE_DOUBLECLICK":"",
+				"MOUSE_ON":"",
+				"MOUSE_DOWN":"",
+				"INIT":"",
+				"AUTH":"",
+				"VALIDATE_EVENT":"",
+				"DATA":[
+				],
+				"EVENT_FUNCTION":[
+					{"KEY":"change","VALUE":"DIY.bindChangeEvent(this,{'url':'city.json','extraData':'abc=2','targetId':'ele_11'})"}
+				] 
+			},
+			{
+				"KEY":"ele_11",
+				"NAME":"区域",
+				"MODULE_TYPE":"select",
+				"SHOW_TYPE":"",
+				"DADA_TYPE":"STRING",
+				"IS_EDITABLE":"Y",
+				"DEFAULT_VALUE":"",
+				"ON_CHANGE":"",
+				"MOUSE_OVER":"",
+				"MOUSE_CLICK":"",
+				"MOUSE_DOUBLECLICK":"",
+				"MOUSE_ON":"",
+				"MOUSE_DOWN":"",
+				"INIT":"",
+				"AUTH":"",
+				"VALIDATE_EVENT":"",
+				"DATA":[
+				],
+				"EVENT_FUNCTION":[
+					{"KEY":"change","VALUE":"DIY.bindChangeEvent(this,{'url':'city.json','extraData':'abc=4','targetId':'12'})"}
+				] 
+			},
+			{
+				"KEY":"ele_12",
+				"NAME":"区域",
+				"MODULE_TYPE":"select",
+				"SHOW_TYPE":"",
+				"DADA_TYPE":"STRING",
+				"IS_EDITABLE":"Y",
+				"DEFAULT_VALUE":"",
+				"ON_CHANGE":"",
+				"MOUSE_OVER":"",
+				"MOUSE_CLICK":"",
+				"MOUSE_DOUBLECLICK":"",
+				"MOUSE_ON":"",
+				"MOUSE_DOWN":"",
+				"INIT":"",
+				"AUTH":"",
+				"VALIDATE_EVENT":"",
+				"DATA":[
+				],
+				"EVENT_FUNCTION":[
+					{"KEY":"change","VALUE":"DIY.bindChangeEvent(this,{'url':'city.json','extraData':'abc=5','targetId':''})"}
+				] 
+			}
+		]
+	}
+}
+
+$(function(){
+	$("#J_jsonform").jsonToForm({data:jsons.data.eles});
+})
+
+</script>
+
+
+
+<!--[if IE 6]>
+<script>
+try{document.execCommand("BackgroundImageCache", false, true);}catch(e){}
+</script>
+<![endif]-->
+
+</body>
+</html>

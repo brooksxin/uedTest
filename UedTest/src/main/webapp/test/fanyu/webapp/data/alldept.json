@@ -1,0 +1,85 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": "数据加载成功！！！",
+    "bean": {},
+    "beans": [],
+    "object": [
+        {
+            "TGT_PTY_ID": "1000000000101",
+            "PTY_NM": "电话营销组",
+            "PTY_TYPE_CD": "3001",
+            "PTY_LVL_CD": "03",
+            "BASE_PTY_ID": "1000000000124",
+            "subList": [
+                {
+                    "TGT_PTY_ID": "1000000000102",
+                    "PTY_NM": "营销1班",
+                    "PTY_TYPE_CD": "3001",
+                    "PTY_LVL_CD": "04",
+                    "BASE_PTY_ID": "1000000000101"
+                },
+                {
+                    "TGT_PTY_ID": "1000000000103",
+                    "PTY_NM": "营销2班",
+                    "PTY_TYPE_CD": "3001",
+                    "PTY_LVL_CD": "04",
+                    "BASE_PTY_ID": "1000000000102"
+                },
+                {
+                    "TGT_PTY_ID": "1000000000104",
+                    "PTY_NM": "营销3班",
+                    "PTY_TYPE_CD": "3001",
+                    "PTY_LVL_CD": "04",
+                    "BASE_PTY_ID": "1000000000103"
+                },
+                {
+                    "TGT_PTY_ID": "1000000000110",
+                    "PTY_NM": "营销4班 ",
+                    "PTY_TYPE_CD": "3001",
+                    "PTY_LVL_CD": "04",
+                    "BASE_PTY_ID": "1000000000104"
+                }
+            ]
+        },
+        {
+            "TGT_PTY_ID": "1000000000102",
+            "PTY_NM": "电话营销组1",
+            "PTY_TYPE_CD": "3001",
+            "PTY_LVL_CD": "03",
+            "BASE_PTY_ID": "1000000000124",
+            "subList": [
+                {
+                    "TGT_PTY_ID": "1000000000111",
+                    "PTY_NM": "营销6班",
+                    "PTY_TYPE_CD": "3001",
+                    "PTY_LVL_CD": "04",
+                    "BASE_PTY_ID": "1000000000112"
+                },
+                {
+                    "TGT_PTY_ID": "1000000000113",
+                    "PTY_NM": "营销7班",
+                    "PTY_TYPE_CD": "3001",
+                    "PTY_LVL_CD": "04",
+                    "BASE_PTY_ID": "1000000000114"
+                },
+                {
+                    "TGT_PTY_ID": "1000000000114",
+                    "PTY_NM": "营销8班",
+                    "PTY_TYPE_CD": "3001",
+                    "PTY_LVL_CD": "04",
+                    "BASE_PTY_ID": "1000000000117"
+                },
+                {
+                    "TGT_PTY_ID": "1000000000118",
+                    "PTY_NM": "营销9班 ",
+                    "PTY_TYPE_CD": "3001",
+                    "PTY_LVL_CD": "04",
+                    "BASE_PTY_ID": "1000000000108"
+                }
+            ]
+        }
+    ]
+}

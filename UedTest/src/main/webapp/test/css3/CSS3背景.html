@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="../zw.ico">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>css3-demo</title>
+
+<style type="text/css">
+/*
+*
+*/
+body{
+	width: 900px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+div{
+	margin: 10px 0;
+	line-height: 20px;
+	border: solid 1px #CCC;
+	background-color: #DDD;
+}
+.demo1{
+	-wbekit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-o-border-radius: 10px;
+	border-radius: 10px;
+}
+.demo1Px{
+	background-image: url("../zw.ico");
+	-wbekit-background-size: 50px 100px;
+	-moz-background-size: 50px 100px;
+	-o-background-size: 50px 100px;
+	background-size: 50px 100px;
+	width: 200px;
+	height: 100px;
+	background-repeat: no-repeat;
+
+}
+.demo1Pe{
+	background-image: url("../zw.ico");
+	-wbekit-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-o-background-size: 100% 100%;
+	background-size: 100% 100%;
+	width: 200px;
+	height: 100px;
+	background-repeat: no-repeat;
+
+}
+.demo1D{
+	background-image: url("../zw.ico");
+	width: 100px;
+	height: 50px;
+	background-repeat: no-repeat;
+}
+
+#div1,#div2{
+	background-image: url("../zw.ico");
+	background-repeat: no-repeat;
+	background-position:left;
+	padding: 30px;/**background-origin设置了padding才会有效果**/
+}
+#div1{
+	background-origin:border-box;
+}
+#div2{
+	background-origin:content-box;
+}
+
+.demo3 div{
+	background-color:yellow;
+	background-repeat: no-repeat;
+}
+.demo3 .clip{
+	padding: 30px;
+	background-clip: content-box;
+}
+</style>
+
+</head>
+<body>
+	<div class="demo1">
+		<p>background-size：规定背景图片的大小</p>
+		<p>在 CSS3 之前，背景图片的尺寸是由图片的实际尺寸决定的。在 CSS3 中，可以规定背景图片的尺寸，这就允许我们在不同的环境中重复使用背景图片。</p>
+		<p class="demo1Px">像素拉伸</p>
+		<p class="demo1Pe">百分比拉伸</p>
+		<p class="demo1D">原图</p>
+	</div>
+
+	<div id="div1">
+	这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。
+	</div>
+
+	<div id="div2">
+	这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。
+	</div>
+
+	<div class="demo3">
+		<div>
+		这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。
+		</div>
+
+		<div class="clip">
+		这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。这是文本。
+		</div>
+	</div>
+</body>
+</html>

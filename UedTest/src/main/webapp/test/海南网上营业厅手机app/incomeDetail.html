@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>厅排名</title>
+<meta charset="utf-8">
+<link href="nvd3/nv.d3.css" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1 , user-scalable=no">
+<meta content="telephone=no" name="format-detection" />
+</head>
+<body>
+ <div class="ui-head" id="J_income_title">
+      <a class="nb-ui-head-icon nb-ui-head-icon-return fn-left" onclick="window.location.href='myincome.html?type='+$.getUrlVar('type')"></a>
+          <!-- <span class="nb-ui-head-icon nb-ui-head-icon-list "></span> -->
+      <a class="ui-title myincome-title-item fn-text-overflow" id="J_title" style="width:50%;">-</a>
+      <a class="nb-ui-head-icon nb-ui-head-icon-list fn-right" id="J_list" href=""></a>
+  </div>
+  <div class="ui-body">
+    <h1 class="bar-pie-title mgl5">收入构成分析(元)</h1>
+    <div id="pie" class="bar-pie-pie">
+      <svg></svg>
+    </div>
+    <ul class="bar-pie-info-wrap"  id="J_detail_label_all">
+    </ul>
+    <div class="fn-clear"></div>
+    <h1 class="bar-pie-title mgl5">最近七天趋势(元)</h1>
+    <div id="chart" class="bar-pie-bar">
+      <svg></svg>
+    </div>
+  </div>
+
+<textarea id="T_detail_label_all" class="fn-hide">
+  {{#each this}}
+    <li>
+      <span class="bar-pie-info bar-pie-info-{{@index}}"></span>{{salTypeName}}
+    </li>
+  {{/each}}
+</textarea>
+<div class="nb-ui-loader nb-ui-corner-all fn-hide" id="J_loading_ui" style="">
+    <span class="nb-ui-icon-loading"></span>
+    <h1 class="nb-ui-loader-verbose">正在加载数据...</h1>
+</div>
+<script src="../../lib/jquery/2.1.0/jquery.min.js"></script>
+<script src="../../lib/handlebars/1.1.2/handlebars.min.js"></script>
+<script src="../../common/config.js"></script>
+<script src="../../common/common.js"></script>
+<script src="../../lib/cordova.js"></script>
+
+
+<script src="nvd3/d3.v3.js"></script>
+<script src="nvd3/nv.d3.js"></script>
+
+<script type="text/javascript">
+window.incomeDetail={};
+window.incomeDetail.pieUrls={
+  "0":"incomepieY",
+  "1":"incomepieTotal",
+  "10":"incomepieYLD",
+  "11":"incomepieTotalLD"
+}
+window.incomeDetail.lineUrls={
+  "0":"incomeAreaY",
+  "1":"incomeAreaTotal",
+  "10":"incomeAreaYLD",
+  "11":"incomeAreaTotalLD"
+}
+window.incomeDetail.keys={
+  "0":"SR",
+  "1":"LJSR",
+  "10":"salary",
+  "11":"salary"
+}
+window.incomeDetail.titles={
+  "0":"昨日收入",
+  "1":"累计收入",
+  "10":"昨日收入",
+  "11":"累计收入"
+}
+// 费用项  0、总收入 1、放号 2、产品销售 3、终端销售 4、促销活动 5、缴费 6、基础服务
+$(function(){
+  var type=$.getUrlVar('type');
+  var pId=$.getUrlVar('prodId');
+  var salary=$.getUrlVar('salary');
+  var title=$.getUrlVar('title');
+  $('#J_list').attr('href','income.html?type='+type+'&title='+title+'&salary='+salary+'&prodId='+pId);
+  $('#J_title').html(window.incomeDetail.titles[type]+'-'+decodeURIComponent(title));
+  $.PostJson(window.dataArray[window.incomeDetail.pieUrls[type]],'prodId='+pId+'&type='+type,function(state,json){
+    if(state=='success'){
+          if(parseInt(type)<10){
+            //普通操作员登入
+            if(pId!='0'){
+              var total=0;
+              var target=0;
+              for(var i=0;i<json.beans.length;i++){
+                if(json.beans[i].salType==pId){
+                  target=json.beans[i].salary;
+                }else{
+                  total+=parseFloat(json.beans[i].salary);
+                }
+              }
+              json.beans=[];
+              json.beans[0]={
+                salTypeName:decodeURIComponent(title),
+                salary:target,
+                color:'#000'
+              }
+              json.beans[1]={
+                salTypeName:'其他',
+                salary:total
+              }
+            }
+          }
+          $('#J_detail_label_all').temp($('#T_detail_label_all'),json.beans);
+          
+          nv.addGraph(function() {
+            var chart = nv.models.pieChart()
+                .x(function(d) { return d.salTypeName })
+                .y(function(d) { return d.salary })
+                //.color(function(d){return '#000000'})
+                .showLabels(true)
+                .labelThreshold(.1)
+                .labelType("percent")
+                .donut(true)
+                .donutRatio(0.35)
+                ;
+            var options = {
+              showControls: false,
+              showLegend: false
+            }
+            chart.margin({left:0,top:5,right:0,bottom:5});
+            chart.options(options);
+            d3.select("#pie svg")
+              .datum(json.beans)
+              .call(chart)
+            return chart;
+        });
+      }else{
+        alert(json.returnMessage||'获取数据失败，请稍后再试');
+    }
+  });
+  $.PostJson(window.dataArray[window.incomeDetail.lineUrls[type]],'prodId='+pId+'&type='+type,function(state,json){
+    if(state=='success'){
+          nv.addGraph(function(){
+            var chart = nv.models.stackedAreaChart()
+                          .margin({left:42,top:30})
+                          .x(function(d) { return parseInt(parseInt(d.TJRQ)/1000/60/60)})
+                          .y(function(d) { return parseInt(d[window.incomeDetail.keys[type]])})
+                          .useInteractiveGuideline(true)
+                          .clipEdge(true);
+            var options = {
+                showControls: false,
+                showLegend: false
+            }
+            chart.options(options);
+            chart.xAxis.tickFormat(function(d) {
+                  //return d.toString().substr(4);
+                  //alert(d+'   '+timeFormat(new Date(d),'MMDD'));
+                  return timeFormat(new Date(d*1000*3600),'MMDD');
+            });
+            chart.yAxis
+                .tickFormat(d3.format(',.0f'));
+            d3.select('#chart svg')
+              .datum(json.beans)
+              .call(chart);
+            return chart;
+          });
+        }else{
+          alert(json.returnMessage||'获取数据失败，请稍后再试');
+      }
+  });
+})
+function timeFormat(date , formatStr){ 
+      var str = formatStr; 
+      str=str.replace(/yyyy|YYYY/,date.getFullYear()); 
+      str=str.replace(/yy|YY/,(date.getYear() % 100)>9?(date.getYear() % 100).toString():"0" + (date.getYear() % 100)); 
+      str=str.replace(/MM/,date.getMonth()>8?(date.getMonth()+1).toString():"0" + (date.getMonth()+1)); 
+      str=str.replace(/M/g,date.getMonth()+1); 
+      str=str.replace(/dd|DD/,date.getDate()>9?date.getDate().toString():"0" + date.getDate()); 
+      str=str.replace(/d|D/g,date.getDate()); 
+      str=str.replace(/hh|HH/,date.getHours()>9?date.getHours().toString():"0" + date.getHours()); 
+      str=str.replace(/h|H/g,date.getHours()); 
+      str=str.replace(/mm/,date.getMinutes()>9?date.getMinutes().toString():"0" + date.getMinutes()); 
+      str=str.replace(/m/g,date.getMinutes()); 
+      str=str.replace(/ss|SS/,date.getSeconds()>9?date.getSeconds().toString():"0" + date.getSeconds()); 
+      str=str.replace(/s|S/g,date.getSeconds()); 
+      return str; 
+}
+</script>
+</body>
+</html>

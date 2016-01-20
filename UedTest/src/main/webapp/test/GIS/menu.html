@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>menu</title>
+	<style type="text/css">
+		#wholewindow{
+			width: 100%;
+			margin: 0 auto;
+			padding: 0;
+			position:absolute;
+			left:0;
+			top:0;
+		}
+
+		#aside{
+			width: 200px;
+			position:relative;
+			left:0px;
+			top:50px;
+		}
+
+		#aside ul{
+			list-style: none;
+			margin: 40px 0 0 70px;
+			padding: 0;
+		}
+
+		#aside ul li{
+			margin: 0 0 10px 0;
+		}
+
+		#article{
+			width: 1100px;
+			height: 500px;
+			position:absolute;
+			left:210px;
+			top:40px;
+		}
+		a{
+			text-decoration: none;
+			font-size: 14px;
+		}
+	</style>
+		<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+	<script>
+		function loadHtml(htmlpage){
+			$("'iframe[src='" +htmlpage+"']'").show().siblings().hide();
+		}
+	
+	</script>
+</head>
+<body>
+<div id="wholewindow">
+	<div id="aside">
+		<ul>
+			<li>
+				<a href="javascript:;" onclick='loadHtml("appConfig.html")' >应用配置界面</a>
+			</li>
+
+			<li>
+				<a href="javascript:;" onclick='loadHtml("busiInfoConfig.html")')>业务配置界面</a>
+			</li>
+
+			<li>
+				<a href="javascript:;" onclick='loadHtml("dynamicAttr.html")')>实时属性界面</a>
+			</li>
+
+			<li>
+				<a href="javascript:;" onclick='loadHtml("synchroAttr.html")')>同步属性界面</a>
+			</li>
+
+			<li>
+				<a href="javascript:;" onclick='loadHtml("markerInfoSearch.html")')>标记点信息界面</a>
+			</li>
+
+			<li>
+				<a href="javascript:;" onclick='loadHtml("markerType.html")')>标记点类型界面</a>
+			</li>
+
+			<li>
+				<a href="javascript:;" onclick='loadHtml("markerTypeTpl.html")')>标记点类型模板界面</a>
+			</li>
+
+			<li>
+				<a href="javascript:;" onclick='loadHtml("treeConfig.html")')>组织树配置界面</a>
+			</li>
+		</ul>
+	</div>
+
+	<div id="article">
+		<iframe src="appConfig.html" width="100%" height="100%" id="appConfig"></iframe>
+		<iframe src="busiInfoConfig.html" width="100%" height="100%" id="busiInfoConfig" style="display:none;"></iframe>
+		<iframe src="dynamicAttr.html" width="100%" height="100%" id="dynamicAttr" style="display:none;"></iframe>
+		<iframe src="synchroAttr.html" width="100%" height="100%" id="synchroAttr" style="display:none;"></iframe>
+		<iframe src="markerInfoSearch.html" width="100%" height="100%" id="markerInfoSearch" style="display:none;"></iframe>
+		<iframe src="markerType.html" width="100%" height="100%" id="markerType" style="display:none;"></iframe>
+		<iframe src="markerTypeTpl.html" width="100%" height="100%" id="markerTypeTpl" style="display:none;"></iframe>
+		<iframe src="treeConfig.html" width="100%" height="100%" id="treeConfig" style="display:none;"></iframe>
+	</div>
+
+</div>
+
+</body>
+</html>

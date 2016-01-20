@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="../icon.jpg">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../reset.css">
+<title>css3-rgba</title>
+
+<style type="text/css">
+body{
+	width: 900px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font:normal 12px/1.5 Verdana, Arial, \5b8b\4f53, sans-serif;
+}
+ul{
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+/*
+*R：红色值。正整数 | 百分数
+ G：绿色值。正整数 | 百分数
+ B：蓝色值。正整数| 百分数
+ A：透明度。取值0~1之间
+*/
+
+/*
+*rgba和opacity的对比实例：opacity后代元素会随着一起具有透明性,而RGBA不具有这样的问题;
+*为了解决这样的问题我们需要增加一个空的div来专门放置使用透明的背景，然后通过使用绝对定位来实现我们需要的结果。
+*/
+li.opacity{
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+li.opacity1 {
+ 	background: rgb(255,255,0);
+ 	opacity: 1;
+ 	filter:alpha(opacity=100);
+}
+li.opacity2 {
+	background: rgb(255,255,0);
+	opacity: 0.8;
+	filter:alpha(opacity=80);
+}
+li.opacity3 {
+	background: rgb(255,255,0);
+	opacity: 0.6;
+	filter:alpha(opacity=60);
+}
+li.opacity4 {
+	background: rgb(255,255,0);
+	opacity: 0.4;
+	filter:alpha(opacity=40);
+}
+li.opacity5 {
+	background: rgb(255,255,0);
+	opacity: 0.2;
+	filter:alpha(opacity=20);
+}
+li.opacity6 {
+	background: rgb(255,255,0);
+	opacity: 0;
+	filter:alpha(opacity=0);
+}
+li.rgba {
+	float: left;
+	width: 50px;
+	height: 50px;
+}
+li.rgba1 {
+	background: rgba(255,255,0,1);
+}
+li.rgba2 {
+	background: rgba(255,255,0,0.8);
+}
+li.rgba3 {
+	background: rgba(255,255,0,0.6);
+}
+li.rgba4 {
+	background: rgba(255,255,0,0.4);
+}
+li.rgba5 {
+	background: rgba(255,255,0,0.2);
+}
+li.rgba6 {
+	background: rgba(255,255,0,0);
+}
+
+.bg-box {
+   width: 200px;
+   height: 100px;
+   border: 1px solid #ccc;
+   background: red;
+   position: relative;
+}
+.bg {
+   background: black;
+   opacity: 0.5;
+   filter:alpha(opacity=50);
+   width: 100%;
+   height: 50px;
+   position: absolute;
+   bottom: 0;
+   left: 0;
+}
+.bg-content p,.bg-content2 p {
+   padding: 5px 10px;
+   color: white;
+}
+.bg2{
+	background: black;
+	opacity: 0.5;
+	filter:alpha(opacity=50);
+	width: 100%;
+	height: 100px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+}
+.bg-content2{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 2;
+}
+.p-box p{
+	height: 25px;
+	line-height: 25px;
+	margin: 5px 0;
+}
+/*
+*rgba不单可以应用在background上，只要设置了颜色的地方都可以使用
+*第一种：前景色color
+*/
+.norgba-color {
+  color: rgb(255, 0, 0);
+}  
+.rgba-color {
+  color: rgba(255, 0, 0,0.5);
+}
+/*
+*第二种边框色border-color
+*/
+.norgba-border-color {
+   border:5px solid rgb(255,0,0);
+   width: 200px;
+}  
+.rgba-border-color {
+   border:5px solid rgba(255,0,0,0.5);
+   width: 200px;
+}
+/*
+*第三种：字体的阴影色text-shadow
+*/
+.norgba-text-shadow {
+  text-shadow : 0 2px 1px rgb(255,0,0);
+}
+.rgba-text-shadow {
+  text-shadow : 0 2px 1px rgba(255,0,0,0.3);
+}
+/*
+*第四种改变边框阴影色
+*/
+.norgba-box-shadow {
+   border: 5px solid green;
+   width: 200px;
+   -webkit-box-shadow: 0 2px 2px rgb(255,0,0);
+   -moz-box-shadow: 0 2px 2px rgb(255,0,0);
+   box-shadow: 0 2px 2px rgb(255,0,0);
+}
+.rgba-box-shadow {
+   border: 5px solid green;
+   width: 200px;
+   -webkit-box-shadow: 0 2px 2px rgba(255,0,0,0.6);
+   -moz-box-shadow: 0 2px 2px rgba(255,0,0,0.6);
+   box-shadow: 0 2px 2px rgba(255,0,0,0.6);
+}
+</style>
+
+</head>
+<body>
+	<div class="example-opacity">
+	  	<p>Opacity效果</p>
+	  	<ul>
+	   		<li class="opacity opacity1">100%</li>
+	   		<li class="opacity opacity2">80%</li>
+	   		<li class="opacity opacity3">60%</li>
+	   		<li class="opacity opacity4">40%</li>
+	   		<li class="opacity opacity5">20%</li>
+	   		<li class="opacity opacity6">0</li>
+	  	</ul>
+	  	<p>CSS3的RGBA效果</p>
+	  	<ul>
+	   		<li class="rgba rgba1">1</li>
+	   		<li class="rgba rgba2">0.8</li>
+	   		<li class="rgba rgba3">0.6</li>
+	   		<li class="rgba rgba4">0.4</li>
+	   		<li class="rgba rgba5">0.2</li>
+	   		<li class="rgba rgba6">0</li>
+	 	</ul>
+	</div>
+	<br />
+	<div class="bg-box">
+	  <div class="bg">
+	    <div class="bg-content">
+	       	<p>前景色有黑色半透明</p>
+	     </div>
+	  </div>
+	</div>
+	<div class="bg-box">
+	  	<div class="bg2"></div>
+	   	<div class="bg-content2">
+	      	<p>前景色还是纯白！</p>
+	    </div>           
+	</div>
+	<br />
+	<div class="p-box">
+		<p class="norgba-color">无rgba透明</p>
+		<p class="rgba-color">用rgba改变我的字体颜色</p>
+		<p class="norgba-border-color">用rgba改变我的边框颜色</p>
+		<p class="rgba-border-color">用rgba改变我的边框颜色</p>
+		<p class="norgba-text-shadow">用rgba改变我的字体阴影颜色</p>
+		<p class="rgba-text-shadow">用rgba改变我的字体阴影颜色</p>
+		<p class="norgba-box-shadow">用rgba改变我的边框阴影颜色</p>
+		<p class="rgba-box-shadow">用rgba改变我的边框阴影颜色</p>
+	</div>
+</body>
+</html>

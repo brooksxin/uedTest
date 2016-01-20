@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>顾客接触记录</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+                <div class="breadcrumb"></div>
+                
+				<div class="formItem">
+					<div class="titleArea">
+						<h2>顾客接触记录</h2>
+					</div>
+				</div>
+                
+                <div class="cmxform" >
+                   <form class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+                      <div class="record-search-cate">
+            				<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+									<tr>
+                                        <td width="120"><label class="description">顾客电话号码</label></td>
+                                        <td width="140">
+                                        	<input class="inputWidth  inputText" name="CUST_MOBNUM"  id="CUST_MOBNUM" type="text" maxlength="255" value="" style="width: 140px;"/>
+                                        </td>     
+                                        <td width="120"><label class="description">顾客姓名</label></td>
+										<td width="140">
+											<input class="inputWidth  inputText" name="CMCC_CUST_NM"  id="CMCC_CUST_NM" type="text" maxlength="255" value="" style="width: 140px;"/>
+										</td>
+                        				<td width="120" align="right"><a class="searchBtn" href="javascript:;" id="J_search" >查询</a></td> 
+                        				
+                        				
+                               <tbody id="J_searchMore" class="searchMore">
+                                    <tr>
+                                        <td><label class="description">省份</label></td>
+                    					<td>
+                      					 <select class="element text" id="suprRegnCode" name="suprRegnCode"  onchange="loadCityData()"></select>
+                                          <script type="text/x-handlebars-template" id="p_suprRegnCode">
+                      											<option value="">--请选择--</option>
+                      										    {{#each beans}}
+                      										        <option value="{{suprRegnCode}}">{{regnDesc}}</option>
+                      											{{/each}}
+                      					  </script> 
+										</td>  
+                                        <td><label class="description">地市</label></td>
+                    					<td>
+                      					 <select class="element text" id="regnCode" name="regnCode"></select>
+                                          <script type="text/x-handlebars-template" id="p_regnCode">
+                      											<option value="">--请选择--</option>
+                      										    {{#each beans}}
+                      										        <option value="{{regnCode}}">{{regnNm}}</option>
+                      											{{/each}}
+                      					  </script>                     					
+										</td> 										                                      
+                                    </tr>
+									<tr>
+										<td><label class="description" for="sDate">开始时间</label></td>
+                    					<td>
+                      						<input id="sDate" name='START_DATE' class="inputWidth  text Wdate" style="width: 140px;" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'eDate\')}'})"/>
+										</td> 	
+										<td><label class="description" for="eDate">结束时间</label></td>
+										<td>
+											<input id="eDate" name='END_DATE' class="inputWidth  text Wdate" style="width: 140px;" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'sDate\')}'})"/>
+                    					</td>
+									</tr>
+								</tbody>
+            				</table>
+                        </div>
+                        <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+                    </form>
+                </div>
+                <div class="tablewidth mg_t_10">
+          					<table class="ui-record-table table_radius table-bordered table-striped" >
+						<thead>
+							<tr>
+                                <th width="50">省份</th>
+                                <th width="50">地市</th>							
+								<th width="50">顾客姓名</th>
+								<th width="80">顾客电话</th>
+								<th width="">日期</th>
+								<th width="">开始时间</th>
+								<th width="">结束时间</th>
+								<th width="80">持续时间(秒)</th>
+                                <th width="50">处理人</th>
+								<th width="60">工号</th>
+                                <th width="100">操作</th>
+							</tr>
+                         </thead>
+                         <tbody id="J_tabletpl"></tbody>
+					</table>
+                </div>
+            <!--翻页及功能按钮区域开始-->
+                <div class="amount-bottom">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+                      <tr>
+                        <td width="60">
+                        </td>
+                        <td>
+                        </td>
+                        <td width="50%">
+                            <div class="fn-clear action-other  action-other-show ">
+                                    <div id="PaginationCntMng" class="page pagination fn-right"></div>
+                                    <div class="fn-right fn-pt5 fn-pr10"></div>
+                            </div></td>
+                      </tr>
+                    </table>
+                 </div>
+       <!-- right stop -->
+       	<div id="T_playReocrdPage" class="fn-hide">
+       		 <div class="formArea-B nobottomborder">
+                <table width="100%">
+                	<tbody id="J_RcdTabletpl"></tbody>
+                </table>
+                <div style="text-align: center;"><a class="searchBtn" href="javascript:;" onclick="stopPlay();" >停止</a></div>               
+             </div>
+       	</div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+    /*
+    服务配置
+    param1: 服务名
+    param2: 假数据路径
+    param3: 后台服务路径
+    */
+    srvMap.add('queryContactCntMngs', 'contactCntMngs.json','front/sh/contact!execute?uid=u007');//查询接触记录
+    srvMap.add('selectCntMsgAndTouchRcd', 'rcdInfo.json','front/sh/contact!execute?uid=u014');//接触信息和录音信息查询
+    srvMap.add('queryProvinceData', 'provinceData.json','front/sh/contact!execute?uid=u016');//查询省数据
+    
+    var G_params = {
+    url : srvMap.get('queryContactCntMngs'),
+    items_per_page : 10 ,   // 每页数     @param : limit
+    page_index : 0 , //当前页  @param : start
+    pagination : "PaginationCntMng" , //分页id
+    searchformId : "J_formSearch", //搜索表单的id
+    tabletpl : "T_tabletpl", //表格模板
+    tablewrap : "J_tabletpl" //表格容器
+    };
+
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        loadProvinceData();
+        try{
+            $('#J_search').bind('click',function(){
+                var strCntMng = $("#"+G_params.searchformId).serialize(); //把form序列化 队列
+                Util.pagination( 0 , true , G_params, strCntMng);
+            })
+          	var CUST_MOBNUM = Util.browser.getParameter("CUST_MOBNUM");
+          	if(CUST_MOBNUM!=null){
+          		$("#CUST_MOBNUM")[0].value = CUST_MOBNUM ;
+          	}
+          	
+        }catch(e)
+        {
+            alert(e);
+        }
+    });
+  //查询省份数据
+    function loadProvinceData(){
+     var coopParam={'regionFlag':0};		
+   	 Util.ajax.postJson(srvMap.get('queryProvinceData'),coopParam,function(json,status){
+   		 //alert(JSON.stringify(json));
+   		Util.ajax.loadTemp('#suprRegnCode',$('#p_suprRegnCode'),json);//加载模板
+	    });	  
+	  
+    }    
+  //查询地市数据
+    function loadCityData(){
+     var coopParam={'suprRegnCode':$("#suprRegnCode").val(),'regionFlag':'2'};
+     //Util.ajax.postJson(srvMap.get('queryProvinceData'),'&province_id='+province_id+'&flag='+flag,function(json,status)
+   	 Util.ajax.postJson(srvMap.get('queryProvinceData'),coopParam,function(json,status){
+   		Util.ajax.loadTemp('#regnCode',$('#p_regnCode'),json);//加载模板
+	    });	  
+	  
+    }
+    
+  //跳转到详情页面
+    function gotoDetail(CNTMNG_ID,CUST_MOBNUM,TOUCH_ID){
+    	window.location.href="customerContactSearchDetail.html?CNTMNG_ID="+CNTMNG_ID+"&CUST_MOBNUM="+CUST_MOBNUM+"&TOUCH_ID="+TOUCH_ID;
+    }
+
+    function phoneCall(CUST_MOBNUM){
+        
+    }
+	//播放录音记录
+    function playRecord(CNTMNG_ID,TOUCH_ID){
+		if(TOUCH_ID == ''){
+			alert('无播放录音！');
+			return;
+		}
+    	 Util.ajax.postJson(srvMap.get('selectCntMsgAndTouchRcd'),'&CNTMNG_ID='+CNTMNG_ID,function(json,status){
+ 	        if (status) {
+ 	            Util.ajax.loadTemp('#J_RcdTabletpl',$('#T_RcdTabletpl'),json);//加载模板
+ 	        }else{
+ 	            alert(json.returnMessage||'查询失败，请重试！');
+ 	        }
+ 	    })
+    	var elem = document.getElementById('T_playReocrdPage');
+      	var params = {
+          id:'D_playReocrdPage',
+          title:'录音播放',
+          content: elem,
+          width: 700,
+          height:400,
+          modal: true,
+          closeCallback: stopPlay
+      	}
+     	Util.dialog.openDiv(params);
+    }
+    function stopPlay(){
+    	try{
+    	 player.Stop();
+    	 Util.dialog.close("D_playReocrdPage");
+    	 }catch(e){}
+    }
+    
+    Handlebars.registerHelper('compareTouchMode',function(val){
+    	var buffer = "";
+    	if(val == "0"){
+    		buffer = "呼入";
+    	}else{
+    		buffer = "呼出";
+    	}
+    	
+    	return buffer;
+    })
+</script>
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+			<td>{{REGNDESC}}</td>
+			<td>{{REGNNM}}</td>
+			<td>{{CMCC_CUST_NM}}</td>
+			<td>{{CUST_MOBNUM}}</td>
+			<td>{{CRT_TIME}}</td>
+			<td>{{BGN_CNTMNG_TIME}}</td>
+			<td>{{END_CNTMNG_TIME}}</td>
+			<td>{{BETWEEN_TIME}}</td>
+			<td>{{STAFF_NAME}}</td>
+            <td>{{STAFF_ID}}</td>
+            <td>
+				<div class="gridRowBtn">
+					<a class="item-text" href="javascript:;" onclick="gotoDetail('{{CNTMNG_ID}}','{{CUST_MOBNUM}}','{{TOUCH_ID}}')">详情</a>
+					<a class="item-text" href="javascript:;" onclick="playRecord('{{CNTMNG_ID}}','{{TOUCH_ID}}')">播放录音</a>
+				</div>
+			</td>            
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="9">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无接触记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+<script id="T_RcdTabletpl" type="text/x-handlebars-template">
+{{#if bean}}
+	<tr>
+        <td width="10%" ><span class="text_gray-666">顾客姓名：</span></td>
+        <td width="20%">{{bean.CMCC_CUST_NM}}</td>
+        <td width="10%" ><span class="text_gray-666">顾客电话：</span></td>
+        <td width="20%">{{bean.CUST_MOBNUM}}</td>
+        <td width="10%"><span class="text_gray-666">呼叫类型：</span></td>
+        <td width="20%">{{compareTouchMode bean.TOUCH_MODE_CD}}</td>
+    </tr>
+	<tr>
+        <td width="10%" valign="top"><span class="text_gray-666">接触时间：</span></td>
+        <td colspan="5">{{bean.BGN_CNTMNG_TIME}} 至 {{bean.END_CNTMNG_TIME}}</td>
+     </tr>
+    <tr>
+        <td width="10%" valign="top"><span class="text_gray-666">处理人：</span></td>
+        <td width="20%">{{bean.STAFF_NAME}}</td>
+        <td width="10%" valign="top"><span class="text_gray-666">工号：</span></td>
+        <td width="20%">{{bean.STAFF_ID}}</td>
+        <td width="10%"></td>
+        <td width="20%"></td>
+     </tr>
+     <tr>
+	     <td colspan="6">
+	         <embed id="player"  src="{{bean.rcdFileSvrUrlPath}}{{bean.rcdFileSavePath}}/{{bean.rcdFileNm}}"
+	            hidden="false" ShowStatusBar="true" type="application/x-mplayer3" EnableContextMenu="false" autostart="true" ShowTracker="true" ShowPositionControls="false" autostart="true" loop="false" width="90%" height="70"> 
+	         </embed>
+	     </td>
+	</tr>
+{{else}}
+    <div>无播放录音！</div>
+{{/if}}
+</script>
+
+</body>
+</html>

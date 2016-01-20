@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人信息</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+
+</head>
+
+<body>
+<!-- <div class="formItem">
+    <div class="pt-10 ui-fhw"><a href="Javascript:history.go(-1);void(0);" class="formItem_jiantou-tu normalLink">返回</a></div>
+</div> -->
+
+<div class="formItem bd-bottom">
+    <div class="titleArea">
+        <!--
+        不同题型对应样式
+        单选：qIcon_Radio
+        判断：qIcon_Judgment
+        多选：qIcon_Checkbox
+        填空：qIcon_Blank
+        问答：qIcon_Essay
+        日期：qIcon_Date
+        -->
+        <h2><i class="qTitleIcon qIcon_Radio"></i><span class="titleAreaTxt">单选题</span></h2>
+    </div>
+</div>
+
+
+
+
+
+
+    <!--新增问题START-->
+    <div class="questionAdd">
+
+
+
+<!-- 单选类题 -->
+        <div class="qBox">
+            <div class="qBoxTitle">
+                <div class="qDecoration"><a href="#">问题描述</a></div>
+            </div>
+
+            <div class="qDecorationTxt">
+                <textarea name=""  class="qDecorationTxtEdit">单选题描述显示在这里</textarea>
+            </div>
+
+            <div class="qContent">
+                <!--编辑时展示内容-->
+                <div class="editContent">
+                    <div class="qTitle"><i class="listIndex">1.</i><input type="text" class="FormInputText" value="您是否正在使用4G手机？" /></div>
+                    <div class="qAnswerEdit">
+                        <ul class="fn-clear">
+                            <li><i class="listIndex">A.</i><input type="radio" name="myradio" /><input type="text" class="FormInputText" value="是" /><a href="#" class="upIcon"></a><a href="#" class="downIcon"></a><a href="#" class="delIcon"></a></li>
+                        </ul>
+                    </div>
+                    <a href="#" class="addAnswer">添加一项</a>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+<!-- 多选类题 -->
+        <div class="qBox">
+            <div class="qBoxTitle">
+                <div class="qDecoration"><a href="#">问题描述</a></div>
+            </div>
+
+            <div class="qDecorationTxt">
+                <textarea name="" class="qDecorationTxtEdit">多选题描述显示在这里</textarea>
+            </div>
+
+            <div class="qContent">
+
+                <!--编辑时展示内容-->
+                <div class="editContent">
+                    <div class="qTitle"><i class="listIndex">2.</i><input type="text" class="FormInputText" value="您是否正在使用4G手机？" /></div>
+                    <div class="qAnswerEdit">
+                        <ul class="fn-clear">
+                            <li><i class="listIndex">A.</i><input type="checkbox" /><input type="text" class="FormInputText" value="是" /><a href="#" class="upIcon"></a><a href="#" class="downIcon"></a><a href="#" class="delIcon"></a></li>
+                        </ul>
+                    </div>
+                    <a href="#" class="addAnswer">添加一项</a>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- 填空题展示 -->
+        <div class="qBox">
+            <div class="qBoxTitle">
+                <div class="qDecoration"><a href="#">问题描述</a></div>
+            </div>
+ 
+            <div class="qDecorationTxt">
+                <textarea name="" class="qDecorationTxtEdit">填空题描述显示在这里</textarea>
+
+            </div>
+
+            <div class="qContent">
+                <!--编辑时展示内容-->
+                <div class="editContent">
+                    <div class="qTitle"><i class="listIndex">3.</i>填空题</div>
+                    <div class="qAnswerEdit">
+                        <ul class="fn-clear">
+                            <li><i class="listIndex">A.</i><input type="text" class="FormInputText" value="您一周购物购物几次？" /></li>
+                            <li><i class="listIndex">B.</i><input type="text" class="FormInputText" value="每次购物消费多少元？" /></li>
+                        </ul>
+                    </div>
+                    <a href="#" class="addAnswer">添加一项</a>
+                </div>
+
+            </div>
+       </div>
+
+
+
+
+
+
+
+
+
+<!-- 日期类题 -->
+        <div class="qBox">
+            <div class="qBoxTitle">
+                <div class="qDecoration"><a href="#">问题描述</a></div>
+            </div>
+
+            <div class="qDecorationTxt">
+                <textarea class="qDecorationTxtEdit">日期题描述显示在这里</textarea>
+            </div>
+
+            <div class="qContent">
+
+                <!--编辑内容-->
+                <div class="editContent">
+                    <div class="qTitle"><i class="listIndex">4.</i><input type="text" class="FormInputText" value="请办理入问题标题" /></div>
+                    <div class="qAnswerEdit">
+                        <ul class="fn-clear">
+                            <li><input  name="endDate" class="inputWidth element text Wdate" type="text" onclick="WdatePicker()"></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+<!-- 问答类题 -->
+        <div class="qBox">
+            <div class="qBoxTitle">
+                <div class="qDecoration"><a href="#">问题描述</a></div>
+            </div>
+
+            <div class="qDecorationTxt">
+                <textarea class="qDecorationTxtEdit fn-hide">描述显示在这里</textarea>
+
+
+            </div>
+
+            <div class="qContent">
+                <!--编辑内容-->
+                <div class="editContent">
+                    <div class="qTitle"><i class="listIndex">5.</i><input type="text" class="FormInputText" value="我来问你来答" /></div>
+                    <div class="qAnswerEdit">
+                        <ul class="fn-clear">
+                            <li><textarea name=""></textarea></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--新增问题END-->
+
+
+
+
+
+
+
+
+<div class="formBtnArea bd-top">
+    <table width="100%">
+        <tr>
+            <td>
+                <div class="normalBtnArea norBtnAleft">
+                    <a class="normalBtn BGblue largeBtn" href="javascript:;" id="Next">发布</a>
+                    <a class="normalBtn BGgray largeBtn" href="javascript:;" id="Save">保存</a>
+                </div>
+            </td>
+            <td>
+                <div class="normalBtnArea fn-right">
+                    <a href="#" class="formLink"><span>取消编辑</span></a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+
+
+<script src="../../lib/jquery/1.8.1/jquery.js"></script>
+<script src="../../lib/json2/1.0.0/json2.js"></script>
+<script src="../../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../../lib/handlebars/1.3.0/helpers.js"></script>
+<script src="../../lib/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="../../lib/blockUI/2.64/jquery.blockUI.js"></script>
+<script src="../../common/frameInit.js"></script>
+<script src="../../lib/dialog/4.1.7/artDialog.js"></script>
+<script src="../../lib/dialog/4.1.7/iframeTools.js"></script>
+<script src="../../common/config.js"></script>
+<script src="../../common/common.js"></script>    
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        $(".qBox").mouseover(function() {
+          $(this).addClass("qBoxHover");
+          $(this).find(".qEditIcon").show();
+
+        }).mouseout(function() {
+          $(this).removeClass("qBoxHover");
+          $(this).find(".qEditIcon").hide();
+        });;
+    });
+</script>
+</body>
+</html>

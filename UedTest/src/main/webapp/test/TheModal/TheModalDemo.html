@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>TheModalDemo</title>
+<link rel="stylesheet" type="text/css" href="../alice.css">
+<script src="../jquery.js" type="text/javascript"></script>
+<script src="TheModal.js" type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+.themodal-lock {
+	/* when modal is opened we're removing scrollbars from the main content */
+	overflow: hidden;
+}
+
+.themodal-overlay {
+	/* overlay will stay fixed and will take all the space available */
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	top: 0;
+	right: 0;
+	z-index: 100;
+
+	/* if modal content doesn't fit inside the overlay, display scrollbars */
+	overflow: auto;
+
+	/* allow one-finger iPad scrolling */
+	-webkit-overflow-scrolling: touch;
+
+}
+
+/* fix for iPad glitches */
+.themodal-overlay > * {
+	-webkit-transform: translateZ(0px);
+}
+
+.themodal-overlay {
+	background: rgba(0, 0, 0, 0.5);
+	/* IE6–IE8 */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = #7F000000, endColorstr = #7F000000);
+	zoom: 1;
+}
+/* modal box style, can be anything you want */
+.modal {
+    background: #eee;
+    width: 600px;
+    margin: 20px auto;
+
+    border: 3px solid #666;
+    padding: 20px;
+}
+
+.modal .close {
+    float: right;
+    text-decoration: none;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+
+/* Page visual styles, these aren't important */
+html {
+	padding: 20px;
+}
+body {
+    font-family: Georgia sans-serif;
+    width: 100%;
+}
+
+li {
+    margin-bottom: 1em;
+}
+</style>
+</head>
+<body>
+
+<div>
+	<input class="trigger" type="button" value="Click me for demo"/><br />
+</div>
+<div class="modal" id="test-modal" style="display: none">
+    <a href="#" class="close">&times;</a>
+
+    <h1>Hi, I'm the modal demo.</h1>
+
+    <p><a href="https://github.com/samdark/the-modal">https://github.com/samdark/the-modal</a></p>
+
+    <div class="more">
+        <ul>
+            <li>Note that page scrollbar is no longer active &rarr;</li>
+            <li>You can't scroll page content anymore. That's the right thing
+                to do when the modal is opened.</li>
+            <li>Page content stays properly scrolled.</li>
+            <li>It doesn't matter where in the page markup the modal code is.</li>
+            <li>Plays nicely with <a href="#facebook-modal" class="facebook-modal">Facebook modal dialogs</a>.</li>
+        </ul>
+
+        <p>Try <a href="#more" class="more-toggle">add more content</a>.</p>
+
+    </div>
+</div>
+<div class="modal" id="test-modal2" style="display: none">
+	<p>2222222222222222222222222222222222222222</p>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('body').on('click', '.trigger', function(e){
+		e.preventDefault();
+		$('#test-modal').modal().open();
+	});
+
+	// attach modal close handler
+	$('.modal .close').on('click', function(e){
+		e.preventDefault();
+		$.modal().close();
+	});
+
+	// below isn't important (demo-specific things)
+	$('.modal .more-toggle').on('click', function(e){
+		$('#test-modal2').modal().open();
+	});
+});
+
+</script>
+</body>
+</html>

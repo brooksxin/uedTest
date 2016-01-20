@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>员工通话时长报表</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<div class="formItem">
+ <div class="titleArea">
+  <div class="listTopBtn fn-clear">
+   <h2 class="fn-left">员工通话时长报表</h2>
+   <div class="normalBtnArea mb-10 ft-right"><a class="normalBtn BGblue" target="erroriframe" href="/ecp/front/sh/report!createExcel?uid=0005" id="excel">导出Excel</a></div>
+  </div>
+ </div>
+ <div method="post" action="#" class="cmxform" >
+  <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+   <div class="record-search-cate">
+    <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+     <tbody>
+      <tr>
+       <td width="75"><label class="description">开始时间</label></td>
+       <td width="100"><input id="startDate" name="STDT" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'endDate\')}'})" type="text"></td>
+       <td width="75"><label class="description">结束时间</label></td>
+       <td width="100"><input id="endDate" name="ENDT" class="inputWidthDataPoint element text Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{$dp.$D(\'startDate\',{d:1})||\'2010-01-01 23:59:59\'}'})" type="text"></td>
+       <td width="100"><label class="description">项目名称</label></td>
+       <td width="200"><select id="activity" class="FormInputText inputWidth" name="PROJ"></select>
+			  <script type="text/x-handlebars-template" id="p_activity">
+                     <option value="">--全部--</option>
+					 {{#each beans}}
+            		 <option value="{{CMPGN_ID}}">{{CMPGN_NM}}</option>
+                     {{/each}}
+              </script></td>
+       <td width="100"><div class="normalBtnArea"> <a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a> </div></td>
+      </tr>
+      <tr>
+       <td width="100"><label class="description">团队</label></td>
+             <td width="200"><select class="inputSelect w160" id="team" name="TEAM" onchange="loadClassData()">
+        </select>
+        <script type="text/x-handlebars-template" id="p_team">
+                    <option value="">全部</option>
+					{{#each beans}}
+                    <option value="{{TGT_PTY_ID}}">{{PTY_NM}}</option>
+                    {{/each}}
+            </script></td>
+       <td width="100"><label class="description">班组</label></td>
+       <td width="200"><select class="inputSelect inputWidth" id="class" onchange="loadStaffData()" name="DEPT">
+        </select>
+			<script type="text/x-handlebars-template" id="p_class">
+                    <option value="">全部</option>
+					{{#each object}}
+                    <option value="{{TGT_PTY_ID}}">{{PTY_NM}}</option>
+                    {{/each}}
+            </script></td>
+       <td width="100"><label class="description">个人</label></td>
+       <td width="200"><select class="inputSelect inputWidth" id="staff" name="PERS">
+        </select>
+			<script type="text/x-handlebars-template" id="p_staff">
+                    <option value="">全部</option>
+					{{#each beans}}
+                    <option value="{{STAFF_ID}}">{{PTY_NM}}</option>
+                    {{/each}}
+            </script></td>
+            <td></td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <!-- <div class="seeMoreFilter"><a href="#" class="down"></a></div> -->
+  </form>
+ </div>
+ <div class="tablewidth mg_t_10" style="overflow:scroll;overflow-y:hidden">
+  <table class="ui-record-table table_radius table-bordered table-striped text-hidden">
+   <thead>
+    <tr>
+     <th width="100">团队</th>
+     <th width="80">班组</th>
+     <th width="75">个人</th>
+     <th width="150">项目名称</th>
+     <!-- <th width="60">导入号码量</th> -->
+     <th width="75">外呼量</th>
+     <th width="75">接通量</th>
+     <th width="75">接通率</th>
+     <th width="75">成功业务量</th>
+     <th width="75">成功号码量</th>
+     <th width="75">成功调研量</th>
+     <th width="75">业务办理率</th>
+     <th width="100">业务接触办理率</th>
+     <!-- <th width="60">完成进度</th> -->
+     <th width="80">通话总时长</th>
+     <th width="80">平均通话时长</th>
+     <th width="80">最长通话时长</th>
+    </tr>
+   </thead>
+   <tbody id="J_tabletpl">
+   </tbody>
+  </table>
+ </div>
+ 
+ <!--翻页及功能按钮区域开始-->
+ <DIV class="amount-bottom">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+   <tr>
+    <td width="50%"><DIV class="fn-clear action-other  action-other-show ">
+      <DIV id=Pagination class="page pagination fn-right"></DIV>
+      <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+     </DIV></td>
+   </tr>
+  </table>
+ </DIV>
+</div>
+
+
+<!-- 脚本部分 -->
+<#include "../../tpl/res_js.tpl" />
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+			<td>{{C0}}</td>
+			<td>{{C1}}</td>
+			<td>{{C2}}</td>
+			<td>{{C3}}</td>
+			<td>{{C5}}</td>
+			<td>{{C6}}</td>
+			<td>{{C7}}</td>
+			<td>{{C8}}</td>
+			<td>{{C9}}</td>
+			<td>{{C10}}</td>
+			<td>{{C11}}</td>
+			<td>{{C12}}</td>
+			<td>{{C15}}</td>
+			<td>{{C16}}</td>
+			<td>{{C17}}</td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="16">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+<script type="text/javascript">
+	srvMap.add('staffCallReport','','front/sh/report!statement?uid=0005');
+	srvMap.add('queryCategory','','front/sh/market!index?uid=mgl001');
+	srvMap.add('queryTeam','','front/sh/user!userinfo?uid=u012');
+	srvMap.add('queryClass','','front/sh/user!userinfo?uid=u010');
+	srvMap.add('queryStaff','','front/sh/user!userinfo?uid=u005');
+	//格式化时间方法
+	Date.prototype.format = function(format){ 
+	var o = { 
+	"M+" : this.getMonth()+1, //month 
+	"d+" : this.getDate(), //day 
+	"h+" : this.getHours(), //hour 
+	"m+" : this.getMinutes(), //minute 
+	"s+" : this.getSeconds(), //second 
+	"q+" : Math.floor((this.getMonth()+3)/3), //quarter 
+	"S" : this.getMilliseconds() //millisecond 
+	} 
+	if(/(y+)/.test(format)) { 
+	format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+	} 
+	for(var k in o) { 
+	if(new RegExp("("+ k +")").test(format)) { 
+	format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length)); 
+	} 
+	} 
+	return format; 
+	};
+	//分页数据
+	var G_params = {
+		url : srvMap.get('staffCallReport'),
+		items_per_page : 10,   		// 每页数     @param : limit
+		page_index : 0 , 				//当前页  @param : start
+		pagination : "Pagination" , 	//分页id
+		searchformId : "J_formSearch",  //搜索表单的id
+		tabletpl : "T_tabletpl", 		//表格模板
+		tablewrap : "J_tabletpl", 		//表格容器
+	};
+	//查询活动内容
+	function loadActivityData(){
+		Util.ajax.postJson(srvMap.get('queryCategory'),'',function(json,status){
+		   Util.ajax.loadTemp('#activity',$('#p_activity'),json);//加载模板
+		});
+	}
+	//查询团队信息
+	function loadTeamData(){
+		Util.ajax.postJson(srvMap.get('queryTeam'),'',function(json,status){
+		   Util.ajax.loadTemp('#team',$('#p_team'),json);//加载模板
+		});
+	}
+	//查询班组信息
+	function loadClassData(){
+		 var params={'deptId':$('#team').val()}
+		   Util.ajax.postJson(srvMap.get('queryClass'),params,function(json,status){
+		   Util.ajax.loadTemp('#class',$('#p_class'),json);//加载模板
+		});
+	}
+	//查询组内员工信息
+	function loadStaffData(){
+		var params = {'DEPT_ID':$('#class').val()};
+		Util.ajax.postJson(srvMap.get('queryStaff'),params,function(json,status){
+		   Util.ajax.loadTemp('#staff',$('#p_staff'),json);//加载模板
+		});
+	}
+	//页面加载完开始执行
+      $(document).ready(function () {
+          //时间初始化
+    	  var end = new Date();
+          var start = new Date(new Date()-(7*86400000));
+          $('#endDate').val(end.format("yyyy-MM-dd hh:mm:ss"));
+          $('#startDate').val(start.format("yyyy-MM-dd hh:mm:ss"));
+          //初始化函数
+    	  loadActivityData();
+          loadTeamData();
+          $('#J_search').bind('click',function(){
+              var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+              Util.pagination(0, true , G_params , str );
+          });
+      });
+      
+  function cancelReservation(){
+      artDialog({
+          id: 'Confirm',
+          lock: true,
+          opacity: .1,
+          content: '您确定要取消此预约单吗？',
+          ok: function (here) {
+              art.dialog.tips('已取消');
+          },
+          cancel: function (here) {
+              return;
+          }
+      });
+      
+      
+  }
+  </script>
+   <!-- 导出excel方法 -->
+  <iframe id="erroriframe" name="erroriframe" style="width: 0px;height:0px;display: none;"></iframe>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>流量购买</title>
+<link rel="stylesheet" type="text/css" href="hum.css">
+<script type="text/javascript" src="jquery.js"></script>
+
+<style type="text/css">
+.wrap {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.bg, .tips, .buy, .buyList {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.btn {
+    position: absolute;
+    top: 55%;
+    left: 37%;
+    width: 12%;
+    height: 5%;
+}
+.btn span {
+    text-indent: -9999px;
+    display: block;
+}
+.btn2 {
+    left: 49%;
+}
+.btn7 {
+    position: absolute;
+    top: 31%;
+    left: 85%;
+    width: 13%;
+    height: 5%;
+    text-indent: -9999px;
+}
+.btn3, .btn4, .btn5, .btn6 {
+    position: absolute;
+    top: 21%;
+    width: 24%;
+    height: 53%;
+}
+.btn3 {
+    left: 3%;
+}
+.btn4 {
+    left: 31%;
+}
+.btn5 {
+    left: 59%;
+}
+.btn6 {
+    left: 87%;
+    width: 13%;
+}
+
+.back {
+    position: absolute;
+    top: 4%;
+    left: 2%;
+    width: 8%;
+    height: 8%;
+    text-indent: -9999px;
+}
+.back2 {
+    left: 94%;
+    width: 4%;
+}
+.btn8 {
+    width: 22%;
+    left: 28%;
+    top: 59%;
+    height: 7%;
+}
+.btn9 {
+    width: 22%;
+    left: 50%;
+    top: 59%;
+    height: 7%;
+}
+</style>
+
+</head>
+<body>
+
+<div class="wrap">
+    <div class="bg">
+        <img src="img/Catch13.png" />
+        <a class="btn btn7" href="javascript:;" hidefocus="true"><span>购 买</span></a>
+    </div>
+    <div class="tips fn-hide">
+        <img src="img/Catchpop362.png" />
+        <a class="btn btn1" href="javascript:;" hidefocus="true"><span>确 定</span></a>
+        <a class="btn btn2" href="javascript:;" hidefocus="true"><span>取 消</span></a>
+    </div>
+
+    <div class="buy fn-hide">
+        <img src="img/Catchbg34.png" />
+        <a class="btn btn3" href="javascript:;" hidefocus="true" data-liuliang="1" data-money="30"><span>1G流量</span></a>
+        <a class="btn btn4" href="javascript:;" hidefocus="true" data-liuliang="2" data-money="50"><span>2G流量</span></a>
+        <a class="btn btn5" href="javascript:;" hidefocus="true" data-liuliang="5" data-money="100"><span>5G流量</span></a>
+        <a class="btn btn6" href="javascript:;" hidefocus="true" data-liuliang="8" data-money="120"><span>8G流量</span></a>
+        <a class="back back1" href="javascript:;" hidefocus="true"><span>返回</span></a>
+        <a class="back back2" href="javascript:;" hidefocus="true"><span>返回</span></a>
+    </div>
+    <div class="buyList fn-hide">
+        <img id="target" src="" />
+        <a class="btn btn8" href="javascript:;" hidefocus="true"><span>确 定</span></a>
+        <a class="btn btn9" href="javascript:;" hidefocus="true"><span>取 消</span></a>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+(function($){
+    $.extend({
+        PostJson: function(url, datas , callback) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data : datas +"&_=" + (new Date()).getTime(),
+                cache: false,
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.overrideMimeType("text/plain; charset=utf-8");
+                },
+                success: function(json) {
+                    callback("success", json);
+                },
+                error: function(e) {
+                    callback("error", null);
+                }
+            });
+        }
+    });
+})(jQuery);
+
+var _liuliang,
+    _money;
+$(function(){
+    $.PostJson("test.json","",function(state,json){
+        if(state=='success'){
+            if(json){
+                $(".tips").removeClass("fn-hide");
+            }
+        }
+    });
+    $(".btn1").click(function(){
+        $(".tips").addClass("fn-hide");
+    })
+
+    $(".buy .btn").each(function(i){
+        $(this).click(function(){
+            _liuliang = $(this).data("liuliang");
+            _money = $(this).data("money");
+            $(".buy").addClass("fn-hide");
+            $(".buyList").removeClass("fn-hide");
+            $("#target").attr({"src": "img/Catch3"+i+".png"});
+        })
+    });
+
+    $(".btn7, .btn2").click(function(){
+        $(".buy").removeClass("fn-hide");
+    })
+    $(".back").click(function(){
+        $(".buy, .tips").addClass("fn-hide");
+        $("#target").attr({"src": "img/Catch34.png"});
+    })
+
+    $(".btn8").click(function(){
+        $(".buy").removeClass("fn-hide");
+        $(".buyList").addClass("fn-hide");
+    })
+
+    $(".btn9").click(function(){
+        $.PostJson("test.json", "liuliang="+_liuliang+"&money="+_money, function(state,json){
+            if(state=='success'){
+                if(json){
+                    alert("共花费"+_money+"元购买"+_liuliang+"G流量成功！");
+                    $(".tips, .buy, .buyList").addClass("fn-hide");
+                }
+            }
+        })
+    })
+})
+
+</script>
+</body>
+</html>

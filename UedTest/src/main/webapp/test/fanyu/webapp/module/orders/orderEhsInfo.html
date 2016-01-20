@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>查看物流信息</title>
+<link rel="stylesheet" href="../../css/common.css" />
+<link rel="stylesheet" href="../../css/alice/tablepay.css" />
+<link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+</head>
+
+<body>
+ 
+<div class="formItem">
+  <div class="pt-10 pb-10 ui-fhw"><a href="Javascript:history.go(-1);void(0);" class="formItem_jiantou-tu normalLink">返回</a></div>
+  <div class="mb-10">
+   <table class="form_table" width="100%">
+    <tr>
+     <td width="60%"><span class="tc-c2" id="orderNum"></span></td>
+     <td><span class="tc-c2" id="expressCompany"></span></td>
+    </tr>
+   </table>
+  </div>
+  <hr />
+<!--显示蓝色的点用样式ui-progressBlue 显示灰色的点用样式ui-progressGray-->   
+  <div class="fn-clear" id="wuliu">
+   <!--<div class="ui-progressBlue fn-clear">
+   	<div class="ui-timeLeft fn-left">2014-12-06  12:40:00</div>
+    <div class="ui-statusRight">EMS 已收件</div>
+   </div>
+   <div class="ui-progressGray fn-clear">
+     <div class="ui-timeLeft fn-left">2014-12-06  15:00:00</div>
+     <div class="ui-statusRight">快件在 杭州幸福服务点, 正转运至 杭州萧山集散中心件</div>
+   </div>
+   <div class="ui-progressGray fn-clear">
+     <div class="ui-timeLeft fn-left">2014-12-07  15:00:00</div>
+     <div class="ui-statusRight">快件在 杭州萧山集散中心, 正转运至 上海西站集散中心</div>
+   </div>
+   <div class="ui-progressGray fn-clear">
+     <div class="ui-timeLeft fn-left">2014-12-08  15:00:00</div>
+     <div class="ui-statusRight">快件在 上海西站集散中心, 正转运至 荣城黄村集散中心</div>
+   </div>
+   <div class="ui-progressGray fn-clear">
+     <div class="ui-timeLeft fn-left">2014-12-09  10:00:00</div>
+     <div class="ui-statusRight">快件在 荣城黄村集散中心, 正转运至 滨海大街中心</div>
+   </div>
+   <div class="ui-progressGray fn-clear">
+     <div class="ui-timeLeft fn-left">2014-12-09  15:00:00</div>
+     <div class="ui-statusRight">正在派送途中,请您准备签收(派件人:卢一儒,电话:13911416742</div>
+   </div>
+  --></div>
+ 
+</div>
+
+
+
+<div class="fengelineBackbor mb-10"></div> 
+ 
+<div class="formBtnArea">
+ <div class="normalBtnArea fn-center"> <!-- <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search"><span>关闭窗口</span></a> --> </div>
+</div>
+
+<script src="../../lib/jquery/1.8.1/jquery.js"></script> 
+<script src="../../lib/json2/1.0.0/json2.js"></script> 
+<script src="../../lib/handlebars/1.3.0/handlebars.js"></script> 
+<script src="../../lib/handlebars/1.3.0/helpers.js"></script> 
+<script src="../../lib/pagination/1.2.1/jquery.pagination.js"></script> 
+<script src="../../lib/blockUI/2.64/jquery.blockUI.js"></script> 
+<script src="../../common/frameInit.js"></script> 
+<script src="../../lib/dialog/4.1.7/artDialog.js"></script> 
+<script src="../../lib/dialog/4.1.7/iframeTools.js"></script> 
+<script src="../../common/config.js"></script> 
+<script src="../../common/common.js"></script> 
+<script type="text/javascript">
+srvMap.add('queryLogistics', '','front/sh/order!queryLogistics?uid=log001');//查询物流信息
+    //页面加载完开始执行
+    $(document).ready(function () {
+    	var orderNum = Util.browser.getParameter("orderNum");
+    	var arg = {"orderNum" : orderNum};
+    	$("#orderNum").html("订单编号："+orderNum);
+        //初始化函数
+        Util.ajax.postJson(srvMap.get('queryLogistics'),arg,function(json,status){
+        if (status) {
+            if(json.object.success){
+            	if(json.object.expressCompany){
+            		$("#expressCompany").html("物流公司："+json.object.expressCompany);
+            	} else {
+            		$("#expressCompany").html("物流公司：未知");
+            	}
+            	
+            	if(json.object.wuliu){
+            		$("#wuliu").html(json.object.wuliu);
+            	} else {
+            		$("#wuliu").html("本订单查询不到物流信息。");
+            	}
+            } else {
+            	$("#expressCompany").hide();
+            	$("#wuliu").html("本订单查询不到物流信息。");
+            	Util.dialog.tips(json.returnMessage||'查询物流详情失败，请联系管理员 ！');
+            }
+        }else{
+        	$("#expressCompany").hide();
+            $("#wuliu").html("本订单查询不到物流信息。");
+            Util.dialog.tips(json.returnMessage||'查询物流详情失败，请联系管理员 ！');
+        }
+    });
+    });
+</script>
+</body>
+</html>

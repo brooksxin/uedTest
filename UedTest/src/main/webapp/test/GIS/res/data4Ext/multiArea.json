@@ -1,0 +1,273 @@
+{
+    "returncode": "1",
+    "area_list": [
+        {
+            "node": {
+                "node_id": "Q0",
+                "node_name": "浙江移动总公司",
+                "node_pid": "Q-1"
+            },
+            "area_info": {
+                "drawing_modes": "polygon",
+                "point_list": [
+                    {
+                        "longitude": 120.185455,
+                        "latitude": 30.254253
+                    },
+                    {
+                        "longitude": 120.177981,
+                        "latitude": 30.249261
+                    },
+                    {
+                        "longitude": 120.182868,
+                        "latitude": 30.239527
+                    },
+                    {
+                        "longitude": 120.196666,
+                        "latitude": 30.249511
+                    }
+                ],
+                "param": {
+                    "fill_color": "white",
+                    "fill_opacity": "0.3",
+                    "stroke_color": "blue",
+                    "stroke_opacity": "0.8",
+                    "stroke_style": "solid",
+                    "stroke_weight": "3"
+                }
+            }
+        },
+        {
+            "node": {
+                "node_id": "Q0",
+                "node_name": "浙江移动总公司",
+                "node_pid": "Q-1"
+            },
+            "area_info": {
+                "drawing_modes": "polygon",
+                "point_list": [
+                    {
+                        "longitude": 120.192929,
+                        "latitude": 30.246266
+                    },
+                    {
+                        "longitude": 120.191204,
+                        "latitude": 30.24377
+                    },
+                    {
+                        "longitude": 120.195803,
+                        "latitude": 30.244519
+                    }
+                ],
+                "param": {
+                    "fill_color": "white",
+                    "fill_opacity": "0.3",
+                    "stroke_color": "blue",
+                    "stroke_opacity": "0.8",
+                    "stroke_style": "solid",
+                    "stroke_weight": "3"
+                }
+            }
+        },
+        {
+            "node": {
+                "node_id": "Q0",
+                "node_name": "浙江移动总公司",
+                "node_pid": "Q-1"
+            },
+            "area_info": {
+                "drawing_modes": "polygon",
+                "point_list": [
+                    {
+                        "longitude": 120.404102,
+                        "latitude": 30.3884
+                    },
+                    {
+                        "longitude": 120.403204,
+                        "latitude": 30.387742
+                    },
+                    {
+                        "longitude": 120.407417,
+                        "latitude": 30.378553
+                    }
+                ],
+                "param": {
+                    "fill_color": "white",
+                    "fill_opacity": "0.3",
+                    "stroke_color": "blue",
+                    "stroke_opacity": "0.8",
+                    "stroke_style": "solid",
+                    "stroke_weight": "3"
+                }
+            }
+        },
+        {
+            "node": {
+                "node_id": "Q0",
+                "node_name": "浙江移动总公司",
+                "node_pid": "Q-1"
+            },
+            "area_info": {
+                "drawing_modes": "polygon",
+                "point_list": [
+                    {
+                        "longitude": 120.374315,
+                        "latitude": 30.378458
+                    },
+                    {
+                        "longitude": 120.367991,
+                        "latitude": 30.375467
+                    },
+                    {
+                        "longitude": 120.370578,
+                        "latitude": 30.364749
+                    },
+                    {
+                        "longitude": 120.377189,
+                        "latitude": 30.370233
+                    }
+                ],
+                "param": {
+                    "fill_color": "white",
+                    "fill_opacity": "0.3",
+                    "stroke_color": "blue",
+                    "stroke_opacity": "0.8",
+                    "stroke_style": "solid",
+                    "stroke_weight": "3"
+                }
+            }
+        },
+        {
+            "node": {
+                "node_id": "Q0",
+                "node_name": "浙江移动总公司",
+                "node_pid": "Q-1"
+            },
+            "area_info": {
+                "drawing_modes": "polygon",
+                "point_list": [
+                    {
+                        "longitude": 120.394365,
+                        "latitude": 30.365309
+                    },
+                    {
+                        "longitude": 120.386316,
+                        "latitude": 30.365434
+                    },
+                    {
+                        "longitude": 120.376902,
+                        "latitude": 30.362131
+                    },
+                    {
+                        "longitude": 120.387035,
+                        "latitude": 30.357768
+                    }
+                ],
+                "param": {
+                    "fill_color": "white",
+                    "fill_opacity": "0.3",
+                    "stroke_color": "blue",
+                    "stroke_opacity": "0.8",
+                    "stroke_style": "solid",
+                    "stroke_weight": "3"
+                }
+            }
+        },
+        {
+            "node": {
+                "node_id": "Q0",
+                "node_name": "浙江移动总公司",
+                "node_pid": "Q-1"
+            },
+            "area_info": {
+                "drawing_modes": "polygon",
+                "point_list": [
+                    {
+                        "longitude": 120.361667,
+                        "latitude": 30.376963
+                    },
+                    {
+                        "longitude": 120.356492,
+                        "latitude": 30.372476
+                    },
+                    {
+                        "longitude": 120.367991,
+                        "latitude": 30.366992
+                    }
+                ],
+                "param": {
+                    "fill_color": "white",
+                    "fill_opacity": "0.3",
+                    "stroke_color": "blue",
+                    "stroke_opacity": "0.8",
+                    "stroke_style": "solid",
+                    "stroke_weight": "3"
+                }
+            }
+        },
+        {
+            "node": {
+                "node_id": "Q0",
+                "node_name": "浙江移动总公司",
+                "node_pid": "Q-1"
+            },
+            "area_info": {
+                "drawing_modes": "polygon",
+                "point_list": [
+                    {
+                        "longitude": 120.391275,
+                        "latitude": 30.382695
+                    },
+                    {
+                        "longitude": 120.377189,
+                        "latitude": 30.380452
+                    },
+                    {
+                        "longitude": 120.385238,
+                        "latitude": 30.374221
+                    }
+                ],
+                "param": {
+                    "fill_color": "white",
+                    "fill_opacity": "0.3",
+                    "stroke_color": "blue",
+                    "stroke_opacity": "0.8",
+                    "stroke_style": "solid",
+                    "stroke_weight": "3"
+                }
+            }
+        },
+        {
+            "node": {
+                "node_id": "Q0",
+                "node_name": "浙江移动总公司",
+                "node_pid": "Q-1"
+            },
+            "area_info": {
+                "drawing_modes": "polygon",
+                "point_list": [
+                    {
+                        "longitude": 120.401048,
+                        "latitude": 30.378957
+                    },
+                    {
+                        "longitude": 120.388975,
+                        "latitude": 30.373972
+                    },
+                    {
+                        "longitude": 120.396736,
+                        "latitude": 30.371728
+                    }
+                ],
+                "param": {
+                    "fill_color": "white",
+                    "fill_opacity": "0.3",
+                    "stroke_color": "blue",
+                    "stroke_opacity": "0.8",
+                    "stroke_style": "solid",
+                    "stroke_weight": "3"
+                }
+            }
+        }
+    ]
+}

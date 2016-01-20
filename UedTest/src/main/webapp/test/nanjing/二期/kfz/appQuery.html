@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>应用查询</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/jquery-easyui-1.4/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/dialog/4.1.6/skins/blue.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/magnific-popup.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+<style type="text/css">
+</style>
+
+<script type="text/javascript" src="ui/js/jquery.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/js/jquery.form.js"></script>
+<script type="text/javascript" src="ui/js/json2.js"></script>
+<script type="text/javascript" src="ui/pagination/1.2.1/jquery.pagination.js"></script>
+<script type="text/javascript" src="ui/js/handlebars.js"></script>
+<script type="text/javascript" src="ui/js/helpers.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="ui/js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="ui/js/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="ui/js/common.js"></script>
+</head>
+<body>
+<!--顶部-->
+<div class="global-top">
+	<div class="top-content">
+		<!--左侧logo-->
+		<div class="fn-left">
+			<span class="logo"></span>
+		</div>
+		<!--中间-->
+		<div class="menutitle" id="menutitle">
+			<span class="active">首页</span>
+			<span class="item">应用管理</span>
+			<span class="item">能力查询</span>
+			<span class="item">申请查询</span>
+			<span class="item">其他</span>
+		</div>
+		<!--右侧-->
+		<div class="fn-right">
+			<div class="helpDoc" title="帮助中心"></div>
+			<div class="devDoc" title="开发文档"></div>
+			<div class="user-info" id="userInfo" title="用户信息">
+				<div class="user-info-more" id="userInfoMore">
+					<i class="iconfont" title="上三角形"></i>
+					<ul>
+						<li>
+							<a href="javascript:;" hidefocus="true" id="userInfoBase">基本信息</a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true">修改密码</a>
+						</li>
+						<li class="last">
+							<a href="javascript:;" hidefocus="true">联系人</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="msgInfo" title="站内信"></div>
+		</div>
+	</div>
+</div>
+<div class="container fn-clear">
+	<div class="ui-search-cdt">
+		<form id="J_formSearch" name="J_formSearch" class="formSearch">
+			<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+				<tr>
+					<td width="8%">
+						<label for="APP_NAME">应用名称：</label>
+					</td>
+					<td width="25%">
+						<input class="ui-input" type="text" id="APP_NAME" name="APP_NAME" >
+					</td>
+					<td width="8%">
+						<label for="APP_IP">应用IP：</label>
+					</td>
+					<td width="25%">
+						<input class="ui-input" type="text" id="APP_IP" name="APP_IP" >
+					</td>
+					<td width="8%">
+						<label for="APP_CODE">应用编码：</label>
+					</td>
+					<td width="25%">
+						<input class="ui-input" type="text" id="APP_CODE" name="APP_CODE" >
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="description" for="CREATE_TIME">起始时间：</label>
+					</td>
+					<td>
+						<input id="CREATE_TIME" name="CREATE_TIME" class="easyui-datetimebox">
+					</td>
+					<td>
+						<label class="description" for="END_TIME">结束时间：</label>
+					</td>
+					<td>
+						<input id="END_TIME" name="END_TIME" class="easyui-datebox">
+					</td>
+					<td></td>
+					<td>
+						<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="J_search">
+							<i class="iconfont" title="查询/搜索"></i>
+							<span>查 询</span>
+						</a>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<div id="J_flt_cdt"></div>
+	</div>
+	<div>
+		<div class="ui-change-view">
+			<span class="fn-left" style="margin-right:18px;">切换视图：</span>
+			<a href="javascript:;" class="ui-btn-view ui-img-view"></a>
+			<a href="javascript:;" class="ui-btn-view ui-list-view"></a>
+		</div>
+		<div class="ui-app-list" id="blockCtn">
+			<div id="J_app_list">
+
+
+			</div>
+			<div class="dataTbl-bottom fn-hide fn-clear">
+		        <div class="page pagination fn-left" id="Pagination">
+		        	<!-- pagination -->
+		        </div>
+		        <div class="paginationTools fn-right">
+		        	<span class="des">跳转到第</span>
+		        	<input id="gotoPage" value="" type="text" class="ui-input" />
+		        	<span class="des">页</span>
+		        	<a class="ui-button ui-button-normal" href="javascript:;" hidefocus="true" id="">
+		        		<span>确定</span>
+		        	</a>
+		        </div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="menu-list" id="menuList"></div>
+
+
+<div id="J_app_dtl" class="mfp-hide">
+	<div class="ui-dtl-base fn-clear">
+		<h2 class="ui-last-title" width="110" height="110">应用基础信息</h2>
+		<img class="ui-dtl-logo" src="ui/theme/img/p2.png">
+		<ul class="ui-dtl-info-list">
+			<li>应用IP：</li>
+			<li>应用编码：</li>
+			<li>应用名称：</li>
+			<li>应用平台：</li>
+			<li>应用分类：</li>
+			<li>加密类型：</li>
+			<li>起始时间：</li>
+		</ul>
+	</div>
+	<div class="ui-call-situ" style="positin:relative;">
+		<h2 class="ui-last-title">应用能力调用情况</h2>
+		<ul class="ui-call-list fn-clear">
+			<li>
+				<img src="ui/theme/img/p2.png" width="90" height="90">
+				<dl>
+					<dt>视频节目能力配额申请</dt>
+					<dd>编号：12345678</dd>
+					<dd>调用比：25%</dd>
+					<dd>总额度：4567(万次)</dd>
+					<dd>已用额度：4567(万次)</dd>
+					<dd>剩余额度：4567(万次)</dd>
+				</dl>
+				<a href="javascript:;" class="J_btn_apply ui-button ui-button-blue mgl-109">申请配额</a>
+			</li>
+			<li>
+				<img src="ui/theme/img/p2.png" width="90" height="90">
+				<dl>
+					<dt>视频节目能力配额申请</dt>
+					<dd>编号：12345678</dd>
+					<dd>调用比：25%</dd>
+					<dd>总额度：4567(万次)</dd>
+					<dd>已用额度：4567(万次)</dd>
+					<dd>剩余额度：4567(万次)</dd>
+				</dl>
+				<a href="javascript:;" class="ui-button ui-button-blue mgl-109">申请配额</a>
+			</li>
+			<li>
+				<img src="ui/theme/img/p2.png" width="90" height="90">
+				<dl>
+					<dt>视频节目能力配额申请</dt>
+					<dd>编号：12345678</dd>
+					<dd>调用比：25%</dd>
+					<dd>总额度：4567(万次)</dd>
+					<dd>已用额度：4567(万次)</dd>
+					<dd>剩余额度：4567(万次)</dd>
+				</dl>
+				<a href="javascript:;" class="ui-button ui-button-blue mgl-109">申请配额</a>
+			</li>
+			<li>
+				<img src="ui/theme/img/p2.png" width="90" height="90">
+				<dl>
+					<dt>视频节目能力配额申请</dt>
+					<dd>编号：12345678</dd>
+					<dd>调用比：25%</dd>
+					<dd>总额度：4567(万次)</dd>
+					<dd>已用额度：4567(万次)</dd>
+					<dd>剩余额度：4567(万次)</dd>
+				</dl>
+				<a href="javascript:;" class="ui-button ui-button-blue mgl-109">申请配额</a>
+			</li>
+			<li>
+				<img src="ui/theme/img/p2.png" width="90" height="90">
+				<dl>
+					<dt>视频节目能力配额申请</dt>
+					<dd>编号：12345678</dd>
+					<dd>调用比：25%</dd>
+					<dd>总额度：4567(万次)</dd>
+					<dd>已用额度：4567(万次)</dd>
+					<dd>剩余额度：4567(万次)</dd>
+				</dl>
+				<a href="javascript:;" class="ui-button ui-button-blue mgl-109">申请配额</a>
+			</li>
+			<li>
+				<img src="ui/theme/img/p2.png" width="90" height="90">
+				<dl>
+					<dt>视频节目能力配额申请</dt>
+					<dd>编号：12345678</dd>
+					<dd>调用比：25%</dd>
+					<dd>总额度：4567(万次)</dd>
+					<dd>已用额度：4567(万次)</dd>
+					<dd>剩余额度：4567(万次)</dd>
+				</dl>
+				<a href="javascript:;" class="ui-button ui-button-blue mgl-109">申请配额</a>
+			</li>
+			<li>
+				<img src="ui/theme/img/p2.png" width="90" height="90">
+				<dl>
+					<dt>视频节目能力配额申请</dt>
+					<dd>编号：12345678</dd>
+					<dd>调用比：25%</dd>
+					<dd>总额度：4567(万次)</dd>
+					<dd>已用额度：4567(万次)</dd>
+					<dd>剩余额度：4567(万次)</dd>
+				</dl>
+				<a href="javascript:;" class="ui-button ui-button-blue mgl-109">申请配额</a>
+			</li>
+			<li>
+				<img src="ui/theme/img/p2.png" width="90" height="90">
+				<dl>
+					<dt>视频节目能力配额申请</dt>
+					<dd>编号：12345678</dd>
+					<dd>调用比：25%</dd>
+					<dd>总额度：4567(万次)</dd>
+					<dd>已用额度：4567(万次)</dd>
+					<dd>剩余额度：4567(万次)</dd>
+				</dl>
+				<a href="javascript:;" class="ui-button ui-button-blue mgl-109">申请配额</a>
+			</li>
+		</ul>
+	</div>
+
+	<div id="J_apply_limit" class="fn-hide">
+		<a href="javascript:;" class="ui-button ui-button-blue">提交申请</a>
+	</div>
+	<div class="fn-overflow"></div>
+</div>
+
+
+
+<textarea class="fn-hide" id="T_flt_cdt">
+	{{#if appSort}}
+		<div class="ui-app-filter fn-clear">
+			<ul class="app-sort">
+				<li class="ui-filter-ttl">应用分类：</li>
+				<li class="all choice">全部</li>
+				{{#each appSort}}
+					<li class="condition" value="{{VALUE}}">{{TEXT}}<b>X</b></li>
+				{{/each}}
+			</ul>
+			<!-- <a href="javascript:;" class="ui-more-cdt">更多</a> -->
+		</div>
+	{{/if}}
+	{{#if appPlatform}}
+		<div class="ui-app-filter fn-clear">
+			<ul class="app-platform">
+				<li class="ui-filter-ttl">应用平台：</li>
+				<li class="all choice">全部</li>
+				{{#each appPlatform}}
+					<li class="condition" value="{{VALUE}}">{{TEXT}}<b>X</b></li>
+				{{/each}}
+			</ul>
+			<!-- <a href="javascript:;" class="ui-more-cdt">更多∧</a> -->
+		</div>
+	{{/if}}
+	{{#if appState}}
+		<div class="ui-app-filter fn-clear">
+			<ul class="app-state">
+				<li class="ui-filter-ttl">应用状态：</li>
+				<li class="all choice">全部</li>
+				{{#each appState}}
+					<li class="condition" value="{{VALUE}}">{{TEXT}}<b>X</b></li>
+				{{/each}}
+			</ul>
+			<!-- <a href="javascript:;" class="ui-more-cdt">更多∨</a> -->
+		</div>
+	{{/if}}
+</textarea>
+<textarea class="fn-hide" id="T_app_list_pic">
+{{#if rows.length}}
+	<ul class="ui-listView fn-clear">
+	{{#each rows}}
+		<li>
+			<a href="javascript:;"><img src="{{APP_LOG}}"></a>
+			<a href="javascript:;">
+				<div class="ui-listView-name">{{APP_NAME}}({{APP_TYPE}})</div>
+			</a>
+			<div class="ui-listView-state">状态：{{APP_STATUS}}<span>{{APP_PLATFORM}}</span></div>
+			<div class="ui-listView-ct">创建时间：{{CREATE_TIME}}</div>
+			<div class="ui-listView-ac">应用编码：{{APP_ID}}</div>
+			<div style="margin: 3px 0 0 30px;">
+				<a href="javascript:;" class="ui-href-btn">应用修改</a>
+				<a href="javascript:;" class="ui-href-btn" style="border-left:none;">配额申请</a>
+			</div>
+		</li>
+	{{/each}}
+	</ul>
+{{else}}
+	<div style="font-size:14px;width: 200px;margin: 0 auto;">对不起，没有查询到相关数据！</div>
+{{/if}}
+</textarea>
+
+<textarea class="fn-hide" id="T_app_list">
+<table width="100%">
+	<thead>
+		<tr>
+			<th width="10%">应用图片</th>
+			<th width="15%">名称/IP/编码</th>
+			<th width="10%">应用类型</th>
+			<th width="10%">状态</th>
+			<th width="10%">应用平台</th>
+			<th width="10%">创建时间</th>
+			<th width="8%"></th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#if rows.length}}
+			{{#each rows}}
+				<tr>
+					<td><img src="{{APP_LOG}}" width="110" height="110"></td>
+					<td>
+						<p>{{APP_NAME}}</p>
+						<p>{{APP_IP}}</p>
+						<p>{{APP_ID}}</p>
+					</td>
+					<td>
+						<p>{{APP_TYPE}}</p>
+					</td>
+					<td>
+						<p>{{APP_STATUS}}</p>
+					</td>
+					<td>
+						<p>{{APP_PLATFORM}}</p>
+					</td>
+					<td>
+						<p>{{CREATE_TIME}}</p>
+					</td>
+					<td>
+						<a href="#J_app_dtl" class="ui-href-btn J_detail">查询详情</a>
+						<a href="javascript:;" class="ui-href-btn" style="border-top:none;">应用修改</a>
+						<a href="javascript:;" class="ui-href-btn" style="border-top:none;">配额申请</a>
+					</td>
+				</tr>
+			{{/each}}
+		{{else}}
+			<tr><td colspan="7" style="font-size:14px;">对不起，没有查询到相关数据！</td></tr>
+		{{/if}}
+	</tbody>
+</table>
+</textarea>
+
+<!--目录-->
+<textarea class="fn-hide" id="menuList_tpl">
+{{#each this}}
+<div class="navparts fn-clear fn-hide">
+	{{#each list}}
+	<dl>
+		<dt>{{title}}</dt>
+		{{#each item}}
+		<dd>
+			<a href="{{url}}" hidefocus="true"><span>{{name}}</span></a>
+		</dd>
+		{{/each}}
+	</dl>
+	{{/each}}
+</div>
+{{/each}}
+</textarea>
+
+
+<script type="text/javascript">
+//入参
+var pageParam = {
+	url: "ui/json/appList.json?1=1",
+	perPage: "5",
+	formStr: '',
+	blockId: 'blockCtn',
+	dataContainId: 'J_app_list',
+	dataTpl: 'T_app_list'
+}
+$(function(){
+	//加载查询条件
+	$.PostJson("ui/json/appSort.json?1=1","",function(state,appSort){
+		if(state=='success'){
+			if(appSort){
+				$.PostJson("ui/json/appPlatform.json?1=1","",function(state,appPlatform){
+					if(state=='success'){
+						if(appPlatform){
+							$.PostJson("ui/json/appState.json?1=1","",function(state,appState){
+								if(state=='success'){
+									if(appState){
+										var json = {};
+										json.appSort = appSort;
+										json.appPlatform = appPlatform;
+										json.appState = appState;
+										$("#J_flt_cdt").temp($("#T_flt_cdt").val(), json);
+										//获取应用列表
+										getPage(pageParam,function(){
+											$('.J_detail').magnificPopup({
+												type: 'inline',
+												fixedContentPos: true,
+												fixedBgPos: true,
+												overflowY: 'scroll',
+												showCloseBtn: true,
+												preloader: false,
+												midClick: true,
+												removalDelay: 300,
+												mainClass: 'mfp-slide-bottom',
+												callbacks: {
+													beforeOpen: function(){
+														console.log($(this.ev[0]).html())
+													},
+													beforeClose: function() {
+													},
+													close: function(){
+													}
+												}
+											});
+										});
+										//筛选条件
+										$('.ui-app-filter ul li').click(function(){
+											var _this = $(this);
+											//判断是筛选条件时，可选中
+											if (!(_this.hasClass('choice')) && _this.hasClass('condition')) {
+												_this.addClass('choice').siblings('.all').removeClass('choice');
+												getParams();
+											}
+											//点击全选时，取消其他选择条件
+											if (_this.hasClass('all')) {
+												_this.addClass('choice').siblings('li').removeClass('choice');
+												getParams();
+											};
+										})
+
+										//删除筛选条件
+										$('.ui-app-filter ul li b').click(function(){
+											stopEvent();
+											var _this = $(this);
+											_this.parent().removeClass('choice');
+											var flag = false;//是否还存在已选择条件标志位
+											//判断选择条件是否全部取消
+											for (var i = 0;i <= _this.parents('ul').find('li').length; i++) {
+												if (_this.parents('ul').find('li').eq(i).hasClass('choice')) {
+													flag = true;
+													break;
+												}
+											};
+											//如果选择条件全部取消，则选中全部
+											if (!flag) {
+												_this.parents('ul').find('.all').addClass('choice');
+											};
+											getParams();
+										})
+									}
+								}
+							})
+						}
+					}
+				})
+			}
+		}
+	})
+	
+
+	$('.J_btn_apply').click(function(){
+		$('#J_apply_limit').removeClass('fn-hide');
+		$('.fn-overflow').show();
+		autoCenter($('#J_apply_limit'));
+	})
+	
+	//查询按钮
+	$("#J_search").click(function(){
+		//清空多选条件
+		$('.ui-app-filter ul li.all').each(function(){
+			$(this).addClass('choice').siblings('li').removeClass('choice');
+		})
+		var str = $("#J_formSearch").formSerialize();
+		pageParam.formStr = str;
+		getPage(pageParam);
+	})
+
+	gotoTop();//回到顶部
+
+	//切换至大图显示
+	$('.ui-img-view').click(function(){
+		$(this).css('background-position','0 -38px').siblings('.ui-list-view').css('background-position','-42px -38px');
+		pageParam.perPage = 8;
+		pageParam.dataTpl = "T_app_list_pic";
+		getPage(pageParam);
+	})
+	//切换至列表显示
+	$('.ui-list-view').click(function(){
+		$(this).css('background-position','-42px 0').siblings('.ui-img-view').css('background-position','0 0');
+		pageParam.perPage = 10;
+		pageParam.dataTpl = "T_app_list";
+		getPage(pageParam);
+	})
+
+
+	//用户信息
+	$("#userInfo").bind("mouseenter",function(){
+		$("#userInfoMore").show();
+	}).bind("mouseleave",function(){
+		$("#userInfoMore").hide();
+	});
+	$("#userInfoBase").click(function(){
+		openWindow("个人信息","searchDemo.html",800,300);
+	});
+
+	//目录列表
+	$.PostJson("ui/json/menu.json?1=1","",function(state,json){
+		if(state=='success'){
+			if(json){
+				$("#menuList").temp($("#menuList_tpl").val(), json);
+				$("#menutitle").find("span.item").each(function(i){
+					$(this).click(function(){
+						if($("#menuList").find(".navparts:eq("+i+")").is(":hidden")){
+							$(this).addClass("active").siblings().removeClass("active");
+							$(".navparts").slideUp();
+							$("#menuList").css({"display": "block"}).find(".navparts:eq("+i+")").slideDown();
+						}else{
+							$('#menuList').slideUp().find(".navparts").slideUp();
+						}
+					})
+				})
+			}
+		}
+	})
+	$(document).on('click',function(e){
+		var e = window.event || e;
+        var tar = $(e.srcElement || e.target);
+        if(tar.hasClass('menutitle') || tar.parents().hasClass('menutitle') || tar.hasClass('menu-list') || tar.parents().hasClass('menu-list')){
+        }else{
+            $('#menuList').slideUp().find(".navparts").slideUp();
+        }
+    })
+});
+
+
+//回到顶部
+function gotoTop(min_height){
+    var gotoTop_html = '<div id="gotoTop">返回顶部</div>';
+    $("body").append(gotoTop_html);
+    $("#gotoTop").click(
+        function(){$('html,body').animate({scrollTop:0},300);
+    }).hover(
+        function(){$(this).addClass("hover");},
+        function(){$(this).removeClass("hover");
+    });
+    min_height ? min_height = min_height : min_height = 300;
+    $(window).scroll(function(){
+        var s = $(window).scrollTop();
+        if( s > min_height){
+            $("#gotoTop").fadeIn(100);
+        }else{
+            $("#gotoTop").fadeOut(200);
+        };
+    });
+};
+
+//获取选中的条件并加载数据
+function getParams(){
+	var appType = [], appPlatform = [], appState = [];
+	$('.app-sort li.choice').each(function(){
+		appType.push($(this).attr('value'));
+	})
+	$('.app-platform li.choice').each(function(){
+		appPlatform.push($(this).attr('value'));
+	})
+	$('.app-state li.choice').each(function(){
+		appState.push($(this).attr('value'));
+	})
+	appType = appType.join(",");
+	appPlatform = appPlatform.join(",");
+	appState = appState.join(",");
+	pageParam.formStr = 'appType='+appType+'&appPlatform='+appPlatform+'&appState='+appState;
+	console.log(pageParam.formStr)
+	getPage(pageParam);
+}
+
+//	自动居中元素（el = Element）
+function autoCenter( el ){
+	var bodyW = document.documentElement.clientWidth;
+	var bodyH = document.documentElement.clientHeight;
+	var scrollH = document.body.scrollTop;
+
+	var elW = el.get(0).offsetWidth;
+	var elH = el.get(0).offsetHeight;
+alert(scrollH)
+	el.get(0).style.left = (bodyW-elW)/2 + 'px';
+	el.get(0).style.top = ((bodyH-elH)/2)+scrollH + 'px';
+}
+</script>
+</body>
+</html>

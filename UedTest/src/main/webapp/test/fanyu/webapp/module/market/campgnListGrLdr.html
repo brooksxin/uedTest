@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>预览</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+
+  <div class="breadcrumb"></div>
+
+				<div class="formItem">
+					<div class="titleArea">
+						<h2>活动任务</h2>
+					</div>
+				</div>
+  
+      <div method="post" action="#" class="cmxform" >
+         <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+            <div class="record-search-cate">
+                  <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                                  <tbody>
+                                      <tr>
+                                          <td width="80"><label class="description">任务类型</label></td>
+                                          <td width="100">
+                                               <select name="CMPGN_TYPE_CD" id="CMPGN_TYPE_CD" class="inputWidth inputSelect" >
+                                                  <option value="">全部</option>
+                                                  <option value="0">活动任务</option>
+                                                  <option value="1">订单任务</option>
+                                               </select>
+                                          </td>
+                                          <td width="80"><label class="description">活动编号</label></td>
+                                          <td width="100">
+                                              <input name="CMPGN_ID" class="inputWidth inputText" type="text" maxlength="255" value=""/>
+                                          </td>
+                                          <td width="80"><label class="description">活动名称</label></td>
+                                          <td width="120">
+                                              <input name="CMPGN_NM" class="inputWidth inputText" type="text" maxlength="255" value=""/>
+                                          </td>
+                                          <td width="120">
+                                          <div class="normalBtnArea w82">
+							                  	<a class="searchBtn" href="javascript:;" id="Query" ><i></i>查询</a>
+                                          </div>
+                                          </td>
+                                          
+                                      </tr>
+                                  </tbody>
+                  </table>
+              </div>
+              <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+          </form>
+      </div>
+               
+           
+      <div class="tablewidth mg_t_10">
+                      <table class="ui-record-table table_radius table-bordered table-striped"  >
+                          <thead>
+                              <tr>
+                                  <th width="45"><div class="table_select"><input type="checkbox" /></div></th>
+                                  <th width="80">任务类型</th>
+                                  <th width="50">活动编号</th>
+                                  <th width="">活动名称</th>
+                                  <th width="70">开始时间</th>
+                                  <th width="70">结束时间</th>
+                                  <th width="50">分配状态</th>
+                                  <th width="50">活动状态</th>
+                                  <th width="100">操作</th>
+                              </tr>
+                           </thead>
+                           <tbody id="J_tabletpl">
+                          </tbody>
+                      </table>
+      </div>
+      
+          <!--翻页及功能按钮区域开始-->
+      <DIV class="amount-bottom">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+            <tr>
+              <!-- <td width="60">
+                  <input type="checkbox" class="selectAll" id="selectAll" /> <label for="selectAll">全选</label> 
+              </td> -->
+              
+              <td width="50%">
+                  <DIV class="fn-clear action-other  action-other-show ">
+                          <DIV id=Pagination class="page pagination fn-right"> </DIV>
+                          <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                  </DIV></td>
+            </tr>
+          </table>
+      </DIV>
+      
+      
+
+      
+
+      <script id="T_tabletpl" type="text/x-handlebars-template">
+   {{#if beans}}
+            {{#each beans}}
+                   <tr>
+                         <td><div class="table_select"><input type="checkbox" /></div></td>
+                               <td>{{CMPGN_TYPE_CD}}</td>
+                               <td>{{CMPGN_ID}}</td>
+                               <td>{{CMPGN_NM}}</td>
+                               <td>{{CMPGN_EFF_DATE}}</td>
+                               <td>{{CMPGN_INVLD_DATE}}</td>
+                               <td>{{co}}</td>
+                                   <!--CMPGN_STS_CD  未开始  已结束  进行中 暂停 废止 "item-text"-->
+                               <td>{{CMPGN_STS_CD}}</td>
+                               <td width="90">
+                                    <div class="gridRowBtn">
+                                       <a class="{{isDis CMPGN_STS_CD}}" href="javascript:;" onclick="distributeData('{{CMPGN_ID}}','{{CMPGN_NM}}','{{CMPGN_EFF_DATE}}','{{CMPGN_INVLD_DATE}}','{{co}}','{{CMPGN_STS_CD}}')">分配</a>
+                                       <a class="{{isWatch CMPGN_STS_CD co}}"  href="javascript:;" onclick="watchProcess('{{CMPGN_ID}}','{{CMPGN_NM}}','{{CMPGN_EFF_DATE}}','{{CMPGN_INVLD_DATE}}','{{CMPGN_STS_CD}}','{{co}}')">查看进度</a>
+                                   </div>
+                               </td>
+                   </tr>
+             {{/each}}
+   {{else}}
+	<tr>
+		<td colspan="9">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+
+   {{/if}}
+   </script>  	
+
+<#include "../../tpl/res_js.tpl" />
+    <script src="../../common/market/common.js"></script>
+    <script src="../../common/requirejsConfig.js"></script>
+
+  <script type="text/javascript">
+  
+  srvMap.add('query' , 'query.json','front/sh/market!index?uid=my011');//查询班组长已分配的活动
+  var G_params = {
+		    url : srvMap.get('query'),
+			searchformId :"J_formSearch",
+			items_per_page : 10 ,   // 每页数     @param : limit
+		    page_index : 0 , //当前页  @param : start
+		    pagination : "Pagination" , //分页id
+		    tabletpl : "T_tabletpl",  //表单模型
+		    tablewrap :"J_tabletpl" //表格容器
+	};
+  
+      //页面加载完开始执行
+      $(document).ready(function () {
+    	  /* <td>{{isFENPEI  STAFF_TYPE_CD}}</td> */
+    	 /*  Handlebars.registerHelper("isFENPEI",function(str,fn){
+        	  var buffer="";
+        	  if(str=="1"){
+        	      buffer="已分配";
+        	  }else{
+        		  buffer="未分配";
+        	  }
+        	  return buffer;
+        	  }); */
+    	  var str= $("#"+G_params.searchformId).serialize();
+          //console.log(str);
+     	 Util.pagination(0, true , G_params , str );
+          //初始化函数
+     	$('#Query').bind('click',function(){
+            var str= $("#"+G_params.searchformId).serialize();
+           // console.log(str);
+       	 Util.pagination(0, true , G_params , str );
+       });
+      });
+      
+  function cancelReservation(){
+      artDialog({
+          id: 'Confirm',
+          lock: true,
+          opacity: .1,
+          content: '您确定要取消此预约单吗？',
+          ok: function (here) {
+              art.dialog.tips('已取消');
+          },
+          cancel: function (here) {
+              return;
+          }
+      });
+  }
+      function distributeData(CMPGN_ID,CMPGN_NM,CMPGN_EFF_DATE,CMPGN_INVLD_DATE,status,CMPGN_STS_CD){
+        
+    	  if(CMPGN_STS_CD == "进行中"||CMPGN_STS_CD == "未开始"||CMPGN_STS_CD == "再次分配暂停"){
+    		  if(status=='未分配'){
+        		  window.location.href="divideTaskDept.html?"
+        	         	 + "CMPGN_ID="+CMPGN_ID+"&CMPGN_NM="+CMPGN_NM+"&CMPGN_EFF_DATE="
+        	         	 +CMPGN_EFF_DATE+"&CMPGN_INVLD_DATE="+CMPGN_INVLD_DATE;
+        	  }else{
+        		  var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text"><span style="color:red;">警告：</span>重新分配会导致该活动处于暂停状态！请谨慎操作！</div></div></div>'
+        		    );
+
+        		    var params = {
+        		        top:top,
+        		        content: elem,
+        		        width: "300px",
+        		        height: "140px",
+        		        modal: true,
+        		        okVal:'确定',
+        		        okCallback:function(){
+        		              $(obj).hide().siblings().hide();
+                          require(['common/util/loading'], function(Loading){
+                            Loading.init();
+                            require(['common/market/againdivideTaskDept'], function(Main){
+                              Main.init({ CMPGN_ID:CMPGN_ID, CMPGN_NM:CMPGN_NM, CMPGN_EFF_DATE:CMPGN_EFF_DATE, CMPGN_INVLD_DATE:CMPGN_INVLD_DATE,status:status,CMPGN_STS_CD:CMPGN_STS_CD }, Loading);
+                            });
+
+                          });
+                          
+        		              //跳转
+        		              /*window.location.href="../market/againdivideTaskDept.html?"
+        	        	         	 + "CMPGN_ID="+CMPGN_ID+"&CMPGN_NM="+CMPGN_NM+"&CMPGN_EFF_DATE="
+        	        	         	 +CMPGN_EFF_DATE+"&CMPGN_INVLD_DATE="+CMPGN_INVLD_DATE;*/
+        		        },
+        		        cancelVal:'取消',
+        		        cancelCallback:function(){}
+        		      }
+
+        		      Util.dialog.openDiv(params);
+        		  
+        		  
+        		  
+        		 
+        	  }
+    	  }else{
+    		  return false;
+    	  }
+	  } 
+      function watchProcess(CMPGN_ID,CMPGN_NM,CMPGN_EFF_DATE,CMPGN_INVLD_DATE,status,co){
+    	  if(status == "废止" || status == "未开始"||co=='未分配'||status=='再次分配暂停'){
+    		  return false;
+    	  }else{
+    		  if(status=='已结束'){
+        		  window.location.href="finishTaskStatusDept.html?"
+     	         	 + "CMPGN_ID="+CMPGN_ID+"&CMPGN_NM="+CMPGN_NM+"&CMPGN_EFF_DATE="
+     	         	 +CMPGN_EFF_DATE+"&CMPGN_INVLD_DATE="+CMPGN_INVLD_DATE;
+        	  }else{
+        		  window.location.href="taskprogressdept.html?"
+      	         	 + "CMPGN_ID="+CMPGN_ID+"&CMPGN_NM="+CMPGN_NM+"&CMPGN_EFF_DATE="
+      	         	 +CMPGN_EFF_DATE+"&CMPGN_INVLD_DATE="+CMPGN_INVLD_DATE;
+        	  }
+    	  }
+     }
+     
+  	Handlebars.registerHelper("isDis", function(status){
+  		var buffer = "";
+  		if(status == "进行中"||status == "未开始"||status == "再次分配暂停"){
+  			buffer = "item-text";
+  		}else{
+  			buffer = "disable-text";
+  		}
+  		
+  		return buffer;
+  	});
+  	
+  	Handlebars.registerHelper("isWatch", function(status,co){
+  		var buffer = "";
+  		if(status == "废止" || status == "未开始"||co=='未分配'||status=='再次分配暂停'){
+  			buffer = "disable-text";
+  		}else{
+  			buffer = "item-text";
+  		}
+  		
+  		return buffer;
+  	});
+  </script>
+</body>
+</html>
+

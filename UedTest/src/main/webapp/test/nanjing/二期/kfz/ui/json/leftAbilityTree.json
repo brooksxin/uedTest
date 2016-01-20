@@ -1,0 +1,189 @@
+[
+    {
+        "children": [
+            {
+                "id": 100000000219,
+                "name": "乱码讨厌",
+                "nodeId": 100000000007,
+                "nodeType": "1"
+            },
+            {
+                "children": [
+                    {
+                        "id": 100000000222,
+                        "name": "能力1117",
+                        "nodeId": 100000000010,
+                        "nodeType": "1"
+                    },
+                    {
+                        "id": 100000000223,
+                        "name": "能力11172",
+                        "nodeId": 100000000011,
+                        "nodeType": "1"
+                    },
+                    {
+                        "id": 100000000224,
+                        "name": "能力123",
+                        "nodeId": 100000000012,
+                        "nodeType": "1"
+                    },
+                    {
+                        "id": 100000000225,
+                        "name": "能力泰国",
+                        "nodeId": 100000000013,
+                        "nodeType": "1"
+                    },
+                    {
+                        "id": 100000000218,
+                        "name": "????",
+                        "nodeId": 100000000006,
+                        "nodeType": "1"
+                    },
+                    {
+                        "id": 100000000220,
+                        "name": "??1",
+                        "nodeId": 100000000008,
+                        "nodeType": "1"
+                    }
+                ],
+                "id": 100000000200,
+                "name": "wxq1",
+                "nodeId": 100000000201,
+                "nodeType": "2"
+            },
+            {
+                "children": [
+                    {
+                        "id": 100000000214,
+                        "name": "??1110",
+                        "nodeId": 100000000002,
+                        "nodeType": "1"
+                    },
+                    {
+                        "id": 100000000221,
+                        "name": "helloday",
+                        "nodeId": 100000000009,
+                        "nodeType": "1"
+                    },
+                    {
+                        "id": 100000000216,
+                        "name": "??1111",
+                        "nodeId": 100000000004,
+                        "nodeType": "1"
+                    },
+                    {
+                        "id": 100000000217,
+                        "name": "??11112",
+                        "nodeId": 100000000005,
+                        "nodeType": "1"
+                    }
+                ],
+                "id": 100000000205,
+                "name": "目录弹窗",
+                "nodeId": 100000000206,
+                "nodeType": "2"
+            },
+            {
+                "id": 100000000211,
+                "isParent": true,
+                "name": "目录11042",
+                "nodeId": 100000000212,
+                "nodeType": "2"
+            },
+            {
+                "id": 100000000208,
+                "isParent": true,
+                "name": "目录1111",
+                "nodeId": 100000000209,
+                "nodeType": "2"
+            },
+            {
+                "children": [
+                    {
+                        "id": 100000000215,
+                        "name": "??11102",
+                        "nodeId": 100000000003,
+                        "nodeType": "1"
+                    }
+                ],
+                "id": 100000000209,
+                "name": "目录2",
+                "nodeId": 100000000210,
+                "nodeType": "2"
+            },
+            {
+                "id": 100000000210,
+                "isParent": true,
+                "name": "目录1104",
+                "nodeId": 100000000211,
+                "nodeType": "2"
+            },
+            {
+                "id": 100000000213,
+                "isParent": true,
+                "name": "目录11052",
+                "nodeId": 100000000214,
+                "nodeType": "2"
+            },
+            {
+                "children": [
+                    {
+                        "id": 5,
+                        "name": "能力1009",
+                        "nodeId": 3002,
+                        "nodeType": "1"
+                    },
+                    {
+                        "id": 6,
+                        "name": "能力1008",
+                        "nodeId": 3001,
+                        "nodeType": "1"
+                    }
+                ],
+                "id": 10,
+                "name": "不想起名1",
+                "nodeId": 2,
+                "nodeType": "2"
+            },
+            {
+                "id": 100000000201,
+                "isParent": true,
+                "name": "查询w",
+                "nodeId": 100000000202,
+                "nodeType": "2"
+            },
+            {
+                "id": 100000000202,
+                "isParent": true,
+                "name": "查询1",
+                "nodeId": 100000000203,
+                "nodeType": "2"
+            },
+            {
+                "id": 100000000203,
+                "isParent": true,
+                "name": "111",
+                "nodeId": 100000000204,
+                "nodeType": "2"
+            },
+            {
+                "id": 100000000204,
+                "isParent": true,
+                "name": "目录11",
+                "nodeId": 100000000205,
+                "nodeType": "2"
+            },
+            {
+                "id": 100000000212,
+                "isParent": true,
+                "name": "弹窗关闭",
+                "nodeId": 100000000213,
+                "nodeType": "2"
+            }
+        ],
+        "id": 1,
+        "name": "根目录",
+        "nodeId": 1,
+        "nodeType": "2"
+    }
+]

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>评分类型-新建评分类型</title>
+    <#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<div class="formItem">
+    <hr/>
+    <table  class="form_table" >                                            
+        <tbody>  
+            <tr>
+                <td width="120"><label class="formDescription"><span class="fn-high">*</span>评分类型名称：</label></td>
+                <td><input type="text"class="FormInputText width100"/></td>
+            </tr>
+            <tr>    
+                <td valign="top"><label class="formDescription">评分类型名称：</label></td>
+                <td>
+                    <textarea rows="8" cols="40"style="resize:none;" id="REMARK" name="REMARK" class="width100"></textarea>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr/>
+</div>
+<#include "../../tpl/res_js.tpl" />   
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+    });
+</script>
+</body>
+</html>

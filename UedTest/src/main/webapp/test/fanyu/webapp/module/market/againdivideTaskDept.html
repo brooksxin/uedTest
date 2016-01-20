@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>预览</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+				<div class="titleArea fn-center">
+					<h2>调整配给数量</h2>
+				</div>
+				<hr />
+
+				<table width="100%">
+					<tr>
+						<td width="100"><div class="market_tableTxtColor">任务名称：</div></td>
+						<td width=""><span id="CMPGN_NM"></span></td>
+						<td width="100"><div class="market_tableTxtColor">距任务结束：</div></td>
+						<td><div class="fn-red" id="clock"></div></td>
+					</tr>
+					<tr>
+						<td><div class="market_tableTxtColor">结束时间：</div></td>
+						<td><span id="CMPGN_INVLD_DATE"></span></td>
+						<td><div class="market_tableTxtColor">剩余任务量：</div></td>
+						<td><span id="plusCount"></span>/<span id="total"></span></td>
+					</tr>
+				</table>
+
+
+     <form id="divideTask">
+		<div class="tablewidth mg_t_10">
+			<table
+				class="ui-record-table table_radius table-bordered table-striped">
+				<thead>
+					<tr>
+						<th width="50"></th>
+						<th width="">员工工号</th>
+						<th width="">员工姓名</th>
+						<th width="">配给数量</th>
+					</tr>
+				</thead>
+				<tbody id="J_tabletpl">
+					
+				</tbody>
+			</table>
+		</div>
+		<input type="hidden" name="uid" value="mt006">
+		<input type="hidden" name="type" value="1">
+		<input type="hidden" name="CMPGN_ID" class="CMPGN_ID" />
+		<input type="hidden" name="VALID_END_DATE" class="VALID_END_DATE" />
+		<input type="hidden" name="VALID_BGN_DATE" class="VALID_BGN_DATE" />
+	</form>
+
+
+
+	<!--翻页及功能按钮区域开始-->
+	<DIV class="amount-bottom">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0"
+			class="gridBottom">
+			<tr>
+				<td width="60"><input type="checkbox" class="selectAll" checked="checked"
+					id="selectAll" /> <label for="selectAll">全选</label></td>
+				<td width="100">剩余配给量:<span class="surplus">0</span></td>
+				<td width="100">
+					<DIV class="normalBtnArea">
+						<A class="normalBtn BGgray" id="J_distr_again" href="javascript:;">重新分配</A>
+					</DIV>
+				</td>
+				<td>
+					<DIV class="fn-clear action-other  action-other-show" style="width:410px">
+						<DIV id=Pagination class="page pagination fn-right"></DIV>
+						<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+					</DIV>
+				</td>
+			</tr>
+		</table>
+	</DIV>
+
+	<div class="formBtnArea">
+      <table width="100%">
+        <tr>
+          <td>
+            <div class="normalBtnArea fn-center">
+                <a class="normalBtn BGblue largeBtn" href="javascript:;"
+					id="J_search">确定</a> <a class="normalBtn BGgray largeBtn"
+					href="javascript:;" onclick="Cancel()" id="J_search">取消</a>
+            </div>
+          </td>
+        </tr>
+      </table>
+	</div>
+
+
+	<#include "../../tpl/res_js.tpl" />
+	<!--以下为该页面私有js-->
+	<script src="../../lib/underscore/1.8.3/m.js"></script>
+	<script src="../../lib/jqueryPlugin/jquery.countdown/2.0.2/m.js"></script>
+    <script src="../../common/market/common.js"></script>
+	
+	<!--
+	<script src="../../common/underscore.js"></script>
+    <script src="../../common/jquery.countdown.js"></script>
+	-->
+
+	<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+								<td>
+				<div class="table_select">
+					<input type="checkbox" checked="checked" onchange="checkStaff(this)" />
+				</div>
+			</td>
+            <input type="hidden" name="STAFF_ID" class="hideBox" value={{STAFF_ID}}>
+			<td align="center">{{PTY_NO}}</td>
+			<td align="center">{{PTY_NM}}</td>
+								<td align="center">
+				                  <div style="line-height:0px">
+					                 <a herf="#" class="order_productDiva" onclick="decrease(this)">-</a>
+					                 <input type="text" name="TSK_ALCT_QTY" class="ui-count-ipt order_productinput fn-mtl-5" lastVal="" onchange="changeTaskIpt(this)" onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')"  />
+					                 <a herf="#" class="order_productDiva fn-mtl-5" onclick="increase(this)">+</a>
+				                  </div>
+			                   </td>
+
+							</tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="4">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+
+{{/if}}
+</script>
+	
+	<script type="text/javascript">
+	
+	
+	//获取传递的营销活动ID
+	var CMPGN_ID = Util.browser.getParameter("CMPGN_ID");//活动ID
+	var CMPGN_NM=  decodeURI(Util.browser.getParameter("CMPGN_NM"));//活动名称	
+	var CMPGN_EFF_DATE=  decodeURI(Util.browser.getParameter("CMPGN_EFF_DATE"));//活动结束日期
+	var CMPGN_INVLD_DATE=  decodeURI(Util.browser.getParameter("CMPGN_INVLD_DATE"));//活动结束日期
+	$(".CMPGN_ID").val(CMPGN_ID);
+	$("#CMPGN_NM").text(CMPGN_NM);
+	$("#CMPGN_INVLD_DATE").text(CMPGN_INVLD_DATE);
+	$("#CMPGN_EFF_DATE").text(CMPGN_EFF_DATE);
+	$(".VALID_END_DATE").val(CMPGN_INVLD_DATE);
+	$(".VALID_BGN_DATE").val(CMPGN_EFF_DATE);
+	srvMap.add('getcount', 'count.json', 'front/sh/market!index');//班组长查询未分配任务数量
+	srvMap.add('stafflist', 'staf.json', 'front/sh/user!userinfo');//系统管理员查询所有班组
+	srvMap.add('divide', 'divide.json', 'front/sh/market!index');//分配任务
+	srvMap.add('updateCampngStatus', 'divide.json', 'front/sh/market!index');//进入重新分配，更新该营销活动状态为暂停
+	//页面使用参数列表
+	var G_params = {
+		url : srvMap.get('getcount'),
+		loginformId : "J_formCount", //搜索表单的id
+		divideformId:"divideTask"//分配任务表单ID
+		
+		
+	};
+	var count = "",num = '';
+	//页面加载完开始执行
+	$(function() {
+		var DEPT_Id=userInfo.bean.deptId;
+		//更新营销活动状态为暂停
+		var paramupdate={"uid":"myxz006","CMPGN_ID":CMPGN_ID,"CMPGN_STS_CD":"2"};
+		Util.ajax.postJsonSync(srvMap.get('updateCampngStatus'), paramupdate,function(json, status) {
+			if (status) {//更细营销活动状态为暂停
+				
+					
+				}
+		});
+		
+		
+		
+		//获取任务数量
+		var params={"uid":"mc003","CMPGN_ID":CMPGN_ID,"DEPT_ID":DEPT_Id,"type":"1"};
+		Util.ajax.postJsonSync(srvMap.get('getcount'), params, function(json,
+				status) {
+			if (status) {
+				count = json.bean.plusCount;
+				$("#plusCount").text(count);
+				$("#total").text(json.bean.total);
+			}
+		});
+		
+		//查询员工列表
+		var param={'uid':'u005',"DEPT_ID":DEPT_Id};
+		Util.ajax.postJsonSync(srvMap.get('stafflist'),param, function(
+				json, status) {
+			/* alert(status);
+			alert(JSON.stringify(json));  */
+			if (status) {
+				num=json.beans.length;
+				Util.ajax.loadTemp('#J_tabletpl', $('#T_tabletpl'), json);
+				distributeTask();
+			}
+		});
+		
+		//全选checkbox
+		$('#selectAll').change(function() {
+			var ck=this.checked;
+			$("#J_tabletpl input[type='checkbox']").each(function(i,ele){
+				this.checked=ck;
+				checkStaff(ele);
+			});
+		});
+		
+		$("#J_search").bind("click",function(){
+			if ($(this).attr('class').indexOf('disable') > -1) {
+				return false;
+			}
+			//分配任务
+			var str1 = $("#" + G_params.divideformId).serialize(); //把form序列化
+			Util.ajax.postJsonSync(srvMap.get('divide'), str1, function(
+					json, status) {
+				if (status) {
+					if(json.returnCode='0'){
+						var param1={"uid":"myxz006","CMPGN_ID":CMPGN_ID,"CMPGN_STS_CD":"1"};
+						Util.ajax.postJsonSync(srvMap.get('updateCampngStatus'), param1,function(json, status) {
+							if (status) {//更细营销活动状态为暂停
+								Util.dialog.tips("调整任务成功");
+								//跳转到营销活动列表页面
+								window.location.href="campgnListGrLdr.html";
+								}
+						});
+						
+					}
+				}
+					
+			});
+		});
+		
+		//倒计时
+		var countdownParam = {};
+		Util.ajax.postJson(srvMap.get('stafflist'), countdownParam, function(json, status) {
+			if (status) {
+				//json
+			}
+		});
+		
+		var dateStr = CMPGN_INVLD_DATE.replace(/-/g, '/')
+		var countdownDate = new Date(dateStr);
+		if (countdownDate > new Date()) {
+			$('#clock').countdown(dateStr, function(event) {
+				$(this).html(event.strftime('%D 天 %H:%M:%S'));
+			});
+		}else{
+			$('#clock').html('活动已过期！');
+		}
+
+		//给任务数量文本框注册事件
+		$('#J_tabletpl').on('propertychange keyup input paste blur set', 'tr td .ui-count-ipt', function(e){
+			numSign(e.currentTarget);
+		})
+
+	});
+	
+	//分配任务
+	function distributeTask(){
+		var $tbody = $('#J_tabletpl');
+		var $trs = $tbody.children();
+		var $trCheckeds = _.filter($trs, function(tr) {
+			var $tr = $(tr);
+			return $tr.find('input[type=checkbox]').is(':checked');
+		});
+		if($trCheckeds==null||$trCheckeds==''){
+			Util.dialog.tips("请选择成员");
+		}else{
+		   var checkedNum = $trCheckeds.length;
+		    var averageTask = parseInt(parseInt(count)/checkedNum),//平均分配
+			surplusTask = parseInt(parseInt(count)%checkedNum);//取余
+		
+		   $('.ui-count-ipt', $trCheckeds).val(averageTask).attr('lastVal',averageTask)
+			.eq(0).val(averageTask+surplusTask).attr('lastVal',averageTask+surplusTask);
+		//$('input[type=checkbox]').attr('checked','checked');
+		   $('.surplus').html(0);
+		   canDistribute();
+		}
+	}
+
+	//递减
+	function decrease(obj){
+		if ($(obj).attr('class').indexOf('disabled')>-1){
+			return false;
+		}
+		var obj = $(obj),surplus = parseInt($('.surplus').html());
+		var curTask = parseInt(obj.siblings('input').val());
+		if (curTask>0) {
+			curTask--;
+			surplus++;
+			obj.siblings('input').val(curTask).attr('lastVal',curTask);
+			$('.surplus').html(surplus);
+		};
+		canDistribute(obj);
+	}
+
+	//递增
+	function increase(obj){
+		if ($(obj).attr('class').indexOf('disabled')>-1){
+			return false;
+		}
+		obj = $(obj);
+		var surplus = parseInt($('.surplus').html());
+		var curTask = parseInt(obj.siblings('input').val());
+		if (surplus>0) {
+			surplus--;
+			curTask++;
+			obj.siblings('input').val(curTask).attr('lastVal',curTask);
+			$('.surplus').html(surplus);
+		};
+		canDistribute(obj);
+	}
+	//改变input的任务量值
+	function changeTaskIpt(obj){
+		obj = $(obj);
+		var	lastVal = parseInt(obj.attr('lastVal')),
+		curVal = parseInt(obj.val()),
+		surplus = parseInt($('.surplus').html());
+		if (curVal > lastVal) {
+			var DVal = curVal - lastVal;
+			if (DVal > surplus) {
+				Util.dialog.tips('剩余配给量不足！');
+				obj.val(lastVal);
+			}else{
+				$('.surplus').html(surplus - DVal);
+				obj.attr('lastVal',curVal);
+			}
+		}else{
+			var DVal = lastVal - curVal;
+			$('.surplus').html(surplus + DVal);
+			obj.attr('lastVal',curVal);
+		}
+		canDistribute(obj);
+	}
+	//是否选中员工
+	function checkStaff(obj){
+		obj = $(obj);
+		var curIpt = obj.parents('tr').find('.ui-count-ipt'),
+			curVal = parseInt(curIpt.val()),
+			surplus = parseInt($('.surplus').html()), 
+			$tr = obj.parents('tr'), 
+			$box = $('input[type=text]', $tr), 
+			$hideBox = $('.hideBox', $tr), 
+			$plus = $('.order_productDiva', $tr);
+		if (!obj.attr('checked')) {
+			$('.surplus').html(surplus+curVal);
+			curIpt.val(0);
+			$box.attr('readonly', 'readonly');
+			$plus.addClass('disabled');
+			$hideBox.attr('readonly', 'readonly');
+		}else{
+			$box.removeAttr('readonly');
+			$hideBox.removeAttr('readonly');
+			$plus.removeClass('disabled');
+		}
+		canDistribute(obj);
+		obj.parents('tr').find('.ui-count-ipt').attr('lastVal',0);
+	}
+
+	//判断重新分配按钮是否可用
+	function canDistribute(obj){
+		var $trCheckeds = checkedGets(true);
+		var surplus = parseInt($('.surplus').html());
+		if (surplus || $trCheckeds.length > 0) {
+			$('#J_distr_again').removeClass('disable').attr('onclick','distributeTask()');
+			$('#J_search').addClass('disable');
+		}else{
+			$('#J_distr_again').addClass('disable').removeAttr('onclick');
+			$('#J_search').removeClass('disable');
+		}
+		numSign(obj);
+	}
+	
+	function Cancel(){
+		var param1={"uid":"myxz006","CMPGN_ID":CMPGN_ID,"CMPGN_STS_CD":"1"};
+		Util.ajax.postJsonSync(srvMap.get('updateCampngStatus'), param1,function(json, status) {
+			if (status) {//更细营销活动状态为暂停
+				//跳转到营销活动列表页面
+				window.location.href="campgnListGrLdr.html";
+				}
+		});
+		
+	}
+</script>
+</body>
+</html>

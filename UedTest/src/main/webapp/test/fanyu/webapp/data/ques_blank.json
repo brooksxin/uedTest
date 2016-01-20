@@ -1,0 +1,34 @@
+{
+	"returnCode": "0",
+	"returnMessage": "success",
+	"bean":{
+		"QU_ID":"1003",
+		"QU_TYPE_CD":"10",
+		"QU_NM":"多项填空默认问题名",
+		"QU_DESC":"多项填空的描述",
+		"QU_HAVE_ASWR_FLAG":"1",
+		"beans":[
+			{
+				"QU_ID":"10031",
+				"QU_TYPE_CD":"10",
+				"QU_NM":"您经常在线购物的网站是？",
+				"QU_DESC":"多项填空的描述",
+				"QU_HAVE_ASWR_FLAG":"0",
+			},
+			{
+				"QU_ID":"10032",
+				"QU_TYPE_CD":"10",
+				"QU_NM":"还有哪些？",
+				"QU_DESC":"多项填空的描述",
+				"QU_HAVE_ASWR_FLAG":"0",
+			},
+			{
+				"QU_ID":"10033",
+				"QU_TYPE_CD":"10",
+				"QU_NM":"还有哪些？",
+				"QU_DESC":"多项填空的描述",
+				"QU_HAVE_ASWR_FLAG":"0",
+			}
+		]
+	}
+}

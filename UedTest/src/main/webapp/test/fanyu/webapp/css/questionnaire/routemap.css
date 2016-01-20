@@ -1,0 +1,51 @@
+body {
+	font-family: "Î¢ÈíÑÅºÚ", "STXihei";
+}
+
+.formItem {
+	margin: 0 10px;
+}
+
+.bd-bottom {
+	border-bottom: 2px solid #4496F0;
+}
+
+.titleArea {
+	font-size: 16px;
+	color: #333;
+	margin: 10px 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-size: 100%;
+	font-weight: 300;
+}
+
+#flowchart-demo {
+	margin: 10px auto;
+	position: relative;
+	width: 100%;
+	background-color: white;
+	overflow: auto;
+	height: 600px;
+	font-family: georgia;
+}
+
+.node {
+	border: 1px solid rgba(0, 0, 0, 0.07);
+	background-color: #ddddff;
+	position: absolute;
+	-moz-border-radius: 5px; /* Gecko browsers */
+	-webkit-border-radius: 5px;
+	font-size: 12px;
+	text-align: center;
+	line-height: 20px;
+	diplay: block;
+	word-wrap: break-word;
+	overflow: hidden;
+}
+
+em {
+	font-style: normal;
+	color: #cc0000;
+}

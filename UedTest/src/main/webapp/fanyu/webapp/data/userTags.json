@@ -1,0 +1,13 @@
+{
+	"returnCode": "0000",
+	"returnMessage": "success",
+	"total": "3",
+	"beans":[
+		{
+			"tagName":"黄牛"
+		},
+		{
+			"tagName":"黑名单"
+		}
+	]
+}

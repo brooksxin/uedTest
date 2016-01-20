@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加新角色</title> <#include "../../tpl/res_css.tpl" />
+</head>
+
+<body>
+	<div class="formItem">
+		<div class="titleArea">
+			<h2>添加角色</h2>
+		</div>
+
+		<div class="formArea">
+			<div class="form_table" style="text-align: center;">角色创建成功，是否现在配置角色权限？</div>
+			<hr />
+			<div class="formBtnArea">
+				<div class="normalBtnArea fn-center">
+					<a class="normalBtn BGblue largeBtn" href="javascript:;"
+						id="configNow">配置权限</a> <a class="normalBtn BGgray largeBtn"
+						href="javascript:;" id="notConfig">稍后再配置</a>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<#include "../../tpl/res_js.tpl" />
+		<script type="text/javascript">
+			
+			var ROLE_ID = "";
+			var ROLE_NM = "";
+			
+	        //页面加载完开始执行
+	        $(document).ready(function () {
+	        	ROLE_ID = Util.browser.getParameter("ROLE_ID");
+	        	ROLE_NM = decondeURI(Util.browser.getParameter("ROLE_NM"));
+	        });
+	        
+	        $("#configNow").click(function(){
+	        	window.location.href="configAuth.html?ROLE_ID="+ROLE_ID + "&ROLE_NM=" + encodeURI(ROLE_NM);
+	        });
+	        
+			$("#notConfig").click(function(){
+				window.location.href="roleList.html";
+	        });
+      </script>
+</body>
+</html>

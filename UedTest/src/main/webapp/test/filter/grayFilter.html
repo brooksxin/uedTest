@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>test-demo</title>
+
+<script type="text/javascript" src="jquery.js"></script>
+<style type="text/css">
+body{
+	width: 900px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+}
+.boxgrid{
+	position: relative;
+	height: 272px;
+	overflow: hidden;
+	width: 199px;
+}
+.boxgrid a,.boxgrid .cover{
+	width: 100%;
+}
+.cover{
+	position: absolute;
+	top: 272px;
+	background: #000;
+	left: 0;
+}
+.lbwz{
+	color: #fff;
+	font-family: '微软雅黑';
+	font-size: 12px;
+	margin-left: 10px;
+	padding-top: 8px;
+	line-height: 18px;
+}
+.lbwz span {
+	font-size: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #fff;
+}
+.fn-filter-gray{
+	-webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter: url(gray-svg#grayscale);
+    filter: gray;
+}
+</style>
+
+</head>
+<body>
+	<div class="boxgrid">
+		<a href="javascript:;" title="国雅地板品牌网站建设">
+			<img src="1.jpg" width="199" height="272" class="fn-filter-gray">
+		</a>
+		<div class="cover">
+			<div class="lbwz">国雅地板品牌网站建设
+				<br />
+				<span>TIME:2013-09-29</span>
+				<p>国人伟业与龙华集团合作打造国雅地板品牌官方网站，安徽龙华集团创办于1998年，是一家...</p>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+$(function(){
+	var _zflag = 0;
+	$(".boxgrid").mouseenter(function(){
+		if(!_zflag){
+			$(this).find("a img").removeClass("fn-filter-gray").end().find(".cover").animate({top:'162px'},'slow');
+			_zflag = 1;
+		}
+	}).mouseleave(function(){
+		if(_zflag){
+			$(this).find("a img").addClass("fn-filter-gray").end().find(".cover").animate({top:'272px'},'slow');
+			_zflag = 0;
+		}
+	})
+});
+</script>
+
+</html>

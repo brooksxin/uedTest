@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10085-下单量-编辑数量</title>
+<#include "../../tpl/res_css.tpl" />
+
+</head>
+<body>
+    <div class="formItem">
+		<div class="pt-10 pb-10 ui-fhw"><a href="Javascript:history.go(-1);void(0);" class="formItem_jiantou-tu normalLink">取消</a></div>
+    </div>
+    <div class="formArea colorA">
+        <table width="100%" class="order_productItem">
+            <tr>
+                <td>[13310]iphone6 plus/16G</td>
+                <td width="200">
+                    <div style="line-height:0px">
+                        <a herf="javascript:;" class="order_productDiva">-</a>
+                        <input type="text" value="1" class="order_productinput fn-mtl-5">
+                        <a herf="javascript:;" class="order_productDiva fn-mtl-5">+</a>
+                    </div>
+                </td>
+                <td width="100" class="txt-right">
+                    &yen;7800
+                </td>
+            </tr>
+        </table>
+        <hr/>
+        <h2 class="order_productTitle">
+            周边商品：
+        </h2>
+        <table width="100%" class="order_productItem">
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="checkbox" />
+                        <label for="selectAll">
+                            [13120]流行-大白手机壳
+                        </label>
+                    </td>
+                    <td width="200">
+                        <div style="line-height:0px">
+                            <a herf="javascript:;" class="order_productDiva">-</a>
+                            <input type="text" value="1" class="order_productinput fn-mtl-5">
+                            <a herf="javascript:;" class="order_productDiva fn-mtl-5">+</a>
+                        </div>
+                    </td>
+                    <td width="100" class="txt-right">
+                        &yen;100
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" />
+                        <label for="selectAll">
+                            [13121]黑珍珠手机链
+                        </label>
+                    </td>
+                    <td>
+                        <div style="line-height:0px">
+                            <a herf="javascript:;" class="order_productDiva">
+                                -
+                            </a>
+                            <input type="text" value="1" class="order_productinput fn-mtl-5">
+                            <a herf="javascript:;" class="order_productDiva fn-mtl-5">
+                                +
+                            </a>
+                        </div>
+                    </td>
+                    <td class="txt-right">
+                        &yen;100
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="ft-right mt-10 mb-10 mr-10">
+        合计：
+        <span class="order_productDiv">
+            &yen;3088.00
+        </span>
+    </div>
+    <hr/>
+    <table width="100%">
+        <tr>
+            <td>
+                <div class="normalBtnArea ft-left ml-30 mt-15">
+                    <a class="normalBtn BGgray largeBtn" href="#">
+                        预约
+                    </a>
+                </div>
+            </td>
+            <td>
+                <div class="normalBtnArea ft-right mr-30 mt-15">
+                    <a class="normalBtn BGblue largeBtn" href="checkOrderInfo.html">
+                        下单
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+//页面加载完开始执行
+$(function () {
+   /* $(".normalBtn").bind("click",function(){
+        var href = "checkOrderInfo.html"
+        $(this).attr("href",href);
+    });*/
+});
+</script>
+</body>
+</html>

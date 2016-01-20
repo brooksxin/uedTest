@@ -1,0 +1,30 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": null,
+    "bean": {
+        "total": "6",
+        "QU_CNTT": "添加开篇词01",
+        "QU_DESC": "开篇词",
+        "CRT_APP_SYS_ID": "0",
+        "QU_STS_CD": "10D",
+        "CRT_USER_ID": "U100000000000X",
+        "QU_SHARE_TYPE_CD": "01",
+        "QU_HAVE_ASWR_FLAG": "0",
+        "MODF_TIME": "2015-06-28 13:48:22.0",
+        "QNR_ISTNC_ID": "514af141-d1ad-4dab-a778-4e332a5e7d2e",
+        "QU_SHOW_MODE_CD": "0",
+        "HAVE_CHILD_QU_FLAG": "0",
+        "MODF_USER_ID": "U100000000000X",
+        "CRT_TIME": "2015-06-28 13:41:36.0",
+        "QU_TYPE_CD": "0B",
+        "QU_NM": "尚未添加开篇词",
+        "GAIN_ASWR_MODE_CD": "01",
+        "QNR_ID": "f973eac3-8a32-47e9-aff6-e485c00f0730",
+        "QU_ID": "c30e7eab-1252-4ea7-aaea-c2cc6fb29d2f"
+    },
+    "beans": [],
+    "object": null
+}

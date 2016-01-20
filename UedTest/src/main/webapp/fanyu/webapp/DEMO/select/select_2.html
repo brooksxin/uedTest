@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>select</title>
+<#include "../../tpl/res_css.tpl" />
+<link href="../../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+</head>
+<body id="main_body" onload="prettyPrint()" >
+	
+	<div id="J_select"></div>
+
+	<pre class="prettyprint mg_t_20 fn-clear" id="html">
+
+	&lt;div id="J_select"&gt;&lt;/div&gt;
+
+	&lt;!-- 
+		url：服务地址
+		data: 入参
+		id： 下拉框id
+		name：下拉框anme
+		key：option标签中vlaue属性的key值
+		value：页面上要展示的option标签的key值
+		handler：onchange事件回调函数
+		callback：下拉框加载成功时回调函数
+	 --&gt;
+
+	$("#J_select").NiceSelect({
+		url:"../data/selectDatas.json",
+		datas:"",
+		id:"testId",
+		name:"testId",
+		key :"value",
+		value:"text",
+		handler: '',
+		callback: ''
+	});
+	</pre>
+</div>
+
+
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript" src="../../lib/pretty/prettify.js"></script>
+<script>
+$(function(){
+	$("#J_select").NiceSelect({
+		url:"../../data/selectDatas.json",
+		datas:"",
+		id:"testId",
+		name:"testId",
+        key :"value",
+        value:"text"
+	});
+})
+</script>
+</body>
+</html>

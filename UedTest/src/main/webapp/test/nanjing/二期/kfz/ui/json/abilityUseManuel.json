@@ -1,0 +1,13 @@
+{
+    "id":"100000000010",
+    "useNum":"1260",
+    "callNum":"1998243",
+    "ABILITY_NAME": "能力名称",
+    "ABILITY_SKETCH" :"能力简述",
+    "ABILITY_SORT" : "能力分类",
+    "ABILITY_CODE": "能力编码",
+    "msgType": "报文类型",
+    "ABILITY_URL": "能力地址",
+    "REQ_PACKETS_EXAMPLE": "http://ip_address:port/resouce/identity/degress?appId=xxx&accessToker=xxx&type=xxx",
+    "RSP_PACKETS_EXAMPLE" :"http://ip_address:port/resouce/identity/degress?appId=xxx&accessToker=xxx&type=xxx"
+}

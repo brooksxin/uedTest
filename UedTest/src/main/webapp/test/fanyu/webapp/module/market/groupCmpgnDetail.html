@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>项目详情_营销类</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+
+</head>
+
+<body>
+<div class="formItem">
+    <div class="titleArea bd-bottom fn-clear">
+        <a href="javascript:goBackJsPage();" class="ui-getBackJ fn-left"></a><h2 class="ui-textIndentStyle fn-left">项目详情</h2>
+       
+    </div>
+	<div class="ml-15 mr-15">
+    	<div id="cmpgn_detail" class="mt-20"><h2 class="ft-14">基本信息</h2>
+    
+    	
+        
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<#include "../../tpl/res_js.tpl" />  
+<script id="cmpgnTab" type="text/x-handlebars-template">
+<form id="J_form_activity">
+<table class="form_table"  width="100%">
+    <tr>
+        <td><span class="gray_text">项目名称:</span><span class="ml-15">{{CMPGN_NM}}</span></td>
+        <td><span class="gray_text">项目编号:</span><span class="ml-15">{{CMPGN_ID}}</span></td>
+    </tr>
+    <tr>
+        <td><span class="gray_text">创建人:</span><span class="ml-15">{{CRT_USER_ID}}</span></td>
+        <td><span class="gray_text">执行渠道:</span><span class="ml-15">{{PTY_NM}}</span></td>
+    </tr>
+    <tr>
+        <td><span class="gray_text">项目类型:</span><span class="ml-15">{{CMPGN_TYPE_CD}}</span></td>
+        <td><span class="gray_text">项目归属:</span><span class="ml-15">{{POST_NAME}}</span></td>
+    </tr>
+
+    <tr>
+        <td><span class="gray_text">起止时间:</span><span class="ml-15">{{CMPGN_EFF_DATE}} - {{CMPGN_INVLD_DATE}}</span></td>
+    </tr>
+    <tr>
+        <td><span class="gray_text">项目描述:</span><span class="ml-15">{{CMPGN_DESC}}</span></td>
+    </tr>
+    <tr>
+        <td><span class="gray_text">执行进度:</span><span class="fn-right gray_text">已完成：<span class="gray_text">{{hasFinish}}</span>/{{total}}</span></td>
+    </tr>
+</table>
+<div class="importProcess" id="J_step5_2">
+            <div class="rateBar">
+                    <div class="rateBg"></div>
+                    <div class="rateProcess" style="width: 75%;"></div>
+<div class="rateProcess" style="width: 75%;"></div>
+					<input type="hidden" value="{{hasFinish}}" id="has_fs"/>
+					<input type="hidden" value="{{total}}" id="hs_total"/>
+            </div>
+        </div>
+</form>
+</script>
+<script type="text/javascript">
+srvMap.add('detail', 'query.json', 'front/sh/market!index?uid=mgl006');//查询商品详情
+	var CMPGN_ID = Util.browser.getParameter("CMPGN_ID");
+	var cmd ={
+			CMPGN_ID : CMPGN_ID	
+	}
+    //页面加载完开始执行
+    $(document).ready(function () {
+    	//加载数据
+    	 Util.ajax.postJson(srvMap.get("detail"),cmd,function(json, status){
+    		if(status){
+    			//console.log(json);
+    			 Util.ajax.loadTemp("#cmpgn_detail",$("#cmpgnTab"),json.bean);
+    			 Number.prototype.toPercent = function(){
+  	    			return (Math.round(this * 10000)/100).toFixed(2) + '%';
+  	    			}
+  	    		var total=$('#hs_total').val();
+  	    		var finish=$('#has_fs').val();
+  	    		var progress_val=eval(parseInt(finish)/parseInt(total));
+  	    		//var progress_val=eval(parseInt(50)/parseInt(100));
+  	    		$('.rateProcess').css('width',progress_val.toPercent());
+    		}
+    	 });
+    		 
+    	 
+        //初始化函数
+        $(".qBox").mouseover(function() {
+          $(this).addClass("qBoxHover");
+          $(this).find(".qEditIcon").show();
+
+        }).mouseout(function() {
+          $(this).removeClass("qBoxHover");
+          $(this).find(".qEditIcon").hide();
+        });;
+    });
+    
+function goBackJsPage(){
+	$("#J_busi_div", window.top.document).show();
+	$("#J_busi_iframe", window.top.document).hide();
+}
+</script>
+</body>
+</html>

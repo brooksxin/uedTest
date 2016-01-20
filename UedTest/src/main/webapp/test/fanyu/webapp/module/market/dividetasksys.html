@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>创建活动_创建外呼营销任务step5_选择外呼团队1</title>
+<#include "../../tpl/res_css.tpl" />
+<link rel="stylesheet" type="text/css" href="../../lib/ztree/3.5.01/zTreeStyle/zTreeStyle.css"/>
+</head>
+
+<body>
+<div class="formItem">
+    <div class="titleArea bd-bottom fn-clear">
+        <a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a><h2 class="ui-textIndentStyle fn-left">创建新项目</h2>
+    </div>
+    
+        <div class="flowSteps_six">
+			<!--第二步样式改为current_2-->
+			<ul class="current_5 fn-clear" id="J_stepstype1">
+				<li class="FirstStep"><a href="javascript:;">基本信息</a></li>
+				<li class="SecondStep"><a href="javascript:;">选择商品</a></li>
+				<li class="ThirdStep"><a href="javascript:;">添加问卷</a></li>
+				<li class="FourStep"><a href="javascript:;">目标客户</a></li>
+				<li class="FiveStep"><a href="javascript:;">执行团队</a></li>
+			</ul>
+		</div>
+        <div class="flowSteps_four fn-hide" id="J_stepstype2">
+			<!--第二步样式改为current_2-->
+			<ul class="current_4 fn-clear">
+				<li class="FirstStep"><a href="javascript:;">基本信息</a></li>
+				<li class="SecondStep"><a href="javascript:;">添加问卷</a></li>
+				<li class="ThirdStep"><a href="javascript:;">目标客户</a></li>
+				<li class="FourStep"><a href="javascript:;">执行团队</a></li>
+			</ul>
+		</div>
+
+	<div class="formAreaB_dashed ml-15 mr-15">
+      <table  class="form_table mt-10" width="100%">
+          <!-- <tr>
+              <td>项目归属</td>
+              <td>
+                  <select  class="selectStyle w323">
+                    <option>河北省分公司</option>
+                  </select>
+              </td>
+          </tr> -->
+          <tr>
+              <td>任务分配方式</td>
+              <td>
+                <form id="J_choiceTaskType" name="J_choiceTaskType">
+                	<input type="radio" id="random" name="choiceTask" checked="checked" value="0" />
+                   	<label for="random">随机任务数量</label>
+                    <input type="radio" id="special" name="choiceTask" value="1" />
+                   	<label for="special">指定任务数量</label>
+                </form>
+              </td>
+           </tr>
+      </table>
+    </div>
+	
+    <div class="question">
+    
+        <!--呼叫部门START-->
+		<div class="zui fn-left">
+	        <ul id="J_deptTree" class="ztree ability-catalog-list fn-clear"></ul>
+	    </div>
+        <!--呼叫部门END-->
+    
+        <!--呼叫部门右侧内容START-->
+        <form id="divideTask">
+        <div class="questionRight mt-20 none_borleft" >
+            <div class="tablewidth mg_t_10">
+            <div class="fn-right">
+				任务数量：<span id="count"></span></div>
+                <table class="ui-record-table table_radius table-bordered table-striped" >
+                    <thead>
+                        <tr>
+                            <th width="120">班级名称</th>
+                            <th width="120">班组长 </th>
+                            <th width="120">班组人数</th>
+                            <th width="120" class="fn-hide">配给数量</th>
+                        </tr>
+                     </thead>
+                     <tbody id="J_tabletpl">
+                        
+                    </tbody>
+                </table>
+                <div class="fn-clear mt-10 fn-hide" id="plusCount">
+                    <div class="fn-left" >剩余配给量:<span class="surplus">0</span></div>
+                    <DIV class="normalBtnArea fn-right">
+                        <a class="normalBtn BGgray" id="J_distr_again" href="javascript:distributeTask();">重新分配</a>
+                    </DIV>
+                </div>
+       </div> 
+      </div>
+	  <input type="hidden" name="type" value="0"/>
+	  <input type="hidden" class="VALID_BGN_DATE" name="VALID_BGN_DATE"/>
+	  <input type="hidden" class="VALID_END_DATE" name="VALID_END_DATE"/>
+	  <input type="hidden" name="CMPGN_ID" class="CMPGN_ID" />
+      </form>
+        <!--翻页及功能按钮区域开始-->
+        <DIV class="amount-bottom">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+              <tr>
+                <td width="100"></td>
+                <td></td>
+              </tr>
+            </table>
+        </DIV>
+        <!--呼叫部门右侧内容END-->
+ </div>
+
+<div class="formBtnArea bd-top">
+        <table width="100%">
+            <tr>
+                <td>
+                    <div class="normalBtnArea">
+                        <a class="normalBtn BGgray largeBtn" href="#" id="Return" onclick="Return()">上一步</a>
+                        <a class="normalBtn BGblue largeBtn" href="javascript:;"  id="Publish">发布项目</a>
+                        <a class="normalBtn BGgray largeBtn" href="javascript:;" id="Save">保存</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="normalBtnArea fn-right">
+                        <a href="#" class="formLink" id="CanCelCreate"><span>取消创建</span></a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+  </div>
+  
+</div>
+
+<script id="T_tabletpl" type="text/x-handlebars-template">
+   {{#if beans}}
+    {{#each beans}}
+         <tr>
+                 <td>{{BM}} 
+<input type="hidden" name="STAFF_ID" class="hideBox" value="{{leaderId}}">
+<input type="hidden" name="DEPT_ID"  value="{{DEPT_ID}}">
+</td>
+
+                 <td>{{ZG}}</td>
+                 <td>{{num}}</td>
+                 <td class="fn-hide show-type" ><div id="addsum" style="line-height:0px">
+					<a herf="#" class="order_productDiva" onclick="decrease(this)">-</a>
+					<input type="text" name="count" class="ui-count-ipt order_productinput fn-mtl-5" lastVal="" onchange="changeTaskIpt(this)" value="0" onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')"  />
+					<a herf="#" class="order_productDiva fn-mtl-5" onclick="increase(this)">+</a>
+				</div></td>
+         </tr>
+
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="5">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+
+{{/if}}
+</script>
+<#include "../../tpl/res_js.tpl" />
+<script src="../../lib/ztree/3.5.01/jquery.ztree.core-3.5.js"></script>
+<script src="../../lib/ztree/3.5.01/jquery.ztree.excheck-3.5.js"></script>
+<!--以下为该页面私有js-->
+<script src="../../lib/underscore/1.8.3/m.js"></script>
+<script src="../../lib/jqueryPlugin/jquery.countdown/2.0.2/m.js"></script>
+<script src="../../common/market/common.js"></script>
+<script type="text/javascript">
+	var CMPGN_ID = Util.browser.getParameter("CMPGN_ID");
+	var type=Util.browser.getParameter("type");
+	//var CMPGN_ID="20150508";
+	$(".CMPGN_ID").val(CMPGN_ID);
+	/*
+	 服务配置
+	 param1: 服务名
+	 param2: 假数据路径
+	 param3: 后台服务路径
+	 */
+	srvMap.add('campgninfo', 'campgninfo.json', 'front/sh/market!index');
+	srvMap.add('deleteCmpgnDept', 'deletecmpgndept.json', 'front/sh/market!index?uid=mwt023');
+	 srvMap.add('getcount', 'count.json', 'front/sh/market!index');//班组长查询未分配任务数量
+	srvMap.add('deptlist', 'dept.json', 'front/sh/market!index?uid=mwt022');//初始化查询是否已经分配过，及分配数据展示
+	srvMap.add('divide', 'divide.json', 'front/sh/market!index');//分配任务
+	srvMap.add('updateCampngStatus', 'divide.json', 'front/sh/market!index');//更新营销活动状态 
+	srvMap.add('queryAlldept', 'alldept.json', 'front/sh/user!userinfo?uid=u007');//查询树
+	srvMap.add('querydeptinfo', 'querydeptinfo.json', 'front/sh/user!userinfo?uid=u009');//勾选树后查询勾选组的信息
+
+	//页面使用参数列表
+	var G_params = {
+		url : srvMap.get('getcount'),
+		loginformId : "J_formCount", //搜索表单的id
+		divideformId : "divideTask"//分配任务表单ID
+	};
+	var count = "", num = '', treeObj = null,zNodes = null,checkedArr = [], setting = {
+	
+			view: {
+			dblClickExpand: false, //去除双击事件，单击展开收缩
+			showLine: false //不显示虚线
+		},
+        check: {
+            enable: true  //是否启用 复选框
+        },  
+        data: {
+            key:{
+            	children:"subList",
+            	name:"PTY_NM",
+            }
+        },
+		callback: {
+			beforeClick: beforeClick,
+			onCheck: zTreeOnCheck
+		}
+    }; 
+	
+	var deptId="";
+	var total=0;
+	
+	$(function() {
+		if(type == 2){
+			$("#J_stepstype2").show();
+			$("#J_stepstype1").hide();
+		}
+		
+		
+		var campgnparam = {
+			"uid" : "my004",
+			"CMPGN_ID" : CMPGN_ID
+		};
+		//查询营销活动基本信息
+		Util.ajax.postJsonSync(srvMap.get('campgninfo'), campgnparam,function(json, status) {
+			if (status) {
+				if (json.returnCode == '0') {
+					$(".VALID_BGN_DATE").val(json.beans[0].CMPGN_EFF_DATE);
+					$(".VALID_END_DATE").val(json.beans[0].CMPGN_INVLD_DATE);
+					deptId=json.beans[0].BELG_BRNCH_ID1;
+				}
+			}
+		});
+		
+		var cms={"deptId":deptId};
+		//查询部门树结构
+		Util.ajax.postJsonSync(srvMap.get('queryAlldept'),cms,function(json, status) {
+			if (status) {
+				if (json.returnCode == '0') {
+                    zNodes = json.object;
+                    
+				}
+			}
+		});
+
+	
+		//查询已勾选的班组并加载到班组树结构上
+		 var paramCd={"STAFF_TYPE_CD":"0","CMPGN_ID":CMPGN_ID};
+		Util.ajax.postJsonSync(srvMap.get('deptlist'),paramCd,function(json, status) {
+			if (status) {
+				if (json.returnCode == '0') {
+					if(json.beans.length>0){
+						if(json.bean.TSK_ALCT_MODE_CD=='01'){//选中随机
+							$("input[type=radio]:eq(0)").attr("checked",'checked'); 
+						}else{
+							$('thead th').eq(3).show();
+							$("input[type=radio]:eq(1)").attr("checked",'checked'); 
+						}
+						
+						for (var i = 0; i < json.beans.length; i++) {
+							for (var j = 0; j < zNodes.length; j++) {
+								for (var k = 0; k < zNodes[j].subList.length; k++) {
+									if (zNodes[j]['subList'][k]['TGT_PTY_ID'] === json.beans[i]['TGT_PTY_ID']) {
+										zNodes[j]['subList'][k]['checked'] = true;
+										zNodes[j]['open'] = true;
+										checkedArr.push(json.beans[i]['TGT_PTY_ID']);
+									};
+								};
+							};
+						};
+					}
+					
+                    $.fn.zTree.init($("#J_deptTree"), setting, zNodes);
+                 	treeObj = $.fn.zTree.getZTreeObj("J_deptTree");
+                    if(checkedArr.length!=0){
+                    	queryTbl('deptId='+checkedArr.join('&deptId='));
+                    }
+                 	
+				}
+			}
+		});
+		 
+		//勾选组时查询组信息
+		/* var param={"deptId":userInfo.bean.deptId};
+		//查询部门树结构
+		Util.ajax.postJsonSync(srvMap.get('queryAlldept'),param,function(json, status) {
+			if (status) {
+				if (json.returnCode == '0') {
+                     console.log(json);
+				}
+			}
+		}); */
+
+		//隐藏显示班组人数
+		$('#J_choiceTaskType').on('click', "input[type='radio']:checked", function(event) {
+			var _this = $(this);
+			if (_this.val() == '0') {
+				$("#plusCount").hide();
+				$('thead th').eq(3).hide();
+				$('#J_tabletpl tr').each(function() {
+					var $this = $(this);
+					$this.find('td').eq(3).hide();
+				})
+			}else{
+				$("#plusCount").show();
+				$('thead th').eq(3).show();
+				$('#J_tabletpl tr').each(function() {
+					var $this = $(this);
+					$this.find('td').eq(3).show();
+				})
+			}
+		});
+		
+		
+		//获取任务数量
+		var param1={"uid":"mc001","CMPGN_ID":CMPGN_ID,"type":"0"};
+		Util.ajax.postJsonSync(srvMap.get('getcount'), param1, function(json,
+				status) {
+			if (status) {
+				count = json.bean.count;
+				$("#count").text(count);
+			}
+		});
+		
+		
+
+		$("#Publish").bind("click",function() {
+			 if ($(this).attr('class').indexOf('disable') > -1) {
+				return false;
+			} 
+			 if(total==0){
+				 Util.dialog.tips("请选择班组");
+				 return false;
+			 }
+			 //先删除再插入
+			 var paramdelete={"CMPGN_ID":CMPGN_ID};
+			  Util.ajax.postJsonSync(srvMap.get('deleteCmpgnDept'),paramdelete,function(json, status) {	
+					 if (status) {
+							if (json.returnCode == '0') {
+								 if($("input[type='radio']:checked").val()=='1'){
+									 var str1 = $("#" + G_params.divideformId).serialize(); //把form序列化
+									 Util.ajax.postJsonSync(srvMap.get('divide'),str1+"&uid=mt001",function(json, status) {	
+										 if (status) {
+												if (json.returnCode == '0') {
+													Util.dialog.tips("成功分配任务");
+												}
+										 }
+									 });
+								}else{
+									var str1 = $("#" + G_params.divideformId).serialize(); //把form序列化
+									Util.ajax.postJsonSync(srvMap.get('divide'),str1+"&uid=mwt021",function(json, status) {	
+										 if (status) {
+												if (json.returnCode == '0') {
+													Util.dialog.tips("成功分配任务");
+												}
+										 }
+									 });
+										
+								}
+							}
+					 }
+				 });	 
+			var param1={"uid":"myxz006","CMPGN_ID":CMPGN_ID,"CMPGN_STS_CD":"1"};
+			Util.ajax.postJsonSync(srvMap.get('updateCampngStatus'), param1,function(json, status) {
+				if (status) {//更细营销活动状态成功
+					if (json.returnCode == '0') {
+						//跳转到营销活动列表页面
+						window.location.href = "campgnList.html";
+					}
+				}
+			});
+		});
+		
+		$("#Save").bind("click",function() {
+			if($(this).attr('class').indexOf('disable') > -1) {
+				return false;
+			} 
+			if(total==0){
+				 Util.dialog.tips("请选择班组");
+				 return false;
+			 }
+			var paramdelete={"CMPGN_ID":CMPGN_ID};
+			  Util.ajax.postJsonSync(srvMap.get('deleteCmpgnDept'),paramdelete,function(json, status) {	
+					 if (status) {
+							if (json.returnCode == '0') {
+								 if($("input[type='radio']:checked").val()=='1'){
+									 var str1 = $("#" + G_params.divideformId).serialize(); //把form序列化
+									 Util.ajax.postJsonSync(srvMap.get('divide'),str1+"&uid=mt001",function(json, status) {	
+										 if (status) {
+												if (json.returnCode == '0') {
+													window.location.href="draftList.html";
+												}
+										 }
+									 });
+								}else{
+									var str1 = $("#" + G_params.divideformId).serialize(); //把form序列化
+									Util.ajax.postJsonSync(srvMap.get('divide'),str1+"&uid=mwt021",function(json, status) {	
+										 if (status) {
+												if (json.returnCode == '0') {
+													window.location.href="draftList.html";
+												}
+										 }
+									 });
+										
+								}
+							}
+					 }
+				 });
+		});
+
+
+		//给任务数量文本框注册事件
+		$('#J_tabletpl').on('propertychange keyup input paste blur set', 'tr td .ui-count-ipt', function(e){
+			numSign(e.currentTarget);
+		})
+		
+		
+	});
+
+    function beforeClick(treeId, treeNode) {
+    	if(treeNode.isParent){
+	    	$.fn.zTree.getZTreeObj(treeId).expandNode(treeNode, null, true);
+    	}
+    	return false;
+	}
+	/*
+	*  treeNode:选中的json数据
+	*/
+	function zTreeOnCheck(e, treeId, treeNode) {
+		//判断是否是父节点
+		if(treeNode.isParent){
+			if (treeNode.checked) {
+				for (var i = 0; i < treeNode.subList.length; i++) {
+					checkedArr.push(treeNode.subList[i]['TGT_PTY_ID']);
+				};
+			}else{
+				for (var i = 0; i < treeNode.subList.length; i++) {
+					Util.Arrays.removeByValue(checkedArr,treeNode.subList[i]['TGT_PTY_ID']);
+				};
+			}
+		}else {
+			if (treeNode.checked) {
+				checkedArr.push(treeNode.TGT_PTY_ID);
+			}else{
+				Util.Arrays.removeByValue(checkedArr,treeNode.TGT_PTY_ID);
+			}
+			//输出treeNode
+			//console.log(treeNode);
+		}
+
+		queryTbl('deptId='+checkedArr.join('&deptId='));
+	}
+	
+	var queryTbl = function (data) {
+		Util.ajax.postJson(srvMap.get('querydeptinfo'),data,function(json, status) {
+			//console.log(json);
+			if (status) {
+				//json.returnCode 0为加载成功
+				if (json.returnCode == '0') {
+					total=json.beans.length;
+					Util.ajax.loadTemp('#J_tabletpl', $('#T_tabletpl'), json);
+					//指定任务数量
+					if($("input[type='radio']:checked").val()=='1'){
+						$('#J_tabletpl tr').each(function() {
+							var $this = $(this);
+							$this.find('td').eq(3).show();
+							if(total > 0){
+								distributeTask();
+							}else{
+								$this.hide();
+							}
+						})
+						
+					}else{
+						$('#J_tabletpl tr').each(function() {
+							var $this = $(this);
+							$this.find('td').eq(3).hide();
+							if(total > 0){
+								distributeTask();
+							}else{
+								$this.hide();
+							}
+						});
+					}
+				}else{
+					$('#J_tabletpl').html("<td colspan='4'>对不起,暂时没有数据</td>")
+				}
+			}
+		});
+	}
+
+
+	//分配任务
+	function distributeTask() {
+		/*var averageTask = parseInt(parseInt(count) / num), //平均分配
+		surplusTask = parseInt(parseInt(count) % num);//取余
+		$(".ui-count-ipt").val(averageTask).attr('lastVal', averageTask);
+		$(".ui-count-ipt").eq(0).val(averageTask + surplusTask).attr(
+				'lastVal', averageTask + surplusTask);//将剩余任务分给第一个
+		$('input[type=checkbox]').attr('checked', 'checked');
+		$('.surplus').html(0);*/
+		var $tbody = $('#J_tabletpl');
+		var $trs = $tbody.children();
+		var checknum=$trs.length;
+		var averageTask = parseInt(parseInt(count)/checknum),//平均分配
+			surplusTask = parseInt(parseInt(count)%checknum);//取余
+			//alert(surplusTask);
+		$('.ui-count-ipt').val(averageTask).attr('lastVal',averageTask)
+			.eq(0).val(averageTask+surplusTask).attr('lastVal',averageTask+surplusTask);
+		//$('input[type=checkbox]').attr('checked','checked');
+		$('.surplus').html(0);
+		canDistribute();
+		
+	}
+
+	//递减
+	function decrease(obj) {
+		if ($(obj).attr('class').indexOf('disabled')>-1){
+			return false;
+		}
+		var obj = $(obj), surplus = parseInt($('.surplus').html());
+		var curTask = parseInt(obj.siblings('input').val());
+		if (curTask > 0) {
+			curTask--;
+			surplus++;
+			obj.siblings('input').val(curTask).attr('lastVal', curTask);
+			$('.surplus').html(surplus);
+		}
+		
+		canDistribute(obj);
+	}
+
+	//递增
+	function increase(obj) {
+		if ($(obj).attr('class').indexOf('disabled')>-1){
+			return false;
+		}
+		obj = $(obj);
+		var surplus = parseInt($('.surplus').html());
+		var curTask = parseInt(obj.siblings('input').val());
+		if (surplus > 0) {
+			surplus--;
+			curTask++;
+			obj.siblings('input').val(curTask).attr('lastVal', curTask);
+			$('.surplus').html(surplus);
+		}
+		
+		canDistribute(obj);
+	}
+	//改变input的任务量值
+	function changeTaskIpt(obj) {
+		obj = $(obj);
+		var lastVal = parseInt(obj.attr('lastVal')), curVal = parseInt(obj
+				.val()), surplus = parseInt($('.surplus').html());
+		if (curVal > lastVal) {
+			var DVal = curVal - lastVal;
+			if (DVal > surplus) {
+				Util.dialog.tips('剩余配给量不足！');
+				obj.val(lastVal);
+			} else {
+				$('.surplus').html(surplus - DVal);
+				obj.attr('lastVal', curVal);
+			}
+		} else {
+			var DVal = lastVal - curVal;
+			$('.surplus').html(surplus + DVal);
+			obj.attr('lastVal', curVal);
+		}
+		canDistribute(obj);
+	}
+
+	//判断重新分配按钮是否可用
+	function canDistribute(obj) {
+		//var $trCheckeds = checkedGets(true);
+		var surplus = parseInt($('.surplus').html());
+		if(surplus==0){
+			$('#J_distr_again').addClass('disable').removeAttr('onclick');
+		}else{
+			$('#J_distr_again').removeClass('disable');
+		}
+		
+		//$('#J_search').removeClass('disable');
+		numSign(obj);
+	}
+	
+	function Return(){
+		window.location.href="importCust.html?id="+CMPGN_ID+"&type="+type;
+	}
+	
+	$(function(){
+		  $("#CanCelCreate").bind("click",function(){
+			 var elem= $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">是否取消创建该项目？</div></div></div>');
+		        var paramsdiv = {
+		          top:top,
+		          content: elem,
+		          width: "300px",
+		          height: "140px",
+		          modal: true,
+		          okVal:'取消创建',
+		          okCallback:function(){
+		                $(obj).hide().siblings().hide();
+		                window.location.href="../market/campgnList.html";
+		          },
+		          cancelVal:'返回继续创建',
+		          cancelCallback:function(){}
+		        }
+		        Util.dialog.openDiv(paramsdiv);
+		  });
+	});
+</script>
+</body>
+</html>

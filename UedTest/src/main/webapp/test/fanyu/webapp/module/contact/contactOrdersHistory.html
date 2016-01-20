@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>查看更多订单信息</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+    <!-- begin -->
+    <div class="titleArea">
+       <h2 class="ml-15">订单查询</h2>
+    </div>
+    			
+    <div method="post" action="#" class="cmxform" >
+       <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+          <div class="record-search-cate">
+    			<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+    				<tbody>
+    					<tr>
+                            <td width="60"><label class="description">开始时间</label></td>
+                            <td>
+                            	<input id="param-eDate2" class="inputWidth  element text Wdate" type="text" name='START_DATE' onclick="WdatePicker({realDateFmt:'yyyy-MM-dd 00:00:00',dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'param-eDate\')}'})"/>
+                            </td>
+                            <td width="60"><label class="description">结束时间</label></td>
+                            <td>
+                            	<input id="param-eDate" class="inputWidth  element text Wdate" type="text" name='END_DATE' onclick="WdatePicker({realDateFmt:'yyyy-MM-dd 23:59:59',dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'param-eDate2\')}'})"/>
+                            </td>     
+                            <td width="60"><label class="description">电话号码</label></td>
+    						<td width="150">
+    							<input class="inputWidth  inputText" type="text" maxlength="255" name="CUST_RESV_TELNUM" />
+    						</td>
+                            <td width="120"><a class="btn_search" href="javascript:;" id="J_search" >查询</a></td>
+    					</tr>
+    				</tbody>
+    			</table>
+            </div>
+            <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+        </form>
+    </div>
+    		
+    <div class="tablewidth mg_t_10">
+    	<table class="ui-record-table table_radius table-bordered table-striped" >
+    		<thead>
+    			<tr>
+    				<th width="100">订单编号</th>
+    				<th width="">商品名称</th>
+    				<th width="60">金额（元）</th>
+    				<th width="100">下单时间</th>
+                    <th width="60">下单人</th>
+    				<th width="60">物流状态</th>
+                    <th width="100">操作</th>
+    			</tr>
+             </thead>
+             <tbody id="J_tabletpl"></tbody>
+    	</table>
+    </div>
+    		    
+     <!--翻页及功能按钮区域开始-->
+    <div class="amount-bottom">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+            <tr>
+                <td width="60"></td>
+                <td></td>
+                <td width="50%">
+                    <div class="fn-clear action-other  action-other-show ">
+                        <div id="PaginationCntOrders" class="page pagination fn-right"></div>
+                        <div class="fn-right fn-pt5 fn-pr10"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- end -->
+
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+  /*
+    服务配置
+    param1: 服务名
+    param2: 假数据路径
+    param3: 后台服务路径
+    */
+    srvMap.add('queryContactOrders', 'contactOrders.json','front/sh/order!execute?uid=o008');//查询订单记录
+
+    var G_params = {
+    url : srvMap.get('queryContactOrders'),
+    items_per_page : 10 ,   // 每页数     @param : limit
+    page_index : 0 , //当前页  @param : start
+    pagination : "PaginationCntOrders" , //分页id
+    searchformId : "J_formSearch", //搜索表单的id
+    tabletpl : "T_tabletpl", //表格模板
+    tablewrap : "J_tabletpl" //表格容器
+    };
+
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        try{
+            $('#J_search').bind('click',function(){
+                var strCntMng = $("#"+G_params.searchformId).serialize(); //把form序列化 队列
+                Util.pagination( G_params.page_index , true , G_params, strCntMng);
+            })
+        }catch(e)
+        {
+            alert(e);
+        }
+    });
+    function gotoDetail(ivrId){
+        
+    }
+
+    function phoneCall(ivrId){
+        
+    }
+</script>
+
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+			<td>{{ODR_ID}}</td>
+			<td>{{SBSCR_MCDS_NAME}}</td>
+			<td>{{ODR_ORIG_AMT}}</td>
+			<td>{{CRT_TIME}}</td>
+			<td>{{CRT_USER_ID}}</td>
+            <td>{{EHS_STS_CD}}</td>
+            <td><div class="gridRowBtn">
+				<a class="item-text" href="javascript:;" >详情   </a>
+				<a class="item-text" href="javascript:;" >拨打电话  </a>
+				</div>
+			</td>            
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="7">
+			<div class="ui-tips-box">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无接触记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+</body>
+</html>

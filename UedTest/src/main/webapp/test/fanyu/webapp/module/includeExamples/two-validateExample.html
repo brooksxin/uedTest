@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10085系统</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<#include "../../tpl/sys_top.tpl" />
+<div class="wrapper">
+    <!-- 顶部菜单容器 -->
+    <div id="J_topMenu" class="menu fn-clear"></div>
+    <!-- left start -->
+    <div class="left">
+        <!-- 左侧菜单容器 -->
+        <div class="leftInner" id="J_leftMenu"></div>
+        <div class="middle" id="mainMiddle">&nbsp;</div>
+    </div>
+    <!-- left stop -->
+    <!-- right start -->
+    <div class="right" id="mainRight" style="overflow:auto">
+        <div id="mainRight_child" style="height:100%;">
+            <div class="breadcrumb"></div>
+            <div class="cmxform">
+                <form class="record-search-form record-search-min" id="J_formSearch" name="J_formSearch">
+                    <div class="record-search-cate">
+                        <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td width="120">
+                                        <label for="custNo" class="description">客户来电号码</label>
+                                    </td>
+                                    <td width="100">
+                                        <input id="custNo" style="width:100px;" name="custNo" class="inputText" type="text" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                                    </td>
+                                    <td width="120">
+                                        <label for="startDate" class="description">开始时间</label>
+                                    </td>
+                                    <td width="100">
+                                        <input id="startDate" style="width:100px;" name="startDate" class="text Wdate" type="text" onclick="WdatePicker({realDateFmt:'yyyy-MM-dd 00:00:00',dateFmt:'yyyy-MM-dd',minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'endDate\')}'})" />
+                                    </td>
+                                    <td width="120">
+                                        <label for="endDate" class="description">结束时间</label>
+                                    </td>
+                                    <td width="100">
+                                        <input id="endDate" style="width:100px;" name="endDate" class="text Wdate" type="text" onclick="WdatePicker({realDateFmt:'yyyy-MM-dd 23:59:59',dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startDate\')||\'2010-01-01 23:59:59\'}'})" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="staffId" class="description">工号</label>
+                                    </td>
+                                    <td>
+                                        <input id="staffId" name="staffId" class="inputText" type="text" maxlength="255" style="width:100px;"/>
+                                    </td>
+                                    <td>
+                                        <label for="billId" class="description">订单编号</label>
+                                    </td>
+                                    <td>
+                                        <input id="billId" name="billId" class="inputText" type="text" maxlength="255" style="width:100px;"/>
+                                    </td>
+                                    <td>
+                                        <label for="handler" class="description">处理人</label>
+                                    </td>
+                                    <td>
+                                        <input id="handler" name="handler" class="inputText" type="text" maxlength="10" style="width:100px;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="prodName" class="description">产品名称</label>
+                                    </td>
+                                    <td>
+                                        <input id="prodName" name="prodName" class="inputText" type="text" maxlength="255" style="width:100px;"/>
+                                    </td>
+                                    <td>
+                                        <label for="IMEI" class="description">IMEI</label>
+                                    </td>
+                                    <td>
+                                        <input id="IMEI" style="width:100px;" name="IMEI" class="inputText" type="text" maxlength="15" onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')"  />
+                                    </td>
+                                    <td>
+                                        <label for="custName" class="description">客户姓名</label>
+                                    </td>
+                                    <td>
+                                        <input id="custName" name="custName" class="inputText" type="text" maxlength="255" style="width:100px;"/>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="5"></td>
+                                    <td>
+                                        <div class="normalBtnArea fn-center w82">
+                                            <a class="searchBtn" href="javascript:;" id="J_search">
+                                                <i></i>查询
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="seeMoreFilter">
+                        <a href="#" id="J_toggleSearch" class="down"></a>
+                    </div>
+                </form>
+            </div>
+
+             <form id="J_form_addProd">
+                  <div class="formAreaD">
+                      <div class="flowSteps">
+                          <ul class="current_1 fn-clear">
+                              <li class="FirstStep">
+                                  <a href="javascript:;">基本信息</a>
+                              </li>
+                              <li class="SecondStep">
+                                  <a href="javascript:;">详细信息</a>
+                              </li>
+                              <li class="ThirdStep">
+                                  <a href="javascript:;">图文信息</a>
+                              </li>
+                          </ul>
+                      </div>
+                      <div class="ui-Oline_padding">
+
+                         
+                          <div class="ui-topQuDashed">
+                              <div class="titleArea pt-5 pd_10">保存表单</div>
+                              <table width="100%">
+                                  <tr>
+                                      <td class="formAreaD_PB" width="120">
+                                          <span class="fn-high">*</span>商家名称
+                                      </td>
+                                      <td class="formAreaD_PB">
+                                          <select class="element text" id="ptyId" name="ptyId">
+                                                <option value="1">11</option>
+                                                <option value="2">22</option>
+                                          </select>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="formAreaD_PB">
+                                          <span class="fn-high">*</span>供货商商品编码
+                                      </td>
+                                      <td class="formAreaD_PB">
+                                          <input class="FormInputText" id="suplerProdCode" name="suplerProdCode"/>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="formAreaD_PB">
+                                          <span class="fn-high">*</span>商品名称
+                                      </td>
+                                      <td class="formAreaD_PB">
+                                          <input class="FormInputText" id="mcdnUnitNm" name="mcdnUnitNm"/>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="formAreaD_PB">
+                                          <span class="fn-high">*</span>销售价格
+                                      </td>
+                                      <td class="formAreaD_PB" >
+                                          <input class="FormInputText" id="uprc" name="uprc"/>元
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <span class="fn-high">*</span>库存
+                                      </td>
+                                      <td>
+                                          <input class="FormInputText" id="skuQty" name="skuQty"/>
+                                      </td>
+                                  </tr>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+                </form>
+
+                <div class="formBtnArea pt-20 fn-clear">
+                    <div class="normalBtnArea fn-left">
+                        <a class="normalBtn BGblue largeBtn" href="javascript:void(0)" id="J_add">下一步</a>
+                    </div>
+                </div>
+
+              </div>
+        </div>
+    </div>
+    <!-- right stop -->
+</div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+srvMap.add('test', 'test.json','');//测试数据
+$(function () {
+// <!--------------------------------------查询表单设置开始-------------------------------------->
+    
+    /**
+     * 如果表单为查询表单，必须进行如下配置
+     * #J_formSearch为表单ID
+     */
+    $("#J_formSearch").tooltip({
+        show: false,
+        hide: false
+    });
+    //表单输入信息验证
+    var validate = $("#J_formSearch").validate({
+        rules: {
+            startDate: "required",//startDate 为字段id
+            endDate: "required",
+            custNo: {
+                required: true,
+                digits:true,
+                minlength: 11
+            },
+            staffId: {
+                required: true,
+                minlength: 11
+            },
+            billId: {
+                required: true,
+                minlength: 11
+            },
+            IMEI: {
+                required: true,
+            },
+            topic: {
+                required: true,
+                minlength: 11
+            },
+            custName: "required"
+        },
+        messages: {
+            startDate: "请选择开始时间",
+            endDate: "请选择结束时间",
+            custNo: {
+                required: "请填写客户来电号码",
+                digits: "请填写正确电话号码",
+                minlength: "客户来电号码为11位"
+            },
+            staffId: {
+                required: "请填写工号",
+                minlength: "工号为11位"
+            },
+            billId: {
+                required: "请填写订单编号",
+                minlength: "订单编号工号为11位"
+            },
+            IMEI: "请填写IMEI号",
+            custName: "请填写客户姓名"
+        }
+    });
+
+    //提交查询表单
+    $('#J_search').bind('click',function(){
+        //validate.form()  返回验证结果，boolean类型
+        var str = $('#J_formSearch').serialize();
+        // console.log(str);
+        if (validate.form()) {
+            Util.ajax.postJsonSync(srvMap.get('test'),str,function(json,status){
+                if (status) {
+                    Util.dialog.tips('提交成功');
+                }else{
+                    Util.dialog.tips(json.returnMessage||'查询失败，请重试！');
+                }
+            })
+        };
+    })
+
+// <!--------------------------------------查询表单设置结束--------------------------------------->
+    /**
+     *
+     * 保存表单验证
+     */
+
+// <!--------------------------------------保存表单设置开始--------------------------------------->
+
+    /**
+     * 保存表单必须在validate函数中添加showErrors()方法和success()方法
+     * showErrors()方法:   是将错误信息追加到文本框之后
+     * success()方法：   表示每个字段通过验证后，将图片插入到文本框之后 
+     */
+    var validate1 = $("#J_form_addProd").validate({
+        rules: {
+            suplerProdCode: {
+                required: true
+            },
+            mcdnUnitNm:{
+                required: true
+            },
+            uprc: {
+                required: true,
+                number: true,
+                min: 0,
+                max:100000,
+                maxlength:7
+            },
+            skuQty: {
+                required: true,
+                digits:true,
+                min: 0
+            }
+        },
+        messages: {
+            suplerProdCode: {
+                required: "请输入供货商商品编码"
+            },
+            mcdnUnitNm: {
+                required: "请填写商品名称"
+            },
+            uprc: {
+                required: "请填写销售价格",
+                digits: "请填写正确的销售价格",
+                number: "请填写正确的销售价格",
+                min: "请填写正确的销售价格",
+                max: "请填写正确的销售价格",
+                maxlength:"请填写正确的销售价格"
+            },
+            skuQty: {
+                required: "请填写库存",
+                digits: "请填写正确的库存",
+                min:"请填写正确的库存"
+            }
+        },
+        showErrors:function(){
+            this.defaultShowErrors();
+        },
+        success: function(currentDom){
+            $(currentDom).html("<img src='../../css/images/validate-right.png' class='right-img'>");
+        }
+    });
+
+    //点击下一步按钮对保存表单信息进行验证
+    $("#J_add").on("click",function(){
+        if(validate1.form()){
+            //如果表单通过验证,要执行的代码.... 
+        }
+    })
+// <!--------------------------------------保存表单设置结束--------------------------------------->
+});
+</script>
+</body>
+</html>

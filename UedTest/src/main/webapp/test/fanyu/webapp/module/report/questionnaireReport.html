@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>问卷明细报表</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<!-- 报表明细页面 -->
+<div id="report">
+<div class="formItem">
+ <div class="titleArea">
+  <div class="listTopBtn fn-clear">
+   <h2 class="fn-left">问卷明细报表</h2>
+  </div>
+ </div>
+ <div method="post" action="#" class="cmxform" >
+  <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+   <div class="record-search-cate">
+    <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+     <tbody>
+      <tr>
+       <td width="100"><label class="description">项目名称</label></td>
+       <td width="200"><select class="inputSelect inputWidth" id="category" name="PROJ" style="width:324px"></select>
+			  <script type="text/x-handlebars-template" id="p_category">
+					 <option value="ce83cce1-26c7-4964-978b-1e7c8a5923e8">点这个</option>
+					 {{#each beans}}
+            		 <option value="{{CMPGN_ID}}">{{CMPGN_NM}}</option>
+                     {{/each}}
+              </script></td>
+       <td width="100"><div class="normalBtnArea"> <a class="searchBtn normalBtn BGblue" href="javascript:;" id="J_search" ><i></i>查询</a> </div></td>
+      </tr>
+      <tr>
+       <td width="75"><label class="description">时间选择</label></td>
+       <td width="100"><input id="startDate" name="STDT" class="inputWidthDataPoint element text Wdate" 
+       onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'endDate\')}'})" type="text"> 
+       <span class="ml-5 mr-5">至</span> <input id="endDate" name="ENDT" class="inputWidthDataPoint element text Wdate" 
+       onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{$dp.$D(\'startDate\',{d:1})||\'2010-01-01 23:59:59\'}'})" type="text"></td>
+      <td></td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <!-- <div class="seeMoreFilter"><a href="#" class="down"></a></div> -->
+  </form>
+ </div>
+ <div class="tablewidth mg_t_10" style="overflow:scroll;overflow-y:hidden">
+  <table class="ui-record-table table_radius table-bordered table-striped text-hidden">
+   <thead>
+    <tr>
+     <th width="90">用户号码</th>
+     <th width="110">员工</th>
+     <th width="130">开始时间</th>
+     <th width="50">结束码</th>
+     <th width="50">问题1</th>
+     <th width="50">问题2</th>
+     <th width="50">问题3</th>
+     <th width="50">问题4</th>
+     <th width="50">问题5</th>
+     <th width="50">问题6</th>
+     <th width="50">问题7</th>
+     <th width="50">问题8</th>
+     <th width="50">问题9</th>
+     <th width="50">问题10</th>
+    </tr>
+   </thead>
+   <tbody id="J_tabletpl">
+   </tbody>
+  </table>
+ </div>
+ 
+ <!--翻页及功能按钮区域开始-->
+ <DIV class="amount-bottom">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+          <tr>
+            <td>
+                <div class="normalBtnArea" id="buttonDiv"><!--不附加ft-right样式，默认左对齐-->
+                    
+                    <a class="normalBtn BGblue" id="analysis" href="javascript:;">查看问卷分析</a>
+                    <a class="normalBtn BGblue" id="word" href="javascript:;">导出分析报告</a>
+                </div>
+            </td>
+            <td width="50%">
+                <DIV class="fn-clear action-other  action-other-show ">
+                        <DIV id=Pagination class="page pagination fn-right"> </DIV>
+                        <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                </DIV></td>
+          </tr>
+        </table>
+    </DIV>
+</div>
+</div>
+
+<!-- 问卷分析页面 -->
+<div id="analysisPage">
+<div class="formItem">
+    <div class="titleArea bd-bottom fn-clear">
+        <a href="javascript:;" class="ui-getBackJ fn-left" id="goBack"></a><h2 class="ui-textIndentStyle fn-left">问卷分析</h2>
+        <div class="normalBtnArea ft-right mb-10"><a id="word1" class="normalBtn BGblue" href="#">导出分析报告</a></div>
+    </div>
+	<script id="p_analysisReport" type="text/x-handlebars-template">
+	{{#each beans}}
+	<div class="ml-15 mr-15">
+        当前问卷：<span id="QNR_NM" class="attributionValue mr-15">{{name}}</span>
+        填写问卷人数：<span id="QNR_PR" class="attributionValue">{{total}}</span>
+    </div>
+	{{/each}}
+	{{#each object}}
+    {{#if flag}}
+	<div class="tablewidth fn-mt10 attributionValue">
+    <table class="ui-record-table table_radius table-bordered table-striped none-bottom">
+    <thead>
+    <tr>
+    <th style="text-align:left">{{qutypecd}}:<span class="mr-10">{{qunm}}</span></th>
+    </tr>
+    </thead>
+    </table>
+    <table class="ui-record-table table_radius table-bordered table-striped">
+      <tr>
+        <td class="fn-center">选项</td>
+        <td class="fn-center">比例</td>
+        <td></td>
+      </tr>
+	{{#each answers}}
+      <tr>
+       	<td>{{ASWR_CNTT}}</td>
+        <td>{{PERCENT}}</td>
+        <td><div class="gridRowBtn qyxj_center"><a id="queryContent" class="item-text" href="javascript:;" onclick="questionContent('{{quid}}')">查看全部答案</a></div></td>
+      </tr>
+	{{/each}}
+	 <tr>
+		<td>未填写</td>
+        <td>{{nopercent}}</td>
+		<td></td>
+    </table>
+    </div>
+	{{else}}
+		<div class="tablewidth fn-mt10 attributionValue">
+    <table class="ui-record-table table_radius table-bordered table-striped none-bottom">
+    <thead>
+    <tr>
+    <th style="text-align:left">{{qutypecd}}:<span class="mr-10">{{qunm}}</span></th>
+    </tr>
+    </thead>
+    </table>
+    <table class="ui-record-table table_radius table-bordered table-striped">
+      <tr>
+        <td class="fn-center">选项</td>
+        <td class="fn-center">比例</td>
+      </tr>
+	{{#each answers}}
+      <tr>
+       	<td>{{ASWR_CNTT}}</td>
+        <td>{{PERCENT}}</td>
+      </tr>
+	{{/each}}
+	</table>
+	</div>
+	{{/if}}
+    {{/each}}
+	</script>
+	
+<div id="analysisReport"></div>
+</div>
+</div>
+
+<!-- 详细答案 -->
+<div id="content">
+<div class="formItem" id="contentDiv">
+</div>
+</div>
+<script type="text/x-handlebars-template" id="p_contentDiv">
+	{{#each object}}
+    <div class="titleArea bd-bottom fn-clear">
+        <h2 class="ui-textIndentStyle fn-center">答案详情</h2>
+    </div>
+	<div class="ml-15 mr-15">
+    	当前问题：<span id="qsname"class="attributionValue mr-15">{{qunm}}</span>
+        <span class="textCor_Green">【{{type}}】</span>
+    </div>
+    <div class="tablewidth fn-mt10 attributionValue">
+    <table class="ui-record-table table_radius table-bordered table-striped">
+    	<thead>
+        <tr>
+            <th width="50">答卷序号</th>
+            <th>受访用户电话</th>
+            <th>答案详情</th>
+        </tr>
+        </thead>
+		{{#each answers}}
+        <tr>
+        	<td class="fn-center">{{addOne @index}}</td>
+            <td>{{telnum}}</td>
+            <td>{{answer}}</td>
+        </tr>
+		{{/each}}
+    </table>
+    </div>
+	{{/each}}
+</script>
+<#include "../../tpl/res_js.tpl" />
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+			<td>{{C1}}</td>
+			<td>{{C2}}</td>
+			<td>{{C3}}</td>
+			<td>{{C4}}</td>
+			<td>{{Q1}}</td>
+			<td>{{Q2}}</td>
+			<td>{{Q3}}</td>
+			<td>{{Q4}}</td>
+			<td>{{Q5}}</td>
+			<td>{{Q6}}</td>
+			<td>{{Q7}}</td>
+			<td>{{Q8}}</td>
+			<td>{{Q9}}</td>
+			<td>{{Q10}}</td>
+ 		</tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="19">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+<script type="text/javascript">
+	srvMap.add('quesReport','','front/sh/report!statement?uid=0007');
+	srvMap.add('quesAnalysis','','front/sh/report!statement?uid=0008');
+	srvMap.add('quesContent','','front/sh/report!statement?uid=0009');
+	srvMap.add('queryCategory','','front/sh/market!index?uid=mgl001');
+	srvMap.add('createWord','','front/sh/report!createWord?uid=0001&PROJ=');
+	//格式化时间方法
+	Date.prototype.format = function(format){ 
+	var o = { 
+	"M+" : this.getMonth()+1, //month 
+	"d+" : this.getDate(), //day 
+	"h+" : this.getHours(), //hour 
+	"m+" : this.getMinutes(), //minute 
+	"s+" : this.getSeconds(), //second 
+	"q+" : Math.floor((this.getMonth()+3)/3), //quarter 
+	"S" : this.getMilliseconds() //millisecond 
+	} 
+	if(/(y+)/.test(format)) { 
+	format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+	} 
+	for(var k in o) { 
+	if(new RegExp("("+ k +")").test(format)) { 
+	format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length)); 
+	} 
+	} 
+	return format; 
+	};
+	//分页数据
+	var G_params = {
+	    url : srvMap.get('quesReport'),
+	    items_per_page : 10,   		// 每页数     @param : limit
+	    page_index : 0 , 				//当前页  @param : start
+	    pagination : "Pagination" , 	//分页id
+	    searchformId : "J_formSearch",  //搜索表单的id
+	    tabletpl : "T_tabletpl", 		//表格模板
+	    tablewrap : "J_tabletpl", 		//表格容器
+	};
+	//查询服务类别
+	function loadCategoryData(){
+		Util.ajax.postJson(srvMap.get('queryCategory'),'',function(json,status){
+	  	 	Util.ajax.loadTemp('#category',$('#p_category'),json);//加载模板
+		});
+	}
+	//答案详情弹框
+	function questionContent(quid){
+		 var dialog = document.getElementById("content")||top.document.getElementById("content");
+		 var proj = $('#category').val();
+		 var params = {
+				  top:top,
+		          content:dialog,
+		          width: "800px",
+		          height:"400px",
+		          modal: true,
+		          okVal:'完成',
+		          okCallback:function(){
+		        	  $('#contentDiv').html('');
+		          }
+		      };
+		 var param = {'PROJ':proj,'QUES':quid};
+		 Util.ajax.postJson(srvMap.get('quesContent'),param, function(json, flag) {
+			if (flag) {
+				//注册索引+1的helper
+      			 	var handleHelper = Handlebars.registerHelper("addOne",function(index){
+      			        //返回+1之后的结果
+      			        return index+1;
+      			 	});
+				Util.ajax.loadTemp($('#contentDiv',dialog), $('#p_contentDiv'), json);//加载模板
+				Util.dialog.openDiv(params);
+			}
+		});
+	};
+      //页面加载完开始执行
+      $(document).ready(function () {
+    	  //时间初始化
+    	  var end = new Date();
+          var start = new Date(new Date()-(7*86400000));
+          $('#endDate').val(end.format("yyyy-MM-dd hh:mm:ss"));
+          $('#startDate').val(start.format("yyyy-MM-dd hh:mm:ss"));
+    	  //初始化函数
+          loadCategoryData();
+    	  $('#analysisPage').hide();
+    	  $('#content').hide();
+          $('#J_search').bind('click',function(){
+              var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+              Util.pagination(0, true , G_params , str );
+          });
+          //导出word
+          $('#word').click(function(){
+        	  var param = $('#category').val();
+        	 window.open(srvMap.get('createWord')+param,'_blank');
+          });
+          $('#word1').click(function(){
+        	  var param = $('#category').val();
+         	 window.open('/ecp/front/sh/report!createWord?uid=0001&PROJ='+param,'_blank');
+          })
+          //分析报告
+          $('#analysis').click(function(){
+        	  var param = {'PROJ':$('#category').val()};
+        	  Util.ajax.postJson(srvMap.get('quesAnalysis'),param,function(json,status){
+        		 if(status){
+        		 Util.ajax.loadTemp('#analysisReport',$('#p_analysisReport'),json); 
+        		 }
+        	  });
+        	  $('#report').hide();
+        	  $('#analysisPage').show();
+          });
+          //分析报告返回按钮
+          $('#goBack').click(function(){
+        	  $('#report').show();
+        	  $('#analysisPage').hide();
+          });
+      });
+      
+  function cancelReservation(){
+      artDialog({
+          id: 'Confirm',
+          lock: true,
+          opacity: .1,
+          content: '您确定要取消此预约单吗？',
+          ok: function (here) {
+              art.dialog.tips('已取消');
+          },
+          cancel: function (here) {
+              return;
+          }
+      });
+      
+      
+  }
+  </script>
+</body>
+</html>

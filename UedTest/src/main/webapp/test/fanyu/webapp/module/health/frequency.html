@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>频次管理</title>
+   <#include "../../tpl/res_css.tpl" />
+
+</head>
+
+<body>
+
+    <div class="formItem">
+   
+        <div class="titleArea">
+            <h2>频次设置</h2>
+        </div>
+        
+        <div class="formArea-B pl-20 pr-20">
+            <div class="pt-20 pb-30 formAreaB_dashed">
+                <div class="titleArea mb-20"><h2>敏感客户过滤</h2></div>
+                <div><input type="checkbox"  class="mr-10 nameListCheckAll">启用</div>
+                <div class="yh-centerBack mt-15 nameList">
+                    <span><input type="checkbox" name="FLTR_TYPE_CD" class="mr-10 temp-01" value='01'>红名单客户</span>
+                    <span class="ml-15"><input type="checkbox"  name="FLTR_TYPE_CD" class="mr-10 temp-02" value='02' >白名单客户</span>
+                    <span class="ml-15"><input type="checkbox"  name="FLTR_TYPE_CD" class="mr-10 temp-03" value='03'>黑名单客户</span>
+                </div>
+            </div>
+            <div class="pt-20 pb-30 formAreaB_dashed">
+                <div class="titleArea mb-20"><h2>解除频次过滤</h2></div>
+                <div><input type="checkbox"   class="mr-10 0405List cancelFilsterBox">启用</div>
+                <div class="mt-15">
+                    <span class="mr-10 04title"><input name="FLTR_TYPE_CD" type="checkbox"   value="04"> 按项目开始时间清洗</span>
+                    <span class="mr-10 05title"><input name="FLTR_TYPE_CD" type="checkbox"  value="05"> 指定清洗时间段</span>
+                </div>
+                <div class="ui-tiptext-container yh-centerBack mt-15 04List">
+                    <span>清洗项目开始前</span>
+                    <span class="ml-20"><input type="text"  id='FST_NUMR_ATTR_VAL04' name='FST_NUMR_ATTR_VAL'  class="FormInputText" value="" /> </span>
+                    <span class="ml-15">天内有过</span>
+                    <span class="ml-20"><input type="text"  id='SECD_NUMR_ATTR_VAL04'  name='SECD_NUMR_ATTR_VAL'  class="FormInputText" value="" /> </span>
+                    <span class="ml-10">次接触的客户</span>
+                    <div class="ui-poptip mt-15">
+                        <p class="fn-high">请在文本框内输入您的真实情况</p>
+                    </div>
+                </div>
+                <div class="ui-tiptext-container yh-centerBack mt-15 05List">
+                    <span class="ml-20">
+                    	<input type="text"  id='FST_TIME_ATTR_VAL05' name='FST_TIME_ATTR_VAL'  class="FormInputText Wdate inputWidthDataPoint" value="" readonly=true onclick="WdatePicker({realDateFmt:'yyyy-MM-dd 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss', maxDate:'#F{$dp.$D(\'SECD_TIME_ATTR_VAL05\',{d:-1})||\'2025-01-01 23:59:59\'}', vel:'CREATE_DATE'}); "/> </span>
+                    	<input type="text" size="20" name='CREATE_DATE' id="CREATE_DATE" class="fn-hide"/>
+                    <span class="ml-15">至</span>
+                    <span class="ml-20">
+                    	<input type="text"  id='SECD_TIME_ATTR_VAL05'  name='SECD_TIME_ATTR_VAL'  class="FormInputText Wdate inputWidthDataPoint" value="" readonly=true onclick="WdatePicker({realDateFmt:'yyyy-MM-dd 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss', minDate:'#F{$dp.$D(\'FST_TIME_ATTR_VAL05\',{d:1})||\'2010-01-01 23:59:59\'}',vel:'FIELD_D1'});"/> </span>
+                    	<input type="text" name='FIELD_D1' id="FIELD_D1" class="fn-hide"/></td>
+                    <span class="ml-10">有过</span>
+                    <span class="ml-20"><input type="text"  id='FST_NUMR_ATTR_VAL05'  name='FST_NUMR_ATTR_VAL'  class="FormInputText" value="" /> </span>
+                    <span class="ml-10">次接触的客户</span>
+                    <div class="ui-poptip mt-15">
+                        <p class="fn-high">请在文本框内输入您的真实情况</p>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-20 pb-30 formAreaB_dashed">
+                <div class="titleArea mb-20"><h2>超长通话清洗</h2></div>
+                <div class="07title"><input type="checkbox"  class="mr-10"  name="FLTR_TYPE_CD" value='07'>启用</div>
+                <div class="ui-tiptext-container yh-centerBack mt-15 07List">
+                    <span>通话时长超过</span>
+                    <span class="ml-20"><input type="text" id='FST_NUMR_ATTR_VAL07' name='FST_NUMR_ATTR_VAL' class="FormInputText" value="" /> </span>
+                    <span class="ml-15">分钟时，</span>
+                    <span class="ml-20"><input type="text" id='SECD_NUMR_ATTR_VAL07'  name='SECD_NUMR_ATTR_VAL' class="FormInputText" value="" /> </span>
+                    <span class="ml-10">天内免打扰</span>
+                    <div class="ui-poptip mt-15">
+                        <p class="fn-high">请在文本框内输入您的真实情况</p>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-20 pb-30 formAreaB_dashed">
+                <div class="titleArea mb-20"><h2>连续状态清洗</h2></div>
+                <div class="06title"><input type="checkbox"  class="mr-10"  name="FLTR_TYPE_CD"  value='06'>启用</div>
+                <div class="ui-tiptext-container yh-centerBack mt-15 06List">
+                    <span>连续拒绝</span>
+                    <span class="ml-20"><input type="text" id='FST_NUMR_ATTR_VAL06' name='FST_NUMR_ATTR_VAL'  class="FormInputText" value="" /> </span>
+                    <span class="ml-15">次呼叫，</span>
+                    <span class="ml-20"><input type="text" id='SECD_NUMR_ATTR_VAL06' name='SECD_NUMR_ATTR_VAL'  class="FormInputText" value="" /> </span>
+                    <span class="ml-10">天内不在呼叫</span>
+                    <div class="ui-poptip mt-15">
+                        <p class="fn-high">请在文本框内输入您的真实情况</p>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-20 pb-30">
+                <div class="titleArea mb-20"><h2>项目去重</h2></div>
+                <div><input type="checkbox"  class="mr-10 088List" checked='checked' disabled="true" />启用（过滤当前批次中重复的客户）</div>
+            </div>
+            <div class="ui-poptip mt-15">
+                        <span class="fn-high">保存之后将在次日生效</span>
+            </div>
+        </div>
+</div>
+
+
+<div class="formBtnArea onlin_borTop">
+ <div class="normalBtnArea fn-center"> <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search"><span>保存</span></a> </div>
+</div>
+<#include "../../tpl/res_js.tpl" />
+<script src="../../lib/underscore/1.8.3/m.js"></script>
+<script type="text/javascript">
+    //页面加载完开始执行
+    srvMap.add('query', 'query.json', 'front/sh/frequency!index?uid=mycc003');//查询
+    srvMap.add('update', 'query.json', 'front/sh/frequency!index?uid=mycc002');//保存
+    srvMap.add('queryParty', 'query.json', 'front/sh/user!userinfo?uid=u011');//保存
+
+    var belg=null;
+    $(document).ready(function () {
+        //初始化函数
+        Util.ajax.postJson(srvMap.get("queryParty"),'', function (json) {
+            if(json.returnCode==0){
+            //    alert("1111111"+json.beans[0].BASE_PTY_ID);
+            //      belg=json.beans[0].BASE_PTY_ID;
+                  //belg=json.object[0].TGT_PTY_ID;
+
+                  belg=json.object[0].TGT_PTY_ID;
+
+            //    alert("2222"+belg);
+            
+          //  alert("333333"+belg);
+        /*
+        $('.nameListCheckAll').attr('checked',false);
+        $('.nameList').hide();
+        $('.0405List').attr('checked',false);
+        $('.04List').hide();
+        $('.05List').hide();
+        $('input[name=FLTR_TYPE_CD][value=06]').attr('checked',false);
+        $('.06List').hide();
+        $('input[name=FLTR_TYPE_CD][value=07]').attr('checked',false); 
+        $('.07List').hide();
+        $('.088List').attr('checked',true);
+        */
+        var garam=null;
+        
+      
+        var  cmd={
+                BELG_BRNCH_ID:belg
+        };
+
+        $('.nameList, .04title, .04List, .05title, .05List, .06List, .07List').hide();
+        Util.ajax.postJson(srvMap.get("query"),cmd, function (json) {
+            if(json.returnCode==0){
+                var beans = json.beans;      
+                var hasKey = function(key){
+                    return _.find(beans, function(item, i){
+                        return item.FLTR_TYPE_CD == key;
+                    }) ? 1 : 0;
+                }
+
+                //console.log(hasKey('05'))   
+                if (hasKey('01') || hasKey('02') || hasKey('03')){
+                    $('.nameList').show();
+                    $('.nameListCheckAll').attr('checked', true);
+                }
+                if (hasKey('04') || hasKey('05')){
+                    $('.cancelFilsterBox').attr('checked', true);
+                }
+                if (hasKey('04')){
+                    $('.04title, .05title, .04List').show();
+                    $('.04title input').attr('checked', true);
+                }else if (hasKey('05')){
+                    $('.04title, .05title, .05List').show();
+                    $('.05title input').attr('checked', true);
+                }
+                if (hasKey('07')){
+                    $('.07List').show();
+                    $('.07title input').attr('checked', true);
+                }
+                if (hasKey('06')){
+                    $('.06List').show();
+                    $('.06title input').attr('checked', true);
+                }
+
+                
+
+                 for(var i=0;i<beans.length;i++){
+                        
+                        //$("input[name='FLTR_TYPE_CD'][value=" + beans[i].FLTR_TYPE_CD + "]").attr('checked', true);
+                        $('.temp-' + beans[i].FLTR_TYPE_CD).attr('checked', true);
+                        //console.log(beans[i].FLTR_TYPE_CD)
+                       if(beans[i].FLTR_TYPE_CD=='04'){
+                            $('#FST_NUMR_ATTR_VAL04').val(beans[i].FST_NUMR_ATTR_VAL);
+                            $('#SECD_NUMR_ATTR_VAL04').val(beans[i].SECD_NUMR_ATTR_VAL);
+                        }else if(beans[i].FLTR_TYPE_CD=='05'){
+                            $('#FST_TIME_ATTR_VAL05').val(beans[i].FST_TIME_ATTR_VAL);
+                            $('#SECD_TIME_ATTR_VAL05').val(beans[i].SECD_TIME_ATTR_VAL);
+                            $('#FST_NUMR_ATTR_VAL05').val(beans[i].SECD_NUMR_ATTR_VAL);
+                        }else if(beans[i].FLTR_TYPE_CD=='07'){
+                            $('#FST_NUMR_ATTR_VAL07').val(beans[i].FST_NUMR_ATTR_VAL);
+                            $('#SECD_NUMR_ATTR_VAL07').val(beans[i].SECD_NUMR_ATTR_VAL);
+                        }else if(beans[i].FLTR_TYPE_CD=='06'){
+                            $('#FST_NUMR_ATTR_VAL06').val(beans[i].FST_NUMR_ATTR_VAL);
+                            $('#SECD_NUMR_ATTR_VAL06').val(beans[i].SECD_NUMR_ATTR_VAL);
+                        }
+                        //进行页面的勾选与显示   
+                 }
+                 
+                 /*
+                 if($(".nameList input[name=FLTR_TYPE_CD][value=01]").attr("checked")||$(".nameList input[name=FLTR_TYPE_CD][value=02]").attr("checked")||$(".nameList input[name=FLTR_TYPE_CD][value=03]").attr("checked")){
+                     $('.nameListCheckAll').attr('checked',true);
+                     $('.nameList').show();
+                 }else{
+                    
+                     $('.nameListCheckAll').attr('checked',false);
+                     $('.nameList').hide();
+                 }
+                 
+                 
+                if($("input[name=FLTR_TYPE_CD][value=04]").attr("checked")){
+                     $('.0405List').attr('checked',true);
+                     $(".04title").show();
+                     if($(".04List input").val==""){
+                        $(".04List .ui-poptip").show();
+                     }else{$(".04List .ui-poptip").hide();}
+                     $(".05title").show();
+                     $('.04List').show();
+                     $('.05List').hide();
+                 }else if($("input[name=FLTR_TYPE_CD][value=05]").attr("checked")){
+                     $('.0405List').attr('checked',true);
+                     $(".04title").show();
+                     $(".05title").show();
+                     if($(".05List input").val==""){
+                        $(".05List .ui-poptip").show();
+                     }else{$(".05List .ui-poptip").hide();}
+                     $('.05List').show();
+                     $('.04List').hide();
+                 }else{
+                     //$('.0405List').attr('checked',false);
+                     $(".04title").hide();
+                     $(".05title").hide();
+                     $('.05List').hide();
+                     $('.04List').hide();
+                 }
+                 
+                 
+                 
+                 if($("input[name=FLTR_TYPE_CD][value=07]").attr("checked")){
+                     $('.07List').show();
+                     if($(".07List input").val==""){
+                        $(".07List .ui-poptip").show();
+                     }else{$(".07List .ui-poptip").hide();}
+                 }else{
+                     $('.07List').hide();
+                 }
+                 if($("input[name=FLTR_TYPE_CD][value=06]").attr("checked")){
+                     $('.06List').show();
+                     if($(".06List input").val==""){
+                        $(".06List .ui-poptip").show();
+                     }else{$(".06List .ui-poptip").hide();}
+                 }else{
+                     $('.06List').hide();
+                 }*/
+            }
+       });
+              
+                /*$("input[name=FLTR_TYPE_CD][value=07]").change(function() {
+                    if($("input[name=FLTR_TYPE_CD][value=07]").attr("checked")){
+                        $('.07List').show();
+                    }else{
+                        $('.07List').hide();
+                    } 
+                });
+                $("input[name=FLTR_TYPE_CD][value=06]").change(function() {
+                    if($("input[name=FLTR_TYPE_CD][value=06]").attr("checked")){
+                        $('.06List').show();
+                    }else{
+                        $('.06List').hide();
+                    } 
+                });
+                $(".0405List").change(function() {
+                    if($(".0405List").attr("checked")){
+                        $('.04List').show();
+                        $('.05List').hide();
+                        $(".04title").show();
+                        $(".05title").show();
+                        $("input[name=FLTR_TYPE_CD][value=04]").attr('checked',true);
+                    }else{
+                        $('.04List').hide();
+                        $('.05List').hide();
+                        $(".04title").hide();
+                        $(".05title").hide();
+                        $('input[name=FLTR_TYPE_CD][value=04]').attr("checked",false);
+                        $('input[name=FLTR_TYPE_CD][value=05]').attr("checked",false);
+                    } 
+                });
+                $('input[name=FLTR_TYPE_CD][value=04]').change(function() {
+                        $('.04List').show();
+                        $('.05List').hide();
+                        $(".04title").show();
+                        $(".05title").show();
+                   });
+                $('input[name=FLTR_TYPE_CD][value=05]').change(function() {
+                        $('.04List').hide();
+                        $('.05List').show();
+                        $(".04title").show();
+                        $(".05title").show();
+                 });
+                $(".nameListCheckAll").change(function() {
+                    if($('.nameListCheckAll').attr("checked")){
+                        $('.nameList').show();
+                    }else{
+                        $('.nameList').hide();
+                        $('.nameList input[name=FLTR_TYPE_CD][value=01]').attr("checked",false);
+                        $('.nameList input[name=FLTR_TYPE_CD][value=02]').attr("checked",false);
+                        $('.nameList input[name=FLTR_TYPE_CD][value=03]').attr("checked",false);
+                    }
+                    
+                });
+                */
+
+                //事件 
+                $('.nameListCheckAll').on('click', function(e){
+                    var $el = $(e.currentTarget);
+                    var $boxs = $('.nameList input');
+                    if (!$el.is(':checked')){
+                        $boxs.attr('checked', false);
+                        $('.nameList').hide();
+                    }else{
+                        //$boxs.attr('checked', true);
+                        $('.nameList').show();
+                    }
+                    //$('.nameList input').attr('')
+                });
+                $('.cancelFilsterBox').on('click', function(e){
+                    var $el = $(e.currentTarget);
+                    if (!$el.is(':checked')){
+                        $('.04title input, .05title input').attr('checked', false);
+                        $('.04title, .05title, .04List, .05List').hide();
+                    }else{
+                        $('.04title input').attr('checked', true);
+                        $('.04title, .05title, .04List').show();
+                    }
+                });
+                $('.04title input').on('click', function(e){
+                	$(e.currentTarget).attr('checked', true);
+                	$('.05title input').attr('checked', false);
+                    $('.04List').show();
+                    $('.05List').hide();
+                });
+
+                $('.05title input').on('click', function(e){
+                	$(e.currentTarget).attr('checked', true);
+                	$('.04title input').attr('checked', false);
+                    $('.04List').hide();
+                    $('.05List').show();
+                });
+
+                $('.07title input').on('click', function(e){
+                    var $el = $(e.currentTarget);
+                    var $list = $('.07List');
+                    if ($el.is(':checked')){
+                        $list.show();
+                    }else{
+                        $list.hide();
+                    }
+                });
+                $('.06title input').on('click', function(e){
+                    var $el = $(e.currentTarget);
+                    var $list = $('.06List');
+                    if ($el.is(':checked')){
+                        $list.show();
+                    }else{
+                        $list.hide();
+                    }
+                });
+
+                var dataValidate = function(){
+                    //05title
+                    
+                    if ($('.05title input').is(':checked')){
+                        var $firstDate = $('#FST_TIME_ATTR_VAL05');
+                        if (!$firstDate.val() ){
+                            Util.dialog.tips("指定清洗时间段开始日期不能为空");
+                            return false;
+                        }   
+                        var $secondDate = $('#SECD_TIME_ATTR_VAL05');
+                        if (!$secondDate.val() ){
+                            Util.dialog.tips("指定清洗时间段结束日期不能为空");
+                            return false;
+                        }   
+                        var $appointTimes = $('#FST_NUMR_ATTR_VAL05');
+                        if (!$appointTimes.val()){
+                            Util.dialog.tips("指定清洗时间段接触的客户次数不能为空");
+                            return false;
+                        }
+                    }
+                    if ($('.04title input').is(':checked')){
+                        var $days = $('#FST_NUMR_ATTR_VAL04');
+                        if (!$days.val()){
+                            Util.dialog.tips("按项目开始时间清洗的天数不能为空");
+                            return false;
+                        }
+                        var $times = $('#SECD_NUMR_ATTR_VAL04');
+                        if (!$times.val()){
+                            Util.dialog.tips("按项目开始时间清洗的接触客户次数不能为空");
+                            return false;
+                        }
+                    }
+                    if ($('.07title input').is(':checked')){
+                        var $days = $('#FST_NUMR_ATTR_VAL07');
+                        if (!$days.val()){
+                            Util.dialog.tips("通话时长超过 不能为空");
+                            return false;
+                        }
+                        var $times = $('#SECD_NUMR_ATTR_VAL07');
+                        if (!$times.val()){
+                            Util.dialog.tips("天内免打扰不能为空");
+                            return false;
+                        }
+                    }
+                    if ($('.06title input').is(':checked')){
+                        var $days = $('#FST_NUMR_ATTR_VAL06');
+                        if (!$days.val()){
+                            Util.dialog.tips("连续拒绝 不能为空");
+                            return false;
+                        }
+                        var $times = $('#SECD_NUMR_ATTR_VAL06');
+                        if (!$times.val()){
+                            Util.dialog.tips("天内不在呼叫不能为空");
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                
+
+                $('#J_search').bind('click',function(){
+                    if (!dataValidate()){
+                        return false;
+                    }
+
+                    //return false;
+                    var str="";
+                    $("input[name='FLTR_TYPE_CD']:checkbox").each(function(){ 
+                        if($(this).attr("checked")){
+                            str += $(this).val()+",";
+                        }
+                    });
+                  //  alert(str);
+                   /*  var strRadio="";
+                     $("input[name='FLTR_TYPE_CD']:radio").each(function(){ 
+                      if($(this).attr("checked")){
+                          strRadio =  $(this).val();
+                      }
+                     }); */
+                    
+                     var b=str.split(",");
+                      if(null!=b&&""!=b){
+                          for(var i=0;i<b.length-1;i++ ){
+                          if(b[i]==01){
+                              if(garam!=null){
+                                garam+="&BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=01&FST_NUMR_ATTR_VAL=0&SECD_NUMR_ATTR_VAL=0&FST_TIME_ATTR_VAL=1111-11-11 00:00:00&SECD_TIME_ATTR_VAL=1111-11-11 00:00:00";
+                              }else{
+                                garam="BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=01&FST_NUMR_ATTR_VAL=0&SECD_NUMR_ATTR_VAL=0&FST_TIME_ATTR_VAL=1111-11-11 00:00:00&SECD_TIME_ATTR_VAL=1111-11-11 00:00:00";  
+                              }
+                          }else if(b[i]==02){             
+                             if(garam!=null){  
+                                garam+="&BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=02&FST_NUMR_ATTR_VAL=0&SECD_NUMR_ATTR_VAL=0&FST_TIME_ATTR_VAL=1111-11-11 00:00:00&SECD_TIME_ATTR_VAL=1111-11-11 00:00:00";
+                             }else{
+                                garam="BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=02&FST_NUMR_ATTR_VAL=0&SECD_NUMR_ATTR_VAL=0&FST_TIME_ATTR_VAL=1111-11-11 00:00:00&SECD_TIME_ATTR_VAL=1111-11-11 00:00:00"; 
+                             }
+                            
+                          }else if(b[i]==03){
+                              if(garam!=null){
+                                garam+="&BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=03&FST_NUMR_ATTR_VAL=0&SECD_NUMR_ATTR_VAL=0&FST_TIME_ATTR_VAL=1111-11-11 00:00:00&SECD_TIME_ATTR_VAL=1111-11-11 00:00:00";
+                              }else{
+                                garam="&BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=03&FST_NUMR_ATTR_VAL=0&SECD_NUMR_ATTR_VAL=0&FST_TIME_ATTR_VAL=1111-11-11 00:00:00&SECD_TIME_ATTR_VAL=1111-11-11 00:00:00"; 
+                              }
+                          }else if(b[i]==07){
+                              if(garam!=null){
+                                 garam+="&BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=07"+"&FST_NUMR_ATTR_VAL="+$("#FST_NUMR_ATTR_VAL07").val()+"&SECD_NUMR_ATTR_VAL="+$("#SECD_NUMR_ATTR_VAL07").val()+"&FST_TIME_ATTR_VAL=1111-11-11 00:00:00&SECD_TIME_ATTR_VAL=1111-11-11 00:00:00";
+                              }else{
+                                 garam="BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=07"+"&FST_NUMR_ATTR_VAL="+$("#FST_NUMR_ATTR_VAL07").val()+"&SECD_NUMR_ATTR_VAL="+$("#SECD_NUMR_ATTR_VAL07").val()+"&FST_TIME_ATTR_VAL=1111-11-11 00:00:00&SECD_TIME_ATTR_VAL=1111-11-11 00:00:00";  
+                              }
+                          }else if(b[i]==06){
+                              if(garam!=null){
+                                garam+="&BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=06"+"&FST_NUMR_ATTR_VAL="+$("#FST_NUMR_ATTR_VAL06").val()+"&SECD_NUMR_ATTR_VAL="+$("#SECD_NUMR_ATTR_VAL06").val()+"&FST_TIME_ATTR_VAL=1111-11-11 00:00:00&SECD_TIME_ATTR_VAL=1111-11-11 00:00:00";
+                              }else{
+                                garam="BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=06"+"&FST_NUMR_ATTR_VAL="+$("#FST_NUMR_ATTR_VAL06").val()+"&SECD_NUMR_ATTR_VAL="+$("#SECD_NUMR_ATTR_VAL06").val()+"&FST_TIME_ATTR_VAL=1111-11-11 00:00:00&SECD_TIME_ATTR_VAL=1111-11-11 00:00:00";  
+                              }
+                          }else if(b[i]==04){
+                        	  if(garam!=null){
+                                  garam+="&BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=04"+"&FST_NUMR_ATTR_VAL="+$("#FST_NUMR_ATTR_VAL04").val()+"&SECD_NUMR_ATTR_VAL="+$("#SECD_NUMR_ATTR_VAL04").val()+"&FST_TIME_ATTR_VAL=1111-11-11 00:00:00&SECD_TIME_ATTR_VAL=1111-11-11 00:00:00";
+                                }else{
+                                  garam="&BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=04"+"&FST_NUMR_ATTR_VAL="+$("#FST_NUMR_ATTR_VAL04").val()+"&SECD_NUMR_ATTR_VAL="+$("#SECD_NUMR_ATTR_VAL04").val()+"&FST_TIME_ATTR_VAL=1111-11-11 00:00:00&SECD_TIME_ATTR_VAL=1111-11-11 00:00:00";  
+                                }
+                          }else if(b[i]==05){
+                        	  if(garam!=null){
+                                  garam+="&BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=05"+"&FST_TIME_ATTR_VAL="+$("#FST_TIME_ATTR_VAL05").val()+"&SECD_TIME_ATTR_VAL="+$("#SECD_TIME_ATTR_VAL05").val()+"&SECD_NUMR_ATTR_VAL="+$("#FST_NUMR_ATTR_VAL05").val()+"&FST_NUMR_ATTR_VAL=0";
+                                }else{
+                                  garam="&BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=05"+"&FST_TIME_ATTR_VAL="+$("#FST_TIME_ATTR_VAL05").val()+"&SECD_TIME_ATTR_VAL="+$("#SECD_TIME_ATTR_VAL05").val()+"&SECD_NUMR_ATTR_VAL="+$("#FST_NUMR_ATTR_VAL05").val()+"&FST_NUMR_ATTR_VAL=0"; 
+                                }
+                          }else{
+                        	  
+                          }
+                       
+                      } 
+                     }
+                      
+                     /* if(null!=strRadio&&""!=strRadio){
+                       if(strRadio==04){
+                           if(garam!=null){
+                             garam+="&BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=04"+"&FST_NUMR_ATTR_VAL="+$("#FST_NUMR_ATTR_VAL04").val()+"&SECD_NUMR_ATTR_VAL="+$("#SECD_NUMR_ATTR_VAL04").val()+"&FST_TIME_ATTR_VAL=1111-11-11 00:00:00&SECD_TIME_ATTR_VAL=1111-11-11 00:00:00";
+                           }else{
+                             garam="&BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=04"+"&FST_NUMR_ATTR_VAL="+$("#FST_NUMR_ATTR_VAL04").val()+"&SECD_NUMR_ATTR_VAL="+$("#SECD_NUMR_ATTR_VAL04").val()+"&FST_TIME_ATTR_VAL=1111-11-11 00:00:00&SECD_TIME_ATTR_VAL=1111-11-11 00:00:00";  
+                           }
+                       }else{
+                           if(garam!=null){
+                             garam+="&BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=05"+"&FST_TIME_ATTR_VAL="+$("#FST_TIME_ATTR_VAL05").val()+"&SECD_TIME_ATTR_VAL="+$("#SECD_TIME_ATTR_VAL05").val()+"&SECD_NUMR_ATTR_VAL="+$("#FST_NUMR_ATTR_VAL05").val()+"&FST_NUMR_ATTR_VAL=0";
+                           }else{
+                             garam="&BELG_BRNCH_ID="+belg+"&FLTR_TYPE_CD=05"+"&FST_TIME_ATTR_VAL="+$("#FST_TIME_ATTR_VAL05").val()+"&SECD_TIME_ATTR_VAL="+$("#SECD_TIME_ATTR_VAL05").val()+"&SECD_NUMR_ATTR_VAL="+$("#FST_NUMR_ATTR_VAL05").val()+"&FST_NUMR_ATTR_VAL=0"; 
+                           }
+                       }
+                      }  */
+                     /*  alert("gasd"+strRadio); */
+                   /*   alert("uuuuuuuuuuu"+garam); */
+                      if(garam==null||garam==""){
+                          
+                       garam="BELG_BRNCH_ID="+belg;
+                      }
+                  //    alert(garam);
+                   Util.ajax.postJson(srvMap.get("update"), garam, function (json) {
+                       if(json.returnCode==0){
+                           Util.dialog.tips("保存成功");
+                           garam=null;
+                    //     alert("1");
+                       }else{
+                    //     alert("2");
+                           Util.dialog.tips("保存失败");
+                       } 
+                   });
+
+
+                });      
+            }else{
+                Util.dialog.tips("查询失败");
+            }
+            
+        });
+    });
+</script>
+</body>
+</html>

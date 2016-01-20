@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>预览</title>
+<#include "../../tpl/res_css.tpl" />
+</head>	
+		<div class="tabsArea fn-clear" style="margin-top:10px">
+			<div class="tabs">
+				<div class="ui-tab  thefirstdiv">
+					<ul class="ui-tab-items">
+						<li class="ui-tab-item ">
+							<a href="endCalling.html">通话结束</a>
+						</li>
+						<li class="ui-tab-item ">
+							<a href="appointment.html">下单预约</a>
+						</li>
+						<li class="ui-tab-item ">
+							<a href="goodInfo.html">商品信息</a>
+						</li>
+						<li class="ui-tab-item ui-tab-item-current">
+							<a href="saleService.html">售后处理</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		<!--标题-->
+		<div class="fn-hide" id="T_addSms">
+
+			<div class="titleArea SMStitle">
+				<h2 class="mb-10" id="addCj"></h2>
+			</div>
+			<div class="mt-20">
+				<span>商家名称：</span>
+				<span> <select id="J_coopInfo" class="fn-select-width"></select>
+					<script type="text/x-handlebars-template" id="T_coopInfo">
+						{{#each beans}}
+						    <option value="{{PTY_ID}}">{{PTY_NM}}</option>
+						{{/each}}
+					</script>
+				</span>
+			</div>
+			<div class="divcolor">
+					已输入字数：
+					<span id="word">0</span>
+			</div>
+			<div class="mt-30 mb-30">
+				<textarea rows="8" cols="113" style="resize:none;" name="smsCntt" class="width_all" id="addSmsCntt" onKeyUp="javascript:checkWord(this,'word');" onMouseDown="javascript:checkWord(this,'word');"></textarea>
+			</div>
+			<hr />
+
+
+		</div>
+		<div id="T_editSms" class="fn-hide">
+			<div class="formItem">
+
+				<div class="SMStitle">
+					<div class="divcolor">
+						已输入字数：
+						<span id="sale">0</span>
+					</div>
+					<div class="thedivcolor">
+						使用场景：
+						<span id="cj"></span>
+					</div>
+				</div>
+
+				<div class="mt-20 mb-20">
+					<textarea rows="7" cols="140" id="smsCntt" name="smsCntt" class="width_all" onKeyUp="javascript:checkWord(this,'sale');" onMouseDown="javascript:checkWord(this,'sale');"></textarea>
+				</div>
+			</div>
+
+			<hr />
+		</div>
+
+
+		<div class="listTopBtn" id="J_title">
+		</div>
+		<script type="text/x-handlebars-template" id="T_title">
+    	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td style="color:#cfcfcf">使用场景：{{bean.CMN_CD_VAL_NM}}</div></td>
+            <td width="162"><div class="normalBtnArea ft-right mt-5" style="width:162px"><a class="normalBtn BGblue" href="javascript:void(0);"   onclick="addSms('{{bean.CD_VAL}}','{{bean.CMN_CD_VAL_NM}}');">添加商家售后短信模板</a></div></td>
+          </tr>
+        </table>
+	 </script>
+
+
+
+
+		<div method="post" action="#" class="cmxform">
+			<form method="get" action=""
+				class="record-search-form record-search-min record-search-form-border"
+				id="J_formSearch" name="J_formSearch">
+				<div class="record-search-cate">
+					<table class="search_table" cellpadding="0" cellspacing="0"
+						border="0" width="100%">
+						<tbody>
+							<tr>
+								<td width="100">
+								<input type="hidden" name="uid" value="c001">
+								<input type="hidden" name="flag" value="sales">
+									<label class="description">
+										商家名称
+									</label>
+								</td>
+								<td width="150">
+									<select id="J_coop" name="coopId">
+									</select>
+
+									<script type="text/x-handlebars-template" id="T_coop">
+													<option value="">全部</option>
+									{{#each beans}}
+											        <option value="{{PTY_ID}}">{{PTY_NM}}</option>
+									{{/each}}
+										     </script>
+								</td>
+								<td>
+									<div class="normalBtnArea w82">
+							                  	<a class="searchBtn" href="javascript:void(0);" id="J_search"><i></i>查询</a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</div>
+
+		<!--内容-->
+		<div class="tablewidth mg_t_10">
+			<table
+				class="ui-record-table table_radius table-bordered table-striped">
+				<thead>
+					<tr>
+						<th width="100">
+							商家名称
+						</th>
+						<th>
+							售后处理短信
+						</th>
+						<th width="90" >
+							操作
+						</th>
+					</tr>
+				</thead>
+				<tbody id="J_sms"></tbody>
+			</table>
+		</div>
+		    <DIV class="amount-bottom">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+                      <tr>
+                        <td>
+                            <DIV class="fn-clear action-other  action-other-show">
+                                    <DIV id="Pagination" class="page pagination fn-right"> </DIV>
+                                    <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                            </DIV></td>
+                      </tr>
+                    </table>
+                </DIV>
+<script type="text/x-handlebars-template" id="T_sms">
+{{#if beans.length}}
+ 	{{#each beans}}
+        <tr >
+            <td align="center">{{coopNM}}</td>
+			<td>{{SMS_CNTT}}</td>
+			<td><div class="gridRowBtn">
+			<a  class="item-text" href="javascript:void(0);"   onclick="editSms('{{SMS_RS_ID}}','{{SMS_CNTT}}','{{CMN_CD_VAL_NM}}');">编辑</a>
+			<a class="item-text" href="javascript:void(0);" onclick="delSms('{{SMS_RS_ID}}');">删除</a></div></td>
+		</tr>
+	{{/each}}
+{{/if}}
+</script>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+srvMap.add('sms','sms.json','front/sh/common!smsRs');
+srvMap.add('coopPrnr','coopPrnr.json','front/sh/user!partnerInfo');
+var G_params = {
+	    url : srvMap.get('sms'),
+	    items_per_page : 10 ,   		// 每页数     @param : limit
+	    page_index : 0 , 				//当前页  @param : start
+	    pagination : "Pagination" , 	//分页id
+	    searchformId : "J_formSearch",  //搜索表单的id
+	    tabletpl : "T_sms", 		//表格模板
+	    tablewrap : "J_sms", 		//表格容器
+        pageCallback: pageback
+	};
+$(document).ready(function () {
+ reload();
+});
+function reload(){
+	var coopParam={'uid':'u001'};
+	   Util.ajax.postJson(srvMap.get("coopPrnr"), coopParam, function(json,flag){
+	    	 Util.ajax.loadTemp('#J_coop',$('#T_coop'),json);//加载模板
+	        });
+	var param={'uid':'c002','flag':'sales'};
+	   Util.ajax.postJson(srvMap.get("sms"), param, function(json,flag){
+	    	 Util.ajax.loadTemp('#J_title',$('#T_title'),json);//加载模板
+	        });
+	   $('#J_search').bind('click',function(){
+			G_params.page_index=0;
+	     var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+	     //分页获取数据
+	     Util.pagination(0, true , G_params , str );
+	 });
+		$('#J_search').trigger("click");
+}
+
+ var J_addCj = document.getElementById('addCj');
+ var J_cj = document.getElementById('cj');
+ var J_smsCntt = document.getElementById('smsCntt');
+ var mode = document.getElementById('T_addSms');
+ var elem = document.getElementById('T_editSms');
+ var  addSmsCntt= document.getElementById('addSmsCntt');
+ var  J_coopInfo= document.getElementById('J_coopInfo');
+ var  T_coopInfo= document.getElementById('T_coopInfo');
+function addSms(val,cj){
+	 $(J_addCj).html(cj);
+	 $(J_smsCntt).val('');
+	 var coopParam={'uid':'u001'};
+	   Util.ajax.postJson(srvMap.get("coopPrnr"), coopParam, function(json,flag){
+	    	 Util.ajax.loadTemp(J_coopInfo,$(T_coopInfo),json);//加载模板
+	        });
+    var params = {
+        top:top,    
+        id:'T_addSms',
+        title:'添加短信模板',
+        content: mode,
+        width: 700,
+        height:300,
+        modal: true,
+        cancelVal:'取消',
+        cancelCallback:option,
+        okVal:'确定',
+        okCallback:add(val)
+    }
+    Util.dialog.openDiv(params);
+}
+
+function add(tempID){
+	return function() {
+	var coopId=$(J_coopInfo).find('option:selected').val();
+	var param1={'uid':'c007','bizSceneTypeCd':tempID,'coopPrnrId':coopId,'smsCntt':$(addSmsCntt).val()};
+		Util.ajax.postJsonSync(srvMap.get("sms"),param1,function(json,status){
+			if(status){
+				alert("添加成功!");
+				reload();
+			}
+			else {
+				alert("添加失败");
+				
+			};
+			
+		});
+	};
+};
+
+function editSms(id,smsCntt,cj){
+	 $(J_smsCntt).val(smsCntt);
+	 $(J_cj).html(cj);
+     var params = {
+   		 top:top,
+         id:'T_editSms',
+         title:'编辑短信模板',
+         content: elem,
+         width: 900,
+         height:200,
+         modal: true,
+         cancelVal:'取消',
+         cancelCallback:option,
+         okVal:'确定',
+         okCallback:option(id)
+     }
+     Util.dialog.openDiv(params);
+	$(J_smsCntt).trigger('keyup');
+}
+ 
+function option(tempID){
+	return function() {
+	var param1={'uid':'c004','smsRsId':tempID,'smsCntt':$(J_smsCntt).val()};
+		Util.ajax.postJsonSync(srvMap.get("sms"),param1,function(json,status){
+			if(status){
+				alert("修改成功!");
+				reload();
+			}
+			else {
+				alert("修改失败");
+				
+			};
+			
+		});
+	};
+};
+function delSms(id){
+	var delParam={'uid':'c006','smsRsId':id};
+	 if (confirm("确定删除吗？")) {
+		 Util.ajax.postJsonSync(srvMap.get("sms"),delParam,function(json,status){
+				if(status){
+					reload();
+					};
+			 });
+			};
+};
+function pageback(){
+   
+}
+</script>
+
+	</body>
+</html>

@@ -1,0 +1,26 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": null,
+    "bean": {},
+    "beans": [
+        {
+            "CMPGN_ID": "8dd0a8c3-4227-4a3a-b91d-f8d081c94494",
+            "state": "0",
+            "MODF_TIME": "2015-06-09 11:42:46.0",
+            "modifyDate": "2015-06-09 11:42:46.0",
+            "STAFF_ID": "1000000000019",
+            "CRT_TIME": "2015-06-04 14:13:08.0",
+            "CMPGN_TYPE_CD": "0",
+            "CMPGN_NM": "测试分配",
+            "CMPGN_INVLD_DATE": "2015-07-10 00:00:00",
+            "TSK_ALCT_QTY": "3",
+            "CMPGN_EFF_DATE": "2015-06-03 00:00:00",
+            "CMPGN_STS_CD": "2",
+            "TSK_ID": "040a13f5-b581-4d04-a24d-328bf3ac0815"
+        }
+    ],
+    "object": null
+}

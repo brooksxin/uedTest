@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10085-任务管理-查看进度</title> <#include
+"../../tpl/res_css.tpl" />
+</head>
+
+<body>
+
+				<div class="listTopBtn">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td><h1><span class="CMPGN_NM"></span></h1></td>
+							<!-- <td><div class="normalBtnArea ft-right">
+									<a class="normalBtn BGblue" href="#">上一个任务</a><a
+										class="normalBtn BGblue" href="#">下一个任务</a>
+								</div></td> -->
+						</tr>
+					</table>
+				</div>
+
+				<div class="listTopTips">
+					<table cellpadding="0" cellspacing="0" border="0" width="100%">
+						<tr>
+							<td><span class="CMPGN_EFF_DATE"></span>——<span class="CMPGN_INVLD_DATE"></span></td>
+							<td><div class="ft-right">
+									任务数量：<span id="count"></span>/
+									<span id="total"></span>
+							    </div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<form id="J_formCount">
+					<input type="hidden" name="uid" value="mc001" /> <input
+						type="hidden" name="CMPGN_ID" value="1430365031076" /> <input
+						type="hidden" name="STAFF_ID" value="6" /> <input type="hidden"
+						name="type" value="1" />
+				</form>
+				<form id="stafflist">
+					<input type="hidden" name="uid" value="u005" />
+					<div id="get_dept"></div>
+
+				</form>
+				<form id="staffcount">
+					<input type="hidden" name="uid" value="mc002" /> <input
+						type="hidden" name="CMPGN_ID" value="1430365031076" /> <input
+						type="hidden" name="STAFF_ID" value="1" /> <input type="hidden"
+						name="type" value="1" />
+				</form>
+
+				<div class="tablewidth mg_t_10">
+					<table
+						class="ui-record-table table_radius table-bordered table-striped">
+						<thead>
+							<tr>
+								<th width="120">员工工号</th>
+								<th width="120">员工姓名</th>
+								<th width="120">拨打电话次数</th>
+								<th width="120">完成进度</th>
+								<th width="120">成单数量</th>
+							</tr>
+						</thead>
+						<tbody id="J_tabletpl">
+
+
+						</tbody>
+					</table>
+				</div>
+
+
+
+				<!--翻页及功能按钮区域开始-->
+				<DIV class="amount-bottom">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0"
+						class="gridBottom">
+						<tr>
+							<td>
+								<DIV class="normalBtnArea">
+									<A class="normalBtn BGblue" onclick="againDivide()" href="javascript:; ">调整配给数量 </A>
+								</DIV>
+							</td>
+							<td width="50%">
+								<DIV class="fn-clear action-other  action-other-show ">
+									<DIV id=Pagination class="page pagination fn-right"></DIV>
+									<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+								</DIV>
+							</td>
+						</tr>
+					</table>
+				</DIV>
+
+	<#include "../../tpl/res_js.tpl" />
+	<script src="../../lib/underscore/1.8.3/m.js"></script>
+	<script src="../../lib/jqueryPlugin/jquery.countdown/2.0.2/m.js"></script>
+    <script src="../../common/market/common.js"></script>
+	<script src="../../common/requirejsConfig.js"></script>
+	
+	<script id="T_count" type="text/x-handlebars-template">
+{{bean.count}}/{{bean.total}}
+</script>
+	<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+    <tr>
+					<td>{{PTY_NO}}</td>
+					<td>{{STAFF_NM}}</td>
+					<td>{{DIAL_TELNUM_QTY}}/{{TSK_ALCT_QTY}}</td>
+					<td><div class="rateBar_Large fn-clear">
+							<div class="rateBarText">{{process}}</div>
+							<div class="rateBarArea">
+								<div class="rateBar">
+									<div class="rateBg"></div>
+									<div class="rateProcess" style="width: {{process}};"></div>
+								</div>
+							</div>
+						</div></td>
+					<td>{{TSK_SUCC_QTY}}</td>
+			</tr>
+    {{/each}}
+{{else}}
+    	<tr>
+		<td colspan="5">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+	<script id="taskcount" type="text/x-handlebars-template">
+{{bean.count}}/{{bean.total}}
+</script>
+	<script type="text/javascript">
+	
+	
+	var CMPGN_ID=Util.browser.getParameter("CMPGN_ID");
+	var CMPGN_NM=  decodeURI(Util.browser.getParameter("CMPGN_NM"));//活动名称
+	var CMPGN_EFF_DATE=  decodeURI(Util.browser.getParameter("CMPGN_EFF_DATE"));//活动结束日期
+	var CMPGN_INVLD_DATE=  decodeURI(Util.browser.getParameter("CMPGN_INVLD_DATE"));//活动结束日期 
+	/* var CMPGN_ID = '20150508'//活动ID
+		var CMPGN_INVLD_DATE= '2015-05-08' //活动结束日期
+		var CMPGN_EFF_DATE= '2015-05-08' //活动结束日期
+		var CMPGN_NM ="情满七夕 优惠钜献 大型促销活动"; */
+	$(".CMPGN_NM").text(CMPGN_NM);
+	$(".CMPGN_EFF_DATE").text(CMPGN_EFF_DATE);
+	$(".CMPGN_INVLD_DATE").text(CMPGN_INVLD_DATE);
+	
+	
+		srvMap.add('userinfo', 'user.json', 'front/sh/user!session');//用户信息查询
+		srvMap.add('getcount', 'count.json', 'front/sh/market!index');//班组长查询任务数量
+		srvMap.add('stafflist', 'staf.json', 'front/sh/user!userinfo');//班组长查询所在部门的员工列表
+
+		//页面加载完开始执行
+		$(function() {
+			var STAFF_ID=userInfo.bean.staffId;
+			var DEPT_ID=userInfo.bean.deptId;
+			//获取任务数量
+			var str = $("#J_formCount").serialize(); //把form序列化
+			//console.log(str);
+			//不分页获取数据
+			var params={"uid":"mc004","CMPGN_ID":CMPGN_ID,"type":"1","DEPT_ID":DEPT_ID};
+			Util.ajax.postJsonSync(srvMap.get('getcount'), params, function(json,
+					status) {
+				if (status) {
+					var count = json.bean.count;
+					$("#count").html(count);
+					$("#total").html(json.bean.total);
+				}
+			});
+
+			//查询员工列表
+			
+			var param2={"uid":"mwt007","CMPGN_ID":CMPGN_ID,"type":"1"};
+			Util.ajax.postJsonSync(srvMap.get('getcount'), param2, function(json1, status) {
+				if (status) {
+					Util.ajax.loadTemp('#J_tabletpl', $('#T_tabletpl'), json1);
+				}
+					
+			});
+		});
+		function againDivide(){
+			var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text"><span style="color:red;">警告：</span>重新分配会导致该活动处于暂停状态！请谨慎操作！</div></div></div>'
+		    );
+
+		    var params = {
+		        top:top,
+		        content: elem,
+		        width: "300px",
+		        height: "140px",
+		        modal: true,
+		        okVal:'确定',
+		        okCallback:function(){
+		        	$(obj).hide().siblings().hide();
+		              require(['common/util/loading'], function(Loading){
+		                Loading.init();
+		                require(['common/market/againdivideTaskDept', ], function(Main){
+		                  Main.init({ CMPGN_ID:CMPGN_ID, CMPGN_NM:CMPGN_NM, CMPGN_EFF_DATE:CMPGN_EFF_DATE, CMPGN_INVLD_DATE:CMPGN_INVLD_DATE }, Loading);
+		                });
+
+		              });
+		              /*
+		              window.location.href="../market/againdivideTaskSys.html?"
+		            	  + "CMPGN_ID="+CMPGN_ID+"&CMPGN_NM="+CMPGN_NM+"&CMPGN_EFF_DATE="
+		            	  +CMPGN_EFF_DATE+"&CMPGN_INVLD_DATE="+CMPGN_INVLD_DATE; */
+		        },
+		        cancelVal:'取消',
+		        cancelCallback:function(){}
+		      }
+
+		      Util.dialog.openDiv(params);
+			//window.location.href="againdivideTaskSys.html?CMPGN_ID="+CMPGN_ID+"&CMPGN_NM="+CMPGN_NM+"&CMPGN_INVLD_DATE="+CMPGN_INVLD_DATE;
+		}
+	</script>
+</body>
+</html>

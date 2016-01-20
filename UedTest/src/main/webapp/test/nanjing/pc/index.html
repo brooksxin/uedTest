@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>首页</title>
+<link rel="stylesheet" type="text/css" href="alice.css">
+<style type="text/css">
+
+body{
+	font:normal 12px/1.5  \5fae\8f6f\96c5\9ed1, Verdana, Arial, \5b8b\4f53, sans-serif;
+	color: #4D4D4D;
+}
+.fn-text-right {
+	text-align: right;
+}
+.fn-gray {
+	color: #C6C6C6;
+}
+.fn-strong {
+	font-size: 20px;
+}
+
+.container {
+	width: 1080px;
+	margin: 20px auto;
+}
+.header {
+	background: #EFEFEF;
+	padding: 10px 0 10px 10px;
+	margin: 10px 0;
+}
+.header .user-logo {
+	background: url(工作台_33.png) no-repeat 0 0;
+	width: 88px;
+	height: 84px;
+	margin: 0 10px 0 10px;
+}
+.header .tit {
+	padding: 3px 0 3px 10px;
+}
+h2 {
+	color: #4c6063;
+	font-size: 16px;
+	font-weight: bold;
+	height: 32px;
+	line-height: 32px;
+}
+.header .tit ul {
+	width: 800px;
+	height: 32px;
+	margin-top: 12px;
+	overflow: hidden;
+}
+.header .tit ul li {
+	float: left;
+	height: 32px;
+	line-height: 32px;
+	color: #777777;
+	width: 80px;
+}
+.content {
+	margin-top: 20px;
+}
+.content .left {
+	width: 600px;
+}
+.content .left .secret .secret-icon {
+	background: url(工作台_40.png) no-repeat 0 0;
+	width: 84px;
+	height: 106px;
+	margin: 0 33px 0 10px;
+}
+.secret .secret-tbl th, .secret .secret-tbl td {
+	padding: 5px 10px;
+}
+.secret .secret-tbl .des {
+	margin-right: 3px;
+	font-size: 14px;
+}
+.secret .secret-tbl .up {
+	color: #C0392B;
+}
+.secret .secret-tbl .down {
+	color: #48925F;
+}
+.new-business {
+	background: #EFEFEF;
+	margin-top: 10px;
+	padding: 10px 0;
+}
+.new-business .new-business-logo {
+	background: url(工作台_70.png) no-repeat 0 0;
+	width: 72px;
+	height: 97px;
+	margin: 0 45px 0 10px;
+}
+.new-business .fn-text-right {
+	margin: 10px 0 0 90px;
+}
+.new-business .fn-text-right .fn-strong {
+	font-size: 34px;
+	margin: 0 10px;
+}
+.custom-make {
+	margin-top: 10px;
+	padding: 10px 0;
+}
+.custom-make .custom-make-logo {
+	background: url(工作台_82.png) no-repeat 0 0;
+	width: 88px;
+	height: 91px;
+	margin: 0 30px 0 10px;
+}
+.custom-make .custom-make-content .tit {
+	margin-right: 10px;
+}
+.custom-make .custom-make-content span input {
+	vertical-align: middle;
+	height: 27px;
+	line-height: 27px;
+}
+.custom-make .custom-make-content span label {
+	vertical-align: middle;
+	margin-right: 10px;
+	height: 27px;
+	line-height: 27px;
+}
+.custom-make .custom-make-content h2 {
+	width: 383px;
+	display: inline-block;
+}
+.custom-make .custom-make-content .custom-make-btn {
+	float: right;
+	color: #fff;
+	background: #4C6063;
+	border-radius: 5px;
+	padding: 5px 20px;
+}
+.custom-make .custom-make-content .custom-make-btn:hover {
+	text-decoration: none;
+	background: #5A7174;
+}
+.map-slide {
+	position: relative;
+	height: 400px;
+	width: 600px;
+	background: #EFEFEF;
+	margin-top: 10px;
+	padding: 10px 0;
+}
+.map-slide img {
+	position: absolute;
+	top: 12px;
+	left: 100px;
+}
+.map-slide .left-btn {
+	background: url(工作台_89.png) no-repeat 0 0;
+	width: 34px;
+	height: 34px;
+	position: absolute;
+	top: 175px;
+	left: 50px;
+	display: inline-block;
+	cursor: pointer;
+}
+.map-slide .right-btn {
+	background: url(工作台_92.png) no-repeat 0 0;
+	width: 34px;
+	height: 34px;
+	position: absolute;
+	top: 175px;
+	left: 515px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.rich-man .rich-man-logo {
+	background: url(工作台_42.png) no-repeat 0 0;
+	width: 109px;
+	height: 104px;
+	margin: 0 30px 0 10px;
+}
+.rich-man .rich-man-content .item-one {
+	position: relative;
+	background: url(工作台_46.png) no-repeat 0 0;
+	width: 325px;
+	height: 44px;
+	line-height: 34px;
+}
+.rich-man .rich-man-content .item-two {
+	position: relative;
+	background: url(工作台_52.png) no-repeat 0 0;
+	width: 325px;
+	height: 44px;
+	line-height: 34px;
+}
+.rich-man .rich-man-content .item-three {
+	position: relative;
+	background: url(工作台_57.png) no-repeat 0 0;
+	width: 325px;
+	height: 44px;
+	line-height: 34px;
+}
+.rich-man .rich-man-content div .tit {
+	position: absolute;
+	left: 10px;
+}
+.rich-man .rich-man-content div .num {
+	position: absolute;
+	right: 50px;
+	top: 0;
+	color: #FD0F0F;
+}
+.pk-width {
+	margin: 20px 0;
+}
+.pk-width .pk-width-content {
+	margin-left: 20px;
+}
+.pk-width .pk-width-content .item {
+	color: #777777;
+	height: 27px;
+	line-height: 27px;
+}
+.pk-width .pk-width-content .prev {
+	color: #BC6B6B;
+}
+.pk-width .pk-width-content .next {
+	color: #99BC6B;
+}
+.pk-width .pk-width-logo {
+	position: relative;
+}
+.pk-width .pk-width-logo .logo-one {
+	background: url(工作台_66.png) no-repeat 0 0;
+	width: 65px;
+	height: 68px;
+	position: absolute;
+	top: 35px;
+	right: -110px;
+}
+.pk-width .pk-width-logo .logo-two {
+	background: url(工作台_63.png) no-repeat 0 0;
+	width: 50px;
+	height: 30px;
+	position: absolute;
+	top: 0;
+	right: -140px;
+}
+.date-data {
+	margin: 10px 0;
+}
+.date-data .date-data-logo {
+	background: url(工作台_80.png) no-repeat 0 0;
+	width: 93px;
+	height: 102px;
+	margin: 0 40px 0 20px;
+}
+.date-data .date-data-content .date-chceck input {
+	vertical-align: middle;
+	height: 27px;
+	line-height: 27px;
+}
+.date-data .date-data-content .date-chceck label {
+	vertical-align: middle;
+	margin-right: 10px;
+	height: 27px;
+	line-height: 27px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+	<div class="ui-tab">
+	    <ul class="ui-tab-items">
+	        <li class="ui-tab-item ui-tab-item-current">
+	            <a href="javascript:;">工作台</a>
+	        </li>
+	        <li class="ui-tab-item">
+	            <a href="javascript:;">代办任务</a>
+	        </li>
+	        <li class="ui-tab-item">
+	            <a href="javascript:;">我的收藏</a>
+	        </li>
+	    </ul>
+	</div>
+	<div class="header fn-clear">
+		<div class="user-logo fn-left"></div>
+		<div class="tit fn-left">
+			<h2>HI，xxx！小仙一直在等您回来哦！从现在开始了解一下更有价值的自己，立即体验吧！</h2>
+			<ul>
+				<li>
+					<span>角色：</span>
+					<span>xxx</span>
+				</li>
+				<li>
+					<span>岗位：</span>
+					<span>xxx</span>
+				</li>
+				<li>
+					<span>等级：</span>
+					<span>xxx</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="content fn-clear">
+		<div class="left fn-left">
+			<div class="secret fn-clear">
+				<div class="secret-icon fn-left"></div>
+				<div class="secret-content fn-left">
+					<h2>这些秘密很重要！它们最需要你多多关心哦！</h2>
+					<table class="secret-tbl" cellpadding="0" cellspacing="0" border="0" width="100%">
+						<colgroup>
+							<col width="50%" />
+							<col width="23%" />
+							<col width="" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th>&nbsp;</th>
+								<th>&nbsp;</th>
+								<th>
+									<span class="fn-gray">完成率</span>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<span class="des">全市通服收入</span>
+									<span class="fn-gray">万元</span>
+								</td>
+								<td>
+									<span class="des">130.22</span>
+								</td>
+								<td class="fn-text-right up">
+									<span class="des">49.56%</span>
+									<i class="iconfont" title="上三角形"></i>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="des">全市固网宽带总数</span>
+									<span class="fn-gray">户</span>
+								</td>
+								<td>
+									<span class="des">10,350</span>
+								</td>
+								<td class="fn-text-right up">
+									<span class="des">81.79%</span>
+									<i class="iconfont" title="上三角形"></i>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="des">全市维系用户数</span>
+									<span class="fn-gray">户</span>
+								</td>
+								<td>
+									<span class="des">2,160</span>
+								</td>
+								<td class="fn-text-right down">
+									<span class="des">15.43%</span>
+									<i class="iconfont" title="下三角形"></i>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="des">全市下沉成本</span>
+									<span class="fn-gray">万元</span>
+								</td>
+								<td>
+									<span class="des">115.03</span>
+								</td>
+								<td class="fn-text-right up">
+									<span class="des">49.56%</span>
+									<i class="iconfont" title="上三角形"></i>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="des">全市销售毛利</span>
+									<span class="fn-gray">万元</span>
+								</td>
+								<td>
+									<span class="des">130.22</span>
+								</td>
+								<td class="fn-text-right up">
+									<span class="des">49.56%</span>
+									<i class="iconfont" title="上三角形"></i>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="new-business fn-clear">
+				<div class="new-business-logo fn-left"></div>
+				<div class="new-business-content fn-left">
+					<h2>亲爱的，最新任务给您快递来喽！</h2>
+					<div class="fn-text-right">
+						<span>再接再厉完成</span>
+						<span class="fn-strong">4</span>
+						<span>项任务，您就成功啦！</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="custom-make fn-clear">
+				<div class="custom-make-logo fn-left"></div>
+				<div class="custom-make-content fn-left">
+					<h2>您的江山如此多娇~</h2>
+					<a class="custom-make-btn" href="javascript:;" hidefocus="true">
+						<span>私人定制</span>
+					</a>
+					<div>
+						<label class="tit">业务类型：</label>
+						<span>
+							<input type="radio" name="busiType" id="twoG" />
+							<label for="twoG">2G</label>
+							<input type="radio" name="busiType" id="threeG" />
+							<label for="threeG">3G</label>
+							<input type="radio" name="busiType" id="fourG" />
+							<label for="fourG">4G</label>
+							<input type="radio" name="busiType" id="broadband" />
+							<label for="broadband">宽带</label>
+						</span>
+					</div>
+					<div>
+						<label class="tit">关键指标：</label>
+						<span>
+							<input type="checkbox" name="keyNum" id="devNum" />
+							<label for="devNum">发展用户数</label>
+							<input type="checkbox" name="keyNum" id="reachNum" />
+							<label for="reachNum">到达用户数</label>
+							<input type="checkbox" name="keyNum" id="outNum" />
+							<label for="outNum">离网用户数</label>
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="map-slide">
+				<img src="map.jpg" width="400" height="394" />
+				<i class="left-btn"></i>
+				<i class="right-btn"></i>
+			</div>
+		</div>
+
+		<div class="right fn-left">
+			<div class="rich-man fn-clear">
+				<div class="rich-man-logo fn-left"></div>
+				<div class="rich-man-content fn-left">
+					<h2>哇，您真的好富有哦！</h2>
+					<div class="item-one">
+						<span class="tit">移动发展积分</span>
+						<span class="num">1234</span>
+					</div>
+					<div class="item-two">
+						<span class="tit">家庭宽带及融合发展积分</span>
+						<span class="num">999</span>
+					</div>
+					<div class="item-three">
+						<span class="tit">企业固网发展积分</span>
+						<span class="num">666</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="pk-width fn-clear">
+				<div class="pk-width-content fn-left">
+					<h2>在与小伙伴的pk中，您与冠军宝座不远喽！</h2>
+					<div class="item">
+						<span>第一名：xxx，5678</span>
+					</div>
+					<div class="item">
+						<span>第二名：xxx，4567</span>
+					</div>
+					<div class="item">
+						<span>第三名：xxx，3456</span>
+					</div>
+					<div class="item prev">
+						<span>您前面一名：xxx，2345</span>
+					</div>
+					<div class="item next">
+						<span>您后面一名：xxx，2343</span>
+					</div>
+				</div>
+				<div class="pk-width-logo fn-left">
+					<div class="logo-one"></div>
+					<div class="logo-two"></div>
+				</div>
+			</div>
+
+			<div class="date-data fn-clear">
+				<div class="date-data-logo fn-left"></div>
+				<div class="date-data-content">
+					<h2>如画江山，日新月异~</h2>
+					<div class="date-chceck">
+						<input type="radio" name="dateData" id="oneWeek" />
+						<label for="oneWeek">一周</label>
+						<input type="radio" name="dateData" id="oneMonth" />
+						<label for="oneMonth">一月</label>
+						<input type="radio" name="dateData" id="thrMonth" />
+						<label for="thrMonth">三月</label>
+						<input type="radio" name="dateData" id="sixMonth" />
+						<label for="sixMonth">六月</label>
+						<input type="radio" name="dateData" id="oneYear" />
+						<label for="oneYear">一年</label>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<img src="dataList.jpg" width="474" height="413" />
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

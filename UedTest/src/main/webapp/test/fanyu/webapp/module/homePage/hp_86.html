@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>外呼_首页_话务员</title>
+
+<#include "../../tpl/res_css.tpl" />
+<style type="text/css">
+.ui-loading{
+    margin: 95px auto;
+}
+.ui-no-data{
+    margin:20px;width:115px;font-size:14px;
+} 
+.rateBar .rateProcess{width: 0;}
+.ui-dialog-content{overflow: auto;}
+.createQuestionnarie { display:none; }
+</style>
+</head>
+<script>
+
+</script>
+<body style="background:#EDF0F2">
+
+    <!-- header start -->
+		 <#include "../../tpl/sys_top86.tpl" />
+    <!-- header stop -->
+    
+    
+    <div class="wrapper">
+    	<!-- 顶部菜单 -->
+		<div id="J_topMenu" class="menu fn-clear"></div>
+		
+        <div id="J_homePage">
+            <!-- right start -->
+            <div style="overflow:auto;">
+                <div style="height:100%;margin:20px auto;width:970px">
+                
+                 <div class="fn-clear">
+                        <div class="fn-left" style="width:570px">
+                            <div class="bl_mainBox" id="PJ_tabletpl">
+                                <h2 class="boxTitle">项目进度监控</h2>
+                                <div class="ui-Oline_padding" style="padding-bottom:50px;">
+	                                <div  id="J_tabletpl">
+	                                   <div class="ui-loading"><h1><img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等 ...</h1></div>
+	                                </div>
+	                               	 <DIV class=" action-other  action-other-show ">
+				                          <DIV id="Pagination" class="page pagination fn-right"> </DIV>
+				                          <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+				                     </DIV>
+			                     </div>
+                            </div>
+                            <div class="bl_mainBox mt-20" id="PJ_newlist">
+                                <h2 class="boxTitle">待办任务<a href="javascript:;" class="blGreenColor" id="wait-item">0</a></h2>
+                                <div class="ui-Oline_padding" id="J_newlist" style="overflow:auto;height:300px;">
+                                   <div class="ui-loading"><h1><img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等 ...</h1></div>
+                                </div>
+                               </div> 
+                                <div class="bl_mainBox mt-20" id="PJ_dialback">
+                                    <h2 class="boxTitle">待回拨电话<a href="javascript:;" class="blGreenColor" id="dialback-item">0</a></h2>
+                                    <div class="ui-Oline_padding" id="J_dialback" style="overflow:auto;height:300px;">
+                                        <div class="ui-loading"><h1><img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等 ...</h1></div>
+                                	</div>
+                            </div>
+                            
+                        </div>
+                        <div class="fn-left ml-20">
+                            <div class="bl_mainBox" style="width:374px">
+                                <h2 class="boxTitle">常用工具</h2>
+                                <div class="ui-Oline_padding">
+                                	<div class="fn-clear">
+                                    <a href="javascript:;" onclick="new ActiveXObject('wscript.shell').run('notepad.exe');">
+                                    	<div class="cygjSty_pmlr fn-left fn-center">
+                                            <div class="icon_backborderdes icon_bockBlue"></div>
+                                            <div class="mt-10 mb-10" style="color:#000">记事本</div>
+                                        </div>
+                                    </a>
+                                    <a href="javascript:;" onclick="new ActiveXObject('wscript.shell').run('calc');">
+                                        <div class="pad_lrbC fn-left">
+                                            <div class="icon_backborderdes icon_jsBlue"></div>
+                                            <div class="mt-10 mb-10" style="color:#000">计算器</div>
+                                        </div>
+                                    </a>
+                                    </div>
+                                    <div class="fn-clear ui-topQuDashed">
+                                    <a href="javascript:;" url="../market/newCampgnNew.html" onclick="skip(this,'2')">
+                                    	<div class="cygjSty_pmlr fn-left fn-center pt-10">
+                                            <div class="icon_backborderdes icon_cxxmGreen"></div>
+                                            <div class="mt-10 mb-10" style="color:#000">创建新项目</div>
+                                        </div>
+                                    </a><!--
+                                    <a href="javascript:;" onclick="Util.dialog.tips('敬请期待！');">
+                                        <div class="pad_lrbC fn-left pt-10">
+                                            <div class="icon_backborderdes icon_jsBlue"></div>
+                                            <div class="mt-10 mb-10" style="color:#000">问卷管理</div>
+                                        </div>
+                                    </a>
+                                    --></div><!--
+                                    <div class="fn-clear ui-topQuDashed">
+                                    <a href="javascript:;" onclick="Util.dialog.tips('敬请期待！');">
+                                    	<div class="cygjSty_pmlr fn-left fn-center pt-10">
+                                            <div class="icon_backborderdes icon_ckxtrzGreen"></div>
+                                            <div class="mt-10 mb-10" style="color:#000">查看日志</div>
+                                        </div>
+                                    </a>
+                                    <a href="javascript:;" onclick="Util.dialog.tips('敬请期待！');">
+                                        <div class="pad_lrbC fn-left pt-10">
+                                            <div class="icon_backborderdes icon_onleyhOrg"></div>
+                                            <div class="mt-10 mb-10" style="color:#000">用户管理</div>
+                                        </div>
+                                    </a>
+                                    </div>
+                                    <div class="fn-clear ui-topQuDashed">
+                                    <a href="javascript:;" onclick="Util.dialog.tips('敬请期待！');">
+                                    	<div class="cygjSty_pmlr fn-left fn-center pt-10">
+                                            <div class="icon_backborderdes icon_renGreen"></div>
+                                            <div class="mt-10 mb-10" style="color:#000">员工管理</div>
+                                        </div>
+                                    </a>
+                                    </div>
+                                --></div>
+                            </div>
+                        </div>   
+                 </div>
+    			</div>
+       		</div>
+        </div>
+        <div class="fn-hide" id="busi_right">
+             <!-- left start -->
+                <div class="left">
+                 <!-- 左侧菜单容器 -->
+                 <div class="leftInner" id="J_leftMenu"></div>
+                 <div class="middle" id="mainMiddle">&nbsp;</div>
+             </div>
+             <!-- left stop -->
+             <!-- right start -->
+             <div class="right" id="mainRight" style="overflow:auto">
+                 <div id="mainRight_child" style="height:100%;">
+                     <iframe id="J_busi_iframe" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+                     <div id="J_busi_div" class="fn-hide"></div>
+                 </div>
+             </div>
+             <!-- right stop -->
+        </div>
+    </div>
+    
+<#include "../../tpl/res_js.tpl" /> 
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+       						 	<div class="pb-10">
+                                	<a href="javascript:;" onclick="detail('{{CMPGN_ID}}')"  class="attributionValue ft-14"><span>[{{CMPGN_TYPE_CD}}]{{CMPGN_NM}}</span> </a>
+                                    <a href="javascript:;" class="ml-10" style="color:#666"><span>(已完成：{{tisend finishcount TSK_ALCT_QTY CMPGN_ID}})</span> </a>
+                                </div>
+                                <div class="ft-gray pb-10">起止时间：{{CMPGN_EFF_DATE}}-{{CMPGN_INVLD_DATE}}<span class="ml-10">状态：{{CMPGN_STS_CD}}</span></div>
+                                <div class="orderBar pb-15" id="{{CMPGN_ID}}">
+									{{tisprogress finishcount TSK_ALCT_QTY CMPGN_ID}}
+                            	 </div>
+    {{/each}}
+{{else}}
+	 <div class="pb-10">暂时没有数据</div>
+{{/if}}
+</script>
+<!-- 系统支撑 -->
+<script id="ST_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+       						 	<div class="pb-10">
+                                	<a href="javascript:;" onclick="detail('{{CMPGN_ID}}')"  class="attributionValue ft-14"><span>[{{CMPGN_TYPE_CD}}]{{CMPGN_NM}}</span> </a>
+                                    <a href="javascript:;" class="ml-10" style="color:#666"><span>(已完成：{{isend finnishcount total}})</span> </a>
+                                </div>
+                                <div class="ft-gray pb-10">起止时间：{{CMPGN_EFF_DATE}}-{{CMPGN_INVLD_DATE}}<span class="ml-10">状态：{{CMPGN_STS_CD}}</span></div>
+                                <div class="orderBar pb-15">
+									{{isprogress finnishcount total}}
+                            	 </div>
+    {{/each}}
+{{else}}
+	 <div class="pb-10">暂时没有数据</div>
+{{/if}}
+</script>
+<script id="T_newlist" type="text/x-handlebars-template">
+	{{#if beans}}
+		{{#each beans}}
+					 <div class="pb-10">
+                                    <a href="javascript:;" onclick="detail('{{cmpgn_id}}')" class="attributionValue ft-14">
+                                        <span>[{{cmpgn_type_cd}}]{{cmpgn_name}}</span>
+                                    </a>
+                                    <a href="javascript:;" class="ml-10" style="color:#666">
+                                        <span>(已完成：{{isNAN finishcount total}})</span> 
+                                    </a>
+                                    <a href="javascript:;" class="icon_phoneblue fn-right" onclick="toSoftPhone('{{cmpgn_id}}','{{qnr_id}}','{{CMPGN_INVLD_DATE}}')"></a>
+                            </div>
+                                <div class="ft-gray pb-10">起止时间：{{CMPGN_EFF_DATE}}-{{CMPGN_INVLD_DATE}}</div>
+                                <div class="ft-gray pb-10 none_dytext">{{CMPGN_DESC}}</div>
+		{{/each}}
+	{{else}}
+		 <div class="pb-10">没有待办事项!</div>
+	{{/if}}
+</script>
+
+<script id="T_dialback" type="text/x-handlebars-template">
+	{{#if beans}}
+		{{#each beans}}
+						<div class="pb-10">
+                                        <a href="javascript:;" class="icon_lingred fn-left pr-10"></a>
+                                        <a href="javascript:;" class="attributionValue ft-14">
+                                            <span>{{replace RESV_MOBNUM}}</span>
+                                            <span class="pl-30">回拨时间：{{ONEMRE_RSVT_TIME}}</span>
+                                        </a>
+                                        <a href="javascript:;" class="icon_phoneblue fn-right" onclick="toSoftPhone('{{CMPGN_ID}}','{{QNR_ID}}','{{CMPGN_INVLD_DATE}}','{{RESV_MOBNUM}}')"></a>
+                         </div>
+                                    <div class="ft-gray pb-10">{{CMPGN_NM}}（已完成：{{finnishcount}}/{{total}}）</div>
+                                    <div class="ft-gray pb-10 none_dytext">{{CMPGN_DESC}}</div>
+		{{/each}}
+	{{else}}
+		<div class="pb-10">暂无信息!</div>
+	{{/if}}
+</script>
+<script type="text/javascript">
+srvMap.add("schedule","schedule.json","front/sh/market!index?uid=my009");//项目进度接口
+srvMap.add("dolist","dolist.json","front/sh/market!index?uid=my016");//话务员待办任务 
+srvMap.add("dialback","dialback.json","front/sh/market!index?uid=mwt026");//待回拨电话服务
+srvMap.add('queryRole', 'queryRole.json', 'front/sh/login!getRole?uid=l001');//根据结果查询出所属上级
+srvMap.add('schedule_s', 'query.json', 'front/sh/market!index?uid=my011');//根据登录人呈现不同的数据 
+Util.ajax.postJson(srvMap.get('queryRole'),'',function(json,status){
+	 if(status){
+		 console.log(json);
+		 var ROLE_ID=json.beans[0].ROLE_ID;
+		 //13系统支撑;14班组长 ;15话务员;
+		 if(ROLE_ID=="13"){
+			 Util.pagination(0, true , G_params , {} );
+			 $('#PJ_newlist').hide();
+			 $('#PJ_dialback').hide();
+		 }else if(ROLE_ID=="14"){
+			 Util.pagination(0, true , S_params , {} );
+		 }else if(ROLE_ID=="15"){
+			 $('#PJ_tabletpl').hide();
+		 }else{
+			 $('#PJ_tabletpl').html('<div class="ui-tips-box tipsBox" style="padding:20px 0;"><div class="ui-icon-noData"></div><div class="ui-tips-text">暂时没有数据！</div></div>') 
+		 }
+		 
+	 }
+});
+    //话务页面打开标示
+    var objWin;
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //框架初始化
+    	setWindow();
+        window.setInterval("initIframe()", 1500);
+    });
+    
+        //框架初始化
+        function setWindow(){
+            var headerHeight=$(".header").height();
+            var menuHeight=$(".menu").height();
+            var windowHeight=$(window).height();
+            var centerHeight=windowHeight-headerHeight-menuHeight;
+            $(".mainLeft").height(centerHeight);
+            $(".mainRight").height(centerHeight);
+            $(".mainLeftInner").height(centerHeight);
+            $("#mainMiddle").height(centerHeight);
+        }
+    //项目进度数据加载  
+    //系统支撑
+	var G_params = {
+		    url : srvMap.get('schedule'),
+		    items_per_page : 5 ,   		// 每页数     @param : limit
+		    page_index : 0 , 				//当前页  @param : start
+		    pagination : "Pagination" , //分页id
+		    tabletpl : "ST_tabletpl", 		//表格模板
+		    tablewrap : "J_tabletpl", 		//表格容器
+		};
+	//班组长
+		var S_params = {
+		    url : srvMap.get('schedule_s'),
+		    items_per_page : 5 ,   		// 每页数     @param : limit
+		    page_index : 0 , 				//当前页  @param : start
+		    pagination : "Pagination" , //分页id
+		    tabletpl : "T_tabletpl", 		//表格模板
+		    tablewrap : "J_tabletpl", 		//表格容器
+		};
+	 
+//代办任务
+    Util.ajax.postJson(srvMap.get('dolist'),'',function(json,status){
+        if (status) {
+        	$('#wait-item').html(json.beans.length);
+            Util.ajax.loadTemp('#J_newlist',$('#T_newlist'),json);//加载模板
+        }else{
+            $('#J_newlist').html('<div class="ui-tips-box tipsBox"><div class="ui-icon-noData"></div><div class="ui-tips-text">'+json.returnMessage||'查询失败，请重试！'+'</div></div>');
+        }
+    });
+    //待回拨电话
+     Util.ajax.postJson(srvMap.get('dialback'),'',function(json,status){
+        if (status) {
+        	$('#dialback-item').html(json.beans.length);
+            Util.ajax.loadTemp('#J_dialback',$('#T_dialback'),json);//加载模板
+        }else{
+            $('#J_newlist').html('<div class="ui-tips-box tipsBox"><div class="ui-icon-noData"></div><div class="ui-tips-text">'+json.returnMessage||'查询失败，请重试！'+'</div></div>');
+        }
+    });
+
+Number.prototype.toPercent = function(){
+return (Math.round(this * 10000)/100).toFixed(2) + '%';
+}
+Handlebars.registerHelper('isprogress',function(finnishcount,total){
+	var percent=eval(parseInt(finnishcount)/parseInt(total));
+	if(finnishcount>=total){
+		percent=1;
+	}
+	var str='<div class="rateBar"><div class="rateBg"></div><div class="rateProcess" style="width:'+percent.toPercent()+'"></div></div>'
+	return new Handlebars.SafeString(str);
+});
+Handlebars.registerHelper('tisprogress',function(finishcount,TSK_ALCT_QTY,CMPGN_ID){
+	var percent=eval(parseInt(finishcount)/parseInt(TSK_ALCT_QTY));
+	if(finishcount>=TSK_ALCT_QTY){
+		percent=1;
+	}
+	if(TSK_ALCT_QTY<1){
+		$('#'+CMPGN_ID).hide();
+		return " ";
+	}
+	var str='<div class="rateBar"><div class="rateBg"></div><div class="rateProcess" style="width:'+percent.toPercent()+'"></div></div>'
+	return new Handlebars.SafeString(str);
+});
+
+ Handlebars.registerHelper('replace',function(RESV_MOBNUM){
+	 var phone=RESV_MOBNUM;
+	 var newphone=phone.replace((phone.substr(3,4)),"****");
+	 return newphone;
+ });
+Handlebars.registerHelper('isend',function(finnishcount,total){
+	var str="";
+	if(total<1){
+		str=finnishcount;
+	}else{
+		str=finnishcount+"/"+total;
+	}
+	return str;
+})
+Handlebars.registerHelper('tisend',function(finishcount,TSK_ALCT_QTY,CMPGN_ID){
+	var str="";
+	if(TSK_ALCT_QTY < 1){
+		str=finishcount;
+	}else{
+		str=finnishcount+"/"+TSK_ALCT_QTY;
+	}
+	return str;
+});
+Handlebars.registerHelper('isNAN',function(finishcount,total){
+	var str="";
+	if(total < 1){
+		str=finishcount;
+	}else{
+		str=finishcount+"/"+total;
+	}
+	return str;
+});
+ function toSoftPhone(cmpgn_id,qnr_id,cmpgn_invld_date,RESV_MOBNUM){
+    var softphoneUrl = "../contact/softphoneManage_86.html?CMPGN_ID=" +cmpgn_id+"&QNR_ID="+qnr_id+"&cmpgn_invld_date"+cmpgn_invld_date+"&RESV_MOBNUM="+RESV_MOBNUM;  
+    //判断是否打开
+    if (objWin == null || objWin.closed) {
+         objWin = window.open(softphoneUrl,"","menubar=no,status=no,resizable=yes,scrollbars=no,toolbar=no,top=0,left=0,width="+ (window.screen.availWidth)+ ",height=" +(window.screen.availHeight-30));
+    } else {
+        objWin.focus();
+    }
+ }
+ /*
+  function toSoftPhone(cmpgn_id,qnr_id,reCall){
+    if (reCall) {
+        var softphoneUrl = "../contact/softphoneManage_86.html?CMPGN_ID=" + cmpgn_id+"&QNR_ID="+qnr_id+"&reCall=1";
+    }else{
+        var softphoneUrl = "../contact/softphoneManage_86.html?CMPGN_ID=" + cmpgn_id+"&QNR_ID="+qnr_id;
+    }
+    //判断是否打开
+    if (objWin == null || objWin.closed) {
+         objWin = window.open(softphoneUrl,"","menubar=no,status=no,resizable=yes,scrollbars=no,toolbar=no,top=0,left=0,width="+ (window.screen.availWidth)+ ",height=" +(window.screen.availHeight-30));
+    } else {
+        objWin.focus();
+    }
+ }
+ */
+function skip(obj,flag){
+    var _this = $(obj),
+        url = _this.attr('url'),
+        title = _this.find('span').text(),
+        menuId = _this.attr('menuId');
+    if(flag === '2'){
+        $('#busi_right').show();
+        $('#J_homePage').hide();
+        $('#J_topMenu li').eq(1).find('a').click();
+    }
+}
+
+function detail(CMPGN_ID){
+	window.location.href="../market/cmpgnQuesDetail.html?CMPGN_ID="+CMPGN_ID;	
+}
+
+</script>
+</body>
+</html>

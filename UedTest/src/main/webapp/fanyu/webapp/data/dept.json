@@ -1,0 +1,23 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": "数据加载成功！！！,02代表指定分，01代表随机分",
+    "bean": {"TSK_ALCT_MODE_CD":"02"},
+    "beans": [
+        { 
+            "TGT_PTY_ID":"1000000000102", 
+            "TSK_ALCT_QTY": "1"
+        },
+        {
+            "TGT_PTY_ID": "1000000000113",
+            "TSK_ALCT_QTY": "2"
+        },
+        {
+           "TGT_PTY_ID": "1000000000104",
+            "TSK_ALCT_QTY": "100"
+        }
+    ],
+    "object": null
+}

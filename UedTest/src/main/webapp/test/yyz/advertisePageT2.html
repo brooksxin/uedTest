@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>平台角色识别 - 平台介绍</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+<script type="text/javascript" src="ui/js/jquery.js"></script>
+<script type="text/javascript" src="ui/js/json2.js"></script>
+
+<style>
+body {
+	background: #F5F5F5;
+}
+.wrap {
+	padding: 100px;
+	width: 1100px;
+	background: #F5F5F5;
+	margin: 0 auto;
+}
+.first {
+	border-bottom: 1px solid #E3E3E3;
+	padding-bottom: 50px;
+	margin-bottom: 50px;
+}
+.item-logo {
+	margin: 10px 30px;
+}
+dl.des {
+	width: 280px;
+	overflow: hidden;
+}
+dl.des dt {
+	font-size: 18px;
+	margin: 10px 0 20px;
+	font-weight: bold;
+}
+dl.des dd {
+	word-wrap:break-word;
+	word-break: break-all;
+	text-align: left;
+	color: #6C6C6C;
+	line-height: 24px;
+	font-size: 14px;
+}
+.ui-grid-12 {
+	padding-left: 80px;
+}
+</style>
+</head>
+<body class="yyz-ad">
+<div class="ad-top">
+	<div class="ad-logo"></div>
+	<ul class="ad-first fn-clear">
+		<li><a href="advertisePageF.html">联系我们</a></li>
+		<li class="platform-intro cur">
+			<a href="javascript:;">
+				平台介绍
+			</a>
+			<div class="ad-second">
+				<ul class="fn-clear">
+					<li><a href="advertisePageT3.html">平台特性</a></li>
+					<li class="active"><a href="javascript:;">平台角色识别</a></li>
+					<li><a href="advertisePageT1.html">功能概览</a></li>
+				</ul>
+			</div>
+			<div class="triangle"></div>
+		</li>
+		<li><a href="advertisePageS.html">能力开放与产业互联</a></li>
+		<!--<li><a href="javascript:;">首页</a></li>
+	--></ul>
+</div>
+<div class="wrap">
+	<div class="ui-grid-row first">
+	    <div class="ui-grid-13 fn-clear">
+	    	<img src="ui/theme/img/ad_t21.png" width="120" height="120" class="item-logo fn-left" />
+	    	<dl class="fn-left des">
+	    		<dt>开发者</dt>
+	    		<dd>
+	    			创建应用，选择能力，沙箱测试，提交审批。达到自身应用需要实现的功能；
+	    			内部渠道，根据自身需求对服务进行编排封装生产能力，自测，提交审批。
+	    			达到可以使用业务支撑系统开发出来的功能。
+	    		</dd>
+	    	</dl>
+	    </div>
+	    <div class="ui-grid-12 fn-clear">
+	    	<img src="ui/theme/img/ad_t22.png" width="120" height="120" class="item-logo fn-left" />
+	    	<dl class="fn-left des">
+	    		<dt>能力提供者</dt>
+	    		<dd>
+	    			内部服务的提供方责任人，负责提供服务，保障服务接口运行稳定、可靠；外部系统，保证外部服务的正确稳定，
+	    			让业务支撑系统可以调用外部服务。
+	    		</dd>
+	    	</dl>
+	    </div>
+	</div>
+	<div class="ui-grid-row">
+	    <div class="ui-grid-13 fn-clear">
+	    	<img src="ui/theme/img/ad_t23.png" width="120" height="120" class="item-logo fn-left" />
+	    	<dl class="fn-left des">
+	    		<dt>业务运营者</dt>
+	    		<dd>
+	    			审批服务提供者的申请，服务上线。审批渠道提交的能力，通过服务规格和生命周期，
+	    			提高系统标准化管理能力；通过服务地图，达到服务可视、可管、可控。
+	    		</dd>
+	    	</dl>
+	    </div>
+	    <div class="ui-grid-12 fn-clear">
+	    	<img src="ui/theme/img/ad_t24.png" width="120" height="120" class="item-logo fn-left" />
+	    	<dl class="fn-left des">
+	    		<dt>治理小组</dt>
+	    		<dd>
+	    			推动和实施服务管理，确保管理体系和平台工具的执行，监控服务接口的运行情况，
+	    			评估服务管理的绩效，保证服务管理最终实现业务目标和需求。
+	    		</dd>
+	    	</dl>
+	    </div>
+	</div>
+</div>
+<div class="ad-footer">
+	
+</div>
+
+
+<script type="text/javascript">
+$(function(){
+	gotoTop();//回到顶部
+});
+//回到顶部
+function gotoTop(min_height){
+    var gotoTop_html = '<div id="gotoTop"></div>';
+    $("body").append(gotoTop_html);
+    $("#gotoTop").click(
+        function(){$('html,body').animate({scrollTop:0},300);
+    }).hover(
+        function(){$(this).addClass("hover");},
+        function(){$(this).removeClass("hover");
+    });
+    min_height ? min_height = min_height : min_height = 300;
+    $(window).scroll(function(){
+        var s = $(window).scrollTop();
+        if( s > min_height){
+            $("#gotoTop").fadeIn(100);
+        }else{
+            $("#gotoTop").fadeOut(200);
+        };
+    });
+};
+</script>
+</body>
+</html>

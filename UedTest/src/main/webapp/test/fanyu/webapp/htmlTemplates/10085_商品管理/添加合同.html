@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加合同</title>
+    <link rel="stylesheet" href="../../css/common.css"><link rel="stylesheet" href="../../css/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+<div class="breadcrumb">您的当前位置：<a href="#">首页</a> > <a href="#">商品合同管理</a> > <a href="#">添加合同</a></div>
+
+
+
+
+<div class="formItem">
+                                            <div class="titleArea">
+                                                <h2>添加合同</h2>
+                                            </div>
+                                            
+                                            <div class="formArea">
+                                            
+                                            
+                                                <div class="FormItem_table_border-bottom">
+                                                    <table width="100%" class="form_table">
+                                                      
+                                                        <tbody>
+                                                              
+                                                            <tr>
+                                                                <td width="15%"><label class="formDescription"><span class="fn-high">*</span>合同编号：</label></td>
+                                                                <td width="85%"><input class="FormInputText" type="text" /></td>
+                                                                
+                                                            </tr>
+                                                            
+                                                            <tr>
+                                                                <td width="15%"><label class="formDescription"><span class="fn-high">*</span>签订时间：</label></td>
+                                                                <td width="85%"><input class="FormInputText" type="text" onFocus="WdatePicker({minDate:'%y-%M-%d',maxDate:'#F{$dp.$D(\'EXPIRE_DATE\')||\'2099-12-31\'}'})"/></td>
+                                                                
+                                                            </tr>
+                                                            
+                                                            <tr>
+                                                                <td width="15%"><label class="formDescription">合同期限：</label></td>
+                                                                <td width="85%"><input class="FormInputText" type="text"/> 年 <input class="FormInputText" type="text" /> 月 </td>
+                                                                
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                
+                                                </div>
+                                                
+                                                
+                                                <div class="FormItem_table_border-bottom">
+                                            
+                                                    <table width="100%" class="form_table">
+                                                     
+                                                            <tr>
+                                                                <td width="15%"><label class="formDescription"><span class="fn-high">*</span>商家名称：</label></td>
+                                                                <td width="85%"><input class="FormInputText" type="text" /></td>
+                                                                
+                                                            </tr>
+                                                            
+                                                            <tr>
+                                                                <td width="15%"><label class="formDescription">品牌：</label></td>
+                                                                <td width="85%"><input class="FormInputText" type="text" /></td>
+                                                                
+                                                            </tr>
+                                                            
+                                                            <tr>
+                                                                <td width="15%"></td>
+                                                                <td width="85%"><a href="#">添加一个品牌</a></td>
+                                                                
+                                                            </tr> 
+                                                    </table>
+                                                </div>
+                                                
+                                                
+                                                <div class="FormItem_table_border-bottom">
+                                                    <table width="100%" class="form_table">
+                                                        <tr>
+                                                        <td width="15%" valign="top">销售任务：</td>
+                                                        <td width="85%">
+                                                            <table width="100%">
+                                                              <tr class="FormItem_table_bj_th">
+                                                                <td scope="col">商品名称</th>
+                                                                <td scope="col">销售量</th>
+                                                                <td scope="col">&nbsp;</th>
+                                                              </tr>
+                                                              <tr class="FormItem_table_border-bottom">
+                                                                <td><input class="FormInputText" type="text" value="iPhone 6Plus / 16G 黑色" /></td>
+                                                                <td><input class="FormInputText" type="text" value="1000" /></td>
+                                                                <td><a href="#">删除</a></td>
+                                                              </tr>
+                                                              <tr class="FormItem_table_border-bottom">
+                                                                <td><input class="FormInputText" type="text" value="iPhone 6Plus / 16G 黑色" /></td>
+                                                                <td><input class="FormInputText" type="text" value="1000" /></td>
+                                                                <td><a href="#">删除</a></td>
+                                                              </tr>
+                                                              <tr>
+                                                                <td><a href="#">添加一项</a></td>
+                                                                <td>&nbsp;</td>
+                                                                <td>&nbsp;</td>
+                                                              </tr>
+                                                            </table>
+                                                        </td>
+                                                        </tr>
+                                                    </table>
+                                      			</div>
+                                            
+                                            
+                                            	<div>
+                                            
+                                                    <table width="100%" class="form_table">
+                                                            <tr>
+                                                                <td width="15%"><label class="formDescription"><span class="fn-high">*</span>合同电子版</label></td>
+                                                                <td width="85%"><input type="file" class="fileupload" /></td>
+                                                            </tr>
+                                                            
+                                                            <tr>
+                                                                <td width="15%"><label class="formDescription">备注</label></td>
+                                                                <td><textarea class="form_textarea"></textarea></td>
+                                                            </tr>
+                                                    </table>        
+                                              </div>
+                                            
+                                            
+                                            </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="formBtnArea">
+    <table width="100%">
+      <tr>
+        <td>
+        	<div class="normalBtnArea">
+                <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" >确定</a>
+                <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_search" >取消</a>
+            </div>
+        </td>
+      </tr>
+    </table>
+</div>
+
+<script src="../../lib/jquery/1.8.1/jquery.js"></script>
+<script src="../../lib/json2/1.0.0/json2.js"></script>
+<script src="../../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../../lib/handlebars/1.3.0/helpers.js"></script>
+<script src="../../lib/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="../../lib/blockUI/2.64/jquery.blockUI.js"></script>
+<script src="../../common/frameInit.js"></script>
+<script src="../../lib/dialog/4.1.7/artDialog.js"></script>
+<script src="../../lib/dialog/4.1.7/iframeTools.js"></script>
+<script src="../../common/config.js"></script>
+<script src="../../common/common.js"></script>    
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+    });
+</script>
+</body>
+</html>

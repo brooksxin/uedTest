@@ -1,0 +1,22 @@
+{
+	"returnCode": "0000",
+	"returnMessage": "success",
+	"beans":[
+		{
+			"CATG_UNIT_ID":"06",
+			"CATG_UNIT_NM":"mi"
+		},
+		{
+			"CATG_UNIT_ID":"07",
+			"CATG_UNIT_NM":"meizu",
+		},
+		{
+			"CATG_UNIT_ID":"09",
+			"CATG_UNIT_NM":"test"
+		},
+		{
+			"CATG_UNIT_ID":"12",
+			"CATG_UNIT_NM":"OPPO"
+		}
+	]
+}

@@ -1,0 +1,9 @@
+.logistics-panel .list { border-left: 3px solid #ccc; margin-left: 10px; }
+.logistics-panel .list li { line-height: 25px; }
+.logistics-panel .list .icon { display: inline-block; width: 10px; height: 10px; background-color: #ccc; border-radius: 5px; position: relative; left: -7px;}
+.logistics-panel .list .active { background-color: #3A8BE0; }
+.logistics-panel .ui-dialog-title { text-align: center; }
+.logistics-panel .ui-dialog-content { overflow-y:auto; }
+.logistics-panel .orderID { width: 180px; display: inline-block;}
+.logistics-panel .wayBillNo { width: 90px; display: inline-block; }
+.logistics-panel .companyName { width: 80px; display: inline-block; }

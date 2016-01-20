@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<link rel="stylesheet" href="alice.css">
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+
+<div>
+	
+</div>
+
+<script src="jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	var abc=function(y){  
+		var x=y;// 这个是局部变量  
+		return function(){  
+		  console.log(x++);// 就是这里调用了闭包特性中的一级函数局部变量的x，并对它进行操作  
+		  console.log(y--);// 引用的参数变量也是自由变量  
+		}
+	}(5);// 初始化  
+	abc();// "5" "5"  
+	abc();// "6" "4"  
+	abc();// "7" "3"  
+	// console.log(x);// 报错！“x”未定义！ 
+	abc=null;//释放
+
+	console.log((function(z){return ++z; })(2));
+
+	var createXHRObject = function(){
+	    //先把三个匿名函数缓存起来。
+	    var methods = [
+	        function(){return new XMLHttpRequest();},
+	        function(){return new ActiveXObject("Msxml2.XMLHTTP");},
+	        function(){return new ActiveXObject("Microsoft.XMLHTTP");}
+	    ];
+	    for(var i=0,len=methods.length;i<len;i++){
+	        try{//这里用try catch来代替了条件判断，通常我不赞成这种写法
+	            methods[i]();
+	        }
+	        catch(e){
+	            continue;//如果报异常，则执行下一次循环
+	        }
+	        // 把createXHRObject 与能正常执行的匿名函数对应起来，再调用createXHRObject不用再检测浏览器了
+	        createXHRObject = methods[i];
+	        return methods[i];
+	    }
+	}
+	console.log(createXHRObject())
+
+	function fib(n) {
+		if (n < 2) {
+			return n;
+		}
+		return fib(n - 1) + fib(n - 2);
+	}
+	console.log(fib(3))
+
+	//这是一个经典的斐波纳契序列，fib(20) 会把fib这个方法执行21891次，如果是fib(40),这会执行331160281次。
+	//再看看如何使用memoization来实现，由于fib的参数就是一个自然数，这里用一个数组来缓存fib函数执行的结果。数组的下标用来标识参数，该小标对应的值用来表示函数执行的结果。
+
+	var iterMemoFib = (function() {
+	    var cache = [1, 1];
+	    var fib = function(n) {
+	        if (n >= cache.length) {
+	            //将一个递归转换成了一个遍历
+	            for (var i = cache.length; i <= n; i++) {
+	                cache[i] = cache[i - 2] + cache[i - 1];
+	            }
+	        }
+	        return cache[n-1];
+	    }
+	    return fib;
+	})();
+	console.log(iterMemoFib(3))
+
+	var testObj;
+	foo = function(){
+		this.myName = "Foo function.";
+		testObj = this;
+	}
+	foo.prototype.sayHello = function(){
+		console.log(this.myName);//bar方法undefined
+		// console.log(testObj.myName);//都可以
+	}
+	foo.prototype.bar = function(){
+		setTimeout(this.sayHello, 1000);
+	}
+	foo.prototype.bar2 = function(){
+	    setTimeout((function(obj){
+			return function(){
+			    obj.sayHello();
+			}
+		})(this), 2000);//this指到window了，闭包存起来就行了
+	}
+	foo.prototype.bar3 = function() {
+		setTimeout(this.sayHello.call(this), 3000);
+		//或者
+		// setTimeout(this.sayHello.apply(this), 3000);
+	}
+	foo.prototype.bar4 = function(){
+		setTimeout(this.sayHello(), 4000);
+	}
+
+	var f = new foo;
+	f.sayHello();
+	f.bar();
+	f.bar2();
+	f.bar3();//直接就调用了...
+	f.bar4();//直接就调用了...
+
+
+	var arr = [1,2,3,1,43,12,12,1];
+	
+	uniq(arr);
+});
+
+function uniq(arr){
+	var tempArr = {};
+	var newArr = [];
+	for(var i=0, length = arr.length; i<length; i++){
+		if(typeof (tempArr[arr[i]] == 'undefined')){
+			tempArr[arr[i]] = 1;
+		}
+	}
+	for(var key in tempArr){
+		newArr.push(parseInt(key, 10));
+	}
+	console.log(newArr)
+}
+
+/**
+
+javascript 的基础知识
+知道基本的编程语法，比如循环，判断，try/catch 等等
+理解包括多种函数定义以及赋值的方式，包括匿名函数
+理解基本的命名空间，全局（window）空间以及对象空间（不包括闭包）
+理解上下文的角色以及 this 变量的使用
+理解各种对象以及函数的初始化和声明方式
+理解 javascript 比较操作符，如<, >, ==, ===，以及对象和字符串比较的原理和对象映射
+理解对象属性和函数的数组索引，以及这和真实的数组之间的区别。
+javascript 中级知识
+理解定时器，以及它的工作原理，包括何时以及如何使用定时器来异步执行方法调用
+关于回调的深度支持，以及如何通过 call 和 apply 方法来控制上下文和函数参数传递
+理解 JSON 标记以及 eval 函数
+理解闭包以及他们如何影响你的代码效率
+AJAX 以及对象序列化
+javascript 高级知识点
+
+理解方法的 arguments 变量，包括如何使用它来通过 arguments.length 重载函数，以及通过 arguments.callee 来进行递归调用，需要注意使用这个特性有一定的危险性，因为 ECMAScript 5 的 Strict 模式不支持此功能，但 jQuery 和 Dojo 都用到了它。
+高级闭包比如 self-memoizing 函数，partially applied 函数，以及最可爱的 (function(){})() 调用。
+函数以及 HTML prototype，prototype chain，以及如何使用基本的javascript对象和函数（比如 Array）来简化代码。
+对象类型以及 instanceof 的使用
+正则表达式和表达式编译
+With 语句以及为什么不要使用它们
+最困难的部分，知道如果利用所有这些工具，并产生处干净，整洁，健壮，快速，可维护以及兼容不同浏览器的代码。
+
+
+当一个匿名函数被括起来，然后再在后面加一个括号，这个匿名函数就能立即运行起来
+
+函数是将唯一的输出值赋予给每一输入的“法则”。
+将输入的若干数据，经过代码设定的逻辑操作处理后，返回唯一的输出的一组代码组合块。
+
+
+小括号能把我们的表达式组合分块，并且每一块，也就是每一对小括号，都有一个返回值。这个返回值实际上也就是小括号中表达式的返回值。所以，当我们用一对小括号把匿名函数括起来的时候，实际上小括号对返回的，就是一个匿名函数的Function对象。因此，小括号对加上匿名函数就如同有名字的函数般被我们取得它的引用位置了。所以如果在这个引用变量后面再加上参数列表，就会实现普通函数的调用形式。
+
+
+var abc=function(x,y){return x+y;};// 把匿名函数对象赋给abc  
+// abc的constructor就和匿名函数的constructor一样了。也就是说，两个函数的实现是一样的。  
+alert((abc).constructor==(function(x,y){return x+y;}).constructor);  
+
+闭包是指某种程序语言中的代码块允许一级函数存在并且在一级函数中所定义的自由变量能不被释放，直到一级函数被释放前，一级函数外也能应用这些未释放的自由变量。
+
+闭包，其实是一种语言特性，它是指的是程序设计语言中，允许将函数看作对象，然后能像在对象中的操作搬在函数中定义实例（局部）变量，而这些变量能在函数中保存到函数的实例对象销毁为止，其它代码块能通过某种方式获取这些实例（局部）变量的值并进行应用扩展。
+
+闭包，其实就是指程序语言中能让代码调用已运行的函数中所定义的局部变量。
+
+
+
+是否应用了闭包特性，必须确定该段代码有没有 最重要的要素：未销毁的局部变量。那么很显然，没有任何实现的匿名函数不可能应用了闭包特性。但如果匿名函数里面有实现呢？那也还得确定它的实现中有没有 用到那些未销毁的局部变量。所以如果问你那个开篇中的jQuery代码片段是应用了JS里的什么特性？那么它只是匿名函数与匿名函数的调用而已。但是，它 隐含了闭包的特性，并且随时可以实现闭包应用。因为JS天生就是有这个特性的！
+
+
+
+
+
+
+
+
+
+
+
+
+
+**/
+</script>
+</body>
+</html>

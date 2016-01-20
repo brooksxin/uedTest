@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>10085_dialog</title>
+<link href="../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../css/common.css" media="all">
+<link rel="stylesheet" type="text/css" href="../lib/dialog/6.0.4/css/ui-dialog.css">
+<script src="../lib/jquery/1.8.1/jquery.js"></script>
+
+<style>
+.standard {
+	margin:0px 20px
+}
+.standard h1 {
+	font-size:20px;
+	padding:10px 0px;
+	font-weight:bold
+}
+.standard p {
+	line-height:150%;
+	margin:20px 0px 10px 0px;
+}
+.prettyprint{
+	background-color:#fff;
+}
+#J_dialog_5_dest{
+  width: 30px; margin-left: 100px;
+  display: inline-block;
+}
+</style>
+</head>
+<body id="main_body" onload="prettyPrint()" style="background-color:#f5f5f5;">
+<div class="standard">
+	<H1>dialog控件</H1>
+	<div style="margin:20px 0;">
+	<p><strong>普通对话框</strong></p>
+	<a href="javascript:;" id="J_dialog_1">打开对话框</a>
+	<a href="javascript:;" id="J_dialog_1_close">关闭对话框</a>
+		<p><strong>代码</strong></p>
+		<pre class="prettyprint">
+			&lt;a href=&quot;javascript:;&quot; id=&quot;J_dialog_1&quot;&gt;打开对话框&lt;/a&gt;
+			&lt;a href=&quot;javascript:;&quot; id=&quot;J_dialog_1_close&quot;&gt;关闭对话框&lt;/a&gt;
+
+			$('#J_dialog_1').click(function(){
+				var params = {
+					id : 'd1',		//弹出对话框的id
+					title : '提示信息',	//左上角提示标题
+					content : 'hello world',	//具体提示内容
+					width : '200',	//对话框宽度
+					height : '50'	//对话框高度
+				}
+				Util.dialog.openDiv(params);
+			});
+			$('#J_dialog_1_close').click(function(){
+				Util.dialog.close('d1');	//关闭对话框
+			});
+		</pre>
+	</div>
+
+	<div style="margin:20px 0;">
+		<p><strong>模态对话框</strong></p>
+	<a href="javascript:;" id="J_dialog_2">打开对话框</a>
+		
+		<p><strong>代码</strong></p>
+		<pre class="prettyprint mg_t_20 fn-clear">
+
+		&lt;a href=&quot;javascript:;&quot; id=&quot;J_dialog_2&quot;&gt;打开对话框&lt;/a&gt;
+
+		$('#J_dialog_2').click(function(){
+			var params = {
+				id : 'd2',		//弹出对话框的id
+				title : '提示信息',	//左上角提示标题
+				content : 'hello world',	//具体提示内容
+				width : '200',	//对话框宽度
+				height : '50'	//对话框高度
+				modal : true	//是否模态对话框 可填true或false
+			}
+			Util.dialog.openDiv(params);	//打开对话框的标准方法
+		})
+		</pre>
+	</div>
+
+	<div style="margin:20px 0;">
+		<p><strong>确认弹出框</strong></p>
+	<a href="javascript:;" id="J_dialog_3">打开对话框</a>
+		<p><strong>代码</strong></p>
+		<pre class="prettyprint mg_t_20 fn-clear">
+
+		&lt;a href=&quot;javascript:;&quot; id=&quot;J_dialog_3&quot;&gt;打开对话框&lt;/a&gt;
+
+		$('#J_dialog_3').click(function(){
+			var params = {
+				id : 'd3',	//弹出对话框的id
+				title : '提示信息',	//左上角提示标题
+				content : '您确认要删除这条记录？',	//具体提示内容
+				okVal: '确定',		//确认按钮文本
+				okCallback: function () {	//确认按钮点击过之后执行的函数
+			        this.title('提交中…');	//设置左上角标题
+			        return false;
+			    },
+			    cancelVal: '取消',	//取消按钮文本
+			    cancelCallback: function () {}	//取消按钮点击后执行的函数
+			}
+			Util.dialog.confirm(params);	//要调用确认对话框，记住confirm
+		});
+		</pre>
+	</div>
+	
+	<div style="margin:20px 0;">
+		<p><strong>2秒后自动关闭弹出框</strong></p>
+	<a href="javascript:;" id="J_dialog_4">打开对话框</a>
+		<p><strong>代码</strong></p>
+		<pre class="prettyprint mg_t_20 fn-clear">
+
+		&lt;a href=&quot;javascript:;&quot; id=&quot;J_dialog_4&quot;&gt;打开对话框&lt;/a&gt;
+
+		$('#J_dialog_4').click(function(){
+			/*
+			参数
+				第一个 要显示的文本内容
+				第二个 top对象，在iframe内层要弹窗到顶层时用到
+				第三个 延迟关闭时间，单位（毫秒）
+			*/
+			Util.dialog.tips('hello world', null, 2000);	
+			//也可简写如下，默认2秒后关闭
+			Util.dialog.tips('hello world');
+		})
+		</pre>
+	</div>
+
+	
+	<div style="margin:20px 0;">
+		<p><strong>气泡弹出框</strong></p>
+		<a href="javascript:;" id="J_dialog_5">打开对话框</a>
+		<div id="J_dialog_5_dest">目标</div>
+
+		<p><strong>代码</strong></p>
+		<pre class="prettyprint mg_t_20 fn-clear">
+
+		&lt;a href=&quot;javascript:;&quot; id=&quot;J_dialog_5&quot;&gt;打开对话框&lt;/a&gt;
+		&lt;div id=&quot;J_dialog_5_dest&quot;&gt;目标&lt;/div&gt;
+
+		$('#J_dialog_5').click(function() {
+			Util.dialog.bubble({ 
+				element:$('#J_dialog_5_dest'), 	//要将气泡弹出在哪个元素上
+				content:'欢迎使用气泡对话框', 	//气泡内容
+				quickClose:true, 	//点击页面上其它位置是否关闭气泡 默认为true
+				align: 'bottom right',	//气泡弹出方向，可以是 top、right、bottom、left、或者它们的组合，如top right
+			});
+		});
+		</pre>
+	</div>
+
+
+<!--
+<div style="margin:20px 0;">
+	<p><strong>关闭弹出框</strong></p>
+	<p><strong>代码</strong></p>
+	<pre class="prettyprint mg_t_20 fn-clear">
+
+        Util.dialog.close(id);//id:弹出框id
+	</pre>
+</div>
+-->
+</div>
+<script src="../lib/jquery/1.8.1/jquery.js"></script>
+<script type="text/javascript" src="../lib/pretty/prettify.js"></script>
+<script src="../lib/dialog/6.0.4/dialog-plus.js"></script>
+<script src="../common/common.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('#J_dialog_1').click(function(){
+		var params = {
+				id : 'd1',
+			title : '普通对话框',
+			content : 'hello world',
+			width : '200',
+			height : '50'
+		}
+		Util.dialog.openDiv(params);
+	})
+	$('#J_dialog_1_close').click(function(){
+		Util.dialog.close('d1');	//关闭对话框
+	});
+
+	$('#J_dialog_2').click(function(){
+		var params = {
+			id : 'd2',
+			title : '普通对话框',
+			content : 'hello world',
+			width : '200',
+			height : '50',
+			modal : true
+		}
+		Util.dialog.openDiv(params);
+	})
+	$('#J_dialog_3').click(function(){
+		var params = {
+			id : 'd3',
+			title : '提示信息',
+			content : '您确认要删除这条记录？',
+			okVal: '确定',
+			okCallback: function () {
+		        this.title('提交中…');
+		        return false;
+		    },
+		    cancelVal: '取消',
+		    cancelCallback: function () {}
+		}
+		Util.dialog.confirm(params);
+	})
+	$('#J_dialog_4').click(function(){
+		Util.dialog.tips('hello world', null, 2000);
+	});
+
+	$('#J_dialog_5').click(function() {
+		Util.dialog.bubble({ 
+			element:$('#J_dialog_5_dest'), 
+			content:'欢迎使用气泡对话框', 
+			quickClose:true, 
+			align: 'bottom right',
+		});
+	});
+
+	
+})
+</script>
+</body>
+</html>

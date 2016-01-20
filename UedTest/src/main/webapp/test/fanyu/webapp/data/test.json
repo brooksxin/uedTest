@@ -1,0 +1,14 @@
+{
+	"returnCode": "0",
+	"returnMessage": "success",
+	"bean":{
+		"name":"樊宇",
+		"gender":"1",
+		"nation":"汉族",
+		"year":"1989",
+		"month":"02",
+		"day":"22",
+		"addr":"河南省郑州市",
+		"id":"411328198902220001"
+	}
+}

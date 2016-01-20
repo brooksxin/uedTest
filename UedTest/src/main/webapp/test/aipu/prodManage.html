@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>产品管理 - 亚信开源社区</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/js/dialog/6.0.5/ui-dialog.css">
+<link rel="stylesheet" type="text/css" href="ui/js/selectordie/0.1.8/selectordie.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+<div class="search_wrap approve prodManage">
+	<div class="tool-bar fn-clear">
+		<a class="ui-button ui-button-normal fn-mr-20" href="javascript:;" hidefocus="true" id="J_add">
+			<i class="iconfont" title=""></i>
+			<span>创建产品</span>
+		</a>
+	</div>
+
+	<!--分页table-->
+	<div class="data-table" id="dataTable">
+		<table class="ui-table" cellpadding="0" cellspacing="0" border="0" width="100%">
+			<colgroup>
+				<col width="8%">
+				<col width="28%">
+				<col width="15%">
+				<col width="12%">
+				<col width="12%">
+				<col width="">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>产品名称/产品创建者</th>
+					<th>产品公开范围</th>
+					<th>创建时间</th>
+					<th>产品状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody id="dataTbody"></tbody>
+		</table>
+
+		<div class="dataTbl-bottom fn-hide fn-clear">
+	        <div class="page pagination fn-left" id="Pagination">
+	        	<!-- pagination -->
+	        </div>
+	        <div class="paginationTools fn-right">
+	        	<span class="des">跳转到第</span>
+	        	<input id="gotoPage" value="" type="text" class="ui-input" />
+	        	<span class="des">页</span>
+	        	<a class="ui-button ui-button-normal" href="javascript:;" hidefocus="true" id="">
+	        		<span>确定</span>
+	        	</a>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<!--分页数据容器-->
+<textarea class="fn-hide" id="dataTbl_tpl">
+{{#each rows}}
+<tr>
+	<td>{{indexAdd @index}}</td>
+	<td>
+		<div class="fn-clear prod_author">
+			<div class="fn-left">
+				<img src="ui/theme/img/ipu_logo.png" width="56" height="56">
+			</div>
+			<div class="fn-left">
+				<p>{{ABILITY_CODE}}</p>
+				<p>{{ABILITY_CODE}}</p>
+			</div>
+		</div>
+	</td>
+	<td>
+		{{ABILITY_URL}}
+	</td>
+	<td>{{REMARKS}}</td>
+	<td>{{REMARKS}}</td>
+	<td data-json="{{retJson2Str this}}">
+		{{#if_eq ABILITY_ID compare = '998'}}
+			<a href="javascript:;" hidefocus="true"><span>下架</span></a>
+		{{else}}
+			<a href="javascript:;" hidefocus="true" onclick="modProd(this);return false;"><span>修改</span></a>
+			<i class="split">|</i>
+			<a href="javascript:;" hidefocus="true" onclick="showDetail(this);return false;"><span>详情</span></a>
+		{{/if_eq}}
+	</td>
+</tr>
+{{/each}}
+</textarea>
+
+<textarea class="fn-hide" id="T_addProd">
+	<div class="T_addProd">
+		<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tbody>
+				<tr>
+					<td width="20%" rowspan="6" class="fn-va-top">
+						<span id="J_add_logo"></span>
+					</td>
+					<td width="18%">
+						<label>产品名称：</label>
+					</td>
+					<td>
+						<input type="text" value="" name="J_prod_name" id="J_prod_name" class="ui-input J_prod_name" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>产品介绍：</label>
+					</td>
+					<td>
+						&lt;textarea class="ui-textarea" id="J_textarea" name="J_textarea"&gt;&lt;/textarea&gt;
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>产品公开范围：</label>
+					</td>
+					<td>
+						<ul class="zui_check_list fn-clear prod_scope">
+							<li>
+								<i class="zui_check check checked" data-id="1"></i>
+								<span>CMC</span>
+							</li>
+							<li>
+								<i class="zui_check check" data-id="2"></i>
+								<span>非亚信</span>
+							</li>
+							<li>
+								<i class="zui_check check" data-id="3"></i>
+								<span>亚信</span>
+							</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td class="fn-va-top">
+						<label>产品状态：</label>
+					</td>
+					<td>
+						<ul class="zui_check_list fn-clear prod_status">
+							<li>
+								<i class="zui_check check checked" data-id="1"></i>
+								<span>待上架</span>
+							</li>
+							<li>
+								<i class="zui_check check" data-id="2"></i>
+								<span>已上架</span>
+							</li>
+							<li>
+								<i class="zui_check check" data-id="3"></i>
+								<span>已下架</span>
+							</li>
+							<li>
+								<i class="zui_check check" data-id="4"></i>
+								<span>已暂停</span>
+							</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>产品SVN地址：</label>
+					</td>
+					<td>
+						<input type="text" value="" name="J_prod_svn" id="J_prod_svn" class="ui-input" />
+						<input type="hidden" value="" name="J_prod_logo_url" id="J_prod_logo_url" class="ui-input" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="fn-center">
+						<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="J_clean">
+							<span>清空</span>
+						</a>
+						<a class="ui-button ui-button-green" href="javascript:;" hidefocus="true" id="J_sub">
+							<span>确定</span>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</textarea>
+
+<textarea class="fn-hide" id="T_modProd">
+	<div class="T_addProd">
+		<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tbody>
+				<tr>
+					<td width="26%">
+						<label>产品图标：</label>
+					</td>
+					<td>
+						<img src="{{url}}" width="58" height="58">
+						<span id="J_mod_logo"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>产品名称：</label>
+					</td>
+					<td>
+						<input type="text" value="{{ABILITY_CODE}}" name="J_prod_name" id="J_prod_name" class="ui-input J_prod_name" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>产品介绍：</label>
+					</td>
+					<td>
+						&lt;textarea class="ui-textarea" id="J_textarea" name="J_textarea"&gt;&lt;/textarea&gt;
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>产品公开范围：</label>
+					</td>
+					<td>
+						<ul class="zui_check_list fn-clear prod_scope">
+							<li>
+								<i class="zui_check check {{retChecked ABILITY_ID 1}}" data-id="1"></i>
+								<span>CMC</span>
+							</li>
+							<li>
+								<i class="zui_check check {{retChecked ABILITY_ID 2}}" data-id="2"></i>
+								<span>非亚信</span>
+							</li>
+							<li>
+								<i class="zui_check check {{retChecked ABILITY_ID 3}}" data-id="3"></i>
+								<span>亚信</span>
+							</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td class="fn-va-top">
+						<label>产品状态：</label>
+					</td>
+					<td>
+						<ul class="zui_check_list fn-clear prod_status">
+							<li>
+								<i class="zui_check check {{retChecked ABILITY_ID 1}}" data-id="1"></i>
+								<span>待上架</span>
+							</li>
+							<li>
+								<i class="zui_check check {{retChecked ABILITY_ID 2}}" data-id="2"></i>
+								<span>已上架</span>
+							</li>
+							<li>
+								<i class="zui_check check {{retChecked ABILITY_ID 3}}" data-id="3"></i>
+								<span>已下架</span>
+							</li>
+							<li>
+								<i class="zui_check check {{retChecked ABILITY_ID 4}}" data-id="4"></i>
+								<span>已暂停</span>
+							</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>产品SVN地址：</label>
+					</td>
+					<td>
+						{{ABILITY_CODE}}
+						<input type="hidden" value="{{ABILITY_CODE}}" name="J_prod_logo_url" id="J_prod_logo_url" class="ui-input" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="fn-center">
+						<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="J_cancel">
+							<span>取消</span>
+						</a>
+						<a class="ui-button ui-button-green" href="javascript:;" hidefocus="true" id="J_sub">
+							<span>确定</span>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</textarea>
+
+<textarea class="fn-hide" id="T_detailProd">
+	<div class="T_addProd detail_wrap">
+		<table cellpadding="0" cellspacing="0" border="0" width="100%" class="detail_table">
+			<tbody>
+				<tr>
+					<td width="16%" class="des">
+						<label>产品图标：</label>
+					</td>
+					<td width="30%">
+						<img src="{{url}}" width="58" height="58">
+					</td>
+					<td width="16%" class="des">
+						<label>产品名称：</label>
+					</td>
+					<td>
+						{{ABILITY_CODE}}
+					</td>
+				</tr>
+				<tr>
+					<td class="des">
+						<label>公开范围：</label>
+					</td>
+					<td>
+						{{ABILITY_CODE}}
+					</td>
+					<td class="des">
+						<label>产品状态：</label>
+					</td>
+					<td>
+						{{ABILITY_CODE}}
+					</td>
+				</tr>
+				<tr>
+					<td class="des">
+						<label>SVN地址：</label>
+					</td>
+					<td colspan="3">
+						{{ABILITY_CODE}}
+					</td>
+				</tr>
+				<tr>
+					<td class="des">
+						<label>产品介绍：</label>
+					</td>
+					<td colspan="3">
+						{{ABILITY_CODE}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</textarea>
+
+<script src="ui/js/jquery/1.8.3/jquery.js"></script>
+<script src="ui/js/dialog/6.0.5/dialog-min.js"></script>
+<script src="ui/js/jqueryForm/jquery.form.js"></script>
+<script src="ui/js/json2/json2.js"></script>
+<script src="ui/js/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="ui/js/handlebars/handlebars.js"></script>
+<script src="ui/js/handlebars/helpers.js"></script>
+<script src="ui/js/blockUI/jquery.blockUI.js"></script>
+<script src="ui/js/slides/3.0.3/jquery.slides.min.js"></script>
+<script src="ui/js/selectordie/0.1.8/selectordie.js"></script>
+<script src="ui/js/datepicker/4.8.b2/WdatePicker.js"></script>
+<script src="ui/js/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script src="ui/js/common.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+	srvMap.add('prodManage', 'tableData.json','');//产品管理查询table
+	srvMap.add('prodLogo', 'test.json','');//产品logo
+	srvMap.add('prodName', 'tableData.json','');//产品名称校验
+
+	initSearch();
+
+	$("#J_add").click(function(){
+		addProd();
+	})
+})
+
+function initSearch(){
+	var pageParam = {
+		url: srvMap.get("approve"),
+		formStr: ""
+	}
+	//分页查询
+	getPage(pageParam);
+}
+
+function addProd(){
+	var D_param = {
+		id: "D_addProd",
+		title: "产品创建",
+		content: $("#T_addProd").val(),
+		width: "600"
+	}
+	openWindowDiv(D_param, function(e){
+		swfu = new SWFUpload(settings);
+
+		setTimeout(function(){
+			$(".swfupload").css({"display": "block"});
+		},200)
+
+		//checkbox
+		$(".prod_scope .zui_check").click(function(){
+			$(".prod_scope .zui_check").removeClass("checked");
+			$(this).addClass("checked");
+		})
+		$(".prod_status .zui_check").click(function(){
+			$(".prod_status .zui_check").removeClass("checked");
+			$(this).addClass("checked");
+		})
+
+		//校验产品名称
+		$("#J_prod_name").blur(function(){
+			var J_prod_name = $(this).val();
+			if(J_prod_name){
+				$.PostJson(srvMap.get("prodName"), "J_prod_name="+J_prod_name, function(state,json){
+					if(state == 'success'){
+						if(json){
+							result_tips("产品名称存在，请重新输入！");
+							$("#J_prod_name").val("");
+						}
+					}	
+				})
+			}
+		})
+
+		//提交
+		$("#J_sub").click(function(){
+			var J_prod_name = $("#J_prod_name").val();
+			var J_textarea = $("#J_textarea").val();
+			var prod_scope = $(".prod_scope i.checked").data("id");
+			var prod_status = $(".prod_status i.checked").data("id");
+			var J_prod_svn = $("#J_prod_svn").val();
+			var J_prod_logo_url = $("#J_prod_logo_url").val();
+			alert(J_prod_logo_url)
+
+
+			//提交校验
+			if(!J_prod_name){
+				console.log(J_prod_name)
+				result_tips("产品名称不能为空！", 1, function(){
+					$("#J_prod_name").focus();
+				})
+			}
+
+			//ajax提交
+
+		})
+
+		//清空
+		$("#J_clean").click(function(){
+			$("#J_prod_name, #J_textarea, #J_prod_svn, #J_prod_logo_url").val("");
+			$(".prod_scope i:eq(0), .prod_status i:eq(0)").trigger("click");
+		})
+	})
+}
+
+function modProd(obj){
+	var tempJson = $(obj).parent().data("json");
+	var html = Handlebars.compile($("#T_modProd").val())(tempJson); 
+	var D_param = {
+		id: "D_modProd",
+		title: "产品修改",
+		content: html,
+		width: "500"
+	}
+	openWindowDiv(D_param, function(e){
+		//textarea好像不能直接赋值value
+		$("#J_textarea").val(tempJson.ABILITY_CODE);
+
+		swfu2 = new SWFUpload(settings2);
+
+		setTimeout(function(){
+			$(".swfupload").css({"display": "inline-block", "marginLeft": "10px"});
+		},200)
+
+		//关闭弹窗
+		$("#J_cancel").click(function(){
+			dialog.get("D_modProd").close().remove();
+		})
+
+		//提交
+		$("#J_sub").click(function(){
+			var J_prod_name = $("#J_prod_name").val();
+			var J_textarea = $("#J_textarea").val();
+			var prod_scope = $(".prod_scope i.checked").data("id");
+			var prod_status = $(".prod_status i.checked").data("id");
+			var J_prod_logo_url = $("#J_prod_logo_url").val();
+			alert(J_prod_logo_url)
+
+			//提交校验
+			if(!J_prod_name){
+				console.log(J_prod_name)
+				result_tips("产品名称不能为空！", 1, function(){
+					$("#J_prod_name").focus();
+				})
+			}
+
+			//ajax提交
+
+		})
+	})
+}
+
+function showDetail(obj){
+	var tempJson = $(obj).parent().data("json");
+	var html = Handlebars.compile($("#T_detailProd").val())(tempJson); 
+	var D_param = {
+		id: "D_detailProd",
+		title: "产品详情",
+		content: html,
+		width: "600"
+	}
+	openWindowDiv(D_param, function(e){
+		$("#J_textarea").val(tempJson.ABILITY_CODE);
+
+		//关闭弹窗
+		$("#J_cancel").click(function(){
+			dialog.get("D_detailProd").close().remove();
+		})
+	})
+}
+
+Handlebars.registerHelper("retChecked", function(val ,val2, fn) {
+	if(val == val2)
+		return "checked";
+	return "";
+});
+
+//logo上传
+var swfu, swfu2, settings, settings2;
+$(function () {
+    settings = {
+        flash_url: "ui/js/swfupload/1.0.0/2.5/swfupload.swf",
+        upload_url: srvMap.get("prodLogo")+"?_v=" + (new Date()).getTime(),
+        post_params: "",
+        use_query_string: true,
+        file_size_limit: "3 MB",
+        file_types: "*.jpg;*.png;*.gif;*.jpeg",  //允许所有类型时请使用 *.*
+        file_types_description: "All Files",
+        file_upload_limit: 0,
+        file_queue_limit: 0,
+        debug: false,
+
+        // Button settings
+        button_image_url: "ui/js/swfupload/1.0.0/vendor/logo_add.png",
+        button_width: "94",
+        button_height: "94",
+        button_placeholder_id: "J_add_logo",
+        button_text: '',
+        button_text_left_padding: 12,
+        button_text_top_padding: 3,
+        button_cursor: SWFUpload.CURSOR.HAND,
+
+        // The event handler functions are defined in handlers.js
+        file_dialog_complete_handler: fileDialogComplete,
+        upload_start_handler: uploadStart,
+        upload_error_handler: uploadError,
+        upload_success_handler: uploadSuccess,
+        upload_complete_handler: upload_complete_handler
+    };
+
+    settings2 = {
+    	button_image_url: "ui/js/swfupload/1.0.0/vendor/file_img.png",
+    	button_width: "61",
+    	button_height: "22",
+    	button_placeholder_id: "J_mod_logo"
+    }
+    settings2 = $.extend({},settings,settings2);
+});
+
+/**
+ * 选择完文件后出发方法
+ */
+function fileDialogComplete(numFilesSelected, numFilesQueued) {
+    try {
+        this.startUpload();
+    } catch (ex) {
+        this.debug(ex);
+    }
+}
+
+/**
+ * 开始上传文件前校验方法
+ */
+function uploadStart(file) {
+    if (file.size > 3145728) {
+        result_prompt(0, "图片大小不能超过3M！");
+        return false;
+    }
+	result_tips("正在上传...");
+    return true;
+}
+
+/**
+ * 文件上传成功后预览图片
+ */
+function uploadSuccess(file, serverData) {
+    try {
+        serverData = JSON.parse(serverData);
+        if (serverData.rtnCode == '0') {
+           $("#J_prod_logo_url").val("11111111111111");
+           result_tips("LOGO上传成功");
+        } else {
+            alert("LOGO上传失败");
+        }
+    } catch (ex) {
+        this.debug(ex);
+    }
+}
+
+function uploadError(file, errorCode, message) {
+    try {
+        alert("上传失败!");
+    } catch (ex) {
+        this.debug(ex);
+    }
+}
+function upload_complete_handler(file) {
+    if (this.getStats().files_queued > 0) {
+        this.startUpload();
+    }
+}
+</script>
+
+</body>
+</html>

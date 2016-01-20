@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>数据报表-问卷分析</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+
+</head>
+
+<body>
+<div class="formItem">
+    <div class="titleArea bd-bottom fn-clear">
+        <a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a><h2 class="ui-textIndentStyle fn-left">问卷分析</h2>
+        <div class="normalBtnArea ft-right mb-10"><a class="normalBtn BGblue" href="#">导出分析报告</a></div>
+    </div>
+	
+	<div class="ml-15 mr-15">
+    	当前问卷：<span class="attributionValue mr-15">家庭计划（ID:10000087231）</span>
+        问卷类型：<span class="attributionValue mr-15">客户关怀类</span>
+        填写问卷人数：<span class="attributionValue">100</span>
+    </div>
+	
+    <div class="tablewidth fn-mt10 attributionValue">
+    <table class="ui-record-table table_radius table-bordered table-striped none-bottom">
+        <thead>
+            <tr>
+                <th style="text-align:left">第1题：<span class="mr-10">您现在使用的套餐是哪一种？</span><span class="textCor_Green">【单选题】</span></th>
+         	</tr>
+        </thead>
+    </table>
+    <table class="ui-record-table table_radius table-bordered table-striped">
+        <tr>
+            <td class="fn-center">选项</td>
+            <td class="fn-center">比例</td>
+        </tr>
+        <tr>
+        	<td>A.58套餐</td>
+            <td>31%</td>
+        </tr>
+        <tr>
+        	<td>B.88套餐</td>
+            <td>45%</td>
+        </tr>
+        <tr>
+        	<td>C.128套餐</td>
+            <td>24%</td>
+        </tr>
+    </table>
+    </div>
+    <div class="tablewidth fn-mt10 attributionValue">
+    <table class="ui-record-table table_radius table-bordered table-striped none-bottom">
+        <thead>
+            <tr>
+                <th style="text-align:left">第2题：<span class="mr-10">您现在使用的手机是哪一种？</span><span class="textCor_Green">【单选题】</span></th>
+         	</tr>
+        </thead>
+    </table>
+    <table class="ui-record-table table_radius table-bordered table-striped">
+        <tr>
+            <td class="fn-center">选项</td>
+            <td class="fn-center">比例</td>
+        </tr>
+        <tr>
+        	<td>A.三星</td>
+            <td>29%</td>
+        </tr>
+        <tr>
+        	<td>B.IPhone</td>
+            <td>45%</td>
+        </tr>
+        <tr>
+        	<td>C.国产机</td>
+            <td>26%</td>
+        </tr>
+    </table>
+    </div>
+    <div class="tablewidth fn-mt10 attributionValue">
+    <table class="ui-record-table table_radius table-bordered table-striped none-bottom">
+        <thead>
+            <tr>
+                <th style="text-align:left">第3题：<span class="mr-10">您的网络购物体验如何？</span><span class="textCor_Green">【填空题】</span></th>
+         	</tr>
+        </thead>
+    </table>
+    <table class="ui-record-table table_radius table-bordered table-striped">
+        <tr>
+            <td class="fn-center">选项</td>
+            <td class="fn-center">比例</td>
+            <td></td>
+        </tr>
+        <tr>
+        	<td>填写</td>
+            <td>29%</td>
+            <td><div class="gridRowBtn qyxj_center"><a class="item-text" href="javascript:;">查看全部答案</a></div></td>
+        </tr>
+        <tr>
+        	<td>未填</td>
+            <td>45%</td>
+            <td></td>
+        </tr>
+    </table>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+<script src="../../lib/jquery/1.8.1/jquery.js"></script>
+<script src="../../lib/json2/1.0.0/json2.js"></script>
+<script src="../../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../../lib/handlebars/1.3.0/helpers.js"></script>
+<script src="../../lib/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="../../lib/blockUI/2.64/jquery.blockUI.js"></script>
+<script src="../../common/frameInit.js"></script>
+<script src="../../lib/dialog/4.1.7/artDialog.js"></script>
+<script src="../../lib/dialog/4.1.7/iframeTools.js"></script>
+<script src="../../common/config.js"></script>
+<script src="../../common/common.js"></script>    
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        $(".qBox").mouseover(function() {
+          $(this).addClass("qBoxHover");
+          $(this).find(".qEditIcon").show();
+
+        }).mouseout(function() {
+          $(this).removeClass("qBoxHover");
+          $(this).find(".qEditIcon").hide();
+        });;
+    });
+</script>
+</body>
+</html>

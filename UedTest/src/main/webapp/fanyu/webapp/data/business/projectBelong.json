@@ -1,0 +1,9 @@
+{
+	"returnCode": "0",
+	"returnMessage": "", 
+	"beans":[
+		{ "name":"10085座席基地", "value":"0" }, 
+		{ "name":"河南分公司", "value":"1" }, 
+		{ "name":"山西分公司", "value":"2" }
+	]
+}

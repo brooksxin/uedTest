@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>个人中心 - 亚信开源社区</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/js/dialog/6.0.5/ui-dialog.css">
+<link rel="stylesheet" type="text/css" href="ui/js/selectordie/0.1.8/selectordie.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+<style type="text/css">
+.test .ui-dialog-body {
+	padding: 0;
+}
+.test .dataTbl-bottom {
+	margin: 20px 50px 20px 190px;
+}
+.test .ui-table {
+	border: none;
+}
+.joinAsia {
+	position: absolute;
+	right: 80px;
+	top: 200px;
+}
+</style>
+</head>
+<body>
+
+<div class="glob-top">
+	<div class="wrap fn-clear">
+		<a class="logo fn-clear" href="index.html" hidefocus="true">
+			<span class="logo-name">AIOSC</span>
+			<span class="logo-name2">亚信开源社区</span>
+		</a>
+		<div class="login-bar fn-clear">
+			<a href="javascript:;" hidefocus="true" class="login" id="J_login">
+				<span><i class="iconfont" title="用户"></i> 登录</span>
+			</a>
+			<a href="javascript:;" hidefocus="true" class="regist" id="J_regist">
+				<span>注册</span>
+			</a>
+			<a href="javascript:;" hidefocus="true" class="maintain">
+				<span>社区维护后台</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="glob-contain">
+	<div class="wrap mycenter">
+		<div class="head">
+			<h2>基础信息</h2>
+			<a href="javascript:;" hidefocus="true" class="ui-button ui-button-orange" id="J_mod_pwd"><span>密码修改</span></a>
+			<a href="javascript:;" hidefocus="true" class="ui-button asia" id="J_mod_pwd"><span>我是亚信员工</span></a>
+		</div>
+		<div class="contain">
+			<div id="J_userInfo">
+				
+			</div>
+		</div>
+		
+		<div class="head">
+			<h2>角色申请</h2>
+			<a href="javascript:;" hidefocus="true" class="ui-button asia" id="J_history"><span>历史申请查看</span></a>
+		</div>
+		<div class="contain">
+			<div class="choserole">
+				<table class="reg_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+					<tbody>
+						<tr>
+							<td width="25%"><label>请选择开源产品：</label></td>
+							<td>
+								<select class="J_prod_sel" id="J_prod_sel">
+						            <option value="1">亚信艾扑</option>
+						            <option value="2">亚信艾扑2</option>
+						            <option value="3">亚信艾扑3</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="fn-va-top"><label>申请成为以下角色（可多选）：</label></td>
+							<td>
+								<ul class="fn-clear">
+									<li>
+										<i class="zui_check check checked" data-id="1"></i>
+										<span>下载使用者</span>
+									</li>
+									<li>
+										<i class="zui_check check" data-id="2"></i>
+										<span>文档维护者</span>
+									</li>
+									<li>
+										<i class="zui_check check" data-id="3"></i>
+										<span>代码开发者</span>
+									</li>
+									<li>
+										<i class="zui_check check" data-id="4"></i>
+										<span>产品支持者</span>
+									</li>
+									<li>
+										<a href="javascript:;" hidefocus="true">各角色说明</a>
+									</li>
+								</ul>
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>
+								<a href="javascript:;" hidefocus="true" class="ui-button ui-button-green" id="J_addProd_btn"><span>提交申请</span></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="joinAsia">
+	<a href="javascript:;" hidefocus="true">
+		<img src="ui/theme/img/joinAsia.png" width="69" alt="加入亚信">
+	</a>
+</div>
+
+<textarea class="fn-hide" id="T_userInfo">
+<div class="user-info">
+	<table class="reg_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+		<tbody>
+			<tr>
+				<td width="11%"><label>用户名：</label></td>
+				<td width="18%">
+					<div class="fn-clear">
+						<span class="username">{{userInfo.name}}</span>
+						<input type="text" value="{{userInfo.name}}" class="ui-input username-inp fn-hide" />
+						<a href="javascript:;" hidefocus="true" class="normalA" id="J_mod_name"><span>修改</span></a>
+					</div>
+				</td>
+				<td width="22%"><label>Email：</label></td>
+				<td>
+					<span>{{userInfo.Email}}</span>
+				</td>
+			</tr>
+			<tr>
+				<td><label>注册时间：</label></td>
+				<td colspan="3">
+					<span>{{userInfo.regDate}}</span>
+				</td>
+			</tr>
+			<tr>
+				<td><label>个人积分：</label></td>
+				<td colspan="3">
+					<span>{{userInfo.points}}</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="role-info">
+	<h4>我的角色列表</h4>
+	<ul class="fn-clear">
+		{{#each roleInfo}}
+		<li class="fn-clear">
+			<div class="left">
+				<img src="{{img}}" width="52" height="52" />
+				<p title="{{tit}}">{{tit}}</p>
+			</div>
+			<div class="right fn-clear">
+				<dl>
+					{{#each beans}}
+					{{retNewDl @index}}
+					<dd>{{prod}}</dd>
+					{{/each}}
+				</dl>
+			</div>
+		</li>
+		{{/each}}
+	</ul>
+</div>
+</textarea>
+
+<textarea class="fn-hide" id="T_history">
+<div class="data-table his_tbl" id="dataTable">
+	<table class="ui-table" cellpadding="0" cellspacing="0" border="0" width="100%">
+		<colgroup>
+			<col width="30%" />
+			<col width="18%" />
+			<col width="18%" />
+			<col width="" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th>申请内容</th>
+				<th>状态</th>
+				<th>申请时间</th>
+				<th>反馈信息</th>
+			</tr>
+		</thead>
+		<tbody id="dataTbody"></tbody>
+	</table>
+
+	<div class="dataTbl-bottom fn-hide fn-clear">
+        <div class="page pagination fn-left" id="Pagination">
+        	<!-- pagination -->
+        </div>
+        <div class="paginationTools fn-right">
+        	<span class="des">跳转到第</span>
+        	<input id="gotoPage" value="" type="text" class="ui-input" />
+        	<span class="des">页</span>
+        	<a class="ui-button ui-button-normal" href="javascript:;" hidefocus="true" id="">
+        		<span>确定</span>
+        	</a>
+        </div>
+	</div>
+</div>
+</textarea>
+
+<!--分页数据容器-->
+<textarea class="fn-hide" id="dataTbl_tpl">
+{{#each rows}}
+<tr>
+	<td>
+		<p>申请前角色：<span>{{ABILITY_ID}}</span></p>
+		<p>申请前角色：<span>{{ABILITY_NAME}}</span></p>
+	</td>
+	<td>{{ABILITY_NAME}}</td>
+	<td>{{ABILITY_URL}}</td>
+	<td><span class="fn-ellip">{{REMARKS}}</span></td>
+</tr>
+{{/each}}
+</textarea>
+
+<script src="ui/js/jquery/1.8.3/jquery.js"></script>
+<script src="ui/js/dialog/6.0.5/dialog-min.js"></script>
+<script src="ui/js/jqueryForm/jquery.form.js"></script>
+<script src="ui/js/json2/json2.js"></script>
+<script src="ui/js/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="ui/js/handlebars/handlebars.js"></script>
+<script src="ui/js/handlebars/helpers.js"></script>
+<script src="ui/js/blockUI/jquery.blockUI.js"></script>
+<script src="ui/js/slides/3.0.3/jquery.slides.min.js"></script>
+<script src="ui/js/selectordie/0.1.8/selectordie.js"></script>
+<script src="ui/js/common.js"></script>
+
+<script type="text/javascript">
+	
+$(function(){
+
+	srvMap.add('mycenter', 'mycenter.json','');//个人信息
+	srvMap.add('saveUserName', 'test.json','');//修改用户名
+
+	$.PostJson(srvMap.get("mycenter"), "", function(state, json){
+		if(state == 'success'){
+			if(json && json.rtnCode == '0'){
+				$("#J_userInfo").temp($("#T_userInfo"), json);
+
+				$("#J_mod_name").click(function(){
+					var $this = $(this);
+					var $input = $this.siblings("input");
+					var _input = $input.val();
+					var $text = $this.siblings("span");
+					var _text = $text.text();
+					if($this.hasClass("mod")){
+						//提交保存
+						$.PostJson(srvMap.get("saveUserName"), "", function(state, json){
+							if(state == 'success'){
+								if(json && json.rtnCode == '0'){
+									$this.removeClass("mod").html("<span>修改</span>");
+									$input.addClass("fn-hide");
+									$text.removeClass("fn-hide").text(_input);
+									result_tips("修改用户名成功！");
+								}else{
+									result_prompt(json.retMsg || "修改用户名失败！");
+								}
+							}else{
+								result_prompt(json.retMsg || "系统错误，请稍后再试！");
+							}
+						})
+
+					}else{
+						$this.addClass("mod").html("<span>保存</span>");
+						$input.removeClass("fn-hide").val(_text);
+						$text.addClass("fn-hide");
+					}
+				})
+			}else{
+				result_prompt(json.retMsg || "获取个人信息失败！");
+			}
+		}else{
+			result_prompt(json.retMsg || "系统错误，请稍后再试！");
+		}
+	})
+	
+	//下拉框
+	$("#J_prod_sel").selectOrDie();
+
+	//查看历史
+	$("#J_history").on("click", function(){
+		var D_param = {
+			id: "D_history",
+			title: "历史申请",
+			content: $("#T_history").val(),
+			width: 920,
+			height: 400,
+			skin: "test"
+		}
+		openWindowDiv(D_param, function(e){
+			getHistory();
+		})
+	})
+
+	//checkbox
+	$(".choserole .zui_check").click(function(){
+		$(this).toggleClass("checked");
+	})
+
+	//提交申请
+	$("#J_addProd_btn").click(function(){
+		var prodId = $("#J_prod_sel").val();
+		var roleArr = [];
+		$(".choserole .zui_check").each(function(){
+			if($(this).hasClass("checked")){
+				var val = $(this).data("id");
+				roleArr.push(val);
+			}
+		});
+		var dataP = "prodId="+prodId+"&roleArr="+roleArr.join(",");
+		console.log(dataP)
+	})
+})
+
+function getHistory(){
+	var str = "";
+	var pageParam = {
+		url: "ui/json/tableData.json?1=1",
+		formStr: str,
+		perPage: 5
+	}
+	//分页查询
+	getPage(pageParam);
+}
+
+Handlebars.registerHelper("retNewDl", function(index, fn) {
+    if(index > 0 && index % 4 == 0){
+       return new Handlebars.SafeString("</dl><dl>");
+    }
+    return "";
+});
+
+</script>
+
+</body>
+</html>

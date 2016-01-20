@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>组织树新增</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/opui/om-default.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/zTree/zTreeStyle.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/zTree/3.5.16/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="res/lib/zTree/3.5.16/jquery.ztree.excheck-3.5.js"></script>
+<script type="text/javascript" src="res/lib/zTree/3.5.16/jquery.ztree.exedit-3.5.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<!-- base64 -->
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/core-min.js"></script>
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/enc-base64-min.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body>
+<div class="openwin">
+	<div class="ztreeConfig">
+		<label for="treename">请输入节点树名称：</label>
+		<input type="text" id="treename" maxlength="20"/>
+		<a id="addParent" href="#" title="添加根节点" onclick="return false;">添加根节点</a>
+
+		<ul id="treeDemo" class="ztree creat_tree"></ul>
+	</div>
+
+	<div class="bz_btn_list">
+		<a class="btn_normal fn-mr-20" href="#nogo" id="J_save"><em>保存</em></a>
+		<a class="btn_normal " href="#nogo" onclick="closeDialog();return false;"><em>关闭</em></a>
+	</div>
+</div>
+
+<script type="text/javascript" >
+var setting = {
+	view: {
+		expandSpeed:"",
+		addHoverDom: addHoverDom,
+		removeHoverDom: removeHoverDom,
+		selectedMulti: false,
+		showIcon:true
+	},
+	edit: {
+		enable: true,
+		showRemoveBtn: setRemoveBtn
+	},
+	data: {
+		simpleData: {
+			enable: true,
+			idKey: "id",
+			pIdKey: "pId"
+		}
+	},
+	callback: {
+		beforeRemove: beforeRemove,
+		beforeRename: beforeRename,
+		beforeDrag: beforeDrag,
+		beforeClick: beforeClick
+	}
+};
+
+function setRemoveBtn(treeId, treeNode) {
+	return !(treeNode.pId == null);
+}
+function fontCss(treeNode) {
+	var aObj = $("#" + treeNode.tId + "_a");
+	aObj.removeClass("copy").removeClass("cut");
+	if (treeNode === curSrcNode) {
+		if (curType == "copy") {
+			aObj.addClass(curType);
+		} else {
+			aObj.addClass(curType);
+		}			
+	}
+}
+
+function filter(treeId, parentNode, childNodes) {
+	if (!childNodes) return null;
+	for (var i=0, l=childNodes.length; i<l; i++) {
+		childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+	}
+	return childNodes;
+}
+function beforeDrag(treeId, treeNodes) {
+	return false;
+}
+
+function beforeClick(treeId, treeNode) {
+	return !treeNode.isCur;
+}
+
+function beforeRemove(treeId, treeNode) {
+	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+	zTree.selectNode(treeNode);
+	
+	return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+}		
+function beforeRename(treeId, treeNode, newName) {
+	if (newName.length == 0) {
+		result_prompt(2,"节点名称不能为空！");
+		return false;
+	}
+	if (newName.length > 20) {
+		result_prompt(2,"节点名称长度不能超过20个字符！");
+		return false;
+	}
+	return true;
+}
+
+var newCount = 1;
+function addHoverDom(treeId, zNodes) {
+	var sObj = $("#" + zNodes.tId + "_span");
+	if (zNodes.editNameFlag || $("#addBtn_"+zNodes.tId).length>0) return;
+	
+ 	var addStr = "<span class='button add' id='addBtn_" + zNodes.tId
+		+ "' title='新增' onfocus='this.blur();'></span>"; 
+
+	sObj.after(addStr);
+	var btn = $("#addBtn_"+zNodes.tId);
+	if (btn) btn.bind("click", function(){
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+		zTree.addNodes(zNodes, {id:(100 + newCount), pId:zNodes.id, name:"新增节点" + (newCount++)});
+		return false;
+	});
+};
+function removeHoverDom(treeId, treeNode) {
+	$("#addBtn_"+treeNode.tId).unbind().remove();
+}; 
+
+function add(e) {
+	var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+	isParent = e.data.isParent,
+	nodes = zTree.getSelectedNodes(),
+	treeNode = nodes[0];
+	treeNode = zTree.addNodes(null, {id:(100 + newCount), pId:0, isParent:isParent, name:"根节点" + (newCount++)});
+};
+
+var zNodes =[
+	{ name:"根节点", open:true,id:1,isParent:true
+}];
+
+$(function(){
+	placeholder("#treename","长度小于20个字符");
+	$.fn.zTree.init($("#treeDemo"), setting,zNodes);
+	$("#addParent").bind("click", {isParent:true}, add);
+	
+    $("#J_save").click(function(){
+    	var $btn = $(this);
+    	var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+		var nodes = treeObj.transformToArray(treeObj.getNodes());
+		var treename = $("#treename").val();
+		if($.trim(treename)==""){
+			result_prompt(2,"节点树名称不能为空");
+			return false;
+		}
+		if($.trim(treename) == "长度小于20个字符"){
+			result_prompt(2,"请输入合法的节点树名称");
+			return false;
+		}
+		var str = '{"root":{"name":"'+treename+'"},"rows":[';
+		var addArr = [];
+		for(var i = 0; i < nodes.length; i++){
+			if(i > 0) str += ',';
+			var data = {
+					"id" : nodes[i].id,
+					"pid" : nodes[i].pId,
+					"name" : nodes[i].name					
+			}
+			addArr.push(data);
+			str += JSON.stringify(addArr[i]);
+		}
+		str += "]}";
+		
+		str = encodeURIComponent(str);
+        str = encodeBase64(str);
+        
+		if(treename){
+			toggleButtonStyle($btn,true);
+			$.PostJson(REQURLS.tree_addTreeNodes,"addTreeJson="+str,function(state,json){
+			    if(state=="success"){
+			        if(json&&json.returnCode=="1"){
+			            alert("新增成功");
+			            parent.gridReload("mytable");
+			            closeDialog();
+			        }else{
+			            alert(json.returnMessage||"新增失败！");
+			        }
+			    }else{
+			        alert("系统错误！");
+			    }
+			    toggleButtonStyle($btn,false);
+			}); 
+		}else{
+			alert("请您填写树名称！");
+			return false;
+		}
+    })
+
+	$("#treename").bind("keyup",function(e){
+	    var _self = $(this);
+	    var newVal = _self.val().replace(/[!<>"#$'\/|\\~%]/g,'');
+	    _self.val(newVal);
+	});
+})
+</script>
+	
+</body>
+
+</html>
+
+

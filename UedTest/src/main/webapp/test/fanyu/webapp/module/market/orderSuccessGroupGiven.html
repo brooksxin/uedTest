@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>预览</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<div class="breadcrumb"></div>
+<div class="ml-15 mr-15">
+	<table width="100%">
+		<tr>
+			<td width=""><div class="titleArea">今日下单量</div></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>2015.4.1</td>
+			<td><div class="fn-right">任务数量：160</div></td>
+		</tr>
+	</table>
+</div>
+<div class="tablewidth mg_t_10">
+	<table class="ui-record-table table_radius table-bordered table-striped" >
+		<thead>
+			<tr>
+				<th width="25"></th>
+				<th width="80">员工工号</th>
+				<th width="60">员工姓名</th>
+				<th width="100">通话次数</th>
+				<th width="">完成进度</th>
+				<th width="80">完成配给数量</th>
+			</tr>
+		</thead>
+		<tbody id="J_tabletpl">
+			<tr>
+				<td><div class="table_select">
+						<input type="checkbox" />
+					</div></td>
+				<td>X009501</td>
+				<td>张晓峰</td>
+				<td>160</td>
+				<td><div class="rateBar_Large fn-clear">
+						<div class="rateBarText">67%</div>
+						<div class="rateBarArea">
+							<div class="rateBar">
+								<div class="rateBg"></div>
+								<div class="rateProcess" style="width:67%;"></div>
+							</div>
+						</div>
+					</div></td>
+				<td>16/3416</td>
+			</tr>
+			<tr>
+				<td><div class="table_select">
+						<input type="checkbox" />
+					</div></td>
+				<td>X009501</td>
+				<td>张晓峰</td>
+				<td>160</td>
+				<td><div class="rateBar_Large fn-clear">
+						<div class="rateBarText">60%</div>
+						<div class="rateBarArea">
+							<div class="rateBar">
+								<div class="rateBg"></div>
+								<div class="rateProcess" style="width:60%;"></div>
+							</div>
+						</div>
+					</div></td>
+				<td>16/3416</td>
+			</tr>
+			<tr>
+				<td><div class="table_select">
+						<input type="checkbox" />
+					</div></td>
+				<td>X009501</td>
+				<td>张晓峰</td>
+				<td>160</td>
+				<td><div class="rateBar_Large fn-clear">
+						<div class="rateBarText">90%</div>
+						<div class="rateBarArea">
+							<div class="rateBar">
+								<div class="rateBg"></div>
+								<div class="rateProcess" style="width:90%;"></div>
+							</div>
+						</div>
+					</div></td>
+				<td>16/3416</td>
+			</tr>
+			<tr>
+				<td><div class="table_select">
+						<input type="checkbox" />
+					</div></td>
+				<td>X009501</td>
+				<td>张晓峰</td>
+				<td>160</td>
+				<td><div class="rateBar_Large fn-clear">
+						<div class="rateBarText">80%</div>
+						<div class="rateBarArea">
+							<div class="rateBar">
+								<div class="rateBg"></div>
+								<div class="rateProcess" style="width:80%;"></div>
+							</div>
+						</div>
+					</div></td>
+				<td>16/3416</td>
+			</tr>
+			<tr>
+				<td><div class="table_select">
+						<input type="checkbox" />
+					</div></td>
+				<td>X009501</td>
+				<td>张晓峰</td>
+				<td>160</td>
+				<td><div class="rateBar_Large fn-clear">
+						<div class="rateBarText">66%</div>
+						<div class="rateBarArea">
+							<div class="rateBar">
+								<div class="rateBg"></div>
+								<div class="rateProcess" style="width:66%;"></div>
+							</div>
+						</div>
+					</div></td>
+				<td>16/3416</td>
+			</tr>
+			<tr>
+				<td><div class="table_select">
+						<input type="checkbox" />
+					</div></td>
+				<td>X009501</td>
+				<td>张晓峰</td>
+				<td>160</td>
+				<td><div class="rateBar_Large fn-clear">
+						<div class="rateBarText">88%</div>
+						<div class="rateBarArea">
+							<div class="rateBar">
+								<div class="rateBg"></div>
+								<div class="rateProcess" style="width:88%;"></div>
+							</div>
+						</div>
+					</div></td>
+				<td>16/3416</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<!--翻页及功能按钮区域开始-->
+<DIV class="amount-bottom">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+		<tr>
+			<td width="60"><input type="checkbox" class="selectAll" id="selectAll" />
+				<label for="selectAll">全选</label></td>
+			<td width="80">剩余配给量:0</td>
+			<td width="100"><DIV class="normalBtnArea"> <A class="normalBtn BGgray" href="javascript:;">重新分配</A> </DIV></td>
+			<td width="200"><div class="normalBtnArea fn-center"> <a class="normalBtn BGblue" href="javascript:;" id="J_search" >调整配给数量</a> </div></td>
+			<td><DIV class="fn-clear action-other  action-other-show " style="width:250px">
+					<DIV id=Pagination class="page pagination fn-right"> </DIV>
+					<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+				</DIV></td>
+		</tr>
+	</table>
+</DIV>
+<#include "../../tpl/res_js.tpl" />
+ 
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
+

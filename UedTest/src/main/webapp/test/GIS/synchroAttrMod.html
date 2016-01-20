@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>同步属性修改</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/ajaxform/3.2.3/jquery.form.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body>
+<div class="openwin">
+	<form id="busi_form" class="bz_manage">
+        <table class="infoTable" cellpadding="0" cellspacing="0" border="0" width="100%">
+            <colgroup>
+                <col width="18%"/>
+                <col width="50%" />
+                <col width="18%"/>
+                <col />
+            </colgroup>
+            
+            <tbody>
+               <tr>
+                    <td class="keycription">属性名称：</td>
+                    <td  colspan="5">
+                    <input type="hidden" name="id" id="dynamicInfoId"/>
+                    <input class="normalinput" type="text" value="" name="attrName" id="attrName" maxlength="30" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"/></td>
+                </tr>
+                <tr>
+                    <td class="keycription">属性Label：</td>
+                    <td  colspan="5">
+                    <input class="normalinput js-class-non" type="text" value="" name="attrLabel" id="attrLabel" maxlength="30" /></td>
+                </tr>
+                <tr>
+                    <td class="keycription">接口URL：</td>
+                    <td colspan="5">
+                        <input class="normalinputlong" type="text" value="" name="intfUrl" id="intfUrl" maxlength="400" /></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="keycription">接口KEY：</td>
+                    <td colspan="5">
+                        <input class="normalinput js-class-non" type="text" value="" name="intfKey" id="intfKey" maxlength="30" /></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div class="bz_btn_list">
+                            <a class="btn_normal fn-mr-20" href="#nogo" id="J_save"><em>保存</em></a>
+                            <a class="btn_normal " href="#nogo" id="J_cancel"><em>关闭</em></a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+<script type="text/javascript" >
+$(function(){
+    var id = art.dialog.data("id");
+    var name = art.dialog.data('name');
+    var url = art.dialog.data('url');
+    var key = art.dialog.data('key');
+    var label = art.dialog.data('label');
+    
+    $("#dynamicInfoId").val(id);
+    $("#attrName").val(name).next().hide().siblings("span").show();
+    $("#intfUrl").val(url).next().hide().siblings("span").show();
+    $("#intfKey").val(key).next().hide().siblings("span").show();
+    $("#attrLabel").val(label).next().hide().siblings("span").show();
+    
+    var attrname = $("#attrName").val();
+    if(attrname == "")
+    $("#attrName").val("长度小于30个字符").css("color","#A9A9A9");
+    var rgExp = /^(http:\/\/){1}.+(\?wsdl&method=){1}.+$/g;
+    placeholderByReg("#intfUrl","http://XXXX?wsdl&method=XXX",rgExp);
+    placeholder("#attrLabel","长度小于30个字符");
+    placeholder("#intfKey","长度小于30个字符");
+    placeholder("#attrName","长度小于30个字符");
+    placeholder("#intfUrl","");
+    
+    $("#attrName").on("focus",function(){
+        var reg = /[^\w\.\/]/ig;  
+            if($(this).val() == "长度小于30个字符"){
+                $(this).val("").css("color","black");
+            }
+            $(this).next().show().siblings("span").hide();
+    }).on("blur",function(){
+        var reg = /[^\w\.\/]/ig;  
+        var attrname = $(this).val();
+        if((!reg.test(attrname)) && attrname != ""){
+            $(this).next().hide().siblings("span").show();
+        }
+        if($(this).val() == ""){
+            $(this).val("长度小于30个字符").css("color","#A9A9A9");
+            $(this).next().show().siblings("span").hide();
+        }
+            reg.lastIndex = 0;
+    })
+    
+    
+    var formFlag = 0;
+    var str1 = $("#busi_form").serialize();
+    $("#J_save").click(function(){
+        var $btn = $(this);
+        var str2 = $("#busi_form").serialize();
+        var intfUrl = $.trim($("#intfUrl").val());
+        var attrname = $("#attrName").val();
+        var intfKey = $("#intfKey").val();
+        var attrLabel = $("#attrLabel").val();
+
+        rgExp.lastIndex = 0;
+        if(!formFlag){
+            var str = "&"+$("#busi_form").serialize();
+            if($.trim($("#attrName").val())==""){
+                result_prompt(2,"属性名称不能为空！");
+            }else if($.trim($("#attrLabel").val())==""){
+                result_prompt(2,"属性Label不能为空！");
+            }else if(intfUrl == "http://XXXX?wsdl&method=XXX"){
+                result_prompt(2,"请输入接口URL！");
+            }else if(attrname == "长度小于30个字符"){
+                result_prompt(2,"请输入合法的属性名称！");
+            }else if(intfKey == "长度小于30个字符"){
+                result_prompt(2,"请输入合法的Key值！");
+            }else if(attrLabel == "长度小于30个字符"){
+                result_prompt(2,"请输入合法的Label！");
+            }else if(!rgExp.test(intfUrl)){
+                result_prompt(2,"接口URL输入格式不正确！");
+            }else if($.trim($("#intfKey").val())==""){
+                result_prompt(2,"接口key值不能为空！");
+            }else if(str1 == str2){
+                result_prompt(2,"未做任何修改！");
+            }else{
+                formFlag = 1;
+                toggleButtonStyle($btn,true);
+                 $.PostJson(REQURLS.updateSynProps,str,function(state,json){
+                     if(state=="success"){
+                         if(json&&json.returnCode=="1"){
+                             result_prompt(1,"修改成功");
+                             parent.gridReload("mytable");
+                         }else{
+                             result_prompt(0,json.returnMessage||"修改失败！");
+                         }
+                     }else{
+                         result_prompt(0,"系统错误！");
+                     }
+                     formFlag = 0;
+                     toggleButtonStyle($btn,false);
+                 });
+            }
+        }
+    })
+})
+
+</script>
+
+</body>
+</html>
+
+

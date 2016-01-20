@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>可编辑树结构</title> <#include "../../tpl/res_css.tpl" />
+<link rel="stylesheet" type="text/css"
+	href="../../lib/ztree/3.5.01/zTreeStyle/zTreeStyle.css" />
+<link href="../../lib/pretty/prettify.css" type="text/css"
+	rel="stylesheet" />
+<link rel="stylesheet" href="../../css/common.css">
+<link rel="stylesheet" href="../../css/tablepay.css" />
+<link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+<style type="text/css">
+.form_container .zui {
+	float: left;
+	width: 300px;
+}
+
+#u11 {
+	position: absolute;
+	left: 330px;
+	top: 230px;
+	width: 49px;
+	height: 25px;
+	font-family: 'HiraginoSansGB-W3', 'Hiragino Sans GB W3',
+		'Hiragino Sans GB';
+	font-weight: 300;
+	font-style: normal;
+	font-size: 12px;
+}
+
+#u11_img {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 49px;
+	height: 25px;
+}
+
+#u12 {
+	position: absolute;
+	left: 0px;
+	top: 4px;
+	width: 49px;
+	white-space: nowrap;
+}
+</style>
+</head>
+<body id="main_body" onload="prettyPrint()">
+
+	<div class="form_container fn-clear">
+		<div class="zui">
+			<ul id="J_zTree" class="ztree ability-catalog-list fn-clear"></ul>
+		</div>
+		<div class="normalBtnArea ft-left">
+			<a class="normalBtn BGblue" href="javascript:;" id="J_addTree">增加节点</a>
+			<a class="normalBtn BGblue" href="javascript:;" id="J_delTree">删除节点</a>
+			<a class="normalBtn BGblue" href="javascript:;" id="J_editTree">编辑节点</a>
+		</div>
+		<!-- <pre class="prettyprint mg_t_20 fn-clear" id="html">
+	
+	</pre> -->
+	</div>
+	<#include "../../tpl/res_js.tpl" />
+	<script type="text/javascript" src="../../lib/pretty/prettify.js"></script>
+	<script src="../../lib/ztree/3.5.01/jquery.ztree.core-3.5.js"></script>
+	<script src="../../lib/ztree/3.5.01/jquery.ztree.excheck-3.5.js"></script>
+	<script type="text/javascript">
+		srvMap.add('queryAlldept', 'alldept.json',
+				'front/sh/user!index?uid=sys1014&isAll=true');//查询树
+		srvMap
+				.add('addDept', 'alldept.json',
+						'front/sh/user!index?uid=sys1016');
+		srvMap.add('editDept', 'alldept.json',
+				'front/sh/user!index?uid=sys1012');
+		var setting = {
+			view : {
+				dblClickExpand : true, //去除双击事件，单击展开收缩
+				showLine : false, //不显示虚线
+				selectedMulti : false
+			},
+			data : {
+				keep : {
+					parent : true,
+					leaf : true
+				},
+				edit : {
+					enable : true,
+					showRemoveBtn : false,
+					showRenameBtn : false
+				},
+				key : {
+					children : "subList", //json中树子节点的key值
+					name : "PTY_NM" //json中需要展示树的key值
+				}
+			},
+			callback : {
+				beforeRemove : beforeRemove,
+				beforeClick : beforeClick
+			}
+		};
+
+		$(function() {
+			initTree();
+			//添加事件
+			$('#J_addTree')
+					.bind(
+							'click',
+							function() {
+								var zTree = $.fn.zTree.getZTreeObj("J_zTree"), nodes = zTree
+										.getSelectedNodes(), treeNode = nodes[0]
+								var content = ' <div method="post" action="#" class="cmxform" >'
+										+ '<form class="record-search-form record-search-min record-search-form-border" id="J_formAdd" name="J_formAdd" ><div class="formArea">'
+										+ ' <table width="100%" class="form_table">'
+										+ '<tbody>'
+										+ ' <tr>'
+										+ '<td width="35%"><label class="formDescription" ><span class="fn-high">*</span>部门名称：</label></td>'
+										+ '<td><input class="FormInputText" id="deptName" name="deptName" type="text"/></td>'
+										+ '<tr>'
+										+ '<td width="35%"><label class="formDescription"><span class="fn-high">*</span>部门类型：</label></td>'
+										+ ' <td><div id="J_select" id="deptType" name="deptType"></div></td>'
+										+ ' </tr>'
+										+ '  <tr>'
+										+ ' <td width="35%"><label class="formDescription">部门描述：</label></td>'
+										+ '  <td><textarea class="form_textarea" id="deptDes" name="deptDes"></textarea></td>'
+										+ ' </tr>     </tbody></table></div> </form></div>'
+								Util.dialog.openDiv({
+									content : content,
+									width : "450px",
+									height : "auto",
+									modal : true,
+									okVal : '确定',
+									okCallback : addOk,
+									cancelVal : '取消',
+									cancelCallback : {}
+								})
+								$("#J_select").NiceSelect({
+									url : "../../data/selectDatas.json",
+									datas : "codeType=dept",
+									id : "deptType",
+									name : "deptType"
+								});
+							})
+
+			//删除节点
+			$('#J_delTree')
+					.bind(
+							'click',
+							function() {
+								var zTree = $.fn.zTree.getZTreeObj("J_zTree"), nodes = zTree
+										.getSelectedNodes(), treeNode = nodes[0];
+								if (nodes.length == 0) {
+									alert("请先选择一个节点");
+									return;
+								}
+								//param2: 触发回调函数（beforeRemove）
+								zTree.removeNode(treeNode, true);
+							})
+			$('#J_editTree')
+					.bind(
+							'click',
+							function() {
+								var zTree = $.fn.zTree.getZTreeObj("J_zTree"), //获取树对象
+								nodes = zTree.getSelectedNodes(), //获取选中的树节点对象，数组类型
+								treeNode = nodes[0];
+								if (nodes.length == 0) {
+									alert("请先选择一个节点");
+									return;
+								}
+								var content = '<div method="post" action="#" class="cmxform" >'
+										+ '<form class="record-search-form record-search-min record-search-form-border" id="J_formEdit" name="J_formEdit" ><div class="formArea">'
+										+ ' <table width="100%" class="form_table">'
+										+ '<tbody>'
+										+ ' <tr>'
+										+ '<td width="35%"><label class="formDescription" >部门编号：</label></td>'
+										+ '<td><span>'
+										+ treeNode.PTY_NO
+										+ '</span></td>'
+										+ '<tr>'
+										+ ' <tr>'
+										+ '<td width="35%"><label class="formDescription" ><span class="fn-high">*</span>部门名称：</label></td>'
+										+ '<td><input class="FormInputText" type="text" id="deptName" name="deptName" value="'+treeNode.PTY_NM+'"/></td>'
+										+ '<tr>'
+										+ '<td width="35%"><label class="formDescription"><span class="fn-high">*</span>部门类型：</label></td>'
+										+ ' <td><div id="J_select"  id="deptType" name="deptType"></div></td>'
+										+ ' </tr>'
+										+ '  <tr>'
+										+ ' <td width="35%"><label class="formDescription">部门描述：</label></td>'
+										+ '  <td><textarea class="form_textarea"  id="deptDes" name="deptDes"> '
+										+ treeNode.DEPT_DESC
+										+ '</textarea></td>'
+										+ ' </tr>     </tbody></table></div></form></div>'
+								Util.dialog.openDiv({
+									content : content,
+									width : "450px",
+									height : "auto",
+									modal : true,
+									okVal : '确定',
+									okCallback : editOk,
+									cancelVal : '取消',
+									cancelCallback : {}
+								})
+								$("#J_select").NiceSelect({
+									url : "../../data/selectDatas.json",
+									datas : "codeType=dept",
+									id : "deptType",
+									name : "deptType"
+								});
+							})
+		})
+
+		function beforeClick(treeId, treeNode) {
+			//如果是父节点，则展开或收缩子节点
+			if (treeNode.isParent) {
+				$.fn.zTree.getZTreeObj(treeId).expandNode(treeNode, null, true);
+			}
+			return true;
+		}
+
+		function beforeRemove(treeId, treeNode) {
+			return confirm("确认删除 节点" + treeNode.PTY_NM + " 吗？");
+		}
+
+		//初始化树结构
+		var initTree = function() {
+			Util.ajax.postJson(srvMap.get('queryAlldept'), '', function(json,
+					status) {
+				if (status) {
+					/*
+						param1：树的容器id
+						param2：树的配置参数
+						param3：树的json数据
+					 */
+					$.fn.zTree.init($("#J_zTree"), setting, json.object);
+				}
+			});
+		}
+		var addOk = function() {
+			var zTree = $.fn.zTree.getZTreeObj("J_zTree"), nodes = zTree
+					.getSelectedNodes(), treeNode = nodes[0]
+			var datas = $('#J_formAdd').serialize();
+			if (nodes.length > 0) {
+				datas += "&baseId=" + treeNode.DEPT_ID;
+			}
+			Util.ajax.postJson(srvMap.get('addDept'), datas, function(json,
+					status) {
+				if (status) {
+					/*
+						param1：树的容器id
+						param2：树的配置参数
+						param3：树的json数据
+					 */
+					$.fn.zTree.init($("#J_zTree"), setting, json.object);
+				}
+			});
+		}
+		var editOk = function() {
+			var zTree = $.fn.zTree.getZTreeObj("J_zTree"), nodes = zTree
+			.getSelectedNodes(), treeNode = nodes[0]
+			var datas = $('#J_formEdit').serialize();
+			datas += "&deptId=" + treeNode.DEPT_ID;
+			Util.ajax.postJson(srvMap.get('editDept'), datas, function(json,
+					status) {
+				if (status) {
+					/*
+						param1：树的容器id
+						param2：树的配置参数
+						param3：树的json数据
+					 */
+					$.fn.zTree.init($("#J_zTree"), setting, json.object);
+				}
+			});
+		}
+	</script>
+</body>
+</html>

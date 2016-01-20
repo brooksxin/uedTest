@@ -1,0 +1,21 @@
+{
+	"returnCode": "0000",
+	"returnMessage": "success",
+	"bean":{
+		"total": "4"
+	},
+	"beans":[
+		{
+			"TASK_ID":"0001",
+			"TASK_NAME":"河南省预约客户外呼任务",
+			"TASK_TOTAL_NUM":"180",
+			"TASK_FINISH_NUM":"20"
+		},
+		{
+			"TASK_ID":"0002",
+			"TASK_NAME":"山东客户生日关怀",
+			"TASK_TOTAL_NUM":"280",
+			"TASK_FINISH_NUM":"10"
+		}
+	]
+}

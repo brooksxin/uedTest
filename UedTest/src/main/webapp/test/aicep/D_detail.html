@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>详情展示</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/jquery-easyui-1.4/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/dialog/4.1.6/skins/simple.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+
+<script type="text/javascript" src="ui/js/jquery.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/js/jquery.form.js"></script>
+<script type="text/javascript" src="ui/js/json2.js"></script>
+<script type="text/javascript" src="ui/pagination/1.2.1/jquery.pagination.js"></script>
+<script type="text/javascript" src="ui/js/handlebars.js"></script>
+<script type="text/javascript" src="ui/js/helpers.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="ui/js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="ui/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="ui/js/common.js"></script>
+</head>
+<body>
+
+<div class="openwind">
+	<div class="wrap">
+		<table cellpadding="0" cellspacing="0" border="0" width="100%" class="info_table">
+			<tbody id="J_detail_data">
+				
+			</tbody>
+		</table>
+		<div class="handler">
+			<a href="javascript:;" hidefocus="true" class="J_alert_0">失败</a>
+			<a href="javascript:;" hidefocus="true" class="J_alert_1">成功</a>
+			<a href="javascript:;" hidefocus="true" class="J_alert_2">警告</a>
+			<a href="javascript:;" hidefocus="true" class="J_alert_3">疑问</a>
+			<a href="javascript:;" hidefocus="true" class="J_alert_4">confirm</a>
+			<a href="javascript:;" hidefocus="true" class="J_alert_5">操作父页面</a>
+		</div>
+	</div>
+</div>
+
+<textarea class="fn-hide" id="detail_tpl">
+<tr>
+	<td width="16%" class="des">
+		<label>能力名称：</label>
+	</td>
+	<td width="34%">
+		<span class="des">{{name1}}</span>
+	</td>
+	<td width="16%" class="des">
+		<label>能力简述：</label>
+	</td>
+	<td>
+		<span class="des">{{name2}}</span>
+	</td>
+</tr>
+<tr>
+	<td class="des">
+		<label>能力名称：</label>
+	</td>
+	<td>
+		<span class="des">{{name3}}</span>
+	</td>
+	<td class="des">
+		<label>能力简述：</label>
+	</td>
+	<td>
+		<span class="des">{{name4}}</span>
+	</td>
+</tr>
+<tr>
+	<td class="des">
+		<label>能力名称：</label>
+	</td>
+	<td colspan="3">
+		<span class="des">{{name5}}</span>
+	</td>
+</tr>
+</textarea>
+
+<script type="text/javascript">
+$(function(){
+	var data = art.dialog.data("data");
+	$("#J_detail_data").temp($("#detail_tpl").val(), data);
+
+
+	$(".J_alert_0").click(function(){
+		result_prompt("0", '222222222');
+	})
+
+	$(".J_alert_1").click(function(){
+		result_prompt("1", '这是请求成功的alert，注意点击确定按钮会关闭弹窗');
+	})
+
+	$(".J_alert_2").click(function(){
+		result_prompt("2", '这是请求强调的alert');
+	})
+
+	$(".J_alert_3").click(function(){
+		result_prompt("3", '这是表示疑问的alert');
+	})
+
+	$(".J_alert_4").click(function(){
+		result_comfirm("是否删除？", function(){
+			result_prompt("0", "删除失败");
+		}, function(){
+			result_prompt("1", "取消成功");
+		})
+	})
+
+	$(".J_alert_5").click(function(){
+		// parent.getP_dialog("33333333");
+		openWindow('上传', 'D_add.html', 600, 360);
+		return false;
+	})
+})
+
+function zalert(data){
+	alert(data+"12")
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>中移在线集中审核系统</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/js/dialog/6.0.5/ui-dialog.css">
+<link rel="stylesheet" type="text/css" href="ui/js/selectordie/0.1.8/selectordie.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+<div class="glob-top">
+	<div class="wrap fn-clear">
+		<a class="logo" href="index.html" hidefocus="true">
+			<img src="ui/theme/img/pic-logo.png" width="230">
+		</a>
+		<div class="menu fn-clear" id="J_menu">
+			
+		</div>
+		<div class="userInfo fn-right">
+			<i class="iconfont userIcon" title="用户"></i>
+			<span id="J_userLoginName">罗晓娜（127890）</span>
+			<a href="javascript:;" hidefocus="true" id="J_logOut" class="J_logOut">退出</a>
+		</div>
+	</div>
+</div>
+
+<div class="glob-contain">
+	<div class="wrap" id="J_wrap">
+		<a href="ui/theme/img/wang1.bmp" title="正面" class="zpicbox">
+		    <img src="ui/theme/img/wang1.bmp" alt="正面" width="175" height="100">
+		</a>
+	</div>
+</div>
+
+<div class="J_navigation" id="J_navigation">
+	<a href="javascript:;" hidefocus="true" class="navig left"></a>
+	<a href="javascript:;" hidefocus="true" class="navig right"></a>
+</div>
+
+<textarea class="fn-hide" id="T_menu">
+	<ul>
+		{{#each this}}
+		<li>
+			<a href="javascript:;" hidefocus="true" class="menuItem" title="{{tit}}">
+				<span>{{tit}}</span>
+			</a>
+			<div class="sub-menu">
+				<span class="arrow"></span>
+				{{#each sub}}
+				<a href="javascript:;" hidefocus="true" class="sub-menuItem {{retlast ../sub.length @index}}" title="{{name}}" data-url="{{tpl}}">
+					<span>{{name}}</span>
+				</a>
+				{{/each}}
+			</div>
+		</li>
+		{{/each}}
+	</ul>
+</textarea>
+
+<script src="ui/js/jquery/1.8.3/jquery.js"></script>
+<script src="ui/js/jquery/1.6.3/jquery.js"></script>
+<script type="text/javascript">
+	//只限于图片查看时使用该jq对象
+	var jQuery_1_6_3 = $.noConflict(true);
+</script>
+<script src="ui/js/json2/json2.js"></script>
+<script src="ui/js/handlebars/handlebars.js"></script>
+<script src="ui/js/handlebars/helpers.js"></script>
+<script src="ui/js/dialog/6.0.5/dialog-min.js"></script>
+<script src="ui/js/blockUI/jquery.blockUI.js"></script>
+<script src="ui/js/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="ui/js/selectordie/0.1.8/selectordie.min.js"></script>
+<script src="ui/js/datepicker/4.8.b2/WdatePicker.js"></script>
+<script src="ui/js/jqueryForm/jquery.form.js"></script>
+<script src="ui/js/jquery.picbox/jquery.picbox.js"></script>
+<script src="ui/js/main.js"></script>
+<script src="ui/js/requireJs/2.1.17/requireJs.js"></script>
+<script src="ui/js/common.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+
+	//图片查看
+	jQuery_1_6_3(".zpicbox").picbox();
+	//退出事件
+	$("#J_logOut").click(function(){
+		result_tips("退出");
+	})
+
+	//获取菜单目录
+	getMenu();
+})
+
+function getMenu(){
+	srvMap.add("menu", "menu.json", "");
+
+	$.PostJson(srvMap.get("menu"), "", function(state, json){
+		if(state=='success'){
+			if(json && json.rtnCode == '0'){
+				$("#J_menu").temp($("#T_menu").val(), json.beans);
+				
+				//目录菜单按钮事件
+				$("#J_menu .sub-menuItem").click(function(){
+					if($(this).hasClass("cur")){
+						return false;
+					}else{
+						$(".sub-menuItem").removeClass("cur");
+						$(this).addClass("cur");
+					}
+					var tpl = $(this).data("url");
+					if(tpl){
+						require(['../tpl/'+tpl], function(fnInit){
+							fnInit();
+						})
+					}else{
+						result_tips("该目录暂未配置！");
+						return false;
+					}
+				}).eq(0).click();
+
+			}else{
+				result_prompt(json.rtnMsg || "获取菜单目录失败！");
+			}
+		}else{
+			result_prompt(json.rtnMsg || "系统错误！");
+		}
+	})
+}
+
+/**
+ * 新建工单
+**/
+function getXJGD(){
+	$("#J_wrap").html('<div class="building-page"></div>');
+}
+
+/**
+ * 待办工单
+**/
+function getDBGD(){
+	require(['../tpl/DBGD'], function(fnInit){
+		fnInit();
+	})
+}
+
+/**
+ * 已办工单
+**/
+function getYBGD(){
+	require(['../tpl/YBGD'], function(fnInit){
+		fnInit();
+	})
+}
+
+Handlebars.registerHelper("retlast", function(length, index, fn) {
+	if((index+1) == length){
+		return "last";
+	}
+	return "";
+});
+</script>
+
+</body>
+</html>

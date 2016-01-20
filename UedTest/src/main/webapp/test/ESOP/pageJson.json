@@ -1,0 +1,76 @@
+{
+    "returnCode": "0",
+    "total": 10,
+    "rows": [
+        {
+            "PROD_SPEC_ID": "1000402",
+            "IS_LEAVE": "0",
+            "B_TAG": "",
+            "NEW_GOOD": "",
+            "REMARK": "20131109数据割接 add by zzq"
+        },
+        {
+            "PROD_SPEC_ID": "2002301",
+            "IS_LEAVE": "0",
+            "B_TAG": "",
+            "NEW_GOOD": "0",
+            "REMARK": "20131109数据割接 add by zzq"
+        },
+        {
+            "PROD_SPEC_ID": "2002303",
+            "IS_LEAVE": "0",
+            "B_TAG": "",
+            "NEW_GOOD": "0",
+            "REMARK": "20131109数据割接 add by zzq"
+        },
+        {
+            "PROD_SPEC_ID": "2003509",
+            "IS_LEAVE": "0",
+            "B_TAG": "",
+            "NEW_GOOD": "0",
+            "REMARK": "20131109数据割接 add by zzq"
+        },
+        {
+            "PROD_SPEC_ID": "2001511",
+            "IS_LEAVE": "0",
+            "B_TAG": "",
+            "NEW_GOOD": "0",
+            "REMARK": "20131109数据割接 add by zzq"
+        },
+        {
+            "PROD_SPEC_ID": "2001923",
+            "IS_LEAVE": "0",
+            "B_TAG": "",
+            "NEW_GOOD": "0",
+            "REMARK": "20131109数据割接 add by zzq"
+        },
+        {
+            "PROD_SPEC_ID": "2001924",
+            "IS_LEAVE": "0",
+            "B_TAG": "",
+            "NEW_GOOD": "0",
+            "REMARK": "20131109数据割接 add by zzq"
+        },
+        {
+            "PROD_SPEC_ID": "2003123",
+            "IS_LEAVE": "0",
+            "B_TAG": "",
+            "NEW_GOOD": "",
+            "REMARK": "20131109数据割接 add by zzq"
+        },
+        {
+            "PROD_SPEC_ID": "2001507",
+            "IS_LEAVE": "0",
+            "B_TAG": "",
+            "NEW_GOOD": "0",
+            "REMARK": "20131109数据割接 add by zzq"
+        },
+        {
+            "PROD_SPEC_ID": "2001514",
+            "IS_LEAVE": "0",
+            "B_TAG": "",
+            "NEW_GOOD": "0",
+            "REMARK": "20131109数据割接 add by zzq"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+	"returnCode": "0",
+	"returnMessage": "success",
+	"bean":{
+		"userName":"张三",
+		"userId":"2",
+		"userAls":"zhangsan",
+		"staffEnName":"张三",
+		"staffId":"2",
+		"staffName":"张三",
+		"op_fullname":"测试工号",
+		"deptId":"2",
+		"deptName":"22222",
+		"SEAT_TRMN_IP_ADDR":"127.0.0.1"
+	}
+}

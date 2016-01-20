@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>添加目标客户</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+			
+	<div class="pageMargin10">
+		<div class="titleArea">
+		  <h2>创建活动</h2>
+		</div>
+
+		<div class="formAreaD">
+			<div class="flowSteps">
+				<ul class="current_3">
+					<li class="FirstStep"><a href="#">基本信息</a></li>
+					<li class="SecondStep"><a href="#">选择产品</a></li>
+					<li class="ThirdStep"><a href="#">客户号码</a></li>
+					<div class="clearfloat"></div>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="creatLabelBtn">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td><div class="">已选客户人数<span id="count1">0</span>人</div></td>
+					<td><div class="normalBtnArea ft-right">
+							<a class="normalBtn BGblue" onclick="addCust()" href="javascript:;">添加目标客户</a>
+						</div></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+				
+				
+	<div class="cmxform">
+		<form class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch">
+			<input type="hidden" name="uid" value="mb005" />
+			<div class="record-search-cate">
+
+				<table class="search_table" cellpadding="0" cellspacing="0"
+					border="0" width="100%">
+
+					<tbody>
+						<tr>
+							<td width="90"><label class="description">标签名称</label></td>
+							<td width="120"><input class="inputWidth inputText" type="text"
+								maxlength="255" name="LBL_NM" /></td>
+							<td width="90"><label class="description">发布来源</label></td>
+							<td width="200"><select name="CRT_APP_SYS_ID"
+								class="inputWidth inputSelect">
+									<option>不限</option>
+							</select></td>
+							<td width="120">
+								<div class="normalBtnArea w82">
+							                  	<a class="searchBtn" href="javascript:;" id="J_search"><i></i>查询</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</form>
+	</div>
+
+	<div class="tablewidth mg_t_10">
+		<table
+			class="ui-record-table table_radius table-bordered table-striped">
+			<thead>
+				<tr>
+					<th width="50"></th>
+					<th>标签名称</th>
+					<th width="80">人数</th>
+					<th width="120">发布时间</th>
+					<th width="100">发布来源</th>
+					<th width="150">操作</th>
+			</thead>
+			<tbody id="J_tabletpl">
+
+			</tbody>
+		</table>
+	</div>
+
+	<!--翻页及功能按钮区域开始-->
+	<DIV class="amount-bottom">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0"
+			class="gridBottom">
+			<tr>
+				<td width="60"><input type="checkbox" class="selectAll"
+					id="selectAll" /> <label for="selectAll">全选</label></td>
+				
+				<td width="50%">
+					<DIV class="fn-clear action-other  action-other-show ">
+						<DIV id=Pagination class="page pagination fn-right"></DIV>
+						<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+					</DIV>
+				</td>
+			</tr>
+		</table>
+	</DIV>
+	<hr />
+	
+	<div class="formBtnArea">
+		<table width="100%">
+			<tr>
+				<td>
+					<div class="normalBtnArea fn-center">
+						<a class="normalBtn BGgray largeBtn" href="#" id="Return">上一步</a> <a
+							class="normalBtn BGblue largeBtn" href="javascript:;"
+							id="J_next">下一步</a> <a class="normalBtn BGgray largeBtn"
+							href="javascript:;" id="Save">保存草稿</a>
+					</div>
+				</td>
+				<td>
+					<div class="normalBtnArea fn-right cancleExit" style="display: none;">
+						<a href="#" class="formLink"><span>取消编辑</span></a>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>				
+				
+	<div id="alertDialog" class="ui-alertDialog fn-clear fn-hide">
+			<div class="ui-alertIco"></div>
+			<div class="ui-alertDialogTxt">您已导入目标客户，是否需要重新导入？</div>
+	</div>
+	
+
+	
+	<#include "../../tpl/res_js.tpl" />	
+	<script src="../../lib/underscore/1.8.3/m.js"></script>
+    <script src="../../lib/jqueryPlugin/jquery.countdown/2.0.2/m.js"></script>
+	<script id="T_tabletpl" type="text/x-handlebars-template">
+   {{#if beans}}
+            {{#each beans}}
+                   <tr>
+								<td><div class="table_select" lbl_id="{{lblId}}" count="{{count}}"> 
+										<input type="checkbox"  onchange="checkStaff(this)" {{checkedStr lblId count}}/>
+									</div></td>
+								<td>{{LBL_NM}}</td>
+								<td>{{count}}</td>
+								<td>{{CRT_TIME}}</td>
+								<td>{{CRT_APP_SYS_ID}}</td>
+								<td><div class="gridRowBtn" lbl_id="{{lblId}}" count="{{count}}">
+										<a class="item-text J_Desc"  href="javascript:;" LBL_DESC="{{LBL_DESC}}">查看描述</a><a
+											class="item-text J_Exit"  href="javascript:;" onclick="Exit_lbl(this)">编辑</a>
+									</div></td>
+							</tr>
+             {{/each}}
+   {{else}}
+			<tr>
+		<td colspan="6">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+   {{/if}}
+   </script>
+	<script type="text/javascript">
+	var CMPGN_ID;
+	    //var CMPGN_ID = '20150508';//活动ID
+	    var beans=[];
+	    var datas = [];//全局变量，存放选择的标签
+	    var count=0;
+	    var str="";
+	    var type="";
+	    srvMap.add('lbllist', 'lbllist.json', 'front/sh/common!execute');//查询所有标签列表
+		srvMap.add('checkedCount', 'count.json','front/sh/user!queryCustByLblId');//查询去重后的客户人数
+		srvMap.add('insertCust', 'count.json','front/sh/market!index');//插入标签到营销活动和插入客户到营销活动目标客户表
+		srvMap.add('quertCampgnLbl', 'lbl.json','front/sh/market!index');//查询跟营销活动绑定的标签ID
+		srvMap.add('Cust', 'lbl.json','front/sh/market!index');//删除目标客户
+		//页面使用参数列表
+		var G_params = {
+			url : srvMap.get('lbllist'),
+			searchformId : "J_formSearch",
+			items_per_page : 10, // 每页数     @param : limit
+			page_index : 0, //当前页  @param : start
+			pagination : "Pagination", //分页id
+			tabletpl : "T_tabletpl", //表格模板
+			tablewrap : "J_tabletpl" //表格容器
+		};
+var alertDiv = document.getElementById("alertDialog");
+var alertParams = {
+	top:top,
+    id:'D_alertdialog',
+    title:'提示',
+    content: alertDiv,
+    width: 500,
+    height:100,
+    modal: true,
+    cancelVal:'取消',
+    cancelCallback:cancelFn,
+    okVal:'确定',
+    okCallback:okFn
+}
+//页面加载完开始执行
+		$(document).ready(function() {
+			 CMPGN_ID = Util.browser.getParameter("id");
+		     var param4={"uid":"mwt011","CMPGN_ID":CMPGN_ID};
+			Util.ajax.postJsonSync(srvMap.get('Cust'), param4,
+					function(json, status) {
+						if (status) {
+							var count=json.bean.count;
+							if(count=='0'){
+								//初始化分页查询标签
+								var str1 = $("#" + G_params.searchformId).serialize();
+						        Util.pagination(G_params.page_index, true,G_params, str1);	
+							}else{
+							  //这里加判断条件是否显示提示
+							  Util.dialog.openDiv(alertParams);
+							}
+						} else {
+
+						}
+			});
+			
+			   
+		        
+				Handlebars.registerHelper('checkedStr', function(lblID,count) {
+					var result = _.find(beans, function(item, i) {
+						return item.LBL_ID == lblID;
+					})
+					if (result) {
+						var params={};
+						params.lblId = lblID;
+						params.count = count;
+						datas.push(params);
+						return 'checked';
+					}else{
+						return '';
+					}
+					//return person.firstName + " " + person.lastName;
+				});
+				//初始化函数
+				//var beans;//去重后的客户ID
+				
+
+				$('#J_search').bind('click',function() {
+					var str1 = $("#" + G_params.searchformId).serialize();
+					Util.pagination(G_params.page_index,true, G_params, str1);
+				});
+				//全选checkbox
+				$('#selectAll').change(function() {
+					var ck = this.checked;
+					$("#J_tabletpl input[type='checkbox']").each(function(i, ele) {
+						this.checked = ck;
+						checkStaff(ele);
+					});
+				});
+				//下一步  跳转到分配任务
+				 $("#J_next").bind("click",function() {
+					if(count=='0'){//判断是否添加目标客户
+						Util.ajax.postJsonSync(srvMap.get('Cust'), param4,function(json, status) {//查询是否添加新的目标客户
+							if (status) { 
+							    var count=json.bean.count;
+							   if(count=='0'){
+								  Util.dialog.tips("您还未添加目标客户，请添加！");
+								   return;
+							   }else{
+								  var param = "uid=mwt004&CMPGN_ID="+CMPGN_ID+"&count="+count+ "&" + str;
+								  Util.ajax.postJsonSync(srvMap.get('insertCust'),param,function(json,status) {
+									if (status) {
+										if (json.returnCode == '0') {
+											Util.dialog.tips("插入客户成功");
+											window.location.href = "dividetasksys.html?CMPGN_ID="+ CMPGN_ID;
+										}
+									}
+								});
+							}
+						}
+			      });
+			    }else{
+			    	var param = "uid=mwt004&CMPGN_ID="+CMPGN_ID+"&count="+count+ "&" + str;
+					  Util.ajax.postJsonSync(srvMap.get('insertCust'),param,function(json,status) {
+						if (status) {
+							if (json.returnCode == '0') {
+								Util.dialog.tips("插入客户成功");
+								window.location.href = "dividetasksys.html?CMPGN_ID="+ CMPGN_ID;
+							}
+						}
+					});
+			    }
+			});
+							   
+				     
+			
+
+			
+			//跳转到更新标签页面
+			$("#J_Exit").bind("click",function(){
+				//得到当前的标签ID
+				var LBL_ID=$(this).parent().attr("lbl_id");
+				window.location.href="updateLbl.html?LBL_ID="+LBL_ID+"&CMPGN_ID="+CMPGN_ID;
+			});
+			//跳转到商品页面
+			$("#Return").bind("click",function(){
+				window.location.href="addGoods.html?id="+CMPGN_ID;
+			});
+			$("#Save").bind("click",function(){
+				if(count=='0'){//判断是否添加目标客户
+					Util.ajax.postJsonSync(srvMap.get('Cust'), param4,function(json, status) {//查询是否添加新的目标客户
+					if (status) {
+						var count=json.bean.count;
+						if(count=='0'){
+							window.location.href="draftList.html?id="+CMPGN_ID;
+							//return;
+						}else{
+							var param = "uid=mwt004&CMPGN_ID="+CMPGN_ID+"&count="+count+ "&" + str;
+							Util.ajax.postJsonSync(srvMap.get('insertCust'),str,function(json,status) {
+								if (status) {
+									if (json.returnCode == '0') {
+										Util.dialog.tips("插入客户成功");
+										window.location.href="draftList.html?id="+CMPGN_ID;
+									}
+								}
+							});
+						}
+					}
+		      });
+		    }else{
+		    	var param = "uid=mwt004&CMPGN_ID="+CMPGN_ID+"&count="+count+ "&" + str;
+				  Util.ajax.postJsonSync(srvMap.get('insertCust'),param,function(json,status) {
+					if (status) {
+						if (json.returnCode == '0') {
+							Util.dialog.tips("插入客户成功");
+							window.location.href="draftList.html?id="+CMPGN_ID;
+						}
+					}
+				});
+		    }
+				
+				
+			});
+
+
+				$('#J_tabletpl').on('click','.J_Desc',function(e) {
+					var $el = $(e.currentTarget);
+					var d = dialog({
+						fixed : true,
+						quickClose : true,
+						content : $el.attr('lbl_desc')
+								|| '没有描述内容',
+						width : 200,
+						height : 90,
+
+					});
+					d.show($el[0]);
+				});
+		});
+
+		function checkStaff(obj) {
+			obj = $(obj);
+			var params = {};
+			if (obj.attr('checked')) {
+				params.lblId = obj.parent().attr("lbl_id");
+				params.count = obj.parent().attr("count");
+				datas.push(params);
+				//Util.ajax.loadTemp('#lbl-id', $('#lbl-id'), datas);
+				//var param2={"uid":"u001","lblId=1&lblId=2"};
+
+			} else {
+				for ( var i = 0; i < datas.length; i++) {
+					if (datas[i].lblId == obj.parent().attr("lbl_id")) {
+						datas.splice(i, 1);
+					}
+				}
+			}
+			for ( var i = 0; i < datas.length; i++) {
+				if (i == 0) {
+					str = "lblId=" + datas[i].lblId;
+				} else {
+					str = str + "&lblId=" + datas[i].lblId;
+				}
+
+			}
+			if (datas.length > 1) {
+				var params2 = "uid=u007&" + str;
+				Util.ajax.postJsonSync(srvMap.get('checkedCount'), params2,
+						function(json, status) {
+							if (status) {
+								count = json.bean.total;
+								$("#count1").text(count);
+							} else {
+
+							}
+						});
+			} else if (datas.length == 1) {
+				$("#count1").text(datas[0].count);
+				count=datas[0].count;
+			} else if (datas.length == 0) {
+				$("#count1").text("0");
+				count=0;
+			}
+		}
+		//进入编辑标签页面
+		function Exit_lbl(obj) {
+			var LBL_ID = $(obj).parent().attr("lbl_id");
+			var count = $(obj).parent().attr("count");
+			window.location.href = "updateLbl.html?count="+count+"&LBL_ID=" + LBL_ID+"&CMPGN_ID="+CMPGN_ID;;
+		}
+		
+		//确定重新导入
+		function okFn(){
+			var param3={"uid":"mwt012","CMPGN_ID":CMPGN_ID};
+			Util.ajax.postJsonSync(srvMap.get('Cust'), param3,
+					function(json, status) {
+						if (status) {
+							Util.dialog.tips("删除目标客户成功");
+							//初始化分页查询标签
+							var str1 = $("#" + G_params.searchformId).serialize();
+					        Util.pagination(G_params.page_index, true,G_params, str1);
+						} else {
+
+						}
+					});
+		}
+		
+		//取消重新导入
+		function cancelFn(){
+			window.location.href="../market/draftList.html";
+		}
+		function addCust(){
+			window.location.href="createLbl.html?CMPGN_ID="+ CMPGN_ID;
+		}
+
+	</script>
+</body>
+</html>

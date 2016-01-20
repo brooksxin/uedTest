@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>开发者首页</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/jquery-easyui-1.4/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/dialog/4.1.6/skins/blue.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+
+<script type="text/javascript" src="ui/js/jquery.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/js/jquery.form.js"></script>
+<script type="text/javascript" src="ui/js/json2.js"></script>
+<script type="text/javascript" src="ui/pagination/1.2.1/jquery.pagination.js"></script>
+<script type="text/javascript" src="ui/js/handlebars.js"></script>
+<script type="text/javascript" src="ui/js/helpers.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="ui/js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="ui/js/jquery.slides.min.js"></script>
+<script type="text/javascript" src="ui/js/common.js"></script>
+</head>
+<body>
+
+<!--顶部-->
+<div class="global-top">
+	<div class="top-content">
+		<!--左侧logo-->
+		<div class="fn-left">
+			<span class="logo"></span>
+		</div>
+
+		<!--中间-->
+		<div class="menutitle" id="menutitle">
+			<span class="active">首页</span>
+			<span class="item">应用管理</span>
+			<span class="item">能力查询</span>
+			<span class="item">申请查询</span>
+			<span class="item">其他</span>
+		</div>
+
+		<!--右侧-->
+		<div class="fn-right">
+			<div class="helpDoc" title="帮助中心"></div>
+			<div class="devDoc" title="开发文档"></div>
+			<div class="user-info" id="userInfo" title="用户信息">
+				<div class="user-info-more" id="userInfoMore">
+					<i class="iconfont" title="上三角形"></i>
+					<ul>
+						<li>
+							<a href="javascript:;" hidefocus="true" id="userInfoBase">基本信息</a>
+						</li>
+						<li>
+							<a href="javascript:;" hidefocus="true">修改密码</a>
+						</li>
+						<li class="last">
+							<a href="javascript:;" hidefocus="true">联系人</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="msgInfo" title="站内信"></div>
+		</div>
+	</div>
+</div>
+
+<div class="menu-list" id="menuList"></div>
+
+<div class="global-content">
+	<div class="container">
+		<!--用户信息及公告-->
+		<div class="login-msg fn-clear">
+			<div class="login-info fn-left">
+				<div class="base-info fn-clear">
+					<div class="user-logo fn-left"></div>
+					<div class="user-name fn-left">
+						<p class="user-type">
+							个人开发者
+						</p>
+						<p>
+							用户名：Wang_529
+						</p>
+						<a href="javascript:;" hidefocus="true">信息修改</a>
+					</div>
+				</div>
+				<div class="fn-clear">
+					<div class="phone-info fn-left">
+						<p>
+							<i class="phone-icon"></i>
+							手机
+						</p>
+						<p>187158****</p>
+					</div>
+					<div class="mail-info fn-left">
+						<p>
+							<i class="mail-icon"></i>
+							邮箱
+						</p>
+						<p class="mail-det">z@qq.com</p>
+					</div>
+				</div>
+			</div>
+			<div class="notice-info fn-left">
+				<div class="notice-header fn-clear">
+					<div class="fn-left">
+						<h2 class="fn-border-des-red">公告</h2>
+						<i class="notice-icon"></i>
+					</div>
+					<div class="fn-right">
+						<a href="javascript:;" hidefocus="true" class="notice-more"><span>更多</span></a>
+						<i class="fn-right-arrow"></i>
+					</div>
+				</div>
+				<div class="notice-content" id="myNotice">
+					
+				</div>
+			</div>
+		</div>
+		<!--能力使用情况-->
+		<div class="ability-use">
+			<h2 class="fn-border-des-red">能力使用情况</h2>
+			<div class="zslide-content">
+				<div class="top-slide" id="topSlide">
+					
+				</div>
+
+				<div id="footSlide">
+					
+				</div>
+				
+			</div>
+		</div>
+
+		<!--能力通知-->
+		<div class="ability-notice">
+			<h2 class="fn-border-des-red">能力</h2>
+			<div class="ability-notice-contain fn-clear" id="abilitNotice">
+				<div class="ability-notice-box fn-left">
+				    <h3>新上线能力</h3>
+				    <ul class="fn-clear">
+				    	<li data-json="">
+				    		<a href="javascript:;" hidefocu="true">
+				    			<span class="fn-left title">能力A</span>
+				    			<span class="fn-right date">11天前</span>
+				    		</a>
+				    	</li>
+				    	<li data-json="">
+				    		<a href="javascript:;" hidefocu="true">
+				    			<span class="fn-left title">能力B</span>
+				    			<span class="fn-right date">12天前</span>
+				    		</a>
+				    	</li>
+				    	<li data-json="">
+				    		<a href="javascript:;" hidefocu="true">
+				    			<span class="fn-left title">能力C</span>
+				    			<span class="fn-right date">13天前</span>
+				    		</a>
+				    	</li>
+				    	<li data-json="<h2>能力简介：</h2><div class='des'>这里是说明，此处省略若干字。这里是说明，此处省略若干字。这里是说明，此处省略若干字。</div>">
+				    		<a href="javascript:;" hidefocu="true">
+				    			<span class="fn-left title">能力C</span>
+				    			<span class="fn-right date">13天前</span>
+				    		</a>
+				    	</li>
+				    </ul>
+				</div>
+				<div class="ability-notice-box fn-left">
+				    <h3>即将下线能力</h3>
+				    <ul class="fn-clear">
+				    	<li>
+				    		<a href="javascript:;" hidefocu="true">
+				    			<span class="fn-left title">能力A</span>
+				    			<span class="fn-right date">11天前</span>
+				    		</a>
+				    	</li>
+				    	<li>
+				    		<a href="javascript:;" hidefocu="true">
+				    			<span class="fn-left title">能力B</span>
+				    			<span class="fn-right date">12天前</span>
+				    		</a>
+				    	</li>
+				    	<li>
+				    		<a href="javascript:;" hidefocu="true">
+				    			<span class="fn-left title">能力C</span>
+				    			<span class="fn-right date">13天前</span>
+				    		</a>
+				    	</li>
+				    	<li>
+				    		<a href="javascript:;" hidefocu="true">
+				    			<span class="fn-left title">能力C</span>
+				    			<span class="fn-right date">13天前</span>
+				    		</a>
+				    	</li>
+				    </ul>
+				</div>
+			</div>
+		</div>
+
+		<!--操作历史-->
+		<div class="achievement">
+			<h2 class="fn-border-des-red">我的成就</h2>
+			<div class="achievement-content">
+				<div class="left-btn" id="achievementBtnL"></div>
+				<div class="achievement-zcontainer">
+					<ul class="achievement-container fn-clear" id="achievementContainer">
+						<li>
+							<span class="date">2014.03.11</span>
+							<span class="title">注册成为开发平注册成为开发平注册成为开发平注册成为开发平注册成为开发平注册成为开发平注册成为开发平注册成为开发平注册成为开发平注册成为开发平注册成为开发平注册成为开发平注册成为开发平注册成为开发平注册成为开发平</span>
+						</li>
+						<li>
+							<span class="date">2014.03.21</span>
+							<span class="title">审批通过</span>
+						</li>
+						<li>
+							<span class="date">2014.03.2441</span>
+							<span class="title">审批通过</span>
+						</li>
+						<li>
+							<span class="date">2014.03.2221</span>
+							<span class="title">审批通过</span>
+						</li>
+						<li>
+							<span class="date">2014.03.21</span>
+							<span class="title">22审批通过</span>
+						</li>
+						<li>
+							<span class="date">2014.03.21</span>
+							<span class="title">dd审批通过</span>
+						</li>
+						<li>
+							<span class="date">2014.03.21</span>
+							<span class="title">9999999999</span>
+						</li>
+						<li>
+							<span class="date">2014.03.21</span>
+							<span class="title">333</span>
+						</li>
+						<li>
+							<span class="date">2014.03.21</span>
+							<span class="title">22</span>
+						</li>
+						<li>
+							<span class="date">2014.03.21</span>
+							<span class="title">xxx</span>
+						</li>
+					</ul>
+				</div>
+				<div class="right-btn" id="achievementBtnR"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="global-footer">
+	<div class="foot-wrap">
+		<div class="contract">
+			<a href="javascript:;" hidefocus="true">联系我们</a>
+			<a href="javascript:;" hidefocus="true">投诉举报</a>
+			<a href="javascript:;" hidefocus="true">Complaint  Guidlines</a>
+			<a href="javascript:;" hidefocus="true" class="last">移动能力开放平台</a>
+		</div>
+		<div>
+			<p>Copyright  ©  1998-2050  China  Mobile. All Rights  Reserved.</p>
+		</div>
+	</div>
+</div>
+
+<!--目录-->
+<textarea class="fn-hide" id="menuList_tpl">
+{{#each this}}
+<div class="navparts fn-clear fn-hide">
+	{{#each list}}
+	<dl>
+		<dt>{{title}}</dt>
+		{{#each item}}
+		<dd>
+			<a href="{{url}}" hidefocus="true"><span>{{name}}</span></a>
+		</dd>
+		{{/each}}
+	</dl>
+	{{/each}}
+</div>
+{{/each}}
+</textarea>
+
+<!--公告-->
+<textarea class="fn-hide" id="myNotice_tpl">
+<ul>
+{{#each this}}
+	<li class="fn-clear">
+		<div class="fn-left">
+			<span>{{title}}</span>
+			{{#if new}}
+			<i class="notice-new"></i>
+			{{/if}}
+		</div>
+		<div class="fn-right">{{date}}</div>
+	</li>
+{{/each}}
+</ul>
+</textarea>
+
+<!--能力使用情况-->
+<textarea class="fn-hide" id="topSlide_tpl">
+<ul class="fn-clear">
+{{#each this}}
+	{{retNewUl @index}}
+	<li>
+		<span class="item" title="{{name}}">{{name}}</span>
+	</li>
+{{/each}}
+</ul>
+<a href="javascript:;" hidefocus="true" class="slidesjs-previous slidesjs-navigation">
+	<i class="icon-chevron-left icon-large"></i>
+</a>
+<a href="javascript:;" hidefocus="true" class="slidesjs-next slidesjs-navigation">
+	<i class="icon-chevron-right icon-large"></i>
+</a>
+</textarea>
+<textarea class="fn-hide" id="footSlide_tpl">
+{{#each this}}
+<div class="foot-slide">
+	<ul class="fn-clear">
+		{{#each item}}
+		{{retNewUlFoot @index}}
+		<li class="zitem fn-clear">
+			<a href="javascript:;" hidefocus="true" title="{{name}}" class="{{upDown}}">
+				<i class="item-icon fn-left"></i>
+				<span class="tit fn-left">{{name}}</span>
+				<span class="num fn-left">{{percent}}</span>
+				<i class="updown"></i>
+			</a>
+		</li>
+		{{/each}}
+	</ul>
+</div>
+{{/each}}
+</textarea>
+
+<script type="text/javascript">
+$(function(){
+	//用户信息
+	$("#userInfo").bind("mouseenter",function(){
+		$("#userInfoMore").show();
+	}).bind("mouseleave",function(){
+		$("#userInfoMore").hide();
+	});
+	$("#userInfoBase").click(function(){
+		openWindow("个人信息","searchDemo.html",800,300);
+	});
+
+	//目录列表
+	$.PostJson("ui/json/menu.json?1=1","",function(state,json){
+		if(state=='success'){
+			if(json){
+				$("#menuList").temp($("#menuList_tpl").val(), json);
+				$("#menutitle").find("span.item").each(function(i){
+					$(this).click(function(){
+						if($("#menuList").find(".navparts:eq("+i+")").is(":hidden")){
+							$(this).addClass("active").siblings().removeClass("active");
+							$(".navparts").slideUp();
+							$("#menuList").css({"display": "block"}).find(".navparts:eq("+i+")").slideDown();
+						}else{
+							$('#menuList').slideUp().find(".navparts").slideUp();
+						}
+					})
+				})
+			}
+		}
+	})
+	$(document).on('click',function(e){
+		var e = window.event || e;
+        var tar = $(e.srcElement || e.target);
+        if(tar.hasClass('menutitle') || tar.parents().hasClass('menutitle') || tar.hasClass('menu-list') || tar.parents().hasClass('menu-list')){
+
+        }else{
+            $('#menuList').slideUp().find(".navparts").slideUp();
+        }
+    })
+
+	//公告
+	$.PostJson("ui/json/notice.json?1=1","",function(state,json){
+		if(state=='success'){
+			if(json){
+				$("#myNotice").temp($("#myNotice_tpl").val(), json);
+			}
+		}
+	})
+
+	//能力使用情况--顶部
+	var slideTotal = 0;
+    $.PostJson("ui/json/topSlide.json?1=1","",function(state,json){
+    	if(state=='success'){
+    		if(json){
+    			var _topSlide = $("#topSlide");
+			    _topSlide.temp($("#topSlide_tpl").val(), json);
+			    if(_topSlide.find("ul").length>1){
+			    	_topSlide.slidesjs({
+						width: 842,
+						height: 50,
+						navigation: false
+					});
+			    }else {
+			    	_topSlide.find(".slidesjs-previous, .slidesjs-next").css({"top": "-38px"});
+			    }
+			    _topSlide.find(".item").each(function(i){
+					$(this).hover(function(){
+						if($(this).hasClass("zactive")){
+
+						}else {
+							_topSlide.find(".item").removeClass("zactive");
+							$(this).addClass("zactive");
+							$(".foot-slide:eq("+i+")").fadeIn().siblings(".foot-slide").hide();
+						}
+					})
+				});
+				slideTotal++;
+				if(slideTotal==2){
+					_topSlide.find(".item:eq(0)").trigger("mouseover");
+				}
+    		}
+    	}
+    })
+	//能力使用情况--底部
+    $.PostJson("ui/json/footSlide.json?1=1","",function(state,json){
+    	if(state=='success'){
+    		if(json){
+    			$("#footSlide").temp($("#footSlide_tpl").val(), json);
+			    $(".foot-slide").each(function(){
+			    	if($(this).find("ul").length>1){
+			    		$(this).slidesjs({
+					    	width: 842,
+					    	height: 192,
+					    	navigation: false
+					    }).find(".slidesjs-pagination .slidesjs-pagination-item a").click(function(){
+					    	$(this).addClass("active").siblings().removeClass("active");
+					    }).end()
+					    .find(".slidesjs-pagination .slidesjs-pagination-item a:eq(0)").addClass("active").end()
+					    .hide();
+			    	}
+			    })
+				slideTotal++;
+				if(slideTotal==2){
+					$('#topSlide').find(".item:eq(0)").trigger("mouseover");
+				}
+    		}
+    	}
+    })
+
+	//重新计算容器的宽度
+	var achievementContainer_length = $("#achievementContainer li").length * 130;
+	$("#achievementContainer").css({"width":achievementContainer_length});
+    $("#achievementBtnL").click(function(){
+    	var _mr_left = Math.abs(parseInt($("#achievementContainer").css("margin-left").slice(0, -2), 10));
+    	if(achievementContainer_length >= _mr_left+260){
+	    	$("#achievementContainer").stop(true,true).animate({"margin-left": "-=130"});
+    	}else {
+    		result_prompt(2,"已经是最后一个了！");
+    		return false;
+    	}
+    })
+    $("#achievementBtnR").click(function(){
+    	var _mr_left = Math.abs(parseInt($("#achievementContainer").css("margin-left").slice(0, -2), 10));
+    	if(_mr_left > 120){
+	    	$("#achievementContainer").stop(true,true).animate({"margin-left": "+=130"});
+    	}else {
+    		result_prompt(2,"已经是第一个了！");
+    		return false;
+    	}
+    })
+
+    var ability_tips = {
+    	"ownClass": "ability-tips"
+    }
+    $("#abilitNotice li").zui_tips(ability_tips);
+});
+
+Handlebars.registerHelper("retNewUl", function(index, fn) {
+	if(index<9){
+		return "";
+	}
+	if(index% 9 == 0){
+		return new Handlebars.SafeString("</ul><ul>");
+	}
+	return "";
+});
+Handlebars.registerHelper("retNewUlFoot", function(index, fn) {
+	if(index>=8 && index% 8 == 0){
+		return new Handlebars.SafeString("</ul><ul class='fn-clear'>");
+	}
+	return "";
+});
+</script>
+</body>
+</html>

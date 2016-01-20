@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新建评分项</title>
+    <#include "../../tpl/res_css.tpl" /> 
+</head>
+<body>
+<!-- 面包屑 begain -->
+<div class="breadcrumb"></div>
+<!-- 面包屑end -->
+<div class="formItem">
+    <div class="pt-10 pb-10">
+        <a href="javascript:history.go(-1)" class="formItem_jiantou-tu normalLink">返回</a>
+    </div>
+    <div class="titleArea">
+        <h2>新建评分项</h2>
+    </div>
+</div>
+<div class="formItem">
+    <hr/>
+    <form action="" method="post" id="J_form_item">
+    <div class="new_score">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" class="form_table">
+            <tbody>
+                <tr>
+                    <td align="right"><span class="fn-high">*</span>评分项名称：</td>
+                    <td><input type="text" id="ascore_item_nm" name="ascore_item_nm" placeholder="基本用语"  class="FormInputText w314"></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right">评分描述：</td>
+                    <td><textarea  rows="6" id="ascore_tmplt_desc" name="ascore_tmplt_desc" placeholder="此评分项为客服人员在进行回访电话时，需要被测评的要点之一" class="FormInputText w314"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><hr/></td> 
+                </tr> 
+                <tr class="button">
+                    <td colspan="2">
+                        <a href="###" class="normalBtn BGgray">增加评分等级</a>
+                    </td>
+                </tr>
+  				<tr>
+                    <td colspan="2"><hr/></td> 
+                </tr>
+                <tr>
+                <td><a class="normalBtn BGblue" href="###" id="InsertScoreGrade">完成</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </form>
+    <hr/>
+</div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/template" id="template-item">
+	<tr>
+                    <td align="right" valign="top">评分等级</td>
+                    <td valign="top" class="J_grade_tab">
+                        <div class="new_score_box">
+                            <span>等级名称</span>
+                            <input type="text" placeholder="优秀"  class="FormInputText width100 J_grade_nm"/>
+                            <a href="###" class="new_score_del">删除</a>
+                        </div>
+                        <div class="new_score_box">
+                            <span>等级分值</span>
+                            <input type="text" placeholder="10" class="FormInputText width100 J_grade_score"/>
+                        </div>
+                    </td>
+    </tr>
+</script>
+<script type="text/javascript"> 
+	srvMap.add('AddScoreGrade', '','front/sh/quality!execute?uid=pfx003');   //填加评分项 
+	var reg="^([\u4e00-\u9fa5]+|[a-zA-Z0-9]+)$";//不能输入特殊符号正则 
+	
+	
+	 $('#InsertScoreGrade').bind('click',function(){ 
+		 var idStr= $("#J_form_item").serialize(); 
+		 var gradeNM=[]; //等级名称
+		 var gradeScore=[]; //等级分值 
+		 $('.J_grade_tab').each(function(i,obj){
+			 var val=$(obj).find('input.J_grade_nm').val(); 
+
+			 var r = val.match(reg);
+		        if(r==null){
+		            alert('请您正确输入等级名称!'); //请将“日期”改成你需要验证的属性名称!
+		        }
+			 gradeNM.push(val);
+		 });
+		
+		 $('.J_grade_tab').each(function(i,obj){
+			 var val=$(obj).find('input.J_grade_score').val(); 
+			
+			 var r = val.match(reg);
+		        if(r==null){
+		            alert('请您正确输入等级分值!'); //请将“日期”改成你需要验证的属性名称!
+
+		        } 
+			 gradeScore.push(val);
+		 });
+		 idStr += "&gradeNMS=" + gradeNM + "&grade_scoreS=" + gradeScore;
+		 
+		//不分页获取数据
+         Util.ajax.postJsonSync(srvMap.get('AddScoreGrade'),idStr,function(json,status){
+              if (status) {
+                  alert("添加成功！");
+              }else{
+                  alert(json.returnMessage||'添加失败，请重试！');
+              }
+         });
+		  
+	 }); 
+	//页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        $('.button a').on('click', function(e){
+        	//alert('fff')
+        	var $item = $($('#template-item').html());
+        	$('.button').before($item);
+        	$item.on('click', '.new_score_del', function(e){
+        		$item.remove();
+        	});
+        }); 
+       
+    });
+</script>
+</body>
+</html>

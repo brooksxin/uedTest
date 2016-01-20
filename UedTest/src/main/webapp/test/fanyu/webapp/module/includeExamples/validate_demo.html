@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10085系统</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<#include "../../tpl/sys_top.tpl" />
+<div class="wrapper">
+    <!-- 顶部菜单容器 -->
+    <div id="J_topMenu" class="menu fn-clear"></div>
+    <!-- left start -->
+    <div class="left">
+        <!-- 左侧菜单容器 -->
+        <div class="leftInner" id="J_leftMenu"></div>
+        <div class="middle" id="mainMiddle">&nbsp;</div>
+    </div>
+    <!-- left stop -->
+    <!-- right start -->
+    <div class="right" id="mainRight" style="overflow:auto">
+        <div id="mainRight_child" style="height:100%;">
+            <div class="breadcrumb"></div>
+            <div class="cmxform">
+                <form class="record-search-form record-search-min" id="J_formSearch" name="J_formSearch">
+                    <div class="record-search-cate">
+                        <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                            
+                                <tr>
+                                    <td width="110">
+                                        <label for="custNo" class="description">客户来电号码</label>
+                                    </td>
+                                    <td width="100">
+                                        <input id="custNo" class="inputWidth" name="custNo" class="inputText" type="text" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                                    </td>
+                                    <td width="80">
+                                        <label for="startDate" class="description">开始时间</label>
+                                    </td>
+                                    <td width="100">
+                                        <input id="startDate" class="inputWidth" name="startDate" class="text Wdate" type="text" onclick="WdatePicker({realDateFmt:'yyyy-MM-dd 00:00:00',dateFmt:'yyyy-MM-dd',minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'endDate\')}'})" />
+                                    </td>
+                                    <td width="80">
+                                        <label for="endDate" class="description">结束时间</label>
+                                    </td>
+                                    <td width="100">
+                                        <input id="endDate"  name="endDate" class="inputWidth text Wdate" type="text" onclick="WdatePicker({realDateFmt:'yyyy-MM-dd 23:59:59',dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startDate\')||\'2010-01-01 23:59:59\'}'})" />
+                                    </td>
+                                    <td width="120">
+                                        <div class="normalBtnArea fn-center  w82">
+                                            <a class="searchBtn" href="javascript:;" id="J_search">
+                                                <i></i>查询
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <tbody id="J_searchMore" class="searchMore">
+                                <tr>
+                                    <td>
+                                        <label for="staffId" class="description">工号</label>
+                                    </td>
+                                    <td>
+                                        <input id="staffId" name="staffId" class="inputWidth inputText" type="text" maxlength="255" />
+                                    </td>
+                                    <td>
+                                        <label for="billId" class="description">订单编号</label>
+                                    </td>
+                                    <td>
+                                        <input id="billId" name="billId" class="inputWidth inputText" type="text" maxlength="255" />
+                                    </td>
+                                    <td>
+                                        <label for="handler" class="description">处理人</label>
+                                    </td>
+                                    <td>
+                                        <input id="handler" name="handler" class="inputWidth inputText" type="text" maxlength="10" />
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="prodName" class="description">产品名称</label>
+                                    </td>
+                                    <td>
+                                        <input id="prodName" name="prodName" class="inputWidth inputText" type="text" maxlength="255" />
+                                    </td>
+                                    <td>
+                                        <label for="IMEI" class="description">IMEI</label>
+                                    </td>
+                                    <td>
+                                        <input id="IMEI"  name="IMEI" class="inputWidth inputText" type="text" maxlength="15" onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')"  />
+                                    </td>
+                                    <td>
+                                        <label for="custName" class="description">客户姓名</label>
+                                    </td>
+                                    <td>
+                                        <input id="custName" name="custName" class="inputWidth inputText" type="text" maxlength="255" />
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="custLocale" class="description">客户归属地</label>
+                                    </td>
+                                    <td>
+                                        <input id="custLocale" name="custLocale" class="inputWidth inputText" type="text" maxlength="255" />
+                                    </td>
+                                    <td>
+                                        <label for="activeInfo" class="description">活动信息</label>
+                                    </td>
+                                    <td>
+                                        <select id="activeInfo" class="inputWidth inputSelect" ">
+                                            <option>暂无</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <label for="payType" class="description">支付方式</label>
+                                    </td>
+                                    <td>
+                                        <select id="payType" class="inputWidth inputSelect" >
+                                            <option>暂无</option>
+                                        </select>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="logisState" class="description">物流状态</label>
+                                    </td>
+                                    <td>
+                                        <select id="logisState" class="inputWidth inputSelect" >
+                                            <option>暂无</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <label for="waybillNum" class="description">运单号</label>
+                                    </td>
+                                    <td>
+                                        <input id="waybillNum" name="waybillNum" class="inputWidth inputText" type="text" maxlength="255" />
+                                    </td>
+                                    <td>
+                                        <label for="type1" class="description">类型</label>
+                                    </td>
+                                    <td>
+                                        <select id="type1" class="inputWidth inputSelect" >
+                                            <option>全部</option>
+                                        </select>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="seeMoreFilter">
+                        <a href="#" id="J_toggleSearch" class="down"></a>
+                    </div>
+                </form>
+            </div>
+            <div class="listTopBtn">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="700">
+                            <h3>共1500条记录</h3>
+                        </td>
+                        <td width="120">
+                            <div class="normalBtnArea ft-right">
+                                <a class="normalBtn BGblue" href="#">导出表单</a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="tablewidth mg_t_10">
+                <table class="ui-record-table table_radius table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th width="30">
+                                <div class="table_select">
+                                    <input type="checkbox" />
+                                </div>
+                            </th>
+                            <th width="80">订单编号</th>
+                            <th width="">商品名称</th>
+                            <th width="40">金额</th>
+                            <th width="50">客户姓名</th>
+                            <th width="80">客户来电号码</th>
+                            <th width="60">下单时间</th>
+                            <th width="40">类型</th>
+                            <th width="100">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="J_tabletpl">
+                        <tr>
+                            <td>
+                                <div class="table_select">
+                                    <input type="checkbox" />
+                                </div>
+                            </td>
+                            <td>CM20150318825824</td>
+                            <td>酷派大神F1plus 移动4G（智铂银）</td>
+                            <td>
+                                <div class="gridNum">1779.00</div>
+                            </td>
+                            <td>张凤仪</td>
+                            <td>15966137525</td>
+                            <td>2015-12-5 12:24:35</td>
+                            <td>已签收</td>
+                            <td width="90">
+                                <div class="gridRowBtn">
+                                    <a class="item-text" href="javascript:;">查看</a>
+                                    <a class="item-text" href="javascript:;">拨打电话</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table_select">
+                                    <input type="checkbox" />
+                                </div>
+                            </td>
+                            <td>CM20150318825824</td>
+                            <td>
+                                酷派大神F1plus 移动4G（智铂银）
+                            </td>
+                            <td>
+                                <div class="gridNum">1779.00</div>
+                            </td>
+                            <td>张凤仪</td>
+                            <td>15966137525</td>
+                            <td>2015-12-5 12:24:35</td>
+                            <td>已签收</td>
+                            <td width="90">
+                                <div class="gridRowBtn">
+                                    <a class="item-text" href="javascript:;">查看</a>
+                                    <a class="item-text" href="javascript:;">拨打电话</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table_select">
+                                    <input type="checkbox" />
+                                </div>
+                            </td>
+                            <td>CM20150318825824</td>
+                            <td>酷派大神F1plus 移动4G（智铂银）</td>
+                            <td>
+                                <div class="gridNum">1779.00</div>
+                            </td>
+                            <td>张凤仪</td>
+                            <td>15966137525</td>
+                            <td>2015-12-5 12:24:35</td>
+                            <td>已签收</td>
+                            <td width="90">
+                                <div class="gridRowBtn">
+                                    <a class="item-text" href="javascript:;">查看</a>
+                                    <a class="item-text" href="javascript:;">拨打电话</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table_select">
+                                    <input type="checkbox" />
+                                </div>
+                            </td>
+                            <td>CM20150318825824</td>
+                            <td>酷派大神F1plus 移动4G（智铂银）</td>
+                            <td>
+                                <div class="gridNum">
+                                    1779.00
+                                </div>
+                            </td>
+                            <td>
+                                张凤仪
+                            </td>
+                            <td>
+                                15966137525
+                            </td>
+                            <td>
+                                2015-12-5 12:24:35
+                            </td>
+                            <td>
+                                已签收
+                            </td>
+                            <td width="90">
+                                <div class="gridRowBtn">
+                                    <a class="item-text" href="javascript:;">
+                                        查看
+                                    </a>
+                                    <a class="item-text" href="javascript:;">
+                                        拨打电话
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--翻页及功能按钮区域开始-->
+            <DIV class="amount-bottom">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+                    <tr>
+                        <td width="60">
+                            <input type="checkbox" class="selectAll" id="selectAll" />
+                            <label for="selectAll">
+                                全选
+                            </label>
+                        </td>
+                        
+                        <td width="50%">
+                            <DIV class="fn-clear action-other  action-other-show ">
+                                <DIV id=Pagination class="page pagination fn-right">
+                                </DIV>
+                                <DIV class="fn-right fn-pt5 fn-pr10">
+                                </DIV>
+                            </DIV>
+                        </td>
+                    </tr>
+                </table>
+            </DIV>
+        </div>
+    </div>
+    <!-- right stop -->
+</div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+srvMap.add('test', 'test.json','');//测试数据
+
+$(function () {
+    $("#J_formSearch").tooltip({
+        show: false,
+        hide: false
+    });
+
+    //表单输入信息验证
+    var validate = $("#J_formSearch").validate({
+        rules: {
+            startDate: "required",//startDate 为字段id
+            endDate: "required",
+            custNo: {
+                required: true,
+                digits:true,
+                minlength: 11
+            },
+            staffId: {
+                required: true,
+                minlength: 11
+            },
+            billId: {
+                required: true,
+                minlength: 11
+            },
+            IMEI: {
+                required: true,
+            },
+            topic: {
+                required: true,
+                minlength: 11
+            },
+            custName: "required"
+        },
+        messages: {
+            startDate: "请选择开始时间",
+            endDate: "请选择结束时间",
+            custNo: {
+                required: "请填写客户来电号码",
+                digits: "请填写正确电话号码",
+                minlength: "客户来电号码为11位"
+            },
+            staffId: {
+                required: "请填写工号",
+                minlength: "工号为11位"
+            },
+            billId: {
+                required: "请填写订单编号",
+                minlength: "订单编号工号为11位"
+            },
+            IMEI: "请填写IMEI号",
+            custName: "请填写客户姓名"
+        }
+    });
+
+    //提交查询表单
+    $('#J_search').bind('click',function(){
+        //validate.form()  返回验证结果，boolean类型
+        var str = $('#J_formSearch').serialize();
+        // console.log(str);
+        if (validate.form()) {
+            Util.ajax.postJsonSync(srvMap.get('test'),str,function(json,status){
+                if (status) {
+                    Util.dialog.tips('提交成功');
+                }else{
+                    Util.dialog.tips(json.returnMessage||'查询失败，请重试！');
+                }
+            })
+        };
+    })
+});
+</script>
+</body>
+</html>

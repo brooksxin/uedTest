@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="../zw.ico">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>css3-demo</title>
+<script type="text/javascript" src="../jquery.js"></script>
+<style type="text/css">
+/*
+*
+*/
+body{
+	width: 960px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+.pcontent{
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: #002b36;
+	color: #FFF;
+}
+.demo{
+	-webkit-transition:all 1s ease-in-out;-moz-transition:all 1s ease-in-out;
+	-moz-transition:all 1s ease-in-out;-moz-transition:all 1s ease-in-out;
+	-o-transition:all 1s ease-in-out;-moz-transition:all 1s ease-in-out;
+	transition:all 1s ease-in-out;-moz-transition:all 1s ease-in-out;
+	border: solid 1px #CCC;
+	width: 120px;
+	height: 50px;
+	margin-top: 50px;
+}
+.demo:hover{
+	-webkit-transform:rotate(360deg) skew(-20deg) scale(3.0) translate(100px,0);
+	-moz-transform:rotate(360deg) skew(-20deg)scale(3.0) translate(100px,0);
+	-o-transform:rotate(360deg) skew(-20deg)scale(3.0) translate(100px,0);
+	transform:rotate(360deg) skew(-20deg)scale(3.0) translate(100px,0);
+}
+.demo2{
+	border: solid 1px #CCC;
+	width: 120px;
+	height: 50px;
+	position: fixed;
+	top: 50%;
+	left: 50px;
+}
+.zrotate{
+	-webkit-transform: rotate(30deg);
+	-moz-transform: rotate(30deg);
+	-o-transform: rotate(30deg);
+	transform: rotate(30deg);
+}
+.ztranslate{
+	-webkit-transform: translate(10px , 20px);
+	-moz-transform: translate(10px , 20px);
+	-o-transform: translate(10px , 20px);
+	transform: translate(10px , 20px);
+}
+.zscale{
+	-webkit-transform: scale(1.5 , 2);
+	-moz-transform: scale(1.5 , 2);
+	-o-transform: scale(1.5 , 2);
+	transform: scale(1.5 , 2);
+}
+.zskew{
+	-webkit-transform: skew(30deg, 20deg);
+	-moz-transform: skew(30deg, 20deg);
+	-o-transform: skew(30deg, 20deg);
+	transform: skew(30deg, 20deg);
+}
+.zmatrix{
+	-webkit-transform: matrix(1,0,0,1,30,30);
+	-moz-transform: matrix(1,0,0,1,30,30);
+	-o-transform: matrix(1,0,0,1,30,30);
+	transform: matrix(1,0,0,1,30,30);
+}
+
+.matrix_image { margin-top: 30px; position: relative; }
+.matrix_image img {   
+   vertical-align: bottom;
+   
+   -webkit-transition:all 0.5s ease-in-out;
+    -moz-transition:all 0.5s ease-in-out;
+    -o-transition:all 0.5s ease-in-out;
+    -ms-transition:all 0.5s ease-in-out;
+    transition:all 0.5s ease-in-out;
+}
+.matrix_line {
+   width: 150px;
+   height: 2px;
+   background-color: #000;
+   background-color: rgba(0,0,0,.6);
+   position: absolute;
+   left: 128px;
+   top: 95px;
+   z-index: 1;
+   -moz-transform-origin: top left;
+   -webkit-transform-origin: top left;
+   -o-transform-origin: top left;
+   transform-origin: top left;
+}
+.matrix_line:before {
+   content: " ";
+   width: 4px;
+   height: 4px;
+   border: 1px solid #000;
+   border-radius: 4px;
+   background-color: #fff;
+   opacity: .75;
+   position:absolute;
+   left: -2px;
+   top:-2px;
+}
+.matrix_line:after {
+   content: " ";
+   width: 8px;
+   height: 8px;
+   border-radius: 8px;
+   border: 1px solid #000;
+   background-color: #34538b;
+   position:absolute;
+   right: -4px;
+   top:-4px;
+   cursor:move;
+}
+.matrix_input {
+   width: 160px;
+   position: absolute;
+   left: 270px;
+   top: 105px;
+}
+
+.clearfix:after {
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+}
+.clearfix {
+    zoom:1; /* for IE6 IE7 */
+}
+.menu ul {
+   border-top: 15px solid black;
+   padding: 0 10px;    
+}
+.menu ul li {
+   float: left;  
+}
+.menu ul li a{
+   color: #fff;
+   float: left;
+   margin: 0 5px;
+   font-size: 14px;
+   height: 50px;
+   line-height: 50px;
+   text-align: center;
+   width: 65px;
+   padding: 10px 5px;
+   background: #151515;
+   -moz-border-radius: 0 0 5px 5px;
+   -webkit-border-radius: 0 0 5px 5px;
+   border-radius: 0 0 5px 5px;
+   -moz-box-shadow: 0 0 1px #ccc,inset 0 0 2px #fff;
+   -webkit-box-shadow: 0 0 1px #ccc,inset 0 0 2px #fff;
+   box-shadow: 0 0 1px #ccc,inset 0 0 2px #fff;
+   text-shadow: 0 1px 1px #686868;
+   text-decoration: none;
+}
+.menu ul li.translate a{
+   background: #2EC7D2;
+}
+.menu ul li.translate-x a {
+   background: #8FDD21;
+}
+.menu ul li.translate-y a {
+   background: #F45917;
+}
+.menu ul li.rotate a {
+   background: #D50E19;
+}
+.menu ul li.scale a {
+   background: #cdddf2;
+}
+.menu ul li.scale-x a {
+  background: #0fDD21;
+}
+.menu ul li.scale-y a {
+  background: #cd5917;
+}
+.menu ul li.skew a {
+  background: #519;
+}
+.menu ul li.skew-x a {
+  background: #D50;
+}
+.menu ul li.skew-y a {
+  background: #E19;
+}
+.menu ul li.matrix a {
+  background: #919;
+}
+.menu ul li.translate a:hover {
+   -moz-transform: translate(-10px,-10px);
+   -webkit-transform: translate(-10px,-10px);
+   -o-transform: translate(-10px,-10px);
+   -ms-transform: translate(-10px, -10px);
+   transform: translate(-10px,-10px);
+}
+.menu ul li.translate-x a:hover {
+   -moz-transform: translateX(-10px);
+   -webkit-transform: translateX(-10px);
+   -o-transform: translateX(-10px);
+   -ms-transform: translateX(-10px);
+   transform: translateX(-10px);
+}
+.menu ul li.translate-y a:hover {
+   -moz-transform: translateY(-10px);
+   -webkit-transform: translateY(-10px);
+   -o-transform: translateY(-10px);
+   -ms-transform: translateY(-10px);
+   transform: translateY(-10px);
+}
+.menu ul li.rotate a:hover {
+   -moz-transform: rotate(45deg);
+   -webkit-transform: rotate(45deg);
+   -o-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+   transform: rotate(45deg);
+}
+.menu ul li.scale a:hover {
+   -moz-transform: scale(.8);
+   -webkit-transform: scale(.8);
+   -o-transform: scale(.8);
+   -ms-transform: scale(.8);
+   transform: scale(.8);
+}
+.menu ul li.scale-x a:hover {
+   -moz-transform: scaleX(.8);
+   -webkit-transform: scaleX(.8);
+   -o-transform: scaleX(.8);
+   -ms-transform: scaleX(.8);
+   transform: scaleX(.8);
+}
+.menu ul li.scale-y a:hover {
+   -moz-transform: scaleY(1.2);
+   -webkit-transform: scaleY(1.2);
+   -o-transform: scaleY(1.2);
+   -ms-transform: scaleY(1.2);
+   transform: scaleY(1.2);
+}
+.menu ul li.skew a:hover {
+   -moz-transform: skew(45deg, 15deg);
+   -webkit-transform: skew(45deg, 15deg);
+   -o-transform: skew(45deg, 15deg);
+   -ms-transform: skew(45deg, 15deg);
+   transform: skew(45deg, 15deg);
+}
+.menu ul li.skew-x a:hover {
+   -moz-transform: skewX(-30deg);
+   -webkit-transform: skewX(-30deg);
+   -o-transform: skewX(-30deg);
+   -ms-transform: skewX(-30deg);
+   transform: skewX(-30deg);          
+}
+.menu ul li.skew-y a:hover {
+   -moz-transform: skewY(30deg);
+   -webkit-transform: skewY(30deg);
+   -o-transform: skewY(30deg);
+   -ms-transform: skewY(30deg);
+   transform: skewY(30deg);          
+}
+.menu ul li.matrix a:hover {
+  -moz-transform: matrix(1,1,-1,0,0,0);
+  -webkit-transform: matrix(1,1,-1,0,0,0);
+  -o-transform: matrix(1,1,-1,0,0,0);
+  -ms-transform: matrix(1,1,-1,0,0,0);
+  transform: matrix(1,1,-1,0,0,0);          
+}
+/* .menu ul.transform-origin li a {
+  -moz-transform-origin: left top;
+  -webkit-transform-origin: left top;
+  -o-transform-origin: left top;
+  -ms-transform-origin: left top;
+  transform-origin: left top;
+} */
+</style>
+
+</head>
+<body>
+	<div class="demo">
+		transform
+	</div>
+
+	<div class="demo2">demo2</div>
+
+	<div>
+		<p class="pcontent">
+			transform: rotate(&lt;angle&gt;) ：通过指定的角度参数对原元素指定一个2D rotation（2D 旋转），需先有transform-origin属性的定义。transform-origin定义的是旋转的基点，其中angle是指旋转角度，如果设置的值为正数表示顺时针旋转，如果设置的值为负数，则表示逆时针旋转。如：transform:rotate(30deg)；
+		</p>
+		<button onclick="tran(1);return false;">旋转rotate</button>
+
+		<p class="pcontent">
+			transform: translate(10px,20px)表示水平移动10px;竖直移动20px;<br />
+			transform: translateX(10px);x轴<br />
+			transform: translateY(20px);y轴
+		</p>
+		<button onclick="tran(2);return false;">移动translate</button>
+
+		<p class="pcontent">
+			transform: scale(X,Y)：其中X表示水平方向缩放的倍数，Y表示垂直方向的缩放倍数<br />
+			transform: scaleX(1.5)<br />
+			transform: scaleY(2)
+		</p>
+		<button onclick="tran(3);return false;">缩放scale</button>
+
+		<p class="pcontent">
+			transform:skew(30deg,10deg)<br />
+			skewX(30deg)<br />
+			skewY(30deg)
+		</p>
+		<button onclick="tran(4);return false;">扭曲skew：斜切变换</button>
+
+		<p class="pcontent">
+			<img src="http://image.zhangxinxu.com/image/blog/201206/2012-06-07_160412.png" alt="矩阵matrix" /><br />
+			ax+cy+e为变换后的水平坐标<br />
+			bx+dy+f表示变换后的垂直位置。<br />
+			实际上transform: matrix(1, 0, 0, 1, 30, 30);就等同于transform: translate(30px, 30px);
+		</p>
+		<button onclick="tran(5);return false;">矩阵matrix</button>
+	</div>
+
+	<div>
+    	<p id="matrixDetail">目前属性值为：matrix(1,0,0,1,0,0)</p>
+        <div class="matrix_image">
+           <div id="matrixLine" class="matrix_line"></div>
+            <input type="text" id="matrixInput" class="matrix_input" autocomplete="off" placeholder="输入角度确定镜像对称轴" />
+           <img id="matrixImage" src="http://image.zhangxinxu.com/image/study/s/s256/mm1.jpg" width="256" height="191" />
+        </div>
+    </div>
+
+    <div class="menu">
+       <ul class="clearfix transform-origin">
+         <li class="item translate"><a href="javascript:;">Translate</a></li>
+         <li class="item translate-x"><a href="javascript:;">TranslateX</a></li>
+         <li class="item translate-y"><a href="javascript:;">TranslateY</a></li>
+         <li class="item rotate"><a href="javascript:;">Rotate</a></li>
+         <li class="item scale"><a href="javascript:;">Scale</a></li>
+         <li class="item scale-x"><a href="javascript:;">ScaleX</a></li>
+         <li class="item scale-y"><a href="javascript:;">ScaleY</a></li>
+         <li class="item skew"><a href="javascript:;">Skew</a></li>
+         <li class="item skew-x"><a href="javascript:;">SkewX</a></li>
+         <li class="item skew-y"><a href="javascript:;">SkewY</a></li>
+         <li class="item matrix"><a href="javascript:;">Matrix</a></li>
+       </ul>
+     </div>
+
+<script type="text/javascript">
+var hoverClass = "";
+function tran(type){
+	switch (type){
+		case 1:
+			hoverClass = "zrotate";
+			break;
+		case 2:
+			hoverClass = "ztranslate";
+			break;
+		case 3:
+			hoverClass = "zscale";
+			break;
+		case 4:
+			hoverClass = "zskew";
+			break;
+		case 5:
+			hoverClass = "zmatrix";
+			break;
+	}
+	$(".demo2").toggleClass(hoverClass);
+}
+
+(function() {
+   var $ = function(selector) {
+      return document.querySelector && document.querySelector(selector);
+   };
+   var $css3Transform = function(element, value) {
+      var arrPriex = ["O", "Ms", "Moz", "Webkit", ""], length = arrPriex.length;
+      for (var i=0; i < length; i+=1) {
+         element.style[arrPriex[i] + "Transform"] = value;
+      }
+   };
+   
+   var eleDetail = $("#matrixDetail"), eleInput = $("#matrixInput"),
+    	eleLine = $("#matrixLine"), eleImage = $("#matrixImage");
+      
+   if (eleDetail && eleInput && eleImage) {
+      eleInput.addEventListener("blur", function() {
+         var value = parseInt(this.value, 10);
+         if (typeof value === "number") {
+			value = value % 360;
+            $css3Transform(eleLine, "rotate("+ value +"deg)");
+            // 确认对称线
+            var k = Math.tan( -1 * value * Math.PI / 180),
+               ux = 1 / Math.sqrt(1 + k * k), uy = k / Math.sqrt(1 + k * k);
+			   
+            if (k > 1000000) {
+				ux = 0, uy = 1;
+			} else if (k < -1000000) {
+				ux = 0, uy = -1;
+			}            
+            
+            var valTransform = "matrix("+ (2*ux*ux-1).toFixed(6) +","+ (2*ux*uy).toFixed(6) +","+ (2*ux*uy).toFixed(6) +","+ (2*uy*uy-1).toFixed(6) +",0,0)";
+			eleDetail.innerHTML = '目前属性值为：' + valTransform;
+            $css3Transform(eleImage, valTransform);
+         } else {
+            this.value = "";   
+         }
+      });
+   }
+})();
+</script>
+</body>
+</html>

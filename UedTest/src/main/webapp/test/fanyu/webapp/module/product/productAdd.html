@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>上传新页面</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+  <#include "../../tpl/sys_top.tpl" />
+                <div class="formItem">
+                    <div class="titleArea">
+                        <h2>
+                            基本信息
+                        </h2>
+                    </div>
+                    <div class="formArea">
+                        <table width="100%" class="form_table">
+                            <tbody>
+                                <tr>
+                                    <td width="15%">
+                                        <label class="formDescription">
+                                            <span class="fn-high">
+                                                *
+                                            </span>
+                                            商品分类：
+                                        </label>
+                                    </td>
+                                    <td width="85%">
+                                        <select class="FormInputSelect mr10">
+                                            <option value="1">
+                                                请选择分类
+                                            </option>
+                                            <option value="2">
+                                                手机
+                                            </option>
+                                            <option value="3">
+                                                套餐
+                                            </option>
+                                        </select>
+                                        <select class="FormInputSelect">
+                                            <option value="1">
+                                                请选择子分类
+                                            </option>
+                                            <option value="2">
+                                                智能机
+                                            </option>
+                                            <option value="3">
+                                                非智能机
+                                            </option>
+                                        </select>
+                                    </td>
+                                    <tr>
+                                        <td width="15%">
+                                            <label class="formDescription">
+                                                <span class="fn-high">
+                                                    *
+                                                </span>
+                                                商品名称：
+                                            </label>
+                                        </td>
+                                        <td width="85%">
+                                            <input class="FormInputText" type="text" id="mcdsUnitNm" name="mcdsUnitNm"
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="15%">
+                                            <label class="formDescription">
+                                                <span class="fn-high">
+                                                    *
+                                                </span>
+                                                产品图片：
+                                            </label>
+                                        </td>
+                                        <td width="85%">
+                                            <input type="file" class="fileupload" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="15%">
+                                            <label class="formDescription">
+                                                <span class="fn-high">
+                                                    *
+                                                </span>
+                                                销售价格：
+                                            </label>
+                                        </td>
+                                        <td width="85%">
+                                            <input class="FormInputText" type="text" />
+                                            &nbsp;&nbsp;元
+                                        </td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="formItem">
+                    <div class="titleArea">
+                        <h2>
+                            详细参数
+                        </h2>
+                    </div>
+                    <div class="formArea">
+                        <div class="subFormItem">
+                            <table width="100%" class="form_table">
+                                <tr>
+                                    <td>
+                                        <label class="formDescription">
+                                            产品参数
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <input class="FormInputText" type="text" />
+                                    </td>
+                                    <td width="10%">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <table width="100%" class="form_table">
+                                            <tr class="FormItem_table_bj">
+                                                <td>
+                                                    <label class="formDescription">
+                                                        标签
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <input class="FormInputText" type="text" />
+                                                </td>
+                                                <td>
+                                                    <label class="formDescription">
+                                                        参数
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <input class="FormInputText" type="text" />
+                                                </td>
+                                                <td>
+                                                    <div class="gridRowBtn">
+                                                        <a class="item-text" href="javascript:;">
+                                                            删除
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label class="formDescription">
+                                                        标签
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <input class="FormInputText" type="text" />
+                                                </td>
+                                                <td>
+                                                    <label class="formDescription">
+                                                        参数
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <input class="FormInputText" type="text" />
+                                                </td>
+                                                <td>
+                                                    <div class="gridRowBtn">
+                                                        <a class="item-text" href="javascript:;">
+                                                            删除
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="FormItem_table_bj">
+                                                <td>
+                                                    <label class="formDescription">
+                                                        标签
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <input class="FormInputText" type="text" />
+                                                </td>
+                                                <td>
+                                                    <label class="formDescription">
+                                                        参数
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <input class="FormInputText" type="text" />
+                                                </td>
+                                                <td>
+                                                    <div class="gridRowBtn">
+                                                        <a class="item-text" href="javascript:;">
+                                                            删除
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="FormItem_table_border-bottom">
+                                                <td>
+                                                    <label class="formDescription">
+                                                        标签
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <input class="FormInputText" type="text" />
+                                                </td>
+                                                <td>
+                                                    <label class="formDescription">
+                                                        参数
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <input class="FormInputText" type="text" />
+                                                </td>
+                                                <td>
+                                                    <div class="gridRowBtn">
+                                                        <a class="item-text" href="javascript:;">
+                                                            删除
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="formItemBtn">
+                                <a href="#">
+                                    添加一个标签
+                                </a>
+                            </div>
+                        </div>
+                        <div class="subFormItem">
+                            <table width="100%" class="form_table">
+                                <tr>
+                                    <td>
+                                        <label class="formDescription">
+                                            产品参数
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <input class="FormInputText" type="text" />
+                                    </td>
+                                    <td width="10%">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <table width="100%" class="form_table">
+                                            <tr class="FormItem_table_bj">
+                                                <td>
+                                                    <label class="formDescription">
+                                                        标签
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <input class="FormInputText" type="text" />
+                                                </td>
+                                                <td>
+                                                    <label class="formDescription">
+                                                        参数
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <input class="FormInputText" type="text" />
+                                                </td>
+                                                <td>
+                                                    <div class="gridRowBtn">
+                                                        <a class="item-text" href="javascript:;">
+                                                            删除
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="FormItem_table_border-bottom">
+                                                <td>
+                                                    <label class="formDescription">
+                                                        标签
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <input class="FormInputText" type="text" />
+                                                </td>
+                                                <td>
+                                                    <label class="formDescription">
+                                                        参数
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <input class="FormInputText" type="text" />
+                                                </td>
+                                                <td>
+                                                    <div class="gridRowBtn">
+                                                        <a class="item-text" href="javascript:;">
+                                                            删除
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="formItemBtn">
+                                <a href="#">
+                                    添加一个标签
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mtb20">
+                        <a href="#" class="">
+                            <span>
+                                添加一组参数
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="formItem">
+                    <div class="titleArea">
+                        <h2>
+                            其它信息
+                        </h2>
+                    </div>
+                    <div class="formArea">
+                        <table width="100%" class="form_table">
+                            <tr class="FormItem_table_border-bottom">
+                                <td>
+                                    <label class="formDescription">
+                                        图文信息
+                                    </label>
+                                </td>
+                                <td>
+                                    <span class="mr18">
+                                        <input type="radio" name="图文信息" />
+                                        显示
+                                    </span>
+                                    <span>
+                                        <input type="radio" name="图文信息" />
+                                        隐藏
+                                    </span>
+                                </td>
+                                <td class="formArea_text-right">
+                                    <span>
+                                        显示来自京东的图文信息
+                                    </span>
+                                </td>
+                                <tr class="FormItem_table_border-bottom">
+                                    <td>
+                                        <label class="formDescription">
+                                            用户评价
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <span class="mr18">
+                                            <input type="radio" name="用户评价" />
+                                            显示
+                                        </span>
+                                        <span>
+                                            <input type="radio" name="用户评价" />
+                                            隐藏
+                                        </span>
+                                    </td>
+                                    <td class="formArea_text-right">
+                                        <span>
+                                            显示来自京东的用户评价
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="formDescription">
+                                            产品测评
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <span class="mr18">
+                                            <input type="radio" / name="产品测评">
+                                            显示
+                                        </span>
+                                        <span>
+                                            <input type="radio" name="产品测评" />
+                                            隐藏
+                                        </span>
+                                    </td>
+                                    <td class="formArea_text-right">
+                                        <span>
+                                            显示来自中关村在线的测评信息
+                                        </span>
+                                    </td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="formBtnArea">
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <div class="normalBtnArea">
+                                    <a class="normalBtn BGblue largeBtn" href="javascript:;" id="j_prodAdd">
+                                        上传
+                                    </a>
+                                    <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_search">
+                                        浏览
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="normalBtnArea fn-right">
+                                    <a href="#" class="formLink">
+                                        <span>
+                                            取消上传
+                                        </span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+/*
+服务配置
+param1: 服务名
+param2: 假数据路径
+param3: 后台服务路径
+*/
+srvMap.add('saveMcds', '','front/sh/prod!saveMcds');//新增商品服务
+//页面加载完开始执行
+$(function () {
+    $('#j_prodAdd').bind('click',function(){
+        var str = 'mcdsUnitNm='+$("#mcdsUnitNm").val();
+        console.log(str);
+        Util.ajax.postJson(srvMap.get('saveMcds'),'formData='+str,function(json,status){
+          if (status) {
+              Util.ajax.loadTemp('#J_tabletpl',$('#T_tabletpl'),json);//加载模板
+          }else{
+              alert(json.returnMessage||'查询失败，请重试！');
+          }
+       });
+    });
+});
+</script>
+</body>
+</html>

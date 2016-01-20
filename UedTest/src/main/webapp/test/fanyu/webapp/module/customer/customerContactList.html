@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>客户管理模板</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+  <#include "../../tpl/sys_top.tpl" />
+    <div class="wrapper">
+        <div id="J_topMenu"  class="menu fn-clear">
+        <#include "../../tpl/sys_topMenu.tpl" />
+        </div>
+        <!-- left start -->
+        <div class="left">
+            <div class="leftInner" id="">
+        <#include "../../tpl/cust_left.tpl" />
+            </div>
+            <div class="middle" id="mainMiddle">&nbsp;</div>
+        </div>
+        <!-- left END -->
+        <!-- right start -->
+        <div class="right" id="mainRight" style="overflow:auto;*position:relative">
+            <div id="mainRight_child" style="height:100%;">
+    
+    
+            <div class="titleArea">
+               <h2 class="ml-15">钱大华的接触历史</h2>
+            </div>
+          
+            <div method="post" action="#" class="cmxform" >
+               <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+                  <div class="record-search-cate">
+                <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tbody>
+                          <tr>
+                            <td width="60"><label class="description">时间选择</label></td>
+                            <td colspan="3">
+                              <input id="param-eDate2" class="inputWidth  element text Wdate" type="text" value="2015-12-04" onfocus="WdatePicker()" /> 至 
+                              <input id="param-eDate" class="inputWidth  element text Wdate" type="text" value="2015-12-04" onFocus="WdatePicker()" />
+                            </td>     
+                            <td width="60"><label class="description">工号</label></td>
+                            <td width="130">
+                              <input class="inputWidth  inputText" type="text" maxlength="255" value=" x10082" />
+                            </td>
+                            <td width="120"><a class="btn_search" href="javascript:;" id="J_search" >查询</a></td>
+                          </tr>
+                        </tbody>
+                </table>
+                    </div>
+                    <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+                </form>
+            </div>
+        
+            <div class="tablewidth mg_t_10">
+                  <table class="ui-record-table table_radius table-bordered table-striped" >
+                    <thead>
+                      <tr>
+                        <th width="100">日期</th>
+                        <th width="100">开始时间</th>
+                        <th width="100">结束时间</th>
+                        <th width="100">接触标记</th>
+                        <th width="60">持续时间</th>
+                        <th width="60">处理人工号</th>
+                        <th width="">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody id="J_tabletpl">
+                      <tr>
+                          <td>2015-12-05</td>
+                          <td>10:50:20</td>
+                          <td>10:53:40</td>
+                          <td>咨询类</td>
+                          <td>3'20''</td>
+                          <td>x10086</td>
+                          <td><div class="gridRowBtn fn-center"><a class="item-text" href="javascript:;">查看</a></div></td>
+                      </tr>
+                      <tr>
+                          <td>2015-12-04</td>
+                          <td>10:50:20</td>
+                          <td>10:53:40</td>
+                          <td>咨询类</td>
+                          <td>3'20''</td>
+                          <td>x10086</td>
+                          <td><div class="gridRowBtn fn-center"><a class="item-text" href="javascript:;">查看</a></div></td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+
+
+
+          </div>
+        </div>
+        <!-- right stop -->
+    </div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+//页面加载完开始执行
+$(function () {
+    
+});
+</script>
+</body>
+</html>

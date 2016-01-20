@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>活动任务</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+      <div class="breadcrumb"></div>
+      <div class="listTopBtn">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td><h1>活动任务</h1></td>
+              <td><div class="normalBtnArea ft-right" ><a id="Creat" class="normalBtn BGblue" href="javascript:;">创建项目</a></div></td>
+            </tr>
+          </table>
+      </div>
+
+          <div class="cmxform" >
+              <form class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch">
+                  <div class="record-search-cate">
+                      <table class="search_table" cellpadding="0" cellspacing="0" border="0" style="width:100%" >
+                         
+                            <tr>
+                              <td width="80">
+                                <label class="description">执行渠道</label>
+                              </td>
+                              <td width="325">
+                            <select class="selectStyle w160" id="BELG_CHNL_ID1" name="BELG_CHNL_ID1">
+								<option value =''>请选择</option>
+							</select>
+							<select class="selectStyle w160" id="BELG_CHNL_ID" name="BELG_CHNL_ID">
+					        	<option value='' >请选择</option>
+							</select></td>
+                              <td width="57">
+                                <label class="description">项目名称</label>
+                              </td>
+                              <td width="100"><input id="CMPGN_NM" name="CMPGN_NM" class="inputWidth inputText" type="text" maxlength="255" value="" /></td>
+                              <td>
+                               <div class="normalBtnArea w82">
+                                   <a class="searchBtn" href="javascript:;" id="Query" ><i></i>查询</a>
+                               </div>
+                             </td>
+                            </tr>
+                        <tbody id="J_searchMore" class="searchMore">
+                            <tr>
+                            	<td><label class="description">项目类型</label></td>
+                            	<td ><select class="selectStyle w160" id="CMPGN_TYPE_CD1" name="CMPGN_TYPE_CD1">
+                            		<option value=''>请选择</option>
+                           		</select></td>
+                            	<td><label class="description">状态</label></td>
+                            	<td><select class="inputWidth element text" id="CMPGN_STS_CD" name="CMPGN_STS_CD" >
+                                    <option value="">全部</option>
+                                    <option value="1">发布</option>
+                                    <option value="2">暂停</option>
+                                    <option value="3">废止</option>
+                                    <!-- <option value="4">已结束</option>
+                                    <option value="5">未开始</option> -->
+                                    <option value="7">结束</option>
+                                    <option value="6">再次分配暂停</option>
+                                  </select></td>
+                           	</tr>
+                            <tr>
+                                <td>
+                                  <label class="description">所属省公司</label>
+                                </td>
+                                <td ><select class="selectStyle w160" id="BELG_BRNCH_ID" name="BELG_BRNCH_ID">
+							 <option  value=''>请选择</option>
+							</select>
+							</td>
+                                <td><label class="description">创建工号</label></td>
+                                <td width="100">
+                                	<div id="UserID">
+                                  <select class="inputWidth element text" id="CRT_USER_ID" name="CRT_USER_ID" >
+                                    <option ></option>
+                                  </select></div>
+                              </td>
+                            </tr>
+                           
+                        </tbody>
+                      </table>
+                  </div>
+                  <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+              </form>
+          </div>
+          
+          <div class="tablewidth mg_t_10">
+              <table class="ui-record-table table_radius table-bordered table-striped" >
+                  <thead>
+                      <tr>
+                          <th width="40">选择</th>
+                       	  <th width="70">项目编号</th>
+                          <th width="50">渠道</th>
+                          <th width="70">项目类型</th>
+                          <th>项目名称</th>
+                          <th width="70">省公司</th>
+                          <th width="50">创建工号</th>
+                          <th width="100">开始时间</th>
+                          <th width="100">结束时间</th>
+                          <th width="50">状态</th>
+                          <th width="130">操作</th>
+                      </tr>
+                   </thead>
+                   <tbody id="J_tabletpl">
+                     
+                  </tbody>
+                  
+              </table>
+          </div>
+          
+          <!--翻页及功能按钮区域开始-->
+          <DIV class="amount-bottom">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+                <tr>
+                 <!--  <td width="60">
+                      <input type="checkbox" class="selectAll" id="selectAll" /> <label for="selectAll">全选</label> 
+                  </td> -->
+                  <td width="60">
+                            <input type="checkbox" class="selectAll" id="selectAll" onclick="selectAll(this)"/> <label for="selectAll">全选</label> 
+                        </td>
+                        <td >
+                            <DIV class="normalBtnArea">
+                                <a class="normalBtn BGgray" id="downProd" onclick="downProd()">批量暂停<span id="J_downum"></span></a>
+                            </DIV>
+                        </td>
+                  <td width="50%">
+                      <DIV class="fn-clear action-other  action-other-show ">
+                          <DIV id=Pagination class="page pagination fn-right"> </DIV>
+                          <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                      </DIV></td>
+                </tr>
+              </table>
+          </DIV>
+
+<!-- <input type="checkbox" sign="{{sysToJSON this}}" data-keyid="{{CMPGN_ID}}"/> -->
+<script id="T_tabletpl" type="text/x-handlebars-template">
+    {{#if beans}}
+        {{#each beans}}
+            <tr>
+                <td><div class="table_select">{{istop CMPGN_STS CMPGN_ID sysToJSON}}</div></td>
+                <td >{{CMPGN_ID}}</td>
+				<td>{{BELG_CHNL}}</td>
+				<td>{{CMPGN_TYPE_CD}}</td>
+				<td><a href="javascript:;" onclick="detail('{{CMPGN_ID}}','{{CMPGN_TYPE_CD}}')">{{CMPGN_NM}}</a></td>
+                <td>{{POST_NAME}}</td>
+                <td>{{PTY_NO}}</td>
+                <td>{{ CMPGN_EFF_DATE}}</td>
+                <td>{{ CMPGN_INVLD_DATE}}</td>
+                <td>{{CMPGN_STS_CD}}</td>
+                <td>
+                    <div class="gridRowBtn" data='{{dataToJSON this}}'>
+                      {{isClick  CMPGN_STS  CMPGN_STS_CD CMPGN_ID CMPGN_NM CMPGN_EFF_DATE CMPGN_INVLD_DATE Distribution}}
+                   </div>
+                </td>
+            </tr>
+         {{/each}}
+    {{else}}
+	<tr>
+		<td colspan="8">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+
+    {{/if}}
+</script>
+<#include "../../tpl/res_js.tpl" />
+    <script src="../../common/market/common.js"></script>
+    <script src="../../common/requirejsConfig.js"></script>
+
+<script type="text/javascript">
+srvMap.add('query' , 'market/activity.json','front/sh/market!index?uid=my009');
+//根据营销活动Id获取详情
+srvMap.add('cmpgnStopAll','query.json','front/sh/market!index?uid=myxzeee006');//批量暂停
+srvMap.add('detail','query.json','front/sh/market!index?uid=mgl002');
+srvMap.add('update', 'query.json','front/sh/market!index?uid=myxz006');
+srvMap.add('updateData', 'query.json','front/sh/market!index?uid=myxzeee006');
+srvMap.add('allUser','query.json','front/sh/user!userinfo?uid=u005');
+srvMap.add('queryDept','query.json','front/sh/user!userinfo?uid=u011');
+srvMap.add('queryType', 'query.json', 'front/sh/common!execute?uid=cwt001');//查询营销活动类型代码
+srvMap.add('queryChnl', 'query.json', 'front/sh/user!getChnl?uid=u003');//获取渠道列表
+//更新已分配的活动状态
+      
+var G_params = {
+    url : srvMap.get('query'),
+    searchformId :"J_formSearch",
+    items_per_page : 10 ,   // 每页数     @param : limit
+    page_index : 0 , //当前页  @param : start
+    pagination : "Pagination" , //分页id
+    tabletpl : "T_tabletpl",  //表格模板
+    tablewrap :"J_tabletpl", //表格容器
+    pageCallback: pageback    
+};
+//页面加载完开始执行
+$(document).ready(function () {
+	//全局数组
+    selected_array = [];
+    //$("#J_downum").html("");
+    //初始化函数
+    
+    var str= $("#"+G_params.searchformId).serialize();
+     //   console.log(str);
+       Util.pagination(0, true , G_params , str );
+    $('#Query').bind('click',function(){
+    	if($("#CMPGN_EFF_DATE").val()!=null&&$("#CMPGN_EFF_DATE").val()!=''&&$("#CMPGN_INVLD_DATE").val()!=null&&$("#CMPGN_INVLD_DATE").val()!=''){
+    	if($("#CMPGN_EFF_DATE").val()>=$("#CMPGN_INVLD_DATE").val()){
+    		Util.dialog.tips("开始时间不能等于大于结束时间");
+    		return;
+    	}else{
+    		
+    	}
+    	}
+        var str= $("#"+G_params.searchformId).serialize();
+        Util.pagination(0, true , G_params , str );
+    });
+    
+    $('#Creat').bind('click',function(){
+        //To do跳转到新建页面
+        window.location.href="newCampgnNew.html"; 
+    });
+    
+    $('#J_tabletpl').on('click', '.watchProcess', watchProcess2);
+    //项目类型
+    $Cmpgntype=$("#CMPGN_TYPE_CD1");
+    Util.ajax.postJsonSync(srvMap.get("queryType"),'',function(json1,status){
+		var jsonType=json1.object;
+		//console.log(json1);
+		for (var i = 0; i < jsonType.length; i++) {
+			$Cmpgntype.append("<option value='"+jsonType[i]['CD_VAL']+"'>"+jsonType[i]['CMN_CD_VAL_NM']+"</option>");
+		};
+	})
+	var dept = {
+    		"DEPT_ID": userInfo.bean.deptId 
+    }
+
+  //加载创建工号
+    $("#UserID").NiceSelect({
+       	url:srvMap.get('allUser'),
+           datas : dept,
+           id : "CRT_USER_ID",
+           name : "CRT_USER_ID",
+           all:"请选择",
+           key:"USER_ID",
+           value:"PTY_NO"
+     });
+    
+  //所属机构初始化
+	var jsonDpet = null;
+	$J_chan=$("#BELG_BRNCH_ID");
+	Util.ajax.postJsonSync(srvMap.get("queryDept"),'',function(json1,status){
+		jsonDpet=json1.object;
+		for (var i = 0; i < jsonDpet.length; i++) {
+			$J_chan.append("<option value='"+jsonDpet[i]['BASE_PTY_ID']+"'>"+jsonDpet[i]['PTY_NM']+"</option>");
+		};
+	})
+ 	var json = null;
+	$J_prov=$("#BELG_CHNL_ID1");
+	$J_city=$("#BELG_CHNL_ID");
+	var paramchel={"chnlType":"1"};
+	Util.ajax.postJsonSync(srvMap.get("queryChnl"),paramchel,function(json1,status){
+		json=json1.object;
+		for (var i = 0; i < json.length; i++) {
+			$J_prov.append("<option value='"+json[i]['CHNL_ID']+"'>"+json[i]['PTY_NM']+"</option>");
+		};
+	});
+		//json=[{"PTY_NM":"10085电话营销","PTY_LVL_CD":"01","CHNL_ID":"1001"},{"PTY_NM":"社会代理","PTY_LVL_CD":"01","CHNL_ID":"1010","subList":[{"PTY_NM":"众包平台","PTY_LVL_CD":"02","CHNL_ID":"1012"}]}]
+		//console.log(json);
+		
+	$J_prov.on('change',function(){
+		$J_city.empty();
+		var select_val = $(this).children('option:selected').val();
+			for (var i = 0; i < json.length; i++) {
+				if(select_val==json[i]['CHNL_ID']){
+					var secondjson=json[i].subList;
+					if(secondjson!=null&&secondjson!='undefined'){
+						$J_city.show();
+						for (var j = 0; j < secondjson.length; j++) {
+							$J_city.append("<option value='"+secondjson[j]['CHNL_ID']+"'>"+secondjson[j]['PTY_NM']+"</option>");
+						}
+					}else{
+						$J_city.hide();
+					}
+				}
+				if(select_val=='请选择'){
+					$J_city.show();
+					$J_city.append("<option value =''>请选择</option>");
+				}
+					
+			};
+		
+	});
+});
+     
+function detail(CMPGN_ID,CMPGN_TYPE_CD){
+	if(CMPGN_TYPE_CD=='营销类'){
+		window.location.href="cmpgnDetail.html?CMPGN_ID="+CMPGN_ID;
+	}else{
+		window.location.href="cmpgnQuesDetail.html?CMPGN_ID="+CMPGN_ID;
+		
+	}
+	
+}
+function distributeData(CMPGN_ID,CMPGN_NM,CMPGN_EFF_DATE,CMPGN_INVLD_DATE){
+/* 
+	var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text"><span style="color:red;">警告：</span>重新分配会导致该活动处于暂停状态！请谨慎操作！</div></div></div>'
+    );
+
+    var params = {
+        top:top,
+        content: elem,
+        width: "300px",
+        height: "140px",
+        modal: true,
+        okVal:'确定',
+        okCallback:function(){
+              $(obj).hide().siblings().hide();
+              require(['common/util/loading'], function(Loading){
+                Loading.init();
+                require(['common/market/againdivideTaskSys'], function(Main){
+                  Main.init({ CMPGN_ID:CMPGN_ID, CMPGN_NM:CMPGN_NM, CMPGN_EFF_DATE:CMPGN_EFF_DATE, CMPGN_INVLD_DATE:CMPGN_INVLD_DATE }, Loading, function(){
+                    Util.dialog.tips("任务重新分配成功", top);
+                  });
+                });
+
+              });
+              
+              /*
+              window.location.href="../market/againdivideTaskSys.html?"
+            	  + "CMPGN_ID="+CMPGN_ID+"&CMPGN_NM="+CMPGN_NM+"&CMPGN_EFF_DATE="
+            	  +CMPGN_EFF_DATE+"&CMPGN_INVLD_DATE="+CMPGN_INVLD_DATE; 
+        },
+        cancelVal:'取消',
+        cancelCallback:function(){}
+      }
+
+      Util.dialog.openDiv(params); */
+	window.location.href="againdivideTaskSys.html?" + "CMPGN_ID="+CMPGN_ID;
+}
+
+var watchProcess2 = function(e){
+  //CMPGN_ID,CMPGN_NM,CMPGN_EFF_DATE,CMPGN_INVLD_DATE,status,co
+  var json = JSON.parse($(e.currentTarget).parent().attr('data'));
+  if(json.CMPGN_STS_CD == "废止" || json.CMPGN_STS_CD == "未开始" || json.co=='未分配'){
+    return false;
+  }else{
+    //finishTaskStatus
+    /*require(['common/market/taskprogresssys'], function(Main){
+      Main.init(json);
+    });
+    return false
+    */
+    if(json.CMPGN_STS_CD == '已结束'){
+      require(['common/market/finishTaskStatus'], function(Main){
+        Main.init(json);
+      });
+    }else{
+      require(['common/market/taskprogresssys'], function(Main){
+        Main.init(json);
+      });
+    }
+    
+  }
+  return false;
+}
+
+//正在执行的任务
+function watchProcess(CMPGN_ID,CMPGN_NM,CMPGN_EFF_DATE,CMPGN_INVLD_DATE,CMPGN_STS_CD){
+    //To do进行查看类型
+    //if(CMPGN_INVLD_DATE)
+    	if(CMPGN_STS_CD=='已结束'){
+    		window.location.href="finishTaskStatus.html?"+
+		    "CMPGN_ID="+CMPGN_ID+"&CMPGN_NM="+CMPGN_NM+"&CMPGN_EFF_DATE="
+		    +CMPGN_EFF_DATE+"&CMPGN_INVLD_DATE="+CMPGN_INVLD_DATE+"&CMPGN_STS_CD="+CMPGN_STS_CD;
+    	}else{
+    		 window.location.href="taskprogresssys.html?"+
+    		    "CMPGN_ID="+CMPGN_ID+"&CMPGN_NM="+CMPGN_NM+"&CMPGN_EFF_DATE="
+    		    +CMPGN_EFF_DATE+"&CMPGN_INVLD_DATE="+CMPGN_INVLD_DATE+"&CMPGN_STS_CD="+CMPGN_STS_CD;
+    	}
+   
+}
+
+
+//正在执行的任务
+function add(CMPGN_ID){
+    window.location.href="importAddCust.html?id="+CMPGN_ID;
+   
+}
+
+function stop(obj, CMPGN_ID, CMPGN_STS_CD){
+
+  if($(obj).html() == "暂停"){
+     $(obj).html("开始");
+     $(obj).siblings("a").hide();
+  }else if($(obj).html() == "开始"){
+    $(obj).html("暂停");
+    $(obj).siblings("a").show();
+  }
+
+
+   var cmd={"CMPGN_ID":CMPGN_ID,
+           "CMPGN_STS_CD":"2"
+   };
+    //to do会进行暂停
+    Util.ajax.postJson(srvMap.get("update"),cmd,function(json){
+             if(json.returnCode==0){
+            	 var str= $("#"+G_params.searchformId).serialize();
+            	  //  console.log(str);
+            	   Util.pagination(0, true , G_params , str );
+            	                    
+             }else{
+            	 Util.dialog.tips("暂停失败");
+             }
+   });    
+} 
+
+function end(obj, CMPGN_ID){
+
+    var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要废止吗？</div></div></div>'
+      );
+
+      var params = {
+          top:top,
+          content: elem,
+          width: "300px",
+          height: "120px",
+          modal: true,
+          okVal:'确定',
+          okCallback:function(){
+                $(obj).hide().siblings().hide();
+                //to do进行终止
+                var cmd={
+                    "CMPGN_ID":CMPGN_ID,
+                    "CMPGN_STS_CD":"3"
+                };
+                Util.ajax.postJson(srvMap.get("update"),cmd,function(json){
+                    if(json.returnCode==0){
+                      var str= $("#"+G_params.searchformId).serialize();
+                        Util.pagination(0, true , G_params , str ); 
+                    }else{
+                       Util.dialog.tips("废止失败");
+                    }
+                }); 
+          },
+          cancelVal:'取消',
+          cancelCallback:function(){}
+        }
+
+        Util.dialog.openDiv(params);
+}
+
+function endYou(obj, CMPGN_ID){
+
+    var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要结束吗？</div></div></div>'
+      );
+
+      var params = {
+          top:top,
+          content: elem,
+          width: "300px",
+          height: "120px",
+          modal: true,
+          okVal:'确定',
+          okCallback:function(){
+                $(obj).hide().siblings().hide();
+                
+                var cmd={
+                    "CMPGN_ID":CMPGN_ID,
+                    "CMPGN_STS_CD":"7"
+                };
+                Util.ajax.postJson(srvMap.get("update"),cmd,function(json){
+                    if(json.returnCode==0){
+                      var str= $("#"+G_params.searchformId).serialize();
+                        Util.pagination(0, true , G_params , str ); 
+                    }else{
+                       Util.dialog.tips("结束失败");
+                    }
+                }); 
+          },
+          cancelVal:'取消',
+          cancelCallback:function(){}
+        }
+
+        Util.dialog.openDiv(params);
+}
+
+//全选
+	function selectAll(obj) {
+
+		var isCheck = $(obj).is(":checked");
+		if(isCheck){
+      	  $("#J_tabletpl").find("tr")
+			.each(
+					function(index, item) {
+						var keyId = $(this).find(
+								"td:eq(0) div input[type=checkbox]").data(
+								"keyid");
+						var CMPGN_STS=$(this).find("td:eq(0) input[type=checkbox]")
+						.attr("sign");
+						if(CMPGN_STS == "未开始" ||CMPGN_STS == "废止"||CMPGN_STS =="再次分配暂停"||CMPGN_STS =="已结束"||CMPGN_STS =="暂停"){
+							//console.log("d");
+							$(this).find("td").removeClass("tr-selected");
+							$(this).find("td:eq(0) input[type=checkbox]")
+									.attr({"checked": false,"disabled":true}).removeClass(
+											"active");
+							/* selected_array.splice(selected_array
+									.indexOf(keyId), 1); */
+						}else{
+							$(this).find("td").addClass("tr-selected");
+							$(this).find("td:eq(0) input[type=checkbox]")
+									.attr("checked", true).addClass(
+											"active");
+							if (selected_array.indexOf(keyId) == "-1") {
+								selected_array.push(keyId);
+								
+							}
+						}
+						
+					});
+			//弹出选择框
+/* 		    var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">您想要？</div></div></div>'
+		      );
+
+		      var params = {
+		          top:top,
+		          content: elem,
+		          width: "300px",
+		          height: "120px",
+		          modal: true,
+		          okVal:'批量暂停',
+		          okCallback:function(){
+		        	  $("#J_tabletpl").find("tr")
+						.each(
+								function(index, item) {
+									var keyId = $(this).find(
+											"td:eq(0) div input[type=checkbox]").data(
+											"keyid");
+									var CMPGN_STS=$(this).find("td:eq(0) input[type=checkbox]")
+									.attr("sign");
+									console.log(CMPGN_STS);
+									if(CMPGN_STS == "\"未开始\"" ||CMPGN_STS == "\"废止\""||CMPGN_STS =="\"再次分配暂停\""||CMPGN_STS =="\"已结束\""||CMPGN_STS =="\"暂停\""){
+										console.log("d");
+										$(this).find("td").removeClass("tr-selected");
+										$(this).find("td:eq(0) input[type=checkbox]")
+												.attr({"checked": false,"disabled":true}).removeClass(
+														"active");
+										selected_array.splice(selected_array
+												.indexOf(keyId), 1);
+									}else{
+										$(this).find("td").addClass("tr-selected");
+										$(this).find("td:eq(0) input[type=checkbox]")
+												.attr("checked", true).addClass(
+														"active");
+										if (selected_array.indexOf(keyId) == "-1") {
+											selected_array.push(keyId);
+										}
+									}
+								});
+		        	  $('#downProd').fadeIn();
+		          },
+		          cancelVal:'全选',
+		          cancelCallback:function(){
+		      		$("#J_tabletpl").find("tr")
+					.each(
+							function(index, item) {
+								var keyId = $(this).find(
+										"td:eq(0) div input[type=checkbox]").data(
+										"keyid");
+								if (isCheck) {
+									$(this).find("td").addClass("tr-selected");
+									$(this).find("td:eq(0) input[type=checkbox]")
+											.attr("checked", isCheck).addClass(
+													"active");
+									if (selected_array.indexOf(keyId) == "-1") {
+										selected_array.push(keyId);
+									}
+								} else {
+									$(this).find("td").removeClass("tr-selected");
+									$(this).find("td:eq(0) input[type=checkbox]")
+											.attr("checked", isCheck).removeClass(
+													"active");
+									selected_array.splice(selected_array
+											.indexOf(keyId), 1);
+								}
+							});
+		      		 $('#downProd').fadeOut();
+		          }
+		        }
+
+		        Util.dialog.openDiv(params); */
+		        
+		}else{
+			$("#J_tabletpl").find("tr")
+			.each(
+					function(index, item) {
+						var keyId = $(this).find(
+								"td:eq(0) div input[type=checkbox]").data(
+								"keyid");
+							$(this).find("td").removeClass("tr-selected");
+							$(this).find("td:eq(0) input[type=checkbox]")
+									.attr({"checked":isCheck,"disabled":isCheck}).removeClass(
+											"active");
+							selected_array.splice(selected_array
+									.indexOf(keyId), 1);
+					});
+		}
+
+
+		var str = "(" + selected_array.length + ")";
+		$("#J_downum").html(str);
+		//console.log(selected_array);
+		
+		//queryTbl('CMPGN_ID='+selected_array.join('&CMPGN_ID='));
+	}
+function clickChange(obj,mainKey) {
+	
+		if ($(obj).hasClass("active")) {
+			$(obj).removeClass("active").attr("checked", false).parent()
+					.parent().find("td").removeClass("tr-selected");
+			selected_array.splice(selected_array.indexOf(mainKey), 1);
+			console.log(selected_array);
+		} else {
+			$(obj).addClass("active").attr("checked", true).parent().parent()
+					.find("td").addClass("tr-selected");
+
+			selected_array.push(mainKey);
+		}
+		var str = "(" + selected_array.length + ")";
+		$("#J_downum").html(str);
+	}
+function downProd(){
+	var paramstop="";
+	for(var i=0;i<selected_array.length;i++){
+		if(i==0){
+			paramstop="CMPGN_ID="+selected_array[i]+"&CMPGN_STS_CD=2";
+		}else{
+			paramstop=paramstop+"&CMPGN_ID="+selected_array[i]+"&CMPGN_STS_CD=2";
+		}
+		
+	}
+	var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">是否确定批量暂停？</div></div></div>'
+    );
+
+    var params = {
+        top:top,
+        content: elem,
+        width: "300px",
+        height: "120px",
+        modal: true,
+        okVal:'确定',
+        okCallback:function(){
+              $(obj).hide().siblings().hide();
+              //alert(paramstop);
+              Util.ajax.postJson(srvMap.get("cmpgnStopAll"),paramstop,function(json){
+                  if(json.returnCode==0){
+                    var str= $("#"+G_params.searchformId).serialize();
+                      Util.pagination(0, true , G_params , str ); 
+                  }else{
+                     Util.dialog.tips("批量暂停失败");
+                    
+                  }
+              }); 
+        },
+        cancelVal:'取消',
+        cancelCallback:function(){}
+      }
+
+      Util.dialog.openDiv(params);
+}
+
+function start(obj,CMPGN_ID){
+	
+	if($(obj).html() == "暂停"){
+	     $(obj).html("开始");
+	     $(obj).siblings("a").hide();
+	  }else if($(obj).html() == "开始"){
+	    $(obj).html("暂停");
+	    $(obj).siblings("a").show();
+	  }
+	
+	var cmd={
+	        "CMPGN_ID":CMPGN_ID,
+	        "CMPGN_STS_CD":"1"
+	    };
+	 Util.ajax.postJson(srvMap.get("update"),cmd,function(json){
+	        if(json.returnCode==0){
+	        	var str= $("#"+G_params.searchformId).serialize();
+	            Util.pagination(0, true , G_params , str );	
+	        }else{
+	        	 Util.dialog.tips("开始失败");
+	        }
+	    }); 
+
+	
+}
+Handlebars.registerHelper("istop",function(CMPGN_STS,CMPGN_ID){
+	var buffer = "";
+    switch(CMPGN_STS){
+	case "未开始":
+    	buffer = '<input type="checkbox" disabled="true" sign='+CMPGN_STS+' data-keyid='+"'"+CMPGN_ID+"'"+'/>';
+	break;
+	case "废止":
+    	buffer = '<input type="checkbox" disabled="true" sign='+CMPGN_STS+' data-keyid='+"'"+CMPGN_ID+"'"+'/>';
+	break;
+	case "再次分配暂停":
+    	buffer = '<input type="checkbox" disabled="true" sign='+CMPGN_STS+' data-keyid='+"'"+CMPGN_ID+"'"+'/>';
+	break;
+	case "已结束":
+    	buffer = '<input type="checkbox" disabled="true" onclick="clickChange(this,'+"'"+CMPGN_ID+"'"+')"sign='+CMPGN_STS+' data-keyid='+"'"+CMPGN_ID+"'"+'/>';
+	break;
+	case "暂停":
+    	buffer = '<input type="checkbox" disabled="true" sign='+CMPGN_STS+' data-keyid='+"'"+CMPGN_ID+"'"+'/>';
+	break;
+	case "进行中":
+    	buffer = '<input type="checkbox" onclick="clickChange(this,'+"'"+CMPGN_ID+"'"+')"sign='+CMPGN_STS+' data-keyid='+"'"+CMPGN_ID+"'"+'/>';
+	break;
+}
+    return new Handlebars.SafeString(buffer);
+});
+
+
+Handlebars.registerHelper("isClick", function(CMPGN_STS,CMPGN_STS_CD,CMPGN_ID,CMPGN_NM,CMPGN_EFF_DATE,CMPGN_INVLD_DATE,Distribution,fn){
+    
+    var buffer = "";
+
+/*     if(CMPGN_STS_CD == '1'){
+//onclick="watchProcess('+CMPGN_ID +')"
+      buffer = '<a class="item-text" href="javascript:;" onclick="distributeData('+
+      		"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+')">分配</a><a class="item-text" href="javascript:;" onclick="watchProcess('+"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+','+"'"+CMPGN_STS_CD+"'"+')">查看进度</a><a class="item-text" href="javascript:;" onclick="stop(this,'+"'"+CMPGN_ID+"'" +')">暂停</a><a class="item-text" href="javascript:;" onclick="end(this,'+"'"+CMPGN_ID+"'"+')">废止</a>';
+    }else if(CMPGN_STS_CD == '2'){
+      buffer = '<a class="item-text" style="display: none;" href="javascript:;" onclick="distributeData('+
+	"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+')">分配</a><a class="item-text" style="display: none;" href="javascript:;" onclick="watchProcess('+"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+','+"'"+CMPGN_STS_CD+"'"+')">查看进度</a><a class="item-text" href="javascript:;" onclick="stop(this,'+"'"+CMPGN_ID+"'" +')">开始</a><a class="item-text" href="javascript:;" style="display: none;" onclick="end(this,'+"'"+CMPGN_ID+"'"+')">废止</a>';
+    }else if(CMPGN_STS_CD == '3'){
+       buffer = '<a class="disable-text" style="display: none;" href="javascript:;" onclick="return false;">分配</a><a class="disable-text" style="display: none;" href="javascript:;" onclick="return false;">查看进度</a><a class="disable-text" href="javascript:;" style="display: none;" onclick="return false;">暂停</a><a class="disable-text" style="display: none;" href="javascript:;" onclick="return false;">废止</a>';
+    } */
+    
+    	
+    /* switch(CMPGN_STS_CD){ */
+    switch(CMPGN_STS){
+    	case "废止":
+        	buffer = '';
+    	break;
+    	/*onclick="watchProcess('+"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+','+"'"+CMPGN_STS_CD+"'"+')"*/
+    	case "暂停":
+    		buffer = '<a class="item-text" style="display: none;" href="javascript:;" onclick="distributeData('+
+    		"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+')">分配</a><a class="item-text" href="javascript:;" onclick="start(this,'+"'"+CMPGN_ID+"'" +')">开始</a><a class="item-text" href="javascript:;" style="display: none;" onclick="end(this,'+"'"+CMPGN_ID+"'"+')">废止</a><a class="item-text watchProcess" style="display: none;" href="javascript:;">查看进度</a>';
+    	break;
+    	/* onclick="watchProcess('+"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+','+"'"+CMPGN_STS_CD+"'"+')"*/
+    	case "未开始":
+    		buffer = '<a class="item-text" href="javascript:;" onclick="distributeData('+
+    		"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+')">分配</a><a class="item-text" style="display: none;" href="javascript:;" onclick="stop(this,'+"'"+CMPGN_ID+"'" +')">开始</a><a class="item-text" href="javascript:;" onclick="end(this,'+"'"+CMPGN_ID+"'"+')">废止</a><a class="item-text" href="javascript:;" onclick="endYou(this,'+"'"+CMPGN_ID+"'"+')">结束</a><a class="item-text watchProcess" style="display: none;" href="javascript:;">查看进度</a><a class="item-text" href="javascript:;" onclick="add('+"'"+CMPGN_ID+"'"+')">追加</a>';
+    	break;
+      /* onclick="watchProcess('+"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+','+"'"+CMPGN_STS_CD+"'"+')"*/
+    	case "进行中":
+    		if(Distribution=='无法分配'){
+    			buffer = '<a class="item-text" href="javascript:;" style="display: none;" onclick="distributeData('+
+          		"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+')">分配</a><a class="item-text" href="javascript:;" onclick="stop(this,'+"'"+CMPGN_ID+"'" +')">暂停</a><a class="item-text" href="javascript:;" onclick="end(this,'+"'"+CMPGN_ID+"'"+')">废止</a><a class="item-text" href="javascript:;" onclick="endYou(this,'+"'"+CMPGN_ID+"'"+')">结束</a><a class="item-text watchProcess" href="javascript:;" style="display:inline-block;">查看进度</a><a class="item-text" href="javascript:;" onclick="add('+"'"+CMPGN_ID+"'"+')">追加</a>';
+    		}else{
+    			buffer = '<a class="item-text" href="javascript:;" onclick="distributeData('+
+          		"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+')">分配</a><a class="item-text" href="javascript:;" onclick="stop(this,'+"'"+CMPGN_ID+"'" +')">暂停</a><a class="item-text" href="javascript:;" onclick="end(this,'+"'"+CMPGN_ID+"'"+')">废止</a><a class="item-text" href="javascript:;" style="display: none;" onclick="endYou(this,'+"'"+CMPGN_ID+"'"+')">结束</a><a class="item-text watchProcess" href="javascript:;"style="display:inline-block;">查看进度</a><a class="item-text" href="javascript:;" onclick="add('+"'"+CMPGN_ID+"'"+')">追加</a>';
+    		}
+    		
+    	break;
+      /* onclick="watchProcess('+"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+','+"'"+CMPGN_STS_CD+"'"+')"*/
+    	case "已结束":
+    		buffer = '<a style="display: none;" class="item-text" href="javascript:;" onclick="distributeData('+
+    		"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+')">分配</a><a class="item-text" style="display: none;" href="javascript:;" onclick="stop(this,'+"'"+CMPGN_ID+"'" +')">开始</a><a class="item-text" style="display: none;" href="javascript:;" onclick="end(this,'+"'"+CMPGN_ID+"'"+')">废止</a><a class="item-text watchProcess"  href="javascript:;" style="display:inline-block;">查看进度</a>';
+    	break;
+      /* onclick="watchProcess('+"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+','+"'"+CMPGN_STS_CD+"'"+')"*/
+    	case "再次分配暂停":
+    		buffer = '<a style="display: none;" class="item-text" href="javascript:;" onclick="distributeData('+
+    		"'"+CMPGN_ID+"'"+','+ "'" +CMPGN_NM+ "'" +','+ "'" +CMPGN_EFF_DATE+"'"+','+"'"+CMPGN_INVLD_DATE+"'"+')">分配</a><a class="item-text" style="display: none;" href="javascript:;" onclick="stop(this,'+"'"+CMPGN_ID+"'" +')">开始</a><a class="item-text" style="display: none;" href="javascript:;" onclick="end(this,'+"'"+CMPGN_ID+"'"+')">废止</a><a class="item-text watchProcess"  href="javascript:;" style="display:inline-block;">查看进度</a>';
+    	break;
+    }
+    	
+    	
+   return new Handlebars.SafeString(buffer);
+}); 
+
+/* Handlebars.registerHelper("invertTime", function(datestr){
+	var buffer = datestr.replace("00:00:00","");
+	return buffer;
+});
+*/
+
+  Handlebars.registerHelper('dataToJSON', function(obj) {
+    return JSON.stringify(obj);
+  });
+
+  Handlebars.registerHelper('sysToJSON', function(obj) {
+	    return JSON.stringify(obj.CMPGN_STS);
+	  });
+function pageback(){
+	$("#J_downum").html('');
+}
+</script>
+</body>
+</html>

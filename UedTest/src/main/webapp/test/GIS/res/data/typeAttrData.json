@@ -1,0 +1,41 @@
+{
+    "returnCode": "1",
+    "total": "11",
+    "rows": [
+        {
+            "nodeType": "营业厅(节点类型)",
+            "nodeTypeId":"1",
+            "property": [
+                    {
+                        "templateId": "19",
+                        "isBand":"0",
+                        "label": "营业厅面积"
+                        
+                    },
+                    {
+                        "templateId": "20",
+                        "isBand":"1",
+                        "label": "排队人数"
+                    }
+                  ]
+            
+        },
+        {
+           "nodeType": "集团客户(节点类型)",
+           "nodeTypeId":"2",
+           "property": [
+                    {
+                        "templateId": "112",
+                        "isBand":"1",
+                        "label": "客户等级"
+                        
+                    },
+                    {
+                        "templateId": "111",
+                        "isBand":"0",
+                        "label": "客户地址"
+                    }
+                  ]
+        }
+    ]
+}

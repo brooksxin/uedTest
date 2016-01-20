@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>区域配置</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/opui/om-default.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/zTree/zTreeStyle.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/opui/2.1/operamasks-ui.src.js"></script>
+<script type="text/javascript" src="res/lib/zTree/3.5.16/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="res/lib/zTree/3.5.16/jquery.ztree.excheck-3.5.js"></script>
+<script type="text/javascript" src="res/lib/zTree/3.5.16/jquery.ztree.exedit-3.5.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="res/lib/AIMap/1.0.0/AIMap.js"></script>
+<!-- base64 -->
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/core-min.js"></script>
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/enc-base64-min.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body onload="AIMap_loadScript()">
+<div class="openwin area_config fn-clear">
+	<div class=" fn-clear">
+		<div class="areaConfig">	
+			<ul id="treeDemo" class="ztree"></ul>
+		</div>
+
+		<div class="mapContain">
+	    	<div class="suggest_input">
+		    	<label for="suggestId">搜索：</label>
+		    	<input type="text" id="suggestId" placeholder="请输入关键字" class="normalinput"/>
+		    </div>
+		    
+		    <div id="myMap" name="myMap" style="width: 100%;height: 350px;"></div>
+		</div>
+	</div>
+
+	<div class="bz_btn_list">
+		<a class="btn_normal fn-mr-20" href="#nogo" id="J_save"><em>保存</em></a>
+		<a class="btn_normal fn-mr-20" href="#nogo" id="J_del"><em>删除</em></a>
+		<a class="btn_normal " href="#nogo" onclick="closeDialog();return false;"><em>取消</em></a>
+	</div>
+</div>
+
+<script type="text/javascript" >
+var Z_json,myMap,zFlag=1;
+var parentJson;//父区域
+var jsonSelf;//自己区域
+var siblingsJson = [];//同级区域
+var type = 0;//根据drawingModes判断，当为0或者false的时候，不需要考虑超出区域，目前为点与多边形的关系，3；
+var areaMarker = [];//标记点数组
+var rootId = "";
+var rootFlag = true;
+var setting = {
+	view: {
+		expandSpeed: "",
+		selectedMulti: false,
+		showIcon: true
+	},
+	edit: {
+		enable: false
+	},
+	data: {
+		simpleData: {
+			enable: true,
+			idKey: "id",
+			pIdKey: "pId",
+			icon: "icon"
+		}
+	},
+	callback: {
+		onClick: zTreeOnClick
+	}
+};
+
+function zTreeOnClick(event, treeId, treeNode) {
+	var nodeid = treeNode.id;
+	if(rootId==nodeid){
+		result_prompt(2,"根节点不允许绘制区域！");
+		rootFlag = false;
+		return false;
+	}else{
+		rootFlag = true;
+	}
+	var parentid = treeNode.getParentNode().id;
+	var str = "nodeId=" + nodeid + "&parentId=" + parentid;
+	//$.PostJson("res/data/areaConfigMod1.json",nodeid,function(state,json){
+	$.PostJson(REQURLS.tree_getTreeNodeArea,str,function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+            	result_prompt(-1,"正在加载地图...");
+            	AIMap_init();//重置地图
+
+            	
+    	  		var areaJson = [];
+    	  		var tempJson = [];
+    	  		var ztempJson = [];
+    			var bdary = new AIMap.Boundary();
+    			var value = prompt('这是紫金港商务大厦到良渚村的导航，请选择导航方式：', '杭州')||"杭州";
+    			bdary.get(value, function(rs){       //获取行政区域
+    			    myMap.clearOverlays();        //清除地图覆盖物
+    				var count = rs.boundaries.length; //行政区域的点有多少个
+    				for(var i = 0; i < count; i++){
+    					var ply = new AIMap.Polygon(rs.boundaries[i], {strokeWeight: 2, strokeColor: "#ff0000"}); //建立多边形覆盖物
+    					myMap.addOverlay(ply);  //添加覆盖物
+    					myMap.setViewport(ply.getPath());    //调整视野
+
+    					tempJson = rs.boundaries[i].split(";");//["120.420324, 30.323932", "120.390411, 30.345232"]
+
+    					
+    					for(var j=0,length=tempJson.length; j<length; j++){
+    						ztempJson = tempJson[j].split(",");
+    						var tempPoint = {};
+    						tempPoint.lng = ztempJson[0];
+    						tempPoint.lat = ztempJson[1];
+    						areaJson.push(tempPoint);
+    					}
+    				}
+
+    				// Z_json = areaJson;
+    				var zjson = {};
+    				zjson.drawingModes = "polygon";
+    				var param = {
+    					"strokeColor": "blue",
+    					"fillColor": "white",
+    					"strokeWeight": 3,
+    					"strokeOpacity": 0.8,
+    					"fillOpacity": 0.3,
+    					"strokeStyle": "solid"
+    				}
+    				zjson.params = param;
+    				zjson.points = areaJson;
+    				Z_json = zjson;
+    				
+    			});
+            }else{
+                result_prompt(0,json.returnMessage||"修改失败！");
+            }
+        }else{
+            result_prompt(0,"系统错误！");
+        }
+    }); 
+    
+};
+
+function AIMap_encapsulateBMap() {
+	result_prompt(-1,"正在加载地图...");
+	AIMap_asysScript("http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager.js", loadSearch);
+}
+
+function loadSearch() {
+	AIMapLib = BMapLib;
+	AIMap_asysScript("http://api.map.baidu.com/library/GeoUtils/1.2/src/GeoUtils.js", AIMap_loadTools); //最后一个异步加载的回调方法必须为loadTools
+	
+	var treeid = art.dialog.data("treeid");
+	rootId = treeid;
+	var str = "nodeId=" + treeid;
+	//$.PostJson("res/data/treeConfigMod.json",str,function(state,json){
+	$.PostJson(REQURLS.tree_upTreeNodesquery,str,function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+				var zNodes = json.rows;
+				for(var i=0, length=zNodes.length; i<length; i++){
+					if(zNodes[i].pId=='0'){
+						zNodes[i].icon = "res/theme/default/images/tree/zTreeHome.png";
+					}
+				}
+            	$.fn.zTree.init($("#treeDemo"), setting,zNodes);            	
+            	var rootid = "rootid=" + zNodes[0].id;
+            	//$.PostJson("res/data/areaConfigMod.json",str,function(state,json){
+				$.PostJson(REQURLS.tree_getTreeNodeArea,str,function(state,json){
+                    if(state=="success"){
+                        if(json&&json.returnCode=="1"){
+                        	var jsonStr = json.selfJson;
+                        	if(jsonStr !=''){
+                        		var areaJson = JSON.parse(jsonStr);
+                        		AIMap.draw.drawPolygon(areaJson.rows.points,"",function(e){
+                            		myMap.addOverlay(e);
+                            	});
+                        	}
+                        }else{
+                            result_prompt(0,json.returnMessage||"修改失败！");
+                        }
+                    }else{
+                        result_prompt(0,"系统错误！");
+                    }
+                });
+            }else{
+                result_prompt(0,json.returnMessage||"修改失败！");
+            }
+        }else{
+            result_prompt(0,"系统错误！");
+        }
+    });
+
+	$("#J_save").click(function(){
+    	var treeObj = $.fn.zTree.getZTreeObj("treeDemo"); 
+		var nodes = treeObj.getSelectedNodes();
+		var G_json = {},node = {};
+		node.id = nodes[0].id;
+		node.pId = nodes[0].pId;
+		node.name = nodes[0].name;
+		G_json.node = node;
+		G_json.rows = Z_json;
+		
+		var str = JSON.stringify(G_json);
+		str = encodeURIComponent(str);
+        str = encodeBase64(str);
+		
+    	//$.PostJson("res/data/treeConfigSave.json",str,function(state,json){
+    	$.PostJson(REQURLS.tree_bindTreeNodeArea,"nodeId="+nodes[0].id+"&areaJson="+str,function(state,json){
+            if(state=="success"){
+                if(json&&json.returnCode=="1"){
+                    //result_prompt(1,"区域绑定成功！")
+                    alert("绑定成功");
+                    // parent.gridReload("mytable");
+                    //closeDialog();
+                }else{
+                    result_prompt(0,json.returnMessage||"区域绑定失败！");
+                }
+            }else{
+                result_prompt(0,"系统错误！");
+            }
+        });
+    });
+
+	$("#J_del").click(function(){
+	 	if(!rootFlag){
+	 		result_prompt(2,"根节点不允许绘制区域！");
+	 		return false;
+	 	}
+    	var treeObj = $.fn.zTree.getZTreeObj("treeDemo"); 
+		var nodes = treeObj.getSelectedNodes();
+		if(nodes.length != 1){
+			result_prompt(2,'必须选择一个树结点');
+			return false;
+		}
+		result_comfirm("是否确定清空该节点已绑定的区域？",function(){
+			$.PostJson(REQURLS.tree_delTreeNodeArea,"nodeId="+nodes[0].id,function(state,json){
+		        if(state=="success"){
+		            if(json&&json.returnCode=="1"){
+		                result_prompt(1,"删除区域成功！")
+		                closeDialog();
+		            }else{
+		                result_prompt(0,json.returnMessage||"删除区域失败！");
+		            }
+		        }else{
+		            result_prompt(0,"系统错误！");
+		        }
+		    });
+		},"");
+	});
+}
+
+function AIMap_init() {
+	myMap = new AIMap.Map("myMap");
+	myMap.centerAndZoom('杭州', 13);
+	myMap.enableScrollWheelZoom();
+	myMap.addControl(new AIMap.NavigationControl()); //添加默认缩放平移控件
+
+	myMap.onload = mapLoadCallback;
+}
+
+function mapLoadCallback(){
+	closeDialog("loadingBusiId");
+	var ac = new AIMap.Autocomplete({
+		"input":"suggestId",
+		"location":myMap
+	});
+	
+	var myValue;
+	ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+	var _value = e.item.value;
+	    myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+	    setPlace();
+	});
+
+	function setPlace(){
+	    myMap.clearOverlays();    //清除地图上所有覆盖物
+	    function myFun(){
+	        var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+	        myMap.centerAndZoom(pp, 13);
+	        myMap.addOverlay(new BMap.Marker(pp));    //添加标注
+	    }
+	    var local = new BMap.LocalSearch(myMap, { //智能搜索
+	      onSearchComplete: myFun
+	    });
+	    local.search(myValue);
+	}	
+	
+}
+</script>
+
+</body>
+</html>

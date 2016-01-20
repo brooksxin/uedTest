@@ -1,0 +1,85 @@
+{
+    "sysParam": [
+        {
+            "PROP_CODE": "appId",
+            "PROP_NAME": "true",
+            "PROP_TYPE": "string",
+            "IS_NULL": "Y",
+            "LENGTH": "133",
+            "F_OR_V": "F",
+            "DEFAULT_VALUE": "Y",
+            "IS_ENCRYPT": "Y",
+            "EXT_1" :"11"
+        }
+    ],
+    "reqParam": [
+        {
+            "PARAM_CODE": "appId",
+            "PARAM_NAME": "true",
+            "PARAM_TYPE_CODE": "string",
+            "IS_NULL": "Y",
+            "LENGTH": "133",
+            "F_OR_V": "F",
+            "DEFAULT_VALUE": "Y",
+            "IS_ENCRYPT": "Y",
+            "EXT_1" :"11"
+        },
+        {
+            "PARAM_CODE": "appId",
+            "PARAM_NAME": "true",
+            "PARAM_TYPE_CODE": "string",
+            "IS_NULL": "Y",
+            "LENGTH": "133",
+            "F_OR_V": "F",
+            "DEFAULT_VALUE": "Y",
+            "IS_ENCRYPT": "Y",
+            "EXT_1" :"11"
+        },
+        {
+            "PARAM_CODE": "appId",
+            "PARAM_NAME": "true",
+            "PARAM_TYPE_CODE": "string",
+            "IS_NULL": "Y",
+            "LENGTH": "133",
+            "F_OR_V": "F",
+            "DEFAULT_VALUE": "Y",
+            "IS_ENCRYPT": "Y",
+            "EXT_1" :"11"
+        }
+    ],
+    "rspParam": [
+        {
+            "PARAM_CODE": "appId",
+            "PARAM_NAME": "true",
+            "PARAM_TYPE_CODE": "string",
+            "IS_NULL": "Y",
+            "LENGTH": "133",
+            "F_OR_V": "F",
+            "DEFAULT_VALUE": "Y",
+            "IS_ENCRYPT": "Y",
+            "EXT_1" :"11"
+        },
+        {
+            "PARAM_CODE": "appId",
+            "PARAM_NAME": "true",
+            "PARAM_TYPE_CODE": "string",
+            "IS_NULL": "Y",
+            "LENGTH": "133",
+            "F_OR_V": "F",
+            "DEFAULT_VALUE": "Y",
+            "IS_ENCRYPT": "Y",
+            "EXT_1" :"11"
+        },
+        {
+            "PARAM_CODE": "appId",
+            "PARAM_NAME": "true",
+            "PARAM_TYPE_CODE": "string",
+            "IS_NULL": "Y",
+            "LENGTH": "133",
+            "F_OR_V": "F",
+            "DEFAULT_VALUE": "Y",
+            "IS_ENCRYPT": "Y",
+            "EXT_1" :"11"
+        }
+    ]
+}

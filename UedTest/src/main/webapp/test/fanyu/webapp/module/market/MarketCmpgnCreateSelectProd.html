@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>添加商品</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+			<!--#####面包屑导航#####-->
+			<div class="breadcrumb"></div>
+
+			<div class="formItem">
+				<div class="titleArea">
+					<h2>选择产品</h2>
+				</div>
+				<div class="formAreaD">
+					<div class="flowSteps">
+						<ul class="current_2">
+							<li class="FirstStep"><a href="#">基本信息</a></li>
+							<li class="SecondStep"><a href="#">选择产品</a></li>
+							<li class="ThirdStep"><a href="#">客户号码</a></li>
+							<div class="clearfloat"></div>
+						</ul>
+					</div>
+
+
+				<div style="height:150px;padding-top:50px;">
+					<div class="normalBtnArea mt-10 mb-10 fn-center">
+						<a class="normalBtn BGgray largeBtn" href="javascript:;" id="multiProd">创建组合套餐</a>
+					</div>
+					<div class="normalBtnArea mt-10 mb-10 fn-center" >
+						<a class="normalBtn BGgray largeBtn" href="javascript:;" id="singleProd">创建独立促销</a>
+					</div>
+				</div>
+				<hr />
+
+				</div>
+			
+			
+				<div class="formBtnArea">
+					<table width="100%">
+						<tr>
+							<td>
+								<div class="normalBtnArea fn-center">
+
+									<a class="normalBtn BGblue largeBtn" href="javascript:;" id="Return">上一步</a> 
+
+								<!-- 	<a class="normalBtn BGgray largeBtn" href="javascript:;" id="Save">保存草稿</a> -->
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<!-- right stop -->
+			</div>
+			<#include "../../tpl/res_js.tpl" />
+			<script type="text/javascript">
+
+			$(document).ready(function () {
+				
+				var cmpgn_id = Util.browser.getParameter("id");
+				
+				$("#singleProd").bind("click",function(){
+					window.location.href="selectSingleProd.html?id="+cmpgn_id;
+				});
+				$("#multiProd").bind("click",function(){
+					Util.dialog.tips("暂时无法创建组合套餐类活动，更多功能敬请期待 ^_^");
+				});
+				$("#Return").bind("click",function(){
+					window.location.href="newCampgnNew.html?id="+cmpgn_id;
+				});
+				
+		    });
+				
+				
+
+			</script>
+</body>
+</html>

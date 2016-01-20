@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>下单量-待分配任务</title>
+<#include "../../tpl/res_css.tpl" />
+<style>
+	.disabled { background-color:#ddd; }
+	.groupGoal tr td { font-size:12px; }
+	.groupGoal input { }
+	
+	.groupGoalLabel { width:80px; text-align:right; }
+	.groupGoalRemark { height:40px; line-height:40px; }
+</style>
+
+
+</head>
+
+<body>
+<div>
+				<div class="listTopBtn">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td><h1>今日下单量</h1></td>
+							<td><div class="normalBtnArea ft-right">
+									<a class="normalBtn BGblue" href="#" onclick="taskNumberSetting(this); ">任务数量设置</a>
+								</div></td>
+						</tr>
+					</table>
+				</div>
+				<form id="divideTask">
+					<input name="uid" value="mt004" type="hidden" />
+					<div class="listTopTips">
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+							<tr>
+								<td><span id="date"></span> </td>
+								<td><div class="ft-right">
+										任务完成量：<span id="count"></span>
+										<input type="hidden" id="TSK_QTY" name="TSK_QTY"/>
+									</div></td>
+							</tr>
+						</table>
+					</div>
+				<div class="tablewidth mg_t_20">
+						<table
+							class="ui-record-table table_radius table-bordered table-striped">
+							<thead>
+								<tr>
+									<th width="50"></th>
+									<th width="120">员工工号</th>
+									<th width="120">员工姓名</th>
+									<th width="120">配给数量</th>
+								</tr>
+							</thead>
+							<tbody id="J_tabletpl">
+
+							</tbody>
+						</table>
+					</div>
+
+				</form>
+
+				<!--翻页及功能按钮区域开始-->
+				<DIV class="amount-bottom">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0"
+						class="gridBottom">
+						<tr>
+							<td width="60"><input type="checkbox" class="selectAll"
+								id="selectAll" checked="checked" /> <label for="selectAll">全选</label>
+							</td>
+							<td width="100">剩余配给量:<span class="surplus">0</span></td>
+							<td width="100">
+								<DIV class="normalBtnArea">
+									<a class="normalBtn BGgray disable" id="J_distr_again"
+										href="javascript:;">重新分配</a>
+								</DIV>
+							</td>
+							<td>
+								<DIV class="fn-clear action-other  action-other-show " style="width:410px">
+									<DIV id=Pagination class="page pagination fn-right"></DIV>
+									<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+								</DIV>
+							</td>
+						</tr>
+					</table>
+				</DIV>
+			
+			<div class="normalBtnArea fn-center BtnAreaHeight">
+				<a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search">确定</a>
+				<a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" onclick="newModule(); ">新模块</a>
+			</div>
+</div>
+	<#include "../../tpl/res_js.tpl" />	
+	<!--以下为该页面私有js-->
+	<script src="../../lib/underscore/1.8.3/m.js"></script>
+	<script src="../../lib/jqueryPlugin/jquery.countdown/2.0.2/m.js"></script>
+    <script src="../../common/market/common.js"></script>
+	
+
+	<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+         <tr>
+                                <td><div class="table_select"><input type="checkbox" checked="checked" onchange="checkStaff(this)" /></div></td>
+								<td>{{PTY_NO}}</td>
+<input type="hidden" name="STAFF_ID" class="hideBox" value="{{STAFF_ID}}">
+								<td>{{PTY_NM}}</td>
+                            <td align="center">
+				              <div style="line-height:0px">
+					          <a herf="#" class="order_productDiva" onclick="decrease(this)">-</a>
+					          <input type="text" name="TSK_ALCT_QTY" class="ui-count-ipt order_productinput fn-mtl-5" lastVal="" onchange="changeTaskIpt(this)" onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')"  />
+					          <a herf="#" class="order_productDiva fn-mtl-5" onclick="increase(this)">+</a>
+				            </div>
+			              </td>
+</tr>
+    {{/each}}
+{{else}}
+    	<tr>
+		<td colspan="4">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+
+
+	<script id="T_taskNumberSetting" type="text/x-handlebars-template">
+		<table border=0 class="groupGoal">
+			<tr><td class="groupGoalLabel">班组目标：</td><td><input type="text" class="groupGoal" value="{{groupGoalNumber}}" /></td></tr>
+			<tr class="groupGoalRemark"><td></td><td>班组目标修改后，自动将总工作量均分给班组成员</td></tr>
+			
+		</table>
+	</script>
+
+	<script type="text/javascript">
+		var newModule = function(){
+
+			require(['common/util/loading'], function(Loading){
+				Loading.init();
+				require(['common/market/orderDivideToday'], function(Main){
+					Main.init(Loading);
+				});
+			});
+		}
+	
+		/*
+		 服务配置
+		 param1: 服务名
+		 param2: 假数据路径
+		 param3: 后台服务路径
+		 */
+		 srvMap.add('queryCountYesday', 'count.json', 'front/sh/market!index');//查询最近一次设置的订单数（订单分配数量默认为最近一次的数量）
+		srvMap.add('stafflist', 'staf.json', 'front/sh/user!userinfo');//班组长查询所在部门的员工列表
+		srvMap.add('divide', 'divide.json', 'front/sh/market!index');//分配任务
+
+		var count = "",num = '';
+		//页面加载完开始执行
+		$(function() {
+			//当前日期获取
+			var date = Util.date.dateTimeWrapper('yyyy-MM-dd');
+			$("#date").html(date);
+			var DEPT_ID=userInfo.bean.deptId;//当前登录用户所在部门ID
+			var param1={"uid":"mt003"};
+			Util.ajax.postJsonSync(srvMap.get('queryCountYesday'),param1, function(json,
+					status) {
+				if (status) {
+					count = json.bean.TSK_QTY;
+					$("#count").text(count);
+					$("#TSK_QTY").val(count);
+				}
+			});
+					
+			//查询员工列表
+			var param2={"uid":"u005","DEPT_ID":DEPT_ID};
+			Util.ajax.postJsonSync(srvMap.get('stafflist'), param2, function(
+					json, status) {
+				if (status) {
+					num=json.beans.length;
+					Util.ajax.loadTemp('#J_tabletpl', $('#T_tabletpl'), json);
+					distributeTask();
+				}
+			});
+			
+			//全选checkbox
+			$('#selectAll').change(function() {
+				var ck=this.checked;
+				$("#J_tabletpl input[type='checkbox']").each(function(i,ele){
+					this.checked=ck;
+					checkStaff(ele);
+				});
+			});
+			
+			//开始给员工分配今日下单量
+			$("#J_search").bind("click",function(e){
+				if ($(e.currentTarget).attr('class').indexOf('disable') > -1) {
+					return false;
+				}
+				//分配任务
+				Util.ajax.postJsonSync(srvMap.get('divide'), $("#divideTask").serialize(), function(
+						json, status) {
+					if (status) {
+						if(json.returnCode=='0'){
+							if(json.bean.msg==null){
+								Util.dialog.tips("今日下单量分配成功");
+								window.location.href="campgnListGrLdr.html";
+							}else{
+								Util.dialog.tips(json.bean.msg);
+							}
+							
+						}
+					}
+						
+				});
+			}); 
+			
+			//给任务数量文本框注册事件
+			$('#J_tabletpl').on('propertychange keyup input paste blur set', 'tr td .ui-count-ipt', function(e){
+				numSign(e.currentTarget);
+			})
+			
+		});
+		
+		function taskNumberSetting(obj) {
+			var taskNumberHtml = $('#T_taskNumberSetting').html();
+			var template = Handlebars.compile(taskNumberHtml);
+			var d = dialog({
+				//id:params.id,
+				fixed: true,
+				// quickClose: true,	//点击空白处弹出框消失
+				title: '任务数量设置',
+				content:template({ groupGoalNumber:count }), 
+				width:480, height:60,
+				
+				/*cancelValue: '取消',
+				cancel:  function() {
+					
+				},*/
+				okValue: '确定',
+				ok: function() {
+					var $ftRight = $('.listTopTips .ft-right');
+					var $count = $('#count', $ftRight).html(count);
+					var groupGoal = $('input.groupGoal', this.node).val() || 0;
+					$count.html(groupGoal);
+					$('#TSK_QTY', $ftRight).val(groupGoal);
+					count = groupGoal;
+					distributeTask();
+					//canDistribute({}, true);
+
+					//.listTopTips .ft-right #count
+					//.listTopTips .ft-right #TSK_QTY
+				},
+			});
+			d.show();
+			setTimeout(function() {
+				$('input.groupGoal', d.node).focus().select();
+				
+			}, 500);
+			return false;
+		}
+		
+		//分配任务
+		function distributeTask(){
+			var $tbody = $('#J_tabletpl');
+			var $trs = $tbody.children();
+			var $trCheckeds = _.filter($trs, function(tr) {
+				var $tr = $(tr);
+				return $tr.find('input[type=checkbox]').is(':checked');
+			});
+			if($trCheckeds==null||$trCheckeds==''){
+				Util.dialog.tips("请选择成员");
+			}else{
+			var checkedNum = $trCheckeds.length;
+			var averageTask = parseInt(parseInt(count)/checkedNum),//平均分配
+				surplusTask = parseInt(parseInt(count)%checkedNum);//取余
+			
+			$('.ui-count-ipt', $trCheckeds).val(averageTask).attr('lastVal',averageTask)
+				.eq(0).val(averageTask+surplusTask).attr('lastVal',averageTask+surplusTask);
+			$('.surplus').html(0);
+			canDistribute();
+			}
+		}
+
+		//递减
+		function decrease(obj){
+			if ($(obj).attr('class').indexOf('disabled')>-1){
+				return false;
+			}
+			var obj = $(obj),surplus = parseInt($('.surplus').html());
+			var curTask = parseInt(obj.siblings('input').val());
+			if (curTask>0) {
+				curTask--;
+				surplus++;
+				obj.siblings('input').val(curTask).attr('lastVal',curTask);
+				$('.surplus').html(surplus);
+			};
+			canDistribute(obj);
+		}
+
+		//递增
+		function increase(obj){
+			if ($(obj).attr('class').indexOf('disabled')>-1){
+				return false;
+			}
+			obj = $(obj);
+			var surplus = parseInt($('.surplus').html());
+			var curTask = parseInt(obj.siblings('input').val());
+			if (surplus>0) {
+				surplus--;
+				curTask++;
+				obj.siblings('input').val(curTask).attr('lastVal',curTask);
+				$('.surplus').html(surplus);
+			};
+			
+			canDistribute(obj);
+		}
+		//改变input的任务量值
+		function changeTaskIpt(obj){
+			obj = $(obj);
+			var	lastVal = parseInt(obj.attr('lastVal')),
+			curVal = parseInt(obj.val()),
+			surplus = parseInt($('.surplus').html());
+			if (curVal > lastVal) {
+				var DVal = curVal - lastVal;
+				if (DVal > surplus) {
+					Util.dialog.tips('剩余配给量不足！');
+					obj.val(lastVal);
+				}else{
+					$('.surplus').html(surplus - DVal);
+					obj.attr('lastVal',curVal);
+				}
+			}else{
+				var DVal = lastVal - curVal;
+				$('.surplus').html(surplus + DVal);
+				obj.attr('lastVal',curVal);
+			}
+			canDistribute(obj);
+		}
+		//是否选中员工
+		function checkStaff(obj){
+			obj = $(obj);
+			var curIpt = obj.parents('tr').find('.ui-count-ipt'),
+				curVal = parseInt(curIpt.val()),
+				surplus = parseInt($('.surplus').html()), 
+				$tr = obj.parents('tr'), 
+				$box = $('input[type=text]', $tr), 
+				$hideBox = $('.hideBox', $tr), 
+				$plus = $('.order_productDiva', $tr);
+			if (!obj.attr('checked')) {
+				$('.surplus').html(surplus+curVal);
+				curIpt.val(0);
+				$box.attr('disabled', 'disabled');
+				$plus.addClass('disabled');
+				$hideBox.attr('disabled', 'disabled');
+			}else{
+				$box.removeAttr('disabled');
+				$plus.removeClass('disabled');
+				$hideBox.removeAttr('disabled');
+			}
+			canDistribute(obj);
+			obj.parents('tr').find('.ui-count-ipt').attr('lastVal',0);
+		}
+
+		//判断重新分配按钮是否可用
+		//toggle 为分配按钮可点击 开关 true为可点击，false为不可点击
+		function canDistribute(obj, toggle){
+			var $trCheckeds = checkedGets(true);
+			var surplus = parseInt($('.surplus').html());
+			if (surplus || $trCheckeds.length > 0 || toggle) {
+				$('#J_distr_again').removeClass('disable').attr('onclick','distributeTask()');
+				$('#J_search').addClass('disable');
+			}else{
+				$('#J_distr_again').addClass('disable').removeAttr('onclick');
+				$('#J_search').removeClass('disable');
+			}
+			numSign(obj);
+		}
+	</script>
+</body>
+</html>

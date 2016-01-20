@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>实时属性配置</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/opui/om-default.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="res/lib/opui/2.1/operamasks-ui.src.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body>
+<!-- <div class="main">
+	<div id="hnav" >
+		<div class="hnav_logo"></div>
+	</div>
+	<div id="wrapContent">
+		<div class="wrap">
+			<div class="content"> -->
+				<!--内容start-->
+				<div class="pathhome">
+					<h4>标点 &gt; <b>实时属性配置</b></h4>
+				</div>
+				<div class="bz_manage">
+                    <form id="busi_form">
+                        <table class="infoTable" cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td class="description">属性名称：</td>
+                                    <td ><input class="normalinput" type="text" value="" name="attrName" /></td>
+                                    <td class="description">接口URL：</td>
+                                    <td >
+                                        <input class="normalinput" type="text" value="" name="intfUrl" />
+                                    </td>
+                                    <td class="description">接口KEY：</td>
+                                    <td >
+                                        <input class="normalinput" type="text" value="" name="intfKey" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="description">属性Label：</td>
+                                    <td >
+                                        <input class="normalinput" type="text" value="" name="intfLabel" />
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="bz_btn_list">
+                                            <a class="btn_normal fn-mr-20" href="#nogo" id="J_add"><em>新增</em></a>
+                                            <a class="btn_normal " href="#nogo" id="J_search"><em>查询</em></a>
+                                        </div>
+                                    </td>
+                                    <td colspan="2">&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                    
+                    <table id="mytable"></table>
+
+                </div>
+				<!--内容end-->
+<!-- 			</div>
+		</div>
+	</div>
+</div> -->
+
+
+<script type="text/javascript" >
+
+$(function(){
+
+	okGrid(REQURLS.dynamicInfo_pageQuery);
+    $("#J_search").click(function(){
+        var str = "&"+$("#busi_form").serialize();
+        okGrid(REQURLS.dynamicInfo_pageQuery+str);
+    });
+    $("#J_add").click(function(){
+        openWindow('新增实时属性','dynamicAttrAdd.html' , 550 , 260 );
+    });
+})
+
+function okGrid(url){
+    var url = url||"";
+    $('#mytable').omGrid({
+        height : 365,
+        width : '100%',
+        limit : 10, //分页显示，每页显示8条
+        singleSelect : true, //出现checkbox列，可以选择同时多行记录
+        colModel : [
+            {header:'属性编号',name:'id', width:100, align : 'left'},
+            {header:'属性名称',name:'name', width:150, align : 'left'},
+            {header:'属性Label',name:'label', width:150, align : 'left'},
+            {header:'接口URL',name:'url', width:300, align : 'left'},
+            {header:'接口KEY',name:'resultkey', width:150, align : 'left'},
+            {header:'操作',name:'oper', width:'autoExpand', align : 'left',renderer:function(value,rowData,rowIndex){
+                    var str=
+                        '<a href="#nogo" onclick="dynamicAttrDel(\''+rowData.id+'\',event)" class="grid-btn fn-mr-20">删除</a>'+
+                        '<a href="#nogo" onclick="dynamicAttrMod(\''+rowData.id+'\',\''+rowData.name+'\',\''+rowData.url+'\',\''+rowData.resultkey+'\',\''+rowData.label+'\',event)" class="grid-btn">修改</a>';
+                    return str;
+                }
+            }
+        ],
+        dataSource : url,
+        onSuccess:function(data,testStatus,XMLHttpRequest,event){
+            var totals = data.total;
+            if(totals == "-9999"){
+            	data.total = "0";
+            	result_prompt(0,"系统异常,请稍后重试");
+            }
+        }
+    });
+}
+
+function dynamicAttrDel(id){
+    result_comfirm("是否删除？",function(){
+        $.PostJson(REQURLS.dynamicInfo_delTemplate,"id="+id,function(state,json){
+            if(state=="success"){
+                if(json&&json.returnCode=="1"){
+                    result_prompt(1,"删除成功！");
+                    gridReload("mytable");
+                }else{
+                    result_prompt(0,json.returnMessage||"删除失败！");
+                }
+            }else{
+                result_prompt(0,"系统错误！");
+            }
+        });
+    },"");
+}
+function dynamicAttrMod(id,name,url,key,label){
+    art.dialog.data('id',id);
+    art.dialog.data('name',name);
+    art.dialog.data('url',url);
+    art.dialog.data('key',key);
+    art.dialog.data('label',label);
+    openWindow('修改实时属性','dynamicAttrMod.html' , 550 , 260 );
+}
+</script>
+
+</body>
+</html>
+
+

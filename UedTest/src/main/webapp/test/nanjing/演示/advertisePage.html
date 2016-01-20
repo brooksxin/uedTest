@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>AIOSP 场景演示平台</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/js/syntaxhighlighter/styles/shCore.css">
+<link rel="stylesheet" type="text/css" href="ui/js/syntaxhighlighter/styles/shThemeDefault.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+<script type="text/javascript" src="ui/js/jquery.js"></script>
+<script type="text/javascript" src="ui/js/jquery.slides.min.js"></script>
+<script type="text/javascript" src="ui/js/handlebars.js"></script>
+<script type="text/javascript" src="ui/js/helpers.js"></script>
+<script type="text/javascript" src="ui/js/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="ui/js/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript" src="ui/js/syntaxhighlighter/scripts/shBrushJava.js"></script>
+<script type="text/javascript" src="ui/js/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<script type="text/javascript" src="ui/js/common.js"></script>
+
+</head>
+<body class="yyz-ad">
+
+<div class="ad-top fn-clear">
+	<div class="ad-logo fn-left">
+		<h2>AIOSP</h2>
+		<h4>场景演示平台</h4>
+	</div>
+
+	<div class="item-section fn-left">
+		<a href="javascript:;" hidefocus="true" class="fn-mr-20" id="indexPage"><span>首页</span></a>
+		<a href="javascript:;" hidefocus="true" id="demoTitle" class="fn-hide"><span>场景示例演示</span></a>
+	</div>
+
+	<div class="login fn-right" id="loginForm">
+		<a href="javascript:;" hidefocus="true" class="tit"><span>登录</span></a>
+		<div class="triangle"></div>
+		<dl class="login-wrap" id="loginForm">
+			<dd>
+				<i class="user-icon"></i>
+				<label for="account">用户名</label>
+				<input type="text" id="account" name="account" class="ui-input" tabindex="1" maxlength="32">
+			</dd>
+			<dd>
+				<i class="pwd-icon"></i>
+				<label for="password">密码</label>
+				<input type="password" id="password" name="password" class="ui-input" tabindex="2" maxlength="64">
+			</dd>
+			<dd>
+				<label for="UserVertifyCode" class="UserVertifyCode">验证码</label>
+				<input type="text" id="UserVertifyCode" name="UserVertifyCode" class="ui-input login-sec-pwd" maxlength="4" tabindex="3">
+				<img id="vertifyCodeImg" src="" alt="验证码" onclick="changeVertifyCode()" class="loginSecPwdImg" title="点击更换">
+			</dd>
+			<dd>
+				<input type="checkbox" id="rmbUser" name="rmbUser" onclick="" class="login-rem-pwd" tabindex="4">
+				<label for="rmbUser" class="login-rem-pwd-label">记住账号</label>
+				<a href="javascript:;" hidefocus="true" class="ui-button ui-button-green" id="J_login"><span>登 录</span></a>
+			</dd>
+		</dl>
+	</div>
+
+	<div id="demoSub" class="sub-item fn-hide">
+		<div class="triangle"></div>
+		<dl class="fn-clear">
+			<dd><a href="javascript:;" hidefocus="true" class="subTitle"><span>4G红包</span></a></dd>
+			<dd><a href="javascript:;" hidefocus="true" class="subTitle"><span>积分兑换游戏物品</span></a></dd>
+			<dd><a href="javascript:;" hidefocus="true" class="subTitle"><span>应用内购买流量</span></a></dd>
+			<dd class="last"><a href="javascript:;" hidefocus="true" class="subTitle"><span>开发者利用嵌入页面快速实现代理充值</span></a></dd>
+		</dl>
+	</div>
+
+</div>
+
+<div class="section" id="zsection">
+	
+
+	<div class="adSlide-wrap">
+		<div class="adSlide-content">
+			<ul class="ad-slide" id="adSlide">
+				<li style="background-color: #F6EDE8">
+					<a href="javascript:;" hidefocus="true">
+						<img src="ui/theme/img/ad_1.png" width="1200" height="400" />
+					</a>
+				</li>
+				<li style="background-color: #57C4ED">
+					<a href="javascript:;" hidefocus="true">
+						<img src="ui/theme/img/ad_2.png" width="1200" height="400" />
+					</a>
+				</li>
+			</ul>
+			<a href="javascript:;" hidefocus="true" class="slidesjs-previous slidesjs-navigation" id="J_ad_prev">
+				<i class="iconfont"></i>
+			</a>
+			<a href="javascript:;" hidefocus="true" class="slidesjs-next slidesjs-navigation" id="J_ad_next">
+				<i class="iconfont"></i>
+			</a>
+		</div>
+	</div>
+
+	<div class="adwrap">
+		<div class="ui-grid-row first">
+		    <div class="ui-grid-13 fn-clear">
+		    	<img src="ui/theme/img/ad_t21.png" width="120" height="120" class="item-logo fn-left" />
+		    	<dl class="fn-left des">
+		    		<dt>开发者</dt>
+		    		<dd>
+		    			创建应用，选择能力，沙箱测试，提交审批。达到自身应用需要实现的功能；
+		    			内部渠道，根据自身需求对服务进行编排封装生产能力，自测，提交审批。
+		    			达到可以使用业务支撑系统开发出来的功能。
+		    		</dd>
+		    	</dl>
+		    </div>
+		    <div class="ui-grid-12 fn-clear">
+		    	<img src="ui/theme/img/ad_t22.png" width="120" height="120" class="item-logo fn-left" />
+		    	<dl class="fn-left des">
+		    		<dt>能力提供者</dt>
+		    		<dd>
+		    			内部服务的提供方责任人，负责提供服务，保障服务接口运行稳定、可靠；外部系统，保证外部服务的正确稳定，
+		    			让业务支撑系统可以调用外部服务。
+		    		</dd>
+		    	</dl>
+		    </div>
+		</div>
+		<div class="ui-grid-row first">
+		    <div class="ui-grid-13 fn-clear">
+		    	<img src="ui/theme/img/ad_t23.png" width="120" height="120" class="item-logo fn-left" />
+		    	<dl class="fn-left des">
+		    		<dt>业务运营者</dt>
+		    		<dd>
+		    			审批服务提供者的申请，服务上线。审批渠道提交的能力，通过服务规格和生命周期，
+		    			提高系统标准化管理能力；通过服务地图，达到服务可视、可管、可控。
+		    		</dd>
+		    	</dl>
+		    </div>
+		    <div class="ui-grid-12 fn-clear">
+		    	<img src="ui/theme/img/ad_t24.png" width="120" height="120" class="item-logo fn-left" />
+		    	<dl class="fn-left des">
+		    		<dt>治理小组</dt>
+		    		<dd>
+		    			推动和实施服务管理，确保管理体系和平台工具的执行，监控服务接口的运行情况，
+		    			评估服务管理的绩效，保证服务管理最终实现业务目标和需求。
+		    		</dd>
+		    	</dl>
+		    </div>
+		</div>
+	</div>
+
+	<div class="adwrapS">
+		<div class="ui-grid-row">
+		    <div class="ui-grid-13 fn-clear first">
+		    	<h2>服务咨询</h2>
+		    	<dl class="fn-clear">
+		    		<dd>
+		    			<ul>
+		    				<li>
+		    					<i class="iconfont phone" ></i>
+		    					<span>13978645320</span>
+		    				</li>
+		    				<li>
+		    					<i class="iconfont email" ></i>
+		    					<span>adea@open.com</span>
+		    				</li>
+		    				<li class="last">
+		    					<span>服务时间：周一至周五 <span class="green">9:00-18:00</span></span>
+		    				</li>
+		    			</ul>
+		    		</dd>
+		    		<dd>
+		    			<ul>
+		    				<li>
+		    					<i class="iconfont phone" ></i>
+		    					<span>13978645320</span>
+		    				</li>
+		    				<li>
+		    					<i class="iconfont email" ></i>
+		    					<span>adea@open.com</span>
+		    				</li>
+		    				<li class="last">
+		    					<span>服务时间：周一至周五 <span class="green">9:00-18:00</span></span>
+		    				</li>
+		    			</ul>
+		    		</dd>
+		    		<dd>
+		    			<ul>
+		    				<li>
+		    					<i class="iconfont phone" ></i>
+		    					<span>13978645320</span>
+		    				</li>
+		    				<li>
+		    					<i class="iconfont email" ></i>
+		    					<span>adea@open.com</span>
+		    				</li>
+		    				<li class="last">
+		    					<span>服务时间：周一至周五 <span class="green">9:00-18:00</span></span>
+		    				</li>
+		    			</ul>
+		    		</dd>
+		    		<dd>
+		    			<ul>
+		    				<li>
+		    					<i class="iconfont phone" ></i>
+		    					<span>13978645320</span>
+		    				</li>
+		    				<li>
+		    					<i class="iconfont email" ></i>
+		    					<span>adea@open.com</span>
+		    				</li>
+		    				<li class="last">
+		    					<span>服务时间：周一至周五 <span class="green">9:00-18:00</span></span>
+		    				</li>
+		    			</ul>
+		    		</dd>
+		    	</dl>
+		    </div>
+		    <div class="ui-grid-13 fn-clear">
+		    	<h2>反馈、建议与讨论</h2>
+		    	<dl class="fn-clear">
+		    		<dd>
+		    			<ul>
+		    				<li>
+		    					<i class="iconfont phone" ></i>
+		    					<span>13978645320</span>
+		    				</li>
+		    				<li>
+		    					<i class="iconfont email" ></i>
+		    					<span>adea@open.com</span>
+		    				</li>
+		    				<li class="last">
+		    					<span>服务时间：周一至周五 <span class="green">9:00-18:00</span></span>
+		    				</li>
+		    			</ul>
+		    		</dd>
+		    		<dd>
+		    			<ul>
+		    				<li>
+		    					<i class="iconfont phone" ></i>
+		    					<span>13978645320</span>
+		    				</li>
+		    				<li>
+		    					<i class="iconfont email" ></i>
+		    					<span>adea@open.com</span>
+		    				</li>
+		    				<li class="last">
+		    					<span>服务时间：周一至周五 <span class="green">9:00-18:00</span></span>
+		    				</li>
+		    			</ul>
+		    		</dd>
+		    		<dd>
+		    			<ul>
+		    				<li>
+		    					<i class="iconfont phone" ></i>
+		    					<span>13978645320</span>
+		    				</li>
+		    				<li>
+		    					<i class="iconfont email" ></i>
+		    					<span>adea@open.com</span>
+		    				</li>
+		    				<li class="last">
+		    					<span>服务时间：周一至周五 <span class="green">9:00-18:00</span></span>
+		    				</li>
+		    			</ul>
+		    		</dd>
+		    		<dd>
+		    			<ul>
+		    				<li>
+		    					<i class="iconfont phone" ></i>
+		    					<span>13978645320</span>
+		    				</li>
+		    				<li>
+		    					<i class="iconfont email" ></i>
+		    					<span>adea@open.com</span>
+		    				</li>
+		    				<li class="last">
+		    					<span>服务时间：周一至周五 <span class="green">9:00-18:00</span></span>
+		    				</li>
+		    			</ul>
+		    		</dd>
+		    	</dl>
+		    </div>
+		</div>
+	</div>
+
+</div>
+
+<div class="demo-section fn-hide" id="demoSection">
+	
+</div>
+
+<textarea class="fn-hide" id="demoSection_tpl">
+	<h2>{{title}}</h2>
+	<div class="quick">
+		<a href="#demoInfo" hidefocus="true"><span>1，场景说明</span></a>
+		<a href="#demoDes" hidefocus="true"><span>2，流程介绍</span></a>
+		<a href="#demoDown" hidefocus="true"><span>3，DEMO代码下载</span></a>
+		<a href="#demoShow" hidefocus="true"><span>4，关键代码展示</span></a>
+		<a href="#demoNote" hidefocus="true"><span>5，用户反馈</span></a>
+	</div>
+
+	<div id="demoInfo">
+		<h3>{{demoInfo.title}}</h3>
+		<p>
+			{{demoInfo.content}}
+		</p>
+	</div>
+
+	<div id="demoDes">
+		<h3>{{demoDes.title}}</h3>
+		<div class="demo-slide">
+			<div id="demoSlide">
+				{{#each demoDes.content}}
+					<div class="parts fn-clear">
+						<div class="left">
+							<h4>
+								<span class="cur-step">{{cur}}</span>/{{total}}
+							</h4>
+							<p>
+								<span class="fn-strong">{{tit}}</span>{{des}}
+							</p>
+						</div>
+						<div class="right">
+							<img src="{{img}}" width="600">
+						</div>
+					</div>
+				{{/each}}
+				<a href="javascript:;" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left icon-large"></i></a>
+				<a href="javascript:;" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right icon-large"></i></a>
+			</div>
+		</div>
+	</div>
+
+	<div id="demoDown">
+		<h3>3，DEMO代码下载</h3>
+		<a href="javascript:;" hidefocuse="true" class="ui-button ui-button-green demo-down">
+			<span>Free Download</span>&nbsp;&nbsp;<i class="iconfont" title="下载"></i>
+		</a>
+	</div>
+
+	<div id="demoShow">
+		<h3>4，关键代码展示</h3>
+		<div class="ui-tab" id="codeTab">
+		    <ul class="ui-tab-items">
+		        <li class="ui-tab-item ui-tab-item-current">
+		            <a href="javascript:;" hidefocus="true">JAVA</a>
+		        </li>
+		        <li class="ui-tab-item">
+		            <a href="javascript:;" hidefocus="true">HTML</a>
+		        </li>
+		    </ul>
+		</div>
+
+		<div class="codeContent">
+			<pre  class="brush: java;">
+			{{javaCode}}</pre>
+		</div>
+		<div class="codeContent fn-hide">
+			<pre  class="brush: html;">{{htmlCode}}</pre>
+		</div>
+	</div>
+
+	<div id="demoNote">
+		<h3>5，用户反馈</h3>
+		<div class="userNote">
+			<h4 id="demoTheme">主题：4G红包</h4>
+			&lt;textarea&gt;&lt;/textarea&gt;
+			<a href="javascript:;" hidefocuse="true" class="ui-button ui-button-blue">
+				<span>发 送</span>
+			</a>
+		</div>
+	</div>
+</textarea>
+
+
+
+<script type="text/javascript">
+var zFlag = 1;//判断是否登录，1表示已登录
+$(function(){
+
+	var curTimeout, curTimeout2;
+	$("#demoTitle").hover(function(){
+    	clearTimeout(curTimeout);
+    	$(".yyz-ad .login").find(".triangle, .login-wrap").css({"display": "none"});
+		$("#demoSub").slideDown(300);
+	}, function(){
+    	clearTimeout(curTimeout);
+        curTimeout = setTimeout(function(){
+	        $("#demoSub").slideUp(200);
+        }, 1000);
+	});
+
+	$('#demoSub').hover(function(){
+    	clearTimeout(curTimeout);
+    	$(".yyz-ad .login").find(".triangle, .login-wrap").css({"display": "none"});
+		$("#demoTitle").addClass("cur");
+        $(this).show();
+    },function(){
+    	var $this = $(this);
+    	clearTimeout(curTimeout);
+        curTimeout = setTimeout(function(){
+	        $this.slideUp(200);
+			$("#demoTitle").removeClass("cur");
+        }, 1000);
+    });
+
+	$(".yyz-ad .login").hover(function(){
+		clearTimeout(curTimeout2);
+		$("#demoSub").hide();
+		$("#demoTitle").removeClass("cur");
+		$(this).find(".triangle, .login-wrap").css({"display": "block"});
+	},function(){
+		curTimeout2 = setTimeout(function(){
+			$(".yyz-ad .login").find(".triangle, .login-wrap").css({"display": "none"});
+		}, 1000);
+	});
+
+    $("#loginForm .ui-input").keyup(function(e){
+		var _self = $(this);
+		var _place = _self.prev("label");
+		
+		if( _self.val().length ){
+			_place.css("visibility","hidden");
+		}else{
+			_place.css("visibility","visible");
+		}
+	}).focus(function(){
+		var _self = $(this);
+		var _place = _self.prev("label");
+		_place.css("visibility","hidden");
+	}).blur(function(){
+		var _self = $(this);
+		var _place = _self.prev("label");
+		if( _self.val().length ){
+			_place.css("visibility","hidden");
+		}else{
+			_place.css("visibility","visible");
+		}
+	});
+	$("#loginForm").bind('keyup',function(e){
+        if(e.which==13){
+            $("#J_login").click();
+            return false;
+        }
+    });
+    $("#J_login").click(function(){
+		if($(this).hasClass("ui-button-disable")){
+			return false;
+		}
+		//界面是否有验证码校验输入框
+		var account = $("#account").val().replace(/\s/g, "");
+		var password = $("#password").val();
+		var UserVertifyCode = $("#UserVertifyCode").val();
+	
+		if(!account){
+			$("#account").focus();
+			return false;
+		}
+		if(!password){
+			$("#password").focus();
+			return false;
+		}
+		if(!UserVertifyCode){
+			$("#UserVertifyCode").focus();
+			return false;
+		}
+		$(this).removeClass("ui-button-green").addClass("ui-button-disable").css({"left": "101px"}).html('<span>正在登录...</span>');
+		var channel_id = "", IPAddr = "",MacAddr = "";
+		var url = "../baseserver?CHANNEL_ID=" + channel_id + "&EventID=1&LOGIN_USRNAME="+account+"&LOGIN_PSWD="+password+"&LOGIN_VERFYCODE="+UserVertifyCode
+	    +"&IP_ADDR="+IPAddr+"&MAC_ADDR="+MacAddr;
+
+	    url = "ui/json/test.json";
+		$.PostJson(url,"",function(state,json){
+			if(state=='success'){
+				if(json && json.returnCode=='0'){
+					//登录成功
+					zFlag = 1;
+
+					var _html = '<span class="userLogin"><i class="iconfont"></i>&nbsp;&nbsp;<span>'+json.userName+
+						'</span><img class="loginout" src="ui/theme/img/loginOut.jpg" width="35" onclick="loginOut();return false;" /></span>';
+					$("#loginForm").html(_html).css({"cursor":"default"});
+					$("#demoTitle").removeClass("fn-hide").css({"display": "inline-block"});
+				}
+			}
+		});
+	})
+
+	adSlide();
+	
+	gotoTop();
+
+	//检测是否已登录
+	// checkHasLogin();
+
+	$(".subTitle").click(function(){
+		if(!zFlag){
+			alert("请先登录！");
+			return false;
+		}
+		$(".subTitle").removeClass("cur");
+		$(this).addClass("cur");
+
+		var _index = $(this).parent().index();
+		var url = "";
+		switch (_index) {
+			case 0:
+				url = "ui/json/fourG.json";
+				break;
+			case 1:
+				url = "ui/json/jifen.json";
+				break;
+			case 2:
+				url = "ui/json/liuliang.json";
+				break;
+			case 3:
+				url = "ui/json/chongzhi.json";
+				break;
+		}
+		$.PostJson(url,"",function(state,json){
+			if(state=='success'){
+				if(json){
+					$("#zsection").addClass("fn-hide");
+					$('#demoSection').removeClass("fn-hide").temp( $('#demoSection_tpl').val(),  json );
+
+					$('#demoSlide').slidesjs({
+						width: 920,
+						height: 520,
+						navigation: false
+					});
+
+					$("#codeTab li a").click(function(){
+						var _index = $(this).parent().index();
+						$(this).parent().addClass("ui-tab-item-current").siblings().removeClass("ui-tab-item-current");
+						$(".codeContent").eq(_index).removeClass("fn-hide").siblings(".codeContent").addClass("fn-hide");
+					})
+
+					console.log($(".codeContent:eq(1) pre").html())
+
+					SyntaxHighlighter.highlight();
+				}
+			}
+		});
+	})
+
+	$("#indexPage").click(function(){
+		$("#zsection").removeClass("fn-hide");
+		$("#demoSection").addClass("fn-hide");
+		$(".subTitle").removeClass("cur");
+	})
+	
+
+});
+//回到顶部
+function gotoTop(min_height){
+    var gotoTop_html = '<div id="gotoTop"></div>';
+    $("body").append(gotoTop_html);
+    $("#gotoTop").click(
+        function(){$('html,body').animate({scrollTop:0},300);
+    }).hover(
+        function(){$(this).addClass("hover");},
+        function(){$(this).removeClass("hover");
+    });
+    min_height ? min_height = min_height : min_height = 300;
+    $(window).scroll(function(){
+        var s = $(window).scrollTop();
+        if( s > min_height){
+            $("#gotoTop").fadeIn(100);
+        }else{
+            $("#gotoTop").fadeOut(200);
+        };
+    });
+};
+
+function adSlide(){
+	slide(0);
+	var h = $("#adSlide li").length - 1,
+	time = 4000,
+	n = 0,
+	o = null,
+	p = function() {
+	    o = setTimeout(function() {
+	        if( n<h ){
+	            n++;
+	        }else{
+	            n = 0 ;
+	        }
+	        slide( n );
+	        p();
+	    }, time )
+	};
+	p();
+	$(".adSlide-content").on("mouseenter", function() {
+	    clearTimeout(o)
+	}).on("mouseleave", function() {
+	    clearTimeout(o);
+	    p();
+	});
+	$("#J_ad_prev").click(function(){
+	    if( n == 0 ){
+	        n = h;
+	    }else{
+	        n = n-1;
+	    }
+	    slide(n);
+	});
+	$("#J_ad_next").click(function(){
+	    if( n<h ){
+	        n++;
+	    }else{
+	        n = 0 ;
+	    }
+	    slide(n);
+	});
+
+}
+function slide(k){
+    $("#adSlide li").eq(k).stop().fadeIn().siblings().stop().fadeOut();
+}
+
+function loginOut(){
+	alert("登出");
+}
+
+function checkHasLogin(){
+    var url = "ui/json/test.json";
+	$.PostJson(url,"",function(state,json){
+		if(state=='success'){
+			if(json && json.returnCode=='0'){
+				//登录成功
+				zFlag = 1;
+
+				var _html = '<span class="userLogin"><i class="iconfont"></i>&nbsp;&nbsp;<span>'+json.userName+
+					'</span><img class="loginout" src="ui/theme/img/loginOut.jpg" width="35" onclick="loginOut();return false;" /></span>';
+				$("#loginForm").html(_html).css({"cursor":"default"});
+
+				$("#demoTitle").removeClass("fn-hide").css({"display": "inline-block"});
+			}
+		}
+	});
+}
+
+</script>
+<script type="text/javascript">
+   SyntaxHighlighter.config.clipboardSwf = 'ui/js/syntaxhighlighter/scripts/clipboard.swf';
+
+   SyntaxHighlighter.config.strings = {
+
+       expandSource : '展开代码',
+
+       viewSource : '查看代码',
+
+       copyToClipboard : '复制代码',
+
+       copyToClipboardConfirmation : '代码复制成功',
+
+       print : '打印',
+
+       help: '帮助',
+
+       alert: '温馨提示\n\n',
+
+       noBrush: '不能找到刷子: ',
+
+       brushNotHtmlScript: '刷子没有配置html-script选项',
+
+       aboutDialog: '<div></div>'
+
+   };
+
+   SyntaxHighlighter.all();
+</script>
+</body>
+</html>

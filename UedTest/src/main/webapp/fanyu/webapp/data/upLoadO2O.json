@@ -1,0 +1,11 @@
+{
+	"busiCode":null,
+	"opId":null,
+	"phone":null,
+	"returnCode":"0",
+	"returnMessage":null,
+	"bean":{
+		"LBL_ID":"11",
+		"LBL_DESC":"标签描述测试数据"
+	}
+}

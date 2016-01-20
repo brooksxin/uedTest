@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>标点类型新增</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/ajaxform/3.2.3/jquery.form.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body>
+<div class="openwin">
+	<form id="busi_form" class="bz_manage">
+        <table class="infoTable" cellpadding="0" cellspacing="0" border="0" width="100%">
+            <colgroup>
+                <col width="15%"/>
+                <col width="40%" />
+                <col width="15%"/>
+                <col />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td class="description">名称：</td>
+                    <td ><input class="normalinput" type="text" value="" name="markerTypeName" id="markerTypeName" maxlength="20" /></td>
+                    <td class="description">图标：</td>
+                    <td >
+                        <select name="markerIcon" id="markerIcon">
+                            <option value="101">自有渠道</option>
+							<option value="102">签约渠道</option>
+							<option value="103">直供渠道</option>
+							<option value="104">联通渠道</option>
+							<option value="105">电信渠道</option>
+							<option value="106">其他竞争对手渠道  </option>
+							<option value="201">A+类集团客户</option>
+							<option value="202">A类集团客户</option>
+							<option value="203">B类集团客户</option>
+							<option value="204">C类集团客户</option>
+							<option value="205">D类集团客户</option>
+							<option value="206">P类集团客户</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="description fn-vtop">描述：</td>
+                    <td colspan="3">
+                        <textarea name="markerTypeDes" id="markerTypeDes" style="width:90%;height:50px;" maxlength="60"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div class="bz_btn_list">
+                            <a class="btn_normal fn-mr-20" href="#nogo" id="J_save"><em>保存</em></a>
+                            <a class="btn_normal " href="#nogo" id="J_cancel"><em>关闭</em></a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+<script type="text/javascript" >
+$(function(){
+	placeholder("#markerTypeName","长度小于20个字符");
+  	placeholder("#markerTypeDes","长度小于60个字符",true);
+  	textareaLimit();
+    $("#J_save").click(function(){
+        var $btn = $(this);
+        var markertypedes = $("#markerTypeDes").val();
+        if(markertypedes == "" || markertypedes == "长度小于60个字符"){
+        	$("#markerTypeDes").val("");
+        }
+        var zlength = $("#markerIcon option").length;
+        var str = "&"+$("#busi_form").serialize();
+        var markertypename = $("#markerTypeName").val();
+        if($.trim($("#markerTypeName").val())==""){
+        	result_prompt(2,"节点类型名称不能为空！");
+        }else if(!zlength){
+            result_prompt(2,"图标类型不能为空！");
+        }else if(markertypename == "长度小于20个字符"){
+        	result_prompt(2,"请输入合法的节点类型名称！");
+        }else{
+            toggleButtonStyle($btn,true);
+        	$.PostJson(REQURLS.markerType_addTemplate,str,function(state,json){
+                if(state=="success"){
+                    if(json&&json.returnCode=="1"){
+                        result_prompt(1,"新增成功");
+                        parent.gridReload("mytable");
+                    }else{
+                        result_prompt(0,json.returnMessage||"新增失败！");
+                    }
+                }else{
+                    result_prompt(0,"系统错误！");
+                }
+                toggleButtonStyle($btn,false);
+            });
+        }
+    })
+
+    $.PostJson(REQURLS.getUsedIconType,"",function(state,json){
+        if(state=='success'){
+            if(json&&json.returnCode=='1'){
+                for(var i=0,length=json.rows.length; i<length; i++){
+                    var id = json.rows[i].id;
+                    $("#markerIcon").find("option[value="+id+"]").remove();
+                }
+                var zlength = $("#markerIcon option").length;
+                if(!zlength){
+                    result_prompt(2,"暂无可用的图标类型，不可新增标记点类型！",true);
+                }
+            }
+        }
+    })
+})
+
+</script>
+
+</body>
+</html>
+
+

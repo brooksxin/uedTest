@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10085系统</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+      <div class="formItem">
+      <div class="titleArea">
+          <a href="Javascript:history.go(-1);void(0);" class="ui-suText_left">添加商家信息</a>
+      </div>
+      <div class="formArea-B onlin_borBot">
+        <form name="J_form" id="J_form">
+          <div class="formAreaB_dashed">
+              <table  class="form_table mt-10" width="100%">
+                  <tr>
+                      <td width="90"><span class="fn-high">*</span> 商家名称</td>
+                      <td><input type="text" id="ptyNm" class="FormInputText" value="" /></td>
+                  </tr>
+                   <tr>
+                      <td width="90"><span class="fn-high">*</span> 商家编码</td>
+                      <td><input type="text" id="ptyNo" class="FormInputText" value="" /></td>
+                  </tr>
+              </table>
+          </div>
+          
+          <div class="formAreaB_dashed">
+              <table class="form_table mt-10" width="100%">
+                  <tr>
+                      <td width="90"><span class="fn-high">*</span>支付方式</td>
+                      <td class="fn-clear">
+                          <input class="fn-left" type="checkbox" id="onlinepay" name="onlinepay" value="01" style="margin:2px;"/>
+                          <label class="fn-left" for="onlinepay">在线支付</label> 
+                          <input class="fn-left" type="checkbox" id="alipay" name="alipay" value="02" style="margin:2px 2px 2px 50px;"/>
+                          <label class="fn-left" for="alipay">支付宝支付</label>
+                          <input class="fn-left" type="checkbox" id="facepay" name="facepay" value="03" style="margin:2px 2px 2px 50px;"/>
+                          <label class="fn-left" for="facepay">货到付款</label>
+                      </td>
+                      <input type="hidden" value="" id="online"/>
+                      <input type="hidden" value="" id="alione"/>
+                      <input type="hidden" value="" id="face"/>
+                  </tr>
+                  <tr>
+                      <td  valign="top"></td>
+                      <td>
+                         <div class="ui-formBbgive fn-hide online">
+                              <div class="mb-20 ft-12b">
+                                  在线支付收款账号
+                              </div>
+                              <div class="mb-10">
+                                  <span class="mr-15 width80">分配商家ID</span><input type="text" id="onlineAlctFirmId" class="FormInputText ml-15 width280" value=""/>
+                              </div>
+                              <div class="mb-10">
+                                  <span class="mr-15 width80">密匙</span><input type="text" id="onlinemd5" class="FormInputText ml-15  width280" value=""/>
+                              </div>
+                              <div class="mb-10">
+                                  <span class="mr-15 width80">呼转码</span><input type="text" id="callfwdNum" class="FormInputText ml-15  width280" value=""/>
+                              </div>
+                         </div>
+                         <div class="ui-formBbgive fn-hide alipay">
+                              <div class="mb-20 ft-12b">
+                                  支付宝收款账号
+                              </div>
+                              
+                              <div class="mb-10">
+                                  <span class="mr-15 width80">分配商家ID</span><input type="text" id="alipayAlctFirmId" class="FormInputText ml-15 width280" value=""/>
+                              </div>
+                              <div class="mb-10">
+                                  <span class="mr-15 width80">密匙</span><input type="text" id="alipaymd5" class="FormInputText ml-15 width280" value=""/>
+                              </div>
+                              <div class="mb-10">
+                                  <span class="mr-15 width80">账号</span><input type="text" id="acct" class="FormInputText ml-15 width280" value=""/>
+                              </div>
+                              <div class="mb-10">
+                                  <span class="mr-15 width80">邮箱</span><input type="text" id="emailAddr" class="FormInputText ml-15 width280" value=""/>
+                              </div>
+                              
+                         </div>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+          <div class="formAreaB_dashed">
+            <table  class="form_table mt-10" width="100%">
+                  <tr>
+                      <td width="90"><span class="fn-high">*</span>品牌</td>
+                      <td width="500">
+
+						<div class="ui-qglWidth" style="margin:20x">
+					      <div class="ui-TagEditorBd fn-clear">
+						      	<span class="ui-bqBottomText">
+									<div id="J_tagListArea">&nbsp;</div>
+								</span>
+					       </div>
+						</div>
+            </td>
+                      <td><a href="javascript:;" class="normalLink ui-sarmAdd" id="J_add">添加一个品牌</a></td>
+                  </tr>
+            </table>
+          </div>
+          
+          <div class="formAreaB_dashed">
+              <table  class="form_table mt-10" width="100%">
+                  <tr>
+                      <td width="90">合同电子版</td>
+                      <td>
+                           <span id="J_fileName"><a id="oldctrtUrl" href="javascript:;"></a></span>
+                          <span class="fn-right"><a href="javascript:;" class="ml-20 ui-redCloseButton">删除</a></span>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td></td>
+                      <td><div><a href="javascript:;" class="normalLink ui-sarmAdd" id="J_upload">添加一份合同</a></div></td>
+                      <!-- 数据库中的文件路径 -->
+                      <input type="hidden" value="" id="oldctrtFilePath"/>
+                      <!-- 新上传文件的路径 -->
+                      <input type="hidden" value="" id="ctrtFilePath"/>
+                      <!-- 数据库中的合同ID -->
+                      <input type="hidden" value="" id="ctrtId"/>
+                      <!-- 数据库中的合同名 -->
+                      <input type="hidden" value="" id="contract"/>
+                      
+                  </tr>
+              </table>
+          </div>
+          <div>
+          <table  class="form_table mt-10 mb-20" width="100%">
+                  <tr>
+                      <td width="90" valign="top">备注</td>
+                      <td><textarea class="form_textarea" id="coopPrnrDesc" value=""></textarea></td>
+                  </tr>
+          </table>       
+          </div>
+          </form>
+        </div>    
+          <div class="formBtnArea pl-50 ml-10">
+            <table width="100%">
+              <tr>
+                <td>
+                  <div class="normalBtnArea">
+                      <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_pty_confirm" >确定</a>
+                      <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_pty_console" >取消</a>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+       </div>
+            <!-- 品牌选择弹出框 -->
+      <div id="addBrand" class="fn-hide">
+
+      <div method="post" action="#" class="cmxform" >
+        <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+            <div class="record-search-cate">
+                  <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                      <tbody>
+                          <tr>
+                              <td width="100"><label class="description">品牌名称</label></td>
+                              <td width="150">
+                                <input class="inputText" type="text"  id="catgUnitNm" name="catgUnitNm" maxlength="255" value=""/>
+                            <td>
+                              <div class="normalBtnArea w82">
+							                  	<a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a>
+                              </div>
+                              </td>
+                           </tr>
+                      </tbody>
+                  </table>
+              </div>
+         </form>
+      </div>
+      
+      
+       <div class="tablewidth mg_t_10">
+                      <table class="ui-record-table table_radius table-bordered table-striped" >
+                          <thead>
+                              <tr>
+                                  <th width="45"></th>
+                                  <th>品牌名称</th>
+                                  <th width="">添加时间</th>
+                              </tr>
+                           </thead>
+                           <tbody id="J_tabletpl">
+                        </tbody>
+                      </table>
+      </div>
+
+      <!--翻页及功能按钮区域开始-->
+      <DIV class="amount-bottom">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+            <tr>
+<!--               <td width="60"> -->
+<!--                   <input type="checkbox" class="selectAll" id="selectAll" /> <label for="selectAll">全选</label>  -->
+<!--               </td> -->
+              <td width="50%">
+                  <DIV class="fn-clear action-other  action-other-show ">
+                          <DIV id="Pagination" class="page pagination fn-right"> </DIV>
+                          <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                  </DIV></td>
+            </tr>
+          </table>
+      </DIV>
+      <hr>
+      <div class="formBtnArea">
+      <table width="100%">
+        <tr>
+          <td>
+              <div class="normalBtnArea fn-center">
+                 <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_brand_confirm" >确定</a>
+                 <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_brand_console" >取消</a>   
+              </div>
+          </td>
+        </tr>
+      </table>
+      </div>
+           
+  </div>          
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+            <td>
+				<div class="table_select">
+				<input type="checkbox" name="brand" brandId={{CATG_UNIT_ID}} brandName={{CATG_UNIT_NM}} />
+				</div>
+			</td>
+            <td>{{CATG_UNIT_NM}}</td>
+            <td>{{CRT_TIME}}</td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="3">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+
+
+
+
+<script id="T_tagsTpl" type="text/x-handlebars-template">
+{{#if brands}}
+    {{#each brands}}
+             <span class="ui-typeBackground">
+				<input value="{{CATG_UNIT_ID}}" type="hidden" title="{{CATG_UNIT_NM}}" />
+                <span class="mr-10">{{CATG_UNIT_NM}}</span><a href="javascript:;" title="删除" class="ui-closeBbtn fn-right" onclick='delTags(this)'></a>
+             </span>
+    {{/each}}
+{{else}}
+    <span>暂未进行品牌设置！</span>
+{{/if}}
+</script>
+
+
+
+<#include "../../tpl/res_js.tpl" /> 
+<script src="../../lib/swfupload/1.0.0/2.5/swfupload.js"></script> 
+<script type="text/javascript">
+
+srvMap.add('saveCoopPrnr', 'query.json','front/sh/user!partnerInfo?uid=p003');//保存商家
+srvMap.add('queryBrandListByNm', 'query.json' ,'front/sh/prod!execute?uid=b004');//查询商家品牌列表
+srvMap.add('queryCoopPrnr', 'query.json' ,'front/sh/user!partnerInfo?uid=p001');//查询商家信息
+srvMap.add('editCoopPrnr', 'query.json' ,'front/sh/user!partnerInfo?uid=p002');//编辑商家信息
+srvMap.add('uploadContract', 'query.json' ,'front/sh/user!uploadContractFileFromLocal?uid=p005');//上传合同文件
+
+var upload = '';
+
+//上传空间参数
+var settings = {
+	flash_url : "../../lib/swfupload/1.0.0/2.5/swfupload.swf",
+	upload_url: srvMap.get('uploadContract'),
+	post_params: {},
+	use_query_string: false,
+	file_size_limit : "5 MB",
+	file_types : "*.*",  //允许所有类型时请使用 *.*
+	file_types_description : "All Files",
+	file_upload_limit : 0,
+	file_queue_limit : 0,
+	debug: false,
+	// Button settings
+	button_image_url: '../../css/images/upload_btn1.png',
+	button_width: '80',
+	button_height: "32",
+	button_placeholder_id: 'J_upload',
+	button_text_left_padding: 12,
+	button_text_top_padding: 3,
+	button_cursor : SWFUpload.CURSOR.HAND,
+	
+	file_queued_handler : fileQueued,
+	file_dialog_complete_handler : fileDialogComplete,
+	upload_start_handler : uploadStart,
+	upload_error_handler : uploadError,
+	upload_success_handler : uploadSuccess
+};
+
+function fileQueued(file){
+	$('#J_fileName').text(file.name);
+}
+//准备完成
+function fileDialogComplete(numFilesSelected, numFilesQueued){
+	upload.startUpload();
+}
+//上传前
+function uploadStart(file){
+	/*if (file.size > 5242880) {
+		Util.dialog.tips('文件大小超过5M,请重新上传！');
+		return false;
+	};
+	//createLoading('#J_front_wrap');
+	return true;*/
+}
+//上传出错
+function uploadError(file, errorCode, message){
+	try {
+
+	} catch (ex) {
+        this.debug(ex);
+    }
+    //unLoading('#J_front_wrap');
+}
+
+//上传成功之后回调方法
+function uploadSuccess(file, serverData){
+	serverData = JSON.parse(serverData);
+	if (serverData.returnCode == '0') {
+		Util.dialog.tips("成功！");
+		$("#ctrtFilePath").val(serverData.bean.ctrtFilePath);
+		
+	}
+}
+
+var T_tabletpl = $("#T_tabletpl");
+var J_tabletpl = $("#J_tabletpl");
+var J_formSearch = $("#J_formSearch");
+var Pagination = $("#Pagination");
+var J_add = $("#J_add");
+var J_search = $('#J_search');
+
+var G_params = {
+	    url : srvMap.get('queryBrandListByNm'),
+	    items_per_page : 5 ,   		// 每页数     @param : limit
+	    page_index : 0 , 				//当前页  @param : start
+	    pagination : Pagination , 	//分页id
+	    searchformId : "J_formSearch",  //搜索表单的id
+	    tabletpl : T_tabletpl, 		//表格模板
+	    tablewrap : J_tabletpl		//表格容器
+	};
+var brandIds = "";
+var onlineval = "";
+var alipayval = "";
+var faceval = "";
+
+//品牌选择窗
+var brandSelect = document.getElementById('addBrand');
+var params = {
+	  top:top,
+    id:'D_brandSelect',
+    title:'选择品牌',
+    content: brandSelect,
+    width: 900,
+    height:450,
+    modal: true
+}
+         
+$(document).ready(function () {
+  	upload = new SWFUpload(settings);//初始化上传控件
+  	//控制账号信息输入框的显示,隐藏
+  	$("#onlinepay").bind("click",function(){
+  		if($("#onlinepay").attr("checked")){
+  			$(".online").show();
+        }else{
+        	$(".online").hide();
+        }
+  	});
+  	$("#alipay").bind("click",function(){
+  		if($("#alipay").attr("checked")){
+  			$(".alipay").show();
+  		}else{
+  			$(".alipay").hide();
+  		}
+  	});
+  	
+  	$("#J_pty_console").bind("click",function(){
+		window.location.href = "partnerManage.html";
+  	})
+  	
+  	
+    //添加按钮
+    $(J_add).click(function(){
+        if (top && top.$("#J_formSearch").length) {
+          top.$("#J_formSearch")[0].reset();
+        };
+        Util.dialog.openDiv(params);
+        $(J_search).trigger("click");
+    });
+
+     //分页查询出品牌
+     $(J_search).bind('click',function(){
+        var CurrentSelect = [];//存储页面选择项ID
+        $("#J_tagListArea span").find("input").each(function(){
+            CurrentSelect.push($(this).val())
+        })
+         var str = top.$("#J_formSearch").serialize(); //把form序列化
+         console.log(str+"&brandId="+CurrentSelect);
+         G_params.page_index = 0;
+         //分页获取数据
+         Util.pagination(G_params.page_index,true,G_params,str+"&brandId="+CurrentSelect);
+     });
+
+
+    //取消按钮
+    $('#J_brand_console').click(function(){
+    	 Util.dialog.close("D_brandSelect",top);
+    });
+	  
+	    //确认选中的品牌
+	    $('#J_brand_confirm').bind("click",function(){
+	    	//取出选中的品牌
+	    	var checked = 0;
+	    	top.$("input[name='brand']:checked").each(function(){
+	           checked = checked + 1;
+	           var brandId = $(this).attr("brandId");
+	           var brandName = $(this).attr('brandName');
+	           var brandHtml = "<span class=\'ui-typeBackground\'><input value=\'"+brandId+"\' type=\'hidden\' \/><span class=\'mr-10\'>"+brandName+"</span><a href=\'javascript:;\' class=\'ui-closeBbtn fn-right\' onclick=\'delTags(this)\'></a></span>"
+	           $("#J_tagListArea").append(brandHtml);
+	           if(checked == 0){
+	         	   alert("请选择要添加的品牌");
+	         	   Util.dialog.close("D_brandSelect",top);
+	            }
+	           $(this).attr("checked",false);
+	   		}); 
+         	Util.dialog.close("D_brandSelect",top);
+         	
+    	});
+    	 
+	    	 
+    	
+    	//判断商家是新增还是编辑
+    	var coopPrnrId = Util.browser.getParameter("id");
+    	if(coopPrnrId!=null&&coopPrnrId!=""&&coopPrnrId!="undefined"){//编辑
+    		var cmd = {coopPrnrId:coopPrnrId};
+    		 Util.ajax.postJson(srvMap.get("queryCoopPrnr"),cmd,function(json){
+          		console.log(JSON.stringify(json));//这个只支持谷歌和火狐浏览器
+          		var object=json.object;
+          		var brands = object.brands;
+          		var onlinePaymnID = object.onlinePaymnID;  
+          		var alipayPaymnID = object.alipyPaymnID;
+          		var facePaymnID = object.facePaymnID;
+          		Util.ajax.loadTemp('#J_tagListArea',$('#T_tagsTpl'),object);//加载模板
+          		$("#ptyNm").val(object.ptyNm);
+          		$("#ptyNo").val(object.ptyNo);
+          		$("#onlineAlctFirmId").val(object.onlineAlctFirmId);
+          		$("#onlinemd5").val(object.onlinemd5);
+          		$("#callfwdNum").val(object.callfwdNum);
+          		$("#alipayAlctFirmId").val(object.alipayAlctFirmId);
+          		$("#alipaymd5").val(object.alipaymd5);
+          		$("#acct").val(object.acct);
+          		$("#emailAddr").val(object.emailAddr);
+          		$("#J_fileName").html("<a href="+object.oldctrtFilePath+">"+object.extdCntt+"</a>");
+          		$("#contract").val(object.extdCntt);
+          		$("#oldctrtFilePath").val(object.oldctrtFilePath); //编辑时查询出来的合同路径
+          		$("#coopPrnrDesc").val(object.coopPrnrDesc);
+          		$("#ctrtId").val(object.ctrtId);//编辑时查询出来的合同ID
+          		if(onlinePaymnID =="01"){
+          			$("#onlinepay").attr("checked",true);
+          			$(".online").show();
+          			$("#online").attr("value","01");
+          		}
+          		if(alipayPaymnID =="02"){
+          			$("#alipay").attr("checked",true);
+          			$(".alipay").show();
+          			$("#alione").attr("value","02");
+          		}
+          		if(facePaymnID =="03"){
+          			$("#facepay").attr("checked",true);
+          			$("#face").attr("value","03");
+          		}
+          		
+     		 });
+    	}
+    	//确认新增商家按钮
+  	    $("#J_pty_confirm").bind("click",function(){
+  	    	//取出已选中的品牌
+  	    	 brandIds = "";
+  	    	 $("#J_tagListArea span").find("input").each(function(){
+	        	   var newbrand = $(this).val();
+	        	   if(""==brandIds){
+	        		   brandIds = newbrand + "#";
+		           }else{
+		        	   brandIds = brandIds+newbrand+"#";
+		           }
+	           });
+  	    	//取出选中的支付方式
+  	    	var paymnModeIds = "";
+  	        var checked = 0;
+
+  	        if($("#onlinepay").attr("checked")){
+  	        	onlineval = $("#onlinepay").val();
+  	        }
+  	        if($("#alipay").attr("checked")){
+  	        	alipayval = $("#alipay").val();
+  	        }
+  	        if($("#facepay").attr("checked")){
+  	        	faceval = $("#facepay").val();
+  	        }
+  	      paymnModeIds = "#"+onlineval+"@"+alipayval+"*"+faceval;
+  	      var grams={
+	    			coopPrnrId:coopPrnrId,
+	    			ptyNm:$("#ptyNm").val(),
+	    			ptyNo:$("#ptyNo").val(),
+	    			paymnModeId:paymnModeIds, 
+	    			acct:$("#acct").val(),
+	    			alctFirmId:$("#onlineAlctFirmId").val()+"##"+$("#alipayAlctFirmId").val(),
+	    			md5Crkey:$("#onlinemd5").val()+"##"+$("#alipaymd5").val(),
+	    			callfwdNum:$("#callfwdNum").val(),
+	    			emailAddr:$("#emailAddr").val(),
+					catgUnitId:brandIds,
+					ctrtFilePath:$("#ctrtFilePath").val(),
+					extdCntt:$('#J_fileName').text(),//新上传的合同名称
+					coopPrnrDesc:$("#coopPrnrDesc").val(),
+					online:$("#online").val(),
+					alione:$("#alione").val(),
+					face:$("#face").val(),
+					contract:$("#contract").val(),//原合同的名称
+					ctrtId:$("#ctrtId").val()
+	     		 };
+  	    if(coopPrnrId!=null&&coopPrnrId!=""&&coopPrnrId!="undefined"){
+  	    	if(checkInfo()){
+    			Util.ajax.postJsonSync(srvMap.get("editCoopPrnr"), grams,
+  	    	          function(json, status) {
+  	    	              if (status) {//新增成功后跳转到商家列表页
+  	    	                  alert("编辑商家成功");
+  	    	                  window.location.href = "partnerManage.html";
+  	    	              }else{
+  	    	                  alert(json.returnMessage||'编辑商家失败，请重试！');
+  	    	              }
+  	    	          });
+  	    		
+  	    	}
+
+    	}else{
+    		if(checkInfo()){
+  				Util.ajax.postJsonSync(srvMap.get("saveCoopPrnr"), grams,
+          	          function(json, status) {
+          	              if (status) {//新增成功后跳转到商家列表页
+          	                  alert("新增商家成功");
+          	                  window.location.href = "partnerManage.html";
+          	              }else{
+          	                  alert(json.returnMessage||'新增商家失败，请重试！');
+          	              }
+          	          });  
+    			}
+    	}
+    	
+  	  });
+    	
+    //合同删除功能
+    $(".ui-redCloseButton").bind("click",function(){
+    	$("#J_fileName").html("");
+    });
+  });
+
+  function delTags(obj){
+		$(obj).parent().remove();
+	}
+  
+ function checkInfo(){ 
+	 var ptyNm = $("#ptyNm").val();
+	 if(ptyNm=='null' || ptyNm =="" || ptyNm=="undefined"){
+		 alert("请输入有效的商家名称！")
+		 return false;
+	 }
+	 if(""==onlineval && ""==alipayval && ""==faceval){
+		 alert("请选择支付方式!");
+		 return false;
+	 }
+	 if(""==brandIds){
+		 alert("请选择品牌!");
+		 return false; 
+	 }
+	 return true;
+ } 
+
+</script>
+</body>
+</html>

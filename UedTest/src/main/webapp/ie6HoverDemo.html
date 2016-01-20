@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<script src="jquery.js" type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+#zw1 span { color: green; }
+#zw1:hover span { color: red; }
+
+#zw2 span { color: green; }
+#zw2:hover {_zoom: 1; }
+#zw2:hover span { color: red; }
+
+#zw3 a { color: green;}
+#zw3:hover {_zoom: 1; }
+#zw3:hover a { color: #fff; }
+</style>
+</head>
+<body>
+
+<div>
+	<a href="javascript:;" id="zw1">
+		<span>这个ie6下 hover字体不会变红</span>
+	</a>
+</div>
+<div>
+	<a href="javascript:;" id="zw2">
+		<span>再试试这个</span>
+	</a>
+</div>
+<div>
+	<span id="zw3">
+		<a href="javascript:;">是否变白色了？</a>
+	</span>
+</div>
+<script type="text/javascript">
+$(function(){
+
+});
+</script>
+</body>
+</html>

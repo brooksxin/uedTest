@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加新角色</title> 
+<#include "../../tpl/res_css.tpl" />
+</head>
+
+<body>
+	<div class="formItem">
+
+		<div class="titleArea">
+			<h2>添加角色</h2>
+		</div>
+		<div class="formArea">
+			<table class="form_table">
+				<tbody>
+					<tr>
+						<td width="90"><label class="formDescription"><span
+								class="fn-high">*</span> 角色名称</label></td>
+						<td width=""><input class="FormInputText width100"
+							type="text" id="ROLE_NM"/></td>
+					</tr>
+					<tr>
+						<td width="90"><label class="formDescription"><span
+								class="fn-high">*</span> 渠道</label></td>
+						<td width=""><select class="FormInputText width100" id="CHNL_ID">
+						</select></td>
+					</tr>
+					<tr>
+						<td width="90"><label class="formDescription"><span
+								class="fn-high">*</span> 类型</label></td>
+						<td width=""><select class="FormInputText width100" id="ROLE_TYPE_CD">
+						</select></td>
+					</tr>
+					<tr>
+						<td valign="top"><label class="formDescription"><span
+								class="fn-high"></span> 角色描述：</label></td>
+						<td>
+                              		<div class="qDecorationTxt">
+										<textarea class="qDecorationTxtEdit" cols="50" rows="5" id="ROLE_DESC" name="ROLE_DESC"  placeholder="输入角色描述，非必填项"></textarea>
+									</div>
+                              </td>
+					</tr>
+				</tbody>
+			</table>
+			<hr />
+			<div class="formBtnArea">
+				<table width="100%">
+					<tr>
+						<td>
+							<div class="normalBtnArea fn-center">
+								<a class="normalBtn BGblue largeBtn" href="javascript:;"
+									id="J_search">保存</a> <a class="normalBtn BGgray largeBtn"
+									href="javascript:;" id="CANCEL">取消</a>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+
+	</div>
+	
+	
+	<script id="T_CHNL_ID" type="text/x-handlebars-template">
+		<option value="">请选择</option>
+		{{#if beans}}
+            {{#each beans}}
+                 <option value="{{CHNL_ID}}">{{PTY_NM}}</option>
+             {{/each}}
+   		{{/if}}
+	</script>
+
+	<script id="T_ROLE_TYPE_CD" type="text/x-handlebars-template">
+		<option value="">全部</option>
+		{{#if beans}}
+            {{#each beans}}
+                 <option value="{{CD_VAL}}">{{CMN_CD_VAL_NM}}</option>
+             {{/each}}
+   		{{/if}}
+	</script>
+
+
+	<#include "../../tpl/res_js.tpl" />
+	<script type="text/javascript">
+	
+		srvMap.add('queryChnl' , 'query.json','front/sh/user!getChnl?uid=u002');//查询渠道
+		srvMap.add('queryRoleType' , 'query.json','front/sh/common!smsRs?uid=c009');//查询角色类型
+		srvMap.add('addNewRole' , '','front/sh/user!index?uid=sys0024');//新增角色
+	
+          //页面加载完开始执行
+          $(document).ready(function () {
+        	  	var cmd = {};
+	  			//加载渠道
+	  			Util.ajax.postJson(srvMap.get('queryChnl'), cmd, function(json, status) {
+	  				if (status) {
+	  					Util.ajax.loadTemp("#CHNL_ID", $("#T_CHNL_ID"),json);
+	  				} else {
+	  					Util.dialog.tips("加载渠道失败");
+	  				}
+	  			});
+	  			
+	  			//加载角色类型 
+	  			cmd = {"tbNm":"T_PI_PRIV_ROLE","colNm":"ROLE_TYPE_CD"};
+	          	Util.ajax.postJson(srvMap.get('queryRoleType'),cmd,function(json,status){
+	          		  if(status){
+	          		  		Util.ajax.loadTemp("#ROLE_TYPE_CD",$("#T_ROLE_TYPE_CD"),json);
+	          		  }else{
+	          			  Util.dialog.tips("加载角色类型失败");
+	          		  }
+	          	});
+          });
+		
+		
+		
+		$("#J_search").click(function(){
+			var ROLE_NM = $("#ROLE_NM").val();
+			var CHNL_ID = $("#CHNL_ID").val();
+			var ROLE_TYPE_CD = $("#ROLE_TYPE_CD").val();
+			var ROLE_DESC = $("#ROLE_DESC").val();
+			if(ROLE_NM == null || ROLE_NM == "" || ROLE_NM == undefined){
+				Util.dialog.tips("请输入角色名称");
+				return;
+			}
+			if(CHNL_ID == null || CHNL_ID == "" || CHNL_ID == undefined){
+				Util.dialog.tips("请选择渠道");
+				return;
+			}
+			if(ROLE_TYPE_CD == null || ROLE_TYPE_CD == "" || ROLE_TYPE_CD == undefined){
+				Util.dialog.tips("请选择角色类型");
+				return;
+			}
+			var cmd = {"ROLE_NM":ROLE_NM,"CHNL_ID":CHNL_ID,"ROLE_TYPE_CD":ROLE_TYPE_CD,"ROLE_DESC":ROLE_DESC};
+			var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">确定添加该角色吗？</div></div></div>');
+   		  
+   		  	var params = {
+     		          top:top,
+     		          content: elem,
+     		          width: "300px",
+     		          height: "120px",
+     		          modal: true,
+     		          okVal:'确定',
+     		          okCallback:function(){    	
+						Util.ajax.postJson(srvMap.get("addNewRole"), cmd, function(json) {
+							if (json.returnCode == 0) {
+								Util.dialog.tips("添加角色成功!");
+								window.location.href="addRoleSuccess.html?ROLE_ID="+json.bean.ROLE_ID + "&ROLE_NM=" + encodeURI(json.bean.ROLE_NM);
+							} 
+							else {
+								Util.dialog.tips(json.returnMessage);
+							}
+						});
+     		          },
+					  cancelVal:'取消',
+		              cancelCallback:function(){}
+				}
+				Util.dialog.openDiv(params); 
+		});
+		
+		
+		
+		$("#CANCEL").click(function(){
+			window.location.href="roleList.html";
+		});
+      </script>
+</body>
+</html>

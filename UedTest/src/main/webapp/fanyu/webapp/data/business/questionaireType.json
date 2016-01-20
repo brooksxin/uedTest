@@ -1,0 +1,12 @@
+{
+	"returnCode": "0",
+	"returnMessage": "", 
+	"beans":[
+		{ "name":"4G流量营销", "value":"04" }, 
+		{ "name":"4G套餐营销", "value":"05" }, 
+		{ "name":"4G终端营销", "value":"06" },
+		{ "name":"通知告知类", "value":"01" }, 
+		{ "name":"用户调研类", "value":"02" }, 
+		{ "name":"客户关怀类", "value":"03" }
+	]
+}

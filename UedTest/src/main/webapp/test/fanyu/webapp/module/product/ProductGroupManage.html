@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>商品组管理</title>
+<#include "../../tpl/res_css.tpl" />
+<script src="../../lib/swfupload/1.0.0/2.5/swfupload.js"></script>
+</head>
+<body>
+
+<div class="breadcrumb"></div>
+<div class="listTopBtn">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td><h1>商品组列表</h1></td>
+			<td><div class="normalBtnArea ft-right"><a class="normalBtn BGblue" href="#" onclick="addProductGroup()">添加商品组</a></div></td>
+		</tr>
+	</table>
+</div>
+<div method="post" action="#" class="cmxform mb-30" >
+	<form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+		<div class="record-search-cate">
+			<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+				<tbody>
+					<tr>
+						<td width="100"><label class="description">商品组名称</label></td>
+						<td width="150"><input class="inputText" type="text"  id="catgUnitNm" name="name" maxlength="255" value=""/>
+						<td><div class="normalBtnArea w82">
+							                  	<a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a> </div></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</form>
+</div>
+
+ <div class="tablewidth mg_t_10">
+  
+	<table class="ui-record-table table_radius table-bordered table-striped" >
+		<thead>
+			<tr>
+				<th>商品组名称</th>
+				<th>添加时间</th>
+				<th width="45">操作</th>
+			</tr>
+		</thead>
+		<tbody id="J_tabletpl">
+		</tbody>
+	</table>
+</div>
+
+<!--翻页及功能按钮区域开始-->
+<DIV class="amount-bottom">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+		<tr>
+<!-- 			<td width="60"><input type="checkbox" class="selectAll" id="selectAll" /> -->
+<!-- 				<label for="selectAll">全选</label></td> -->
+<!-- 			<td><DIV class="normalBtnArea"> <A class="normalBtn BGgray" href="#">删除</A> </DIV></td> -->
+			<td width="50%"><DIV class="fn-clear action-other  action-other-show ">
+					<DIV id=Pagination class="page pagination fn-right"> </DIV>
+					<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+				</DIV></td>
+		</tr>
+	</table>
+</DIV>
+
+<!-- <div id="T_addBrand" class="fn-hide"> -->
+	<div id="T_importProd" class="fn-hide tablewidth">
+		<form id="J_add_form" name="J_add_form">
+			<div class="titleArea fn-center">商品组管理</div>
+			<hr />
+			<div class="mt-50  bodydiv"> 商品组名称：<input id="name" name="name" class="bodydivinput" type="text" maxlength="255" value="" />
+			</div>
+			<div class="bodydivthree bodydiv">
+				<input id="id" type="hidden" value="" />
+				<input id="filename" name="filename" type="hidden">
+				<input id="fileurl" name="fileurl" type="hidden">
+			</div>
+			<div class="ui-topQuDashed fn-clear">
+				<div class="ui-titleTextjv" style="width:67px;float:left;">商品组图片</div>
+				<div class="ui-zt_pictureText fn-clear fn-left" style="position: relative;margin:10px;margin-left:5px;">
+					<img id="J_upload_img" class="fn-left" src="../../css/images/shangchuantupian.gif" width="150" height="270" />
+						<span id="J_img_wrap" class="fn-left"> <a href="javascript:;" id="uptrigger" class="ui-bjpicture"></a>
+					</span>
+				</div>
+			</div>
+			<div class="ui-textcolorml ">支持JPEG、PNG，图片尺寸：宽600px高1080px</div>
+		</form>
+	</div>
+
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+			<!--
+            <td><div class="table_select"><input type="checkbox" value={{id}}/></div></td>
+			-->
+            <td>{{name}}</td>
+            <td>{{createTime}}</td>
+			<td>
+                <div class="gridRowBtn">
+                    <a class="item-text" href="javascript:;" onclick="updateProductGroup(this)" data-id='{{id}}'>编辑</a>
+                </div>
+            </td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="4">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+
+
+
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+
+
+	//查询品牌列表
+	srvMap.add('queryProductGroupList', '', 'front/sh/prod!execute?uid=pg001');//查询服务
+	srvMap.add('queryProductGroupById', '', 'front/sh/prod!execute?uid=pg002');//查询服务
+	srvMap.add('saveProductGroup', '', 'front/sh/prod!execute?uid=pg003');//新增服务
+	srvMap.add('editProductGroup', '', 'front/sh/prod!execute?uid=pg004');//编辑服务
+	srvMap.add('upload','', 'front/sh/prod!uploadImg2?uid=up002');//上传商品组图片
+	var G_params = {
+		url : srvMap.get('queryProductGroupList'),
+		items_per_page : 10, 			// 每页数     @param : limit
+		page_index : 0, 				//当前页  @param : start
+		pagination : "Pagination", 		//分页id
+		searchformId : "J_formSearch", 	//搜索表单的id
+		tabletpl : "T_tabletpl", 		//表格模板
+		tablewrap : "J_tabletpl" 		//表格容器
+	};
+	var $name = $("#name");
+	var $id = $("#id");
+	var $form = $("#J_add_form");
+	var $elem = $("#T_importProd");
+	var $uploadImg = $("#J_upload_img");
+
+	var validate1 = $form.validate({
+		rules : {
+			"name" : {
+				required : true
+			}
+		},
+		messages : {
+			"name" : {
+				required : "请填写商品组名称"
+			}
+		},
+		showErrors : function() {
+			this.defaultShowErrors();
+		},
+		success : function(currentDom) {
+			$(currentDom).html("<img src='../../css/images/validate-right.png' class='right-img'>");
+		}
+	});
+	
+	//上传空间参数
+	var upload,settings = {
+		flash_url : "../../lib/swfupload/1.0.0/2.5/swfupload.swf",
+		upload_url: srvMap.get('upload'),
+		post_params: {},
+		use_query_string: false,
+		file_size_limit : "5 MB",
+		file_types : "*.jpg;*.png;*.gif;*.jpeg;*.bmp",
+		file_types_description : "All Files",
+		file_upload_limit : 0,
+		file_queue_limit : 0,
+		debug: false,
+		// Button settings
+		button_width: '150',
+		button_height: "270",
+		button_placeholder_id: 'uptrigger',
+		button_text_left_padding: 12,
+		button_text_top_padding: 3,
+		button_cursor : SWFUpload.CURSOR.HAND,
+		
+		file_queued_handler : function(file){
+			$('#J_fileName').text(file.name);
+		},
+		file_dialog_complete_handler : function(numFilesSelected, numFilesQueued){
+			console.log(1);
+			this.startUpload();
+		},
+		upload_start_handler : function(file){
+			console.log(file)
+			/*if (file.size > 5242880) {
+				Util.dialog.tips('文件大小超过5M,请重新上传！');
+				return false;
+			};
+			//createLoading('#J_front_wrap');*/
+			return true;
+		},
+		upload_error_handler : function(file, errorCode, message){
+			console.log(file)
+			console.log(errorCode)
+			try {
+			} catch (ex) {
+		        this.debug(ex);
+		    }
+		    //unLoading('#J_front_wrap');
+		},
+		upload_success_handler : function uploadSuccess(file, serverData){
+			console.log(serverData)
+			serverData = JSON.parse(serverData);
+			if (serverData.returnCode == '0') {
+				Util.dialog.tips("成功！");
+				$("#fileurl").val(serverData.bean.filename);
+				$uploadImg.attr('src',serverData.bean.src);
+			}
+		}
+	};
+	//页面加载完开始执行
+	$(document).ready(function() {
+		$('#J_search').bind('click', function() {
+			G_params.page_index = 0;
+			var params = $(document.getElementById(G_params.searchformId)).serialize(); //把form序列化
+			//console.log(params);
+			//分页获取数据
+			Util.pagination(G_params.page_index, true, G_params, params);
+		});
+		$('#J_search').trigger("click");
+		upload = new SWFUpload(settings);//初始化上传控件
+	});
+
+	var dialogProperties = {
+		id : 'A_importProd',
+		top: top,
+		content : $elem,
+		width : 420,
+		height : 420,
+		modal : true,
+		okVal : '确定',
+		cancelVal : '取消',
+		cancelCallback : function(){
+			validate1.resetForm();
+			$form[0].reset();
+			$id.val("");
+			$uploadImg.attr("src", "../../css/images/shangchuantupian.gif");
+		},
+		okCallback : okDialog
+	}
+
+	function addProductGroup() {
+		Util.dialog.openDiv(dialogProperties);
+	}
+
+	function updateProductGroup(obj) {
+		var id = $(obj).data("id");
+		console.log(srvMap.get('queryProductGroupById'));
+		Util.ajax.postJson(srvMap.get('queryProductGroupById'), {"id": id},function(json, status){
+			if(status){
+				$id.val(id);
+				$name.val(json.bean.name);
+				if(json.bean.IMAGE150x270 !== undefined){
+					$uploadImg.attr("src", json.bean.ftpUrl + json.bean.IMAGE150x270);
+				}
+				Util.dialog.openDiv(dialogProperties);
+			}
+		});
+	}
+
+	/*
+	    点击弹出框中的确定按钮之后的回调事件
+	 */
+	function okDialog() {
+		if (validate1.form()) {
+			if ($id.val() == "" || $id.val() == null || $id.val() == "undefined") {
+				var grams = {
+					"name" : $name.val(),
+					"filename" :$("#filename").val(),
+					"fileurl" : $("#fileurl").val()
+				};
+				Util.ajax.postJson(srvMap.get('saveProductGroup'), grams, function(json, status) {
+					if (status) {
+						alert("新增成功");
+						$('#J_search').trigger("click");
+					} else {
+						alert(json.returnMessage || "新增失败");
+					}
+					$("#filename").val('');
+					$("#fileurl").val('');
+					dialogProperties.cancelCallback();
+				});
+			} else {
+				var grams = {
+					"id" : $id.val(),
+					"name" : $name.val(),
+					"filename" :$("#filename").val(),
+					"fileurl" : $("#fileurl").val()
+				};
+				Util.ajax.postJson(srvMap.get('editProductGroup'), grams, function(json, status) {
+					if (status) {
+						alert("编辑成功");
+						$('#J_search').trigger("click");
+					} else {
+						alert(json.returnMessage || "编辑失败");
+					}
+					dialogProperties.cancelCallback();
+				});
+			}
+		} else {
+			return false;
+		}
+
+	}
+</script>
+</body>
+</html>

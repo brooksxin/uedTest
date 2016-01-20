@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>属性权限配置</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/helpers.js"></script>
+<!-- base64 -->
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/core-min.js"></script>
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/enc-base64-min.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body>
+<div class="openwin">
+    <form id="busi_form">
+        <table class="infoTable" cellpadding="0" cellspacing="0" border="0" width="100%">
+            <colgroup>
+                <col width="15%"/>
+                <col width="35%" />
+                <col width="15%"/>
+                <col />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td class="description">应用名称：</td>
+                    <td ><input class="normalinput" type="text" value="" name="applyName" id="applyName" disabled /></td>
+                    <td class="description">角色选择：</td>
+                    <td>
+                        <select name="applyRole" id="applyRole"></select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <!--加载属性-->
+    <div id="mydiv"></div>
+
+    <div class="bz_btn_list">
+        <a class="btn_normal fn-mr-20" href="#nogo" id="J_save"><em>保存</em></a>
+        <a class="btn_normal " href="#nogo" id="J_cancel"><em>关闭</em></a>
+    </div>
+
+</div>
+
+<textarea class="fn-hide" id="applyRole_tpl">
+{{#each rows}}
+<option value="{{roleId}}">{{roleName}}</option>
+{{/each}}
+</textarea>
+
+<textarea class="fn-hide" id="typeAttr_tpl">
+
+<div class="ui-box">
+    <div class="ui-box-head">
+        <h3 class="ui-box-head-title" data-nodetypeid="{{nodeTypeId}}">{{nodeType}}</h3>
+        <label class="ui-box-head-text" for="selectAll_{{@index}}">全选</label>
+        <input type="checkbox" onclick="selectAll(this);" style="float: left; height: 18px;" id="selectAll_{{@index}}" />
+        <a href="#nogo" class="ui-box-head-more" onclick="toggleDiv(this);"></a>
+    </div>
+    <div class="ui-box-container fn-hide">
+        <div class="ui-box-content">
+            {{#each rows}}
+            <input id="{{gisRoleId}}" type="checkbox" value="{{gisRoleId}}" name="mycheckbox" {{isSlect isBand}}  />
+            <label for="{{gisRoleId}}">{{gisRoleName}}</label>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+</textarea>
+
+<script type="text/javascript">
+ var id = artDialog.data("id")?artDialog.data("id"):"";
+ var name=artDialog.data("name");
+ //var id = 12345;
+ //var name='xyzs';
+ var currentPageId;//在当前页面进行操作的角色id，由于切换下拉框时，下拉框中的值已经变化，是新选中的角色id，所以当前页面的角色id不能从下拉框中取，而是取currentPageId
+
+$("#applyName").val(name);
+$(function(){
+	var roleId;
+    $.PostJson(REQURLS.getRolesByAppId,"id="+id,function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"&&json.rows.length>0){
+                $("#applyRole").temp($("#applyRole_tpl"), json);
+                roleId = json.rows[0].roleId;
+                currentPageId=roleId;
+                $.PostJson(REQURLS.getAllGisRoleByAppIdRoleId,"&appId="+id+"&roleId="+roleId,function(state,json){
+
+                    if(state=="success"){
+                        if(json&&json.returnCode=="1"){
+                            $("#mydiv").temp($("#typeAttr_tpl"), json).find(".ui-box:eq(0) .ui-box-head-more").trigger("click");
+                        }
+                    }
+                });
+            }else{
+            	alert("当前应用角色未同步，无法进行配置，请稍后再试！");
+            	closeDialog();
+            }
+        }
+    });
+    
+
+    
+    $("#J_save").click(function(){
+        var $btn = $(this);
+    	var beans = [];
+        var json={};
+        json.roleId = $("#applyRole").val();
+        json.appId = id;
+        _box = $("#mydiv").find(".ui-box");
+        var property = [];
+        _box.each(function(){
+            var _self = $(this);
+            
+            _self.find(".ui-box-container input[type='checkbox']").each(function(){
+                if($(this).is(":checked")){
+                    var zAttr = {};
+                    zAttr.gisRoleId = $(this).val();
+                    property.push(zAttr);
+                }
+            });
+        })
+        json.property = property;
+        
+        var dataP = encodeBase64(encodeURIComponent(JSON.stringify(json)));
+        toggleButtonStyle($btn,true);
+        $.PostJson(REQURLS.saveAppRoleConfig,"dataP="+dataP,function(state,json){
+            if(state=="success"){
+                if(json&&json.returnCode=="1"){
+                    alert("配置属性成功");
+                    closeDialog();
+                }else{
+                    alert(json.returnMessage||"配置属性失败！");
+                }
+            }else{
+                alert("系统错误！");
+            }
+            toggleButtonStyle($btn,false);
+        });
+    });
+    
+    
+    function getTemplateByAppIdRoleId(){
+    	var newChangeId=$("#applyRole").val();
+    	currentPageId=newChangeId;
+    	$.PostJson(REQURLS.getAllGisRoleByAppIdRoleId,"&appId="+id+"&roleId="+newChangeId,function(state,json){
+            if(state=="success"){
+                if(json&&json.returnCode=="1"){
+                    $("#mydiv").temp($("#typeAttr_tpl"), json).find(".ui-box:eq(0) .ui-box-head-more").trigger("click");
+                }
+            }
+        });
+    }
+    
+    //当下拉框选择变化时提交当前页面的配置，同时查找下拉框中新选中选项的配置信息
+    //由于此时下拉框中的值已经变化，是新选中的角色id，所以当前页面的角色id不能从下拉框中取，而是取currentPageId
+    function submitConfig(){
+        var beans = [];
+        var json={};
+        json.roleId = currentPageId;
+        json.appId = id;
+        _box = $("#mydiv").find(".ui-box");
+        var property = [];
+        _box.each(function(){
+            var _self = $(this);
+            
+            _self.find(".ui-box-container input[type='checkbox']").each(function(){
+                if($(this).is(":checked")){
+                    var zAttr = {};
+                    zAttr.gisRoleId = $(this).val();
+                    property.push(zAttr);
+                }
+            });
+        })
+         json.property = property;
+        
+
+		//alert(JSON.stringify(json))
+
+        var dataP = encodeBase64(encodeURIComponent(JSON.stringify(json)));
+        
+        $.PostJson(REQURLS.saveAppRoleConfig,"dataP="+dataP,function(state,json){
+            if(state=="success"){
+                if(json&&json.returnCode=="1"){
+                	getTemplateByAppIdRoleId();
+                }else{
+                    alert(json.returnMessage||"当前配置保存失败！");
+                }
+            }else{
+                alert("系统错误！");
+            }
+        });
+    }
+    
+    $("#applyRole").change(function(){
+    	if(confirm("是否保存当前角色的配置信息？")){
+    		submitConfig();
+    	}else{
+    		getTemplateByAppIdRoleId();
+    	}
+    	
+    });
+    
+})
+
+function selectAll(obj){
+    var _self = $(obj);
+    var _checkbox = _self.parent().siblings(".ui-box-container").find("input[type='checkbox']");
+    var _flag = _self.is(":checked");
+    _checkbox.each(function(){
+        $(this).attr({"checked":_flag});
+    });
+}
+
+function toggleDiv(obj){
+    var _self = $(obj);
+    _self.parent().siblings(".ui-box-container").slideToggle();
+}
+
+Handlebars.registerHelper('isSlect', function(isBand,fn){
+    var buffer = "";
+    if(isBand=='1'){
+        buffer = "checked = true";
+    }
+    return new Handlebars.SafeString(buffer);
+});
+</script>
+
+</body>
+</html>

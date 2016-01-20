@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<title>汇仁</title>
+<link rel="stylesheet" href="ui/mui/css/mui.min.css">
+<link rel="stylesheet" href="ui/common.css">
+
+<style type="text/css">
+.mui-table-view {
+    background: #E4E9EF;
+    padding-top: 17px;
+}
+#wrapper {
+    position: absolute;
+    z-index: 1;
+    top: 45px;
+    bottom: 48px;
+    left: 0;
+    width: 100%;
+    background: #ccc;
+    overflow: hidden;
+}
+
+#scroller {
+    position: absolute;
+    z-index: 1;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    width: 100%;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    -o-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+/**
+ *
+ * 下拉样式 Pull down styles
+ *
+ */
+#pullDown, #pullUp {
+    background:#fff;
+    height:50px;
+    line-height:50px;
+    padding:5px 10px;
+    border-bottom:1px solid #ccc;
+    font-weight:bold;
+    font-size:14px;
+    color:#888;
+}
+#pullDown {
+    margin-top: -35px;
+}
+#pullDown .pullDownIcon, #pullUp .pullUpIcon  {
+    display:block; float:left;
+    width:40px; height:40px;
+    background:url(ui/img/pull-icon@2x.png) 0 0 no-repeat;
+    -webkit-background-size:40px 80px; 
+    background-size:40px 80px;
+    -webkit-transition-property:-webkit-transform;
+    -webkit-transition-duration:250ms;  
+}
+#pullDown .pullDownIcon {
+    -webkit-transform:rotate(0deg) translateZ(0);
+}
+#pullUp .pullUpIcon  {
+    -webkit-transform:rotate(-180deg) translateZ(0);
+}
+
+#pullDown.flip .pullDownIcon {
+    -webkit-transform:rotate(-180deg) translateZ(0);
+}
+
+#pullUp.flip .pullUpIcon {
+    -webkit-transform:rotate(0deg) translateZ(0);
+}
+
+#pullDown.loading .pullDownIcon, #pullUp.loading .pullUpIcon {
+    background-position:0 100%;
+    -webkit-transform:rotate(0deg) translateZ(0);
+    -webkit-transition-duration:0ms;
+
+    -webkit-animation-name:loading;
+    -webkit-animation-duration:2s;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:linear;
+}
+
+@-webkit-keyframes loading {
+    from { -webkit-transform:rotate(0deg) translateZ(0); }
+    to { -webkit-transform:rotate(360deg) translateZ(0); }
+}
+
+</style>
+
+<script>
+    var html = '<li class="mui-table-view-cell mui-media"> <a href="javascript:;"> <img class="mui-pull-left icon" src="ui/img/1.png" width="90" height="90"> <div class="mui-pull-left mui-media-body des"> <p class="mui-ellipsis"><span class="doc-name">刘医生</span><span class="mui-badge desident">未认证</span></p> <p class="mui-ellipsis">外科 主任医生</p> <p class="mui-ellipsis">第三附属医院</p> <p class="mui-ellipsis">擅长：脑部、脊柱疾病</p> </div> <div class="mui-pull-right consult"> <span class="tit">咨询</span> <span class="price">￥10/次</span> </div> <span class="mui-badge msg">12</span> </a> </li>';
+
+    var myScroll, upIcon, downIcon;
+
+    function scrollEvent(){
+        var y = this.y,
+            maxY = this.maxScrollY - y,
+            downHasClass = downIcon.hasClass("loading"),
+            upHasClass = upIcon.hasClass("loading");
+        
+        if(y >= 40){
+            console.log(y)
+            !downHasClass && downIcon.addClass("flip");
+            return "";
+        }else if(y < 40 && y > 0){
+            downHasClass && downIcon.removeClass("flip");
+
+            //取消翻转
+            if(downIcon.hasClass("flip")){
+                downIcon.removeClass("flip");
+            }
+
+            return "";
+        }
+        
+        if(maxY >= 40){
+            !upHasClass && upIcon.addClass("flip");
+            return "";
+        }else if(maxY < 40 && maxY >=0){
+            upHasClass && upIcon.removeClass("flip");
+
+            //取消翻转
+            if(upIcon.hasClass("flip")){
+                upIcon.removeClass("flip");
+            }
+
+            return "";
+        }
+    }
+
+    function loaded () {
+        upIcon = $("#pullUp"),
+        downIcon = $("#pullDown");
+
+        myScroll = new IScroll('#wrapper', {
+            probeType: 3,
+            scrollbars: true,
+            fadeScrollbars: true
+        });
+
+        myScroll.on('scroll', scrollEvent);
+        myScroll.on('scrollEnd', scrollEvent);
+
+        myScroll.on("slideDown",function(){
+            if(this.y > 40){
+                zuiSlideDown();
+            }
+        });
+        
+        myScroll.on("slideUp",function(){
+            if(this.maxScrollY - this.y > 40){
+                zuiSlideUp();
+            }
+        });
+    }
+
+    function zuiSlideDown(){
+        downIcon.addClass("loading").css({"marginTop": "15px"});
+        setTimeout(function(){
+            $('#thelist').prepend(html);
+            downIcon.removeClass("loading").css({"marginTop": "-35px"});
+            myScroll.refresh();
+        }, 1000)
+    }
+
+    function zuiSlideUp(){
+        upIcon.addClass("loading");
+        setTimeout(function(){
+            $('#thelist').append(html);
+            upIcon.removeClass("loading");
+            myScroll.refresh();
+        }, 1000)
+    }
+
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+</script>
+
+</head>
+<body class="zui" onload="loaded();">
+
+<header class="mui-bar mui-bar-nav">
+    <h1 class="mui-title">我的医生</h1>
+    <a href="javascript:;" class="mui-icon mui-icon-bars mui-pull-right" id="J_submenu"></a>
+</header>
+
+<footer class="mui-bar mui-bar-tab">
+    <a class="mui-tab-item" href="guide.html">
+        <span class="mui-icon mui-icon-home"></span>
+        <span class="mui-tab-label">向导</span>
+    </a>
+    <a class="mui-tab-item" href="myPrescription.html">
+        <span class="mui-icon mui-icon-email"></span>
+        <span class="mui-tab-label">我的处方</span>
+    </a>
+    <a class="mui-tab-item active" href="javascript:;">
+        <span class="mui-icon mui-icon-contact"></span>
+        <span class="mui-tab-label">我的医生</span>
+    </a>
+    <a class="mui-tab-item" href="myHealthLog.html">
+        <span class="mui-icon mui-icon-gear"></span>
+        <span class="mui-tab-label">健康日记</span>
+    </a>
+</footer>
+
+<div class="mui-content myDoctor">
+    <div id="wrapper">
+        <div id="scroller">
+            <div id="pullDown">
+                <span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新...</span>
+            </div>
+            <ul class="mui-table-view" id="thelist">
+                <li class="mui-table-view-cell mui-media">
+                    <a href="javascript:;">
+                        <img class="mui-pull-left icon" src="ui/img/1.png" width="90" height="90">
+                        <div class="mui-pull-left mui-media-body des">
+                            <p class="mui-ellipsis"><span class="doc-name">刘医生</span><span class="mui-badge desident">未认证</span></p>
+                            <p class='mui-ellipsis'>外科 主任医生</p>
+                            <p class='mui-ellipsis'>第三附属医院</p>
+                            <p class='mui-ellipsis'>擅长：脑部、脊柱疾病</p>
+                        </div>
+                        <div class="mui-pull-right consult">
+                            <span class="tit">咨询</span>
+                            <span class="price">￥10/次</span>
+                        </div>
+                        <span class="mui-badge msg">12</span>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media">
+                    <a href="javascript:;">
+                        <img class="mui-pull-left icon" src="ui/img/1.png" width="90" height="90">
+                        <div class="mui-pull-left mui-media-body des">
+                            <p class="mui-ellipsis"><span class="doc-name">秦医生</span><span class="mui-badge ident"><span class="mui-icon mui-icon-checkmarkempty"></span>已认证</span></p>
+                            <p class='mui-ellipsis'>外科 主任医生</p>
+                            <p class='mui-ellipsis'>第三附属医院</p>
+                            <p class='mui-ellipsis'>擅长：脑部、脊柱疾病</p>
+                        </div>
+                        <div class="mui-pull-right consult">
+                            <span class="tit">咨询</span>
+                            <span class="price">￥8/次</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media">
+                    <a href="javascript:;">
+                        <img class="mui-pull-left icon" src="ui/img/1.png" width="90" height="90">
+                        <div class="mui-pull-left mui-media-body des">
+                            <p class="mui-ellipsis"><span class="doc-name">胡医生</span><span class="mui-badge ident"><span class="mui-icon mui-icon-checkmarkempty"></span>已认证</span></p>
+                            <p class='mui-ellipsis'>外科 主任医生</p>
+                            <p class='mui-ellipsis'>第三附属医院</p>
+                            <p class='mui-ellipsis'>擅长：脑部、脊柱疾病333332</p>
+                        </div>
+                        <div class="mui-pull-right consult">
+                            <span class="tit">咨询</span>
+                            <span class="price">￥12/次</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media">
+                    <a href="javascript:;">
+                        <img class="mui-pull-left icon" src="ui/img/1.png" width="90" height="90">
+                        <div class="mui-pull-left mui-media-body des">
+                            <p class="mui-ellipsis"><span class="doc-name">胡医生</span><span class="mui-badge ident"><span class="mui-icon mui-icon-checkmarkempty"></span>已认证</span></p>
+                            <p class='mui-ellipsis'>外科 主任医生</p>
+                            <p class='mui-ellipsis'>第三附属医院</p>
+                            <p class='mui-ellipsis'>擅长：脑部、脊柱疾病333332</p>
+                        </div>
+                        <div class="mui-pull-right consult">
+                            <span class="tit">咨询</span>
+                            <span class="price">￥12/次</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media">
+                    <a href="javascript:;">
+                        <img class="mui-pull-left icon" src="ui/img/1.png" width="90" height="90">
+                        <div class="mui-pull-left mui-media-body des">
+                            <p class="mui-ellipsis"><span class="doc-name">胡医生</span><span class="mui-badge ident"><span class="mui-icon mui-icon-checkmarkempty"></span>已认证</span></p>
+                            <p class='mui-ellipsis'>外科 主任医生</p>
+                            <p class='mui-ellipsis'>第三附属医院</p>
+                            <p class='mui-ellipsis'>擅长：脑部、脊柱疾病333332</p>
+                        </div>
+                        <div class="mui-pull-right consult">
+                            <span class="tit">咨询</span>
+                            <span class="price">￥12/次</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media">
+                    <a href="javascript:;">
+                        <img class="mui-pull-left icon" src="ui/img/1.png" width="90" height="90">
+                        <div class="mui-pull-left mui-media-body des">
+                            <p class="mui-ellipsis"><span class="doc-name">胡医生</span><span class="mui-badge ident"><span class="mui-icon mui-icon-checkmarkempty"></span>已认证</span></p>
+                            <p class='mui-ellipsis'>外科 主任医生</p>
+                            <p class='mui-ellipsis'>第三附属医院</p>
+                            <p class='mui-ellipsis'>擅长：脑部、脊柱疾病333332</p>
+                        </div>
+                        <div class="mui-pull-right consult">
+                            <span class="tit">咨询</span>
+                            <span class="price">￥12/次</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media">
+                    <a href="javascript:;">
+                        <img class="mui-pull-left icon" src="ui/img/1.png" width="90" height="90">
+                        <div class="mui-pull-left mui-media-body des">
+                            <p class="mui-ellipsis"><span class="doc-name">胡医生</span><span class="mui-badge ident"><span class="mui-icon mui-icon-checkmarkempty"></span>已认证</span></p>
+                            <p class='mui-ellipsis'>外科 主任医生</p>
+                            <p class='mui-ellipsis'>第三附属医院</p>
+                            <p class='mui-ellipsis'>擅长：脑部、脊柱疾病333332</p>
+                        </div>
+                        <div class="mui-pull-right consult">
+                            <span class="tit">咨询</span>
+                            <span class="price">￥12/次</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media">
+                    <a href="javascript:;">
+                        <img class="mui-pull-left icon" src="ui/img/1.png" width="90" height="90">
+                        <div class="mui-pull-left mui-media-body des">
+                            <p class="mui-ellipsis"><span class="doc-name">胡医生</span><span class="mui-badge ident"><span class="mui-icon mui-icon-checkmarkempty"></span>已认证</span></p>
+                            <p class='mui-ellipsis'>外科 主任医生</p>
+                            <p class='mui-ellipsis'>第三附属医院</p>
+                            <p class='mui-ellipsis'>擅长：脑部、脊柱疾病333332</p>
+                        </div>
+                        <div class="mui-pull-right consult">
+                            <span class="tit">咨询</span>
+                            <span class="price">￥12/次</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media">
+                    <a href="javascript:;">
+                        <img class="mui-pull-left icon" src="ui/img/1.png" width="90" height="90">
+                        <div class="mui-pull-left mui-media-body des">
+                            <p class="mui-ellipsis"><span class="doc-name">胡医生</span><span class="mui-badge ident"><span class="mui-icon mui-icon-checkmarkempty"></span>已认证</span></p>
+                            <p class='mui-ellipsis'>外科 主任医生</p>
+                            <p class='mui-ellipsis'>第三附属医院</p>
+                            <p class='mui-ellipsis'>擅长：脑部、脊柱疾病333332</p>
+                        </div>
+                        <div class="mui-pull-right consult">
+                            <span class="tit">咨询</span>
+                            <span class="price">￥12/次</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media">
+                    <a href="javascript:;">
+                        <img class="mui-pull-left icon" src="ui/img/1.png" width="90" height="90">
+                        <div class="mui-pull-left mui-media-body des">
+                            <p class="mui-ellipsis"><span class="doc-name">胡医生</span><span class="mui-badge ident"><span class="mui-icon mui-icon-checkmarkempty"></span>已认证</span></p>
+                            <p class='mui-ellipsis'>外科 主任医生</p>
+                            <p class='mui-ellipsis'>第三附属医院</p>
+                            <p class='mui-ellipsis'>擅长：脑部、脊柱疾病333332</p>
+                        </div>
+                        <div class="mui-pull-right consult">
+                            <span class="tit">咨询</span>
+                            <span class="price">￥12/次</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media">
+                    <a href="javascript:;">
+                        <img class="mui-pull-left icon" src="ui/img/1.png" width="90" height="90">
+                        <div class="mui-pull-left mui-media-body des">
+                            <p class="mui-ellipsis"><span class="doc-name">胡医生</span><span class="mui-badge ident"><span class="mui-icon mui-icon-checkmarkempty"></span>已认证</span></p>
+                            <p class='mui-ellipsis'>外科 主任医生</p>
+                            <p class='mui-ellipsis'>第三附属医院</p>
+                            <p class='mui-ellipsis'>擅长：脑部、脊柱疾病333332</p>
+                        </div>
+                        <div class="mui-pull-right consult">
+                            <span class="tit">咨询</span>
+                            <span class="price">￥12/次</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <div id="pullUp">
+                <span class="pullUpIcon"></span><span class="pullUpLabel">上拉加载更多...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="popover" class="mui-popover">
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell"><a href="searchDoctor.html">查找医生</a></li>
+        <li class="mui-table-view-cell"><a href="#">Item2</a></li>
+        <li class="mui-table-view-cell"><a href="#">Item3</a></li>
+        <li class="mui-table-view-cell"><a href="#">Item4</a></li>
+        <li class="mui-table-view-cell"><a href="#">Item5</a></li>
+    </ul>
+    <div class="mui-popover-arrow mui-top"></div>
+</div>
+
+<script src="ui/zepto.min.js"></script>
+<script src="ui/iscroll/iscroll5.js"></script>
+<script src="ui/common.js"></script>
+<script>
+var keys = '';
+$(function(){
+    $("#J_submenu").on("tap", function(){
+        var $popover = $('.mui-popover'),
+            $mask = '<div class="mui-backdrop mui-active" style=""></div>';
+        if($(".mui-backdrop").length){
+            $(".mui-backdrop").show();
+        }else{
+            $("body").append($mask);
+            $(".mui-backdrop").on("tap", function(){
+                $('.mui-popover, .mui-backdrop').hide();
+                $('.mui-popover').css({"opacity": "0"});
+            })
+        }
+        $popover.css({"display": "block", "right": "6px", "top": "80px"}).animate({"opacity": "1"}, 500)
+            .find(".mui-popover-arrow").css({"left": "170px"});
+    })
+
+    //查询医生跳转
+    keys = $.getUrlVar("keys")?$.getUrlVar("keys"):"";
+    console.log(keys)
+})
+</script>
+</body>
+</html>

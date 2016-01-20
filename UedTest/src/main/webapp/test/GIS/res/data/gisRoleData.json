@@ -1,0 +1,17 @@
+
+{
+        "returnCode": "1",
+        "total": "11",
+        "rows": [
+            {
+                "gisRoleId": "1111",
+                "gisRoleName": "营业厅厅长",
+                "gisRoleDesc": "营业厅厅长的描述"
+            },
+            {
+                "gisRoleId": "1112",
+                "gisRoleName": "营业员",
+                "gisRoleDesc": "营业员的描述"
+            }
+        ]
+}

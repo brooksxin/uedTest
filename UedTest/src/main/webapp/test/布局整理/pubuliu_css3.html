@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>瀑布流_css3</title>
+<script src="../jquery.js" type="text/javascript"></script>
+<style type="text/css">
+body {
+	margin: 0 30px;
+	background: #ccc;
+}
+.ul_1{
+	/**直接定义多少列**/
+	-webkit-column-count:4;
+	-moz-column-count:4;
+	-o-column-count:4;
+	column-count:4;
+}
+li{
+	background:#0CF;
+	border:#069 1px solid;
+	display:inline-block;
+	width:150px;
+	margin:5px 0;
+}
+.ul_2 {
+	/* 栏宽度 */
+	-webkit-column-width:160px;
+	-moz-column-width:160px;
+	-o-colum-width:160px;
+	column-width:160px;
+
+	/* 两栏之间的间距 */
+	-webkit-column-gap:1px;
+	-moz-column-gap:1px;
+	-o-column-gap:1px;
+	column-gap:1px;
+}
+</style>
+</head>
+<body>
+
+<ul class="ul_1">
+	<li style="height:50px">1</li>
+	<li style="height:100px">2</li>
+	<li style="height:80px">3</li>
+	<li style="height:60px">4</li>
+	<li style="height:70px">5</li>
+	<li style="height:50px">6</li>
+	<li style="height:100px">7</li>
+	<li style="height:80px">8</li>
+	<li style="height:90px">9</li>
+	<li style="height:30px">10</li>
+</ul>
+
+<br>
+
+<ul class="ul_2">
+	<li style="height:50px">1</li>
+	<li style="height:100px">2</li>
+	<li style="height:80px">3</li>
+	<li style="height:60px">4</li>
+	<li style="height:70px">5</li>
+	<li style="height:50px">6</li>
+	<li style="height:100px">7</li>
+	<li style="height:80px">8</li>
+	<li style="height:90px">9</li>
+	<li style="height:30px">10</li>
+</ul>
+
+<button id="J_btn">点击添加列</button>
+
+
+<script type="text/javascript">
+$(function(){
+	var _html = '<li style="height:30px">11</li><li style="height:40px">12</li><li style="height:130px">13</li><li style="height:160px">14</li><li style="height:70px">15</li>'
+	$("#J_btn").click(function(){
+		$(".ul_2").append(_html);
+	})
+});
+</script>
+</body>
+</html>

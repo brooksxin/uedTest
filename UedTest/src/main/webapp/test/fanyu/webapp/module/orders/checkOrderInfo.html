@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>补充订单信息-表单检查</title> <#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+	<!-- 地址及支付方式区域 -->
+	<div class="formItem" id="J_checkOrder">
+		<form name="checkedOdrInfo" id="checkedOdrInfo">
+			<div class="pt-10 pb-10 ui-fhw">
+				<a href="#" id="backToQtySelect"
+					class="formItem_jiantou-tu normalLink">返回</a>
+			</div>
+
+
+			<div class="titleArea">
+				<h2>补充订单信息</h2>
+			</div>
+			<div class="formArea-A pt-30">
+				<div class="fn-clear mb-30" style="display: block">
+					<div id="J_addrInfo">
+						<div class="ui-loading">
+							<h1>
+								<img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等
+								...
+							</h1>
+						</div>
+					</div>
+				</div>
+				<div class="onlin_borTop" style="padding: 15px 0px">
+					<span class="text_gray-666">支付方式：</span> <span
+						class="ri_all_margin" id="supportPayMode"></span>
+				</div>
+				<div class="pd_bo-dashed">
+					<span class="text_gray-666" style="display: none">发票开具：</span> <span
+						class="ri_all_margin" style="display: none"> <input
+						name="isNeedInvoice" type="checkbox" value="1" checked /><span
+						class="pl-10">开具发票</span>
+					</span>
+					<div class="ui-margin115 mt-10">
+						<span class="text_gray-666">发票类型：</span> <select
+							class="FormInputSelect ml-10 mr-30" name="tinvcObjTypeCd"
+							id="tinvcObjTypeCd" style="margin-left: 20px;">
+							<option value="10">个人</option>
+							<option value="11">单位</option>
+						</select>
+						<div style="margin: 10px 0px 0px 0px; display: none;">
+							<span> <!-- <span class="fn-high" >*</span> -->发票抬头：
+							</span> <input type="text" class="FormInputSelect ml-10 mr-30"
+								name="tinvcInvttNm" id="tinvcInvttNm" />
+						</div>
+					</div>
+				</div>
+				<div class="pd_bo-dashed">
+					<span class="text_gray-666">订单备注：</span> <span
+						class="ri_all_margin"> <textarea type="text" rows="3"
+							cols="60" id="odrRmk"></textarea>
+					</span>
+				</div>
+				<div class="pd_bo-dashed" id="J_info"></div>
+				<script type="text/x-handlebars-template" id="T_info">
+				  <span class="text_gray-666">短信模板：</span>
+              	<span class="ri_all_margin">
+				{{#each beans}}
+ 				  <label>
+                     <input type="radio" name="smsType" value="{{CD_VAL}}"  />
+                     <span class="pl-10 pr-30">{{CMN_CD_VAL_NM}}</span>
+                   </label>
+				</span>
+				{{/each}}
+
+			</script>
+				<div class="ui-margin115" id="J_sms" style="margin-bottom: 20px">
+					<p class='ui-noteCenter'></p>
+				</div>
+
+
+			</div>
+		</form>
+	</div>
+	<div class="formBtnArea" id="J_checkBtnDiv">
+		<table width="100%">
+			<tr>
+				<td>
+					<div class="normalBtnArea fn-center">
+						<a class="normalBtn BGblue largeBtn" href="javascript:;"
+							id="J_search">下一步</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!-- 地址及支付方式区域END -->
+
+	<!-- 订单确认区域 -->
+	<div class="formItem" id="J_orderConfirm" style="display: none">
+		<div class="pt-10 pb-10  ui-fhw">
+			<a href="#" class="formItem_jiantou-tu normalLink"
+				id="backModifyOrderInfo">修改订单信息</a>
+		</div>
+
+		<div class="titleArea">
+			<h2>确认订单</h2>
+		</div>
+
+		<div class="formArea-A">
+			<table width="100%">
+				<tbody>
+					<tr class="formArea-A-dashed">
+						<td width="10%"><span class="tc-c2">收货信息：</span></td>
+						<td><label id="comfirm_custNm"></label> <label
+							id="comfirm_reciverPhoneNum1"></label> <label
+							id="comfirm_fstLvlAddr"></label> <label id="comfirm_secdLvlAddr"></label>
+							<label id="comfirm_thrdLvlAddr"></label>
+							<p>
+								<label id="comfirm_forhLvlAddr"></label>
+							</p></td>
+						<td width="10%"></td>
+					</tr>
+					<tr>
+						<td valign="top"><span class="tc-c2">购买商品：</span></td>
+						<td>
+							<table width="100%">
+								<tr>
+									<td class="tabletest">{<label id="mcdsUnitIdLabel"></label>}<label
+										id="mcdsUnitNmLabel"></label></td>
+									<td class="tabletest fn-right"><label
+										id="mcdsUnitPriceLabel"></label>×<label id="mcdsUnitQtyLabel"></label></td>
+								</tr>
+								<tr class=" formArea-B-dashed">
+									<td>&nbsp;</td>
+									<td class="tcs-red-right"><span>&yen;<label
+											id="odrAmt"></label></span></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr class="formArea-A-dashed">
+						<td valign="top"><span class="tc-c2">支付方式：</span></td>
+						<td><span id="confirm_payModeNm"></span></td>
+						<td></td>
+					</tr>
+					<tr class="formArea-A-dashed">
+						<td valign="top"><span class="tc-c2">发票开具：</span></td>
+						<td><span id="confirm_invoice"></span></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td valign="top"><span class="tc-c2">短信模板：</span></td>
+						<td><span id="confir_smsType"></span></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td valign="top"><span class="tc-c2">订单备注：</span></td>
+						<td><span id="confir_odrRmk"></span></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="formBtnArea" style="display: none" id="J_confirmBtn">
+		<table width="100%">
+			<tr>
+				<td>
+					<div class="normalBtnArea fn-center">
+						<a class="normalBtn BGblue largeBtn" href="javascript:;"
+							id="J_generateOrder">提交订单</a> <a
+							class="normalBtn BGgray largeBtn" href="javascript:;"
+							id="J_generateYyOrder">生成预约</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!-- 订单确认区域end -->
+
+	<!-- 弹出层dom结构 -->
+	<div id="T_addAddr" class="fn-hide">
+		<div style="height: 400px; overflow: auto;">
+			<form id="J_form" name="J_form">
+				<input type="hidden" id="scustId" name="scustId" value="" /> <input
+					type="hidden" name="rvgdAddrSeqno" value="" /> <input
+					type="hidden" id="suserId" name="suserId" value="" />
+				<div class="formItem">
+					<table class="form_table">
+						<tbody>
+							<tr>
+								<td width="110"><label for="phoneNum"
+									class="formDescription"> <span class="fn-high">*</span>手机号码：
+								</label></td>
+								<td><input type="text" id="reciverPhoneNum1"
+									name="reciverPhoneNum1" class="FormInputText width100" value=""
+									onchange="changePhone()" /></td>
+							</tr>
+							<tr>
+								<td><label for="name" class="formDescription"> <span
+										class="fn-high">*</span>收货人姓名：
+								</label></td>
+								<td><input id="rverNm" name="rverNm"
+									class="FormInputText width100" type="text" /></td>
+							</tr>
+							<tr>
+								<td><label for="email" class="formDescription"> <span
+										class="fn-high">*</span>电子邮箱：
+								</label></td>
+								<td><input id="email" name="email"
+									class="FormInputText width100" type="text" /></td>
+							</tr>
+							<tr>
+								<td><label class="formDescription"> <span
+										class="fn-high">*</span>所在地区：
+								</label></td>
+								<td>
+									<div id="J_firstRegin" style="float: left; width: 130px">
+										<select class="inputSelect" name="fstLvlAddr" id="fstLvlAddr">
+										</select>
+									</div>
+									<div id="J_secRegin" style="float: left; width: 130px">
+										<select class="inputSelect" name="secdLvlAddr"
+											id="secdLvlAddr">
+										</select>
+									</div>
+									<div id="J_thrdRegin" style="float: left; width: 130px">
+										<select class="inputSelect" name="thrdLvlAddr"
+											id="thrdLvlAddr">
+										</select>
+									</div>
+									<div class="fn-clear"></div>
+								</td>
+							</tr>
+							<tr>
+								<td><label for="zipcd" class="formDescription"> <span
+										class="fn-high">*</span>邮政编码：
+								</label></td>
+								<td><input id="zipcd" name="zipcd"
+									class="FormInputText width100" type="text" /></td>
+							</tr>
+							<tr>
+								<td><label for="addr" class="formDescription"> <span
+										class="fn-high">*</span>详细地址：
+								</label></td>
+								<td><textarea rows="8" cols="40" id="forhLvlAddr"
+										name="forhLvlAddr" class="width100"></textarea></td>
+							</tr>
+							<tr>
+								<td><label for="secondPhoneNum" class="formDescription"
+									secPhone>第二联系电话：</label></td>
+								<td><input id="reciverPhoneNum2" name="reciverPhoneNum2"
+									class="FormInputText width100" type="text" /></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="formBtnArea">
+						<table width="100%">
+							<tr>
+								<td>
+									<div class="normalBtnArea fn-center">
+										<a class="normalBtn BGblue largeBtn" href="javascript:;"
+											id="J_add">添 加</a> <a class="normalBtn BGgray largeBtn"
+											href="javascript:;" id="J_cancel">取消</a>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<!--修改模版-->
+		<div id="T_updateAddr" class="fn-hide">
+			<div style="height: 400px; overflow: auto;">
+				<form id="U_form" name="U_form">
+					<input type="hidden" id="U_scustId" name="U_scustId" value="" /> <input
+						type="hidden" id="U_rvgdAddrSeqno" name="U_rvgdAddrSeqno" value="" />
+					<input type="hidden" id="U_suserId" name="U_suserId" value="" />
+					<div class="formItem">
+						<table class="form_table">
+							<tbody>
+								<tr>
+									<td width="110"><label for="phoneNum"
+										class="formDescription"> <span class="fn-high">*</span>手机号码：
+									</label></td>
+									<td><input type="text" id="U_reciverPhoneNum1"
+										name="U_reciverPhoneNum1" class="FormInputText width100"
+										value="" /></td>
+								</tr>
+								<tr>
+									<td><label for="name" class="formDescription"> <span
+											class="fn-high">*</span>收货人姓名：
+									</label></td>
+									<td><input id="U_rverNm" name="U_rverNm"
+										class="FormInputText width100" type="text" /></td>
+								</tr>
+								<tr>
+									<td><label for="U_email" class="formDescription">
+											<span class="fn-high">*</span>电子邮箱：
+									</label></td>
+									<td><input id="U_email" name="U_email"
+										class="FormInputText width100" type="text" /></td>
+								</tr>
+								
+								<tr>
+									<td><label class="formDescription"> <span
+											class="fn-high">*</span>所在地区：
+									</label></td>
+									<td>
+										<div id="U_firstRegin" style="float: left; width: 130px">
+											<select class="inputSelect" name="U_fstLvlAddr"
+												id="U_fstLvlAddr">
+											</select>
+										</div>
+										<div id="U_secRegin" style="float: left; width: 130px">
+											<select class="inputSelect" name="U_secdLvlAddr"
+												id="U_secdLvlAddr">
+											</select>
+										</div>
+										<div id="U_thrdRegin" style="float: left; width: 130px">
+											<select class="inputSelect" name="U_thrdLvlAddr"
+												id="U_thrdLvlAddr">
+											</select>
+										</div>
+										<div class="fn-clear"></div>
+									</td>
+								</tr>
+								<tr>
+									<td><label for="U_zipcd" class="formDescription">
+											<span class="fn-high">*</span>邮政编码：
+									</label></td>
+									<td><input id="U_zipcd" name="U_zipcd"
+										class="FormInputText width100" type="text" /></td>
+								</tr>
+								<tr>
+									<td><label for="addr" class="formDescription"> <span
+											class="fn-high">*</span>详细地址：
+									</label></td>
+									<td><textarea rows="8" cols="40" id="U_forhLvlAddr"
+											name="U_forhLvlAddr" class="width100" name="forthRegn"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td><label for="secondPhoneNum" class="formDescription"
+										secPhone>第二联系电话：</label></td>
+									<td><input id="U_reciverPhoneNum2"
+										name="U_reciverPhoneNum2" class="FormInputText width100"
+										type="text" name="" /></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="formBtnArea">
+							<table width="100%">
+								<tr>
+									<td>
+										<div class="normalBtnArea fn-center">
+											<a class="normalBtn BGblue largeBtn" href="javascript:;"
+												id="U_update">保存</a> <a class="normalBtn BGgray largeBtn"
+												href="javascript:;" id="U_cancel">取消</a>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<form id="submitForm" name="submitFrom">
+		<input type="hidden" id="real_userId" name="real_userId" value="" />
+		<input type="hidden" id="real_custId" name="real_custId" value="" />
+		<input type="hidden" id="real_custNm" name="real_custNm" value="" />
+		<!-- 订单备注-->
+		<input type="hidden" id="real_odrRmk" name="real_odrRmk" value="" />
+		<!-- 收货地址信息  开始-->
+		<input type="hidden" id="real_rvgdAddrSeqno" name="real_rvgdAddrSeqno"
+			value="" /> <input type="hidden" id="real_reciverPhoneNum1"
+			name="real_reciverPhoneNum1" value="" /> <input type="hidden"
+			id="real_reciverPhoneNum2" name="real_reciverPhoneNum2" value="" />
+		<input type="hidden" id="real_rverNm" name="real_rverNm" value="" />
+		<input type="hidden" id="real_fstLvlAddr" name="real_fstLvlAddr"
+			value="" /> <input type="hidden" id="real_secdLvlAddr"
+			name="real_secdLvlAddr" value="" /> <input type="hidden"
+			id="real_thrdLvlAddr" name="real_thrdLvlAddr" value="" /> <input
+			type="hidden" id="real_forhLvlAddr" name="real_forhLvlAddr" value="" />
+		<input type="hidden" id="real_fstLvlAddrNm" name="real_fstLvlAddrNm"
+			value="" /> <input type="hidden" id="real_secdLvlAddrNm"
+			name="real_secdLvlAddrNm" value="" /> <input type="hidden"
+			id="real_thrdLvlAddrNm" name="real_thrdLvlAddrNm" value="" /> <input
+			type="hidden" id="real_forhLvlAddrNm" name="real_forhLvlAddrNm"
+			value="" />
+		<!-- 收货地址信息  结束-->
+		<input type="hidden" id="real_payMode" name="real_payMode" value="" />
+		<input type="hidden" id="real_isNeedInvoice" name="real_isNeedInvoice"
+			value="" />
+		<!-- 发票类型 -->
+		<input type="hidden" id="real_tinvcObjTypeCd"
+			name="real_tinvcObjTypeCd" value="" /> <input type="hidden"
+			id="real_tinvcInvttNm" name="real_tinvcInvttNm" value="" /> <input
+			type="hidden" id="real_smsType" name="real_smsType" value="" />
+		<!-- 商品信息 -->
+		<input type="hidden" id="real_mcdsUnitId" name="real_mcdsUnitId"
+			value="" /> <input type="hidden" id="real_mcdsUnitNm"
+			name="real_mcdsUnitNm" value="" /> <input type="hidden"
+			id="real_mcdsUnitTypeCd" name="real_mcdsUnitTypeCd" value="" /> <input
+			type="hidden" id="real_mcdsUnitQty" name="real_mcdsUnitQty" value="" />
+		<!-- 配送方式,默认物流配送 -->
+		<input type="hidden" id="real_dlvryTypeCd" name="real_dlvryTypeCd"
+			value="10" /> <input type="hidden" id="real_custResvTelNum"
+			name="real_custResvTelNum" value="" /> <input type="hidden"
+			id="real_cntmngId" name="real_cntmngId" value="0" /> <input
+			type="hidden" id="real_mcdsUnitPrice" name="real_mcdsUnitPrice"
+			value="" /> <input type="hidden" id="real_chnlId" name="real_chnlId"
+			value="1001" />
+	</form>
+
+	<script id="T_addrInfo_new" type="text/x-handlebars-template">
+{{#if beans.length}}
+  {{#each beans}}
+    <div class="ui-Address_labelA" id="selected{{rvgdAddrSeqno}}" name="selectedDIV">
+        <div class="AdressContent">
+            <a href="#" class="ui-close_btu" onclick="delAddr(this,'{{custId}}','{{rvgdAddrSeqno}}')"></a>
+            <div class="gray-colse">
+                <h1>{{rverNm}}</h1>
+                <div class="gray_text">{{rverFstLvlAddrName}} {{rverSecdLvlAddrName}} {{rverThrdLvlAddrName}} {{rverFothLvlAddr}} 
+    				<input type="hidden" name="rvgdAddrSeqno" value="{{rvgdAddrSeqno}}" class="rvgdAddrSeqno_flag"/></div>
+                <div class="AdressPhoneNum">{{rverMobnum}}<span>{{emailAddr}}</span></div>
+				<div class="AdressPhoneNum">邮政编码：{{zipcd}}</div>
+            </div>
+            <div class="adressModify"><a href="#" class="normalLink" onclick="updateAddr({{rvgdAddrSeqno}})">编辑</a></div>
+        </div>
+    </div>
+  {{/each}}
+{{/if}}
+<div class="ui-Address_labelB ft-center">
+    <a id="J_addBrand" href="javascript:;">
+        <div class="ui-BlueCross"></div>
+        <div class="mt-20">添加一个标签</div>
+    </a>
+</div>
+</script>
+
+
+	<#include "../../tpl/res_js.tpl" />
+	<script src="../../module/orders/js/checkOrderInfo.js"></script>
+	<script type="text/javascript">
+		//查询机构对应的邮政编码
+		//srvMap.add('queryZipcd', 'queryZipcd.json', 'front/sh/order!execute?uid=o026');
+		var J_email = $("#email");
+		var J_reciverPhoneNum1 = $("#reciverPhoneNum1");
+		var param = {
+			'uid' : 'c008'
+		};
+		Util.ajax.postJson(srvMap.get("sms"), param, function(json, flag) {
+			Util.ajax.loadTemp('#J_info', $('#T_info'), json);//加载模板
+			$("input[name='smsType']")[0].checked = true;
+			var styleCode = $("input[name='smsType']:checked").val();
+			load(styleCode);
+			$("input[name='smsType']").each(function() {
+				$(this).click(function() {
+					load($(this).val());
+				});
+			});
+		});
+		function load(styleCode) {
+			var param = {
+				'uid' : 'c005',
+				'bizSceneTypeCd' : '2001',
+				'smsStyleTypeCd' : styleCode
+			};
+			Util.ajax.postJson(srvMap.get("sms"), param, function(json, flag) {
+				if (flag) {
+					if (json.beans.length > 0) {
+						var bean = json.beans[0];
+						var smsMsg = json.beans[0]['SMS_CNTT'];
+						smsMsg = smsMsg.replace('mcdsUnitNm', $(
+								"input[name='real_mcdsUnitNm']").val());
+						$("#J_sms p").html(smsMsg);
+					}
+				}
+			});
+		};
+		function changePhone() {
+			J_email.val(J_reciverPhoneNum1.val() + "@139.com");
+		}
+//		var zipEle = $("#zipcd");
+		//选中市级单位的时候，查询并设置其邮政编码
+// 		$("#J_secRegin").delegate("#secdLvlAddr", "change", function() {
+// 			//获取当前选择的机构编码
+// 			var regnCode = $(this).val();
+// 			Util.ajax.postJson(srvMap.get("queryZipcd"), {
+// 				regnCode : regnCode
+// 			}, function(json, flag) {
+// 				if (flag) {
+// 					//从ajax中获取该机构的邮政编码,设置到邮编输入框中
+// 					var zipcode = json.bean.zipcd;
+// 					if (zipcode != "null") {
+// 						zipEle.val(zipcode);
+// 					}
+// 				}
+// 			});
+// 		});
+		//查询省级单位的时候，清空邮政编码
+// 		$("#J_firstRegin").delegate("#fstLvlAddr", "change", function() {
+// 			zipEle.val("");
+// 		});
+	</script>
+</body>
+</html>

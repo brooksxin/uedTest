@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>AIMap地图--demo</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+<link rel="stylesheet" type="text/css" href="res/theme/zTree/zTreeStyle.css">
+<link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/zTree/3.5.16/jquery.ztree.core-3.5.min.js"></script>
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/core-min.js"></script>
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/enc-base64-min.js"></script>
+<script type="text/javascript" src="res/lib/AIMap/1.0.0/AIMap.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<style>
+@media (max-width: 900px){
+  #myMap {
+    width: 100%;
+    height: 420px;
+
+  }
+}
+
+@media (max-width: 1900px) and (min-width: 900px) {
+  #myMap {
+    width: 900px;
+    height: 420px;
+  }
+}
+#myMap {
+  _width: 900px;
+  _height: 420px;
+  float: left;
+}
+.fn-hide {display: none;}
+#infowindow {
+  border:solid 1px #6699FF; background-color:#FFFFFF; white-space: nowrap; overflow:visible
+}
+.amap-info {
+  width: auto;
+}
+</style>
+<body onload="init();">
+
+<div id="myMap"></div>
+<select id="createSelect" style="display:none;"></select>
+<div id="J_tree" class="ztree"></div>
+
+
+<div id="controlBtn">
+	<button onclick="toggleConf(1);">标点前台</button>
+	<button onclick="toggleConf(6);">标点信息显示</button>
+
+	<button onclick="toggleConf(2);">显示区域--圆形</button>
+	<button onclick="toggleConf(3);">显示区域--矩形</button>
+	<button onclick="toggleConf(4);">显示区域--多边形</button>
+
+	<button onclick="toggleConf(5);">画区域</button>
+	<button onclick="toggleConf(16);">利用marker画区域</button>
+
+	<button onclick="toggleConf(7);">显示树</button>
+
+	<button onclick="toggleConf(8);">按ID数组显示结点</button>
+
+	<button onclick="toggleConf(9);">两点间距离</button>
+
+	<button onclick="toggleConf(11);">导航--步行</button>
+
+	<button onclick="toggleConf(10);">导航--驾车策略</button>
+	<button onclick="toggleConf(12);">导航--驾车</button>
+	
+	<button onclick="toggleConf(13);">导航--公交地铁策略</button>
+	<button onclick="toggleConf(14);">导航--公交</button>
+	
+	<button onclick="toggleConf(15);">周边搜索</button>
+	<button onclick="toggleConf(17);">选择应用显示树</button>
+
+</div>
+
+<script>
+var myMap,AIMapLib,
+	config = "";
+
+//页面加载完成或者重新初始化
+function init(){
+	//加载原生地图脚本
+	AIMap_loadScript(config);
+}
+
+//加载完成地图脚本
+//加载画图js
+function AIMap_encapsulateBMap() {
+	AIMap_asysScript("http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager.js",loadInfoWin);
+}
+//加载弹窗js
+function loadInfoWin(){
+  	AIMapLib = BMapLib;
+	AIMap_asysScript("http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js",loadSearch);
+}
+
+//加载判断点与多边形的脚本
+function loadSearch(){
+  	AIMap_asysScript("http://api.map.baidu.com/library/GeoUtils/1.2/src/GeoUtils.js",AIMap_loadTools);//最后一个异步加载的回调方法必须为AIMap_loadTools
+}
+
+//加载完成自己的地图脚本
+function AIMap_init(){
+  myMap = new AIMap.Map("myMap");
+  myMap.centerAndZoom('杭州',13);
+  myMap.enableScrollWheelZoom();
+  myMap.addControl(new AIMap.NavigationControl());  //添加默认缩放平移控件
+
+  myMap.onload = mapLoadCallback;
+}
+
+//地图初始化完成
+function mapLoadCallback(){
+	$("#J_tree").html("");
+	
+	switch (config) {
+		case 1:
+			AIMap.service.getPoint(myMap,true,function(e){
+		    	alert(e.point.lng+"        "+e.point.lat+"       "+e.type)
+			});
+			break;
+
+		case 2:
+			var jsonStr = {drawingModes : "circle", lng : 120.18258, lat : 30.270224, radius : 7565.5748681641335};
+			AIMap.draw.drawShape(myMap,jsonStr);
+			break;
+
+		case 3:
+			var jsonStr = {drawingModes : "rectangle", minX : 120.294401, minY : 30.259743, maxX : 120.30245, maxY : 30.274216};
+			AIMap.draw.drawShape(myMap,jsonStr);
+			break;
+
+		case 4:
+			var jsonStr =  {drawingModes : "polygon", points : [{ lng : 120.326884, lat : 30.279206},{ lng : 120.336658, lat : 30.255002},{ lng : 120.315673, lat : 30.253255}]};
+			AIMap.draw.drawShape(myMap,jsonStr);
+			break;
+
+		case 5:
+		    // 绘制区域及回调
+		    var overlays = [];
+		    //实例化鼠标绘制工具
+		    var drawingManager = AIMap.service.createDrawingManager(myMap);
+		    //回调获得覆盖物信息并发送Ajax请求
+		    var overlaycomplete = function(e){
+		        //AIMap.service.overlaycomplete(e,'营业厅',function(json){
+		            
+		        //}); 
+		        AIMap.service.overlaycomplete(myMap,e,''); 
+		        overlays.push(e.overlay);
+		        drawingManager.close();
+		    };
+		    //添加鼠标绘制工具监听事件，用于获取绘制结果
+		    drawingManager.addEventListener('overlaycomplete', overlaycomplete);
+		    var menu = new AIMap.ContextMenu();
+		    var txtMenuItem = [
+		      {
+		       text:'删除上一个图形',
+		       callback:function(){AIMap.service.clearLastShape(myMap,overlays)}
+		      },
+		      {
+		       text:'删除全部图形',
+		       callback:function(){AIMap.service.clearAllShape(myMap,overlays)}
+		      },
+		      {
+		       text:'显示图形数量',
+		       callback:function(){alert(overlays.length)}
+		      }
+		     ];
+		    for(var i=0; i < txtMenuItem.length; i++){
+		        menu.addItem(new AIMap.MenuItem(txtMenuItem[i].text,txtMenuItem[i].callback,100));
+		    }
+
+		    myMap.addContextMenu(menu);
+			break;
+
+		case 6:
+			//后台返回基本点信息
+			var json = '{"points": [{"lng": "120.336658", "lat": "30.279206", "title": "树节点1", "icon": "3", "staticData": [{"name": "精通数据1", "value": "树节点1静ddddddddddddddddddddddddd123ddddddddddddddd态属性1"}, {"name": "静态数据2", "value": "树节点1静态属性2"}, {"name": "静态数据2", "value": "树节点1静态属性2"}, {"name": "静态数据2", "value": "树节点1静态属性2"}, {"name": "静态数据2", "value": "树节点1静态属性2"}, {"name": "静态数据2", "value": "树节点1静态属性2"}, {"name": "静态数据2", "value": "树节点1静态属性2"} ] }, {"lng": "120.336658", "lat": "30.255002", "title": "树节点2", "icon": "", "staticData": [{"name": "精通数据1", "value": "树节点2静态属性1"}, {"name": "静态数据2", "value": "树节点2静态属性2"} ] }, {"lng": "120.315673", "lat": "30.253255", "title": "移动营业厅旗舰店", "icon": "", "staticData": [{"name": "地址", "value": "浙江旅游职业学院北校区"}, {"name": "排队人数", "value": "23人"} ] } ] }';
+			json = eval("("+json+")");
+			//第三方修改renderOptions
+			//目前场景icon都是一样的，显示的都是同一类型的marker
+			var renderOptions = {
+				"isDrawLine":true,//点画线
+				"icon": json.points[0].icon
+			};
+			AIMap.draw.createMarker(myMap,json,renderOptions);
+			break;
+
+	    case 7:
+		    AIMap.ajax.AjaxJson("res/data/treeConfigMod.json?1=1","",function(state,json){
+		    	if(state=='success'){
+		    		if(json&&json.returnCode=='1'){
+				    	AIMap.draw.drawZtree($("#J_tree"), json, function(e, treeId, treeNode){
+				    		AIMap.service.clearAll(myMap);
+				    		if(treeNode.id=='113'){
+					    		//显示树节点下绑定的标记点
+					    		AIMap.ajax.AjaxJson("res/data/ztreePoint.json?1=1","treeId="+treeNode.id,function(state,json){
+					    			if(state=='success'){
+					    				if(json&&json.returnCode=='1'){
+					    					var renderOptions = {
+					    						"icon": json.points[0].icon
+					    					};
+					    					AIMap.draw.createMarker(myMap,json,renderOptions);
+					    				}
+			    					}
+					    		});
+
+				    		}else if(treeNode.id=='114'){
+					    		//显示树节点下绑定的区域
+					    		AIMap.ajax.AjaxJson("res/data/treeArea.json?1=1","treeId="+treeNode.id,function(state,json){
+					    			if(state=='success'){
+					    				if(json&&json.returnCode=='1'){
+					    					AIMap.draw.drawShape(myMap,json.parent,false);
+
+											//显示获取同级节点区域
+											for(var i=0,length=json.siblings.length; i<length; i++){
+												AIMap.draw.drawShape(myMap,json.siblings[i],false);
+											}
+					    				}
+			    					}
+					    		});
+				    		}
+				    	});
+		    		}
+    			}
+		    })
+	    	break;
+
+	  	case 8:
+	  		var longArr = [];
+	  		for(var i = 0; i < 300; i++){
+			    // 模拟一个超长的数组
+			    longArr.push(i);
+	  		}
+	  		var shortArrs = AIMap_splitArray(longArr);
+	  		count = shortArrs.length;
+	  		for(var i=0; i<count; i++){
+			    AIMap.ajax.AjaxJsonp("http://files.cnblogs.com/zhouweihny/ztreePoint.js","callback=AIMap_jsonp&wd="+shortArrs[i]);
+	  		}
+	  		break;
+
+		case 9:
+			var point1 = new AIMap.Point(120.19,30.25);
+			var point2 = new AIMap.Point(120.10,30.15);
+			var distance = AIMap.service.getDistance(myMap,point1,point2);
+			alert("点1（120.19,30.25）和点2（120.10,30.15）之间的直线距离为："+distance+"米");
+			break;
+
+		case 10:
+			var value = prompt('这是紫金港商务大厦到良渚村的导航，请选择导航方式：', '0代表最少时间，1代表最短距离，2代表避开高速');  
+			AIMap.service.multiNavigate(myMap,"紫金港商务大厦","良渚村",value?value:"0");
+			break;
+
+		case 11:
+			alert('这是紫金港商务大厦到三墩镇的步行导航');
+			var walking = new AIMap.WalkingRoute(myMap, {renderOptions:{map: myMap, autoViewport: true}});
+			AIMap.service.walkingNavigate(walking,"紫金港商务大厦","三墩镇");
+			break;
+
+		case 12:
+			alert('这是紫金港商务大厦到三墩镇的驾车导航');
+			var driving = new AIMap.DrivingRoute(myMap, {renderOptions:{map: myMap, autoViewport: true}});
+			AIMap.service.drivingNavigate(driving,"紫金港商务大厦","三墩镇");
+			break;
+
+		case 13:
+			var value = prompt('这是城站火车站到浙大紫金港商务大厦的导航，请选择导航方式：', '0不乘地铁，1最少时间，2最少换乘，3最少步行');
+			AIMap.service.multiTransitNavigate(myMap,"城站火车站","浙大紫金港商务大厦",value?value:"0");
+			break;
+
+		case 14:
+			AIMap.service.transitNavigate(myMap,"紫金港商务大厦","三墩镇");
+			break;
+			
+		case 15:
+			
+			myMap.addEventListener("dblclick",function(e){
+				AIMap.service.clearAll(myMap);
+				var marker = new AIMap.Marker(e.point);
+				myMap.addOverlay(marker);
+				var value = prompt("请输入您要搜索的地点");
+				var circle = new AIMap.Circle(e.point,10000);
+				myMap.addOverlay(circle);
+				var data = {
+						"keyword":value,
+						"circle":circle,
+						"map":myMap
+				}
+				AIMap.service.search(data);
+			})
+				
+			
+			
+			break;
+
+		case 16:
+			var parentArea,siblingsAreas=[],type;
+
+			//用于装载不同覆盖物
+			var areaMarker = [],areaCircle = [];
+
+			AIMap.ajax.AjaxJson("res/data/treeArea.json?1=1","",function(state,json){
+				if(state=='success'){
+					if(json&&json.returnCode=='1'){
+						type = 0;//根据drawingModes判断，当为0或者false的时候，不需要考虑超出区域，目前为点与多边形的关系，3；
+
+						//显示获取父节点区域
+						parentArea = AIMap.draw.drawShape(myMap,json.parent,false);
+
+						areaMarker = json.parent.points;
+
+						// //显示获取同级节点区域
+						// for(var i=0,length=json.siblings.length; i<length; i++){
+						// 	siblingsAreas.push(AIMap.draw.drawShape(myMap,json.siblings[i],true));
+						// }
+					}
+				}
+			});
+
+			//初始化画图工具
+		    var drawingManager = AIMap.service.createDrawingManager(myMap,true);
+
+		    //监听绘图完成事件
+		    drawingManager.addEventListener('overlaycomplete', function(e){
+		    	//标点画区域
+			    if (e.drawingMode == BMAP_DRAWING_MARKER) {
+			    	//判断是否超出区域
+			    	var point = new AIMap.Point(e.overlay.getPosition().lng, e.overlay.getPosition().lat);
+			    	var flag = true;//父节点
+			    	var sflag = true;//同级节点
+			    	if(type){
+			    		//判断是否超出父节点
+			    		flag = AIMap.service.ptInPolygon(type, point, parentArea);
+			    	}
+			    	if(!flag){
+			    		alert("标点超出父区域范围！");
+			    		return false;
+			    	}
+			    	areaCircle.length = 0;
+
+				    //传点坐标不传区域
+				    // areaMarker.push(e.overlay);
+				    areaMarker.push(point);
+
+			        AIMap.draw.drawAreaMarker(myMap,drawingManager,areaMarker,true,type,parentArea,function(data){
+			        	// console.log(JSON.stringify(data));
+			        });
+
+			    //圆形区域---暂时不考虑
+			    }else if (e.drawingMode == BMAP_DRAWING_CIRCLE) {
+			    	areaMarker.length = 0;
+			    	areaCircle.length = 0;
+			    	areaCircle.push(e.overlay);
+			    	AIMap.draw.drawAreaCircle(e,drawingManager,areaCircle,function(data){
+				    	console.log(JSON.stringify(data))
+			    	});
+			    }
+
+			    // console.log(areaMarker);
+			    // console.log(areaCircle);
+			});
+			break;
+			
+		case 17:
+			var value = prompt("请选择应用：0代表CRM，1代表ESOP");
+			var Z_json,zFlag=1;
+			var parentJson;//父区域
+			var jsonSelf;//自己区域
+			var siblingsJson = [];//同级区域
+			var type = 0;//根据drawingModes判断，当为0或者false的时候，不需要考虑超出区域，目前为点与多边形的关系，3；
+			var areaMarker = [];//标记点数组
+			var rootId = "";
+			var rootFlag = true;
+			//初始化树
+			value = parseInt(value);
+			var appids = [7,8];
+			var appid=appids[parseInt(value)];
+			//AIMap.ajax.AjaxJson("res/data/treeAppId.json?1=1","appId="+appid,function(state,json){
+			AIMap.ajax.AjaxJson("hz/sdkaction/common?uid=getTreeByAppId","appId="+appid,function(state,json){
+    			if(state=='success'){
+    				if(json&&json.returnCode=='1'){
+    					$("#createSelect").show();
+    					$("#createSelect option").remove();
+    					$("#createSelect").append("<option>请选择</option>");
+		    			for(var i = 0; i < json.rows.length; i++){
+			    			$("#createSelect").append("<option value='"+json.rows[i].nodeId+"'>"+json.rows[i].nodeName+"</option>");
+		    			}
+		    			$("#createSelect").change(function(){
+		    				var rootid = $(this).val();
+		    				  //AIMap.ajax.AjaxJson("res/data/treeConfigMod.json?1=1","appid="+appid+"&rootid="+rootid,function(state,json){
+		    				  AIMap.ajax.AjaxJson("hz/sdkaction/common?uid=getTreeByRootId","appid="+appid+"&rootid="+rootid,function(state,json){
+		    				    	if(state=='success'){
+		    				    		if(json&&json.returnCode=='1'){
+		    				    			
+		    						    	    AIMap.draw.drawZtree($("#J_tree"), json, function(e, treeId, treeNode){
+		    						    		AIMap.service.clearAll(myMap); 
+		    						    			
+	    							    		 //显示树节点下绑定的标记点
+	    					    				//AIMap.ajax.AjaxJson("res/data/areaConfigMod3.json?1=1","appid="+appid+"&treeId="+treeNode.id,function(state,json){			    		 
+	    							    		AIMap.ajax.AjaxJson("hz/sdkaction/common?uid=getPointByTreeNodeId","appid="+appid+"&treeId="+treeNode.id,function(state,json){
+	    							    			if(state=='success'){
+	    							    				if(json&&json.returnCode=='1'&&json.points.length>0){
+	    							    				 	var renderOptions = {
+	    							    						"icon": json.points[0].icon
+	    							    					}; 
+	    							    					AIMap.draw.createMarker(myMap,json,renderOptions);
+	    							    				}
+	    					    					}
+	    							    		});
+	    						    		
+	    							    		//显示树节点下绑定的区域
+	    							    		//AIMap.ajax.AjaxJson("res/data/areaConfigMod4.json?1=1","appid="+appid+"&treeId="+treeNode.id,function(state,json){
+	    							    		$.PostJson("hz/sdkaction/common?uid=getAreaByTreeNodeId","appid="+appid+"&treeId="+treeNode.id,function(state,json){
+	    							    	        if(state=="success"){
+	    							    	            if(json&&json.returnCode=="1"){
+	    							    	            	var parentArea = "";
+	    							    	            	var center = JSON.parse(json.center);
+	    							    	             	var point = new AIMap.Point(center.lng,center.lat);
+	    							    	            	myMap.centerAndZoom(point, 13);
+	    							    					if(json.parentJson){//获取父区域
+	    							    						parentArea = JSON.parse(json.parentJson).rows;
+	    							    					}
+	    							    					if(parentArea){
+	    							    						var param = {
+	    							    							"strokeOpacity": ".4",
+	    							    							"fillOpacity": "1"
+	    							    						}
+	    							    						parentArea.param = param;
+	    							    					   	parentJson = AIMap.draw.drawShape(myMap,parentArea,true);//父区域绘制
+	    							    	               	}
+	    							    					if(json.selfJson){//获取自己区域
+	    							    					   jsonSelf = JSON.parse(json.selfJson).rows;
+	    							    					   Z_json = jsonSelf;
+	    							    					}
+	    							    					var areaJson = json.rows;
+	    							    					siblingsJson.length = 0;
+	    							    					for(var i=0,length=areaJson.length; i<length; i++){//获取相邻同级区域
+	    							    						var sibJson = JSON.parse(areaJson[i].areaJson).rows;
+	    							    						var param = {
+	    							    							"strokeOpacity": ".4"
+	    							    						}
+	    							    						sibJson.param = param;
+	    							    						siblingsJson.push(AIMap.draw.drawShape(myMap,sibJson,true));
+	    							    					}
+
+	    							    					areaMarker.length = 0;
+	    							    					if(jsonSelf){
+	    							    						areaMarker = jsonSelf.points;
+	    							    		               	AIMap.draw.drawShape(myMap,jsonSelf,false);//子区域绘制
+	    							    					}
+	    							    	            }else{
+	    							    	                alert(json.returnMessage||"修改失败！");
+	    							    	            }
+	    							    	        }else{
+	    							    	            alert("系统错误！");
+	    							    	        }
+	    							    	    }); 
+		    						    	} ); 
+		    						    	
+		    				    		}
+		    		    			}
+		    				    })
+		    			})
+    				}
+				}
+    		});
+
+		break;
+  }
+}
+
+var G_json = [],G_Attr = {},count=0;
+function AIMap_jsonp(data){//默认callback为AIMap_jsonp
+  for(var i=0,length=data.points.length; i<length; i++){
+		var attr = {};
+  	attr = data.points[i];
+	  G_json.push(attr);
+  }
+  G_Attr.points = G_json;
+  count--;
+  if(count==0){
+  	var renderOptions = {
+  	    "icon": G_Attr.points[0].icon
+  	};
+  	//转换成标准点坐标
+  	AIMap.draw.createMarker(myMap, G_Attr, renderOptions, function(){
+  		alert("成功！")
+  	});
+  }
+}
+
+function toggleConf(dataP){
+	config = dataP;
+	AIMap_init();
+}
+
+</script>
+</body>
+</html>

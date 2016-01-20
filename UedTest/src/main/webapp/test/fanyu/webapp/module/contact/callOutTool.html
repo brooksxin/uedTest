@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="renderer" content="webkit" />
+    <meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+	<meta name="ProgId" content="VisualStudio.HTML">
+	<meta name="Originator" content="Microsoft Visual Studio .NET 7.1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <title>10085系统-外呼</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/alice/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+   
+  </head>
+  
+  <body onload="">
+  	<div id="keyboard">
+	<div>
+		<div id="tab_01">
+			<div align="center">
+					<div>
+						<span>呼叫号码:</span>		
+						<input id="myinput" value="" style="width:160px"/>
+						
+					</div>
+			</div>
+			<div align="center">
+				<input type="button" value="呼出" onclick="onCallOut();"/>
+			</div>
+		</div>
+	</div>
+</div>
+  	<script src="../../lib/jquery/1.8.1/jquery.js"></script>
+	<script src="../../lib/json2/1.0.0/json2.js"></script>
+	<script src="../../lib/handlebars/1.3.0/handlebars.js"></script>
+	<script src="../../lib/handlebars/1.3.0/helpers.js"></script>
+	<script src="../../lib/pagination/1.2.1/jquery.pagination.js"></script>
+	<script src="../../lib/blockUI/2.64/jquery.blockUI.js"></script>
+	<script src="../../common/frameInit.js"></script>
+	<script src="../../lib/dialog/4.1.7/artDialog.js"></script>
+	<script src="../../lib/dialog/4.1.7/iframeTools.js"></script>
+	<script src="../../common/config.js"></script>
+	<script src="../../common/common.js"></script>
+	
+	<script type="text/javascript">
+		var AiCtFBH=null;
+		var CALL_DATA=null;
+		var modeless=true;
+		
+		$(function(){
+			AiCtFBH=window.dialogArguments.AiCtFBH;
+			var arrayAni=window.dialogArguments.ANIS;
+			$("#myinput").val(arrayAni);
+		});
+		function onCallOut(){
+			try{
+				var call_no=$("#myinput").val();
+				var call_ani=$("#anis").val();
+				call_no=jQuery.trim(call_no);
+				AiCtFBH.makeCall(call_no);		
+				window.close();
+			}catch(err){
+				alert("错误:"+err.message);
+			}
+		}
+	</script>
+  </body>
+</html>

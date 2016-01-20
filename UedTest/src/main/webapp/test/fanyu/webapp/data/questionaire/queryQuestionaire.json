@@ -1,0 +1,40 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": null,
+    "bean": {
+        "total": "1"
+    },
+    "beans": [
+        {
+            "QNR_TYPE_CD": "1",
+            "QNR_NM": "本地JSON数据",
+            "CRT_TIME": "2015-06-18 10:37:27.0",
+            "CRT_USER_ID": "U1000000000021",
+            "QNR_STS_CD": "10D",
+            "SUIT_RNG_ID": "1",
+            "QNR_ID": "d979ea5f-1b4e-4edb-b49a-e8246b413491"
+        },
+        {
+            "QNR_TYPE_CD": "2",
+            "QNR_NM": "本地JSON数据",
+            "CRT_TIME": "2015-06-18 10:37:27.0",
+            "CRT_USER_ID": "U1000000000022",
+            "QNR_STS_CD": "10A",
+            "SUIT_RNG_ID": "2",
+            "QNR_ID": "d979ea5f-1b4e-4edb-b49a-e8246b413492"
+        },{
+            "QNR_TYPE_CD": "3",
+            "QNR_NM": "本地JSON数据",
+            "CRT_TIME": "2015-06-18 10:37:27.0",
+            "CRT_USER_ID": "U1000000000023",
+            "QNR_STS_CD": "10X",
+            "SUIT_RNG_ID": "3",
+            "QNR_ID": "d979ea5f-1b4e-4edb-b49a-e8246b413493"
+        }
+    ],
+    
+    "object": null
+}

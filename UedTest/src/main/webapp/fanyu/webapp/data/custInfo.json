@@ -1,0 +1,12 @@
+{
+	"returnCode": "0",
+	"returnMessage": "success",
+	"bean":{
+		"CUST_NAME":"钱大华",
+		"CUST_LEVEL":"全球通",
+		"CUR_MEAL":"4G飞享188套餐",
+		"IS_4G":"1",
+		"MONTH_FLOW":"1GB",
+		"MONTH_CHARGE":"300.00"
+	}
+}

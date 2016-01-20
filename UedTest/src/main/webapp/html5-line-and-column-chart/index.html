@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>折线图表DEMO</title>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript" src="jqplot.js"></script>
+</head>
+<body>
+	<div style="text-align:center;clear:both;">
+		<script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
+		<script src="/follow.js" type="text/javascript"></script>
+	</div>
+	<div id="chart0"></div>
+	<div id="chart00"></div>
+	<div id="chart1"></div>
+	<div id="chart11"></div>
+	<script type="text/javascript">
+		var data_max = 12000; //Y轴最大刻度
+		var data_max2 = 500; //Y轴最大刻度
+		var line_title = ["A 高度M"]; //曲线名称
+		var line_title2 = ["B 速度F"];
+		var y_label = "高度层"; //Y轴标题
+		var y_label2 = "速度"; //Y轴标题
+		var x_label = "时间：HH-MM-SS —— 机场/航路点"; //X轴标题
+		var title0 = "高度统计"; //统计图标标题
+		var title00 = "速度统计"; //统计图标标题
+
+
+		title0="CAO1051航班__高度统计";
+		title00="CAO1051航班__速度统计";
+		var x0 = ['21-10-00-ZBAA','21-19-27-LADIX','21-42-21-济南','21-44-14-DALIM','21-46-17-ABTUB','21-53-22-P86','21-53-48-P60','21-57-57-P58','22-00-43-邳县','22-04-31-MEXUP','22-08-35-DALNU','22-12-09-P77','22-17-03-P93','22-26-49-奔牛','22-32-55-SASAN','22-39-42-EKIMU','22-49-16-ZSPD'];
+		var data0 = [[0,10700,10700,10700,10700,10700,10700,10700,10700,10700,10700,10700,10700,10700,10700,10700,0]];
+		var data00 = [[0,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,0]];
+		j.jqplot.diagram.base("chart0",data0, line_title, title0, x0, x_label, y_label, data_max, 1);
+		j.jqplot.diagram.base("chart00", data00, line_title, title00, x0, x_label, y_label, data_max2, 1);
+		title1="CAO1052航班__高度统计";
+		title11="CAO1052航班__速度统计";
+		var x1 = ['21-10-00-ZBAA','21-19-27-LADIX','21-42-21-济南','21-44-14-DALIM','21-46-17-ABTUB','21-53-22-P86','21-53-48-P60','21-57-57-P58','22-00-43-邳县','22-04-31-MEXUP','22-08-35-DALNU','22-12-09-P77','22-17-03-P93','22-26-49-奔牛','22-32-55-SASAN','22-39-42-EKIMU','22-49-16-ZSPD'];
+		var data1 = [[0,10700,10700,10700,10700,10700,10700,10700,10700,10700,10700,10700,10700,10700,10700,10700,0]];
+		var data11 = [[0,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,240.76,0]];
+		j.jqplot.diagram.base("chart1",data1, line_title, title1, x1, x_label, y_label, data_max, 1);
+		j.jqplot.diagram.base("chart11", data11, line_title, title11, x1, x_label, y_label, data_max2, 1);
+			
+
+	</script>
+</body>
+</html>
+

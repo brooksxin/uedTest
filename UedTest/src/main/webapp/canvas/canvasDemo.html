@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>canvasDemo</title>
+<link rel="stylesheet" type="text/css" href="../alice.css">
+<script src="../jquery.js" type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+	border: 1px solid #000;
+}
+</style>
+</head>
+<body>
+
+<!-- <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=386420621&amp;site=qq&amp;menu=yes" target="_blank" title="在线QQ客服">
+	<img src="http://im.bizapp.qq.com:8000/zx_qq.gif">
+</a>
+
+
+<embed type="application/x-shockwave-flash" width="480" height="400" src="http://player.youku.com/player.php/sid/XODY1NDQ5Mjg4/v.swf" allowfullscreen="true" quality="high" allowscriptaccess="always" align="middle"></embed> -->
+
+
+
+<canvas id="myCanvas" width="800" height="300">
+    您的浏览器不支持canvas！
+</canvas>
+
+<canvas id="myCanvas2" width="800" height="300">
+    您的浏览器不支持canvas！
+</canvas>
+
+<script type="text/javascript">
+$(function(){
+	var canvas = document.getElementById('myCanvas');//使用jquery对象无效果？
+	if (canvas.getContext) {
+	    var ctx = canvas.getContext('2d');//getContext方法指定参数2d，表示该canvas对象用于生成2D图案（即平面图案）。如果参数是3d，就表示用于生成3D图像（即立体图案），这部分实际上单独叫做WebGL API
+
+	    // 路径绘制
+	    ctx.beginPath(); // 开始路径绘制 
+	    ctx.moveTo(20, 20); // 设置路径起点，坐标为(20,20) 
+	    ctx.lineTo(200, 20); // 绘制一条到(200,20)的直线 
+	    ctx.lineWidth = 1.0; // 设置线宽 
+	    ctx.strokeStyle = "#CC0000"; // 设置线的颜色,注：其他空心元素也同样会被设置
+	    ctx.stroke(); // 进行线的着色，这时整条线才变得可见 
+
+
+	    // 矩形
+	    ctx.fillStyle = '#CC0000';//设置矩形填充色
+	    ctx.fillRect(20, 50, 180, 100);//绘制矩形，设置矩形左上角位置和宽、高
+	    ctx.clearRect(100,60,50,50);//清除某一区域的矩形的内容
+
+	    ctx.strokeStyle = '#008600';//重设空心边框。
+	    ctx.strokeRect(220,60, 80, 80); //用于绘制空心矩形，与fillRect不能同时出现
+
+
+
+	    // 文本
+	    // 设置字体 
+	    ctx.font = "Bold 20px Arial"; 
+	    // 设置对齐方式 
+	    ctx.textAlign = "left"; 
+	    // 设置填充颜色 
+	    ctx.fillStyle = "#008600"; 
+	    // 设置字体内容，以及在画布上的位置 
+	    ctx.fillText("Hello!", 20, 20); 
+	    // 绘制空心字 
+	    // 重设空心字边框样式
+	    ctx.strokeStyle = '#CC0000';
+	    ctx.strokeText("Hello!", 320, 50); 
+
+
+
+	    // 圆与扇形
+	    ctx.beginPath(); 
+	    // 圆心坐标
+	    // 圆半径
+	    // 起始角度
+	    // 终点角度，Math.PI表示180度
+	    // 逆时针(true)画还是顺时针画
+	    ctx.arc(440, 60, 50, 0, Math.PI*2, true); 
+	    ctx.fillStyle = "#008600"; 
+	    ctx.fill();
+
+	    ctx.beginPath(); 
+	    ctx.arc(440, 160, 50, 0, Math.PI*2, true); 
+	    ctx.lineWidth = 1.0;
+	    ctx.strokeStyle = "#000"; 
+	    ctx.stroke();
+
+
+	    //渐变色
+	    //起点坐标、终点坐标
+	    var myGradient = ctx.createLinearGradient(20, 180, 20, 360); 
+	    myGradient.addColorStop(0, "#BABABA"); 
+	    myGradient.addColorStop(1, "#008600");
+	    ctx.fillStyle = myGradient;
+	    //左上角位置、宽、高
+	    ctx.fillRect(20,180,180,100);
+
+
+
+	    //阴影
+	    ctx.shadowOffsetX = 10; // 设置水平位移
+	    ctx.shadowOffsetY = 10; // 设置垂直位移
+	    ctx.shadowBlur = 5; // 设置模糊度
+	    ctx.shadowColor = "rgba(0,0,0,0.5)"; // 设置阴影颜色
+	    ctx.fillStyle = "#CC0000"; 
+	    ctx.fillRect(540,20,180,100);
+	}
+
+
+	var canvas2 = document.getElementById('myCanvas2');//使用jquery对象无效果？
+	if (canvas2.getContext) {
+	    var ctx = canvas2.getContext('2d');
+
+
+	    //图片处理
+	    var image = new Image(); 
+
+	    image.onload = function() { 
+
+	        if (image.width != canvas2.width)
+	            canvas2.width = image.width;
+	        if (image.height != canvas2.height)
+	            canvas2.height = image.height;
+
+	        ctx.clearRect(0, 0, canvas2.width, canvas2.height);
+	        ctx.scale(0.5, 0.5);
+	        ctx.drawImage(image, 0, 0);
+
+	    } 
+	    image.src = "sf.jpg";
+
+	    var imageData = ctx.getImageData(0, 0, canvas2.width, canvas2.height);
+	    console.log(imageData)
+	    ctx.putImageData(imageData, 0, 0);
+	}
+
+});
+</script>
+</body>
+</html>

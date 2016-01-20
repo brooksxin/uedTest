@@ -1,0 +1,102 @@
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>日志管理---查看日志操作</title>    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+  </head>
+<body>
+    <div class="formItem">
+        <div class="pt-10 pb-10"><a href="#" class="formItem_jiantou-tu normalLink">用户操作日志</a></div>
+    </div>
+</body>    
+<div method="post" action="#" class="cmxform" >
+    <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+        <div class="record-search-cate">
+            <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="90"><label class="description">操作模块</label></td>
+                        <td>
+                            <select class="FormInputText w160">
+                               <option>请选择</option>
+                           </select>
+                        </td>
+                        <td width="90"><label class="description">操作类型</label></td>
+                        <td>
+                            <select class="FormInputText w160">
+                               <option>请选择</option>
+                           </select>
+                        </td>
+                        <td><a class="btn_search" href="javascript:;" id="J_search" >查询</a></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="description">操作开始时间</label>
+                        </td>
+                        <td>
+                            <input id="param-eDate" class="element text Wdate" type="text" onFocus="WdatePicker()"  />
+                          </td>     
+                          <td><label class="description">操作结束时间</label></td>
+                          <td>
+                              <input id="param-eDate" class="element text Wdate" type="text" onFocus="WdatePicker()"  />
+                          </td>
+                          <td>&nbsp;</td>
+                      </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+    </form>
+</div>
+<div class="tablewidth mg_t_10">
+    <table class="ui-record-table table_radius table-bordered table-striped" >
+        <thead>
+            <tr>
+                <th width="25">序号</th>
+                <th width="80">操作模块</th>
+                <th width="150">功能描述</th>
+                <th width="100">操作类型</th>
+                <th width="150">调用服务</th>
+                <th>操作时间</th>
+                <th>操作市场(毫秒)</th>
+            </tr>
+        </thead>
+        <tbody id="J_tabletpl">
+            <tr>
+                <td>01</td>
+                <td>订单管理</td>
+                <td>订单查询</td>
+                <td>操作</td>
+                <td>订单管理</td>
+                <td>2015年4月20日 15:26:29</td>
+                <td>
+                    <div class="fn-right">2000</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+      
+          <!--翻页及功能按钮区域开始-->
+      <DIV class="amount-bottom">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+            <tr>
+              <td>
+                  <DIV class="fn-clear action-other  action-other-show ">
+                          <DIV id=Pagination class="page pagination fn-right"> </DIV>
+                          <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                  </DIV></td>
+            </tr>
+          </table>
+      </DIV>	
+<#include "../../tpl/res_js.tpl" />     
+  <script type="text/javascript">
+      //页面加载完开始执行
+      $(document).ready(function () {
+          //初始化函数
+      });
+  </script>
+  </body>
+  </html>

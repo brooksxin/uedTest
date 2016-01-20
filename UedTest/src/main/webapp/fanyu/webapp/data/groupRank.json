@@ -1,0 +1,38 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": null,
+    "bean": {
+        "DEPT_ID": "999",
+        "RANK": "3",
+        "TSK_SUCC_QTY": "5",
+        "DEPT_NM": "营销部门",
+        "GROUP-ALL-COUNTS":"100"
+    },
+    "beans": [
+        {
+            "DEPT_ID": "999",
+            "RANK": "1",
+            "TSK_SUCC_QTY": "20",
+            "DEPT_NM": "营销部门",
+            "GROUP-ALL-COUNTS":"100"
+        },
+        {
+            "DEPT_ID": "999",
+            "RANK": "2",
+            "TSK_SUCC_QTY": "10",
+            "DEPT_NM": "营销部门",
+            "GROUP-ALL-COUNTS":"100"
+        },
+        {
+            "DEPT_ID": "999",
+            "RANK": "3",
+            "TSK_SUCC_QTY": "5",
+            "DEPT_NM": "营销部门",
+            "GROUP-ALL-COUNTS":"100"
+        }
+    ],
+    "object": null
+}

@@ -1,0 +1,75 @@
+{
+    "rows": [
+        {
+            "MAIL_SUBJECT": "节日快乐read",
+            "MAIL_SENDER": "系统",
+            "MAIL_DATE": "2014-12-12 (星期五) AM 9:00",
+            "MAIL_ID": "10020",
+            "MAIL_TYPE": "2"
+        },
+        {
+            "MAIL_SUBJECT": "欢迎注册新浪微博read",
+            "MAIL_SENDER": "系统",
+            "MAIL_DATE": "2014-10-12 (星期五) AM 9:00",
+            "MAIL_ID": "10021",
+            "MAIL_TYPE": "2"
+        },
+        {
+            "MAIL_SUBJECT": "电费缴纳read",
+            "MAIL_SENDER": "系统",
+            "MAIL_DATE": "2014-12-14 (星期五) AM 9:00",
+            "MAIL_ID": "10022",
+            "MAIL_TYPE": "2"
+        },
+        {
+            "MAIL_SUBJECT": "您提交的应用已审批通过read",
+            "MAIL_SENDER": "小王",
+            "MAIL_DATE": "2014-12-12 (星期五) AM 9:00",
+            "MAIL_ID": "10023",
+            "MAIL_TYPE": "2"
+        },
+        {
+            "MAIL_SUBJECT": "阿斯达",
+            "MAIL_SENDER": "大王",
+            "MAIL_DATE": "2014-12-12 (星期五) AM 9:00",
+            "MAIL_ID": "10024",
+            "MAIL_TYPE": "2"
+        },
+        {
+            "MAIL_SUBJECT": "太阳居然同意",
+            "MAIL_SENDER": "小是",
+            "MAIL_DATE": "2014-12-12 (星期五) AM 9:00",
+            "MAIL_ID": "10025",
+            "MAIL_TYPE": "2"
+        },
+        {
+            "MAIL_SUBJECT": "很发达",
+            "MAIL_SENDER": "小王",
+            "MAIL_DATE": "2014-12-12 (星期五) AM 9:00",
+            "MAIL_ID": "10026",
+            "MAIL_TYPE": "2"
+        },
+        {
+            "MAIL_SUBJECT": "盛大",
+            "MAIL_SENDER": "小王",
+            "MAIL_DATE": "2014-12-12 (星期五) AM 9:00",
+            "MAIL_ID": "10027",
+            "MAIL_TYPE": "2"
+        },
+        {
+            "MAIL_SUBJECT": "手动阀",
+            "MAIL_SENDER": "系统",
+            "MAIL_DATE": "2014-12-12 (星期五) AM 9:00",
+            "MAIL_ID": "10028",
+            "MAIL_TYPE": "2"
+        },
+        {
+            "MAIL_SUBJECT": "话费节日快乐",
+            "MAIL_SENDER": "小王",
+            "MAIL_DATE": "2014-12-12",
+            "MAIL_ID": "10029",
+            "MAIL_TYPE": "2"
+        }
+    ],
+    "total": 20
+}

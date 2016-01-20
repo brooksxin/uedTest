@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>首页 - 亚信开源社区</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/js/dialog/6.0.5/ui-dialog.css">
+<link rel="stylesheet" type="text/css" href="ui/js/selectordie/0.1.8/selectordie.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+<div class="glob-top">
+	<div class="wrap fn-clear">
+		<a href="javascript:;" hidefocus="true" id="J_1"><span>已办工单</span></a>
+		<a href="javascript:;" hidefocus="true" id="J_2"><span>已办工单</span></a>
+	</div>
+</div>
+
+<div class="glob-contain">
+	<div class="wrap">
+		
+	</div>
+</div>
+
+<script src="ui/js/jquery/1.8.3/jquery.js"></script>
+<script src="ui/js/handlebars/handlebars.js"></script>
+<script src="ui/js/handlebars/helpers.js"></script>
+<script src="ui/js/dialog/6.0.5/dialog-min.js"></script>
+<script src="ui/js/blockUI/jquery.blockUI.js"></script>
+<script src="ui/js/selectordie/0.1.8/selectordie.min.js"></script>
+<script src="ui/js/main.js"></script>
+<script src="ui/js/requireJs/2.1.17/requireJs.js"></script>
+<script src="ui/js/common.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+	$("#J_1").click(function(){
+		require(['../tpl/test1'], function(tpl){
+			$(".glob-contain .wrap").html(tpl)
+		})
+	})
+
+	$("#J_2").click(function(){
+		require(['../tpl/test2'], function(tpl){
+			$(".glob-contain .wrap").html(tpl)
+		})
+	})
+})
+
+</script>
+
+</body>
+</html>

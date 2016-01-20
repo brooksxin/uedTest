@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>编辑标签</title>
+<style type="text/css">
+.width100 {
+	width: 285px;
+}
+</style> 
+
+<#include "../../tpl/res_css.tpl" />
+</head>
+
+<body>
+				<div class="formItem">
+
+					<div class="titleArea fn-center">
+						<h2>编辑标签</h2>
+					</div>
+
+					<form id="updateLbl">
+						<table class="form_table">
+
+							<tbody id="LBLINFO">
+
+								<tr>
+									<td width="90"><label class="formDescription"><span
+											class="fn-high">*</span> 标签名称：</label></td>
+									<td width=""><input class="FormInputText width100"
+										name="LBL_NM" type="text" id="LBL_NM" /></td>
+
+								</tr>
+								<tr>
+									<td valign="top"><label class="formDescription"><span
+											class="fn-high"></span> 标签描述：</label></td>
+									<!-- <td><a href="#" class="normalLink">添加描述</a></td> -->
+									<td><textarea cols="40" rows="7" name="LBL_DESC" id="LBL_DESC"></textarea></td>
+								</tr>
+							</tbody>
+						</table>
+						<input type="hidden" name="uid" value="mb002" /> <input
+							type="hidden" id="LBL_ID" name="LBL_ID" />
+					</form>
+					<!-- <table class="form_table">
+						<tbody>
+							<tr>
+								<td width="90" valign="top"><label class="formDescription"><span
+										class="fn-high">*</span> 导入号码：</label></td>
+								<td class="cusinfo" >共<span id="cusCount"></span></>条</td>
+
+							</tr>
+
+							<tr>
+								<td></td>
+								<td class="cusinfo" >预约活动名单（1）.xls<a href="#" onclick="del_Cust()" id="del_Cust" class="fn-high">删除</a></td>
+							</tr>
+							<tr>
+					<td></td>
+					<td>预约活动名单（2）.xls<a href="#" class="fn-high">删除</a></td>
+				</tr>
+							<tr>
+								<td></td>
+								<td>
+									<div class="normalBtnArea">
+										<a class="normalBtn BGgray" id="J_upload" href="#">导入文件</a>
+									</div>
+									<div id="J_fileName"></div>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>文件格式限.xls,.csv</td>
+							</tr>
+						</tbody>
+					</table>
+					导入提示start
+							<div>
+						
+						        导入解析中提示
+						        <div id="J_parse_file" class="ui-processDialog fn-hide">
+						          <div class="processRate_title">正在解析数据，可能需要些时间，解析过程中请您不要进行其它操作或离开本页面。</div>
+						          <div class="rateBarArea" style="margin-left:0;">
+						                     <div class="rateBar">
+						                         <div class="rateBg"></div>
+						                         <div class="rateProcess" style="width:0;"></div>
+						                     </div>
+						                 </div>
+						          <div class="processRate">
+						            <span id="J_rate"></span>(已解析
+						            <span id="J_progress"></span>/
+						            <span id="J_total"></span>)
+						          </div>
+						        </div>
+						
+						        导入成功内容
+						     		<div id="J_import_done" class="ui-sucessDialog fn-hide">
+						     			<div class="sucessDialog_text">导入成功，您现在可以分配任务了。</div>
+						     			<div class="sucessDialog_fileShow">
+						     				<div class="fileList"><div class="fileName">预约活动名单.xls</div><a href="javascript:;" class="reImport">重新导入</a><a href="javascript:;" class="ml-20 ui-redCloseButton">删除</a></div>
+						     				<div class="fileTotal">共<span id="countTotal"></span>条</div>
+						     			</div>
+						     		</div>     
+						  
+						          导入失败内容
+						     		<div id="J_import_fail" class="ui-failureDialog fn-hide">
+						     			<div class="failureDialog_text">订单导入失败。</div>
+						     			<div class="failureDialog_fileShow">
+						     				<div class="normalBtnArea mtb20"><a href="javascript:;" class="normalBtn BGgray pdLarge">重新导入</a></div>
+						     			</div>
+						    			<div class="failureReason">
+						    				<h2>失败原因：</h2>
+						    				<p id="errorlist"></p>
+						    			</div>
+						     		</div> 
+						     		
+							</div> -->
+							<!-- 导入提示END -->
+					<hr />
+
+				</div>
+
+				<div class="normalBtnArea fn-center">
+					<a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_confirm" style="line-height:53px;">确定</a>
+					<a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_Cancel"  onclick="fun_cancle()" style="line-height:53px;">取消</a>
+				</div>
+
+
+	<#include "../../tpl/res_js.tpl" />
+	<!--  
+	<script id="errorlist" type="text/x-handlebars-template">
+  {{#if beans}}
+     {{#each beans}}
+              第{{row}}条数据解析失败，{{ERROR_DESC}}。<br />
+     {{/each}}
+  {{/if}}
+</script>-->
+	
+    <script src="../../lib/swfupload/1.0.0/2.5/swfupload.js"></script>
+	<script type="text/javascript">
+		
+
+		srvMap.add('queryLbl', 'lbl.json', 'front/sh/common!execute');//查询标签
+		srvMap.add('updateLbl', 'lbl.json', 'front/sh/common!execute');//保存编辑标签
+		/* srvMap.add('delLbl', 'lbl.json', 'front/sh/user!queryCustByLblId');//删除标签关联客户
+		srvMap.add('updateLblcust', 'lbl.json', 'front/sh/market!uploadMarketFile');//更新标签客户和标签
+		srvMap.add('parseFile', 'parseFile.json','front/sh/market!index');//进度
+		srvMap.add('excelFile', 'parseFile.json','front/sh/market!index');//读取文件 */
+		/* var upload = '';
+		var flag1=false;//是否上传文件 */
+		
+		//上传空间参数
+		/* var settings = {
+			flash_url : "../../lib/swfupload/1.0.0/2.5/swfupload.swf",
+			upload_url: srvMap.get('updateLblcust'),  
+			post_params: {},
+			use_query_string: false,
+			file_size_limit : "5 MB",
+			file_types : "*.xls;*.csv;",  //允许所有类型时请使用 *.*
+			file_types_description : "All Files",
+			file_upload_limit : 0,
+			file_queue_limit : 0,
+			debug: false,
+			// Button settings
+			button_image_url: '../../css/images/upload_btn1.png',
+			button_width: '80',
+			button_height: "32",
+			button_placeholder_id: 'J_upload',
+			button_text_left_padding: 12,
+			button_text_top_padding: 3,
+			button_cursor : SWFUpload.CURSOR.HAND,
+			
+			file_queued_handler : fileQueued,
+			file_dialog_complete_handler : fileDialogComplete,
+			upload_start_handler : uploadStart,
+			upload_error_handler : uploadError,
+			upload_success_handler : uploadSuccess
+		}; */
+
+		$(function() {
+			var CMPGN_ID = Util.browser.getParameter("CMPGN_ID");
+			//获取上个页面传递的值
+			var LBL_ID = Util.browser.getParameter("LBL_ID");
+			//var count = Util.browser.getParameter("count");
+			//var count = '20';
+			//$("#cusCount").text(count);
+			//var LBL_ID= "0060e1ea-ea02-4a71-87e4-d6f36a078c09";//临时数据,测试数据
+			$("#LBL_ID").val(LBL_ID);
+			
+			//查询标签显示在页面上
+			var param = {
+				"uid" : "mb004",
+				"LBL_ID" : LBL_ID
+			};
+			
+			Util.ajax.postJsonSync(srvMap.get('queryLbl'),param, function(
+					json, status) {
+				if (status) {
+					if (json.returnCode == '0') {
+						$("#LBL_NM").val(json.bean.LBL_NM);
+						$("#LBL_DESC").val(json.bean.LBL_DESC);
+					}
+				}
+
+			});
+			//取消返回标签目录页面
+			$("#J_Cancel").bind("click",function(){
+				window.location.href="newCampgnstep3.html?id="+CMPGN_ID;
+			});
+			
+			$("#J_confirm").on("click",function(){
+				// 1代表已经删除
+				//var isDel = $(this).data("isdel");
+				var lableName = $('#LBL_NM').val();
+				var LBL_DESC=$("#LBL_DESC").val();
+				if (!lableName) {
+					Util.dialog.tips('标签名称不能为空！');
+					return;
+				}
+				/* else if(isDel == "1"){
+					if(!flag1){
+						Util.dialog.tips('请选择上传文件！');
+						return;
+					} 
+					upload.addPostParam('uid',"mwq012");
+					upload.addPostParam('LBL_ID',LBL_ID);
+					upload.addPostParam('LBL_NM',lableName);
+					upload.addPostParam('LBL_DESC',LBL_DESC);
+					alert(1);
+					upload.startUpload();   
+					
+				} */
+				else{
+
+					Util.ajax.postJsonSync(srvMap.get('updateLbl'), $("#updateLbl").serialize(), function(
+							json, status) {
+						if (status) {
+							Util.dialog.tips("更新标签成功");
+							window.location.href="newCampgnstep3.html?id="+CMPGN_ID;
+						}
+
+					});
+				}
+				
+			});
+			
+		
+		});
+		
+		/* function fileQueued(file){
+			flag1=true;
+			$('#J_fileName').text(file.name);
+		} 
+		 */
+		/* //准备完成
+		function fileDialogComplete(numFilesSelected, numFilesQueued){
+			
+ 				/* $("#J_confirm").bind("click", function(){
+					alert(33);
+					alert(flag1);
+					var lableName = $('#LBL_NM').val();
+					var LBL_DESC=$("#LBL_DESC").text();
+					if (!lableName) {
+						Util.dialog.tips('标签名称不能为空！');
+						return;
+					}else if(!flag1){
+						Util.dialog.tips('请选择上传文件！');
+						return;
+					} 
+					//动态的向表单内追加参数，不能使用拼接字符串形式
+					upload.addPostParam('uid',"updateLblCust");
+					upload.addPostParam('LBL_ID',LBL_ID);
+					upload.addPostParam('LBL_NM',lableName);
+					upload.addPostParam('LBL_DESC',LBL_DESC);
+					upload.addPostParam('flag',flag);
+					//console.log(settings)
+					upload.startUpload();
+				}); */
+		//}
+		//上传前
+		/* function uploadStart(file){
+			/*if (file.size > 5242880) {
+				Util.dialog.tips('文件大小超过5M,请重新上传！');
+				return false;
+			};
+			//createLoading('#J_front_wrap');
+			return true;
+		} */
+		 //上传出错
+		/* function uploadError(file, errorCode, message){
+			try {
+
+			} catch (ex) {
+		        this.debug(ex);
+		    }
+		    //unLoading('#J_front_wrap');
+		} */
+
+		//上传成功之后回调方法
+		/* function uploadSuccess(file, serverData){
+			serverData = JSON.parse(serverData);
+			if (serverData.returnCode == '0') {
+				Util.dialog.tips("更新标签成功！");
+			}
+		} 
+		function del_Cust(){
+			$("#J_confirm").attr("data-isdel","1");
+			var param1={"uid":"u005","LBL_ID":LBL_ID};
+			$(".cusinfo").hide();
+			upload = new SWFUpload(settings);//初始化上传控件
+			Util.ajax.postJsonSync(srvMap.get('delLbl'), param1, function(
+					json, status) {
+				if (status) {
+					alert(status);
+					
+					if (json.bean.returnCode = '0') {
+						alert("删除成功！");
+					}
+				}
+
+			});
+		} 
+		
+		var timer;
+		//上传成功之后回调方法
+
+	function uploadSuccess(file, serverData) {
+	    alert(1);
+	    alert(serverData);
+		serverData = JSON.parse(serverData);
+		console.log(serverData);
+		if (serverData.returnCode == '0') {
+			alert(2);
+			var lableName = $('#LBL_NM').val();
+			var desc=$('#LBL_DESC').val();
+			var param1={"uid":"mwt009","LBL_NM":lableName,"LBL_DESC":desc};
+			Util.ajax.postJson(srvMap.get("excelFile"), param1, function(
+					json, status) {
+				//alert(status);
+				if (status) {
+					var flag=serverData.bean.flag;
+					if(flag=='false'){
+						$('#J_parse_file').hide();
+						$("#J_import_done").hide();
+						$("#J_import_fail").show();
+						Util.ajax.loadTemp('#errorlist', $('#errorlist'), json);
+					}else{
+						$('#J_parse_file').hide();
+						$("#J_import_fail").hide();
+						$("#J_import_done").show();
+						$("#countTotal").text(serverData.bean.total);
+						Util.dialog.tips("执行成功");
+					}
+					
+				}
+			});		
+			$('#J_import_file').hide();
+			$('#J_parse_file').show();
+			 timer = setInterval(function() {
+				var param = {
+					"uid" : "mwt001"
+				};
+				Util.ajax.postJson(srvMap.get("parseFile"), param, function(
+						json, status) {
+					alert(status);
+					if (status) {
+						
+						 *隔1.5秒钟请求一次数量
+						 *如果解析数等于总数，则停止请求
+						 
+						 alert(JSON.stringify(json));
+						 alert(json.bean.progress);
+						 //alert(json.bean.total);
+						if (json.bean.progress != json.bean.total) {
+							alert(json.bean.progress);
+							alert(json.bean.total);
+							var rate = parseInt(json.bean.progress)
+									/ parseInt(json.bean.total);
+							var rateBgWidth = $('.rateBg').width();
+							$('#J_progress').text(json.bean.progress);
+							$('#J_total').text(json.bean.total);
+							$('#J_rate').text(rate * 100 + '%');
+							$('.rateProcess').width(rateBgWidth * rate);
+						} else {
+							clearInterval(timer);
+				            $('#J_parse_file').hide();
+				            $('#J_import_done').show();
+						}
+					} else {
+						clearInterval(timer);
+						$('#J_parse_file').hide();
+						$('#J_import_fail').show();
+					}
+				});
+			}, 1500); 
+			
+			
+		}
+} */
+	</script>
+</body>
+</html>

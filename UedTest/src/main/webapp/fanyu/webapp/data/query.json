@@ -1,0 +1,139 @@
+{
+	"returnCode": "0000",
+	"returnMessage": "success",
+	"bean":{
+		"total": "100"
+	},
+	"beans":[
+		{
+			"brandId":"0001",
+			"brand":"iphone",
+			"price":"6000",
+			"type":"6 plus",
+			"sellNum":"1989",
+			"inventory":"900",
+			"addDate":"2015-12-5 12:24:35",
+			"addHuman":"亚信"
+		},
+		{
+			"brandId":"0001",
+			"brand":"iphone",
+			"price":"6000",
+			"type":"6 plus",
+			"sellNum":"1989",
+			"inventory":"900",
+			"addDate":"2015-12-5 12:24:35",
+			"addHuman":"亚信"
+		},
+		{
+			"brandId":"0001",
+			"brand":"iphone",
+			"price":"6000",
+			"type":"6 plus",
+			"sellNum":"1989",
+			"inventory":"900",
+			"addDate":"2015-12-5 12:24:35",
+			"addHuman":"亚信"
+		},
+		{
+			"brandId":"0001",
+			"brand":"iphone",
+			"price":"6000",
+			"type":"6 plus",
+			"sellNum":"1989",
+			"inventory":"900",
+			"addDate":"2015-12-5 12:24:35",
+			"addHuman":"亚信"
+		},
+		{
+			"brandId":"0001",
+			"brand":"iphone",
+			"price":"6000",
+			"type":"6 plus",
+			"sellNum":"1989",
+			"inventory":"900",
+			"addDate":"2015-12-5 12:24:35",
+			"addHuman":"亚信"
+		},
+		{
+			"brandId":"0001",
+			"brand":"iphone",
+			"price":"6000",
+			"type":"6 plus",
+			"sellNum":"1989",
+			"inventory":"900",
+			"addDate":"2015-12-5 12:24:35",
+			"addHuman":"亚信"
+		},
+		{
+			"brandId":"0001",
+			"brand":"iphone",
+			"price":"6000",
+			"type":"6 plus",
+			"sellNum":"1989",
+			"inventory":"900",
+			"addDate":"2015-12-5 12:24:35",
+			"addHuman":"亚信"
+		},
+		{
+			"brandId":"0001",
+			"brand":"iphone",
+			"price":"6000",
+			"type":"6 plus",
+			"sellNum":"1989",
+			"inventory":"900",
+			"addDate":"2015-12-5 12:24:35",
+			"addHuman":"亚信"
+		},
+		{
+			"brandId":"0001",
+			"brand":"iphone",
+			"price":"6000",
+			"type":"6 plus",
+			"sellNum":"1989",
+			"inventory":"900",
+			"addDate":"2015-12-5 12:24:35",
+			"addHuman":"亚信"
+		},
+		{
+			"brandId":"0001",
+			"brand":"iphone",
+			"price":"6000",
+			"type":"6 plus",
+			"sellNum":"1989",
+			"inventory":"900",
+			"addDate":"2015-12-5 12:24:35",
+			"addHuman":"亚信"
+		},
+		{
+			"brandId":"0001",
+			"brand":"iphone",
+			"price":"6000",
+			"type":"6 plus",
+			"sellNum":"1989",
+			"inventory":"900",
+			"addDate":"2015-12-5 12:24:35",
+			"addHuman":"亚信"
+		},
+		{
+			"brandId":"0001",
+			"brand":"iphone",
+			"price":"6000",
+			"type":"6 plus",
+			"sellNum":"1989",
+			"inventory":"900",
+			"addDate":"2015-12-5 12:24:35",
+			"addHuman":"亚信"
+		},
+		{
+			"brandId":"0001",
+			"brand":"iphone",
+			"price":"6000",
+			"type":"6 plus",
+			"sellNum":"1989",
+			"inventory":"900",
+			"addDate":"2015-12-5 12:24:35",
+			"addHuman":"亚信"
+		}
+	]
+}

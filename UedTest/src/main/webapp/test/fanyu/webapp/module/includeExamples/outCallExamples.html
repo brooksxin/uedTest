@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>话务模板</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+	<#include "../../tpl/outCall_top.tpl" />
+    <div class="wrapper">
+	<#include "../../tpl/outCall_topMenu.tpl" />
+        <!-- left start -->
+       	<div class="left">
+            <div class="leftInner" id="mainLeft">
+				<#include "../../tpl/outCall_left.tpl" />
+            </div>
+            <div class="middle" id="mainMiddle">&nbsp;</div>
+        </div>
+        <!-- left END -->
+        <!-- right start -->
+        <div class="right" id="mainRight" style="overflow:auto;*position:relative">
+            <div id="mainRight_child" style="height:100%;">
+            
+
+            业务内容放这里
+
+
+            </div>
+
+        </div>
+        <!-- right stop -->
+    </div>
+
+    <!-- 浮层开始 -->
+
+    <div class="formItem" id="J_custInfoMoreLayer"></div>
+    <!-- 浮层结束 -->
+
+<#include "../../tpl/res_js.tpl" />
+<script id="T_contact_custInfoMoreLayer"type="text/x-handlebars-template">
+    {{#if custInfo}}
+    <div class="formArea-B">
+    <table width="100%">
+        <tbody>
+            <tr>
+                <td width="10%" valign="top"><span class="tc-c2">客户级别：</span></td>
+                <td width="40%">{{custInfo.CUST_LEVEL}}</td>
+                <td width="10%" valign="top"><span class="tc-c2">当前套餐：</span></td>
+                <td>{{custInfo.CUR_MEAL}}</td>
+            </tr>
+            <tr class="formArea-A-dashed">
+                <td valign="top"><span class="tc-c2">当前手机：</span></td>
+                <td>{{custInfo.CUST_NAME}}</td>
+                <td valign="top"><span class="tc-c2">4G用户：</span></td>
+                <td>{{is4G custInfo.IS_4G}}</td>
+            </tr>
+            
+            <tr>
+                <td width="10%" valign="top"><span class="tc-c2">月均流量：</span></td>
+                <td width="40%">{{custInfo.MONTH_FLOW}}</td>
+                <td width="10%" valign="top"><span class="tc-c2">月均话费：</span></td>
+                <td>{{custInfo.MONTH_CHARGE}}元</td>
+            </tr>
+        </tbody>
+     </table>
+</div>
+
+  {{/if}}
+</script>
+
+<script type="text/javascript">
+//页面加载完开始执行
+$(function () {
+    var left_height = $(".left").height();
+    $(".J_outcall_contact_list").css("height",left_height-40+"px");
+
+    $(window).resize(function(){
+        $(".J_outcall_contact_list").css("height",left_height-40+"px");
+    });
+
+    outCallLeft(13333333333,$("#J_contact_list_1"));
+    
+    //查询按钮单击事件
+    $("#phoneNum_search").on("click",function(){
+        
+        var num = $("#J_otherPhoneInput").val();
+        
+        if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(num))){ 
+            alert("不是有效的手机号码！");
+            return false;
+        }
+
+        outCallLeft(num,$("#J_contact_list_2"));
+    });
+
+});
+
+function getMoreCustDetail(obj){
+
+    var num = $(obj).data("phonenum");
+
+    Util.ajax.postJsonSync(srvMap.get('custInfo'),'custMobnum='+num,function(json,status){
+        if (status) {
+            var datas = {};
+            datas.custInfo = json.bean;
+            Util.ajax.loadTemp('#J_custInfoMoreLayer',$('#T_contact_custInfoMoreLayer'),datas);//加载模板
+            
+            var elem = document.getElementById('J_custInfoMoreLayer');
+            var params = {
+                 id:'D_importProd',
+                 title:'更多用户信息',
+                 content: elem,
+                 width: 900,
+                 height:400,
+                 modal: true,
+                 cancelVal:'取消',
+                 cancelCallback:test,
+                 okVal:'确定',
+                 okCallback:test
+            }
+         Util.dialog.openDiv(params);
+
+        }else{
+            Util.dialog.tips(json.returnMessage||'查询失败，请重试！');
+        }
+    });
+
+
+    
+
+    $("#J_custInfoMoreLayer").removeClass("fn-hide");
+
+}
+
+function test(){
+   console.log(1);
+}
+
+function closeLayer(obj){
+    $(obj).parent().parent().addClass("fn-hide");
+}
+</script>
+</body>
+</html>

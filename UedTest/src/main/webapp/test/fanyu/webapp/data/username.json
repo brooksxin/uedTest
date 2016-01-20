@@ -1,0 +1,13 @@
+{
+	"busiCode":null,
+	"opId":null,
+	"phone":null,
+	"returnCode":"0000",
+	"returnMessage":"success",
+	"bean":{
+	    "uid":"u002",
+	    "username":"admin"
+	 },
+	 "beans":[]
+}
+	

@@ -1,0 +1,43 @@
+{
+  "returnCode": "0",
+  "returnMessage": "success",
+  "bean":{
+    "total":4
+  },
+  "beans":[{
+    "prod_id":"1",
+    "prod_name":"phone 5s",
+    "prod_no":"2897",
+    "prod_price":"1299.00",
+    "prod_partner":"02",
+    "sale":"80",
+    "inventory":"80"
+  },
+    {
+      "prod_id":"2",
+      "prod_name":"phone 4s",
+      "prod_no":"2898",
+      "prod_price":"1599.00",
+      "prod_partner":"02",
+      "sale":"60",
+      "inventory":"60"
+    },
+    {
+      "prod_id":"3",
+      "prod_name":"phone 6",
+      "prod_no":"2898",
+      "prod_price":"1599.00",
+      "prod_partner":"02",
+      "sale":"60",
+      "inventory":"60"
+    },
+    {
+      "prod_id":"4",
+      "prod_name":"ipad mini",
+      "prod_no":"2898",
+      "prod_price":"1599.00",
+      "prod_partner":"02",
+      "sale":"60",
+      "inventory":"60"
+    }]
+}

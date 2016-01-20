@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>file upload</title>
+<#include "../../tpl/res_css.tpl" />
+<link href="../../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+</head>
+<body id="main_body" onload="prettyPrint()" >
+
+	<div class="ui-zt_pictureText fn-clear" style="position:relative;">
+	   	<img id="J_upload_img" class="fn-left" src="../../css/images/file_upload_btn.png" width="80" height="32" />
+	   	<span id="J_img_wrap" class="fn-left">
+	     	<a href="javascript:;" id="J_upload" class="ui-bjpicture"></a>
+	   	</span>
+	</div>
+
+
+	<!-- <pre class="prettyprint mg_t_20 fn-clear" id="html">
+
+	</pre> -->
+</div>
+
+
+<#include "../../tpl/res_js.tpl" />
+<script src="../../lib/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript" src="../../lib/pretty/prettify.js"></script>
+<script>
+var upload = null;
+srvMap.add('imgPreview', 'lbl.json', 'front/sh/prod!uploadImg?uid=up001');//上传主图片
+$(function(){
+	var param = {
+		"url" : srvMap.get('imgPreview'),
+		"btn_width" : "80",
+		"btn_height" : "32",
+		"post_params":{},
+		"btn_id" : "J_upload",
+		"imgFlag" : upload,
+		"fileDialogComplete" : fileDialogComplete,	//上传准备完成
+		"uploadStart" : uploadStart,				//开始上传回调函数
+		"uploadError" : uploadError,
+		"uploadSuccess" : uploadSuccess
+	};
+
+	//初始化上传控件
+	uploadImg(param);
+})
+
+
+//初始化上传图片SWFUpload插件
+function uploadImg(param){
+  	var settings = {
+		flash_url : "../../lib/swfupload/1.0.0/2.5/swfupload.swf",	//Flash路径
+		upload_url: param.url,										//后台服务路径
+		post_params: param.post_params,								//入参
+		use_query_string: false,									
+		file_size_limit : "",										//文件大小限制
+		file_types : "*.xls;*.csv",  								//文件类型，允许所有类型时请使用 *.*
+		file_types_description : "All Files",
+		file_upload_limit : 0,
+		file_queue_limit : 0,
+		debug: false,
+		// Button settings
+		button_image_url: param.btn_url,							//按钮图片路径
+		button_width: param.btn_width,								//按钮宽度
+		button_height: param.btn_height,							//按钮高度
+		button_placeholder_id: param.btn_id,						//按钮id
+		button_text_left_padding: 12,
+		button_text_top_padding: 3,
+		button_cursor : SWFUpload.CURSOR.HAND,
+
+		file_dialog_complete_handler : param.fileDialogComplete,	//上传准备完成回调函数
+		upload_start_handler : param.uploadStart,					//开始上传回调函数
+		upload_error_handler : param.uploadError,					//上传错误回调函数
+		upload_success_handler : param.uploadSuccess 				//上传成功回调函数
+  	};
+  	param.imgFlag = new SWFUpload(settings);
+}
+
+
+//上传准备完成
+function fileDialogComplete(numFilesSelected, numFilesQueued){
+  	try {
+      	this.startUpload();
+  	} catch (ex)  {
+        this.debug(ex);
+  	}
+}
+//上传前
+function uploadStart(file){
+  /*if (file.size > 5242880) {
+    Util.dialog.tips('文件大小超过5M,请重新上传！');
+    return false;
+  };*/
+  return true;
+}
+//上传出错
+function uploadError(file, errorCode, message){
+  	try {
+    	Util.dialog.tips('上传失败！');
+  	} catch (ex) {
+        this.debug(ex);
+    }
+}
+
+//上传成功之后回调方法
+function uploadSuccess(file, serverData){
+  	serverData = JSON.parse(serverData);
+  	if (serverData.returnCode == '0') {
+  		alert('上传成功！');
+  	}
+}
+</script>
+</body>
+</html>

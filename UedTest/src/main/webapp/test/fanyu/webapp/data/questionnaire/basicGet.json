@@ -1,0 +1,12 @@
+{
+	"returnCode": "0",
+	"returnMessage": "ok", 
+	"bean":{
+		"QNR_ID":"998", 
+		"SUIT_TYPE_CD":"1", 
+		"QNR_TYPE_CD":"1", 
+		"QNR_BELG_DEPT_ID":"1", 
+		"QNR_NM":"问卷1", 
+		"QNR_PAGE_ID":"888"
+	}
+}

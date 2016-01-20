@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>配置角色权限</title>
+<#include "../../tpl/res_css.tpl" />
+<style>
+/*配置角色权限*/
+.sysContentArea{margin-top:20px;}
+.sysContentArea .contentLeft{float:left;width:243px;height:550px;border:1px solid #DDDDDD;border-radius: 3px;}
+.sysContentArea .contentRight{margin-left:250px;height:550px;border:1px solid #DDDDDD;border-radius: 3px;}
+.sysContentArea .searchArea{height:45px;padding-top:15px;padding-left:10px;background:#F1F3F5;}
+.sysContentArea .searchArea input.inputWidth{height:31px;border:1px solid #ddd;background:#fff; vertical-align: middle;margin-right:5px;}
+.sysContentArea .menuArea{height:470px;width: 223px;padding:10px;overflow: auto;}
+.sysContentArea .setTreeTitle{padding:20px 0px;text-indent:20px;font-size: 14px; font-weight: bold;}
+.sysContentArea .setTree{height:400px;padding:10px;overflow: auto;}
+.sysContentArea .btnArea{height:90px;border-top: 1px solid #ddd;}
+</style>
+</head>
+<body>
+<div class="formItem">
+  <div class="titleArea">
+      <a href="Javascript:history.go(-1);void(0);" class="ui-suText_left">角色权限配置</a>
+  </div>
+</div>
+
+<div class="formItem formArea-B">
+
+    <div class="sysContentArea">
+        <div class="contentLeft">
+            <div class="searchArea">
+                <input type="text" name="" value="" placeholder="" class="inputWidth"><a class="normalBtn BGblue" href="javascript:;" id="J_btnSearch" >查询</a>
+            </div>
+            <div class="menuArea">
+                此处放tree
+            </div>
+        </div>
+
+        <!-- 右侧配置操作权限  -->
+        <div class="contentRight">
+            <div class="setTreeTitle">操作权限</div>
+            <div class="setTree">
+                <p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p>
+                <p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p>
+                <p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p>
+                <p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p><p>tree</p>
+            </div>
+            <div class="btnArea">
+                <div class="formBtnArea">
+                    <div class="normalBtnArea fn-center">
+                       <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" >保存</a>
+                       <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_search" >取消</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+    <#include "../../tpl/res_js.tpl" />    
+    <script type="text/javascript">
+        //页面加载完开始执行
+        $(document).ready(function () {
+            //初始化函数
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>标记点绑定</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/opui/om-default.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/zTree/zTreeStyle.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="res/lib/opui/2.1/operamasks-ui.src.js"></script>
+<script type="text/javascript" src="res/lib/zTree/3.5.16/jquery.ztree.core-3.5.js"></script>
+<!-- base64 -->
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/core-min.js"></script>
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/enc-base64-min.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body>
+<div class="openwin marker_bind">
+    <div class=" fn-clear">
+        <!--组织树-->
+        <div class="ztree fn-left" id="ztree"></div>
+
+        <!--标记点查询列表-->
+        <div class="bz_manage fn-left">
+            <form id="busi_form">
+                <table class="infoTable" cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tbody>
+                        <tr>
+                            <td class="description">选定组织：</td>
+                            <td >
+                                <input type="text" id="orgName" name="orgName" class="normalinput" value="" readonly="readonly" style="background: #f1f1f1;" />
+                            </td>
+                            <td class="description">查询类型：</td>
+                            <td ><select name="serachType" id="serachType">
+                                <option value="1">按条件</option>
+                                <option value="2">按已绑定区域</option>
+                            </select></td>
+                            <td class="description">查询范围：</td>
+                            <td ><select name="serachRange" id="serachRange">
+                                <option value="-1">全部</option>
+                                <option value="1">未绑定</option>
+                                <option value="2">已绑定</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td class="description">标点类型：</td>
+                            <td ><select name="markerType" id="markerType"></select></td>
+                            <td class="description">标点名称：</td>
+                            <td ><input type="text" id="suggestId" placeholder="请输入查询关键字" class="normalinput"/></td>
+                            <td colspan="2">
+                                <div class="bz_btn_list">
+                                    <a class="btn_normal" href="#nogo" id="J_search"><em>查询</em></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div class="chooseAll">
+                <input value="" id="chooseAll" name="chooseAll" type="checkbox" />
+                <label for="chooseAll">全选</label>
+            </div>
+            <table id="mytable"></table>
+        </div>
+    </div>
+    <div class="bz_btn_list" style="text-align: center;">
+        <a class="btn_normal" href="#nogo" id="J_save"><em>提交</em></a>
+    </div>
+</div>
+
+<textarea class="fn-hide" id="markerType_tpl1">
+<option value="-1">全部</option>
+{{#each rows}}
+	<option value="{{id}}">{{name}}</option>
+{{/each}}
+</textarea>
+
+<script type="text/javascript">
+var rootId = art.dialog.data("treeid");
+var orgId = "";
+var tempJson = null;//临时存放查询json
+$(function(){
+    okGrid("");
+	//初始化树
+	var setting = {
+		data: {
+			simpleData: {
+				enable: true,
+				idKey: "id",
+				pIdKey: "pId",
+				icon: "icon"
+			}
+		},
+		callback: {
+			onClick:function(event, treeId, treeNode){
+			    getMarker(event, treeId, treeNode);
+			}
+		}
+	};
+
+	$.PostJson(REQURLS.tree_upTreeNodesquery,"nodeId="+rootId,function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+          		var zNodes = json.rows;
+          		for(var i=0, length=zNodes.length; i<length; i++){
+          			if(zNodes[i].pId=='0'){
+          				zNodes[i].icon = "res/theme/default/images/tree/zTreeHome.png";
+          			}
+          		}
+            	$.fn.zTree.init($("#ztree"), setting, zNodes);
+            }else{
+                result_prompt(0,json.returnMessage||"加载树失败！");
+            }
+        }else{
+            result_prompt(0,"系统错误！");
+        }
+    });
+
+	//查找标记点类型
+	$.PostJson(REQURLS.markerType_getAll,"treeid="+rootId,function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+            	$("#markerType").temp($("#markerType_tpl1"), json);
+            }else{
+                result_prompt(0,json.returnMessage||"标记点类型查找失败！");
+            }
+        }else{
+            result_prompt(0,"系统错误！");
+        }
+	});
+
+	//查询按钮
+    $("#J_search").click(function(){
+        $("#chooseAll").removeAttr("checked");
+    	var url = REQURLS.getPointToBind;
+    	initSearch(url);
+    });
+
+    $("#J_save").click(function(){
+        var $btn = $(this);
+        if(!orgId){
+            result_prompt(2,"请先选择组织！");
+            return false;
+        }
+    	var G_json = {};//提交后台json
+    	var addMarker = [];//绑定的标记点
+    	var deleteMarker = [];//解绑的标记点
+
+		var node = {};
+    	node.id = orgId;
+    	node.rootId = rootId;
+    	
+        var newBand = "";
+    	$("#mytable tr").each(function(i){
+    		var _tr = $(this);
+    		var checkbox = _tr.find("td:eq(1) input[type='checkbox']");
+    		var flag = checkbox.is(":checked");
+			
+			//从tempJson中根据索引获取值
+			var attr = {};
+			attr.markerid = tempJson[i].markerid;
+			attr.typeid = tempJson[i].typeid;
+            
+    		if(flag){//如果选中
+                attr.flag = 1;
+    			addMarker.push(attr);
+    		}else{
+                attr.flag = 0;
+    			deleteMarker.push(attr);
+    		}
+			
+    	});
+        //检查表中的数据是否曾经变动过
+        for(var i = 0; i < addMarker.length; i++){
+            newBand += addMarker[i].markerid;
+            newBand += addMarker[i].flag
+        }
+        for(var i = 0; i < deleteMarker.length; i++){
+            newBand += deleteMarker[i].markerid;
+            newBand += deleteMarker[i].flag
+        }
+
+        if(newBand == oldBand){
+            result_prompt(2,"未对任何数据进行修改！");
+            return false;
+        }
+      
+		G_json.node = node;
+		G_json.addMarker = addMarker;
+		G_json.deleteMarker = deleteMarker;
+		var dataP = encodeBase64(encodeURIComponent(JSON.stringify(G_json)));
+		//保存标记点绑定
+        
+		if(deleteMarker.length+addMarker.length>0){
+			toggleButtonStyle($btn,true);
+			$.PostJson(REQURLS.bindPoint,"json="+dataP,function(state,json){
+		        if(state=="success"){
+		            if(json&&json.returnCode=="1"){
+		            	result_prompt(2,"操作成功！");
+		            	var url = REQURLS.getBindPointByNodeId;
+		            	$("#serachType").find("option:eq(0)").attr("selected","true");
+		            	initSearch(url);
+		            }else{
+		                result_prompt(0,json.returnMessage||"操作失败！");
+		            }
+		        }else{
+		            result_prompt(0,"系统错误！");
+		        }
+	            toggleButtonStyle($btn,false,"提交");
+			});
+		}else{
+			result_prompt(2,"未查找到任何标记点！");
+		}
+    });
+
+    $("#chooseAll").on("click", function(){
+        var isCheck = $(this).is(":checked");
+        $("#mytable").find("tr").each(function(){
+            $(this).find("td:eq(1) .check_input").attr("checked",isCheck);
+        });
+    })
+})
+
+//点击树节点时查询
+function getMarker(e, treeId, treeNode){
+	orgId = treeNode.id||"";
+    if(orgId==rootId){
+        result_prompt(2,"根节点不允许绑定标记点！");
+        orgId = "";
+        return false;
+    }
+	orgName = treeNode.name||"无组织名称";
+	$("#orgName").val(orgName);
+	$("#serachType").find("option:eq(0)").attr("selected","true");
+	var url = REQURLS.getBindPointByNodeId;
+	initSearch(url);
+}
+
+function okGrid(url){
+	var url = url||"";
+    $('#mytable').omGrid({
+        height : 300,
+        width : 740,
+        limit : 10, //分页显示，每页显示8条
+        singleSelect : true, //出现checkbox列，可以选择同时多行记录
+        colModel : [
+			{header:'勾选绑定',name:'des', width:100, align : 'left',renderer:function(value,rowData,rowIndex){
+					var check = "";
+					if(rowData.isBand=='1'){
+						check = "checked='checked'";
+					}
+					var str = '<input type="checkbox" value="'+rowData.markerid+'" '+check+' class="check_input" />';
+					return str;
+				}
+			},
+			{header:'标记点ID',name:'markerid', width:100, align : 'left'},
+			{header:'标记点名称',name:'markername', width:250, align : 'left'},
+			{header:'类型',name:'markertype', width:'autoExpand', align : 'left'}
+        ],
+        dataSource : url,
+        onRowClick : function(index,rowData,event){
+            if(event.target.className != 'check_input'){
+            	var checkbox = $("#mytable").find("tr:eq("+index+") td:eq(1) input[type='checkbox']");
+            	if(checkbox.is(":checked")){
+            		checkbox.removeAttr("checked");
+            	}else{
+            		checkbox.attr({"checked":"checked"});
+            	}
+            }
+			judgeCheckAll();
+		},
+        onPageChange:function(c,b,d){
+            $("#chooseAll").removeAttr("checked");
+        },
+		onSuccess:function(data,testStatus,XMLHttpRequest,event){
+			var totals = data.total;
+            if(data.total=='-1'){
+                result_prompt(2,"该组织暂未划定区域！");
+            }
+            if(totals == "-9999"){
+            	data.total = "0";
+            	result_prompt(0,"系统异常,请稍后重试");
+            }
+			tempJson = data.rows||"";
+
+            $("#mytable").find("input[type='checkbox']").on("click",function(){
+                judgeCheckAll();
+            });
+            $("#chooseAll").removeAttr("checked");
+
+            oldBand = "";
+            for(var i = 0; i < tempJson.length; i++){
+                oldBand += tempJson[i].markerid;
+                oldBand += tempJson[i].isBand
+            }
+            
+		}
+    });
+}
+
+function initSearch(url){
+	if(!orgId){
+		result_prompt(2,"请先选择组织！");
+		return false;
+	}
+	var serachType =  $("#serachType").val();
+	var serachRange=$("#serachRange").val();
+	var typeId =  $("#markerType").val();
+	var keyWord = $("#suggestId").val();
+	url += "&rootId="+rootId+"&typeId="+typeId+"&keyWord="+keyWord+"&nodeId="+orgId+"&serachRange="+serachRange;
+	if(serachType=='1'){
+    	okGrid(url);
+	}else if(serachType=='2'){
+		okGrid(REQURLS.getPointByNodeIdArea+"&rootId="+rootId+"&typeId="+typeId+"&keyWord="+keyWord+"&nodeId="+orgId+"&serachRange="+serachRange);
+	}
+}
+
+function judgeCheckAll(){
+    var i = 0;
+    var _tr = $("#mytable").find("tr");
+    _tr.each(function(){
+        var _checkBox = $(this).find("td:eq(1) .check_input");
+        if(_checkBox.is(":checked")){
+            i++;
+        }
+    })
+    if(i==_tr.length){
+        $("#chooseAll").attr("checked",true);
+    }else{
+        $("#chooseAll").removeAttr("checked");
+    }
+}
+</script>
+</body>
+</html>

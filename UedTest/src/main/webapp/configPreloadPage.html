@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<link rel="stylesheet" type="text/css" href="alice.css">
+<script src="jquery.js" type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+
+<div>
+	<a href="javascript:;" onclick="getPage();">getPage()</a>
+	<a href="javascript:;" onclick="addPage();">addPage()</a>
+	<a href="javascript:;" onclick="removePage();">removePage()</a>
+</div>
+
+<script type="text/javascript">
+Util = {};
+
+Util.lStorage = {
+    /*
+    localStorage只支持字符串，如果要放json，请先使用JSON.stringify()转换
+    读取使用JSON.parse()读取
+    */
+    setParam: function(name, value) {
+        localStorage.setItem(name, value);
+    },
+    getParam: function(name) {
+        return localStorage.getItem(name);
+    },
+    removeParam:function(name){
+    	localStorage.removeItem(name);
+    },
+    clearParam:function(){
+    	//清除所有的存储，谨慎使用
+    	localStorage.clear();
+    },
+    paramSize:function(){
+    	return localStorage.length;
+    }
+}
+
+Util.configPreloadPage = {
+	addPage : function(name){
+		var preloadPageArry = this.getPage();
+		var len = preloadPageArry.length;
+		var flag = 0;
+		for(var i=0; i<len; i++){
+			if(name == preloadPageArry[i]){
+				preloadPageArry.splice(i,1);
+				flag = 1;
+				break;
+			}
+		}
+		if(!flag){
+			if(len == 5){
+				 // var cwebview = plus.webview.getWebviewById(preloadPageArry[0]);
+				 // if(cwebview)
+				 // 	cwebview.close();
+
+				preloadPageArry = preloadPageArry.slice(1);
+			}
+		}
+		setTimeout(function(){
+			preloadPageArry.push(name);
+			Util.lStorage.setParam('preloadPageArry', JSON.stringify(preloadPageArry));
+		}, 100)
+	},
+	removePage : function(){
+		Util.lStorage.removeParam('preloadPageArry');
+	},
+	getPage : function(){
+		var preloadPageArry = Util.lStorage.getParam("preloadPageArry");
+		if(preloadPageArry){
+			preloadPageArry = JSON.parse(preloadPageArry);
+		}else{
+			preloadPageArry = [];
+		}
+		return preloadPageArry;
+	}
+}
+
+
+$(function(){
+
+});
+
+function getPage(){
+	var x = Util.configPreloadPage.getPage();
+	console.log(JSON.stringify(x));
+}
+
+function addPage(){
+	Util.configPreloadPage.addPage('600');
+	setTimeout(function(){
+		var x = Util.configPreloadPage.getPage();
+		console.log(JSON.stringify(x));
+	}, 1000)
+}
+
+function removePage(){
+	Util.configPreloadPage.removePage();
+	setTimeout(function(){
+		var x = Util.configPreloadPage.getPage();
+		console.log(JSON.stringify(x));
+	}, 1000)
+}
+
+</script>
+</body>
+</html>

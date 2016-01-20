@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>项目草稿</title> 
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+				<div class="breadcrumb"></div>
+				<div method="post" action="#" class="cmxform">
+				<form class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch">
+						<div class="record-search-cate">
+							 <table class="search_table" cellpadding="0" cellspacing="0" border="0" >
+                         
+                            <tr>
+                              <td width="80">
+                                <label class="description">执行渠道</label>
+                              </td>
+                              <td width="280"><select class="selectStyle inputWidth" id="BELG_CHNL_ID1" name="BELG_CHNL_ID1">
+								<option value = ''>请选择</option>
+							</select>                              <select class="selectStyle inputWidth" id="BELG_CHNL_ID" name="BELG_CHNL_ID">
+					        	<option value='' >请选择</option>
+							</select></td>
+                              <td width="85"><label class="description">活动名称</label></td>
+                              <td> <input id="CMPGN_NM" name="CMPGN_NM" class="inputWidth inputText" type="text" maxlength="255" value="" /></td>
+                              <td>
+                               <div class="normalBtnArea w82">
+                                   <a class="searchBtn" href="javascript:;" id="Query" ><i></i>查询</a>
+                               </div>
+                             </td>
+                            </tr>
+                        <tbody id="J_searchMore" class="searchMore">
+                            <tr>
+                                <td>
+                                  <label class="description">所属省公司</label>
+                                </td>
+                                <td ><select class="selectStyle inputWidth" id="BELG_BRNCH_ID" name="BELG_BRNCH_ID">
+							 <option value = ''>请选择</option>
+							</select>
+							</td>
+                                <td width=""><label class="description">创建工号</label></td>
+                                <td width="">
+                                	<div id="UserID">
+                                  <select class="inputWidth element text" id="CRT_USER_ID" name="CRT_USER_ID" >
+                                    <option ></option>
+                                  </select></div>
+                              </td>
+                              <td></td>
+                           </tr>
+                            <tr>
+                            	<td><label class="description">项目类型</label></td>
+                            	<td><select class="selectStyle" id="CMPGN_TYPE_CD1" name="CMPGN_TYPE_CD1">
+                              	<option value=''>请选择</option>
+                              	</select></td>
+                            	<td>&nbsp;</td>
+                            	<td>&nbsp;</td>
+                            	<td></td>
+                           	</tr>
+                           
+                        </tbody>
+                      </table>
+
+		</div>
+						<div class="seeMoreFilter">
+							<a href="#" class="down"></a>
+						</div>
+				</form>
+				</div>
+				<div class="tablewidth mg_t_10">
+					<table class="ui-record-table table_radius table-bordered table-striped">
+						<thead>
+							 <tr>
+                       		 <th width="70">项目编号</th>
+                          <th width="50">渠道</th>
+                          <th width="70">项目类型</th>
+                          <th width="">项目名称</th>
+                          <th width="70">省公司</th>
+                          <th width="50">创建工号</th>
+                          <th width="100">开始时间</th>
+                          <th width="100">结束时间</th>
+                          <th width="150">操作</th>
+                      </tr>
+						</thead>
+						<tbody id="J_tabletpl">
+						</tbody>
+					</table>
+				</div>
+
+				<!--翻页及功能按钮区域开始-->
+				<DIV class="amount-bottom">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+						<tr>
+						<!-- 	<td width="60"><input type="checkbox" class="selectAll" id="selectAll" /> <label for="selectAll">全选</label></td>
+							<td width="100">剩余配给量:0</td>
+							<td width="100">
+								<DIV class="normalBtnArea">
+									<A class="normalBtn BGgray" href="javascript:;">重新分配</A>
+								</DIV>
+							</td> -->
+							<td>
+								<DIV class="fn-clear action-other  action-other-show " style="width: 410px">
+									<DIV id=Pagination class="page pagination fn-right"></DIV>
+									<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+								</DIV>
+							</td>
+						</tr>
+					</table>
+					</div>
+					
+					<script id="T_tabletpl" type="text/x-handlebars-template">
+   {{#if beans}}
+            {{#each beans}}
+                   <tr>
+                         
+                 <td >{{CMPGN_ID}}</td>
+				<td>{{BELG_CHNL}}</td>
+				<td>{{CMPGN_TYPE_CD}}</td>
+				<td><a href="javascript:;" onclick="detail('{{CMPGN_ID}}')">{{CMPGN_NM}}</a></td>
+                <td>{{POST_NAME}}</td>
+                <td>{{PTY_NO}}</td>
+                <td>{{CMPGN_EFF_DATE}}</td>
+                <td>{{CMPGN_INVLD_DATE}}</td>
+                               <td width="90">
+                                    <div class="gridRowBtn">
+                                       <a class="item-text" href="javascript:;" onclick="update('{{CMPGN_ID}}')">编辑</a>
+                                       <a class="{{isClick GIVEN}}" href="javascript:;" onclick="distributeData(this, '{{CMPGN_ID}}','{{GIVEN}}')">发布项目</a>
+                                       <a class="item-text" href="javascript:;" onclick="deleteCamgn('{{CMPGN_ID}}')">删除</a>
+                                   </div>
+                         </td>
+                   </tr>
+             {{/each}}
+   {{else}}
+	<tr>
+		<td colspan="4">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+  
+   {{/if}}
+   </script>
+				
+	<#include "../../tpl/res_js.tpl" />
+	 <script src="../../common/market/common.js"></script>
+    <script src="../../common/requirejsConfig.js"></script>
+
+	<script type="text/javascript">
+		srvMap.add('query', 'query.json', 'front/sh/market!index?uid=myxz003');//查询草稿的服务
+		srvMap.add('delete', 'query.json', 'front/sh/market!index?uid=my005');//删除草稿的服务
+		srvMap.add('detail','query.json','front/sh/market!index?uid=mgl002');//详情
+		srvMap.add('allUser','query.json','front/sh/user!userinfo?uid=u005');//工号
+		srvMap.add('queryDept','query.json','front/sh/user!userinfo?uid=u011');//所属公司
+		srvMap.add('queryType', 'query.json', 'front/sh/common!execute?uid=cwt001');//查询营销活动类型代码
+		srvMap.add('updateCampngStatus', 'divide.json', 'front/sh/market!index');//更新营销活动状态 
+		srvMap.add('queryChnl', 'query.json', 'front/sh/user!getChnl?uid=u003');//获取渠道列表
+		var G_params = {
+			url : srvMap.get('query'),
+			searchformId : "J_formSearch",
+			items_per_page : 10, // 每页数     @param : limit
+			page_index : 0, //当前页  @param : start
+			pagination : "Pagination", //分页id
+			tabletpl : "T_tabletpl",
+			tablewrap : "J_tabletpl" //表格容器
+		};
+		//页面加载完开始执行
+		$(document).ready(
+				function() {
+					//初始化函数
+					
+					top.$(".leftMenu").find("ul:eq(1) li").each(function(){
+						var _self = $(this);
+						
+						if(_self.children().attr("menuid") == "113"){
+							_self.children().addClass("currentSelect").parent().siblings().children().removeClass("currentSelect");
+						}
+					});
+					
+					var str = $("#" + G_params.searchformId).serialize();
+					Util.pagination(G_params.page_index, true, G_params, str);
+					$('#Query').bind('click',
+							function() {
+								if ($("#CMPGN_EFF_DATE").val() != null&& $("#CMPGN_EFF_DATE").val() != ''&& $("#CMPGN_INVLD_DATE").val() != null&& $("#CMPGN_INVLD_DATE").val() != '') {
+									if ($("#CMPGN_EFF_DATE").val() > $("#CMPGN_INVLD_DATE").val()) {
+										Util.dialog.tips("开始时间不能大于结束时间");
+										return;
+									}
+								}
+								var str = $("#" + G_params.searchformId).serialize();
+								Util.pagination(G_params.page_index, true,G_params, str);
+							});
+					//项目类型
+				    $Cmpgntype=$("#CMPGN_TYPE_CD1");
+				    Util.ajax.postJsonSync(srvMap.get("queryType"),'',function(json1,status){
+						var jsonType=json1.object;
+						//console.log(json1);
+						for (var i = 0; i < jsonType.length; i++) {
+							$Cmpgntype.append("<option value='"+jsonType[i]['CD_VAL']+"'>"+jsonType[i]['CMN_CD_VAL_NM']+"</option>");
+						};
+					})
+					  var dept = {
+					    		"DEPT_ID": userInfo.bean.deptId 
+					    }
+					  //加载创建工号
+					    $("#UserID").NiceSelect({
+					       	url:srvMap.get('allUser'),
+					           datas : dept,
+					           id : "CRT_USER_ID",
+					           name : "CRT_USER_ID",
+					           all:"请选择",
+					           key:"USER_ID",
+					           value:"PTY_NO"
+					     });
+					    
+					  //所属机构初始化
+						var jsonDpet = null;
+						$J_chan=$("#BELG_BRNCH_ID");
+						Util.ajax.postJsonSync(srvMap.get("queryDept"),'',function(json1,status){
+							jsonDpet=json1.object;
+							for (var i = 0; i < jsonDpet.length; i++) {
+								$J_chan.append("<option value='"+jsonDpet[i]['BASE_PTY_ID']+"'>"+jsonDpet[i]['PTY_NM']+"</option>");
+							};
+						})
+					 	var json = null;
+						$J_prov=$("#BELG_CHNL_ID1");
+						$J_city=$("#BELG_CHNL_ID");
+						var paramchel={"chnlType":"1"};
+						Util.ajax.postJsonSync(srvMap.get("queryChnl"),paramchel,function(json1,status){
+							json=json1.object;
+							for (var i = 0; i < json.length; i++) {
+								$J_prov.append("<option value='"+json[i]['CHNL_ID']+"'>"+json[i]['PTY_NM']+"</option>");
+							};
+						});
+							//json=[{"PTY_NM":"10085电话营销","PTY_LVL_CD":"01","CHNL_ID":"1001"},{"PTY_NM":"社会代理","PTY_LVL_CD":"01","CHNL_ID":"1010","subList":[{"PTY_NM":"众包平台","PTY_LVL_CD":"02","CHNL_ID":"1012"}]}]
+							//console.log(json);
+							
+						$J_prov.on('change',function(){
+							$J_city.empty();
+							var select_val = $(this).children('option:selected').val();
+								for (var i = 0; i < json.length; i++) {
+									if(select_val==json[i]['CHNL_ID']){
+										var secondjson=json[i].subList;
+										if(secondjson!=null&&secondjson!='undefined'){
+											$J_city.show();
+											for (var j = 0; j < secondjson.length; j++) {
+												$J_city.append("<option value='"+secondjson[j]['CHNL_ID']+"'>"+secondjson[j]['PTY_NM']+"</option>");
+											}
+										}else{
+											$J_city.hide();
+										}
+									}
+									if(select_val=='请选择'){
+										$J_city.show();
+										$J_city.append("<option value =''>请选择</option>");
+									}
+										
+								};
+							
+						});
+					
+					
+				});
+		function detail(CMPGN_ID){
+			window.location.href="cmpgnDetail.html?CMPGN_ID="+CMPGN_ID;
+		}
+		function update(CMPGN_ID) {
+			//TODO 进入编辑页面
+			window.location.href = "newCampgnNew.html?id=" + CMPGN_ID;
+		}
+		function distributeData(obj, CMPGN_ID, given) {
+			//TODO进入分发页面
+			if (given == "1") {
+				return false;
+			} else {
+				
+				var elem= $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">是否确定发布该项目？</div></div></div>');
+		        var paramsdiv = {
+		          top:top,
+		          content: elem,
+		          width: "300px",
+		          height: "140px",
+		          modal: true,
+		          okVal:'确定',
+		          okCallback:function(){
+		                $(obj).hide().siblings().hide();
+		                var param1={"uid":"myxz006","CMPGN_ID":CMPGN_ID,"CMPGN_STS_CD":"1"};
+						Util.ajax.postJsonSync(srvMap.get('updateCampngStatus'), param1,function(json, status) {
+							if (status) {//更细营销活动状态成功
+								if (json.returnCode == '0') {
+									//跳转到营销活动列表页面
+									Util.dialog.tips("发布成功");
+									 window.location.href="../market/campgnList.html";
+								}
+							}
+						});
+		          },
+		          cancelVal:'取消',
+		          cancelCallback:function(){}
+		        }
+		        Util.dialog.openDiv(paramsdiv);
+			}
+		}
+		function deleteCamgn(CMPGN_ID) {
+			
+			var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要删除吗？</div></div></div>'
+		      ),
+	      	cmd = {
+      				"CMPGN_ID" : CMPGN_ID
+   			};
+
+	      	var params = {
+	          top:top,
+	          content: elem,
+	          width: "300px",
+	          height: "120px",
+	          modal: true,
+	          okVal:'确定',
+	          okCallback:function(){
+	      			Util.ajax.postJson(srvMap.get("delete"), cmd, function(json) {
+	      				if (json.returnCode == 0) {
+	      					var str = $("#" + G_params.searchformId).serialize();
+	      					Util.pagination(G_params.page_index, true, G_params, str);
+	      				}
+	      			});
+	          },
+		          cancelVal:'取消',
+		          cancelCallback:function(){}
+	        }
+
+       	    Util.dialog.openDiv(params);
+		}
+		Handlebars.registerHelper("invertTime", function(datestr){
+			var buffer = datestr.replace("00:00:00","");
+			return buffer;
+		});
+		Handlebars.registerHelper("isClick", function(givenId) {
+			var buffer = "";
+			if (givenId == "1") {
+				buffer = "disable-text";
+			} else {
+				buffer = "item-text";
+			}
+			return buffer;
+		});
+	</script>
+</body>
+</html>

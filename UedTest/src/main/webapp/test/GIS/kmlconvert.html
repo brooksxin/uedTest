@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>KML文件坐标转换--国标TO百度</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/opui/om-default.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="res/lib/opui/2.1/operamasks-ui.src.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body>
+
+<div class="pathhome">
+	<h4>区域 &gt; <b>KML文件坐标转换--国标TO百度</b></h4>
+</div>
+<div class="bz_manage">
+ 	<form id="busi_form" action="" method="post" enctype="multipart/form-data" target="templateIF">
+    	<table class="infoTable" cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+    		<tbody>
+    			<tr>
+    				<td width="9%">导入文件：</td>
+    				<td width="22%">
+    					<input type="file" name="importExcelFile"   id="importExcelFile"/>
+    				</td>
+    				<td width="">
+    					<a class="btn_normal fn-left" href="#nogo" id="J_save1">
+    						<em>保存</em>
+    					</a>
+    				</td>
+    			</tr>
+    		</tbody>
+    	</table>
+    </form>
+</div>
+
+<script type="text/javascript" >
+$(function(){
+	$("#J_save1").click(function(){
+        var upForm = $('#busi_form');
+        if($("#importExcelFile").val()==null||$("#importExcelFile").val()==""){
+        	alert("请选择kml文件上传");
+        	return;
+        }
+        	
+        upForm.attr('action',REQURLS.kmlconvert);
+        upForm.submit();
+    })
+})
+</script>
+</body>
+</html>
+
+

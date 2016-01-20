@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>创建外呼营销任务step2_选择商品</title>
+<link rel="stylesheet" href="../../css/common.css">
+<link rel="stylesheet" href="../../css/tablepay.css" />
+<link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+
+</head>
+
+<body>
+	<div class="formItem">
+		<div class="titleArea bd-bottom fn-clear">
+			<a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a>
+			<h2 class="ui-textIndentStyle fn-left">创建新项目</h2>
+		</div>
+
+
+		<div class="flowSteps_six">
+        <!--第二步样式改为current_2-->
+        <ul class="current_3 fn-clear">
+            <li class="FirstStep">
+                <a href="javascript:;">基本信息</a>
+            </li>
+            <li class="SecondStep">
+                <a href="javascript:;">选择商品</a>
+            </li>
+            <li class="ThirdStep">
+                <a href="javascript:;">添加问卷</a>
+            </li>
+            <li class="FourStep">
+                <a href="javascript:;">目标客户</a>
+            </li>
+            <li class="FiveStep">
+                <a href="javascript:;">执行团队</a>
+            </li>
+        </ul>
+    </div>
+
+
+
+		<div class="normalBtnArea mt-10 mb-10 fn-center">
+			<!--  <a class="normalBtn disable" href="#">创建组合套餐</a>-->
+		</div>
+
+
+		<div class="tablewidth mg_t_10">
+			<div class="mb-10 mt-10">添加问卷</div>
+			<table
+				class="ui-record-table table_radius table-bordered table-striped">
+				<thead>
+					<tr>
+					    <th width="80">商品编号</th>
+						<th width="">商品名称</th>
+						<th width="60">价格(元)</th>
+						<th width="80">库存</th>
+					</tr>
+				</thead>
+				<tbody id="J_tabletpl">
+				</tbody>
+			</table>
+		</div>
+
+
+		<div class="fn-clear">
+			<div class="normalBtnArea tablestyle">
+				<!--  <a class="normalBtn BGblue" href="#">添加产品</a>-->
+			</div>
+			<!--  <div class="tablestyle"><input class="FormInputText" type="text" value="&yen;"/></div>
+                    <div class="tablestyle">促销价（元）</div>
+                    <div class="tablestyle ft-red">&yen;</div>
+                    <div class="tablestyle">总价（元）</div>-->
+		</div>
+		<hr />
+		<!--   <div class="normalBtnArea mt-10 mb-10 fn-center">
+                       <a class="normalBtn disable" href="#">创建组合套餐</a>
+                    </div>-->
+	</div>
+
+
+	<div class="excelImportBtn">
+		<div id="J_step5_1">
+			<i class="importIcon"></i> <a class="normalBtn BGgray"
+				href="javascript:;" id="bindQues">选择问卷</a>
+				
+		</div>
+		<div id="qnmselect" ></div>
+
+	</div>
+	<div class="formBtnArea">
+		<table width="100%">
+			<tr>
+				<td>
+					<div class="normalBtnArea fn-center">
+						<a class="normalBtn BGgray largeBtn" href="javascript:;"
+							id="Return">上一步</a> <a class="normalBtn BGblue largeBtn"
+							href="javascript:;" id="Next">下一步</a> <a
+							class="normalBtn BGgray largeBtn" href="javascript:;" id="Save">保存</a>
+					</div>
+				</td>
+				<td>
+					<div class="normalBtnArea fn-right">
+						<a href="#" class="formLink" id="CanCelCreate"><span>取消创建</span></a>
+					</div>
+				</td>
+				<!-- <td>
+                  <div class="normalBtnArea fn-right">
+                    <a href="#" class="formLink"><span>取消编辑</span></a>
+                  </div>
+              </td> -->
+			</tr>
+		</table>
+	</div>
+
+	<#include "../../tpl/res_js.tpl" />
+	<script id="T_tabletpl" type="text/x-handlebars-template">
+    {{#if beans}}
+    {{#each beans}}
+        <tr>
+            <td>{{MCDS_UNIT_ID}}</td>
+            <td>{{MCDS_UNIT_NM}}</td>
+            <td>{{UPRC}}</td>
+    
+            <td>{{SKU_QTY}}</td>
+        </tr>
+    {{/each}}
+    {{else}}
+        <tr class="noData">
+            <td colspan="7" class="fn-center">对不起，暂无数据</td>
+        </tr>
+    {{/if}}
+</script>
+
+	 <script type="text/javascript">
+	    srvMap.add('update' , 'update.json','front/sh/market!index?uid=mgl003');//绑定问卷
+	    
+	    srvMap.add('queryQues' , 'update.json','front/sh/questionaire!index?uid=qnrwq006');//查询问卷信息
+        srvMap.add('query' , 'query.json','front/sh/market!index?uid=mwq003');//根据活动ID查询所有绑定的商品
+        srvMap.add('queryGood','query.json','front/sh/prod!execute?uid=p006');//根据商品id查询商品详情
+        srvMap.add('queryques','update.json','front/sh/market!index?uid=mgl005');//根据营销活动查询关联问卷 
+        srvMap.add('delete' , 'query.json','front/sh/market!index?uid=mwq005');//解绑活动和商品的关系
+        //页面加载完开始执行
+            var id="";
+        	var good=null;
+            var datas = "";
+            var goodId="";
+            var qnm="";
+            var qid="";
+            var cmd="";
+            var cmds="";
+            $(document).ready(function () {
+                //初始化函数
+                //因为勾选商品后，会有商品id和活动id，由于是页面传值，必须带id过来
+                //TODO 商品id和活动id都传过来,注意暂时规定传过来的只有一个商品
+               goodId=Util.browser.getParameter("goodId");
+               id= Util.browser.getParameter("id");
+               qnm= decodeURI(Util.browser.getParameter("qnm"));
+               qid= Util.browser.getParameter("qid");
+               if(qnm!=null&&qnm!="undefined"&&qnm!="null"){
+            	   $("#qnmselect").text("已选问卷："+qnm);
+               }
+               cmd={"CMPGN_ID":id};
+               cmds={
+        			  "CMPGN_ID":id,
+        			  "MCDS_ID":goodId
+        	   };
+              good=new Array;
+              if(goodId!=null&&goodId!=""){
+            	  var datas='mcdsUnitId='+goodId;//查询商品信息
+            	  var datas='mcdsUnitId='+goodId;
+            	  var fG_params = {
+                          url : srvMap.get('queryGood'),
+                          items_per_page : 10 ,   // 每页数     @param : limit
+                          page_index : 0 , //当前页  @param : start
+                          pagination : "Pagination" , //分页id
+                          tabletpl : "T_tabletpl",  //表格模板
+                          tablewrap :"J_tabletpl" //表格容器
+                  };
+            	  Util.pagination(fG_params.page_index ,true,fG_params,datas);
+            	  if(qid==null||qid=="undefined"||qid=="null"){//没有绑定问卷
+            		  Util.ajax.postJsonSync(srvMap.get('queryques'),cmd,function(json,status){
+            	            if(status){
+            	                if(json.object!=null){
+            	                    var QNR_ID = json.object;
+            	                    qid=QNR_ID;
+            	                    var param={"QNR_ID":QNR_ID};
+            	                    Util.ajax.postJsonSync(srvMap.get('queryQues'),param,function(json,status){
+                        	            if(status){
+                        	                if(json.beans.length != "0"){
+                        	                	 $("#qnmselect").text("已选问卷："+json.beans[0].QNR_NM);
+                        	                }
+                        	                
+                        	            }
+                        	        });
+            	                }
+            	                
+            	            }
+            	        });
+                  }else{//绑定问卷
+                	  $("#qnm").html(qnm);
+                  }
+              }
+              
+              $("#Next").bind("click",function(){
+            	  if(qid!=null&&qid!="undefined"&&qid!="null"){
+            		  var cmds={
+                   			  "CMPGN_ID":id,
+                   			  "QNR_ID":qid
+                   	    };
+                    	 Util.ajax.postJson(srvMap.get('update'),cmds,function(json){
+                   		  if(json.returnCode=="0"){
+                   			  window.location.href="importCust.html?id="+id+"&goodId="+goodId;
+                   		  }
+                   	 });
+            	  }else{
+            		  window.location.href="importCust.html?&id="+id+"&goodId="+goodId;
+            	  }
+            	  
+            	  
+            		
+              });
+              //绑定问卷
+              $("#bindQues").bind("click",function(){
+            	   window.location.href="selectMarketQues.html?id="+id+"&goodId="+goodId;
+              });
+              
+            //绑定问卷
+              $("#Return").bind("click",function(){
+            	   window.location.href="selectSingleProd.html?id="+id;
+              });
+            $("#Save").bind("click",function(){
+            	 if(qid!=null&&qid!="undefined"&&qid!="null"){
+           		  var cmds={
+                  			  "CMPGN_ID":id,
+                  			  "QNR_ID":qid
+                  	    };
+                   	 Util.ajax.postJson(srvMap.get('update'),cmds,function(json){
+                  		  if(json.returnCode=="0"){
+                  			window.location.href="draftList.html";
+                  		  }
+                  	 });
+           	  }else{
+           		window.location.href="draftList.html";
+           	  }
+            	
+            });
+           
+            });
+            
+            
+            $(function(){
+          	  $("#CanCelCreate").bind("click",function(){
+          		 var elem= $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">是否取消创建该项目？</div></div></div>');
+          	        var paramsdiv = {
+          	          top:top,
+          	          content: elem,
+          	          width: "300px",
+          	          height: "140px",
+          	          modal: true,
+          	          okVal:'取消创建',
+          	          okCallback:function(){
+          	                $(obj).hide().siblings().hide();
+          	              window.location.href="../market/campgnList.html";
+          	          },
+          	          cancelVal:'返回继续创建',
+          	          cancelCallback:function(){}
+          	        }
+          	        Util.dialog.openDiv(paramsdiv);
+          	  });
+          });
+        </script>
+</body>
+</html>
+
+
+
+
+
+

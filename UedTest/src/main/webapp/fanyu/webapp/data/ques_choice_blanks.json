@@ -1,0 +1,43 @@
+{
+    "returnCode": "0",
+    "returnMessage": "success",
+    "object": {
+        "QU_ID":"1002",                     //问题id
+        "QU_TYPE_CD":"10",                  //题型
+        "TGT_QU_ID": "001",                 //路由id
+        "QNR_REC_ID":"1002",                //问卷记录id
+        "QNR_ISTNC_ID":"200",               //问卷实例id
+        "QU_CNTT": "您的购物频率",
+        "QU_DESC": "问题的描述",
+        "QU_HAVE_ASWR_FLAG": "1",
+        "beans": [
+            {
+                "QU_CNTT": "问题名称",
+                "QNR_ISTNC_ID":"200",               //问卷实例id
+                "QU_CNTT": "您的购物频率",
+                "QU_DESC": "问题描述",
+                "QU_SHARE_TYPE_CD": "问题共享类型代码 共享、私有",
+                "QU_SHOW_MODE_CD": "1",
+                "HAVE_CHILD_QU_FLAG": "0"
+            },
+            {
+                "QU_CNTT": "问题名称",
+                "QU_CNTT": "您常去",
+                "QNR_ISTNC_ID":"200",               //问卷实例id
+                "QU_DESC": "问题描述",
+                "QU_SHARE_TYPE_CD": "问题共享类型代码 共享、私有",
+                "QU_SHOW_MODE_CD": "1",
+                "HAVE_CHILD_QU_FLAG": "0"
+            },
+            {
+                "QNR_ISTNC_ID":"200",               //问卷实例id
+                "QU_CNTT": "问题名称",
+                "QU_CNTT": "购物",
+                "QU_DESC": "问题描述",
+                "QU_SHARE_TYPE_CD": "问题共享类型代码 共享、私有",
+                "QU_SHOW_MODE_CD": "0",
+                "HAVE_CHILD_QU_FLAG": "0"
+            }
+        ]
+    }
+}

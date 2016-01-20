@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>查看结果</title>
+<#include "../../tpl/res_css.tpl" />
+
+</head>
+<body>
+
+<!-- 面包屑 begain -->
+<div class="breadcrumb"></div>
+<!-- 面包屑end -->
+
+<div class="formItem">
+	<div class="titleArea bd-bottom fn-clear">
+        <a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a><h2 class="ui-textIndentStyle fn-left">返回</h2>
+    </div>
+ <div class="margin_tblr">
+    <div class="pb-10">2015年6月第一周通话服务质量检测</div>
+    <div class="fn-clear">
+        <div class="fn-left">开始时间：2015年4月14日 09:00 — 2015年5月15日 09:00</div>
+        <div class="fn-right">抽查通话数量：10000 次通话</div>
+    </div>
+ </div>
+<div method="post" action="#" class="cmxform" >
+  <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+    <div class="record-search-cate">
+      <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+        <tbody>
+          <tr>
+            <td width="100"><label class="description">录音编号</label></td>
+            <td width="200"><input class="inputText" type="text" maxlength="255" value="" /></td>
+            <td width="100"><label class="description">员工工号</label></td>
+            <td width="200"><input class="inputText" type="text" maxlength="255" value="" /></td>
+            <td width="100"><label class="description">员工姓名</label></td>
+           	<td width="200">
+                <select class="inputSelect w160">
+                 <option>全部</option>
+                </select>
+            </td>
+            <td><div class="normalBtnArea w82"> <a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a> </div></td>
+          </tr>
+          
+          <tr>
+            <td width="100"><label class="description">外呼团队</label></td>
+            <td width="200">
+                <select class="inputSelect w160">
+                 <option>全部</option>
+                 <option>10085坐席</option>
+                 <option>北京客服中心</option>
+                 <option>河南客服中心</option>
+                </select>
+            </td>
+            <td width="100"><label class="description">项目名称</label></td>
+            <td width="200">
+                <select class="inputSelect w160">
+                 <option>全部</option>
+                 <option>双11促销活动</option>
+                 <option>618促销活动</option>
+                </select>
+            </td>
+            <td width="100"><label class="description">质检员</label></td>
+           	<td width="200">
+                <select class="inputSelect w160">
+                 <option>全部</option>
+                 <option>营销类</option>
+                 <option>调研类</option>
+                 <option>终端类</option>
+                 <option>接听类</option>
+                </select>
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+  </form>
+</div>
+<div class="tablewidth mg_t_10">
+  <table class="ui-record-table table_radius table-bordered table-striped"  >
+    <thead>
+      <tr>
+        <th width="100">录音编号</th>
+        <th width="80">员工工号</th>
+        <th width="80">员工姓名</th>
+        <th width="80">外呼团队</th>
+        <th width="80">项目名称</th>
+        <th width="40">得分</th>
+        <th>评价</th>
+        <th width="80">质检员</th>
+        <th width="100">操作</th>
+      </tr>
+    </thead>
+    <tbody id="J_tabletpl">
+      <tr>
+        <td><a href="#">20150615001</a></td>
+        <td>X009059</td>
+        <td>万言</td>
+        <td>达州志向</td>
+        <td>家庭回访计划</td>
+        <td>5</td>
+        <td>该员工平时工作仔细、认真、负责，不但执行力强，且工作配合度也好，有积极向上的工作心态</td>
+        <td>阿迪力</td>
+        <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">下载录音</a></div></td>
+      </tr>
+      <tr>
+        <td><a href="#">20150614002</a></td>
+        <td>X009058</td>
+        <td>康换天</td>
+        <td>达州志向</td>
+        <td>家庭回访计划</td>
+        <td>5</td>
+        <td>工作认真，有高速度、高效率、高质量的工作表现，且在日常生活中能与其他同事团结友爱，互助进取</td>
+        <td>崔明</td>
+        <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">下载录音</a></div></td>
+      </tr>
+      <tr>
+        <td><a href="#">20150610003</a></td>
+        <td>X009055</td>
+        <td>王万元</td>
+        <td>达州志向</td>
+        <td>某活动</td>
+        <td>10</td>
+        <td>表现优秀，该员工平时工作仔细、认真</td>
+        <td>东方明华</td>
+        <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">下载录音</a></div></td>
+      </tr>
+      <tr>
+        <td><a href="#">20150610004</a></td>
+        <td>X009054</td>
+        <td>苏甜甜</td>
+        <td>达州志向</td>
+        <td>家庭回访计划</td>
+        <td>5</td>
+        <td>尽职尽责，平时工作能将自己的能力充分发挥</td>
+        <td>方心</td>
+        <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">下载录音</a></div></td>
+      </tr>
+      <tr>
+        <td><a href="#">20150610005</a></td>
+        <td>X009053</td>
+        <td>宝恩</td>
+        <td>达州志向</td>
+        <td>家庭回访计划</td>
+        <td>5</td>
+        <td>工作表现也很努力，在工作时能以认真</td>
+        <td>高才</td>
+        <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">下载录音</a></div></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!--翻页及功能按钮区域开始-->
+<DIV class="amount-bottom">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+    <tr>
+      <td width="50%"><DIV class="fn-clear action-other  action-other-show ">
+          <DIV id=Pagination class="page pagination fn-right">共1500条记录 </DIV>
+          <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+        </DIV></td>
+    </tr>
+  </table>
+</DIV>
+</div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+    });
+</script>
+</body>
+</html>

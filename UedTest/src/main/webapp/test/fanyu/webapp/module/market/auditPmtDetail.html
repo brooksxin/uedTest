@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>促销审核-审核-查看促销详情</title>
+    <#include "../../tpl/res_css.tpl" />
+
+</head>
+
+<body>
+<div class="formItem">
+    <div class="titleArea bd-bottom fn-clear">
+        <a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a><h2 class="ui-textIndentStyle fn-left">促销管理</h2>
+    	 <div class="normalBtnArea ft-right mb-10"><a id="Pass" class="normalBtn BGblue" href="javascript:;">通过</a><a id="Reject" class="normalBtn BGgray" href="javascript:;">驳回</a></div>
+    </div>
+	<div class="ml-15 mr-15">
+    	<div class="mt-20"><h2 class="ft-14">1.基本信息</h2></div>
+    	<div class="importProcess" id="J_step5_2">
+            <div class="rateBar">
+                    <div class="borgray"></div>
+            </div>
+        </div>
+    	<form id="J_form_activity">
+            <table class="form_table"  width="100%">
+                <tr>
+                    <td><span class="gray_text">促销范围：</span><span class="ml-15">贵州省 贵阳市</span></td>
+                </tr>
+                <tr>
+                    <td><span class="gray_text">促销渠道:</span><span id='PTY_NM' class="ml-15"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="gray_text">促销简介:</span><span id="PMT_DESC" class="ml-15"></span></td>
+                </tr>
+             </table>
+             <table class="form_table"  width="100%">
+                <tr>
+                    <td><span class="gray_text">提交人:</span><span class="ml-15">X10085</span></td>
+                    <td><span class="gray_text">提交时间:</span><span class="ml-15">2015年6月24日 10:36:28</span></td>
+                </tr>
+                <tr>
+				<!-- <td><span class="gray_text">审核人:</span><span class="ml-15">X10086</span></td> -->
+			   <!--  <td><span class="gray_text">审核时间:</span><span class="ml-15">2015年6月25日 10:36:28</span></td> -->
+                </tr>
+            </table>
+    	</form>
+    </div>
+	<div class="ml-15 mr-15">
+    	<div class="mt-20"><h2 class="ft-14">2.促销商品</h2></div>
+    	<div class="importProcess" id="J_step5_2">
+            <div class="rateBar">
+                    <div class="borgray"></div>
+            </div>
+        </div>
+    	<div class="tablewidth fn-mt10">
+        <table class="ui-record-table table_radius table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>商品编号</th>
+                    <th width="280">商品名称</th>
+                   <!--  <th width="80">商家</th> -->
+                    <th width="100">价格（元）</th>
+                    <th width="100">优惠方式</th>
+                    <th>促销价（元）</th>
+                </tr>
+            </thead>
+            <tbody>
+	            <tr>
+	                <td><span id="MCDS_ID" class="ml-15"></span></td>
+					<td><span id="MCDS_UNIT_NM" class="ml-15"></span></td>
+					<!--<td><span id="" class="ml-15">商家</span></td>-->
+					<td><span id="UPRC" class="ml-15"></span></td>
+					<td><span id="preferentialWay" class="ml-15"></span></td>
+					<td><span id="currentPrice" class="ml-15"></span></td>
+				</tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+</div>
+
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+
+	srvMap.add("PmtDetail",'',"front/sh/market!index?uid=zzh002");
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        $(".qBox").mouseover(function() {
+          $(this).addClass("qBoxHover");
+          $(this).find(".qEditIcon").show();
+
+        }).mouseout(function() {
+          $(this).removeClass("qBoxHover");
+          $(this).find(".qEditIcon").hide();
+        });
+        //现暂时把通过和驳回隐藏起来
+        $("#Pass").css("display", "none"); 
+        $("#Reject").css("display", "none"); 
+        var mcds_nm = $('MCDS_UNIT_NM').text();
+        $('#Reject').bind('click',function(){ window.location.href="/ecp/module/market/pmtAuditReject.html?mcds_nm="+mcds_nm});
+        var pmtId = Util.browser.getParameter("pmt_ID");
+         var params={'PMT_ID':pmtId};
+        Util.ajax.postJson(srvMap.get("PmtDetail"), params, function(json,flag){
+        	
+        	if(flag){
+
+        		$("#PTY_NM").html(json.bean.PTY_NM);
+        		$("#PMT_DESC").html(json.bean.PMT_DESC);
+        		$("#MCDS_ID").html(json.bean.MCDS_ID);
+        		$("#MCDS_UNIT_NM").html(json.bean.MCDS_UNIT_NM);
+        		$("#UPRC").html(json.bean.UPRC);
+        		$("#preferentialWay").html(json.bean.preferentialWay);
+        		$("#currentPrice").html(json.bean.currentPrice);
+//         		Util.ajax.loadtemp('#J_tabletpl',$('#T_tabletpl'),json);
+        	}
+        });
+    });
+</script>
+</body>
+</html>

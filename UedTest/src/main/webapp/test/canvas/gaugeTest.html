@@ -1,0 +1,101 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" type="text/css" href="animations.css">
+<script src="RGraph.common.core.js" ></script>
+<script src="RGraph.gauge.js" ></script>
+<script src="RGraph.common.effects.js" ></script>
+<script src="jquery.js"></script>
+<!--[if lt IE 9]><script src="excanvas.js"></script><![endif]-->
+
+<title>A customised Gauge chart</title>
+<style type="text/css">
+.items {
+    float: left;
+}
+.cvs2 {
+    /*margin-top: -150px;*/
+    display: inline-block;
+}
+</style>
+</head>
+<body>
+
+<div class="items cvs2">
+    <canvas id="cvs2" width="300" height="300">[No canvas support]</canvas>
+</div>
+
+<script>
+$(document).ready(function (){
+    var gauge2 = new RGraph.Gauge({
+        id: 'cvs2',
+        min: 0,
+        max: 200,
+        value: [184],
+        options: {
+            title: {
+                top: {
+                    self: '9999',
+                    size: '22',
+                    font: 'Microsoft YaHei',
+                    color: '#96DC01',
+                    bold: "bold"
+                },
+                bottom: {
+                    self: '(kg)',
+                    size: '12',
+                    font: 'Microsoft YaHei',
+                    color: '#C5C5C5',
+                    pos: '0 -0.24'
+                }
+            },
+            background: {
+                color: '#F6F6F6',
+                // color: '#EFEFEF',
+                gradient: true
+            },
+            centerpin: {
+                color: '#019FDE',
+                radius: 10
+            },
+            needle: {
+                colors: ['Gradient(transparent:#d66:#d66:#d66:#d66)']
+            },
+            text: {
+                size: '10',
+                font: 'Microsoft YaHei',
+                color: '#C5C5C5'
+            },
+            tickmarks: {
+                big: {
+                    color: '#fff'
+                },
+                medium: {
+                    color: '#fff'
+                },
+                small: {
+                    color: '#fff'
+                }
+            },
+            border: {
+                outer: '#F6F6F6',
+                inner: '#F6F6F6',
+                outline: '#F6F6F6',
+                width: '0'
+            },
+            colors: {//超过警戒值的颜色
+                ranges: [[0,30, '#3E95E2'], [30, 150,'#96DC00'], [150, 180, '#FECB30'], [180, 200, '#F07275']]
+            },
+            angles: {
+                start: RGraph.PI,
+                end: RGraph.TWOPI
+            },
+            centery: 280
+        }
+    }).draw();
+})
+</script>
+</body>
+</html>

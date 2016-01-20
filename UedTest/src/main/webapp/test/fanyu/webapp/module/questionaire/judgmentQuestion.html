@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新建问题-判断题</title>
+      <#include "../../tpl/res_css.tpl" />
+
+</head>
+
+<body>
+<div class="formItem">
+    <div class="pt-10 ui-fhw"><a href="Javascript:history.go(-1);void(0);" class="formItem_jiantou-tu normalLink">返回</a></div>
+</div>
+
+<div class="formItem bd-bottom">
+    <div class="titleArea">
+        <!--
+        不同题型对应样式
+        单选：qIcon_Radio
+        判断：qIcon_Judgment
+        多选：qIcon_Checkbox
+        填空：qIcon_Blank
+        问答：qIcon_Essay
+        日期：qIcon_Date
+        -->
+        <h2><i class="qTitleIcon qIcon_Judgment"></i><span class="titleAreaTxt">判断题</span></h2>
+    </div>
+</div>
+
+
+
+
+
+<form action="" id="J_form_phone_param" name="J_form_phone_param" >
+    <!--新增问题START-->
+    <div class="questionAdd">
+
+
+<!-- 判断题-->
+        <div class="qBox">
+            <div class="qBoxTitle">
+                <div class="qDecoration"><a href="#"  id="J_addDescription"  title="点击添加问题描述">问题描述</a></div>
+            </div>
+
+            <div class="qDecorationTxt">
+                <textarea   class="qDecorationTxtEdit" id="QU_DESC" name="QU_DESC"  placeholder="您可以在这里输入问题描述，非必填项"></textarea>
+            </div>
+
+            <div class="qContent">
+                <!--编辑时展示内容-->
+                <div class="editContent">
+                    <div class="qTitle"><div>问题标题：</div><input  id="QU_NM" name="QU_NM"  type="text" class="FormInputText" value="" placeholder="输入问题标题" /></div>
+                    <div class="qAnswerEdit">
+                        <ul class="fn-clear">
+                            <li><i class="listIndex">A.</i><input type="radio" name="myradio" /><input type="text" id="ASWR_CNTT0" name="ASWR_CNTT" class="FormInputText" value="是" disabled="disabled" /></li>
+                            <li><i class="listIndex">B.</i><input type="radio" name="myradio" /><input type="text" id="ASWR_CNTT1" name="ASWR_CNTT" class="FormInputText" value="否" disabled="disabled" /></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--新增问题END-->
+</form>
+
+
+
+
+
+
+
+<div class="formBtnArea bd-top">
+    <table width="100%">
+        <tr>
+            <td>
+                <div class="normalBtnArea norBtnAleft">
+                    <a class="normalBtn BGblue largeBtn" href="javascript:;" id="Next">发布</a>
+                    <a class="normalBtn BGgray largeBtn" href="javascript:;" id="Save">保存</a>
+                </div>
+            </td>
+            <td>
+                <div class="normalBtnArea fn-right">
+                    <a href="#" class="formLink"><span>取消编辑</span></a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+
+
+<#include "../../tpl/res_js.tpl" />    
+<script type="text/javascript">
+srvMap.add('queryQuestion', 'query.json', 'front/sh/question!index?uid=mys006');
+srvMap.add('update', 'query.json', 'front/sh/question!index?uid=mys003');
+srvMap.add('insert', 'query.json', 'front/sh/question!index?uid=mys002');
+
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        
+        $("#J_addDescription").on('click',function(){
+        	$(".qDecorationTxt").toggle();
+        });
+
+             var quId=Util.browser.getParameter("QU_ID");
+             var copyId=Util.browser.getParameter("COPY_QU_ID");
+        
+     //  var quId='ca78a4bd-d612-4f67-823d-af351c3adb66';
+         if(copyId==null){ 
+             if(quId!=null&&quId!=""){
+            	 var	cmd={
+                 		"QU_ID":quId
+                 };
+            	 
+            	 Util.ajax.postJson(srvMap.get("queryQuestion"), cmd, function (json) {
+            		     if(json.returnCode==0){
+            		        $('#QU_DESC').val(json.beans[0].QU_DESC);
+            		        $('#QU_NM').val(json.beans[0].QU_NM);
+            		        
+            		        
+            		        
+            		        $('#Save').bind('click', function () {
+            		        	if(validate2.form()){
+            		            var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要保存吗？</div></div></div>'
+            			         );
+
+            		    	   var params = {
+            		              top:top,
+            		              content: elem,
+            		              width: "300px",
+            		              height: "120px",
+            		              modal: true,
+            		              okVal:'确定',
+            		              okCallback:function(){            		            	              		             		            			       
+            		            	  var cmddd="QU_ID="+quId+"&QU_DESC="+$("#QU_DESC").val()+"&QU_CNTT="+$("#QU_NM").val()+"&QU_NM="+$("#QU_NM").val()+"&QU_HAVE_ASWR_FLAG=1&QU_STS_CD=10D&ASWR_CNTT="+$("#ASWR_CNTT0").val()+"&ASWR_SEQNO=0"
+            		            	  +"&QU_ID="+quId+"&QU_DESC="+$("#QU_DESC").val()+"&QU_CNTT="+$("#QU_NM").val()+"&QU_NM="+$("#QU_NM").val()+"&QU_HAVE_ASWR_FLAG=1&QU_STS_CD=10D&ASWR_CNTT="+$("#ASWR_CNTT1").val()+"&ASWR_SEQNO=1";
+            		            	  Util.ajax.postJson(srvMap.get("update"), cmddd, function (jsondd) {
+            		            		  if(jsondd.returnCode==0){
+            		            			     
+            		            			  window.location.href = "questionList.html";
+            		            			  
+            		            			  
+            		            		  }
+            		            		  
+            		            		  
+            		            	  });
+            		            	  
+            		              },
+            		              cancelVal:'取消',
+            		              cancelCallback:function(){  
+            		      	  
+            		             }
+            		    	  }
+            		    	Util.dialog.openDiv(params);
+            		    	}else{Util.dialog.tips("标题要填哦，亲！");}
+            		        });  
+            		        
+            		        
+            		        $('#Next').bind('click', function () {
+            		        	if(validate2.form()){
+            		            var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要发布吗？</div></div></div>'
+            			         );
+
+            		    	   var params = {
+            		              top:top,
+            		              content: elem,
+            		              width: "300px",
+            		              height: "120px",
+            		              modal: true,
+            		              okVal:'确定',
+            		              okCallback:function(){
+            		                  var cmddd="QU_ID="+quId+"&QU_DESC="+$("#QU_DESC").val()+"&QU_CNTT="+$("#QU_NM").val()+"&QU_NM="+$("#QU_NM").val()+"&QU_HAVE_ASWR_FLAG=1&QU_STS_CD=10A&ASWR_CNTT="+$("#ASWR_CNTT0").val()+"&ASWR_SEQNO=0"
+          		            	      +"&QU_ID="+quId+"&QU_DESC="+$("#QU_DESC").val()+"&QU_CNTT="+$("#QU_NM").val()+"&QU_NM="+$("#QU_NM").val()+"&QU_HAVE_ASWR_FLAG=1&QU_STS_CD=10A&ASWR_CNTT="+$("#ASWR_CNTT1").val()+"&ASWR_SEQNO=1";
+            		            	   Util.ajax.postJson(srvMap.get("update"), cmddd, function (jsondd) {
+            		            		  if(jsondd.returnCode==0){
+            		            			     
+            		            			  window.location.href = "questionList.html";
+            		            			  
+            		            			  
+            		            		  }
+            		            		  
+            		            		  
+            		            	  });
+            		            	  
+            		              },
+            		              cancelVal:'取消',
+            		              cancelCallback:function(){  
+            		      	  
+            		             }
+            		    	  }
+            		    	Util.dialog.openDiv(params);
+            		    	}else{Util.dialog.tips("标题要填哦，亲！");}
+            		        });
+            		        
+            		        
+            		        
+            		        
+            		     }else{
+            		    	 Util.dialog.tips("查询报错");
+            		     }
+            		     
+            		 
+            	 });
+            	 
+            	 
+        	
+              }else{
+            	  $('#Next').bind('click', function () {
+            	  if(validate2.form()){
+            		  var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要发布吗？</div></div></div>'
+ 			         );
+
+ 		    	  var params = {
+ 		              top:top,
+ 		              content: elem,
+ 		              width: "300px",
+ 		              height: "120px",
+ 		              modal: true,
+ 		              okVal:'确定',
+ 		              okCallback:function(){ 
+ 		            	  var cmddd="QU_NM="+$("#QU_NM").val()+"&QU_TYPE_CD=40&QU_CNTT="+$("#QU_NM").val()+"&QU_DESC="+$("#QU_DESC").val()+"&QU_STS_CD=10A&QU_SHARE_TYPE_CD=02&ASWR_CNTT="+$("#ASWR_CNTT0").val()+"&ASWR_SEQNO=0"
+ 		            	  +"&QU_NM="+$("#QU_NM").val()+"&QU_TYPE_CD=40&QU_CNTT="+$("#QU_NM").val()+"&QU_DESC="+$("#QU_DESC").val()+"&QU_STS_CD=10A&QU_SHARE_TYPE_CD=02&ASWR_CNTT="+$("#ASWR_CNTT1").val()+"&ASWR_SEQNO=1";
+ 		            	    Util.ajax.postJson(srvMap.get("insert"), cmddd, function (jsondd) {
+ 		            	    	if(jsondd.returnCode==0){
+ 		            	    		window.location.href = "questionList.html";
+ 		            	    	}else{
+ 		            	    		 Util.dialog.tips("发布错误");
+ 		            	    	}
+ 		            	    	
+ 		            	    });
+ 		            	  
+ 		              },
+ 		              cancelVal:'取消',
+		              cancelCallback:function(){  
+		      	  
+		             }
+ 		    	  }
+ 		    	 Util.dialog.openDiv(params);  
+ 		    	 }else{Util.dialog.tips("问题标题必须要有哦，亲！");}
+            	  });
+            	  
+            	  
+            	  $('#Save').bind('click', function () {
+            	  if(validate2.form()){
+            		  var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要保存吗？</div></div></div>'
+ 			         );
+
+ 		    	  var params = {
+ 		              top:top,
+ 		              content: elem,
+ 		              width: "300px",
+ 		              height: "120px",
+ 		              modal: true,
+ 		              okVal:'确定',
+ 		              okCallback:function(){ 
+ 		            	  var cmddd="QU_NM="+$("#QU_NM").val()+"&QU_TYPE_CD=40&QU_CNTT="+$("#QU_NM").val()+"&QU_DESC="+$("#QU_DESC").val()+"&QU_STS_CD=10D&QU_SHARE_TYPE_CD=02&ASWR_CNTT="+$("#ASWR_CNTT0").val()+"&ASWR_SEQNO=0"
+ 		            	  +"&QU_NM="+$("#QU_NM").val()+"&QU_TYPE_CD=40&QU_CNTT="+$("#QU_NM").val()+"&QU_DESC="+$("#QU_DESC").val()+"&QU_STS_CD=10D&QU_SHARE_TYPE_CD=02&ASWR_CNTT="+$("#ASWR_CNTT1").val()+"&ASWR_SEQNO=1";
+ 		            	    Util.ajax.postJson(srvMap.get("insert"), cmddd, function (jsondd) {
+ 		            	    	if(jsondd.returnCode==0){
+ 		            	    		window.location.href = "questionList.html";
+ 		            	    	}else{
+ 		            	    		 Util.dialog.tips("发布错误");
+ 		            	    	}
+ 		            	    	
+ 		            	    });
+ 		            	  
+ 		              },
+ 		              cancelVal:'取消',
+		              cancelCallback:function(){  
+		      	  
+		             }
+ 		    	  }
+ 		    	 Util.dialog.openDiv(params);  
+ 		    	 }else{Util.dialog.tips("问题标题必须要有哦，亲！");}
+            	  });
+            	  
+            	  
+            	  
+                	 
+                	 
+        	
+              }
+        
+        
+        
+        
+        
+        
+        /* $('#Save').bind('click', function () {
+            var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要保存吗？</div></div></div>'
+	         );
+
+    	   var params = {
+              top:top,
+              content: elem,
+              width: "300px",
+              height: "120px",
+              modal: true,
+              okVal:'确定',
+              okCallback:function(){
+            	   
+              },
+              cancelVal:'取消',
+              cancelCallback:function(){  
+      	  
+             }
+    	  }
+    	Util.dialog.openDiv(params);
+        }); */  
+         }else{
+        	 //这是复制
+        	 var	cmd={
+              		"QU_ID":copyId
+              };
+         	 
+         	 Util.ajax.postJson(srvMap.get("queryQuestion"), cmd, function (json) {
+         		     if(json.returnCode==0){
+         		        $('#QU_DESC').val(json.beans[0].QU_DESC);
+         		        $('#QU_NM').val(json.beans[0].QU_NM);
+         		        
+         		        
+         		        
+         		        $('#Save').bind('click', function () {
+         		        	if(validate2.form()){
+         		            var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要保存吗？</div></div></div>'
+         			         );
+
+         		    	   var params = {
+         		              top:top,
+         		              content: elem,
+         		              width: "300px",
+         		              height: "120px",
+         		              modal: true,
+         		              okVal:'确定',
+         		              okCallback:function(){            		            	              		             		            			       
+         		            	  var cmddd="QU_DESC="+$("#QU_DESC").val()+"&QU_CNTT="+$("#QU_NM").val()+"&QU_NM="+$("#QU_NM").val()+"&QU_TYPE_CD=40&QU_SHARE_TYPE_CD=02&QU_STS_CD=10D&ASWR_CNTT="+$("#ASWR_CNTT0").val()+"&ASWR_SEQNO=0"
+         		            	  +"&QU_DESC="+$("#QU_DESC").val()+"&QU_CNTT="+$("#QU_NM").val()+"&QU_NM="+$("#QU_NM").val()+"&QU_TYPE_CD=40&QU_SHARE_TYPE_CD=02&QU_STS_CD=10D&ASWR_CNTT="+$("#ASWR_CNTT1").val()+"&ASWR_SEQNO=1";
+         		            	  Util.ajax.postJson(srvMap.get("insert"), cmddd, function (jsondd) {
+         		            		  if(jsondd.returnCode==0){
+         		            			     
+         		            			  window.location.href = "questionList.html";
+         		            			  
+         		            			  
+         		            		  }
+         		            		  
+         		            		  
+         		            	  });
+         		            	  
+         		              },
+         		              cancelVal:'取消',
+         		              cancelCallback:function(){  
+         		      	  
+         		             }
+         		    	  }
+         		    	Util.dialog.openDiv(params);
+         		    	}else{Util.dialog.tips("问题标题必须要有哦，亲！");}
+         		        });  
+         		        
+         		        $('#Next').bind('click', function () {
+         		        if(validate2.form()){
+         		            var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要发布吗？</div></div></div>'
+         			         );
+
+         		    	   var params = {
+         		              top:top,
+         		              content: elem,
+         		              width: "300px",
+         		              height: "120px",
+         		              modal: true,
+         		              okVal:'确定',
+         		              okCallback:function(){
+         		                  var cmddd="QU_DESC="+$("#QU_DESC").val()+"&QU_CNTT="+$("#QU_NM").val()+"&QU_NM="+$("#QU_NM").val()+"&QU_TYPE_CD=40&QU_SHARE_TYPE_CD=02&QU_STS_CD=10A&ASWR_CNTT="+$("#ASWR_CNTT0").val()+"&ASWR_SEQNO=0"
+       		            	      +"&QU_ID="+quId+"&QU_DESC="+$("#QU_DESC").val()+"&QU_CNTT="+$("#QU_NM").val()+"&QU_NM="+$("#QU_NM").val()+"&QU_TYPE_CD=40&QU_SHARE_TYPE_CD=02&QU_STS_CD=10A&ASWR_CNTT="+$("#ASWR_CNTT1").val()+"&ASWR_SEQNO=1";
+         		            	   Util.ajax.postJson(srvMap.get("insert"), cmddd, function (jsondd) {
+         		            		  if(jsondd.returnCode==0){
+         		            			     
+         		            			  window.location.href = "questionList.html";
+         		            			  
+         		            			  
+         		            		  }
+         		            		  
+         		            		  
+         		            	  });
+         		            	  
+         		              },
+         		              cancelVal:'取消',
+         		              cancelCallback:function(){  
+         		      	  
+         		             }
+         		    	  }
+         		    	Util.dialog.openDiv(params);
+         		    	}else{Util.dialog.tips("问题标题必须要有哦，亲！");}
+         		        });
+         		        
+         		        
+         		        
+         		        
+         		     }else{
+         		    	 Util.dialog.tips("查询报错");
+         		     }
+         		     
+         		 
+         	 });
+        	
+        	
+        }  
+    });
+    
+//输入验证
+var validate2 = $("#J_form_phone_param").validate({
+    rules: {
+    	QU_NM: {
+            required: true
+        }
+    }
+});
+</script>
+</body>
+</html>

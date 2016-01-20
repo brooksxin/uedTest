@@ -1,0 +1,108 @@
+{
+    "rows": [
+        {
+            "ABILITY_CODE": "OPEN_GROUP",
+            "ABILITY_ID": 9980,
+            "ABILITY_NAME": "集团用户开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        },
+        {
+            "ABILITY_CODE": "OPEN",
+            "ABILITY_ID": 9991,
+            "ABILITY_NAME": "CRM开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        },
+        {
+            "ABILITY_CODE": "OPEN2",
+            "ABILITY_ID": 9992,
+            "ABILITY_NAME": "CRM开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        },
+        {
+            "ABILITY_CODE": "OPEN3",
+            "ABILITY_ID": 9993,
+            "ABILITY_NAME": "CRM开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        },
+        {
+            "ABILITY_CODE": "OPEN4",
+            "ABILITY_ID": 9994,
+            "ABILITY_NAME": "CRM开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        },
+        {
+            "ABILITY_CODE": "OPEN5",
+            "ABILITY_ID": 9995,
+            "ABILITY_NAME": "CRM开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        },
+        {
+            "ABILITY_CODE": "OPEN6",
+            "ABILITY_ID": 9996,
+            "ABILITY_NAME": "CRM开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        },
+        {
+            "ABILITY_CODE": "OPEN7",
+            "ABILITY_ID": 9997,
+            "ABILITY_NAME": "CRM开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        },
+        {
+            "ABILITY_CODE": "OPEN8",
+            "ABILITY_ID": 9998,
+            "ABILITY_NAME": "CRM开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        },
+        {
+            "ABILITY_CODE": "OPEN9",
+            "ABILITY_ID": 9999,
+            "ABILITY_NAME": "CRM开户(勿删)",
+            "ABILITY_STATUS": "2",
+            "ABILITY_URL": "www",
+            "REMARKS": "2013/9/23"
+        }
+    ],
+    "beans": [
+        {
+            "name": "底层核心",
+            "id": "1"
+        },
+        {
+            "name": "底层插件",
+            "id": "2"
+        },
+        {
+            "name": "底层插件",
+            "id": "3"
+        },
+        {
+            "name": "底层插件",
+            "id": "4"
+        },
+        {
+            "name": "底层插件",
+            "id": "5"
+        }
+    ],
+    "total": 200,
+    "rtnCode": "0"
+}

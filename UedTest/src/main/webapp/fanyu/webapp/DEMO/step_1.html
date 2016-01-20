@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Form</title>
+<link href="../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../css/common.css" media="all" />
+<script src="../lib/jquery/1.8.1/jquery.js"></script>
+<script type="text/javascript" src="../lib/pretty/prettify.js"></script>
+<script type="text/javascript" src="../lib/slides/3.0/jquery.slides.min.js"></script>
+<script type="text/javascript" src="../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../common/common.js"></script>
+<style>
+@font-face {
+    font-family: "rei";
+    src: url("../css/images/font/rei.eot"); /* IE9*/
+    src: url("../css/images/font/rei.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+         url("../css/images/font/rei.woff") format("woff"), /* chrome 6+、firefox 3.6+、Safari5.1+、Opera 11+ */
+         url("../css/images/font/rei.ttf")  format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+         url("../css/images/font/rei.svg#rei") format("svg"); /*  iOS 4.1- */
+    font-weight: normal;
+    font-style: normal;
+}
+.iconfont {
+    font-family: "rei";
+    font-style: normal;
+    cursor: default;
+    -webkit-font-smoothing: antialiased;
+}
+
+.ui-ministep {
+    list-style: none;
+    font-size: 12px;
+    font-family: tahoma;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    color: #b7b7b7;    
+}
+
+.ui-ministep-item {
+    position: relative;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    margin-right: 36px;
+}
+
+.ui-ministep .iconfont {
+    color: #b7b7b7;    
+    font-size: 18px;
+}
+
+.ui-ministep .ui-ministep-number {
+    position: absolute;
+    top: 6px;
+    left: 5px;
+    color: #fff;
+    line-height: 12px;
+    font-style: normal;
+}
+
+.ui-ministep .ui-ministep-text {
+    position: relative;
+    top: -2px;
+}
+
+.ui-ministep-active,
+.ui-ministep-active .iconfont {
+    color: #FF6700;    
+}
+</style>
+</head>
+<body id="main_body" onload="prettyPrint()" >
+	
+<div class="form_container">
+
+
+
+
+	<!-- ui-step  -->
+	<ol class="ui-ministep">
+	    <li class="ui-ministep-item">
+	        <i class="iconfont">&#x0079;</i>
+	        <i class="ui-ministep-number">1</i>        
+	        <span class="ui-ministep-text">第一步</span>
+	    </li>
+	    <li class="ui-ministep-item ui-ministep-active">
+	        <i class="iconfont">&#x0079;</i>
+	        <i class="ui-ministep-number">2</i>
+	        <span class="ui-ministep-text">第二步</span>
+	    </li>
+	    <li class="ui-ministep-item">
+	        <i class="iconfont">&#x0079;</i>
+	        <i class="ui-ministep-number">3</i>
+	        <span class="ui-ministep-text">第三步</span>
+	    </li>
+	</ol>
+	<!-- ui-step  -->
+
+
+
+
+
+	<pre class="prettyprint mg_t_20 fn-clear" id="html">
+	&lt;!-- ui-step  --&gt;
+	&lt;ol class=&quot;ui-ministep&quot;&gt;
+	    &lt;li class=&quot;ui-ministep-item&quot;&gt;
+	        &lt;i class=&quot;iconfont&quot;&gt;&amp;#x0079;&lt;/i&gt;
+	        &lt;i class=&quot;ui-ministep-number&quot;&gt;1&lt;/i&gt;        
+	        &lt;span class=&quot;ui-ministep-text&quot;&gt;&#x7b2c;&#x4e00;&#x6b65;&lt;/span&gt;
+	    &lt;/li&gt;
+	    &lt;li class=&quot;ui-ministep-item ui-ministep-active&quot;&gt;
+	        &lt;i class=&quot;iconfont&quot;&gt;&amp;#x0079;&lt;/i&gt;
+	        &lt;i class=&quot;ui-ministep-number&quot;&gt;2&lt;/i&gt;
+	        &lt;span class=&quot;ui-ministep-text&quot;&gt;&#x7b2c;&#x4e8c;&#x6b65;&lt;/span&gt;
+	    &lt;/li&gt;
+	    &lt;li class=&quot;ui-ministep-item&quot;&gt;
+	        &lt;i class=&quot;iconfont&quot;&gt;&amp;#x0079;&lt;/i&gt;
+	        &lt;i class=&quot;ui-ministep-number&quot;&gt;3&lt;/i&gt;
+	        &lt;span class=&quot;ui-ministep-text&quot;&gt;&#x7b2c;&#x4e09;&#x6b65;&lt;/span&gt;
+	    &lt;/li&gt;
+	&lt;/ol&gt;
+	&lt;!-- ui-step  --&gt;
+	</pre>
+
+
+</div>
+
+
+</body>
+</html>

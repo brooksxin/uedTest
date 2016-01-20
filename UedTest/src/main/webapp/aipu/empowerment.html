@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>用户赋权 - 亚信开源社区</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/js/dialog/6.0.5/ui-dialog.css">
+<link rel="stylesheet" type="text/css" href="ui/js/selectordie/0.1.8/selectordie.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+<div class="search_wrap approve">
+	<form id="J_formSearch" name="J_formSearch" class="formSearch">
+		<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tbody>
+				<tr>
+					<td width="10%">
+						<label>选择产品：</label>
+					</td>
+					<td width="40%">
+						<select id="J_province" name="J_province">
+							<option value="1">北京</option>
+							<option value="2">郑州</option>
+							<option value="3">南京</option>
+						</select>
+					</td>
+					<td width="10%">
+						<label>NT账号：</label>
+					</td>
+					<td>
+						<input type="text" value="" name="J_qudao_code" id="J_qudao_code" class="ui-input J_qudao_code" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>开始时间：</label>
+					</td>
+					<td>
+						<input type="text" value="" name="J_date_s" id="J_date_s" class="ui-input Wdate" 
+						onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'J_date_e\') || \'%y-%M-%d\'}', minDate:'1949-10-01'})" />
+					</td>
+					<td>
+						<label>结束时间：</label>
+					</td>
+					<td>
+						<input type="text" value="" name="J_date_e" id="J_date_e" class="ui-input Wdate" 
+						onfocus="WdatePicker({maxDate:'%y-%M-%d', minDate:'#F{$dp.$D(\'J_date_s\')||\'1940-10-01\'}'})" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" class="fn-center">
+						<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="J_search">
+							<i class="iconfont" title="查询/搜索"></i>
+							<span>查 询</span>
+						</a>
+						<a class="ui-button ui-button-blue " href="javascript:;" hidefocus="true" id="J_reset">
+							<span>重 置</span>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+
+<script src="ui/js/jquery/1.8.3/jquery.js"></script>
+<script src="ui/js/dialog/6.0.5/dialog-min.js"></script>
+<script src="ui/js/jqueryForm/jquery.form.js"></script>
+<script src="ui/js/json2/json2.js"></script>
+<script src="ui/js/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="ui/js/handlebars/handlebars.js"></script>
+<script src="ui/js/handlebars/helpers.js"></script>
+<script src="ui/js/blockUI/jquery.blockUI.js"></script>
+<script src="ui/js/slides/3.0.3/jquery.slides.min.js"></script>
+<script src="ui/js/selectordie/0.1.8/selectordie.js"></script>
+<script src="ui/js/datepicker/4.8.b2/WdatePicker.js"></script>
+<script src="ui/js/common.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+	var userId = $.getUrlVar("userId")?$.getUrlVar("userId"):"";
+	if(userId){
+		alert("用户赋权"+userId);
+
+		window.parent.document.title = '用户赋权';
+		window.parent.$("#J_prod_menu").find("ul li a").removeClass("cur");
+		window.parent.$("#J_prod_menu").find("ul:eq(0) li:eq(0) a").addClass("cur");
+	}
+})
+
+</script>
+
+</body>
+</html>

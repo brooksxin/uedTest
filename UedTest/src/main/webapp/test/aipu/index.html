@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>首页 - 亚信开源社区</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/js/dialog/6.0.5/ui-dialog.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+<div class="glob-top">
+	<div class="wrap fn-clear">
+		<a class="logo fn-clear" href="index.html" hidefocus="true">
+			<span class="logo-name">AIOSC</span>
+			<span class="logo-name2">亚信开源社区</span>
+		</a>
+		<div class="login-bar fn-clear">
+			<a href="javascript:;" hidefocus="true" class="login" id="J_login">
+				<span><i class="iconfont" title="用户"></i> 登录</span>
+			</a>
+			<a href="javascript:;" hidefocus="true" class="regist" id="J_regist">
+				<span>注册</span>
+			</a>
+			<a href="javascript:;" hidefocus="true" class="maintain">
+				<span>社区维护后台</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="glob-contain">
+	<div class="wrap">
+		<div class="advertise">
+			<img src="ui/theme/img/index_bg.png">
+			<div class="ad-wrap">
+				<div class="opac-bg"></div>
+				<div class="ad-body fn-clear">
+					<div class="tit">
+						<i class="iconfont" title=""></i>
+						<span>系统公告</span>
+					</div>
+					<ul class="fn-clear" id="J_notice">
+						
+					</ul>
+					<div class="more">
+						<a href="javascript:;" hidefocus="true"><span>查看更多&gt;</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="block-prop">
+			<h2>社区特性</h2>
+			<ul class="fn-clear">
+				<li class="block1 fn-clear">
+					<div class="left"></div>
+					<div class="right">
+						<h3>简单易用</h3>
+						<div>
+							承载核心技术平台产品，实现核心技术平台代码级开源共享，降低开发成本，缩短开发时间。
+						</div>
+					</div>
+				</li>
+				<li class="block2 fn-clear">
+					<div class="left"></div>
+					<div class="right">
+						<h3>灵活支撑</h3>
+						<div>
+							聚合公司内各类专家资源，实现产品信息的集中管控与问题跟踪，推动产品的自我演进。
+						</div>
+					</div>
+				</li>
+				<li class="block3 fn-clear">
+					<div class="left"></div>
+					<div class="right">
+						<h3>贴合实际</h3>
+						<div>
+							建立起经验分享与问题交流的渠道，为开发人员的自我提升提供更多的途径。
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="block-prod">
+			<h2>社区产品</h2>
+			<div class="prod-wap" id="J_prod_slide">
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<textarea id="T_regist" class="fn-hide">
+	<div class="regist-wrap">
+		<div class="zui-tab zui-tab-x">
+			<ul>
+				<li class="act">我是亚信员工</li>
+				<li>非亚信员工</li>
+			</ul>
+			<span class="arror"></span>
+		</div>
+		<form class="reg_form">
+			<table class="reg_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+				<tbody>
+					<tr>
+						<td><label class="des">Email：</label></td>
+						<td><input value="" type="text" id="J_email" name="J_email" class="ui-input" /></td>
+					</tr>
+					<tr>
+						<td><label class="des">密码：</label></td>
+						<td><input value="" type="password" id="J_pwd" name="J_pwd" class="ui-input" /></td>
+					</tr>
+					<tr>
+						<td><label class="des">确认密码：</label></td>
+						<td><input value="" type="password" id="J_pwd_s" name="J_pwd_s" class="ui-input" /></td>
+					</tr>
+					<tr>
+						<td colspan="2" class="fn-center"><a href="javascript:;" hidefocus="true" class="ui-button ui-button-green" id="J_reg_btn"><span>确 定</span></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+</textarea>
+
+<textarea id="T_login" class="fn-hide">
+	<div class="regist-wrap login-wrap">
+		<div class="zui-tab zui-tab-x">
+			<ul>
+				<li class="act">我是亚信员工</li>
+				<li>非亚信员工</li>
+			</ul>
+			<span class="arror"></span>
+		</div>
+		<form class="reg_form">
+			<table class="reg_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+				<tbody>
+					<tr class="asia">
+						<td><label class="des">NT账号：</label></td>
+						<td><input value="" type="text" id="J_NT" name="J_NT" class="ui-input" /></td>
+					</tr>
+					<tr class="asia">
+						<td><label class="des">NT密码：</label></td>
+						<td><input value="" type="password" id="J_pwd" name="J_pwd" class="ui-input" /></td>
+					</tr>
+					<tr class="not-asia fn-hide">
+						<td><label class="des">Email：</label></td>
+						<td><input value="" type="text" id="J_email" name="J_email" class="ui-input" /></td>
+					</tr>
+					<tr class="not-asia fn-hide">
+						<td><label class="des">密码：</label></td>
+						<td><input value="" type="password" id="J_pwd_s" name="J_pwd_s" class="ui-input" /></td>
+					</tr>
+					<tr>
+						<td><label class="des">验证码：</label></td>
+						<td class="J_ver-wrap">
+							<input value="" type="text" id="J_ver" name="J_ver" class="ui-input" maxlength="4" />
+							<img src="" width="60" height="30" id="J_ver_img" class="J_ver_img" />
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td class="J_ver-wrap">
+							<a href="javascript:;" hidefocus="true" class="ui-button ui-button-green" id="J_login_btn"><span>登 录</span></a>
+
+							<a href="javascript:;" hidefocus="true" class="forget-pwd" id="J_forgetPwd"><span>忘记密码</span></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+</textarea>
+
+<textarea class="fn-hide" id="T_notice">
+{{#each this}}
+<li>
+	<a href="javascript:;" hidefocus="true" data-id="{{id}}">
+		<span>{{content}}</span>
+		{{#if_eq isNew compare="1"}}<i class="new"></i>{{/if_eq}}
+	</a>
+</li>
+{{/each}}
+</textarea>
+
+<textarea class="fn-hide" id="T_prod">
+<ul class="prod-list fn-clear">
+	{{#each this}}
+	{{retNewUl @index}}
+	<li>
+		<a href="javascript:;" hidefocus="true" data-id="{{id}}">
+			<div class="left">
+				<img src="{{img}}" width="56" height="56" />
+			</div>
+			<div class="right">
+				<h4>{{name}}</h4>
+				<div>
+					{{des}}
+				</div>
+			</div>
+		</a>
+	</li>
+	{{/each}}
+</ul>
+<a href="javascript:;" hidefocus="true" class="slidesjs-previous slidesjs-navigation">
+</a>
+<a href="javascript:;" hidefocus="true" class="slidesjs-next slidesjs-navigation">
+</a>
+</textarea>
+
+<script src="ui/js/jquery/1.8.3/jquery.js"></script>
+<script src="ui/js/dialog/6.0.5/dialog-min.js"></script>
+<script src="ui/js/jqueryForm/jquery.form.js"></script>
+<script src="ui/js/json2/json2.js"></script>
+<script src="ui/js/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="ui/js/handlebars/handlebars.js"></script>
+<script src="ui/js/handlebars/helpers.js"></script>
+<script src="ui/js/blockUI/jquery.blockUI.js"></script>
+<script src="ui/js/slides/3.0.3/jquery.slides.min.js"></script>
+<script src="ui/js/common.js"></script>
+
+<script type="text/javascript">
+	
+$(function(){
+
+	srvMap.add('login', 'test.json','修改为后台服务器action地址');//登录
+	srvMap.add('regist', 'test.json','');//注册
+	srvMap.add('notice', 'notice.json','');//公告消息
+	srvMap.add('prod', 'index_prod.json','');//产品消息
+
+	//获取消息
+	getNotice();
+
+	//产品
+	getProd();
+
+	//注册
+	$("#J_regist").on("click", function(){
+		var D_param = {
+			id: "D_regist",
+			title: "注册",
+			content: $("#T_regist").val()
+		}
+		openWindowDiv(D_param, function(e){
+
+			$(".zui-tab-x li").click(function(){
+				var $this = $(this);
+				if($this.hasClass("act")){
+
+				}else{
+					$this.addClass("act").siblings().removeClass("act");
+					var $arror = $this.parent().siblings(".arror");
+					var l = $(this).offset().left + $(this).width()/2;
+					$arror.offset({left:l});
+				}
+
+				if($this.index() == '0'){
+					$("#J_pwd_s").parent().parent().addClass("fn-hide");
+					$("#J_pwd_s").val("");
+				}else{
+					$("#J_pwd_s").parent().parent().removeClass("fn-hide");
+				}
+			}).eq(0).trigger("click");
+
+			$("#J_reg_btn").click(function(){
+				var curIndex = $(".zui-tab li.act").index();
+				var param = "";
+				var J_email = $("#J_email").val();
+				var J_pwd = $("#J_pwd").val();
+				if(!J_email){
+					result_tips("请输入Email！",1.5,function(){
+						result_tips("关闭了", '0.5')
+					})
+					return false;
+				}
+				if(!J_pwd){
+					result_tips("请输入密码！");
+					return false;
+				}
+				if(curIndex == '0'){
+					param = "J_email="+J_email+"&J_pwd="+J_pwd;
+				}else{
+					var J_pwd_s = $("#J_pwd_s").val();
+					if(J_pwd_s !== J_pwd){
+						result_tips("请输入确认密码！",1.5);
+						return false;
+					}
+					param = "J_email="+J_email+"&J_pwd="+J_pwd+"&J_pwd_s="+J_pwd_s;
+				}
+				$.PostJson("ui/json/test.json", param, function(state, json){
+					if(state == 'success'){
+						if(json && json.returnCode=='0'){
+							result_prompt('注册成功！', function(){
+								dialog.get('D_regist').close().remove();
+							});
+						}
+					}
+				})
+			})
+		})
+	})
+
+	//登录
+	$("#J_login").click(function(){
+		var D_param = {
+			title: "登录",
+			content: $("#T_login").val()
+		}
+		openWindowDiv(D_param, function(){
+			$(".zui-tab-x li").click(function(){
+				var $this = $(this);
+				if($this.hasClass("act")){
+
+				}else{
+					$this.addClass("act").siblings().removeClass("act");
+					var $arror = $this.parent().siblings(".arror");
+					var l = $(this).offset().left + $(this).width()/2;
+					$arror.offset({left:l});
+				}
+
+				if($this.index() == '0'){
+					$(".not-asia").addClass("fn-hide").siblings(".asia").removeClass("fn-hide");
+				}else{
+					$(".not-asia").removeClass("fn-hide").siblings(".asia").addClass("fn-hide");;
+				}
+			}).eq(0).trigger("click");
+
+			$("#J_ver_img").click(function(){
+				console.log("0")
+				$(this).attr({"src": ""});
+			})
+
+			$("#J_reg_btn").click(function(){
+				var curIndex = $(".zui-tab li.act").index();
+				var param = "";
+				
+				$.PostJson("ui/json/test.json", param, function(state, json){
+					if(state == 'success'){
+						if(json && json.returnCode=='0'){
+							result_prompt('登录成功！');
+						}
+					}
+				})
+			})
+		});
+	})
+})
+
+function getNotice(){
+	$.PostJson(srvMap.get("notice"), "", function(state, json){
+		if(state == 'success'){
+			if(json && json.rtnCode == '0'){
+				if(json.rows){
+					$("#J_notice").temp($("#T_notice"), json.rows);
+
+					$("#J_notice li a").on("click", function(){
+						var id = $(this).data("id");
+						alert(id);
+					})
+				}else{
+					result_tips(json.returnMsg || "获取公告信息失败！");
+					$(".ad-wrap").remove();
+				}
+			}else{
+				result_tips(json.rtnMsg || "获取公告信息失败！");
+				$(".ad-wrap").remove();
+			}
+		}else{
+			result_tips("系统错误，获取公告信息失败！");
+			$(".ad-wrap").remove();
+		}
+	})
+}
+
+function getProd(){
+	$.PostJson(srvMap.get("prod"), "", function(state, json){
+		if(state == 'success'){
+			if(json && json.rtnCode == '0'){
+				if(json.rows){
+					$("#J_prod_slide").temp($("#T_prod"), json.rows);
+					if($("#J_prod_slide ul.prod-list").length > 1){
+						$("#J_prod_slide").slidesjs({
+					        width: 1000,
+					        height: 240,
+					        navigation: false
+					    });
+					}else{
+						$("#J_prod_slide .slidesjs-navigation").remove();
+					}
+
+					$("#J_prod_slide li a").on("click", function(){
+						var id = $(this).data("id");
+						alert(id);
+					})
+					
+				}else{
+					result_tips(json.returnMsg || "获取产品信息失败！");
+					$(".block-prod").remove();
+				}
+			}else{
+				result_tips(json.rtnMsg || "获取产品信息失败！");
+				$(".block-prod").remove();
+			}
+		}else{
+			result_tips("系统错误，获取产品信息失败！");
+			$(".block-prod").remove();
+		}
+	})
+}
+
+Handlebars.registerHelper("retNewUl", function(index, fn) {
+    if(index<8){
+        return "";
+    }
+    if(index% 8 == 0){
+        return new Handlebars.SafeString("</ul><ul class='prod-list fn-clear'>");
+    }
+    return "";
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>手动分配任务</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+
+
+<body>
+<div class="formItem">
+    <div class="pt-10 pb-10"><a href="#" class="formItem_jiantou-tu normalLink">返回</a></div>
+    <div class="titleArea">
+        <h2>手动分配任务</h2>
+    </div>    
+    <div method="post" action="#" class="cmxform" >
+        <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+            <div class="record-search-cate">
+                <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label class="description">录音开始时间</label>
+                            </td>
+                            <td>
+                                <input id="param-eDate" class="element text Wdate" type="text" onFocus="WdatePicker()"  />
+                            </td>
+                            <td>
+                                <label class="description">录音结束时间</label>
+                            </td>
+                            <td>   
+                               <input id="param-eDate" class="element text Wdate" type="text"  onFocus="WdatePicker()"  />
+                            </td>
+                            <td width="100"><label class="description">任务状态</label></td>
+                            <td colspan="2" width="200">
+                                <select class="inputSelect w160">
+                                    <option>全部</option>
+                                    <option>已结束</option>
+                                    <option>已开始</option>
+                                    <option>终止</option>
+                                    <option>暂停</option>
+                                    <option>未开始</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="description">受理号码</label>
+                            </td>
+                            <td>
+                                <input  class="inputText" type="text" maxlength="255"/>
+                            </td>
+                            <td>
+                                <label class="description">受理工号</label>
+                            </td>
+                            <td>   
+                               <input  class="inputText" type="text" maxlength="255"/>
+                            </td>
+                            <td>
+                                <label class="description">受理方式</label>
+                            </td>
+                            <td>
+                                <select class="inputSelect w160">
+                                    <option>全部</option>
+                                    <option>双11促销活动服务质量检测</option>
+                                    <option>2015年6月第一周通话服务质量检测</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="description">用户号码</label>
+                            </td>
+                            <td>
+                                <input  class="inputText" type="text" maxlength="255"/>
+                            </td>
+                            <td>
+                                <label class="description">用户品牌</label>
+                            </td>
+                            <td>   
+                               <select class="inputSelect w160">
+                                    <option>全部</option>
+                                    <option>双11促销活动服务质量检测</option>
+                                    <option>2015年6月第一周通话服务质量检测</option>
+                                </select>
+                            </td>
+                            <td>
+                                <label class="description">用户地市</label>
+                            </td>
+                            <td>
+                                <select class="inputSelect w160 fn-left">
+                                    <option>全部</option>
+                                    <option>双11促销活动服务质量检测</option>
+                                    <option>2015年6月第一周通话服务质量检测</option>
+                                </select>
+                                <select class="inputSelect w160 fn-left">
+                                    <option>全部</option>
+                                    <option>双11促销活动服务质量检测</option>
+                                    <option>2015年6月第一周通话服务质量检测</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="description">任务数量</label>
+                            </td>
+                            <td colspan="5">
+                                <input  class="inputText" type="text" maxlength="255"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>       
+        </form>
+    </div>
+</div>
+<script src="../../common/frameInit.js"></script>
+<#include "../../tpl/res_js.tpl" />
+<script src="../../common/config.js"></script>
+<script src="../../common/common.js"></script>    
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+    });
+</script>
+</body>
+</html>

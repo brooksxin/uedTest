@@ -1,0 +1,49 @@
+a      <!DOCTYPE html>
+      <html>
+      <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>重置密码</title>
+          <#include "../../tpl/res_css.tpl" />
+      </head>
+      
+      <body>
+      <div class="formItem"> 
+                <table class="form_table">
+                      <tbody>
+                          <tr>
+                              <td width="90">
+                                     <label class="formDescription" style="text-align:left;">
+                                          <span class="fn-high">*</span>请输入新密码
+                                      </label>
+                               </td>
+                              <td width=""><input class="FormInputText width100" type="text" value="X10085"/></td>
+                          </tr>
+                          <tr>
+                               <td width="90">
+                                     <label class="formDescription" style="text-align:left;">
+                                          <span class="fn-high">*</span>确认密码
+                                     </label>
+                               </td>                              
+                               <td width=""><input class="FormInputText width100" type="text" value="X10085"/></td>
+                          </tr>
+                      </tbody>
+                </table>
+                <hr/>
+      </div>
+      
+      <div class="formBtnArea">
+        <div class="normalBtnArea fn-center">
+           <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" >确定</a>
+           <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_search" >取消</a>   
+        </div>
+      </div>
+      
+      <#include "../../tpl/res_js.tpl" />    
+      <script type="text/javascript">
+          //页面加载完开始执行
+          $(document).ready(function () {
+              //初始化函数
+          });
+      </script>
+      </body>
+      </html>

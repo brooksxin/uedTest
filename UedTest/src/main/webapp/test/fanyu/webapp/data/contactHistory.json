@@ -1,0 +1,19 @@
+{
+	"returnCode": "0",
+	"returnMessage": "success",
+	"amount":"3",
+	"beans":[
+		{
+			"CONTACT_ID":"1001",
+			"BGN_CNTMNG_TIME":"2015-3-12 12:14:12",
+			"STAFF_ID":"A20120",
+			"BETWEEN_TIME":66
+		},
+		{
+			"CONTACT_ID":"1001",
+			"BGN_CNTMNG_TIME":"2015-3-12 22:14:12",
+			"STAFF_ID":"A20123",
+			"BETWEEN_TIME":55
+		}
+	]
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户管理-用户列表</title>
+    <link rel="stylesheet" href="../../css/common.css"><link rel="stylesheet" href="../../css/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+
+</head>
+<body>
+
+
+
+
+
+
+
+	
+    <div class="breadcrumb">您的当前位置：<a href="#">首页</a> > <a href="#">一级模块</a> > <a href="#">二级模块</a></div>
+
+
+	
+	<div class="listTopBtn">
+    	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td><h1>员工列表</h1></td>
+            <td><div class="normalBtnArea ft-right"><a class="normalBtn BGblue" href="#">添加新员工</a></div></td>
+          </tr>
+        </table>
+    </div>
+    <div method="post" action="#" class="cmxform" >
+       <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+          <div class="record-search-cate">
+				<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+								<tbody>
+									<tr>
+										<td width="100"><label class="description">工号</label></td>
+										<td width="150">
+											<input class="inputText" type="text" maxlength="255" value=""/>
+										</td>
+                                        <td width="100"><label class="description">姓名</label></td>
+										<td width="150">
+											<input class="inputText" type="text" maxlength="255" value=""/>
+										</td>
+										<td width="100"><label class="description">所属班级</label></td>
+										<td width="150">
+										 <select class="inputSelect" >
+                                            <option>全部</option>
+                                          	<option>梦想</option>
+                                            <option>飞鸟</option>
+                                            <option>智联</option>
+                                            <option>雪狼</option>
+								         </select>                                        <td>
+                                        <div class="normalBtnArea">
+                                        	<a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a>
+                                        </div>
+										</td>
+</tr>
+								</tbody>
+				</table>
+            </div>
+        </form>
+    </div>
+    
+	
+     <div class="tablewidth mg_t_10">
+					<table class="ui-record-table table_radius table-bordered table-striped" >
+						<thead>
+							<tr>
+								<th width="50">选择</th>
+								<th width="100">工号</th>
+								<th width="50">姓名</th>
+								<th width="80">所属班级</th>
+								<th width="80">角色</th>
+								<th width="100">联系方式</th>
+								<th width="15%">操作</th>
+							</tr>
+                         </thead>
+                         <tbody id="J_tabletpl">
+                            <tr>
+                            	<td><div class="table_select"><input type="checkbox" /></div></td>
+                                <td>X009169</td>
+                                <td>黄厚生</td>
+                                <td>梦想队</td>
+                                <td>班组长</td>
+                                <td>123456789987</td>
+                                <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">编辑</a><a class="item-text" href="javascript:;">查看</a></div></td>
+                             </tr>
+                             <tr>
+                            	<td><div class="table_select"><input type="checkbox" /></div></td>
+                                <td>X009169</td>
+                                <td>黄厚生</td>
+                                <td>梦想队</td>
+                                <td>班组长</td>
+                                <td>123456789987</td>
+                                <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">编辑</a><a class="item-text" href="javascript:;">查看</a></div></td>
+                             </tr>
+                             <tr>
+                            	<td><div class="table_select"><input type="checkbox" /></div></td>
+                                <td>X009169</td>
+                                <td>黄厚生</td>
+                                <td>梦想队</td>
+                                <td>班组长</td>
+                                <td>123456789987</td>
+                                <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">编辑</a><a class="item-text" href="javascript:;">查看</a></div></td>
+                            </tr>
+						</tbody>
+					</table>
+    </div>
+    
+
+    
+    <!--翻页及功能按钮区域开始-->
+    <DIV class="amount-bottom">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+          <tr>
+            <td width="60">
+                <input type="checkbox" class="selectAll" id="selectAll" /> <label for="selectAll">全选</label> 
+            </td>
+            <td>
+                <DIV class="normalBtnArea">
+                    <A class="normalBtn BGgray" href="#">移至其他组</A>
+                    <A class="normalBtn BGblue" href="#">冻结</A>
+                    <A class="normalBtn BGblue" href="#">删除</A>
+                </DIV>
+            </td>
+            <td width="50%">
+                <DIV class="fn-clear action-other  action-other-show ">
+                        <DIV id=Pagination class="page pagination fn-right"> </DIV>
+                        <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                </DIV></td>
+          </tr>
+        </table>
+    </DIV>
+	<script src="../../lib/jquery/1.8.1/jquery.js"></script>
+<script src="../../lib/json2/1.0.0/json2.js"></script>
+<script src="../../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../../lib/handlebars/1.3.0/helpers.js"></script>
+<script src="../../lib/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="../../lib/blockUI/2.64/jquery.blockUI.js"></script>
+<script src="../../common/frameInit.js"></script>
+<script src="../../lib/dialog/4.1.7/artDialog.js"></script>
+<script src="../../lib/dialog/4.1.7/iframeTools.js"></script>
+<script src="../../common/config.js"></script>
+<script src="../../common/common.js"></script>    
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+    });
+</script>
+</body>
+</html>

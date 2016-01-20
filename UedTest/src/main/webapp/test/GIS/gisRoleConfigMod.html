@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>系统角色配置</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/helpers.js"></script>
+<!-- base64 -->
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/core-min.js"></script>
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/enc-base64-min.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body>
+<div class="openwin">
+    <form id="busi_form">
+        <table class="infoTable" cellpadding="0" cellspacing="0" border="0" width="100%">
+            <colgroup>
+                <col width="15%"/>
+                <col width="35%" />
+                <col width="15%"/>
+                <col />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td class="description">系统角色名称：</td>
+                    <td ><input class="normalinput" type="text" value="" name="gisRoleName" id="gisRoleName" /></td>
+                    <td class="description">描述信息：</td>
+                    <td ><input class="normalinput" type="text" value="" name="gisRoleDesc" id="gisRoleDesc" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <!--加载属性-->
+    <div id="mydiv"></div>
+
+    <div class="bz_btn_list">
+        <a class="ui-button ui-button-swhite" href="#nogo" id="J_save"><em>保存</em></a>
+        <a class="ui-button ui-button-swhite" href="#nogo" id="J_cancel"><em>关闭</em></a>
+    </div>
+
+</div>
+
+
+<textarea class="fn-hide" id="typeAttr_tpl">
+{{#each rows}}
+<div class="ui-box">
+    <div class="ui-box-head">
+        <h3 class="ui-box-head-title" data-nodetypeid="{{nodeTypeId}}">{{nodeType}}</h3>
+        <label class="ui-box-head-text" for="selectAll_{{@index}}">全选</label>
+        <input type="checkbox" onclick="selectAll(this);" style="float: left; height: 18px;" id="selectAll_{{@index}}" />
+        <a href="#nogo" class="ui-box-head-more" onclick="toggleDiv(this);">展开/收起</a>
+    </div>
+    <div class="ui-box-container fn-hide">
+        <div class="ui-box-content">
+            {{#each property}}
+            <input id="{{templateId}}" type="checkbox" value="{{templateId}}" name="mycheckbox" {{isSlect isBand}}  />
+            <label for="{{templateId}}">{{label}}</label>
+            {{/each}}
+        </div>
+    </div>
+</div>
+{{/each}}
+</textarea>
+
+<script type="text/javascript">
+ var id = artDialog.data("id");
+ var name=artDialog.data("name")||'';
+ var desc=artDialog.data("desc")||'';
+ var gisRoleId=id?id:"";
+
+$("#gisRoleName").val(name);
+$("#gisRoleDesc").val(desc);
+
+    $.PostJson(REQURLS.getAllTemplateByGisRoleId,"gisRoleId="+gisRoleId,function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+                $("#mydiv").temp($("#typeAttr_tpl"), json).find(".ui-box:eq(0) .ui-box-head-more").trigger("click");
+            }
+        }
+    });
+
+    $("#J_save").click(function(){
+        var beans = [];
+        var json={};
+        if(id){
+            json.gisRoleId = id;
+        }
+        json.gisRoleName = $("#gisRoleName").val();
+        json.gisRoleDesc = $("#gisRoleDesc").val();
+        _box = $("#mydiv").find(".ui-box");
+        var property = [];
+        _box.each(function(){
+            var _self = $(this);
+            
+            _self.find(".ui-box-container input[type='checkbox']").each(function(){
+                if($(this).is(":checked")){
+                    var zAttr = {};
+                    zAttr.templateId = $(this).val();
+                    zAttr.nodeTypeId = _self.find("h3").data("nodetypeid");
+                    property.push(zAttr);
+                }
+            });
+        })
+         json.property = property;
+        
+		//alert(JSON.stringify(json))
+
+        var dataP = encodeBase64(encodeURIComponent(JSON.stringify(json)));
+        if($("#gisRoleName").val()==""){
+			alert("角色名称不能为空！");
+		}else{
+			$.PostJson(REQURLS.updateGisRole,"dataP="+dataP,function(state,json){
+	            if(state=="success"){
+	                if(json&&json.returnCode=="1"){
+	                    alert("修改gis系统角色成功");
+	                    parent.gridReload("mytable");
+	                    closeDialog();
+	                }else{
+	                    alert(json.returnMessage||"配置属性失败！");
+	                }
+	            }else{
+	                alert("系统错误！");
+	            }
+	        });
+		}
+        
+    });
+    
+    
+
+
+function selectAll(obj){
+    var _self = $(obj);
+    var _checkbox = _self.parent().siblings(".ui-box-container").find("input[type='checkbox']");
+    var _flag = _self.is(":checked");
+    _checkbox.each(function(){
+        $(this).attr({"checked":_flag});
+    });
+}
+
+function toggleDiv(obj){
+    var _self = $(obj);
+    _self.parent().siblings(".ui-box-container").slideToggle();
+}
+
+Handlebars.registerHelper('isSlect', function(isBand,fn){
+    var buffer = "";
+    if(isBand=='1'){
+        buffer = "checked = true";
+    }
+    return new Handlebars.SafeString(buffer);
+});
+</script>
+
+</body>
+</html>

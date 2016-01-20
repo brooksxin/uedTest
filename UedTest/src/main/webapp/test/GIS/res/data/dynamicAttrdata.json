@@ -1,0 +1,22 @@
+{
+    "total": 126,
+    "returnCode": "1",
+    "rows": [
+        {
+            "id": "110",
+            "name": "营业厅A等待人数",
+            "url": "http://xxxxxx",
+            "key": "WAIT_NUM"
+        },{
+            "id": "111",
+            "name": "营业厅B等待人数",
+            "url": "http://yyyyyy",
+            "key": "WAIT_COUNT"
+        },{
+            "id": "113",
+            "name": "营业厅C等待人数",
+            "url": "http://zzzzzzzz",
+            "key": "WAIT_PEOPLE"
+        }
+    ]
+}

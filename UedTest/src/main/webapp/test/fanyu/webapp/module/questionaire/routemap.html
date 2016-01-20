@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="renderer" content="webkit" />
+	<meta http-equiv="X-UA-Compatible" content="IE=8,chrome=1" />
+    <title>查看路由图</title>
+    <style type="text/css">
+        body {
+            font-family: "微软雅黑", "STXihei";
+        }
+
+        .formItem {
+            margin: 0 10px;
+        }
+
+        .bd-bottom {
+            border-bottom: 2px solid #4496F0;
+        }
+
+        .titleArea {
+            font-size: 16px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-size: 100%;
+            font-weight: 300;
+        }
+
+        #flowchart-demo {
+            margin: 10px auto;
+            position: relative;
+            width: 100%;
+            background-color: white;
+            overflow: auto;
+            height: 600px;
+            font-family: georgia;
+        }
+
+        .node {
+            border: 1px solid rgba(0, 0, 0, 0.07);
+            background-color: #ddddff;
+            position: absolute;
+            -moz-border-radius: 5px; /* Gecko browsers */
+            -webkit-border-radius: 5px;
+            font-size: 12px;
+            text-align: center;
+            line-height: 20px;
+            diplay: block;
+            word-wrap: break-word;
+            overflow: hidden;
+        }
+
+        em {
+            font-style: normal;
+            color: #cc0000;
+        }
+    </style>
+    <script src="../../lib/jquery/1.9.0/jquery-1.9.0-min.js"></script>
+    <script src="../../lib/jqueryui/1.9.2/jquery-ui-1.9.2.min.js"></script>
+    <script src="../../lib/jqueryPlugin/jquery.jsPlumb/jquery.jsPlumb-1.7.5-min.js"></script>
+    <script src="../../common/questionnaire/routeplumb.js"></script>
+
+</head>
+<body>
+
+<div class="formItem bd-bottom">
+    <div class="titleArea">
+        <h2>问卷整体路由</h2>
+
+    </div>
+</div>
+<div class="formItem">
+    <div class="flowchart-demo" id="flowchart-demo"></div>
+</div>
+
+</body>
+
+</html>

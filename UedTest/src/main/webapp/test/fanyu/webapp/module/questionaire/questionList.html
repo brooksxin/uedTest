@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+      <html>
+      <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>问题库</title>
+		<#include "../../tpl/res_css.tpl" />
+      </head>
+      <body>
+      
+	<div class="breadcrumb"></div>
+	<div class="listTopBtn">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><h1>问题列表</h1></td>
+				<td><div class="normalBtnArea ft-right">
+						<a id="Creat" class="normalBtn BGblue" href="javascript:;">新建问题</a>
+					</div></td>
+			</tr>
+		</table>
+	</div>
+	
+<div method="post" action="#" class="cmxform" >
+<form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+<div class="record-search-cate">
+      <table class="search_table" width="100%">
+          <tbody>
+              <tr>
+                  <td width="80"><label class="description">问题名称</label></td>
+                  <td>
+                      <input id="QU_NM" name="QU_NM"  class="inputText" type="text"  />
+                  </td>
+                  <td width="80"><label class="description">问题类型</label></td>
+                  <td>
+                   <select id="QU_TYPE_CD" name="QU_TYPE_CD"  class="inputSelect">
+                      <option value="">全部</option>
+                      <option value="10">填空题</option>
+                      <option value="20">单项选择题</option>
+                      <option value="30">多项选择题</option>
+                      <option value="40">判断题</option>
+                      <option value="50">问答题</option>
+                      <option value="60">日期类型</option>
+                      <!-- <option value="">URL类型</option> -->
+                     <!--  <option value="0B">开场白</option>
+                      <option value="0E">结束语</option>   -->       
+                   </select>
+                  </td> 
+                  <td width="80"><label class="description">发布工号</label></td>
+                  <td>
+                       <select class="inputSelect"  id="CRT_USER_ID" name="CRT_USER_ID" >
+                       </select>
+                  </td>  
+                  <td width="100">
+				       <div class="normalBtnArea w82">
+                            <a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a>
+                        </div>
+				  </td>
+              </tr>
+              <tr>
+                  <td width="80"><label class="description">开始时间</label></td>
+                  <td><input id="BGN_DATE" name="BGN_DATE" class="element text Wdate" type="text" value="" onclick="WdatePicker({minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'END_DATE\')}'})" />
+                  <td width="80"><label class="description">结束时间</label></td>
+                  <td><input id="END_DATE" name="END_DATE" class="element text Wdate" type="text" value="" onclick="WdatePicker({minDate:'#F{$dp.$D(\'BGN_DATE\')}'})" /></td>  
+
+                  <td></td>  
+				  <td></td>                 
+                  <td></td>
+              </tr>
+          </tbody>
+      </table>
+</div>
+</form>
+
+
+
+<!--  
+<div id="T_title" class="fn-hide">
+    <h2>问题描述:</h2>
+    <table class="ui-record-table table_radius table-bordered table-striped"  >
+    <tr>
+        <td> 
+           <span id="gggtitle"></span>
+        </td>
+     </tr>
+     </table>	
+     <table class="ui-record-table table_radius table-bordered table-striped"  >
+     <tr>
+        <td>
+           <span id="ftitle"></span>
+        </td>
+     </tr>
+     <tr>
+        <td>
+           <input class="inputText" type="text" maxlength="255" value="" />
+        </td>
+     </tr>
+   </table>	
+ 
+</div>
+				
+-->		
+
+<!--预览展示 -->
+<div id="T_title" class="fn-hide">
+	<div class="qBox_preview">
+	    <div class="qBoxTitle">
+	        <div class="qDecoration">问题描述</div>
+	    </div>
+	    <div class="qDecorationTxt">
+	        <span id="gggtitle"></span>
+	    </div>
+	    <div class="qContent">
+	        <!--编辑时展示内容-->
+	         <div class="editContent">
+	             <div class="qDecoration">问题内容</div>
+	             <div class="qTitle"><span id="ftitle"></span></div>
+	             <div class="qAnswerEdit">
+	                 <ul id="J_qAnswerEdit" class="fn-clear">
+	                 	
+	                 </ul>
+	             </div>
+	         </div>
+	    </div>
+	</div>
+</div>		
+				
+<div class="tablewidth mg_t_10">
+    <table class="ui-record-table table_radius table-bordered table-striped"  >
+        <thead>
+            <tr>
+                <th>问题名称</th>
+                <th width="80">问题类型</th>
+                <th width="120">发布时间</th>
+                <th width="80">发布来源</th>
+                <th width="80">问题状态</th>
+                <th width="180">操作</th>
+            </tr>
+         </thead>
+         <tbody id="J_tabletpl">                    
+        </tbody>
+    </table>
+</div>
+          
+          
+ <!--翻页及功能按钮区域开始-->
+<DIV class="amount-bottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+      <tr>
+        <td>
+            <DIV class="fn-clear action-other  action-other-show ">
+                    <DIV id=Pagination class="page pagination fn-right"> </DIV>
+                    <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+            </DIV></td>
+      </tr>
+    </table>
+</DIV>
+    <script id="T_tabletpl" type="text/x-handlebars-template">
+    {{#if beans}}
+        {{#each beans}}
+            <tr>
+                <td>{{QU_NM}}</td>
+                <td>{{QU_TYPE_CD}}</td>
+                <td>{{MODF_TIME}}</td>
+                <td>{{PTY_NO}}</td>
+                <td>{{QU_STS_CD}}</td>
+                <td width="90">
+                    <div class="gridRowBtn" data='{{dataToJSON this}}'>
+                       {{isInto QU_STS_CD  QU_ID  QU_TYPE_CD}}
+                    </div>
+                </td>
+            </tr>
+         {{/each}}
+    {{else}}
+	    <tr>
+		    <td colspan="8">
+			    <div class="ui-tips-box tipsBox">
+				     <div class="ui-icon-noData"></div>
+				     <div class="ui-tips-text">暂无数据记录！</div>
+			   </div>
+		    </td>
+	    </tr>
+
+    {{/if}}
+</script>
+<script id="T_CRT_USER_ID" type="text/x-handlebars-template">
+		<option value="">请选择</option>
+		{{#if beans}}
+            {{#each beans}}
+                 <option value="{{USER_ID}}">{{PTY_NO}} {{PTY_NM}}</option>
+             {{/each}}
+   		{{/if}}
+</script>
+    	
+<#include "../../tpl/res_js.tpl" />   
+      <script type="text/javascript">
+          srvMap.add('query' , 'market/activity.json','front/sh/question!index?uid=mys001');
+          srvMap.add('dele','market/activity.json','front/sh/question!index?uid=mys004');
+          srvMap.add('queryUser' , 'query.json','front/sh/user!userinfo?uid=u005');
+          srvMap.add('updatedata' , 'query.json','front/sh/question!index?uid=mys003');
+          srvMap.add('queryAnswer', 'query.json', 'front/sh/question!index?uid=mys005');//查询答案的服务
+          
+          srvMap.add('tktdele','market/activity.json','front/sh/question!index?uid=qnrTKT002');//填空题删除
+          srvMap.add('wdtdele','market/activity.json','front/sh/question!index?uid=qnrWDT002');//问答题删除
+          srvMap.add('end','market/activity.json','front/sh/question!index?uid=qnrTKT003');//使用填空题 的作废
+          
+          var G_params = {
+        		    url : srvMap.get('query'),
+        		    searchformId :"J_formSearch",
+        		    items_per_page : 10 ,   // 每页数     @param : limit
+        		    page_index : 0 , //当前页  @param : start
+        		    pagination : "Pagination" , //分页id
+        		    tabletpl : "T_tabletpl",  //表格模板
+        		    tablewrap :"J_tabletpl" //表格容器
+        		};
+          //页面加载完开始执行
+          $(document).ready(function () {
+          
+              //新建问题
+              $('#Creat').bind('click',function(){
+                  //To do跳转到新建页面
+                  window.location.href="newQuChsType.html"; 
+              });
+          
+          
+              //初始化函数
+              var cmd={
+    			  "DEPT_ID": 1000000000106 
+    	  };
+    	  Util.ajax.postJson(srvMap.get('queryUser'),cmd,function(json,status){
+    		  if(status){
+    		  		Util.ajax.loadTemp("#CRT_USER_ID",$("#T_CRT_USER_ID"),json);
+    		  }else{
+    			  
+    		  }
+    	  });
+              
+        	  var str= $("#"+G_params.searchformId).serialize();
+        	  Util.pagination(0, true , G_params , str );
+        	  
+        	  
+        	  $('#J_search').bind('click',function(){
+        		  	var str= $("#"+G_params.searchformId).serialize();
+        	        Util.pagination(G_params.page_index, true , G_params , str );
+        	  });   
+        	  
+        	  
+        	  $('#J_tabletpl').on('click', '.copy', copy2);
+
+
+	//预览问题
+	$('#J_tabletpl').on('click', '.watch', function (e) {
+	 
+	    var dialog = document.getElementById("T_title") || top.document.getElementById("T_title");
+	    var params = {
+	        //top: top,
+	        title: '问题预览',
+	        content: dialog,
+	        width: 600,
+	        height: 350,
+	        cancelVal: '取消',
+	        cancelCallback: function () {
+	            $("#J_qAnswerEdit").empty();
+	            //$("#gggtitle").html("ooo");
+	        }
+	    }
+	    Util.dialog.openDiv(params);
+	 
+	    var json = JSON.parse($(e.currentTarget).parent().attr('data'));
+	   	//console.log(json);	
+	    $("#gggtitle").html(json.QU_DESC);
+	    $("#ftitle").html(json.QU_NM);
+	 
+	    if (json.QU_TYPE_CD == "单选题") {
+	        var cmd = {"QU_ID": json.QU_ID};
+	        var str=""
+	        Util.loading.create($("#J_qAnswerEdit"));
+	        Util.ajax.postJson(srvMap.get("queryAnswer"), cmd, function (data) {
+	            if (data.returnCode == 0) {
+	                var beans = data.beans;
+	                for (var i = 0; i < beans.length; i++) {
+	                    str += "<li><i class=\"listIndex\">" + beans[i].NOTO + "</i>" + beans[i].ASWR_CNTT +"</li>";
+	                }
+	                $("#J_qAnswerEdit").html(str);
+	                Util.loading.close($("#J_qAnswerEdit"));
+	            }
+	        });
+	        
+	 
+	    } else if (json.QU_TYPE_CD == "判断题") {
+	        var cmd = {"QU_ID": json.QU_ID};
+	        var str=""
+	        Util.loading.create($("#J_qAnswerEdit"));
+	        Util.ajax.postJson(srvMap.get("queryAnswer"), cmd, function (data) {
+	            if (data.returnCode == 0) {
+	                var beans = data.beans;
+	                for (var i = 0; i < beans.length; i++) {
+	                    str += "<li><i class=\"listIndex\">" + beans[i].NOTO + "</i>" + beans[i].ASWR_CNTT +"</li>";
+	                }
+	                $("#J_qAnswerEdit").html(str);
+	                Util.loading.close($("#J_qAnswerEdit"));
+	            }
+	        });
+	    } else if (json.QU_TYPE_CD == "多选题") {
+	        var cmd = {"QU_ID": json.QU_ID};
+	        var str=""
+	        Util.loading.create($("#J_qAnswerEdit"));
+	        Util.ajax.postJson(srvMap.get("queryAnswer"), cmd, function (data) {
+	            if (data.returnCode == 0) {
+	                var beans = data.beans;
+	                for (var i = 0; i < beans.length; i++) {
+	                    str += "<li><i class=\"listIndex\">" + beans[i].NOTO + "</i>" + beans[i].ASWR_CNTT +"</li>";
+	                }
+	                $("#J_qAnswerEdit").html(str);
+	                Util.loading.close($("#J_qAnswerEdit"));
+	            }
+	        });
+	    } else if (json.QU_TYPE_CD == "填空题") {
+	 
+	    } else if (json.QU_TYPE_CD == "问答题") {
+	 
+	    } else if (json.QU_TYPE_CD == "日期题") {
+	 
+	    } else {
+	 
+	    }
+	});
+
+
+
+
+        	  
+});
+          
+          
+      
+          
+          var copy2 = function(e){
+        	  
+        	  var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要复制吗？</div></div></div>'
+              );
+        	  var json = JSON.parse($(e.currentTarget).parent().attr('data'));
+        	  var cmd={
+        			  "QU_NM":json.QU_NM,
+        			  "QU_TYPE_CD":json.QU_TYPE_CD,
+        			  "QU_CNTT":json.QU_CNTT,
+        			  "QU_DESC":json.QU_DESC,
+        			  "QU_STS_CD":"10D",
+        			  "QU_SHARE_TYPE_CD":"0"
+        	  };
+
+              var params = {
+                  top:top,
+                  content: elem,
+                  width: "300px",
+                  height: "120px",
+                  modal: true,
+                  okVal:'确定',
+                  okCallback:function(){
+                  
+                     if(json.QU_TYPE_CD=="单选题"){
+                	      //window.location.href="choiceQuestion.html?COPY_QU_ID="+json.QU_ID;
+                	      top.$('#J_busi_iframe').attr('src','../questionaire/choiceQuestion.html?COPY_QU_ID='+json.QU_ID);
+                    //	 window.location.href="choiceQuestion.html?COPY_QU_ID="+json.QU_ID;
+                	 }else if(json.QU_TYPE_CD=="判断题"){
+                	     //window.location.href="judgmentQuestion.html?COPY_QU_ID="+json.QU_ID;
+                	    top.$('#J_busi_iframe').attr('src','../questionaire/judgmentQuestion.html?COPY_QU_ID='+json.QU_ID);
+                	//	 window.location.href="judgmentQuestion.html?COPY_QU_ID="+json.QU_ID;
+                	 }else if(json.QU_TYPE_CD=="多选题"){
+                		 top.$('#J_busi_iframe').attr('src','../questionaire/moreChoiceQuestion.html?COPY_QU_ID='+json.QU_ID);
+                	//	 window.location.href="moreChoiceQuestion.html?COPY_QU_ID="+json.QU_ID;
+                	 }else if(json.QU_TYPE_CD=="填空题"){
+                	     top.$('#J_busi_iframe').attr('src','../questionaire/tktQuestion.html?COPY_QU_ID='+json.QU_ID);
+                	     //window.location.href="tktQuestion.html?COPY_QU_ID="+json.QU_ID;
+                	 }else if(json.QU_TYPE_CD=="问答题"){
+                	 	top.$('#J_busi_iframe').attr('src','../questionaire/wdtQuestion.html?COPY_QU_ID='+json.QU_ID);
+                	    //window.location.href="wdtQuestion.html?COPY_QU_ID="+json.QU_ID;
+                	 }else if(json.QU_TYPE_CD=="日期题"){
+                		 top.$('#J_busi_iframe').attr('src','../questionaire/addDateQuestion.html?COPY_QU_ID='+json.QU_ID);
+                	     //window.location.href="addDateQuestion.html?COPY_QU_ID="+json.QU_ID;
+                	    //  alert("开发中 请耐心等待。。。。。。")
+                	 }else{
+                	      alert("该问题类型不能复制")
+                	 }
+                	   
+                      /*
+                	  Util.ajax.postJson(srvMap.get("insert"), cmd,function(json){
+                		  if (json.returnCode == 0) {
+                			  var str= $("#"+G_params.searchformId).serialize();
+                  	          Util.pagination(G_params.page_index, true , G_params , str );                			  
+                		  }else{
+                			  Util.dialog.tips("复制失败！");
+                		  }
+                	  
+                      });
+                      */
+                       
+                  },
+                  cancelVal:'取消',
+                  cancelCallback:function(){}
+                }
+
+                Util.dialog.openDiv(params);
+          };
+          
+          function update(QU_ID,QU_TYPE_CD){
+               //alert("编辑:"+QU_TYPE_CD+" "+QU_ID);
+        	   //进入到编辑页面
+        	   if(QU_TYPE_CD=="单选题"){
+                   window.location.href="choiceQuestion.html?QU_ID="+QU_ID;    
+               }else if(QU_TYPE_CD=="判断题"){
+                   //window.location.href="judgmentQuestion.html?COPY_QU_ID="+json.QU_ID;
+                   window.location.href="judgmentQuestion.html?QU_ID="+QU_ID;                 
+               }else if(QU_TYPE_CD=="多选题"){
+                   //window.location.href="wdtQuestion.html?COPY_QU_ID="+json.QU_ID;
+                   window.location.href="moreChoiceQuestion.html?QU_ID="+QU_ID;;
+                
+               }else if(QU_TYPE_CD=="填空题"){
+                   window.location.href="tktQuestion.html?QU_ID="+QU_ID;
+               }else if(QU_TYPE_CD=="问答题"){
+                   window.location.href="wdtQuestion.html?QU_ID="+QU_ID;
+               }else if(QU_TYPE_CD=="日期题"){
+                   window.location.href="addDateQuestion.html?QU_ID="+QU_ID;
+                //   alert("开发中 请耐心等待。。。。。。")
+               }else{
+                   alert("该问题类型不能复制")
+               }
+          };
+          
+          function end(QU_ID,QU_TYPE_CD){
+        	  var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要废止吗？</div></div></div>'
+              );
+
+              var params = {
+                  top:top,
+                  content: elem,
+                  width: "300px",
+                  height: "120px",
+                  modal: true,
+                  okVal:'确定',
+                  okCallback:function(){
+                	  var cmd={
+                			  "QU_ID":QU_ID,
+                			  "QU_STS_CD":"10X"  
+                	  };
+                	  Util.ajax.postJson(srvMap.get("updatedata"), cmd,function(json){
+                		  if (json.returnCode == 0) {
+                			  var str= $("#"+G_params.searchformId).serialize();
+                  	          Util.pagination(G_params.page_index, true , G_params , str );
+     			  
+                		  }else{
+                			  Util.dialog.tips("废止失败！");
+                		  }
+                	  
+                      });
+                       
+                  },
+                  cancelVal:'取消',
+                  cancelCallback:function(){}
+                }
+                Util.dialog.openDiv(params);
+        	  
+          };
+          
+          function dele(QU_ID,QU_TYPE_CD){
+        	  var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要删除吗？</div></div></div>'
+              );
+
+              var params = {
+                  top:top,
+                  content: elem,
+                  width: "300px",
+                  height: "120px",
+                  modal: true,
+                  okVal:'确定',
+                  okCallback:function(){
+                	  var cmd={
+                			  "QU_ID":QU_ID  
+                	  };
+                	  
+                	 if(QU_TYPE_CD=="单选题" ||QU_TYPE_CD=="判断题" ||QU_TYPE_CD=="多选题"){
+                	     Util.ajax.postJson(srvMap.get("dele"), cmd,function(json){
+                		     if (json.returnCode == 0) {
+                			     var str= $("#"+G_params.searchformId).serialize();
+                  	             Util.pagination(G_params.page_index, true , G_params , str );
+                		     }else{
+                			     Util.dialog.tips("删除失败！");
+                		     }
+                          });
+                	 }else if(QU_TYPE_CD=="填空题"){
+                	      Util.ajax.postJson(srvMap.get("tktdele"), cmd,function(json){
+                		     if (json.returnCode == 0) {
+                			    var str= $("#"+G_params.searchformId).serialize();
+                  	             Util.pagination(G_params.page_index, true , G_params , str );
+                		     }else{
+                			     Util.dialog.tips("删除失败！");
+                		     }
+                          });
+                	 }else if(QU_TYPE_CD=="问答题"||QU_TYPE_CD=="日期题"){
+                	      Util.ajax.postJson(srvMap.get("wdtdele"), cmd,function(json){
+                		     if (json.returnCode == 0) {
+                			    var str= $("#"+G_params.searchformId).serialize();
+                  	             Util.pagination(G_params.page_index, true , G_params , str );
+                		     }else{
+                			     Util.dialog.tips("删除失败！");
+                		     }
+                          });
+                	 }else{
+                	      alert("该问题类型不能删除")
+                	 }
+                	  
+                	  
+                	  
+                	  
+                	  /*
+                	  Util.ajax.postJson(srvMap.get("dele"), cmd,function(json){
+                		  if (json.returnCode == 0) {
+                			  
+                		  }else{
+                			  Util.dialog.tips("删除失败！");
+                		  }
+                	  
+                      });
+                      */
+                       
+                  },
+                  cancelVal:'取消',
+                  cancelCallback:function(){}
+                }
+
+                Util.dialog.openDiv(params);
+ 
+          };
+          
+          Handlebars.registerHelper("isInto", function(QU_STS_CD,QU_ID,QU_TYPE_CD){
+        	  var buffer = "";
+        	  switch(QU_STS_CD){
+        	  case "新建":  
+        		  buffer ='<a class="item-text watch"  href="javascript:;" >预览</a><a class="item-text copy" href="javascript:;" >复制</a><a class="item-text" href="javascript:;" onclick="update('+"'"+QU_ID+"','"+QU_TYPE_CD+"'"+')">编辑</a><a class="disable-text" href="javascript:;" >作废</a><a class="item-text" href="javascript:;" onclick="dele('+"'"+QU_ID+"','"+QU_TYPE_CD+"'"+')">删除</a>';  	  
+        	  break;
+        	  case "发布":  
+        		  buffer ='<a class="item-text watch"  href="javascript:;" >预览</a><a class="item-text copy " href="javascript:;">复制</a><a class="disable-text"  href="javascript:;" >编辑</a><a class="item-text"  href="javascript:;" onclick="end('+"'"+QU_ID+"','"+QU_TYPE_CD+"'"+')">作废</a><a class="disable-text"  href="javascript:;" >删除</a>';
+        	  break;
+        	  case "失效":  
+        		  buffer ='<a class="item-text watch"  href="javascript:;" >预览</a><a class="item-text  copy" href="javascript:;" >复制</a><a class="disable-text"  href="javascript:;" >编辑</a><a class="disable-text"  href="javascript:;" >作废</a><a class="disable-text"  href="javascript:;" >删除</a>';
+        	  break;
+        	  }
+        	  return new Handlebars.SafeString(buffer);
+        	  
+          });
+          Handlebars.registerHelper('dataToJSON', function(obj) {
+        	    return JSON.stringify(obj);
+        	  });
+      </script>
+      </body>
+      </html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>select</title>
+<#include "../../tpl/res_css.tpl" />
+<link href="../../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+</head>
+<body id="main_body" onload="prettyPrint()" >
+	<div id="J_select"></div>
+	<div id="J_select2">
+		<select class="element text" id="element_3" name="element_3" ><option>请选择</option></select>
+	</div>
+	<div id="J_select3">
+		<select class="element text" id="element_3" name="element_3" ><option>请选择</option></select>
+	</div>
+
+	<pre class="prettyprint mg_t_20 fn-clear" id="html">
+
+	&lt;div id="J_select"&gt;&lt;/div&gt;
+
+	&lt;div id=&quot;J_select2&quot;&gt;
+		&lt;select class=&quot;element text&quot; id=&quot;element_3&quot; name=&quot;element_3&quot; &gt;&lt;option&gt;请选择&lt;/option&gt;&lt;/select&gt;
+	&lt;/div&gt;
+
+	&lt;div id=&quot;J_select3&quot;&gt;
+		&lt;select class=&quot;element text&quot; id=&quot;element_3&quot; name=&quot;element_3&quot; &gt;&lt;option&gt;请选择&lt;/option&gt;&lt;/select&gt;
+	&lt;/div&gt;
+
+		$("#J_select").NiceSelect({
+			url:"../data/selectDatas",
+			datas:"codeType=test",
+			id:"testId",
+			name:"testId",
+	        key :"value",
+	        value:"text",
+			handler:function(){
+				var txt = $(this).val();
+				loadSubSelect(txt);//加载二级select
+			}
+		});
+
+		function loadSubSelect(id){
+			$("#J_select2").NiceSelect({
+				url:"../data/selectDatas",
+				datas:"codeType=test&id="+id,
+				id:"testId1",
+				name:"testId1",
+		        key :"value",
+		        value:"text",
+				handler:function(){
+					var txt = $(this).val();
+					loadSubSelect2(txt);//加载二级select
+				}
+			});
+		}
+		
+		function loadSubSelect2(id){
+			$("#J_select3").NiceSelect({
+				url:"../data/selectDatas",
+				datas:"codeType=test&id="+id,
+				id:"testId2",
+				name:"testId2",
+		        key :"value",
+		        value:"text",
+				handler:function(){
+					var txt = $(this).val();
+				}
+			});
+		}
+	</pre>
+</div>
+
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript" src="../../lib/pretty/prettify.js"></script>
+<script>
+$(function(){
+	$("#J_select").NiceSelect({
+		url:"../../data/selectDatas.json",
+		datas:"codeType=test",
+		id:"testId",
+		name:"testId",
+        key :"value",
+        value:"text",
+		handler:function(){
+			var txt = $(this).val();
+			loadSubSelect(txt);//加载二级select
+		}
+	});
+
+	function loadSubSelect(id){
+		$("#J_select2").NiceSelect({
+			url:"../../data/selectDatas.json",
+			datas:"codeType=test&id="+id,
+			id:"testId1",
+			name:"testId1",
+	        key :"value",
+	        value:"text",
+			handler:function(){
+				var txt = $(this).val();
+				loadSubSelect2(txt);//加载二级select
+			}
+		});
+	}
+	
+	function loadSubSelect2(id){
+		$("#J_select3").NiceSelect({
+			url:"../../data/selectDatas.json",
+			datas:"codeType=test&id="+id,
+			id:"testId2",
+			name:"testId2",
+	        key :"value",
+	        value:"text",
+			handler:function(){
+				var txt = $(this).val();
+			}
+		});
+	}
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>充值</title>
+<link rel="stylesheet" type="text/css" href="hum.css">
+<script type="text/javascript" src="jquery.js"></script>
+
+<style type="text/css">
+
+.cz-block {
+	background: url(img/cz_2.png) 0 0 repeat-x;
+}
+
+/* 清理浮动 */
+.fn-clear:after {
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+}
+.fn-clear {
+    zoom:1; /* for IE6 IE7 */
+}
+
+/* 隐藏, 通常用来与 JS 配合 */
+.fn-hide {
+    display:none;
+}
+
+/* 设置内联, 减少浮动带来的bug */
+.fn-left,
+.fn-right {
+    display:inline;
+}
+.fn-left {
+    float:left;
+}
+.fn-right {
+    float:right;
+}
+
+/* 单行文字溢出时出现省略号，需设定宽度 */ 
+.fn-text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.left {
+	width: 40%;
+	padding: 20px;
+}
+.bigImg {
+	margin-top: 30px;
+	width: 310px;
+}
+.right ul {
+	display: inline-block;
+	margin: 20px 0 0 130px;
+}
+.right ul li {
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+.tit {
+	font-size: 24px;
+	margin-bottom: 15px;
+	padding-left: 10px;
+}
+.phoneNum {
+	border: 2px solid #8A2BA1;
+	padding: 10px;
+	width: 300px;
+	margin-bottom: 65px;
+	font-size: 26px;
+}
+.payInfo {
+	background: #8A2BA1;
+	width: 300px;
+	color: #fff;
+	font-size: 26px;
+	text-align: center;
+	border-radius: 10px;
+}
+.count {
+	font-size: 36px;
+}
+.gotoPay {
+	background: url(img/cz_3_1.png) 0 0 no-repeat;
+	width: 30px;
+	height: 30px;
+	display: block;
+	position: absolute;
+	left: 280px;
+	top: 92px;
+}
+.gotoPay:hover {
+	background: url(img/cz_3_2.png) 0 0 no-repeat;
+}
+</style>
+
+</head>
+<body>
+
+<div class="cz-block fn-clear">
+	<div class="fn-left left">
+		<p class="tit">手 机 号</p>
+		<input type="text" value="" class="phoneNum" name="phoneNum" maxlength="11" />
+		<a href="javascrpt:;" hidefocus="true" class="gotoPay"></a>
+		<p class="payInfo">
+			<span>实 际 支 付</span>
+			<span class="count">9.80</span>
+			<span>元</span>
+		</p>
+	</div>
+	<div class="fn-left right fn-clear">
+		<img src="img/cz_2_10.png" class="bigImg fn-left">
+		<input id="total" name="total" value="10" type="hidden" />
+		<ul class="fn-left list">
+			<li><img src="img/cz_1_10.png" data-bigimg="img/cz_2_10.png" data-count="9.80" data-total="10" /></li>
+			<li><img src="img/cz_1_50.png" data-bigimg="img/cz_2_50.png" data-count="49.20" data-total="50" /></li>
+			<li><img src="img/cz_1_100.png" data-bigimg="img/cz_2_100.png" data-count="98.80" data-total="100" /></li>
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+(function($){
+    $.extend({
+        PostJson: function(url, datas , callback) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data : datas +"&_=" + (new Date()).getTime(),
+                cache: false,
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.overrideMimeType("text/plain; charset=utf-8");
+                },
+                success: function(json) {
+                    callback("success", json);
+                },
+                error: function(e) {
+                    callback("error", null);
+                }
+            });
+        }
+    });
+})(jQuery);
+
+$(function(){
+	$(".cz-block .list li").click(function(){
+		var _src = $(this).find("img").data("bigimg");
+		var _count = $(this).find("img").data("count");
+		var _total = $(this).find("img").data("total");
+		$(this).parent().siblings().attr({"src": _src});
+		$(".cz-block .count").text(_count);
+		$("#total").val(_total);
+	});
+	$(".cz-block .phoneNum").bind('keyup',function(e){
+    	var _self = $(this);
+    	var newVal = _self.val().replace(/[^\d]/g,'');
+    	_self.val(newVal);
+        if(e.which==13){
+            $(".cz-block .gotoPay").click(); 
+            return false;
+        }
+    })
+	$(".cz-block .gotoPay").click(function(){
+		var phoneNum = $(".cz-block .phoneNum").val();
+		if(phoneNum.length == '11'){
+			var total = $("#total").val();//注：页面可直接修改，方法不好
+			$.PostJson("test.json?1=1", "phoneNum="+phoneNum+"&total="+total, function(state,json){
+				if(state=='success'){
+					if(json){
+						alert("充值成功！");
+					}
+				}
+			});
+		}
+	})
+})
+
+</script>
+</body>
+</html>

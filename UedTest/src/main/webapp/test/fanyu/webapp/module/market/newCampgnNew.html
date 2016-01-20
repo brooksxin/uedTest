@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>创建项目</title> 
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+	<div class="formItem">
+		<div class="titleArea bd-bottom fn-clear">
+			<a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a>
+			<h2 class="ui-textIndentStyle fn-left">创建新项目</h2>
+		</div>
+
+
+		<div class="flowSteps_six">
+			<!--第二步样式改为current_2-->
+			<ul class="current_1 fn-clear">
+				<li class="FirstStep"><a href="javascript:;">基本信息</a></li>
+				<li class="SecondStep"><a href="javascript:;">选择商品</a></li>
+				<li class="ThirdStep"><a href="javascript:;">添加问卷</a></li>
+				<li class="FourStep"><a href="javascript:;">目标客户</a></li>
+				<li class="FiveStep"><a href="javascript:;">执行团队</a></li>
+			</ul>
+		</div>
+
+
+
+		<div class="formAreaB_dashed">
+		<form id="J_form_activity">
+			<table class="form_table mt-10" width="100%">
+				<tr>
+				
+					<td width="90"><span class="fn-high">*</span> 项目名称</td>
+					<td><input type="hidden" id="CMPGN_ID" name="CMPGN_ID" class="FormInputText w314" />
+					<input type="text" id="CMPGN_NM" name="CMPGN_NM" class="FormInputText w314"
+						 /></td>
+				</tr>
+				<tr>
+					<td ><span class="fn-high">*</span>执行渠道</td>
+					<td><select class="selectStyle w160" id="BELG_CHNL_ID1" name="BELG_CHNL_ID1">
+							<option>请选择</option>
+					</select>
+					<select class="selectStyle w160 fn-hide" id="BELG_CHNL_ID" name="BELG_CHNL_ID">
+					        <option >请选择</option>
+					</select>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="fn-high">*</span>项目归属</td>
+					<td><select class="selectStyle w160" id="BELG_BRNCH_ID1" name="BELG_BRNCH_ID1">
+							 <option >请选择</option>
+					</select>
+					<!-- <select class="selectStyle w160" id="BELG_BRNCH_ID" name="BELG_BRNCH_ID">
+							 <option >请选择</option>
+					</select> -->
+					</td>
+				</tr>
+				<tr>
+					<td><span class="fn-high">*</span>项目类型</td>
+					<td><select class="selectStyle w160" id="CMPGN_TYPE_CD1" name="CMPGN_TYPE_CD1">
+							 <option >请选择</option>
+					</select> <select class="selectStyle w160" id="CMPGN_TYPE_CD" name="CMPGN_TYPE_CD">
+							 <option >请选择</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><span class="fn-high">*</span>起止时间</td>
+					<td colspan="3"><input style="width:150px" id="CMPGN_EFF_DATE" name="CMPGN_EFF_DATE" class="text Wdate" type="text"
+                           onclick="WdatePicker({startDate:'%y-%M-%d',realDateFmt:'yyyy-MM-dd 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{\'%y-%M-%d 00:00:00\'}',maxDate:'#F{$dp.$D(\'CMPGN_INVLD_DATE\')}',vel:'CREATE_DATE'})"
+                           />
+                    <input type="text" size="20" name='CREATE_DATE' id="CREATE_DATE" class="fn-hide"/>
+                                                   至
+                    <input id="CMPGN_INVLD_DATE"  style="width:150px" class="text Wdate" name="CMPGN_INVLD_DATE" type="text"
+                           onclick="WdatePicker({realDateFmt:'yyyy-MM-dd 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'CMPGN_EFF_DATE\',{d:1})||\'2010-01-01 23:59:59\'}',vel:'FIELD_D1'})"
+                           />
+                    <input type="text" name='FIELD_D1' id="FIELD_D1" class="fn-hide"/></td>
+				</tr>
+				<tr>
+					<td width="90" valign="top"><span class="fn-high">*</span>项目描述</td>
+					<td><textarea class="form_textarea" id="CMPGN_DESC" name="CMPGN_DESC" maxlength="500" onKeyDown="chekckLength()"
+					onKeyUp="chekckLength();" onPaste="chekckLength();" onpropertychange="chekckLength();"></textarea></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="txt_gray" id="txt_gray">最多可输入500字</td>
+				</tr>
+
+			</table>
+			</form>
+
+		</div>
+
+
+	</div>
+	<script type="text/javascript">
+	//检测项目描述中的字数限制
+	function chekckLength(){
+		var value=document.getElementById('CMPGN_DESC').value;
+		if(value.length>500){
+			document.getElementById('CMPGN_DESC').value=document.getElementById('CMPGN_DESC').value.substr(0,500);
+		}else{
+			document.getElementById('txt_gray').innerHTML = "您还可以输入"+(500 -value.length)+"个字";
+		}
+	}
+	//检测日期格式
+            		function checkDate(fname){ 
+            			var s = fname; 
+            			var reg=/^(\d{4})-([0-1]\d)-([0-3]\d)\s([0-5]\d):([0-5]\d):([0-5]\d)$/; 
+            			//var reg=/^(\d{4})-(\d{2})-(\d{2})$/; 
+            			if(!reg.test(s)){ 
+            				Util.dialog.tips("请输入正确的日期格式(例如:2020-08-20 09:09:20)");
+            				return false;
+            			}else{ 
+            				return true;
+            				} 
+            			} 
+      </script>
+
+	<div class="formBtnArea bd-top">
+		<table width="100%">
+			<tr>
+				<td>
+					<div class="normalBtnArea">
+						<a class="normalBtn BGblue largeBtn" href="javascript:;" id="Next">下一步</a>
+						<a class="normalBtn BGgray largeBtn" href="javascript:;" id="Save">保存</a>
+					</div>
+				</td>
+				<td>
+					<div class="normalBtnArea fn-right">
+						<a href="#" class="formLink" id="CanCelCreate"><span>取消创建</span></a>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<#include "../../tpl/res_js.tpl" />
+
+	<script type="text/javascript">
+    srvMap.add('insert', 'query.json', 'front/sh/market!index?uid=my002');//插入草稿的服务
+    srvMap.add('query', 'query.json', 'front/sh/market!index?uid=my004');//查询草稿的服务
+    srvMap.add('update', 'query.json', 'front/sh/market!index?uid=my006');//更新草稿的服务
+    srvMap.add('queryChnl', 'query.json', 'front/sh/user!getChnl?uid=u003');//获取渠道列表
+    srvMap.add('queryDept', 'query.json', 'front/sh/user!userinfo?uid=u011');//查询所属机构列表
+    srvMap.add('queryType', 'query.json', 'front/sh/common!execute?uid=cwt001');//查询营销项目类型代码
+    srvMap.add('queryRever', 'query.json', 'front/sh/user!userinfo?uid=u008');//根据结果查询出所属上级
+    srvMap.add('queryRole', 'query.json', 'front/sh/login!getRole?uid=l001');//根据结果查询出所属上级
+       
+    var params = null;
+    var campId = "";
+    
+    //页面加载完开始执行
+    $(document).ready(function () {  
+    	//渠道初始化
+    	var json = null;
+    	var bean=null;
+    	$J_prov=$("#BELG_CHNL_ID1");
+    	$J_city=$("#BELG_CHNL_ID");
+    	var paramchel={"chnlType":"1"};
+		Util.ajax.postJsonSync(srvMap.get("queryChnl"),paramchel,function(json1,status){
+			json=json1.object;
+			//console.log(json);
+			//json=[{"PTY_NM":"10085电话营销","PTY_LVL_CD":"01","CHNL_ID":"1001"},{"PTY_NM":"社会代理","PTY_LVL_CD":"01","CHNL_ID":"1010","subList":[{"PTY_NM":"众包平台","PTY_LVL_CD":"02","CHNL_ID":"1012"}]}]
+			for (var i = 0; i < json.length; i++) {
+				$J_prov.append("<option value='"+json[i]['CHNL_ID']+"'>"+json[i]['PTY_NM']+"</option>");
+			};
+		})
+
+		$J_prov.on('change',function(){
+			$J_city.empty();
+			var select_val = $(this).children('option:selected').val();
+				for (var i = 0; i < json.length; i++) {
+					if(select_val==json[i]['CHNL_ID']){
+						var secondjson=json[i].subList;
+						if(secondjson!=null&&secondjson!='undefined'){
+							$J_city.show();
+							for (var j = 0; j < secondjson.length; j++) {
+								$J_city.append("<option value='"+secondjson[j]['CHNL_ID']+"'>"+secondjson[j]['PTY_NM']+"</option>");
+							}
+						}else{
+							$J_city.hide();
+						}
+					}
+					if(select_val=='请选择'){
+						$J_city.hide();
+						$J_city.append("<option >请选择</option>");
+					}
+						
+				};
+			
+		});
+		
+		//所属机构初始化
+		var jsonDpet = null;
+    	$J_chan=$("#BELG_BRNCH_ID1");
+    	$J_chanseconde=$("#BELG_BRNCH_ID");
+		Util.ajax.postJsonSync(srvMap.get("queryDept"),'',function(json1,status){
+			jsonDpet=json1.object;
+			//console.log(json1);
+			//debugger;
+			//console.log(jsonDpet);
+			if(jsonDpet.length != 0){
+				for (var i = 0; i < jsonDpet.length; i++) {
+				$J_chan.append("<option value='"+jsonDpet[i]['TGT_PTY_ID']+"'>"+jsonDpet[i]['PTY_NM']+"</option>");
+				};
+			}
+
+		})
+
+		/* $J_chanseconde.on('change',function(){
+			$J_city.empty();
+			var select_val = $(this).children('option:selected').val();
+			alert(select_val);
+				for (var i = 0; i < jsonDpet.length; i++) {
+					if(select_val==jsonDpet[i]['CHNL_ID']){
+						var secondjson=jsonDpet[i].subList;
+						//console.log(secondjson);
+						if(secondjson!=null&&secondjson!='undefined'){
+							$J_chanseconde.show();
+							for (var j = 0; j < secondjson.length; j++) {
+								$J_chanseconde.append("<option value='"+secondjson[j]['CHNL_ID']+"'>"+secondjson[j]['PTY_NM']+"</option>");
+							}
+						}else{
+							$J_chanseconde.hide();
+						}
+					}
+					if(select_val=='请选择'){
+						$J_chanseconde.show();
+						$J_chanseconde.append("<option >请选择</option>");
+					}
+						
+				};
+			
+		}); */
+		
+		//营销类型初始化
+		var jsonType = null;
+    	$J_type=$("#CMPGN_TYPE_CD1");
+    	$J_typeSecond=$("#CMPGN_TYPE_CD");
+		Util.ajax.postJsonSync(srvMap.get("queryType"),'',function(json1,status){
+			jsonType=json1.object;
+			Util.ajax.postJsonSync(srvMap.get("queryRole"),'',function(jsonrole,status){
+				console.log(jsonrole);
+				if(jsonrole.beans[0].ROLE_ID=='13'||jsonrole.beans[0].ROLE_ID=='14'||jsonrole.beans[0].ROLE_ID=='15'){
+					for (var i = 1; i < jsonType.length; i++) {
+						$J_type.append("<option value='"+jsonType[i]['CD_VAL']+"'>"+jsonType[i]['CMN_CD_VAL_NM']+"</option>");
+					};
+				}else{
+					for (var i = 0; i < jsonType.length; i++) {
+						$J_type.append("<option value='"+jsonType[i]['CD_VAL']+"'>"+jsonType[i]['CMN_CD_VAL_NM']+"</option>");
+					};
+				}
+			})
+			
+		})
+
+		$J_type.on('change',function(){
+			$J_typeSecond.empty();
+			var select_val = $(this).children('option:selected').val();
+				for (var i = 0; i < jsonType.length; i++) {
+					if(select_val==jsonType[i]['CD_VAL']){
+						var secondjson=jsonType[i].twoLevel;
+						if(secondjson!=null&&secondjson!='undefined'){
+							$J_typeSecond.show();
+							for (var j = 0; j < secondjson.length; j++) {
+								$J_typeSecond.append("<option value='"+secondjson[j]['CD_VAL']+"'>"+secondjson[j]['CMN_CD_VAL_NM']+"</option>");
+							}
+						}else{
+							$J_typeSecond.hide();
+						}
+					}
+					if(select_val=='请选择'){
+						$J_typeSecond.show();
+						$J_typeSecond.append("<option >请选择</option>");
+					}
+						
+				};
+			
+		});
+    	
+        var validate1 = $("#J_form_activity").validate({
+
+            rules: {
+                "CMPGN_NM": {
+                    required: true
+                },
+                "CMPGN_DESC": {
+                    required: true
+                },
+                "CMPGN_EFF_DATE": {
+                    required: true,
+                },
+                "CMPGN_INVLD_DATE": {
+                    required: true
+                }
+
+            },
+            messages: {
+                "CMPGN_NM": {
+                    required: "请输入项目名称"
+                },
+                "CMPGN_DESC": {
+                    required: "请填写项目描述"
+                },
+                "CMPGN_EFF_DATE": {
+                    required: "请输入生效时间"
+                },
+                "CMPGN_INVLD_DATE": {
+                    required: "请输入失效时间"
+                }
+            },
+            showErrors: function () {
+                this.defaultShowErrors();
+            },
+            success: function (currentDom) {
+                $(currentDom).html("<img src='../../css/images/validate-right.png' class='right-img'>");
+            }
+        });
+        
+        campId = Util.browser.getParameter("id");
+        //这是编辑草稿进入下面
+        //如果flag=1是草稿页面进入，如果flag=0是新建页面进入
+        if (campId != null && campId != "" && campId != "undefined") {
+             $("#CMPGN_ID").val(campId);
+            var cmd = {
+                "CMPGN_ID": campId
+            };
+
+            Util.ajax.postJson(srvMap.get("query"), cmd, function (json) {
+                //console.log(JSON.stringify(json));//这个只支持谷歌和火狐浏览器
+                var beans = json.beans;
+                bean=json.beans[0];
+                for (var i = 0; i < beans.length; i++) {
+                	
+                    $("input[name='CMPGN_NM']").val(beans[i].CMPGN_NM);
+                    $("input[name='CMPGN_EFF_DATE']").val(beans[i].CMPGN_EFF_DATE);
+                    $("input[name='CMPGN_INVLD_DATE']").val(beans[i].CMPGN_INVLD_DATE);
+                    $("#CMPGN_DESC").val(beans[i].CMPGN_DESC);
+                    //对checkbox自动选中
+                    //$("input[name='CMPGN_TYPE_CD'][value=" + beans[i].CMPGN_TYPE_CD + "]").attr('checked', true);
+                   // $("input[name='CMPGN_TYPE_CD']").attr('disabled', 'disabled');
+                   //渠道默认选择
+                     var countCHNL01 = $("#BELG_CHNL_ID1 option").length;
+                     for(var j=0;j<countCHNL01;j++){
+ 　                                                     　if($("#BELG_CHNL_ID1").get(0).options[j].value == beans[i].BELG_CHNL_ID1)  
+                          {  
+                            $("#BELG_CHNL_ID1").get(0).options[j].selected = true;
+                            $("#BELG_CHNL_ID1").trigger('change');
+                            break;  
+                           }  
+                       }
+                     //渠道二级
+                     var countCHNL02 = $("#BELG_CHNL_ID option").length;
+                     for(var k=0;k<countCHNL02;k++){
+ 　                                                     　if($("#BELG_CHNL_ID").get(0).options[k].value == beans[i].BELG_CHNL_ID)  
+                          {  
+                            $("#BELG_CHNL_ID").get(0).options[k].selected = true;
+                            break;  
+                           }  
+                       }
+                      //所属机构
+                     var countBRNCH = $("#BELG_BRNCH_ID1 option").length;
+                     for(var l=0;l<countBRNCH;l++){
+ 　                                                     　if($("#BELG_BRNCH_ID1").get(0).options[l].value == beans[i].BELG_BRNCH_ID1)  
+                          {  
+                            $("#BELG_BRNCH_ID1").get(0).options[l].selected = true;
+                            break;  
+                           }  
+                       } 
+                     
+                   //项目类型默认选择
+                     var counttype = $("#CMPGN_TYPE_CD1 option").length;
+                     for(var z=0;z<counttype;z++){
+ 　                                                     　if($("#CMPGN_TYPE_CD1").get(0).options[z].value == beans[i].CMPGN_TYPE_CD1)  
+                          { 
+                            $("#CMPGN_TYPE_CD1").get(0).options[z].selected = true;
+                            $("#CMPGN_TYPE_CD1").trigger('change');
+                            break;  
+                           }  
+                       }
+                     //项目类型二级
+                     var countTYPE2 = $("#CMPGN_TYPE_CD option").length;
+                     for(var m=0;m<countTYPE2;m++){
+ 　                                                     　if($("#CMPGN_TYPE_CD").get(0).options[m].value == beans[i].CMPGN_TYPE_CD)  
+                            {
+ 　                                                   	  $("#CMPGN_TYPE_CD").get(0).options[m].selected = true;
+                            break;  
+                           }  
+                       }
+                     
+                }
+            });
+            //这是草稿页面跳转的，点击下一步
+            $('#Next').bind('click', function () {
+                //根据id，更新数据库
+                var param1=$("#J_form_activity").serialize();
+                if(!vilid()) return;
+                var cmpgn_cd=$("#CMPGN_TYPE_CD").val();
+                Util.ajax.postJson(srvMap.get("update"), param1, function (json) {
+                    var state = json.returnCode;
+                    if (state == 0) {
+                        if (cmpgn_cd == '11') {//外呼营销
+                            window.location.href = "selectSingleProd.html?id=" + campId;
+                        } else if (cmpgn_cd == '12') {//订单任务
+            	           window.location.href = "orderCampgnTwoStep.html?id=" + campId;
+                        } else{
+                            window.location.href = "selectSingleQues.html?id=" + campId;
+                        }
+                    } else {
+                        Util.dialog.tips("插入失败");
+                    }
+                });
+            });
+            
+            //点击保存草稿之后
+            $('#Save').bind('click', function () {
+            	 var cmpgn_cd=$("#CMPGN_TYPE_CD").val();
+                 var param1=$("#J_form_activity").serialize();
+                
+                 
+                Util.ajax.postJson(srvMap.get("update"), param1, function (json) {
+                    var state = json.returnCode;
+                    if (state == 0) {
+                        window.location.href = "draftList.html";
+                    } else {
+                        Util.dialog.tips("保存失败");
+                    }
+                });
+            });
+            
+            $('#Return').bind('click', function () {
+            	 var cmpgn_cd=$("#CMPGN_TYPE_CD").val();
+                 var param1=$("#J_form_activity").serialize();
+                
+                Util.ajax.postJson(srvMap.get("update"), param1, function (json) {
+                    var state = json.returnCode;
+                    if (state == 0) {
+                        window.location.href = "draftList.html";
+                    } else {
+                        Util.dialog.tips("返回失败");
+                    }
+                })
+            });
+        } else {
+        	//这是首页新建页面跳转过来的。
+            $('#Save').bind('click', function () {
+                var startDate = $("#CMPGN_EFF_DATE").val();
+                var endDate = $("#CMPGN_INVLD_DATE").val();
+                var startDateObj = strToDate(startDate, "YYYY-MM-DD");
+                var endDateObj = strToDate(endDate, "YYYY-MM-DD");
+
+                if (!compareDate(startDateObj, endDateObj)) {
+                    Util.dialog.tips("截止日期不能大于开始日期");
+                    return false;
+                }
+
+                if (validate1.form()) {
+                    if (campId != "" && campId != null) {
+                        var param1=$("#J_form_activity").serialize();
+                        Util.ajax.postJson(srvMap.get("update"), param1, function (data) {
+                            //to do 跳转到下一个页面。0表示类型为普通，1表示类型为订单。
+                            var type=$("#CMPGN_TYPE_CD").val();
+                            if(!vilid()) return;
+                            if (type == "11") {
+                                //这是跳转普通项目下一个页面，及分配页面
+                                window.location.href = "draftList.html";
+                            } else if (type == "12") {
+                                //这是跳转订单项目下一个页面
+                                window.location.href = "draftList.html";
+                            } else {
+                                //Util.dialog.tips("必须选择项目的类型");
+                            	window.location.href = "draftList.html";
+                            }
+                        });
+                    } else {
+                    	if(!vilid()) return;
+                         var cmpgn_cd=$("#CMPGN_TYPE_CD").val();
+                         var param1=$("#J_form_activity").serialize();
+                        Util.ajax.postJson(srvMap.get("insert"), param1, function (data) {
+                        	if(data.returnCode=='0'){
+                        		var bean = data.bean;
+                                campId = bean.CMPGN_ID;
+                                //to do 跳转到下一个页面。0表示类型为普通，1表示类型为订单。
+                                if (cmpgn_cd== "11") {
+                                    //这是跳转普通项目下一个页面
+                                    window.location.href = "draftList.html";
+                                } else if (cmpgn_cd == "12") {
+                                    //这是跳转订单项目下一个页面
+                                    window.location.href = "draftList.html";
+                                } else {
+                                    //Util.dialog.tips("必须选择项目的类型");
+                                	window.location.href = "draftList.html";
+                                }
+                        	}
+                            
+                        });
+                    }
+                }
+            });
+            
+            $('#Next').bind('click', function () {
+                
+                var startDate = $("#CMPGN_EFF_DATE").val();
+                var endDate = $("#CMPGN_INVLD_DATE").val();
+                var startDateObj = strToDate(startDate, "YYYY-MM-DD");
+                var endDateObj = strToDate(endDate, "YYYY-MM-DD");
+
+                if (!compareDate(startDateObj, endDateObj)) {
+                    Util.dialog.tips("截止日期不能大于开始日期");
+                    return false;
+                }
+                if (validate1.form()) {
+                    if (campId != "" && campId != null) {
+                    	if(!vilid()) return;
+                    	var cmpgn_cd=$("#CMPGN_TYPE_CD").val();
+                        var param1=$("#J_form_activity").serialize();
+
+                        Util.ajax.postJson(srvMap.get("update"), param1, function (data) {
+                        	if(data.returnCode=='0'){
+                        		//to do 跳转到下一个页面。0表示类型为普通，1表示类型为订单。
+                                var type = cmpgn_cd;
+                                if (type == '11') {
+                                    //这是跳转普通项目下一个页面，及分配页面
+                                    window.location.href = "selectSingleProd.html?id=" + campId;
+                                } else if (type == '12') {
+                                    //这是跳转订单项目下一个页面
+                                    window.location.href = "orderCampgnTwoStep.html?id=" + campId;
+                                } else {
+                                    //Util.dialog.tips("必须选择项目的类型");
+                                	window.location.href = "selectSingleQues.html?id=" + campId;
+                                }
+                        	}
+                            
+                        });
+                    } else {
+                    	
+                    	if(!vilid()) return;
+                        var param1=$("#J_form_activity").serialize();
+                        var cmpgn_cd=$("#CMPGN_TYPE_CD").val();
+                        Util.ajax.postJson(srvMap.get("insert"), param1, function (data) {
+                        	if(data.returnCode=='0'){
+                        		var bean = data.bean;
+                                campId = bean.CMPGN_ID;
+                                //to do 跳转到下一个页面。0表示类型为普通，1表示类型为订单。
+                                if (cmpgn_cd == "11") {
+                                    //这是跳转普通项目下一个页面
+                                    window.location.href = "selectSingleProd.html?id=" + campId;
+                                } else if (cmpgn_cd == "12") {
+                                    //这是跳转订单项目下一个页面
+                                    window.location.href = "orderCampgnTwoStep.html?id=" + campId;
+                                } else {
+                                	window.location.href = "selectSingleQues.html?id=" + campId;
+                                   // Util.dialog.tips("必须选择项目的类型");
+                                }
+                        	}
+                            
+                        });
+                    }
+                }
+            });
+            
+            $('#Return').bind('click', function () {
+                if (campId == null && campId == "") {
+                    Util.ajax.postJson(srvMap.get("insert"), params, function (data) {
+                    });
+                    //to do跳转到任务总表
+                    window.location.href = "draftList.html";
+                } else {
+                    Util.ajax.postJson(srvMap.get("updata"), param, function (data) {
+                        //to do跳转到首页
+                        window.location.href = "campgnList.html";
+                    });
+                }
+            });
+        }  
+        
+    });
+    
+    function vilid(){
+    	var starttime = $("#CMPGN_EFF_DATE").val();
+        var endtime = $("#CMPGN_INVLD_DATE").val();
+    	var cmpgncd=$("#CMPGN_TYPE_CD").val();
+        var belgChnl=$("#BELG_CHNL_ID1").val();
+        var belgbrnch=$("#BELG_BRNCH_ID1").val();
+        if(cmpgncd=="请选择"){
+       	    Util.dialog.tips("请选择项目类型");
+       	    return false;
+        }
+        else if(belgChnl=="请选择"){
+       	    Util.dialog.tips("请选择渠道");
+       	     return false;
+        }else if(belgbrnch=="请选择"){
+       	    Util.dialog.tips("请选择所属机构");
+       	     return false;
+        }else if(starttime=="0000-00-00"||endtime=="0000-00-00"){
+        	 Util.dialog.tips("日期错误，请重新选择");
+       	     return false;
+        }else if(starttime=="0000-00-00 00:00:00"||endtime=="0000-00-00 00:00:00"){
+       	 Util.dialog.tips("日期错误，请重新选择");
+   	     return false;
+        }
+        else if(!checkDate(starttime)){
+        	 return false;
+        }
+        else if(!checkDate(endtime)){
+       	 return false;
+       }else{
+    	   return true;
+       }
+    }
+  $(function(){
+	  $("#CanCelCreate").bind("click",function(){
+		 var elem= $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">是否取消创建该项目？</div></div></div>');
+	        var paramsdiv = {
+	          top:top,
+	          content: elem,
+	          width: "300px",
+	          height: "140px",
+	          modal: true,
+	          okVal:'取消创建',
+	          okCallback:function(){
+	                $(obj).hide().siblings().hide();
+	                window.location.href="../market/campgnList.html";
+	          },
+	          cancelVal:'返回继续创建',
+	          cancelCallback:function(){}
+	        }
+	        Util.dialog.openDiv(paramsdiv);
+	  });
+  });
+</script>
+
+</body>
+</html>

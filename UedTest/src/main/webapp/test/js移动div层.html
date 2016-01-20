@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<script src='jquery.js' type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+
+#movediv{
+	width:250px;
+	height:200px;
+	border:1px #000 solid;
+	position:absolute;
+	left:400px;
+	top:218px;
+}
+</style>
+</head>
+<body>
+
+<div id="movediv">
+    <div id="movespan">
+        朋友:用鼠标来拖走我吧!我在这里太久了!
+    </div>
+    <div style="background:red; height:50px;">
+    </div>
+</div>
+
+<script language="JavaScript" type="text/javascript">
+$(function(){
+	// 使用方式如下：
+	dragdrop.registerDragdropHandler("movespan","movediv");
+})
+var dragdrop = {
+	registerDragdropHandler: function(handler, target, cursor) { // 注册鼠标移动的一些事件。
+		var _IsMousedown=false,_ClickLeft=0,_ClickTop=0;
+		var _hDom=$("#"+handler);
+		var _tDom=$("#"+target);
+		_hDom.css({"cursor":cursor||"move"});
+
+		function startDrag(evt){ // 按下鼠标左键时的事件。
+			evt=window.event||evt;  // 获取当前事件对象。
+			_IsMousedown=true;  // 记录已经准备开始移动了。
+			_ClickLeft=evt.clientX-parseInt(_tDom.offset().left); // 记录当前坐标轴。
+			_ClickTop=evt.clientY-parseInt(_tDom.offset().top);
+		}
+
+		function doDrag(evt){ // 鼠标开始移动时的事件。
+			evt=window.event||evt; // 获取当前事件对象。
+			if(!_IsMousedown)return false; // 如果_IsMousedown不等于真了返回。
+			_tDom.css({"left":evt.clientX-_ClickLeft+"px"}); // 把鼠标当前移动的位置赋值给div
+			_tDom.css({"top":evt.clientY-_ClickTop+"px"}); // 当前位置减去开始位置就是层当前存放的位置。
+		}
+
+		function endDrag(){ // 释放鼠标左键时的事件。
+			if(_IsMousedown){ // 如果_IsMousedown还为真那么就赋值为假。
+				if(this.isIE) _tDom.releaseCapture(); //该函数从当前的窗口释放鼠标捕获，并恢复通常的鼠标输入处理。
+				_IsMousedown=false;
+			}
+		}
+
+		_hDom.bind("mousedown",startDrag); // 鼠标按下事件。
+		$("body").bind("mouseup",endDrag);  // 鼠标释放事件。
+		$(document).bind("mousemove",doDrag);  // 鼠标移动事件。
+		_tDom.onselectstart=_tDom.oncontextmenu=function(){return false;}; // 禁止选择和右键菜单。
+	},
+
+	isIE:(navigator.appName=="Microsoft Internet Explorer"), // 判断是否为IE。
+};
+</script>
+</body>
+</html>
+
+<!--以下是纯js方法
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<script src='jquery.js' type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+
+#movediv{
+	width:250px;
+	height:200px;
+	border:1px #000 solid;
+	position:absolute;
+	left:400px;
+	top:218px;
+}
+</style>
+</head>
+<body>
+
+<div id="movediv">
+	<div id="movespan">朋友:用鼠标来拖走我吧!我在这里太久了!</div>
+	<div style="background:red; height:50px;"></div>
+</div>
+
+<script language="JavaScript" type="text/javascript">
+var dragdrop = {
+	registerDragdropHandler: function(handler, target, cursor) { // 注册鼠标移动的一些事件。
+		var _IsMousedown=false,_ClickLeft=0,_ClickTop=0;
+		var _hDom=this.get(handler);
+		var _tDom=this.get(target);
+		_hDom.style.cursor=cursor||"move";
+
+		function startDrag(evt){ // 按下鼠标左键时的事件。
+			evt=window.event||evt;  // 获取当前事件对象。
+			_IsMousedown=true;  // 记录已经准备开始移动了。
+			_ClickLeft=evt.clientX-parseInt(_tDom.style.left); // 记录当前坐标轴。
+			_ClickTop=evt.clientY-parseInt(_tDom.style.top);
+		}
+
+		function doDrag(evt){ // 鼠标开始移动时的事件。
+			evt=window.event||evt; // 获取当前事件对象。
+			if(!_IsMousedown)return false; // 如果_IsMousedown不等于真了返回。
+			_tDom.style.left=evt.clientX-_ClickLeft+"px"; // 把鼠标当前移动的位置赋值给div
+			_tDom.style.top=evt.clientY-_ClickTop+"px"; // 当前位置减去开始位置就是层当前存放的位置。
+		}
+
+		function endDrag(){ // 释放鼠标左键时的事件。
+			if(_IsMousedown){ // 如果_IsMousedown还为真那么就赋值为假。
+				if(this.isIE) _tDom.releaseCapture(); //该函数从当前的窗口释放鼠标捕获，并恢复通常的鼠标输入处理。
+				_IsMousedown=false;
+			}
+		}
+
+		_hDom.onmousedown=startDrag; // 鼠标按下事件。
+		document.onmouseup=endDrag;  // 鼠标释放事件。
+		document.onmousemove=doDrag; // 鼠标移动事件。
+		_tDom.onselectstart=_tDom.oncontextmenu=function(){return false;}; // 禁止选择和右键菜单。
+	},
+
+	isIE:(navigator.appName=="Microsoft Internet Explorer"), // 判断是否为IE。
+
+	get:function(element){ // 通过一串字符返回一个对象。
+		if(typeof(element) == "string"){
+			return document.getElementById(element);
+		}
+		return element;
+	}
+};
+// 使用方式如下：
+dragdrop.registerDragdropHandler("movespan","movediv");
+</script>
+</body>
+</html>
+-->

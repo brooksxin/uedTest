@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>省市县demo</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<div class="ui-wrapper">
+</div>
+
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+$(function(){
+
+	/*
+	*	requirejs调用方法
+	*	init(param1,param2,param3)
+	*	param1:默认省编码
+	*	param2:默认市编码
+	*	param3:默认区编码
+	*
+	*	init():参数为空默认显示“请选择”
+	*/
+	require(['common/util/region'],function(fn){
+		fn.init('5','49','600');
+		$('.ui-wrapper').html(fn.tpl);
+	})
+})
+
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": null,
+    "bean": {},
+    "beans": [
+        {
+            "menuId": "1",
+            "url": "../homePage/homePage.html",
+            "menuName": "首页"
+        },
+        {
+            "menuId": "10",
+            "url": "../market/campgnList.html",
+            "menuName": "任务管理"
+        },
+        {
+            "menuId": "2",
+            "url": "../orders/noPayPhoneBuy.html",
+            "menuName": "订单管理"
+        },
+        {
+            "menuId": "5",
+            "url": "../product/csProductList.html",
+            "menuName": "商品管理"
+        },
+        {
+            "menuId": "7",
+            "url": "../smsRs/endCalling.html",
+            "menuName": "系统管理"
+        },
+        {
+            "menuId": "8",
+            "url": "../contact/customerContactSearch.html",
+            "menuName": "接触管理"
+        }
+    ],
+    "object": null
+}

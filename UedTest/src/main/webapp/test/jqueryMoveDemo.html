@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<script src='jquery.js' type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+
+li{
+	width: 350px;
+}
+
+a{
+	background-image: linear-gradient(90deg, rgba(204, 204, 204, 0.54) 50%, rgba(255, 255, 255, 0) 50%);
+    background-size: 1% 100%;/**第1个值用于指定背景图的width，第2个值用于指定背景图的height，如果只给background-size设置1个值，则第2个值默认为auto（cover和contain特定值除外）**/
+    color: #444444;
+    display: block;
+    font-weight: 900;
+    line-height: 20px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    padding: 6px 10px;
+	text-decoration: none;
+}
+a:hover{
+    background-size: 200% 100%;
+    color: #000;
+    text-decoration: none;
+}
+
+pre {
+    position:relative;
+    margin-top:15px;
+    background-color:#F8F8F8;
+    border:1px solid #DDD;
+    border-radius:5px;
+    font-size:14px;
+    line-height:19px;
+    overflow:auto;
+    padding:15px 10px 6px;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    overflow:visible;
+    outline:none
+}
+pre:after {
+    content:'代码片段';
+    display:block;
+    position:absolute;
+    top:-12px;
+    left:0px;
+    height:20px;
+    line-height:20px;
+    background-color:#F8F8F8;
+    border:1px solid #ddd;
+    border-radius:5px;
+    overflow:hidden;
+    width:100px;
+    text-align:center;
+    transition:left 0.4s ease 0.2s,margin-left 0.4s ease 0.2s,background-color 0.5s,border-color 0.5s;
+    -webkit-transition:left 0.4s ease 0.2s,margin-left 0.4s ease 0.2s,background-color 0.5s,border-color 0.5s;
+    margin-left:20px
+}
+pre:hover {
+    border-color: #ccc;
+    box-shadow: 0 0 10px #ccc;
+}
+pre:hover:after {
+    left:100%;
+    margin-left:-120px;
+    border-color:#ccc
+}
+pre:focus {
+    outline:2px solid #09f;
+    background-color:#f0f0f0
+}
+pre:focus:after {
+    margin-left:20px;
+    left:0;
+    background-color:#09f;
+    border-color:#09f;
+    color:#fff
+}
+</style>
+</head>
+<body>
+
+<div>
+    <ul>
+        <li>
+        	<a href="javascript:;">本文展示a的动态效果</a>
+        </li>
+        <li>
+        	<a href="javascript:;">本文展示a的动态效果2</a>
+        </li>
+        <li>
+        	<a href="javascript:;">本文展示a的动态效果3</a>
+        </li>
+    </ul>
+</div>
+<br />  
+<div>
+    <pre class="prettyprint">
+    RewriteEngine on
+    RewriteCond %{HTTP_REFERER} !^$
+    RewriteCond %{HTTP_REFERER} !^http://(www\.)?xuexb.com/.*$ [NC]
+    RewriteRule \.(gif|jpg)$ http://www.xuexb.com/image.gif [R,L]
+    </pre>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+<script type="text/javascript">
+$(function(){
+	// $("a").bind("mouseover",function(){
+	// 	$(this).animate({"background-size": "200% 100%;","color":"#000","text-decoration":"none"},1000);
+		
+	// })
+});
+</script>
+</body>
+</html>

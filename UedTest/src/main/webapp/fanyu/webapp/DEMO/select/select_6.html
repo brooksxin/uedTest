@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>select</title>
+<#include "../../tpl/res_css.tpl" />
+<link href="../../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+</head>
+<body id="main_body" onload="prettyPrint()" >
+
+<div id="J_select"></div>
+
+<div id="J_selectV2"></div>
+
+
+<pre class="prettyprint mg_t_20 fn-clear" id="html">
+&lt;div id=&quot;J_select&quot;&gt;&lt;/div&gt;
+
+&lt;div id=&quot;J_selectV2&quot;&gt;&lt;/div&gt;
+
+$("#J_select").NiceSelect({
+	url:"../data/selectDatas.json",
+	datas:"codeType=test",
+	id:"testId",
+	name:"testId",
+	defaultValue:"50",
+	handler:function(){
+		var txt = $(this).val();
+		alert("change:" + txt);
+	},
+	callback:function(){
+		alert("callback");
+	}
+});
+
+$("#J_selectV2").NiceSelect({
+	url:"../data/selectDatas.json",
+	datas:"codeType=test",
+	id:"testId",
+	name:"testId",
+	defaultValue:"1003",
+	handler:function(){
+		var txt = $(this).val();
+		alert("change:" + txt);
+	},
+	callback:function(){
+		alert("callback");
+	}
+});
+
+</pre>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript" src="../../lib/pretty/prettify.js"></script>
+<script>
+$(function(){
+	$("#J_select").NiceSelect({
+		url:"../../data/selectDatas.json",
+		datas:"codeType=test",
+		id:"testId",
+		name:"testId",
+		defaultValue:"50",
+		handler:function(){
+			var txt = $(this).val();
+			alert("change:" + txt);
+		},
+		callback:function(){
+			alert("callback");
+		}
+	});
+
+
+
+	$("#J_selectV2").NiceSelect({
+		url:"../../data/selectDatas.json",
+		datas:"codeType=test",
+		id:"testId",
+		name:"testId",
+		defaultValue:"1003",
+		handler:function(){
+			var txt = $(this).val();
+			alert("change:" + txt);
+		},
+		callback:function(){
+			alert("callback");
+		}
+	});
+})
+</script>
+</body>
+</html>

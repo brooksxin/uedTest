@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>质量管理模块——选择评分类型</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+
+<body>
+<!-- 面包屑 begain -->
+<div class="breadcrumb"></div>
+<!-- 面包屑end -->
+<div class="titleArea">
+    <div class="listTopBtn fn-clear">
+        <h2 class="fn-left">选择评分类型</h2>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../res/common/NiceTools.js"></script>
+<script type="text/javascript" src="../../res/common/common.js"></script>
+<div method="post" action="#" class="cmxform" >
+    <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+        <div class="record-search-cate">
+            <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="80"><label class="description">类型名称</label></td>
+                        <td colspan="2">
+                            <input type="text"/>
+                        </td>
+                        <td width="80">
+                            <label class="description">创建时间起</label>
+                        </td>
+                        <td>
+                            <input id="param-eDate" class="element text Wdate" type="text"  onFocus="WdatePicker()"  />
+                        </td>
+                        <td width="80">
+                            <label class="description">创建时间止</label>
+                        </td>
+                        <td>
+                           <input id="param-eDate" class="element text Wdate" type="text"  onFocus="WdatePicker()"  />
+                        </td>
+                        <td>
+                            <a class="btn_search" href="javascript:;" id="J_search" >查询</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </form>
+</div>
+<div class="tablewidth mg_t_10">
+    <table class="ui-record-table table_radius table-bordered table-striped" >
+        <thead>
+            <tr>
+                <th width="260">评分类型</th>
+                <th width="260">创建时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="J_tabletpl">
+            <tr>
+                <td><a class="item-text" href="javascript:;">服务用语</a></td>
+                <td align="center">2015.05.15 09:00:23</td>
+                <td align="center"><a class="item-text" href="javascript:;">使用该评分类型</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!--翻页及功能按钮区域开始-->
+<div class="amount-bottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+        <tr>
+            <td width="60">
+                <input type="checkbox" class="selectAll" id="selectAll" />
+                <label for="selectAll">全选</label>
+            </td>
+            <td>
+                <div class="normalBtnArea"><!--不附加ft-right样式，默认左对齐-->
+                    <a class="normalBtn BGgray" href="#">使用评分项</a>
+                </div>
+            </td>
+            <td width="50%">
+                <div class="fn-clear action-other  action-other-show ">
+                    <div id="Pagination" class="page pagination fn-right"></div>
+                    <div class="fn-right fn-pt5 fn-pr10"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+      //页面加载完开始执行
+      $(document).ready(function () {
+          //初始化函数
+      });
+  </script>
+</body>
+</html>

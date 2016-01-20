@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<script src='jquery.js' type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+.wrap{
+	position: relative;
+}
+#main{
+	width: 960px;
+	height: 1px;
+	margin: 50px 0 0;
+	background-color: red;
+	position: relative;
+	left: 0;
+	line-height: 0;
+	_overflow: hidden;/**IE中使用 height: XXpx 这样的属性无法设置比较小的高度**/
+}
+.new{
+	height: 1px;
+	margin: 50px 0 0;
+	background-color: red;
+	position: relative;
+	_overflow: hidden;/**IE中使用 height: XXpx 这样的属性无法设置比较小的高度**/
+}
+
+.triangle{
+	width: 0;
+	height: 0;
+	border:50px solid #000; 
+	border-color:#f00 #000 #f0f #00f; 
+	border-color:#f00 transparent transparent transparent; 
+	border-style:solid dashed dashed dashed;/*ie6*/
+}
+
+.triangle2{
+	width: 0;
+	height: 0;
+	border:50px solid #000; 
+	border:50px solid #000; 
+	border-color:#f00 #000 transparent transparent;
+	border-style:solid solid dashed dashed;/*ie6*/
+	line-height:0;/*ie6*/
+}
+
+.radius{
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-o-border-radius: 50%;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	background-color: red;
+	position: relative;
+}
+.zhr{
+	width: 50px;
+	height: 1px;
+	background-color: gray;
+	position: relative;
+	font-size: 0;
+}
+
+.zhr2{
+	width: 100px;
+	height: 1px;
+	background-color: gray;
+	position: relative;
+	font-size: 0;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+	<div id="main"></div>
+</div>
+
+<br />
+<div style="clear: both;"></div>
+
+<!--方法3-->
+<div class="triangle"></div>
+<div class="triangle2"></div>
+
+<div class="wrap">
+	<div class="radius" id="radius"></div>
+</div>
+<br />
+<div class="wrap">
+	<div class="triangle" id="triangle"></div>
+</div>
+
+<script type="text/javascript">
+var _i = 1;
+var _j = 1;
+var _k = 1;
+$(function(){
+	//方法1：不规则的三角，ie6不兼容----方法有问题！
+	// drawTri($("#main"));
+
+	//方法2：只能在console中的三角
+	var s1 = "____________________";
+	var s2 = "                    ";
+	for(var i = 0; i < 11; i++){
+	    // console.log(s2.substring(0, i) + s1.substring(0, 10-i)+ "_" + s1.substring(0, 10-i));
+	}
+
+	drawTri2($("#radius"));
+	drawTri3($("#triangle"));
+
+});
+
+function drawTri(obj){
+	_i++;
+	var _width = obj.width();
+	if(_width<30){
+		return false;
+	}else{
+		obj.append('<div id="main'+_i+'" class="new"></div>');
+		$("#main"+_i).css({"width":_width/2 , "left":_width/4 , "top":_width/4});
+		drawTri($("#main"+_i));
+	}
+}
+
+function drawTri2(obj){
+	_j++;
+	var _width = obj.width();
+	if(_j>12){
+		return false;
+	}else{
+		obj.append('<div id="zmain'+_j+'" class="zhr"></div>');
+		$("#zmain"+_j).css({"top":"5px"});
+		drawTri2($("#zmain"+_j));
+	}
+}
+
+function drawTri3(obj){
+	_k++;
+	var _width = obj.width();
+	if(_k>12){
+		return false;
+	}else{
+		obj.append('<div id="zwmain'+_k+'" class="zhr2"></div>');
+		$("#zwmain"+_k).css({"top":"5px"});
+		$("#zwmain2").css({"top":"-50px" , "left":"-50px"});
+		drawTri3($("#zwmain"+_k));
+	}
+}
+
+</script>
+</body>
+</html>

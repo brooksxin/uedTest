@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>移动能力开放平台</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/jquery-easyui-1.4/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/dialog/4.1.6/skins/blue.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/magnific-popup.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+
+<script type="text/javascript" src="ui/js/jquery.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/js/jquery.form.js"></script>
+<script type="text/javascript" src="ui/js/json2.js"></script>
+<script type="text/javascript" src="ui/pagination/1.2.1/jquery.pagination.js"></script>
+<script type="text/javascript" src="ui/js/handlebars.js"></script>
+<script type="text/javascript" src="ui/js/helpers.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="ui/js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="ui/js/jquery.slides.min.js"></script>
+<script type="text/javascript" src="ui/js/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="ui/js/common.js"></script>
+
+</head>
+<body class="advertise">
+
+<!--顶部-->
+<div class="global-top">
+	<div class="top-content">
+		<!--左侧logo-->
+		<div class="fn-left">
+			<span class="logo"></span>
+		</div>
+
+		<!--中间-->
+		<div class="menutitle" id="menutitle">
+			<span class="active">首页</span>
+			<span class="item">应用管理</span>
+			<span class="item">能力查询</span>
+			<span class="item">申请查询</span>
+			<span class="item">其他</span>
+		</div>
+
+		<!--右侧-->
+		<div class="fn-right login-regist">
+			<a href="#small-dialog" hidefocus="true" id="J_login" class="login-btn">登录</a>
+			<a href="javascript:;" hidefocus="true" id="J_regist">注册</a>
+		</div>
+	</div>
+</div>
+
+<div class="global-content">
+	<div class="container">
+		<div class="adSlide-wrap">
+			<div class="adSlide-content">
+				<ul class="ad-slide" id="adSlide">
+					<li>
+						<a href="javascript:;" hidefocus="true">
+							<img src="ui/theme/img/ad_1.png" width="1200" height="400" />
+						</a>
+					</li>
+					<li>
+						<a href="javascript:;" hidefocus="true">
+							<img src="ui/theme/img/ad_2.png" width="1200" height="400" />
+						</a>
+					</li>
+					<li>
+						<a href="javascript:;" hidefocus="true">
+							<img src="ui/theme/img/ad_3.png" width="1200" height="400" />
+						</a>
+					</li>
+				</ul>
+				<a href="javascript:;" hidefocus="true" class="slidesjs-previous slidesjs-navigation" id="J_ad_prev">
+					<i class="icon-chevron-left icon-large"></i>
+				</a>
+				<a href="javascript:;" hidefocus="true" class="slidesjs-next slidesjs-navigation" id="J_ad_next">
+					<i class="icon-chevron-right icon-large"></i>
+				</a>
+			</div>
+		</div>
+
+		<div class="intro-logo">
+			<img src="ui/theme/img/ad_4.png" width="1200" height="495" />
+		</div>
+
+		<div class="aibility">
+			<h2>能力展示</h2>
+			<a href="javascript:;" hidefocus="true" class="show-more"><span>更多&nbsp;</span><i class="iconfont" title="更多"></i></a>
+			<ul class="aibility-list fn-clear">
+				<li class="li0">
+					<a href="javascript:;" hidefocus="true">
+						<div class="app-logo"></div>
+						<div class="title">互联网信息发送</div>
+						<div class="des">开放平台针对第三方开放平台针对第三方</div>
+						<i class="free-icon"></i>
+						<div class="learn-more">了解更多</div>
+					</a>
+				</li>
+				<li class="li1">
+					<a href="javascript:;" hidefocus="true">
+						<div class="app-logo"></div>
+						<div class="title">气象信息服务</div>
+						<div class="des">开放平台针对第三方开放平台针对第三方</div>
+						<i class="free-icon"></i>
+						<div class="learn-more">了解更多</div>
+					</a>
+				</li>
+				<li class="li2">
+					<a href="javascript:;" hidefocus="true">
+						<div class="app-logo"></div>
+						<div class="title">位置定位</div>
+						<div class="des">开放平台针对第三方开放平台针对第三方</div>
+						<i class="free-icon"></i>
+						<div class="learn-more">了解更多</div>
+					</a>
+				</li>
+				<li class="li3">
+					<a href="javascript:;" hidefocus="true">
+						<div class="app-logo"></div>
+						<div class="title">POI搜索</div>
+						<div class="des">开放平台针对第三方开放平台针对第三方</div>
+						<i class="free-icon"></i>
+						<div class="learn-more">了解更多</div>
+					</a>
+				</li>
+				<li class="li4">
+					<a href="javascript:;" hidefocus="true">
+						<div class="app-logo"></div>
+						<div class="title">视频管理功能</div>
+						<div class="des">开放平台针对第三方开放平台针对第三方</div>
+						<i class="free-icon"></i>
+						<div class="learn-more">了解更多</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="using-app">
+			<h2>已有1000个应用正在使用</h2>
+			<div id="usingAppSlide">
+				<ul class="fn-clear">
+					<li class="li0"></li>
+					<li class="li1"></li>
+					<li class="li2"></li>
+					<li class="li3"></li>
+					<li class="li6"></li>
+					<li class="li0"></li>
+					<li class="li1"></li>
+					<li class="li2"></li>
+					<li class="li3"></li>
+					<li class="li6"></li>
+				</ul>
+				<ul class="fn-clear">
+					<li class="li0"></li>
+					<li class="li1"></li>
+					<li class="li4"></li>
+					<li class="li5"></li>
+					<li class="li6"></li>
+					<li class="li0"></li>
+					<li class="li1"></li>
+					<li class="li2"></li>
+					<li class="li3"></li>
+					<li class="li6"></li>
+				</ul>
+				<a href="javascript:;" hidefocus="true" class="slidesjs-previous slidesjs-navigation">
+					<i class="icon-chevron-left icon-large"></i>
+				</a>
+				<a href="javascript:;" hidefocus="true" class="slidesjs-next slidesjs-navigation">
+					<i class="icon-chevron-right icon-large"></i>
+				</a>
+			</div>
+		</div>
+
+		<div class="access-ways">
+			<h2>接入流程</h2>
+			<div class="access-ways-step">
+				
+			</div>
+		</div>
+
+		<div class="success-prod">
+			<h2>成功案例</h2>
+		    <div class="tabs-box J_Tabs" id="J_Tabs">
+		        <div class="tabs-hd">
+		            <ul>
+		                <li class="act"><i class="icon"><img src="app2/app_icon.png"></i><span class="name">集团联系人</span>
+		                </li>
+		                <li class=""><i class="icon"><img src="app1/app_icon.png"></i><span class="name">收入宝</span>
+		                </li>
+		                <li class=""><i class="icon"><img src="app3/app_icon.png"></i><span class="name">星巴克Wlan</span>
+		                </li>
+		                <li class=""><i class="icon"><img src="app1/app_icon.png"></i><span class="name">收入宝</span>
+		                </li>
+		                <li class=""><i class="icon"><img src="app3/app_icon.png"></i><span class="name">星巴克Wlan</span>
+		                </li>
+		            </ul>
+		            <div class="triangle" style="left: 217px;">&nbsp;</div>
+		        </div>
+		        <div class="tabs-bd-wrap">
+		            <div class="tabs-bd ">
+		                <ul class="left-images">
+		                    <li><img src="app2/1.png">
+		                    </li>
+		                    <li><img src="app2/2.png">
+		                    </li>
+		                    <li><img src="app2/3.png">
+		                    </li>
+		                </ul>
+		                <div class="right-meta">
+		                    <h3>集团联系人</h3>
+		                    <div class="desc">APP介绍：
+		                        <br>集团联系人是一款提升集团联系人粘性的移动应用，通过便捷的业务办理、预约和丰富的营销活动来吸引集团联系人，促进加强移动与客户之间的关系。
+		                        <br>
+		                        <br>开发模式：
+		                        <br>Web + Native
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="tabs-bd hidden" style="display: none;">
+		                <ul class="left-images">
+		                    <li><img src="app1/1.png">
+		                    </li>
+		                    <li><img src="app1/2.png">
+		                    </li>
+		                    <li><img src="app1/3.png">
+		                    </li>
+		                </ul>
+		                <div class="right-meta">
+		                    <h3>收入宝</h3>
+		                    <div class="desc">APP介绍：
+		                        <br>收入宝是一款专注于营业员收入的移动应用。帮助和改善营业员的收入体验，提升工作效率和积极性，帮助厅经理提升管理效率。
+		                        <br>
+		                        <br>开发模式：
+		                        <br>Web + Native
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="tabs-bd hidden" style="display: none;">
+		                <ul class="left-images">
+		                    <li><img src="app3/1.png">
+		                    </li>
+		                    <li><img src="app3/2.png">
+		                    </li>
+		                    <li><img src="app3/3.png">
+		                    </li>
+		                </ul>
+		                <div class="right-meta">
+		                    <h3>星巴克Wlan定制版</h3>
+		                    <div class="desc">APP介绍：
+		                        <br>星巴克Wlan是中国移动为星巴克量身打造的一款wlan无线上网功能，通过简单、易用和个性化的界面，提升用户的满意度。
+		                        <br>
+		                        <br>开发模式：
+		                        <br>Web + Native
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="tabs-bd hidden" style="display: none;">
+		                <ul class="left-images">
+		                    <li><img src="app1/1.png">
+		                    </li>
+		                    <li><img src="app1/2.png">
+		                    </li>
+		                    <li><img src="app1/3.png">
+		                    </li>
+		                </ul>
+		                <div class="right-meta">
+		                    <h3>收入宝</h3>
+		                    <div class="desc">APP介绍：
+		                        <br>收入宝是一款专注于营业员收入的移动应用。帮助和改善营业员的收入体验，提升工作效率和积极性，帮助厅经理提升管理效率。
+		                        <br>
+		                        <br>开发模式：
+		                        <br>Web + Native
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="tabs-bd hidden" style="display: none;">
+		                <ul class="left-images">
+		                    <li><img src="app3/1.png">
+		                    </li>
+		                    <li><img src="app3/2.png">
+		                    </li>
+		                    <li><img src="app3/3.png">
+		                    </li>
+		                </ul>
+		                <div class="right-meta">
+		                    <h3>星巴克Wlan定制版</h3>
+		                    <div class="desc">APP介绍：
+		                        <br>星巴克Wlan是中国移动为星巴克量身打造的一款wlan无线上网功能，通过简单、易用和个性化的界面，提升用户的满意度。
+		                        <br>
+		                        <br>开发模式：
+		                        <br>Web + Native
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</div>
+
+<div class="global-footer">
+	<div class="foot-wrap">
+		<div class="contract">
+			<a href="javascript:;" hidefocus="true">联系我们</a>
+			<a href="javascript:;" hidefocus="true">投诉举报</a>
+			<a href="javascript:;" hidefocus="true">Complaint  Guidlines</a>
+			<a href="javascript:;" hidefocus="true" class="last">移动能力开放平台</a>
+		</div>
+		<div>
+			<p>Copyright  ©  1998-2050  China  Mobile. All Rights  Reserved.</p>
+		</div>
+	</div>
+</div>
+
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide">
+	<div class="login-content">
+		<div class="header fn-clear">
+			<h3>登录</h3>
+			<i class="iconfont close-btn" title="关闭"></i>
+		</div>
+		<div class="login-content">
+			<h2>欢迎来到能力开放平台！</h2>
+			<h4>能力开放平台为您提供强大方便的API开发及交易平台，祝游览愉快！</h4>
+			<div class="login-form">
+				<div class="login-name">
+					<label>账号</label>
+					<input type="text" id="loginName" value="" />
+				</div>
+				<div class="login-pwd">
+					<label>密码</label>
+					<input type="password" id="loginPwd" value="" />
+				</div>
+				<div class="regist-find">
+					<a href="javascript:;" hidefocus="true" class="register" id="J_register"><span>注册新号</span></a>
+					<a href="javascript:;" hidefocus="true" id="J_findPwd"><span>找回密码</span></a>
+				</div>
+				<div class="login-btn">
+					<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="JS_login">
+						<span>登  录</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="find-pwd-content fn-hide">
+		<div class="header fn-clear">
+			<h3>找回密码</h3>
+			<i class="iconfont close-btn" title="关闭"></i>
+		</div>
+		<div class="result-content fn-hide">
+			<div class="success fn-hide">
+				<div class="res-header">
+					<i></i>
+					<span>恭喜您，密码找回成功！</span>
+				</div>
+			</div>
+			<div class="fail fn-hide">
+				<div class="res-header">
+					<i></i>
+					<span>真抱歉！密码找回失败了...</span>
+				</div>
+				<table cellpadding="0" cellspacing="0" border="0" width="100%" class="res_table">
+					<tbody>
+						<tr>
+							<td>
+								<label>失败原因：</label>
+								<span>网络故障</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="name">
+			<label>账号</label>
+			<input type="text" id="userName" value="" />
+		</div>
+		<div class="phone">
+			<label>手机</label>
+			<input type="text" id="userPhone" value="" />
+		</div>
+		<div class="email">
+			<label>邮箱</label>
+			<input type="text" id="userMail" value="" />
+		</div>
+		<div class="find-btn">
+			<a class="ui-button ui-button-blue fn-mr-20" href="javascript:;" hidefocus="true" id="J_return">
+				<span>返 回</span>
+			</a>
+			<a class="ui-button ui-button-green" href="javascript:;" hidefocus="true" id="JS_findPwd">
+				<span>找回密码</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+	function slide(k){
+	    $("#adSlide li").eq(k).stop().fadeIn().siblings().stop().fadeOut();
+	}
+	var h = $("#adSlide li").length - 1,
+	time = 4000,
+	n = 0,
+	o = null,
+	p = function() {
+	    o = setTimeout(function() {
+	        if( n<h ){
+	            n++;
+	        }else{
+	            n = 0 ;
+	        }
+	        slide( n );
+	        p();
+	    }, time )
+	};
+	p();
+	$("#adSlide").on("mouseenter", function() {
+	    clearTimeout(o)
+	}).on("mouseleave", function() {
+	    clearTimeout(o);
+	    p();
+	});
+	$("#J_ad_prev").click(function(){
+	    if( n == 0 ){
+	        n = h;
+	    }else{
+	        n = n-1;
+	    }
+	    slide(n);
+	});
+	$("#J_ad_next").click(function(){
+	    if( n<h ){
+	        n++;
+	    }else{
+	        n = 0 ;
+	    }
+	    slide(n);
+	});
+
+	$("#usingAppSlide").slidesjs({
+		width: 750,
+		height: 320,
+		navigation: true
+	});
+
+	var $arrow = $("#J_Tabs .triangle");
+	var $cd = $("#J_Tabs .tabs-bd");
+	$("#J_Tabs .tabs-hd li").mouseover(function(){
+		var l = $(this).offset().left + $(this).width()/2;
+		$arrow.offset({left:l})
+		var idx = $("#J_Tabs .tabs-hd li").index(this);
+        $(this).addClass("act").siblings().removeClass("act");
+        $cd.eq(idx).show().siblings().hide();
+	});
+
+	$("#J_login").magnificPopup({
+		type: 'inline',
+		fixedContentPos: false,
+		fixedBgPos: true,
+		overflowY: 'auto',
+		showCloseBtn: false,
+		preloader: false,
+		midClick: true,
+		removalDelay: 300,
+		mainClass: 'mfp-slide-bottom',
+		callbacks: {
+			beforeOpen: function(){
+
+				console.log(this)
+				console.log($(this.ev[0]).html())
+			},
+			beforeClose: function() {
+			    if($(".login-content").height() < 360){
+			    	$(".login-content").animate({
+			    		height:'toggle'
+			    	});
+			    	$(".find-pwd-content").animate({
+			    		height:'toggle'
+			    	});
+
+				    $(".result-content, .success, .fail").addClass("fn-hide");
+			    }
+			},
+			close: function(){
+				$("#small-dialog input").val("");
+				$(".login-content").removeClass("fn-hide");
+				$(".find-pwd-content").addClass("fn-hide");
+			}
+		}
+	});
+	$(".close-btn").click(function(){
+		$.magnificPopup.close();
+	})
+	$("#J_findPwd, #J_return").click(function(){
+		$(".login-content").animate({
+			height:'toggle'
+		});
+		$(".find-pwd-content").animate({
+			height:'toggle'
+		});
+		$(".result-content, .success, .fail").addClass("fn-hide");
+	})
+
+	$("#JS_findPwd").click(function(){
+		$(".result-content, .fail").removeClass("fn-hide");
+	})
+
+	$("#J_register").click(function(){
+		openWindow("zz", "test.html", 500, 300)
+	})
+
+});
+</script>
+</body>
+</html>

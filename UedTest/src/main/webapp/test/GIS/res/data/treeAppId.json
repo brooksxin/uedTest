@@ -1,0 +1,17 @@
+{
+	"returnCode":"1",
+	"rows":[
+			{
+				"nodeid":"1",
+				"nodename":"营业厅组织树"
+			},
+			{
+				"nodeid":"2",
+				"nodename":"区域组织树"
+			},
+			{
+				"nodeid":"3",
+				"nodename":"渠道树"
+			}
+	]
+}

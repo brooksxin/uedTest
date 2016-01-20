@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <title>查询列表页面示例</title>
+    
+	<!--************************************
+	 请依据项目情况引用公用CSS文件，如<#include "../../tpl/res_css.tpl" />
+	 ************************************ -->
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+
+</head>
+<body>
+
+            <div class="breadcrumb"></div>
+            <div class="listTopBtn">
+            	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td><h1>页面标题</h1></td>
+                    <td><div class="topBtnArea"><A class="topBtn" href="javascript:;" onclick="addOrder();return false;">新增商品</A><A class="topBtn" href="javascript:;">新增商品</A></div></td>
+                  </tr>
+                </table>
+            </div>
+            
+
+            
+            
+        	<!--
+            #############################
+            查询条件
+            列宽度根据实际情况进行调整，确保紧凑
+            
+            input为text类型的class="inputText"
+            select样式为class="inputSelect"
+            checkbox样式为class="inputCheckbox" 
+            
+            点击展现更多查询条件等待效果图后确定
+            ##################
+            -->
+            <div method="post" action="#" class="cmxform" >
+               <form class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+                  <div class="record-search-cate">
+        				<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+        						<tr>
+        							<td width="60"><label class="description">商品名称</label></td>
+        							<td width="100">
+        								<input  name="busiName" class="inputWidth inputText" type="text" value=""/>
+        							</td>
+        							<td width="60">
+                                        <label class="description" for="busiId">库存数量</label></td>
+        							<td width="100">
+                                        <input  name="busiName1" class="inputWidth inputText" type="text" value=""/>
+                                    </td>
+                                    <td width="60">
+                                        <label class="description" for="cityId">名称</label></td>
+                                    <td width="100">
+										<input  name="busiName2" class="inputWidth inputText" type="text"  value=""/>
+                                    </td>
+                                    <td width="120">
+                                        <div class="normalBtnArea w82">
+                                        	<a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a>
+                                        </div>
+                                    </td>
+        						</tr>
+
+                            	<tr>
+        							<td width="90"><label class="description">名称</label></td>
+        							<td width="150">
+        								<input  name="busiName2" class="inputWidth inputText" type="text"  value=""/>
+        							</td>
+        							<td width="90"><label class="description">日期起</label></td>
+        							<td width="150">
+					<input type="text"  id='start' name='start'  class="FormInputText inputWidth Wdate" value="" onFocus="WdatePicker({
+                    onpicked:function(){end.focus();},//选择后自动打开id为end的日期选择
+                    startDate:'%y-%M-%d',//初始化从今天开始
+                    realDateFmt:'yyyy-MM-dd',//格式化后的值
+                    dateFmt:'yyyy-MM-dd',//显示的格式
+                    minDate:'%y-%M-%d',//选择的最小值是今天
+                    maxDate:'#F{$dp.$D(\'end\')}'//选择的最大值不能大过ID为end的值
+                    })"/>                                    
+
+                                    </td>
+        							<td width="90"><label class="description">日期止</label></td>
+        							<td width="150">
+              	  <input type="text"  id='end' name='end'  class="FormInputText inputWidth Wdate" value="" onFocus="WdatePicker({
+                  startDate:'%y-%M-%d',
+                  realDateFmt:'yyyy-MM-dd',
+                  dateFmt:'yyyy-MM-dd',
+                  minDate:'#F{$dp.$D(\'start\')}',//选择的最小值不能小于ID为start的值
+                  })"/>
+                                    </td>
+
+                                    <td></td>
+
+                                </tr>
+
+        				</table>
+                    </div>
+                </form>
+            </div>
+            
+
+            <div class="tablewidth mg_t_10">
+        		<table class="ui-record-table table_radius table-bordered table-striped" >
+        			<thead>
+        				<tr>
+        					<th width="25">选择</th>
+        					<th>商品名称</th>
+        					<th width="60">价格（元）</th>
+        					<th width="60">名称</th>
+        					<th width="50">已出售</th>
+        					<th width="50">库存</th>
+        					<th width="100">添加时间</th>
+                            <th width="50">状态</th>
+                            <th width="80">操作</th>
+        				</tr>
+                     </thead>
+                     <tbody id="J_tabletpl"></tbody>
+        		</table>
+            </div>
+            
+            <!--翻页及功能按钮区域开始-->
+            <DIV class="amount-bottom">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+                  <tr>
+                    <td width="60">
+                        <label for="selectAll" id="J_selectAll"><input type="checkbox" class="selectAll" id="selectAll" />全选</label>
+                    </td>
+					<td>
+                         <div class="normalBtnArea">
+                             <a class="normalBtn BGgray" onclick="getSelectVal()">批量操作<span id="J_selectNum"></span></a>
+                         </div>
+                     </td>
+                    <td width="50%">
+                        <DIV class="fn-clear action-other  action-other-show ">
+                                <DIV id="Pagination" class="page pagination fn-right"></DIV>
+                                <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                        </DIV></td>
+                  </tr>
+                </table>
+            </DIV>
+
+
+
+
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+            <td><div class="table_select"><input type="checkbox" value="{{brandId}}" /></div></td>
+            <td>{{brand}}</td>
+            <td>{{price}}</td>
+            <td>{{type}}</td>
+            <td><div class="gridNum">{{sellNum}}</div></td>
+            <td><div class="gridNum">{{inventory}}</div></td>
+            <td>{{addDate}}</td>
+            <td>{{status}}</td>
+            <td width="110">
+                <div class="gridRowBtn">
+                    <div class="gridRowBtn">
+                       {{isInto status brandId}}
+                    </div>
+                </div>
+            </td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+        	<!--
+            #############################
+            colspan的值应该与上面TD的数量对应
+            ##################-->
+		<td colspan="9">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+
+<!--
+************************************
+ 请依据项目情况引用公用JS文件，如#include "../../tpl/res_js.tpl" 
+ ************************************ 
+ -->
+<script src="../../lib/jquery/1.8.1/jquery.js"></script>
+<script src="../../lib/json2/1.0.0/json2.js"></script>
+<script src="../../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../../lib/handlebars/1.3.0/helpers.js"></script>
+<script src="../../lib/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="../../lib/blockUI/2.64/jquery.blockUI.js"></script>
+<script src="../../lib/datepicker/4.8.b2/WdatePicker.js"></script>
+<script src="../../common/frameInit.js"></script>
+<script src="../../lib/dialog/4.1.7/artDialog.js"></script>
+<script src="../../lib/dialog/4.1.7/iframeTools.js"></script>
+<script src="../../common/config.js"></script>
+<script src="../../common/common.js"></script>
+
+<script type="text/javascript">
+srvMap.add('query', 'query.json','front/pc/pcprnca!validatePc');//查询服务
+
+var G_params = {
+    url : srvMap.get('query'),
+    items_per_page : 10 ,   // 每页数     @param : limit   请注意后台接收后按此值处理分页，否则页面会全部展现
+    page_index : 0 , //当前页  @param : start
+    pagination : "Pagination" , //分页id
+    searchformId : "J_formSearch", //搜索表单的id
+    tabletpl : "T_tabletpl", //表格模板
+    tablewrap : "J_tabletpl" //表格容器
+};
+
+//页面加载完开始执行
+$(function () {
+	
+	//页面初始化加载数据集
+	listInit();
+
+	//全选
+	$("#J_selectAll").on('click',function(){
+		if($("#selectAll").attr("checked") == "checked"){
+			$("input[type='checkbox']",$("#J_tabletpl")).attr("checked",true);
+		}else{
+			$("input[type='checkbox']",$("#J_tabletpl")).attr("checked",false);
+		}
+	});
+
+
+
+    $('#J_search').bind('click',function(){
+        var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+        Util.ajax.postJson(srvMap.get('query'),'formData='+str,function(json,status){
+            if (status) {
+            	//不分页获取数据
+                //Util.ajax.loadTemp('#J_tabletpl',$('#T_tabletpl'),json);//不使用分页组件，只是渲染模版
+                
+		        //分页获取数据，请注意接收前台分页参数start:0和limit:10并在服务中获取处理
+		        Util.pagination(G_params.page_index, true , G_params , str );
+            }else{
+                Util.dialog.tips(json.returnMessage||'查询失败，请重试！');
+            }
+        })
+    })
+});
+
+//数据集渲染函数
+var listInit = function(){
+	var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+    Util.ajax.postJson(srvMap.get('query'),'formData='+str,function(json,status){
+        if (status) {
+		      //分页获取数据，请注意接收前台分页参数start:0和limit:10并在服务中获取处理
+		      //第一个参数在页面初始化时直接设为0，查询时调用时设为G_params.page_index
+      		Util.pagination(0, true , G_params , str );
+        }else{
+            Util.dialog.tips(json.returnMessage||'查询失败，请重试！');
+        }
+    });
+}
+
+function doSameting(brandId){
+    alert(brandId);
+    //删除后请重新渲染模版刷新数据
+    /*
+    var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+    Util.ajax.postJson(srvMap.get('query'),'formData='+str,function(json,status){
+        if (status) {
+            Util.pagination(G_params.page_index, true , G_params , str );
+        }else{
+            alert(json.returnMessage||'查询失败，请重试！');
+        }
+    })
+    */
+}
+
+
+//handlebars辅助函数，用于不同状态显示不同操作项
+Handlebars.registerHelper("isInto", function(status,brandId){
+    var _content="";
+    switch(status){
+        case "待上架":
+             _content    = "<a class='item-text' href='javascript:;' onclick='doSameting("+ brandId +")' >编辑</a>";
+             _content	+= "<a class='disable-text' href='javascript:;'>下架</a>";
+             _content	+= "<a class='item-text' href='javascript:;' onclick='doSameting("+ brandId +")' >删除</a>";
+             return new Handlebars.SafeString(_content);
+            break;
+        case "发布":
+             _content    = "<a class='item-text' href='javascript:;' onclick='doSameting("+ brandId +")' >编辑</a>";
+             _content	+= "<a class='item-text' href='javascript:;' onclick='doSameting("+ brandId +")' >下架</a>";
+             _content	+= "<a class='item-text' href='javascript:;' onclick='doSameting("+ brandId +")' >删除</a>";
+            return new Handlebars.SafeString(_content);
+            break;
+    }
+});
+
+//获取#J_tabletpl中checkbox的选择项的ID
+var getSelectVal = function(){
+	var valContainer= new Array();
+	var $el = $("#J_tabletpl");
+	var _obj = $("input[type='checkbox']:checked",$el);
+	var _objLength = $("input[type='checkbox']:checked",$el).length;
+	if($("input[type='checkbox']:checked",$el).length){
+		for(var a=0;a<_objLength;a++){
+			valContainer.push(_obj[a].value);
+		}
+		_selectData = valContainer.join(",");
+		alert(_selectData);
+	}
+};
+
+
+
+</script>
+</body>
+</html>

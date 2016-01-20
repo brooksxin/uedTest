@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>标点类型模板新增</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/helpers.js"></script>
+<!-- base64 -->
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/core-min.js"></script>
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/enc-base64-min.js"></script>
+
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body>
+<div class="openwin markertypetpl">
+    <div class="tab_cd">
+        <div class="markertypetpl-top">
+            <table class="infoTable" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <colgroup>
+                    <col width="11%"/>
+                    <col width="22%" />
+                    <col width="11%"/>
+                    <col width="22%" />
+                    <col width="11%"/>
+                    <col />
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td class="description">模板类型：</td>
+                        <td>
+                            <select name="markerType" id="markerType"></select>
+                        </td>
+                        <td class="description">模板名称：</td>
+                        <td colspan="3"><input class="normalinput" type="text" value="" name="markerTypeName" id="markerTypeName" maxlength="20"/></td>
+                    </tr>
+                </tbody>
+            </table> 
+        </div>
+        <div>
+            <div class="bz_btn_add">
+                <a class="btn_normal btn_normal20" href="#nogo" id="J_add"><em>新增一行</em></a>
+            </div>
+            <div class="ui-table-container">
+                <table class="ui-table">
+                    <thead>
+                        <tr>
+                            <th>属性类型</th>
+                            <th>属性名称</th>
+                            <th>LABEL名称</th>
+                            <th>同步URL</th>
+                            <th>同步KEY</th>
+                            <th>权限实体</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead><!-- 表头可选 -->
+                    <tbody id="propTbl">
+                        <tr data-type="4" class="base">
+                            <td>基本属性</td>
+                            <td>businessId</td>
+                            <td colspan="3">业务ID</td>
+                            <td colspan="2" class="entity"></td>
+                        </tr>
+                        <tr data-type="4" class="base">
+                            <td>基本属性</td>
+                            <td>name</td>
+                            <td colspan="3">名称</td>
+                            <td colspan="2" class="entity"></td>
+                        </tr>
+                        <tr data-type="4" class="base">
+                            <td>基本属性</td>
+                            <td>lng</td>
+                            <td colspan="3">经度</td>
+                            <td colspan="2" class="entity"></td>
+                        </tr>
+                        <tr data-type="4" class="base">
+                            <td>基本属性</td>
+                            <td>lat</td>
+                            <td colspan="3">纬度</td>
+                            <td colspan="2" class="entity"></td>
+                        </tr>
+                        <tr data-type="4" class="base">
+                            <td>基本属性</td>
+                            <td>icon</td>
+                            <td colspan="3">图标</td>
+                            <td colspan="2" class="entity"></td>
+                        </tr>
+                        <tr data-type="4" class="base">
+                            <td>基本属性</td>
+                            <td>address</td>
+                            <td colspan="3">地址</td>
+                            <td colspan="2" class="entity"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bz_btn_list">
+                <a class="btn_normal fn-mr-20" href="#nogo" id="J_save"><em>保存</em></a>
+                <a class="btn_normal " href="#nogo" id="J_cancel"><em>关闭</em></a>
+            </div>
+        </div>
+    </div>
+    
+    <!--隐藏的动态url下拉框-->
+    <div class="fn-hide" id="dynaUrl">
+        <select></select>
+    </div>
+
+    <!--隐藏的同步url下拉框-->
+    <div class="fn-hide" id="syncUrl">
+        <select></select>
+    </div>
+
+    <!--隐藏的权限实体下拉框-->
+    <div class="fn-hide" id="dynaEntity">
+        <select>
+            <option value="-1">所有人可见</option>
+            <option value="20022001">基础类</option>
+            <option value="20022000">经分类</option>
+        </select>
+    </div>
+</div>
+
+<textarea class="fn-hide" id="markerType_tpl">
+<option value="">请选择</option>
+{{#each rows}}
+<option value="{{id}}">{{name}}</option>
+{{/each}}
+</textarea>
+
+<textarea class="fn-hide" id="dynaUrl_tpl">
+<option value="">请选择</option>
+{{#each rows}}
+<option value="{{id}}" data-dylabel="{{label}}" data-dyurl="{{url}}" data-dykey="{{resultkey}}">{{name}}</option>
+{{/each}}
+</textarea>
+
+<textarea class="fn-hide" id="syncUrl_tpl">
+<option value="">请选择</option>
+{{#each rows}}
+<option value="{{name}}" data-synlabel="{{label}}" data-synurl="{{url}}" data-synkey="{{resultkey}}">{{name}}</option>
+{{/each}}
+</textarea>
+
+<script type="text/javascript" >
+var zHtml = '<tr>'+
+    '<td><select class="typeChose" onchange="insertHtml(this);"><option value="0">请选择</option><option value="1">静态属性</option><option value="2">实时属性</option><option value="3">同步属性</option></select></td>'+
+    '<td class="dynamicTd"></td><td class="dynamicTd"></td><td class="dynamicTd"></td><td class="dynamicTd"></td>'+
+    '<td class="">'+$("#dynaEntity").html()+'</td>'+
+    '<td><a class="markertypetplbtn J_up" href="#nogo"><em>上移</em></a><a class="markertypetplbtn J_down" href="#nogo"><em>下移</em></a><a class="markertypetplbtn J_del" href="#nogo"><em>删除</em></a></td>'
+    +'</tr>';
+$(function(){
+    createNo();
+    placeholder("#markerTypeName","长度小于20个字符");
+    $(".entity").html($("#dynaEntity").html());
+
+    //获取类型
+    $.PostJson(REQURLS.markerTypeTpl_typeQuery,"",function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+                $("#markerType").temp($("#markerType_tpl"), json);
+            }
+        }
+    });
+
+    //获取实时属性url
+    $.PostJson(REQURLS.markerTypeTpl_urlQuery,"",function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+                $("#dynaUrl select").temp($("#dynaUrl_tpl"), json);
+            }
+        }
+    });
+
+    //获取同步属性url
+    $.PostJson(REQURLS.getSynPropsAll,"",function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+                $("#syncUrl select").temp($("#syncUrl_tpl"), json);
+            }
+        }
+    });
+
+    $("#J_add").click(function(){
+        $("#propTbl").append(zHtml);
+    });
+
+    $("#propTbl").on("click",".J_up",function(){
+        var _tr = $(this).parent().parent();
+        var _prev = _tr.prev();
+        if( _prev.length && _prev.data("type")!='4'){
+            _tr.insertBefore( _prev );
+            createNo();
+        }else{
+            result_prompt(2,'-_- , 已经排第一了！');
+        }
+    });
+    $("#propTbl").on("click",".J_down",function(){
+        var _tr = $(this).parent().parent();
+        var _next = _tr.next();
+        if( _next.length){
+            _tr.insertAfter( _next );
+            createNo();
+        }else{
+            result_prompt(2,'-_- , 已经排最后了！');
+        }
+    });
+    $("#propTbl").on("click",".J_del",function(){
+        var _tr = $(this).parent().parent();
+        _tr.remove();
+        createNo();
+    });
+
+
+    $("#J_save").click(function(){
+        var $btn = $(this);
+        var markerType = $("#markerType").val();
+        var markerTypeName = $("#markerTypeName").val();
+        if(!markerType){
+            result_prompt(2,"请选择模板类型！");
+            return false;
+        }
+        if(!markerTypeName||$.trim(markerTypeName)==''){
+            result_prompt(2,"请输入模板名称！");
+            return false;
+        }
+		if(markerTypeName == "长度小于20个字符"){
+			result_prompt(2,"请输入合法的模板名称！");
+			return false;
+		}
+        var formFlag = 0;
+        var G_json = {};
+        G_json.markerType = markerType;
+        G_json.markerTypeName = $.trim(markerTypeName);
+        //  templateStatus表示属性状态：1.表示修改 ，0：表示删除
+        //  templateId:属性对应的ID,没有这个属性的为新增属性，这时templateStatus值为1
+        //  propOrder属性排序
+        var Beans = [];
+
+        var propOrder = 1;
+        $("#propTbl").find("tr").each(function(){
+            var attr = {}, _self = $(this);
+
+            //判断是否为空
+            _self.find("td").each(function(){
+                var _input = $(this).find("input");
+                var _select = $(this).find("select");
+                if(_input&&typeof(_input.val()) != "undefined"&&$.trim(_input.val())==""){
+                    formFlag = 1;
+                }
+                if(_select&&_select.val()==""){
+                    formFlag = 1;
+                }
+            })
+
+            attr.templateId = "";
+            attr.templateStatus = "1";
+            var _type = _self.data("type")+"";
+            attr.type = _type;
+            attr.propOrder = propOrder+"";
+
+            if(_type=='1'){
+                attr.name = _self.find("td").eq(1).find("input").val();
+                attr.label = _self.find("td").eq(2).find("input").val();
+                attr.url = "";
+                attr.key = "";
+                attr.entityProp = _self.find("td").eq(5).find("select").val();
+            }else if(_type=='2'){
+                attr.name = _self.find("td").eq(1).find("select").val()+"";
+                attr.label = _self.find("td").eq(1).find("select option:selected").data("dylabel")+"";
+                attr.url = _self.find("td").eq(1).find("select option:selected").data("dyurl")+"";
+                attr.key = _self.find("td").eq(1).find("select option:selected").data("dykey")+"";
+               /* attr.dylabel = _self.find("td").eq(1).find("select option:selected").data("dylabel")+"";
+                attr.dyurl = _self.find("td").eq(1).find("select option:selected").data("dyurl") + "";
+                attr.dykey = _self.find("td").eq(1).find("select option:selected").data("dykey")+"";*/
+                attr.entityProp = _self.find("td").eq(5).find("select").val();
+            }else if(_type=='3'){
+                attr.name = _self.find("td").eq(1).find("select").val()+"";
+                /*attr.label = _self.find("td").eq(2).find("input").val();
+                attr.url = _self.find("td").eq(3).find("input").val();
+                attr.key = _self.find("td").eq(4).find("input").val();*/
+           /*   attr.label = "";
+                attr.url = "";
+                attr.key = ""; */
+                attr.label = _self.find("td").eq(1).find("select option:selected").data("synlabel")+"";
+                attr.url = _self.find("td").eq(1).find("select option:selected").data("synurl") + "";
+                attr.key = _self.find("td").eq(1).find("select option:selected").data("synkey")+"";
+                attr.entityProp = _self.find("td").eq(5).find("select").val();
+            }else if(_type=='4'){
+                attr.name = _self.find("td").eq(1).html();
+                attr.label = _self.find("td").eq(2).html();
+                attr.entityProp = _self.find("td").eq(3).find("select").val();
+            }
+            Beans.push(attr);
+            propOrder++;
+        });
+        
+        G_json.rows = Beans;
+        var gjson = JSON.stringify(G_json);
+        gjson = encodeURIComponent(gjson);
+        gjson = encodeBase64(gjson);
+        var dataP = gjson+"&markerType="+markerType;
+        if(!formFlag){
+            toggleButtonStyle($btn,true);
+            $.PostJson(REQURLS.markerTypeTpl_addTemplate,"dataP="+dataP,function(state,json){
+                if(state=="success"){
+                    if(json&&json.returnCode=="1"){
+                        result_prompt(1,"新增成功");
+                        parent.gridReload("mytable");
+                    }else{
+                        result_prompt(0,json.returnMessage||"新增失败！");
+                    }
+                }else{
+                    result_prompt(0,"系统错误！");
+                }
+                toggleButtonStyle($btn,false);
+            });
+        }else{
+            result_prompt(2,"新增属性数据不完整！");
+        }
+    })
+
+    $("#markerTypeName").bind("keyup",function(e){
+        var _self = $(this);
+        var newVal = _self.val().replace(/[!<>"#$'\/|\\~%]/g,'');
+        _self.val(newVal);
+    });
+})
+
+function createNo(){
+    var _tabletpl = $("#propTbl");
+    _tabletpl.find("tr").removeClass("ui-table-split");
+    _tabletpl.find("tr:odd").addClass("ui-table-split");
+}
+
+function insertHtml(obj){
+    createNo();
+    var _value = $(obj).val(),_tr = $(obj).parent().parent(),_input = '<input type="text" value="" class="normalinput" maxlength="20" placeholder="长度小于20个字符"/>';
+    _tr.find("td.dynamicTd").html("").end().data("type",_value);
+    if(_value=='1'){//静态属性
+        _tr.find("td").eq(1).html(_input).children().attr("class","attrname");
+        _tr.find("td").eq(2).html(_input).children().attr("class","labelname");
+        $(".dynamicTd .normalinput").bind("keyup",function(e){
+            var _self = $(this);
+            var newVal = _self.val().replace(/[!<>"#$'\/|\\~%]/g,'');
+            _self.val(newVal);
+        });
+        $(".attrname").bind("keyup",function(e){
+            var _self = $(this);
+            var newVal = _self.val().replace(/[\u4e00-\u9fa5!<>"#$'\/|\\~%]/g,'');
+            _self.val(newVal);
+        });
+    }else if(_value=='2'){
+        _tr.find("td").eq(1).html($("#dynaUrl").html());
+    }else if(_value=='3'){
+        _tr.find("td").eq(1).html($("#syncUrl").html());
+    }
+}
+</script>
+
+</body>
+</html>
+
+

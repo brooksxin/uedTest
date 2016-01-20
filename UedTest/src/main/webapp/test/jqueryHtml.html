@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<link rel="stylesheet" type="text/css" href="alice.css">
+<script src="jquery.js" type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+
+<div class="hiddenImg">
+	<img src="1.png">
+	<img src="2.png">
+	<img src="3.png">
+	<img src="4.png">
+	<img src="5.png">
+	<img src="6.png">
+	<img src="7.png">
+	<img src="8.png">
+	<img src="9.png">
+	<img src="10.png">
+	<img src="11.png">
+	<img src="12.png">
+	<img src="13.png">
+	<img src="14.png">
+	<img src="15.png">
+</div>
+
+<br />
+
+<ul id="slider">
+	
+</ul>
+
+<br />
+<div id="test1"><span>test</span></div>
+<div id="test2"></div>
+
+<script type="text/javascript">
+$(function(){
+
+	console.log($(".hiddenImg").html())
+
+	$(".hiddenImg img").slice(0, 3).wrapAll("<li></li>");
+	$(".hiddenImg img").slice(3, 9).wrapAll("<li></li>");
+	$(".hiddenImg img").slice(9, 15).wrapAll("<li></li>");
+	
+	$("#slider").append($(".hiddenImg li"));
+
+	console.log($(".hiddenImg").html())
+
+	// $("#test2").html($("#test1"));//test1会全部移到test2中
+	$("#test2").html($("#test1").html());//test1位置不变
+});
+
+</script>
+</body>
+</html>

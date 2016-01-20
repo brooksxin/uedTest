@@ -1,0 +1,33 @@
+{
+	"returnCode":"0",
+	"returnMessage":null,
+	"bean":{},
+	"beans":[
+		{
+		 "ODR_ID":"CM20150318825824",
+		 "MCDS_UNIT_NM":"苹果（Apple）iPhone6",
+		 "SBSCR_MCDS_UPRC":"1779.00",
+		 "CRT_USER_ID":"20203",
+		 "CRT_TIME":"2015-04-28 15:16:11.0",
+		 "EHS_STS_CD":"已发货"
+		 
+		},
+		{
+		 "ODR_ID":"CM20150318825824",
+		 "MCDS_UNIT_NM":"苹果（Apple）iPhone6",
+		 "SBSCR_MCDS_UPRC":"1779.00",
+		 "CRT_USER_ID":"20203",
+		 "CRT_TIME":"2015-04-28 15:16:11.0",
+		 "EHS_STS_CD":"已发货"
+		},
+		
+		{
+		 "ODR_ID":"CM20150318825824",
+		 "MCDS_UNIT_NM":"苹果（Apple）iPhone6",
+		 "SBSCR_MCDS_UPRC":"1779.00",
+		 "CRT_USER_ID":"20203",
+		 "CRT_TIME":"2015-04-28 15:16:11.0",
+		 "EHS_STS_CD":"已发货"
+		}
+	   ]
+}

@@ -1,0 +1,1330 @@
+<html>
+<head>
+<title>新增商品</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+
+              <div class="formItem"  id="J_setp1">
+                 <div class="titleArea fn-clear">
+                    <a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a><h2 class="ui-textIndentStyle fn-left">上传新商品</h2>
+                 </div>
+                 <div class="formArea">
+                 <div>
+                     选择商品分类
+                 </div>
+                 <div class="fn-clear" id="J_div_chooseClass">
+                 <div class="ui-ul_onlie fn-left">
+                      <ul id="J_prod_class_1">
+                       </ul>
+                  </div>
+                  <div class="ui-ul_onlie ml-15 fn-left">
+                       <ul id="J_prod_class_2">
+                        </ul>
+                  </div>
+                  <div class="ui-ul_onlie ml-15 fn-left">
+                  </div>
+               	  </div>
+              	  </div>
+                  <div class="onlin_borBot pt-10 pb-30">
+                     当前选择分类：<a href="javascript:;" style="color:#333" id="J_a_clatext1"> </a> > <a href="javascript:;" style="color:#333"  id="J_a_clatext2"> </a> 
+                  </div>
+                  <div class="formBtnArea pt-20 fn-clear">
+                      <div class="normalBtnArea fn-left">
+                           <a class="normalBtn BGblue largeBtn" href="javascript:void(0);" id="J_next" onclick="goNext(2)" >下一步</a>
+                      </div>
+                      <div class="normalBtnArea fn-right">
+                           <a href="javascript:history.back();" class="formLink"><span>取消上传</span></a>
+                      </div>
+                  </div>
+              </div>
+              <!-- 填写基本信息DIV -->
+              <div class="formItem fn-hide"  id="J_setp2">
+                  <div class="titleArea fn-clear">
+                      <a href="javascript:;" class="ui-getBackJ fn-left">
+                      </a>
+                      <h2 class="ui-textIndentStyle fn-left">
+                          上传新商品
+                      </h2>
+                  </div>
+                <form id="J_form_addProd">
+               	<input type="hidden" id="catgUnitId1" name="catgUnitId1" value=""/>
+               	<input type="hidden" id="catgUnitId2" name="catgUnitId2" value=""/>
+               	<input type="hidden" id="prodImgMainSrc" name="prodImgMainSrc" value=""/>
+               	<input type="hidden" id="prodImgMainNm" name="prodImgMainNm" value=""/>
+               	<input type="hidden" id="mcdsUnitId" name="mcdsUnitId" value=""/>
+               	<input type="hidden" id="ctrtId" name="ctrtId" value=""/>
+                  <div class="formAreaD">
+                      <div class="flowSteps">
+                          <ul class="current_1 fn-clear">
+                              <li class="FirstStep">
+                                  <a href="javascript:;">基本信息</a>
+                              </li>
+                              <li class="SecondStep">
+                                  <a href="javascript:;">详细信息</a>
+                              </li>
+                              <li class="ThirdStep">
+                                  <a href="javascript:;">图文信息</a>
+                              </li>
+                          </ul>
+                      </div>
+                      <div class="ui-Oline_padding">
+                          <div class="fn-clear">
+                              <div class="fn-left pt-10">
+                                  当前选择分类：
+                                  <a href="javascript:;" style="color:#333">
+                                      <span id="J_span_catgUnitName1"></span>
+                                  </a>
+                                  >
+                                  <a href="javascript:;" style="color:#333">
+                                       <span id="J_span_catgUnitName2"></span>
+                                  </a>
+                              </div>
+                              <div class="normalBtnArea ft-right mb-20">
+                                  <a class="normalBtn BGblue" id="J_chooseclass" href="javascript:;" >
+                                  	 修改商品分类
+                                  </a>
+                              </div>
+                          </div>
+                          <div class="ui-topQuDashed">
+                           	<div class="ft-14b ui-titleTextjv">商品图片</div>
+                               <div class="ui-zt_pictureText fn-clear" style="position:relative;">
+                                  <img id="J_upload_img" class="fn-left" src="../../css/images/shangchuantupian.gif" width="150" height="270" />
+                                  <span id="J_img_wrap" class="fn-left">
+                                    <a href="javascript:;" id="uptrigger" class="ui-bjpicture"></a>
+                                  </span>
+                                   
+                               </div>
+                               <div class="ui-textcolorml " >支持JPEG、PNG、GIF格式，大小不超过1M，图片尺寸：宽150px高270px</div>
+                           </div>
+                          <div class="ui-topQuDashed">
+                              <div class="titleArea pt-5 pd_10">商品基本信息</div>
+                              <table width="100%">
+                                  <tr>
+                                      <td class="formAreaD_PB" width="120">
+                                          <span class="fn-high">*</span>商家名称
+                                      </td>
+                                      <td class="formAreaD_PB">
+                                          <select class="element text" id="ptyId" name="ptyId"  onchange="loadBrand()">
+                                          </select>
+                                          <script type="text/x-handlebars-template" id="T_ptyId">
+                      											<option value="">--请选择--</option>
+                      										    {{#each beans}}
+                      										        <option value="{{PTY_ID}}">{{PTY_NM}}</option>
+                      											{{/each}}
+                      										</script> 
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="formAreaD_PB">
+                                          <span class="fn-high">*</span>商家品牌
+                                      </td>
+                                      <td class="formAreaD_PB">
+                                          <select class="element text" id="brandId" name="brandId">
+                                          </select>
+                                          <script type="text/x-handlebars-template" id="T_brandId">
+                      											<option value="">--请选择--</option>
+                      										    {{#each beans}}
+                      										        <option value="{{CATG_UNIT_ID}}">{{CATG_UNIT_NM}}</option>
+                      											{{/each}}
+                      										</script>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="formAreaD_PB">
+                                          <span class="fn-high">*</span>商品组名称
+                                      </td>
+                                      <td class="formAreaD_PB">
+                                      	  <input type="text" class="FormInputText" id="productGroupName" name="productGroupName" readonly="readonly">
+                                      	  <input type="hidden" id="productGroupId" name="productGroupId">
+										  <a href="javascript:selectGroup();">请选择商品组名称</a>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="formAreaD_PB">
+                                          <span class="fn-high">*</span>供货商商品编码
+                                      </td>
+                                      <td class="formAreaD_PB">
+                                          <input class="FormInputText" id="suplerProdCode" name="suplerProdCode"/>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="formAreaD_PB">
+                                          <span class="fn-high">*</span>商品名称
+                                      </td>
+                                      <td class="formAreaD_PB">
+                                          <input class="FormInputText" id="mcdnUnitNm" name="mcdnUnitNm"/>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="formAreaD_PB">
+                                          <span class="fn-high">*</span>销售价格
+                                      </td>
+                                      <td class="formAreaD_PB" >
+                                          <input class="FormInputText" id="uprc" name="uprc"/>元
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="formAreaD_PB">
+                                          <span class="fn-high">*</span>库存
+                                      </td>
+                                      <td>
+                                          <input class="FormInputText" id="skuQty" name="skuQty"/>
+                                      </td>
+                                  </tr>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+                </form>
+                <div class="formBtnArea pt-20 fn-clear">
+                    <div class="normalBtnArea fn-left">
+                        <a class="normalBtn BGblue largeBtn" href="javascript:void(0)" id="J_add"  onclick="goNext(3)">下一步</a>
+                    </div>
+                    <div class="normalBtnArea fn-right">
+					             <a href="javascript:history.back();" class="formLink"><span>取消上传</span></a>
+                    </div>
+                </div>
+              </div>
+                  
+<!-- 填写详细信息DIV -->
+ <div class="formItem fn-hide"  id="J_setp3">
+	<div class="titleArea fn-clear"> <a href="javascript:;" class="ui-getBackJ fn-left"> </a>
+		<h2 class="ui-textIndentStyle fn-left"> 上传新商品 </h2>
+	</div>
+	<div class="formAreaD">
+		<div class="flowSteps">
+			<ul class="current_2">
+				<li class="FirstStep"> <a href="javascript:;"> 基本信息 </a> </li>
+				<li class="SecondStep"> <a href="javascript:;"> 详细信息 </a> </li>
+				<li class="ThirdStep"> <a href="javascript:;"> 图文信息 </a> </li>
+				<div class="clearfloat"> </div>
+			</ul>
+		</div>
+		<div class="ui-scpictureOnlie">
+			<div class="normalBtnArea mb-20"> <a class="normalBtn BGblue" href="javascript:;" id="J_btn_importProd"  > 导入商品参数信息 </a> </div>
+
+			
+
+			 <form action="" id="J_form_phone_param" name="J_form_phone_param" >
+			 <input type="hidden" id="prodMainPicSrc" name="prodMainPicSrc"/>
+			 <input type="hidden" id="prodMainPicNm" name="prodMainPicNm"/>
+			<div class="ui-topQuDashed">
+				<div class="ft-14b ui-titleTextjv"> 基本参数 </div>
+				
+				<div>
+					<table width="100%" class="ui-tableTrJV">
+						<tr>
+							<td width="10%"> 品牌 </td>
+							<td width="40%"> <input type="text" class="FormInputText" id="brand" name="brand" /></td>
+							<td width="10%"> 型号 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="modelNumber" name="modelNumber" /></td>
+						</tr>
+						<tr>
+							<td width="10%"> 上市时间 </td>
+							<td width="40%"><input type="text" class="FormInputText"  id="marketDate" name="marketDate"/></td>
+							<td width="10%"> 运营商标识或内容 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="mobileName" name="mobileName" /></td>
+						</tr>
+						<tr>
+							<td width="10%"> 操作系统 </td>
+							<td width="40%"> <input type="text" class="FormInputText" id="os" name="os"/></td>
+							<td width="10%"> 操作系统版本 </td>
+							<td width="40%"> <input type="text" class="FormInputText" id="osModel" name="osModel"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> CPU型号 </td>
+							<td width="40%"> <input type="text" class="FormInputText"  id="cpuModel" name="cpuModel"/></td>
+							<td width="10%"> CPU频率 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="cpuFreq" name="cpuFreq"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> CPU核数 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="cpuCoreNum" name="cpuCoreNum"/></td>
+							<td width="10%"> 京东售价 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="jdPrice"  name="jdPrice"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> 颜色 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="phoneColor" name="phoneColor"/></td>
+							<td width="10%"> 输入方式 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="inputMode" name="inputMode"/></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="ui-topQuDashed">
+				<div class="ft-14b ui-titleTextjv"> 网络 </div>
+				<div>
+					<table width="100%" class="ui-tableTrJV">
+						<tr>
+							<td width="10%"> 4G网络制式 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="network4G" name="network4G"/></td>
+							<td width="10%"> 3G网络制式 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="network3G" name="network3G"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> 2G网络制式 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="network2G" name="network2G"/></td>
+							<td width="10%"> 网络频率 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="networkFreq" name="networkFreq"/></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="ui-topQuDashed">
+				<div class="ft-14b ui-titleTextjv"> 存储 </div>
+				<div>
+					<table width="100%" class="ui-tableTrJV">
+						<tr>
+							<td width="10%"> 机身内存(G) </td>
+							<td width="40%"><input type="text" class="FormInputText" id="phoneRom" name="phoneRom"/></td>
+							<td width="10%"> 存储内存 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="rom" name="rom"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> 存储卡类型 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="romType" name="romType"/></td>
+							<td width="10%"> 最大存储卡扩展 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="maxRom" name="maxRom"/></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="ui-topQuDashed">
+				<div class="ft-14b ui-titleTextjv"> 显示 </div>
+				<div>
+					<table width="100%" class="ui-tableTrJV">
+						<tr>
+							<td width="10%"> 屏幕尺寸 (英寸)</td>
+							<td width="40%"><input type="text" class="FormInputText" id="scrnSize" name="scrnSize"/></td>
+							<td width="10%"> 屏幕材质 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="scrnTexture" name="scrnTexture"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> 屏幕像素密度 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="scrnPixelDensity" name="scrnPixelDensity"/></td>
+							<td width="10%"> 屏幕分辨率 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="scrnResolution" name="scrnResolution"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> 屏幕色彩 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="scrnColour" name="scrnColour"/></td>
+							<td width="10%"></td>
+							<td width="40%"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="ui-topQuDashed">
+				<div class="ft-14b ui-titleTextjv"> 感应器 </div>
+				<div>
+					<table width="100%" class="ui-tableTrJV">
+						<tr>
+							<td width="10%"> GPS模块 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="gpsModule" name="gpsModule"/></td>
+							<td width="10%"> 重力感应 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="gravity" name="gravity"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> 光线感应 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="lightSensor" name="lightSensor"/></td>
+							<td width="10%"> 距离感应 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="pSensor" name="pSensor"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> 陀螺仪 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="gyroscope" name="gyroscope" /></td>
+							<td width="10%"></td>
+							<td width="40%"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="ui-topQuDashed">
+				<div class="ft-14b ui-titleTextjv"> 摄像功能 </div>
+				<div>
+					<table width="100%" class="ui-tableTrJV">
+						<tr>
+							<td width="10%"> 后置摄像头 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="cameraAfter" name="cameraAfter"/></td>
+							<td width="10%"> 前置摄像头 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="cameraFront" name="cameraFront"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> 传感器类型 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="sensorType" name="sensorType"/></td>
+							<td width="10%"> 光圈 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="aperture" name="aperture"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> 闪光灯 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="flashlight" name="flashlight"/></td>
+							<td width="10%"> 其他性能 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="otherNature" name="otherNature"/></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="ui-topQuDashed">
+				<div class="ft-14b ui-titleTextjv"> 娱乐功能 </div>
+				<div>
+					<table width="100%" class="ui-tableTrJV">
+						<tr>
+							<td width="10%"> 音乐播放 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="playMusic" name="playMusic"/></td>
+							<td width="10%"> 视频播放 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="playVideo" name="playVideo"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> 收音机 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="radio" name="radio"/></td>
+							<td width="10%"> 录音 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="record" name="record"/></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="ui-topQuDashed">
+				<div class="ft-14b ui-titleTextjv"> 传输功能 </div>
+				<div>
+					<table width="100%" class="ui-tableTrJV">
+						<tr>
+							<td width="10%"> Wi-Fi </td>
+							<td width="40%"><input type="text" class="FormInputText" id="wifi" name="wifi"/></td>
+							<td width="10%"> 蓝牙版本 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="bluetoothVersion" name="bluetoothVersion"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> NFC </td>
+							<td width="40%"><input type="text" class="FormInputText" id="nfc" name="nfc"/></td>
+							<td width="10%"> WIFI热点 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="wifiHot" name="wifiHot"/></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="ui-topQuDashed">
+				<div class="ft-14b ui-titleTextjv"> 其他 </div>
+				<div>
+					<table width="100%" class="ui-tableTrJV">
+						<tr>
+							<td width="10%"> SIM卡尺寸 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="simSize" name="simSize"/></td>
+							<td width="10%"> 电池类型 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="cellType" name="cellType"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> 电池容量（mAh） </td>
+							<td width="40%"><input type="text" class="FormInputText" id="cellSize" name="cellSize"/></td>
+							<td width="10%"> 电池更换 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="cellChange" name="cellChange"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> 理论通话时间 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="telTime" name="telTime"/></td>
+							<td width="10%"> 理论待机时间 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="standbyTime" name="standbyTime"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> 数据线 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="dataLine" name="dataLine"/></td>
+							<td width="10%"> 耳机接口 </td>
+							<td width="40%"><input type="text" class="FormInputText" id="headsetConn" name="headsetConn"/></td>
+						</tr>
+						<tr>
+							<td width="10%"> 机身尺寸（mm） </td>
+							<td width="40%"><input type="text" class="FormInputText" id="mobileSize"  name="mobileSize" /></td>
+							<td width="10%"> 机身重量（g） </td>
+							<td width="40%"><input type="text" class="FormInputText" id="mobileWeight" name="mobileWeight"/></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="ui-topQuDashed">
+				<div class="ft-14b ui-titleTextjv"> 包装清单 </div>
+				<div>
+					<textarea class="FormTextarea_zc" id="packInv" name="packInv">
+					</textarea>
+				</div>
+			</div>
+			<div class="ui-topQuDashed">
+				<div class="ft-14b ui-titleTextjv"> 售后保障 </div>
+				<div>
+					<textarea class="FormTextarea_zczg" id="saleAfter" name="saleAfter"></textarea>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+	<div class="formBtnArea pt-20 fn-clear">
+		<div class="normalBtnArea fn-left">
+      <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_search" onclick="goNext(2)" > 上一步 </a>
+      <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search_down"  onclick="goNext(4)"> 下一步 </a>
+    </div>
+		<div class="normalBtnArea fn-right"><a href="javascript:history.back();" class="formLink"><span>取消上传</span></a></div>
+	</div>
+</div>
+
+<!-- 图文信息DIV -->
+<div class="formItem fn-hide" id="J_setp4">
+	<div class="titleArea fn-clear"> <a href="javascript:;" class="ui-getBackJ fn-left"> </a>
+		<h2 class="ui-textIndentStyle fn-left"> 上传新商品 </h2>
+	</div>
+	<div class="formAreaD">
+		<div class="flowSteps">
+			<ul class="current_3">
+				<li class="FirstStep"> <a href="javascript:;"> 基本信息 </a> </li>
+				<li class="SecondStep"> <a href="javascript:;"> 详细信息 </a> </li>
+				<li class="ThirdStep"> <a href="javascript:;"> 图文信息 </a> </li>
+				<div class="clearfloat"> </div>
+			</ul>
+		</div>
+		<div class="ui-scpictureOnlie">
+			<div class="ft-14b mb-30"> 图文信息 </div>
+			<div class="mt-20">
+			  <form action="" id="J_form_phone_img" name="J_form_phone_img" >			
+          <ul class="picView"></ul>
+        </form>
+        <div id="J_add_img_wrap">
+          <a id="J_add_img" class="normalBtn BGblue addIcon01" href="javascript:;" style="padding:8px 12px 8px 32px;"><em></em>添加一张图片</a>
+        </div>
+		  </div>
+		</div>
+	</div>
+	<div class="formBtnArea pt-20 fn-clear">
+  		<div class="normalBtnArea fn-left">
+        <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_search" onclick="goNext(3)">上一步 </a>
+        <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_storage"> 放入仓库 </a>
+      </div>
+  		<div class="normalBtnArea fn-right"><a href="javascript:history.back();" class="formLink"><span>取消上传</span></a></div>
+  	</div>
+  </div>
+    </div>
+    
+    	<div id="T_importProd" class="fn-hide">
+      <div style="height:400px;overflow:auto;">
+		    <div method="post" action="#" class="cmxform">
+		       <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+		          <div class="record-search-cate">
+		          <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_form_GathrSearch" name="J_form_GathrSearch" >
+						<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+										<tbody>
+											<tr>
+                        <td  width="100"><label class="description">品牌</label></td>
+                        <td width="150">
+                            <input class="inputText" type="text" id="gathrBrand" name="gathrBrand" maxlength="255" value="" />
+                        </td>
+												<td width="100"><label class="description">商品名称</label></td>
+												<td width="150">
+													<input class="inputText" type="text" id="gathrProdName" name="gathrProdName"  maxlength="255" value=""/>
+											  <td>
+                            <div class="normalBtnArea w82">
+							                  	<a class="searchBtn" href="javascript:;" id="J_gathr_search" ><i></i>查询</a>
+                            </div>
+												</td>
+											</tr>
+										</tbody>
+						</table>
+						</form>
+		            </div>
+		        </form>
+		    </div>
+		    
+		    <div class="tablewidth mg_t_10">
+							<table class="ui-record-table table_radius table-bordered table-striped"  >
+								<thead>
+									<tr>
+										<th width="50"></th>
+										<th width="">商品名称</th>
+										<th width="100">品牌</th>
+										<th width="80">型号</th>
+										<th width="60">颜色</th>
+										<th width="110">内存</th>
+										<th width="150">价格</th>
+									</tr>
+                 </thead>
+                 <tbody id="J_tabletpl">
+								</tbody>
+							</table>
+		    </div>
+		     <!--翻页及功能按钮区域开始-->
+    		<DIV class="amount-bottom">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+				<tr>
+					<td>
+						<DIV class="fn-clear action-other  action-other-show " style="width:800px">
+							<DIV id="Pagination" class="page pagination fn-right"></DIV>
+							<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+						</DIV>
+					</td>
+				</tr>
+			</table>
+		</DIV>
+    </div>
+		</div>
+		
+		
+		
+		<div id="prodcutGroupDialog" class="fn-hide">
+			<div style="height: 400px; overflow: auto;">
+				<div method="post" action="#" class="cmxform">
+					<div class="record-search-cate">
+						<form method="get" action="" class="record-search-form record-search-min record-search-form-border" id="pgsearchform">
+							<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+								<tbody>
+									<tr>
+										<td width="100"><label class="description">商品组名称</label></td>
+										<td width="150"><input class="inputText" type="text" id="prodGroupName" name="name" maxlength="255" value=""/>
+										<td>
+											<div class="normalBtnArea w82">
+												<a class="searchBtn" href="javascript:;" id="J_prodGroup_search"><i></i>查询</a>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</div>
+				</div>
+
+				<div class="tablewidth mg_t_10">
+					<table
+						class="ui-record-table table_radius table-bordered table-striped">
+						<thead>
+							<tr>
+								<th width="50"></th>
+								<th>商品组名称</th>
+								<th>添加时间</th>
+							</tr>
+						</thead>
+						<tbody id="productGroupWarp">
+						</tbody>
+					</table>
+				</div>
+				<!--翻页及功能按钮区域开始-->
+				<DIV class="amount-bottom">
+					<table width="100%" border="0" cellspacing="0"
+						cellpadding="0" class="gridBottom">
+						<tr>
+							<td>
+								<DIV class="fn-clear action-other  action-other-show " style="width: 800px">
+									<DIV class="page pagination fn-right"></DIV>
+									<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+								</DIV>
+							</td>
+						</tr>
+					</table>
+				</DIV>
+			</div>
+		</div> 
+
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+          <td>
+            <div class="table_select">
+              <input name="myRadio" type="checkbox" onclick="clickchange(this,false,'J_tabletpl');"/>
+              <input class="dataListNo" value="{{MCDS_GATHR_ID}}" type="hidden"/>
+            </div>
+          </td>
+          <td>{{GATHR_MCDS_NM}}</td>
+          <td>{{BRAND}}</td>
+          <td>{{MODEL}}</td>
+          <td>{{COL}}</td>
+          <td>{{MCHN_MEMRY}}</td>
+          <td>{{PRICE}}</td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="7">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+
+
+<script id="T_groupTpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+          <td>
+            <div class="table_select">
+              <input name="groupRadio" type="radio" value="{{id}}"/>
+            </div>
+          </td>
+          <td>{{name}}</td>
+          <td>{{createTime}}</td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="3">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+    
+    
+<#include "../../tpl/res_js.tpl" />
+<script src="../../lib/swfupload/1.0.0/2.5/swfupload.js"></script>
+<script type="text/javascript"><!--
+srvMap.add('queryMcdsClassify', 'query.json','front/sh/prod!execute?uid=p004');//查询分类的服务
+srvMap.add('saveProd', 'query.json','front/sh/prod!execute?uid=p001');		   //新增商品
+srvMap.add('queryGathrItem', 'query.json','front/sh/prod!execute?uid=p020');	
+srvMap.add('queryGathrDetail', 'query.json','front/sh/prod!execute?uid=p021');//导入爬虫数据列表
+srvMap.add('imgPreview', 'imgPreview.json', 'front/sh/prod!uploadImg?uid=up001');//上传主图片
+srvMap.add('coopPrnr','coopPrnr.json','front/sh/user!partnerInfo'); 		 //获取商家信息列表
+srvMap.add('queryBrandByCoorId','coopPrnr.json','front/sh/prod!execute?uid=p026'); //根据商家ID获取品牌列表
+srvMap.add('queryCtrtIdByCoorId','coopPrnr.json','front/sh/prod!execute?uid=t0002'); //根据商家ID获取合同ID
+srvMap.add('queryProductGroupList', '', 'front/sh/prod!execute?uid=pg001');//查询产品组服务
+var imgCount=0;
+var submitFlag=true;
+
+var upload = '',upload1='',//标签ID
+    catgUnitId1="",	//一级分类ID
+    catgUnitName1="",	//一级分类名称
+    catgUnitId2="",	//二级分类ID
+    catgUnitName2="";	//二级分类名称
+
+
+    
+var T_tabletpl = $("#T_tabletpl"); 
+var J_tabletpl = $("#J_tabletpl");
+var Pagination= $("#Pagination");
+
+//查询条件
+var gathrBrand = $("#gathrBrand");
+var gathrProdName = $("#gathrProdName");
+
+
+
+
+var G_params = {
+  url : srvMap.get('queryGathrItem'),
+  items_per_page : 5 ,   		// 每页数     @param : limit
+  page_index : 0 , 				//当前页      @param : start
+  pagination : Pagination , 	//分页id
+  searchformId : "J_form_GathrSearch",  //搜索表单的id
+  tabletpl : T_tabletpl, 		//表格模板
+  tablewrap : J_tabletpl 		//表格容器
+};
+    
+    
+//因为J_btn_importProd结点在模板内定义，所以要模板加载出来之后在绑定事件$('#')
+var J_btn_importProd = $("#J_btn_importProd");
+var elem2 = document.getElementById('T_importProd');
+    
+var params2 = {
+        top:top,
+   		id:'D_importProd',
+        title:'导入商品参数',
+        content: elem2,
+        width: 900,
+        height:400,
+        modal: true,
+        okVal:'确定',
+        okCallback:queryGathrDetail,
+        cancelVal:'取消',
+        cancelCallback:closeProdGathrItem
+        
+    }
+    
+	
+	
+//页面加载完开始执行
+$(document).ready(function () {
+	//初始化商家信息下拉框
+	var coopParam={'uid':'u001'};
+	Util.ajax.postJson(srvMap.get("coopPrnr"), coopParam, function(json,flag){
+   	  Util.ajax.loadTemp('#ptyId',$('#T_ptyId'),json);//加载模板
+    });
+	
+  var param = {
+    "url" : srvMap.get('imgPreview'),
+    "btn_width" : "150",
+    "btn_height" : "270",
+    "btn_id" : "uptrigger",
+    "imgFlag" : upload,
+    "fileDialogComplete" : fileDialogComplete,
+    "uploadStart" : uploadStart,
+    "uploadError" : uploadError,
+    "uploadSuccess" : uploadSuccess
+  };
+  
+
+	//初始化上传控件
+  uploadImg(param);
+
+  var param1 = {
+    "url" : srvMap.get('imgPreview'),
+    "btn_url" : '../../css/images/addImg.png',
+    "post_params" : {'mcdsUnitId':$("#mcdsUnitId").val()},
+    "btn_width" : "118",
+    "btn_height" : "32",
+    "btn_id" : "J_add_img",
+    "imgFlag" : upload1,
+    "fileDialogComplete" : fileDialogComplete,
+    "uploadStart" : uploadStart,
+    "uploadError" : uploadError,
+    "uploadSuccess" : uploadSuccess1
+  };
+  //初始化上传控件
+  uploadImg(param1);
+
+    //初始化第一个分类
+	Util.ajax.postJson(srvMap.get("queryMcdsClassify"),{baseCatgUnitId:'00'},function(data){
+        for(var i=0;i<data.beans.length;i++){
+        	$("#J_prod_class_1").append( "<li><a href='javascript:void(0)' id='J_prod_class_1_li_"+data.beans[i].CATG_UNIT_ID+"' onclick='chooseClassify1(&quot;"+data.beans[i].CATG_UNIT_ID+"&quot;,&quot;"+data.beans[i].CATG_UNIT_NM+"&quot;)' class='ui-lvha fn-clear' style='width:auto;'><span class='ui-lvhaJT'></span>"+data.beans[i].CATG_UNIT_NM+"</a></li>");
+        }
+     });
+    
+    //初始化第二个分类
+	Util.ajax.postJson(srvMap.get("queryMcdsClassify"),{baseCatgUnitId:'01'},function(data){
+		for(var i=0;i<data.beans.length;i++){
+        	$("#J_prod_class_2").append( "<li><a  href='javascript:void(0)' id='J_prod_class_2_li_"+data.beans[i].CATG_UNIT_ID+"' onclick='chooseClassify2(&quot;"+data.beans[i].CATG_UNIT_ID+"&quot;,&quot;"+data.beans[i].CATG_UNIT_NM+"&quot;)' class='ui-lvha fn-clear' style='width:auto;'><span class='ui-lvhaJT'></span>"+data.beans[i].CATG_UNIT_NM+"</a></li>");
+        }
+     });
+});
+
+
+//初始化上传图片SWFUpload插件
+function uploadImg(param){
+  var settings = {
+    flash_url : "../../lib/swfupload/1.0.0/2.5/swfupload.swf",
+      upload_url: param.url,
+      post_params: param.post_params,
+      use_query_string: false,
+      file_size_limit : "1 MB",
+      file_types : "*.jpg;*.png;*.gif;*.jpeg;*.bmp",  //允许所有类型时请使用 *.*
+      file_types_description : "All Files",
+      file_upload_limit : 0,
+      file_queue_limit : 0,
+      debug: false,
+      // Button settings
+      button_image_url: param.btn_url,
+      button_width: param.btn_width,
+      button_height: param.btn_height,
+      button_placeholder_id: param.btn_id,
+      button_text_left_padding: 12,
+      button_text_top_padding: 3,
+      button_cursor : SWFUpload.CURSOR.HAND,
+
+      file_dialog_complete_handler : param.fileDialogComplete,
+      upload_start_handler : param.uploadStart,
+      upload_error_handler : param.uploadError,
+      upload_success_handler : param.uploadSuccess
+  };
+  param.imgFlag = new SWFUpload(settings);
+}
+
+//上传准备完成
+function fileDialogComplete(numFilesSelected, numFilesQueued){
+  try {
+      this.startUpload();
+  } catch (ex)  {
+        this.debug(ex);
+  }
+}
+//上传前
+function uploadStart(file){
+  /*if (file.size > 5242880) {
+    Util.dialog.tips('文件大小超过5M,请重新上传！');
+    return false;
+  };*/
+  return true;
+}
+//上传出错
+function uploadError(file, errorCode, message){
+  try {
+    Util.dialog.tips('上传失败！');
+  } catch (ex) {
+        this.debug(ex);
+    }
+}
+
+//上传成功之后回调方法
+function uploadSuccess(file, serverData){
+  serverData = JSON.parse(serverData);
+  if (serverData.returnCode == '0') {
+    $('#J_upload_img').attr('src',serverData.bean.src);
+    $("#prodImgMainSrc").val(serverData.bean.filename);
+    $("#prodImgMainNm").val(serverData.bean.tempImgName);
+    $("#mcdsUnitId").val(serverData.bean.mcdsUnitId);
+  }
+}
+
+//上传成功之后回调方法
+function uploadSuccess1(file, serverData){
+  serverData = JSON.parse(serverData);
+  if (serverData.returnCode == '0') {
+	  imgCount++;
+    $('.picView').append('<li>'+
+      '<img style="height:100px" src="'+serverData.bean.ftpUrl+serverData.bean.tempImgSrc+'">'+
+      '<div class="picName">'+
+        '<label for="pic_'+serverData.bean.tempImgName+'">图片名称</label>'+
+        '<input id="picNo_'+imgCount+'" name="picNo" type="hidden" value="'+imgCount+'">'+
+        '<input id="picSrc_'+imgCount+'" name="picSrc" type="hidden" value="'+serverData.bean.tempImgSrc+'">'+
+        '<input id="pic_'+imgCount+'" name="picName" class="FormInputText" type="text" value="'+serverData.bean.tempImgName+'">'+
+      '</div>'+
+      '<em title="关闭" onclick="delImg(this)">关闭</em>'+
+    '</li>');
+    
+    
+   
+  }
+}
+	
+//第三步----删除图片
+function delImg(obj){
+      var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要删除该图片吗？</div></div></div>'
+      );
+
+      var params = {
+          top:top,
+          content: elem,
+          width: "300px",
+          height: "120px",
+          modal: true,
+          okVal:'确定',
+          okCallback:function(){
+              $(obj).parent().remove();
+          },
+          cancelVal:'取消',
+          cancelCallback:function(){}
+      }
+
+        Util.dialog.openDiv(params);
+}
+
+//第一个分类点击事件
+function chooseClassify1(id,name){
+	$("#"+"J_prod_class_1_li_"+id).attr("class","ui-lvhaSelect");
+	catgUnitId1=id;
+	catgUnitName1=name;
+	$("#J_a_clatext1").text(catgUnitName1);  
+	
+	//清空第二个分类
+	$("#J_prod_class_2").find("li").remove();
+	//初始化第二个分类
+	Util.ajax.postJson(srvMap.get("queryMcdsClassify"),{baseCatgUnitId:id},function(data){
+    for(var i=0;i<data.beans.length;i++){
+    	$("#J_prod_class_2").append( "<li><a  href='javascript:void(0)' id='J_prod_class_2_li_"+data.beans[i].CATG_UNIT_ID+"' onclick='chooseClassify2(&quot;"+data.beans[i].CATG_UNIT_ID+"&quot;,&quot;"+data.beans[i].CATG_UNIT_NM+"&quot;)' class='ui-lvha fn-clear' style='width:auto;'><span class='ui-lvhaJT'></span>"+data.beans[i].CATG_UNIT_NM+"</a></li>");
+    }
+ });
+}
+	
+//第二个分类点击事件
+function chooseClassify2(id,name){
+	catgUnitId2=id;
+	catgUnitName2=name;
+	$("#"+"J_prod_class_2_li_"+id).attr("class","ui-lvhaSelect");
+	$("#J_a_clatext2").text(catgUnitName2);  
+}
+
+/* $("#J_form_addProd,#J_form_phone_param").tooltip({
+    show: false,
+    hide: false
+}); */
+
+//商品基本信息输入验证
+var validate1 = $("#J_form_addProd").validate({
+    rules: {
+    	suplerProdCode: {
+            required: true
+        },
+        mcdnUnitNm:{
+        	required: true,
+        },
+        uprc: {
+            required: true,
+            number: true,
+            min: 0,
+            max:100000,
+            maxlength:7
+        },
+        skuQty: {
+            required: true,
+            digits:true,
+            min: 0
+        }
+    },
+    messages: {
+    	suplerProdCode: {
+            required: "请输入供货商商品编码"
+        },
+        mcdnUnitNm: {
+            required: "请填写商品名称"
+        },
+        uprc: {
+            required: "请填写销售价格",
+            digits: "请填写正确的销售价格",
+            number: "请填写正确的销售价格",
+            min: "请填写正确的销售价格",
+            max: "请填写正确的销售价格",
+            maxlength:"请填写正确的销售价格"
+        },
+        skuQty: {
+            required: "请填写库存",
+            digits: "请填写正确的库存",
+            min:"请填写正确的库存"
+        }
+    },
+    showErrors:function(){
+        this.defaultShowErrors();
+    },
+    success: function(currentDom){
+        $(currentDom).html("<img src='../../css/images/validate-right.png' class='right-img'>");
+    }
+});
+
+
+//商品详细参数输入验证
+var validate2 = $("#J_form_phone_param").validate({
+    rules: {
+    	phoneRom: {
+            required: true,
+            digits:true,
+            min:0
+        },
+        scrnSize:{
+        	required: true,
+        	number:true,
+        	min:0
+        }
+    },
+    messages: {
+    	phoneRom: {
+            required: "请输入机身内存",
+            digits: "请输入正确的机身内存",
+            min:"请输入正确的机身内存"
+        },
+        scrnSize: {
+            required: "请输入屏幕尺寸",
+            number: "请输入正确的屏幕尺寸",
+            min: "请输入正确的屏幕尺寸"
+            
+        }
+    }
+});
+	
+//下一步
+function goNext(step){
+	switch(step){
+	case 1:
+		$("#J_setp1").show();
+		$("#J_setp2").hide();
+		$("#J_setp3").hide();
+		$("#J_setp4").hide();
+		break;
+	case 2:{
+		if(catgUnitId1==""){
+			 Util.dialog.tips("请选择第一级分类!");
+			 return ;
+		}
+		if(catgUnitId2==""){
+			 Util.dialog.tips("请选择第二级分类!");
+			 return ;
+		}
+		$("#J_span_catgUnitName1").text(catgUnitName1);
+		$("#J_span_catgUnitName2").text(catgUnitName2);
+		$("#catgUnitId1").val(catgUnitId1);
+		$("#catgUnitId2").val(catgUnitId2);
+		$("#J_setp1").hide();
+		$("#J_setp2").show();
+		$("#J_setp3").hide();
+		$("#J_setp4").hide();
+		break;
+		}
+		
+	case 3:{
+		if(validate1.form()){
+			if($("#ptyId").val()==""){
+				 Util.dialog.tips("请选择商家!");
+				 return ;
+			}
+			if($("#brandId").val()==""){
+				 Util.dialog.tips("请选择商家品牌!");
+				 return ;
+			}
+			if($("#productGroupId").val()==""){
+				Util.dialog.tips("请选择所属商品组!");
+				return;
+			}
+			
+			if($("#ctrtId").val()==""){
+				 Util.dialog.tips("没有合同信息,请录入合同!");
+				 return ;
+			}
+			//if($("#prodImgMainNm").val()==""||$("#prodImgMainSrc").val()){
+			//	Util.dialog.tips("请上传商品图片!");
+			//	return ;
+			//}
+			$("#J_step3").removeClass("fn-hide");
+			$("#J_setp1").hide();
+			$("#J_setp2").hide();
+			$("#J_setp3").show();
+			$("#J_setp4").hide();
+			
+		}
+		
+		break;
+	}
+	case 4:{
+			if(validate2.form()){
+				$("#J_setp1").hide();
+				$("#J_setp2").hide();
+				$("#J_setp3").hide();
+				$("#J_setp4").show();
+			}
+			break;
+		}
+	}
+}
+	//因为J_chooseclass结点在模板内定义，所以要模板加载出来之后在绑定事件$('#')
+	var elem1 = document.getElementById('J_div_chooseClass');
+	//选择分类
+	$('#J_chooseclass').click(function(){
+		
+		
+	    var params = {
+	    	top:top,
+	    	id:'D_div_chooseClass',
+	        title:'选择商品分类',
+	        content: elem1,
+	        width: 660,
+	        height:300,
+	        modal: true,
+	        okVal:'确定',
+	        okCallback:closeChooseClass,
+	        cancelVal:'取消',
+	        cancelCallback:closeChooseClass
+	        
+	    }
+	   top.Util.dialog.openDiv(params);//弹出框需要在iframe的父页面上弹出，需要添加'top'
+		 
+		
+	});
+	
+	
+	//导入商品参数信息
+	$(J_btn_importProd).click(function(){
+         Util.dialog.openDiv(params2);
+         //初始化导入爬虫数据
+         var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+         Util.pagination(0, true , G_params , str );
+		
+    });
+	
+	  //查询导入商品信息
+	  $("#J_gathr_search").click(function(){
+		  var searGathrParam = "gathrBrand="+gathrBrand.val()+"&gathrProdName="+gathrProdName.val();
+		  Util.pagination( G_params.page_index , true , G_params , searGathrParam );
+	    
+	  });
+	  
+	  //放入仓库
+	  $("#J_storage").click(function(){
+		  saveProd();
+	  });
+	  
+
+	  
+
+	
+	//tbodySelect("J_tabletpl",false);
+	//保存商品信息
+	function saveProd(){
+		if(submitFlag){
+			submitFlag=false;
+			var str1 = $("#J_form_addProd").serialize();
+	        var str2 = $("#J_form_phone_param" ).serialize();
+	        var str3 = $("#J_form_phone_img" ).serialize();
+			var param = str1+"&"+str2+"&"+str3;
+			Util.ajax.postJsonSync(srvMap.get("saveProd"),param,function(json,status){
+	    		if(status){
+	    			alert("保存成功!");
+	    			history.back();
+	    			//window.location.href="shProdList.html";
+	    		}
+	    		else {
+	    			alert("保存失败");
+	    			
+	    		}
+	    		submitFlag=true;
+	    	});
+		}
+
+	}
+	
+	function queryGathrDetail(){
+		//若没有数据，禁止a标签的点击行为
+        //var gathrId=$("#J_tabletpl tr input.dataListNo").val();
+		//var gathrObj = top.$("#J_tabletpl tr").find(".active").next();
+		var gathrObj = J_tabletpl.find('tr .active').next();
+		var gathrId = gathrObj.val();
+		
+        if(typeof gathrId ==="undefined"){
+        	top.Util.dialog.tips("请选择一个商品!");
+        }else{
+        	
+        	var gathrParam="gathrId="+gathrId;
+   		 	Util.ajax.postJsonSync(srvMap.get("queryGathrDetail"),gathrParam,function(json,status){
+   			 if(status){
+   	    		$("#brand").val(json.bean.BRAND);
+   	    		$("#modelNumber").val(json.bean.MODEL);
+   	    		$("#marketDate").val(json.bean.LISTED_YEAR_MON);
+   	    		$("#mobileName").val(json.bean.MTOP_FCTY_FLAG_OR_CNTT);
+   	    		$("#inputMode").val(json.bean.INPUT_MODE);
+   	    		$("#os").val(json.bean.OP_SYS);
+   	    		$("#cpuModel").val(json.bean.CPU_MODEL);
+   	    		$("#cpuFreq").val(json.bean.CPU_FRQRY);
+   	    		$("#cpuCoreNum").val(json.bean.CPU_CORE_CNT);
+   	    		$("#jdPrice").val(json.bean.PRICE);
+   	    		$("#network4G").val(json.bean.FOUR_NET_STYLE);
+   	    		$("#network3G").val(json.bean.THREE_NET_STYLE);
+   	    		$("#network2G").val(json.bean.TWO_NET_STYLE);
+   	    		$("#networkFreq").val(json.bean.NET_RATE);
+   	    		$("#phoneRom").val(json.bean.MCHN_MEMRY);
+   	    		$("#rom").val(json.bean.RUN_MEMRY);
+   	    		$("#romType").val(json.bean.LAYIN_CARD_TYPE);
+   	    		$("#maxRom").val(json.bean.MAX_STO_CARD_EXTD);
+   	    		$("#scrnSize").val(json.bean.SCR_SIZE);
+   	    		$("#scrnTexture").val(json.bean.SCR_MTIAL);
+   	    		$("#scrnPixelDensity").val(json.bean.SCR_PIXEL);
+   	    		$("#scrnResolution").val(json.bean.SCR_RATIO);
+   	    		$("#scrnColour").val(json.bean.SCR_COL);
+   	    		$("#gpsModule").val(json.bean.GPS_MDL);
+   	    		$("#gravity").val(json.bean.G_SENSOR);
+   	    		$("#lightSensor").val(json.bean.L_SENSOR);
+   	    		$("#pSensor").val(json.bean.D_SENSOR);
+   	    		$("#gyroscope").val(json.bean.GYRO);
+   	    		$("#cameraAfter").val(json.bean.B_CAMERA);
+   	    		$("#cameraFront").val(json.bean.F_CAMERA);
+   	    		$("#sensorType").val(json.bean.SENSOR_TYPE);
+   	    		$("#aperture").val(json.bean.APERTURE);
+   	    		$("#flashlight").val(json.bean.FLASH_LIGHT);
+   	    		$("#otherNature").val(json.bean.ETC_FTURE);
+   	    		$("#playMusic").val(json.bean.MUSIC_PLAY);
+   	    		$("#playVideo").val(json.bean.VIDEO_PLAY);
+   	    		$("#radio").val(json.bean.RADIO);
+   	    		$("#record").val(json.bean.RCD);
+   	    		$("#wifi").val(json.bean.WiFi);
+   	    		$("#bluetoothVersion").val(json.bean.BLUETOOTH);
+   	    		$("#nfc").val(json.bean.NFC);
+   	    		$("#wifiHot").val(json.bean.WIFI_HOT);
+   	    		$("#simSize").val(json.bean.SIM_CARD_SIZE);
+   	    		$("#cellType").val(json.bean.BATTERY_TYPE);
+   	    		$("#cellSize").val(json.bean.BATTERY_CAPACITY);
+   	    		$("#cellChange").val(json.bean.BATTERY_CHANGE);
+   	    		$("#telTime").val(json.bean.CALL_TIME);
+   	    		$("#standbyTime").val(json.bean.WAIT_TIME);
+   	    		$("#dataLine").val(json.bean.DATA_LINE);
+   	    		$("#headsetConn").val(json.bean.HEADSET_INTF);
+   	    		$("#mobileSize").val(json.bean.MCHN_SIZE);
+   	    		$("#mobileWeight").val(json.bean.MCHN_WGT);
+   	    		$("#osModel").val(json.bean.OP_SYS_VER);
+   	    		$("#phoneColor").val(json.bean.COL);
+   	    		$("#packInv").val(json.bean.WRAP_LIST_CNTT);
+   	    		$("#saleAfter").val(json.bean.AFTER_SALE_CNTT);
+   	    		//$("#prodMainPicSrc").val(json.bean.PIC_STO_ADDR);
+   	    		//$("#prodMainPicNm").val(json.bean.PIC_NM);
+   	    		
+   	    		//显示图文信息
+   	    		//alert(json.beans[0].PIC_STO_ADDR);
+   	    		for(var i=0;i<json.beans.length;i++){
+   	    			$('.picView').append('<li>'+
+   	   	    		      '<img style="height:100px" src="'+json.bean.ftpUrl+json.beans[i].PIC_STO_ADDR+'">'+
+   	   	    		      '<div class="picName">'+
+   	   	    		        '<label for="pic_'+json.beans[i].PIC_SEQNO+'">图片名称</label>'+'<input id="picNo_'+json.beans[i].PIC_SEQNO+'" name="picNo" type="hidden" value="'+json.beans[i].PIC_SEQNO+'">'+
+   	   	    		  		'<input id="picSrc_'+json.beans[i].PIC_SEQNO+'" name="picSrc" type="hidden" value="'+json.beans[i].PIC_STO_ADDR+'">'+
+   	   	    		        '<input id="pic_'+json.beans[i].PIC_SEQNO+'" class="FormInputText" name="picName" type="text" value="'+json.beans[i].PIC_NM+'">'+
+   	   	    		      '</div>'+
+   	   	    		      '<em title="关闭" onclick="delImg(this)">关闭</em>'+
+   	   	    		   '</li>');
+   	    		}
+   	    		//获取最大序号
+   	    		imgCount = json.beans[json.beans.length-1].PIC_SEQNO;
+   	    		}
+   	    		else {
+   	    			alert("查询失败");
+   	    		}
+   	    	});
+        }
+	}
+	//加载品牌下拉列表并获取合同ID
+	function loadBrand(){
+		var coopParam={'coopPrnrId':$("#ptyId").val()};
+		Util.ajax.postJson(srvMap.get("queryBrandByCoorId"), coopParam, function(json,flag){
+	   	  Util.ajax.loadTemp('#brandId',$('#T_brandId'),json);//加载模板
+	    });
+		
+		//获取合同ID
+		var coopParam={'PTY_ID':$("#ptyId").val()};
+		Util.ajax.postJson(srvMap.get("queryCtrtIdByCoorId"), coopParam, function(json,flag){
+			if(flag){
+				$("#ctrtId").val(json.beans[0].CTRT_ID);
+		   		 
+		   	 }
+		});
+	}
+	
+	function closeChooseClass(){
+	}
+	
+	function closeProdGathrItem(){
+	}
+	
+	function selectGroup(){
+		var dialog = document.getElementById("prodcutGroupDialog")||top.document.getElementById("prodcutGroupDialog");
+		var $from = $("form", dialog);
+		Util.dialog.openDiv({
+	        top:top,
+	   		id:'prodcutGroupDialog',
+	        title:'选择商品组',
+	        content: dialog,
+	        width: 900,
+	        height:400,
+	        modal: true,
+	        okVal:'确定',
+	        okCallback: function(){
+	        	var $selected = $(":radio[name='groupRadio']:checked", dialog);
+	        	console.log($selected.parent().parent().next().html());
+	        	$("#productGroupName").val($selected.parent().parent().next().html());
+	        	$("#productGroupId").val($selected.val());
+	        },
+	        cancelVal:'取消',
+	        cancelCallback:function(){
+	        	$("#productGroupName").val("");
+	        	$("#productGroupId").val("");
+	        }
+	    });
+       
+		var paginationParams = {
+			url : srvMap.get("queryProductGroupList"),
+			items_per_page : 5, // 每页数     @param : limit
+			page_index : 0, 	//当前页      @param : start
+			pagination : $(".pagination", dialog), //分页id
+			searchformId : $from.attr("id"), //搜索表单的id
+			tabletpl : $("#T_groupTpl"), //表格模板
+			tablewrap : $("#productGroupWarp", dialog)//表格容器
+		};
+		Util.pagination(0, true, paginationParams, $from.serialize());
+		
+		$("#J_prodGroup_search", dialog).unbind("click").click(function() {
+			Util.pagination(paginationParams.page_index, true, paginationParams, $from.serialize());
+		});
+	}
+</script>
+</body>
+</html>

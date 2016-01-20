@@ -1,0 +1,14 @@
+{
+	"rtnCode": "0",
+	"rtnMsg": "success",
+	"bean":{
+		"name":"时磊",
+		"gender":"0",
+		"nation":"汉族",
+		"year":"1988",
+		"month":"02",
+		"day":"22",
+		"addr":"河南省郑州市",
+		"id":"411328198702220001"
+	}
+}

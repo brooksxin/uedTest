@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10085-任务管理-查看进度</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+
+<body>
+				<div class="listTopBtn">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td><h1><span class="CMPGN_NM"></span></h1></td>
+							<td><div class="normalBtnArea ft-right">
+									<!-- <a class="normalBtn BGblue" href="#">上一个任务</a><a
+										class="normalBtn BGblue" href="#">下一个任务</a> -->
+								</div></td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="listTopTips">
+					<table cellpadding="0" cellspacing="0" border="0" width="100%">
+						<tr>
+							<td><span class="CMPGN_EFF_DATE"></span>——<span class="CMPGN_INVLD_DATE"></span></td>
+							<td><div class="ft-right">
+									任务数量：<span id="count"></span>/<span id="total"></span></div></td>
+						
+						</tr>
+					</table>
+				</div>
+	           <div class="tablewidth mg_t_10">
+					<table
+						class="ui-record-table table_radius table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>员工编号</th>
+								<th width="100">员工名称</th>
+								<th width="120">拨打电话次数</th>
+								<th width="100">成单数量</th>
+								<th width="80">成单率</th>
+								<th width="60">排名</th>
+							</tr>
+						</thead>
+						<tbody id="J_tabletpl">
+						</tbody>
+					</table>
+				</div>
+				<!--翻页及功能按钮区域开始-->
+				<!-- <DIV class="amount-bottom">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0"
+			class="gridBottom">
+			<tr>
+				
+				<td width="50%">
+					<DIV class="fn-clear action-other  action-other-show ">
+						<DIV id=Pagination class="page pagination fn-right"></DIV>
+						<DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+					</DIV>
+				</td>
+			</tr>
+		</table>
+	</DIV> -->
+
+	<#include "../../tpl/res_js.tpl" />
+	<script id="taskcount" type="text/x-handlebars-template">
+       {{bean.count}}/{{bean.total}}
+   </script>
+
+	<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+                           <tr>
+								<td>{{PTY_NO}}</td>
+								<td>{{STAFF_NM}}</td>
+								<td>{{DIAL_TELNUM_QTY}}/{{TSK_ALCT_QTY}}</td>
+                                <td>{{TSK_SUCC_QTY}}</td>
+                                <td>{{process}}</td>
+								<td>{{rank}}/{{totalRank}}</td>
+                            </tr>
+    {{/each}}
+{{else}}
+		<tr>
+		<td colspan="6">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+
+	
+	<script type="text/javascript">
+		
+		var CMPGN_ID = Util.browser.getParameter("CMPGN_ID");
+		var CMPGN_NM=  decodeURI(Util.browser.getParameter("CMPGN_NM"));//活动名称
+		//var CMPGN_NM ="情满七夕 优惠钜献 大型促销活动";  
+		var CMPGN_EFF_DATE=  decodeURI(Util.browser.getParameter("CMPGN_EFF_DATE"));//活动结束日期
+		var CMPGN_INVLD_DATE=  decodeURI(Util.browser.getParameter("CMPGN_INVLD_DATE"));//活动结束日期 
+		
+		/* var CMPGN_ID = '20150508'//活动ID
+		var CMPGN_INVLD_DATE= '2015-05-08' //活动结束日期
+		var CMPGN_EFF_DATE= '2015-05-08' //活动结束日期
+		var CMPGN_NM ="情满七夕 优惠钜献 大型促销活动"; */
+		
+		$(".CMPGN_NM").text(CMPGN_NM);
+		$(".CMPGN_EFF_DATE").text(CMPGN_EFF_DATE);
+		$(".CMPGN_INVLD_DATE").text(CMPGN_INVLD_DATE);
+		
+		srvMap.add('getcount', 'count.json', 'front/sh/market!index');//班组长查询未分配任务数量
+		srvMap.add('stafflist', 'staf.json', 'front/sh/user!userinfo');//班组长查询所在部门的员工列表
+
+		//页面加载完开始执行
+		$(function() {
+			var DEPT_ID = userInfo.bean.deptId;
+			//获取任务数量
+			var param1={"uid":"mc004","CMPGN_ID":CMPGN_ID,"type":"1","DEPT_ID":DEPT_ID};
+			Util.ajax.postJsonSync(srvMap.get('getcount'), param1, function(json,
+					status) {
+				if (status) {
+					var count = json.bean.count;
+					$("#count").html(count);
+					$("#total").html(json.bean.total);
+				}
+			});
+
+			var param2={"uid":"mwt007","CMPGN_ID":CMPGN_ID,"type":"0"};
+			Util.ajax.postJsonSync(srvMap.get('getcount'), param2, function(json1, status) {
+				if (status) {
+					Util.ajax.loadTemp('#J_tabletpl', $('#T_tabletpl'), json1);
+				}
+					
+			});
+		});
+	</script>
+</body>
+</html>

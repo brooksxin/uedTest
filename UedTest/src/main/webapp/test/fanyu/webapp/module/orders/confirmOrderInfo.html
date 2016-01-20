@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10085系统</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+              <div class="formItem">
+   
+                <div class="pt-10 pb-10"><a href="#" class="formItem_jiantou-tu normalLink">修改订单信息</a></div>
+                  <div class="titleArea">
+                      <h2>确认订单</h2>
+                  </div>
+                                    
+                  <div class="formArea-A">
+                  <table width="100%">
+                      <tbody>
+                          <tr class="formArea-A-dashed">
+                              <td width="90" ><span class="tc-c2">收货信息：</span></td>
+                              <td>
+                                                                    钱大华 13628932839 (第二联系电话:13628932840) qiandahua@163.com
+                                  <p>山东省 菏泽市 八一西路菏泽学院西校区 10 号楼 3 楼道 402 室</p>
+                              </td>
+                              <td width="90"></td>
+                          </tr>
+                          <tr>
+                              <td valign="top"><span class="tc-c2">购买商品：</span></td>
+                              <td>
+                                   <table width="100%">
+                                          <tr>
+                                             <td class="tabletest">{13110}iPhone6Plus/16G</td>
+                                             <td class="tabletest fn-right">7800×1</td>
+                                          </tr>
+                                          <tr>
+                                             <td class="tabletest">{13120}流行-大白手机壳</td>
+                                             <td class="tabletest fn-right">100×1</td>
+                                          </tr>
+                                          <tr>
+                                             <td class="tabletest">{131121}黑珍珠手机链</td>
+                                             <td class="tabletest fn-right">88×1</td>
+                                          </tr>
+                                          <tr class=" formArea-B-dashed">
+                                          <td>&nbsp;</td>
+                                          <td class="tcs-red-right">
+                                               <span>&yen;3088.00</span>
+                                          </td>
+                                         </tr>
+                                   </table>
+                              </td>
+                          </tr>
+                          <tr class="formArea-A-dashed">
+                              <td valign="top"><span class="tc-c2">支付方式：</span></td>
+                              <td>支付宝支付</td>
+                              <td></td>
+                          </tr>
+                          <tr class="formArea-A-dashed">
+                              <td valign="top"><span class="tc-c2">发票开具：</span></td>
+                              <td>个人 钱大华</td>
+                              <td></td>
+                          </tr>
+                          <tr>
+                              <td valign="top"><span class="tc-c2">短信模板：</span></td>
+                              <td>标准版</td>
+                              <td></td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  </div>
+              </div>
+
+
+              <div class="formBtnArea">
+                <table width="100%">
+                  <tr>
+                    <td>
+                      <div class="normalBtnArea fn-center">
+                          <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" >提交订单</a>
+                          <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_search" >生成预约</a>
+                      </div>
+                  </td>
+                  </tr>
+                </table>
+              </div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+//页面加载完开始执行
+$(function () {
+	$("#J_search").bind("click",function(){
+		var href = "orderSuccess.html"
+  		$(this).attr("href",href);
+	});
+});
+</script>
+</body>
+</html>

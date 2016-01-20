@@ -1,0 +1,73 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": null,
+    "object": {
+        "QU_CNTT": "今天您感觉舒服吗？",
+        "QU_DESC": "新建单选题",
+        "ASWR_ID": "0",
+        "QU_TYPE_CD": "50",
+        "QU_HAVE_ASWR_FLAG": "1",
+        "QU_ASWR_TYPE_CD": "01",
+        "QU_ASWR_SEQNO": "1",
+        "IS_ANSWER_QNR_ISTNC_ID": "0",
+        "QNR_ISTNC_ID": "09254ad9-74fc-489b-a055-559e5f796121",
+        "QU_ID": "19d1fce1-782b-4610-bd18-70660b79f47c",
+        "beans": [
+            {
+                "QU_CNTT": "今天您感觉舒服吗？",
+                "QU_DESC": "新建单选题",
+                "ASWR_CNTT": "舒服",
+                "ASWR_ID": "10146dfc-c6a6-4022-b68c-c25f36aba122",
+                "QU_TYPE_CD": "20",
+                "QU_HAVE_ASWR_FLAG": "1",
+                "QU_ASWR_TYPE_CD": "02",
+                "QU_ASWR_SEQNO": "0",
+                "IS_ANSWER_QNR_ISTNC_ID": "0",
+                "QNR_ISTNC_ID": "2cbd6da6-ebdc-402b-b0f3-6442a3dc4f81",
+                "QU_ID": "19d1fce1-782b-4610-bd18-70660b79f47c"
+            },
+            {
+                "QU_CNTT": "今天您感觉舒服吗？",
+                "QU_DESC": "新建单选题",
+                "ASWR_CNTT": "不舒服",
+                "ASWR_ID": "fe0a05aa-14a6-49ce-84a2-d20cf6fd5267",
+                "QU_TYPE_CD": "20",
+                "QU_HAVE_ASWR_FLAG": "1",
+                "QU_ASWR_TYPE_CD": "02",
+                "QU_ASWR_SEQNO": "1",
+                "IS_ANSWER_QNR_ISTNC_ID": "0",
+                "QNR_ISTNC_ID": "183170f3-4c54-4792-b17e-3ebdeeb5d70e",
+                "QU_ID": "19d1fce1-782b-4610-bd18-70660b79f47c"
+            },
+            {
+                "QU_CNTT": "今天您感觉舒服吗？",
+                "QU_DESC": "新建单选题",
+                "ASWR_CNTT": "一般般了",
+                "ASWR_ID": "bfa38d85-bdf3-4fdd-b632-3e6eb6575523",
+                "QU_TYPE_CD": "20",
+                "QU_HAVE_ASWR_FLAG": "1",
+                "QU_ASWR_TYPE_CD": "02",
+                "QU_ASWR_SEQNO": "2",
+                "IS_ANSWER_QNR_ISTNC_ID": "0",
+                "QNR_ISTNC_ID": "d95827dc-8038-4b22-8277-2018d6d57418",
+                "QU_ID": "19d1fce1-782b-4610-bd18-70660b79f47c"
+            },
+            {
+                "QU_CNTT": "今天您感觉舒服吗？",
+                "QU_DESC": "新建单选题",
+                "ASWR_CNTT": "非常好",
+                "ASWR_ID": "bfb3d7f4-0083-47ee-90e6-8d91bfa1e588",
+                "QU_TYPE_CD": "20",
+                "QU_HAVE_ASWR_FLAG": "1",
+                "QU_ASWR_TYPE_CD": "02",
+                "QU_ASWR_SEQNO": "3",
+                "IS_ANSWER_QNR_ISTNC_ID": "0",
+                "QNR_ISTNC_ID": "d192df90-699e-4b6a-8b2b-d27c42e49591",
+                "QU_ID": "19d1fce1-782b-4610-bd18-70660b79f47c"
+            }
+        ]
+    }
+}

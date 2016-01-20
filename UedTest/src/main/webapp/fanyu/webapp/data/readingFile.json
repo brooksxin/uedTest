@@ -1,0 +1,13 @@
+{
+	"returnCode": "0000",
+	"returnMessage": "success",
+	"bean":{
+		"mingan":"1000",
+		"existPhoneNum":"500",
+		"FILE_LIN_SEQ":"2",
+		"FILE_NM":"测试文件.xls",
+		"SMPL_QTY":"3000",
+		"MODF_TIME":"2015-09-09 09:12:32"
+
+	}
+}

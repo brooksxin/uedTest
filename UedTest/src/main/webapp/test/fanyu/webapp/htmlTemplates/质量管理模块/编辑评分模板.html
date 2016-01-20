@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>质量管理模块——评分模板</title>    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+</head>
+
+<body>
+<!-- 面包屑 begain -->
+<div class="breadcrumb"></div>
+<!-- 面包屑end -->
+<div class="formItem">
+    <div class="pt-10 pb-10">
+        <a href="###" class="formItem_jiantou-tu normalLink">返回</a>
+    </div>
+    <div class="titleArea">
+        <h2>编辑评分模板</h2>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="../../res/lib/ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="../../res/lib/validate/1.10.0/jquery.validate.js"></script>
+<script type="text/javascript" src="../../res/lib/datepicker/4.8.b2/WdatePicker.js"></script>
+<script type="text/javascript" src="../../res/lib/json/1.0/json2.js"></script>
+<script type="text/javascript" src="../../res/lib/dialog/4.1.6/artDialog.js"></script>
+<script type="text/javascript" src="../../res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="../../res/lib/opui/2.0.1/operamasks-ui.js"></script>
+<script type="text/javascript" src="../../res/lib/blockUI/2.64/jquery.blockUI.js"></script>
+<script type="text/javascript" src="../../res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="../../res/lib/handlebars/1.0.rc.3/helpers.js"></script>
+<script type="text/javascript" src="../../res/lib/slides/3.0/jquery.slides.min.js"></script>
+<script type="text/javascript" src="../../res/lib/pagination/1.2.1/jquery.pagination.js" ></script>
+<script type="text/javascript" src="../../res/lib/underscore/1.4.4/underscore-min.js" ></script>
+<script type="text/javascript" src="../../res/lib/jqui/1.9.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../../res/lib/jqui/1.9.2/jquery.combobox.js"></script>
+<script type="text/javascript" src="../../res/lib/jqui/1.9.2/jquery.multiselect.js"></script>
+<script type="text/javascript" src="../../res/common/NiceTools.js"></script>
+<script type="text/javascript" src="../../res/common/common.js"></script>
+<div method="post" action="#" class="cmxform" >
+    <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+        <div class="formItem">
+            <hr/>
+            <table class="form_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td align="right" width="100">
+                            <label class="formDescription"><span class="fn-high">*</span>模板名称：</label>
+                        </td>
+                        <td>
+                            <input type="text" class="FormInputText width100" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <label class="formDescription">模板描述：</label>
+                        </td>
+                        <td>
+                            <textarea rows="4" class="width100"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <label class="formDescription"><span class="fn-high">*</span>评分类型：</label>
+                        </td>
+                        <td>服务用语、服务技巧、业务要求</td>
+                    </tr>
+                    <tr>
+                        <td align="right">&nbsp;</td>
+                        <td>
+                            <a href="###" class="normalBtn BGgray">编辑评分类型</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>       
+    </form>
+</div>
+<div class="tablewidth mg_t_10">
+    <table class="ui-record-table table_radius table-bordered table-striped" >
+        <thead>
+            <tr>
+                <th width="25">序号</th>
+                <th width="200">评分项</th>
+                <th>等级名称</th>
+                <th width="200">等级分值</th>
+                <th width="100">权重</th>
+                <th width="100">排序</th>
+                <th width="150">操作</th>
+            </tr>
+        </thead>
+        <tbody id="J_tabletpl">
+            <tr>
+                <td>1</td>
+                <td>
+                    <a class="item-text" href="javascript:;">基本用语</a>
+                </td>
+                <td>优秀/良好/及格/不及格</td>
+                <td align="right">100/70/40/0</td>
+                <td align="right"><a class="item-text" href="javascript:;">10%</a>
+                </td>
+                <td>
+                    <a href="###" class="upIcon"></a>
+                    <a href="###" class="downIcon"></a>
+                </td>
+                <td><a href="###">删除</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!--翻页及功能按钮区域开始-->
+<div class="amount-bottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+        <tr>
+            <td>
+                <div class="fn-clear action-other  action-other-show ">
+                    <div id="Pagination" class="page pagination fn-right"></div>
+                    <div class="fn-right fn-pt5 fn-pr10"><a class="normalBtn BGgray" href="#">添加评分项</a></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+
+</div>
+<hr/>
+<div class="form_btn">
+<a href="###" class="normalBtn BGblue largeBtn">完成</a>
+</div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+      //页面加载完开始执行
+      $(document).ready(function () {
+          //初始化函数
+      });
+  </script>
+</body>
+</html>

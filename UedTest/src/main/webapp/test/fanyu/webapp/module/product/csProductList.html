@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>在售商品管理</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+		      <div class="breadcrumb"></div>
+
+			<div class="tabsArea">
+		       
+		        <div class="ui-tab">
+		        	<div class="tabsBtn"><a href="addPhone1.html" class="normalBtn BGblue">上传新商品</a></div>
+		            <ul class="ui-tab-items">
+		                <li class="ui-tab-item ui-tab-item-current">
+		                    <a href="javascript:;">手机</a>
+		                </li>
+		            </ul>
+		        </div>
+    		 </div>
+    		 
+               <div method="post" action="#" class="cmxform" >
+                   <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+                      <div class="record-search-cate">
+            				<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+								<tbody>
+									<tr>
+										<td width="80"><label class="description">商品编号</label></td>
+										<td width="150">
+											<input class="inputWidth inputText" type="text"  id="mcdsUnitId" name="mcdsUnitId" maxlength="255" value="" />
+										</td>
+										<td width="80"><label class="description">商品名称</label></td>
+										<td width="200">
+											<input class="inputWidth inputText" type="text"  id="mcdsUnitNm" name="mcdsUnitNm" maxlength="255" value="" />
+										</td>
+										<td width="">
+                                        <div class="normalBtnArea w82">
+                                        	<a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a>
+                                        </div>
+										</td>
+                                    </tr>
+								</tbody>
+            				</table>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="tablewidth mg_t_10">
+					<table class="ui-record-table table_radius table-bordered table-striped" >
+						<thead>
+							<tr>
+								<th width="25">序号</th>
+								<th width="150">商品编号</th>
+								<th>商品名称</th>
+								<th width="50">价格(元)</th>
+								<th width="40">已出售</th>
+								<th width="30">库存</th>
+								<th width="70">添加时间</th>
+                                <th width="40">添加者</th>
+                                 <th width="160">操作</th>
+							</tr>
+                         </thead>
+                         <tbody id="J_tabletpl">
+						</tbody>
+					</table>
+   	            </div>
+   	 
+               	 <!--翻页及功能按钮区域开始-->
+                <DIV class="amount-bottom">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+                      <tr>
+                        <td width="60">
+                            <input type="checkbox" class="selectAll" id="selectAll" onclick="selectAll(this)"/> <label for="selectAll">全选</label> 
+                        </td>
+                        <td >
+                            <DIV class="normalBtnArea">
+                                <a class="normalBtn BGgray" onclick="downProd()">批量下架<span id="J_downum"></span></a>
+                            </DIV>
+                        </td>
+                        <td>
+                            <DIV class="fn-clear action-other  action-other-show">
+                                    <DIV id=Pagination class="page pagination fn-right"> </DIV>
+                                    <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                            </DIV></td>
+                      </tr>
+                    </table>
+                </DIV>
+        <!--弹出窗口 -->
+            <div id="popupSku" class="fn-hide">
+                <div id="T_importProd" class="fn-hide">
+                    <form class="formItem  stockChange" id="J_add_form">
+
+                            <input id="mcdsId" type="hidden" value="" />
+                            <div class="caption">提示</div>
+                            <table class="form_table" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td width="90" valign="top"><label class="formDescription">商品名称：</label></td>
+                                        <td id="mcdsNm" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="formDescription">已售出：</label></td>
+                                        <td id="cnspQty" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="formDescription">剩余库存：</label></td>
+                                        <td id="skuQty" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="formDescription">修改为：</label></td>
+                                        <td>
+                                            <input id="newSkuQty" type="text" value="" name="newSkuQty" class="FormInputText"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                    </form>
+                </div>
+                <div class="formBtnArea">
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <div class="normalBtnArea fn-center">
+                                    <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search_confirm"> 确定 </a>
+                                    <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_search_console">取消</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+              </div>
+              
+              <div id="chnlDialog" class="fn-hide">
+				<form class="formItem stockChange" autocomplete="off">
+					<div class="chnl_dialog">
+						<div class="caption">设置渠道</div>
+						<div class="chnl_allSelect"><label for="allSelect"><input type="checkbox" onclick="javascript:$('ul#chnls').find(':checkbox').prop('checked',this.checked);">全选</label></div>
+						<ul id="chnls"></ul>
+					</div>
+				</form>
+			</div>
+			
+			<div id="downDialog" class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要下架所选商品吗？</div></div></div>
+			<script type="text/x-handlebars-template" id="chnltemplate">
+		    	{{#each beans}}
+				<li><label for="{{CHNL_ID}}"><input id="{{CHNL_ID}}" class="chnl_checkbox" type="checkbox" name='chnl' value="{{CHNL_ID}}">{{PTY_NM}}</label></li>
+				{{/each}}
+			</script>
+    
+<#include "../../tpl/res_js.tpl" />
+
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+            <td><div class="table_select"><input type="checkbox" name="prod" value="{{MCDS_UNIT_ID}}" data-chnl="{{channels}}" onclick = "clickChange(this,'{{MCDS_UNIT_ID}}')" data-keyid='{{MCDS_UNIT_ID}}'/></div></td>
+            <td>{{MCDS_UNIT_ID}}</td>
+			<td>{{MCDS_UNIT_NM}}</td>
+            <td><div class="gridNum">{{UPRC}}</div></td>
+			<td><div class="gridNum">{{CNSP_QTY}}</div></td>
+            <td><div class="gridNum">{{SKU_QTY}}</div></td>
+            <td>{{CRT_TIME}}</td>
+			<td>{{CRT_USER_ID}}</td>
+            <td>
+                <div class="gridRowBtn">
+                    <a class="item-text" href="javascript:;" onclick="updateSku(this)" data-skuqty='{{SKU_QTY}}' data-cnspqty='{{CNSP_QTY}}' data-mcdsnm='{{MCDS_UNIT_NM}}' data-mcdsid='{{MCDS_UNIT_ID}}'>调整库存</a>
+					<a class="item-text" href="javascript:;" value="{{MCDS_UNIT_ID}}" onclick="prodDetail('{{MCDS_UNIT_ID}}')" >详情</a>
+					<a class="item-text" href="javascript:;" data-chnl="{{channels}}" data-mcdsId="{{MCDS_UNIT_ID}}" onclick="updateChnlProd(this);">调整渠道</a>
+				</div>
+            </td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="9">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+<script type="text/javascript">
+
+function selectCheckbox(obj){
+	alert(1);
+	console.log($(obj).next('ul').find(':checkbox').length)
+	//$(this).next('ul').find(':checkbox').attr('checked',this.checked);
+}
+//页面加载完开始执行
+/*
+	服务配置
+	param1: 服务名
+	param2: 假数据路径
+	param3: 后台服务路径
+	*/
+	
+	srvMap.add('queryMcdsUnitList', 'queryMcdsUnitList.json' ,'front/sh/prod!execute?uid=p009');//查询服务
+	srvMap.add('changeProdStatus', 'query.json' ,'front/sh/prod!execute?uid=p011');//更改商品上下架状态
+	srvMap.add('updateSku', 'query.json' ,'front/sh/prod!execute?uid=p008');//调整库存
+	srvMap.add('queryChnlList', '', 'front/sh/user!getChnl?uid=u001')//查询渠道列表
+	var G_params = {
+		    url : srvMap.get('queryMcdsUnitList'),
+		    items_per_page : 5 ,   		// 每页数     @param : limit
+		    page_index : 0 , 				//当前页  @param : start
+		    pagination : "Pagination" , 	//分页id
+		    searchformId : "J_formSearch",  //搜索表单的id
+		    tabletpl : "T_tabletpl", 		//表格模板
+		    tablewrap : "J_tabletpl", 		//表格容器
+            pageCallback: pageback
+		};
+    /*
+    *弹出框用到的dom元素
+    */
+	var D_mcdsId = $("#mcdsId");
+    var D_newSkuQty = $("#newSkuQty");
+    var D_prodName = $("#mcdsNm");
+    var D_skuQty = $("#skuQty");
+    var D_cnspQty = $("#cnspQty");
+    var J_add_form = $("#J_add_form");
+	var validate1 = J_add_form.validate({
+        rules: {
+        	"newSkuQty":{
+                required: true,
+                digits:true
+                //min: 1
+            }
+        },
+        messages: {
+        	"newSkuQty": {
+                required: "请输入库存数",
+                digits:"请输入正确的库存数（整数）"
+                //min: "请输入大于0的库存数"
+            }
+        },
+        showErrors:function(){
+            this.defaultShowErrors();
+        },
+        success: function(currentDom){
+            $(currentDom).html("<img src='../../css/images/validate-right.png' class='right-img'>");
+        }
+    });
+
+    //页面加载完开始执行
+    $(document).ready(function () {
+
+        //全局数组
+        selected_array = [];
+        //查询按钮事件
+    	$('#J_search').bind('click',function(){
+    		selected_array = [];
+    		G_params.page_index=0;
+            var str = $("#"+G_params.searchformId).serialize(); //把form序列化
+            console.log(str);
+            //分页获取数据
+            Util.pagination(0, true , G_params , str );
+        });
+    	$('#J_search').trigger("click");
+    });
+    
+  
+    //商品渠道设置
+	function updateChnlProd(obj){
+		var mcdsUnitId = $(obj).data("mcdsid");
+		console.log($(obj).data("chnl"));
+		var arraychnl = String($(obj).data("chnl")).split(",");
+		var dialog = document.getElementById("chnlDialog")||top.document.getElementById("chnlDialog");
+		var params = {
+             top:top,
+             content: dialog,
+             width: "480px",
+             height: "200px",
+             modal: true,
+             okVal:'确定',
+             okCallback:function(){
+            	var channels = '';
+            	var $channels = $(":checkbox[name='chnl']:checked", dialog);
+				$.each($(":checkbox[name='chnl']:checked", dialog), function(i, n) {
+					channels += n.value;
+					if (i < $channels.length - 1) {
+						channels += ","
+					}
+				});
+				var params = {
+					"mcdsUnitIds" : mcdsUnitId,
+					"channels" : channels,
+					"flag" : "02"
+				}
+				Util.ajax.postJsonSync(srvMap.get("changeProdStatus"), jQuery.param(params), function(json, status) {
+					if (status) {
+						Util.dialog.tips("修改成功!")
+						$('#J_search').trigger("click");
+					} else {
+						alert(json.returnMessage || '修改失败');
+					}
+				});
+			},
+			cancelVal : '取消',
+			cancelCallback : function(){
+				$(":checkbox", dialog).attr("checked", false);
+			}
+		};
+
+		Util.ajax.postJson(srvMap.get("queryChnlList"), "",function(json, flag) {
+			if (flag) {
+				Util.ajax.loadTemp('#chnls', $('#chnltemplate'), json);//加载模板
+				$.each(arraychnl,function(i,n){
+					$.each($(":checkbox[name='chnl']", dialog), function(j,m){
+						if(m.value === n){
+							$(m).attr("checked", true);
+						}
+					});
+				});
+				Util.dialog.openDiv(params);
+			}
+		});
+	}
+    
+	function downProd(){
+		var $prods = $(":checkbox[name='prod']:checked", "#J_tabletpl");
+		if($prods.length === 0){
+			alert("请选择要下架的商品");
+			return false;
+		}
+		var dialog = document.getElementById("downDialog")||top.document.getElementById("downDialog");
+		var params = {
+             top:top,
+             content: dialog,
+             width: "400px",
+             height: "200px",
+             modal: true,
+             okVal:'确定',
+             okCallback:function(){
+				var mcdsUnitIds='';
+				$.each($prods, function(i, n){
+					mcdsUnitIds += n.value;
+					if(i < $prods.length - 1){
+						mcdsUnitIds+=","
+					}
+				});
+				var params = {
+					"mcdsUnitIds" : mcdsUnitIds,
+					"flag" : "05"
+				}
+				Util.ajax.postJson(srvMap.get("changeProdStatus"), jQuery.param(params), function(json, status) {
+					if (status) {
+						Util.dialog.tips("商品下架成功!")
+						$('#J_search').trigger("click");
+						$("#J_downum").html("(0)");
+					} else {
+						alert(json.returnMessage || '商品下架修改失败');
+					}
+				});
+			},
+			cancelVal : '取消',
+			cancelCallback : function(){
+				$(":checkbox", dialog).attr("checked", false);
+			}
+		};
+		Util.dialog.openDiv(params);
+	}
+
+	var elem = $("#T_importProd");
+	function updateSku(obj) {
+		var params = {
+			top : top,
+			id : 'A_importProd',
+			content : elem,
+			width : 420,
+			height : 250,
+			modal : true,
+			okVal : '确定',
+			cancelVal : '取消',
+			cancelCallback : closeDialog,
+			okCallback : okDialog
+		}
+		Util.dialog.openDiv(params);
+
+		D_mcdsId.val($(obj).data("mcdsid"));
+		D_prodName.html($(obj).data("mcdsnm"));
+		D_cnspQty.html($(obj).data("cnspqty"));
+		D_skuQty.html($(obj).data("skuqty"));
+
+	}
+
+	function prodDetail(obj) {
+		window.location.href = "phoneDetail.html?prodId=" + obj;
+	}
+
+	/*
+	    点击弹出框中的取消按钮之后的回调事件
+	 */
+	function closeDialog() {
+		D_newSkuQty.val("");
+		validate1.resetForm();
+	}
+
+	/*
+	    点击弹出框中的确定按钮之后的回调事件
+	 */
+	function okDialog() {
+		if (validate1.form()) {
+			var grams = {
+				mcdsUnitId : D_mcdsId.val(),
+				updateSkuQty : D_newSkuQty.val()
+			};
+			Util.ajax.postJson(srvMap.get("updateSku"), grams, function(json,
+					status) {
+				//console.log(JSON.stringify(json));
+				if (status) {//新增成功后跳转到商家列表页
+					Util.dialog.tips("调整成功!");
+					$('#J_search').trigger("click");
+				} else {
+					alert(json.returnMessage || '调整失败');
+				}
+				D_newSkuQty.val("");
+				validate1.resetForm();
+			});
+		} else {
+			return false;
+		}
+	}
+
+	function selectAll(obj) {
+
+		var isCheck = $(obj).is(":checked");
+
+		$("#J_tabletpl").find("tr")
+				.each(
+						function(index, item) {
+							var keyId = $(this).find(
+									"td:eq(0) div input[type=checkbox]").data(
+									"keyid");
+							if (isCheck) {
+								$(this).find("td").addClass("tr-selected");
+								$(this).find("td:eq(0) input[type=checkbox]")
+										.attr("checked", isCheck).addClass(
+												"active");
+								if (selected_array.indexOf(keyId) == "-1") {
+									selected_array.push(keyId);
+								}
+							} else {
+								$(this).find("td").removeClass("tr-selected");
+								$(this).find("td:eq(0) input[type=checkbox]")
+										.attr("checked", isCheck).removeClass(
+												"active");
+								selected_array.splice(selected_array
+										.indexOf(keyId), 1);
+							}
+						});
+
+		var str = "(" + selected_array.length + ")";
+		$("#J_downum").html(str);
+	}
+
+	function clickChange(obj, mainKey) {
+		if ($(obj).hasClass("active")) {
+			$(obj).removeClass("active").attr("checked", false).parent()
+					.parent().parent().find("td").removeClass("tr-selected");
+			selected_array.splice(selected_array.indexOf(mainKey), 1);
+		} else {
+			$(obj).addClass("active").attr("checked", true).parent().parent()
+					.parent().find("td").addClass("tr-selected");
+
+			selected_array.push(mainKey);
+		}
+
+		var str = "(" + selected_array.length + ")";
+		$("#J_downum").html(str);
+	}
+
+	function pageback() {
+		$("#selectAll").removeAttr("checked");
+		var str = "(" + selected_array.length + ")";
+		$("#J_downum").html(str);
+
+		$("#J_tabletpl").find("tr").each(
+				function(index, item) {
+					var _self = $(this);
+					var keyId = $(this).find(
+							"td:eq(0) div input[type=checkbox]").data("keyid");
+					for (var i = 0; i < selected_array.length; i++) {
+						if (keyId == selected_array[i]) {
+							_self.find("td:eq(0) input[type=checkbox]").attr(
+									"checked", true).addClass("active")
+									.parent().parent().parent().find("td")
+									.addClass("tr-selected");
+						}
+					}
+				});
+	}
+</script>
+</body>
+</html>

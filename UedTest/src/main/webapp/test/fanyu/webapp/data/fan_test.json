@@ -1,0 +1,9 @@
+{
+	"rtnCode": "0",
+	"rtnMsg": "success",
+	"bean":{
+		"lessauth":"洛阳市公安局",
+		"startime":"2010.12.12",
+		"endtime":"2012.12.12"
+	}
+}

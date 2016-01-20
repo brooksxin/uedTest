@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>目标客户</title>
+<#include "../../tpl/res_css.tpl" />
+
+</head>
+
+<body>
+	<div class="formItem">
+		<div class="titleArea bd-bottom fn-clear">
+			<a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a>
+			<h2 class="ui-textIndentStyle fn-left">创建新项目</h2>
+		</div>
+
+
+        <div class="flowSteps_six">
+			<!--第二步样式改为current_2-->
+			<ul class="current_4 fn-clear" id="J_stepstype1">
+				<li class="FirstStep"><a href="javascript:;">基本信息</a></li>
+				<li class="SecondStep"><a href="javascript:;">选择商品</a></li>
+				<li class="ThirdStep"><a href="javascript:;">添加问卷</a></li>
+				<li class="FourStep"><a href="javascript:;">目标客户</a></li>
+				<li class="FiveStep"><a href="javascript:;">执行团队</a></li>
+			</ul>
+		</div>
+        <div class="flowSteps_four fn-hide" id="J_stepstype2">
+			<!--第二步样式改为current_2-->
+			<ul class="current_3 fn-clear">
+				<li class="FirstStep"><a href="javascript:;">基本信息</a></li>
+				<li class="SecondStep"><a href="javascript:;">添加问卷</a></li>
+				<li class="ThirdStep"><a href="javascript:;">目标客户</a></li>
+				<li class="FourStep"><a href="javascript:;">执行团队</a></li>
+			</ul>
+		</div>
+		
+		<div class="tablewidth fn-mt10 fn-hide" id="filelist">
+			<table
+				class="ui-record-table table_radius table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>文件名称</th>
+						<th>样本数量</th>
+						<th width="100">上传时间</th>
+						<th width="100">样本去重</th>
+						<th width="100">样本过滤</th>
+						<th width="80">操作</th>
+					</tr>
+				</thead>
+				<tbody id="J_tabletpl">
+					
+				</tbody>
+			</table>
+			<div class="excelImportMessage">
+				已上传文件：<span id="filecount"></span> 样本合计：<span id="total"></span>
+
+			</div>
+		</div>
+		<div class="excelImportBtn">
+			<div id="J_step5_1">
+				<i class="importIcon"></i> <a class="normalBtn BGgray"
+					href="javascript:;" id="J_upload">导入名单</a>
+				<div>支持excel格式</div>
+				<a href="MARKET_CMPGN_CUST_TRG.xls">点击下载模板文件</a>
+			</div>
+
+			<!-- 导入提示start -->
+			<div>
+
+				<!-- 导入解析中提示 -->
+				<div id="J_parse_file" class="ui-processDialog fn-hide">
+					<div class="processRate_title">正在解析数据，可能需要些时间，解析过程中请您不要进行其它操作或离开本页面。</div>
+					<div class="rateBarArea" style="margin-left: 0;">
+						<div class="rateBar">
+							<div class="rateBg"></div>
+							<div class="rateProcess" style="width: 0;"></div>
+						</div>
+					</div>
+					<div class="processRate">
+						<span id="J_rate"></span>(已解析 <span id="J_progress"></span>/ <span
+							id="J_total"></span>)
+					</div>
+				</div>
+
+				<!-- 导入成功内容 -->
+				<div id="J_import_done" class="ui-sucessDialog fn-hide">
+					<div class="sucessDialog_text">目标客户导入成功</div>
+					
+				</div>
+
+				<!-- 导入失败内容 -->
+				<div id="J_import_fail" class="ui-failureDialog fn-hide">
+					<div class="failureDialog_text">目标客户导入失败。</div>
+					<!-- <div class="failureDialog_fileShow">
+						     				<div class="normalBtnArea mtb20">
+						     				   <a href="javascript:;" class="normalBtn BGgray pdLarge">重新导入</a>
+						     				</div>
+						     			</div> -->
+					<div class="failureReason">
+						<h2>失败原因：</h2>
+						<p id="errorlist"></p>
+					</div>
+				</div>
+				<div id="J_import_phone_exist" class="ui-sucessDialog fn-hide">
+					<div class="sucessDialog_fileShow">
+						<div class="fileTotal">
+							导入中去重数据记录<span id="existPhone" style="color: red;"></span>条
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- 导入提示END -->
+
+			<input type="hidden" name="uid" value="mb001" />
+			</form>
+		</div>
+	</div>
+	<div class="formBtnArea bd-top">
+        <table width="100%">
+            <tr>
+                <td>
+                    <div class="normalBtnArea">
+                        <a class="normalBtn BGgray largeBtn" href="#" id="Return" onclick="returnback()">上一步</a>
+                        <a class="normalBtn BGblue largeBtn" href="javascript:;" id="Next" onclick="divideTask()">下一步</a>
+                        <a class="normalBtn BGgray largeBtn" href="javascript:;" id="Save" onclick="save()">保存</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="normalBtnArea fn-right">
+                        <a href="#" class="formLink" id="CanCelCreate"><span>取消创建</span></a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+	<#include "../../tpl/res_js.tpl" />
+
+
+<script id="T_tabletpl" type="text/x-handlebars-template">
+
+
+{{#if beans}}
+	{{#each beans}}
+	    <tr>
+						<td><a href="#">{{FILE_NM}}</a>
+                        </td>
+						<td>{{SMPL_QTY}}</td>
+						<td>{{CRT_TIME}}</td>
+                        <td>{{DEL_DPLCT_CUST_QTY}}</td>
+                        <td>{{DEL_SNSTV_CUST_QTY}}</td>
+						<td>
+							<div class="gridRowBtn">
+								<a class="item-text" href="javascript:;" onclick="deletefile({{FILE_LIN_SEQ}})" dataseq="{{FILE_LIN_SEQ}}">删除</a>
+							</div>
+						</td>
+		</tr>
+	{{/each}}
+{{else}}
+	<tr>
+		<td colspan="4">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+
+{{/if}}
+</script>
+
+
+	<script id="errorlist" type="text/x-handlebars-template">
+{{returnMessage}}
+</script>
+
+
+
+	<script src="../../lib/swfupload/1.0.0/2.5/swfupload.js"></script>
+	<script type="text/javascript">
+		var isImport = true;
+		//var CMPGN_ID='20150508';
+		var CMPGN_ID = Util.browser.getParameter("id");
+		var goodId=Util.browser.getParameter("goodId");
+		var type = Util.browser.getParameter("type");//上一个页面标识，2-问卷页面
+		srvMap.add('queryFilelist', 'filelist.json', 'front/sh/market!index?uid=mwt019');//查询营销活动已经导入的目标客户列表
+		srvMap.add('deletefile', 'deletefile.json', 'front/sh/market!index?uid=mwt018');//删除文件
+		
+		srvMap.add('creatLbl', 'lbl.json', 'front/sh/market!uploadMarketFile');//插入标签和客户
+		srvMap.add('parseFile', 'uploadFile.json', 'front/sh/market!index');//删除和查询操作
+		srvMap.add('readingFile', 'readingFile.json','front/sh/market!getMarketFile');//读取文件
+		srvMap.add('excelFile', 'parseFile.json','front/sh/market!index');//返回正在进行的total和count值
+		//srvMap.add('addMarketCmpgnLbl','','front/sh/market!index?uid=mwq006');//插入标签和活动的关系
+		//srvMap.add('addMarketCmpgnLbl', 'lbl.json', 'front/sh/market!uploadMarketFile?uid=mwq012');
+		var upload = '';
+
+		//上传空间参数
+		var settings = {
+			flash_url : "../../lib/swfupload/1.0.0/2.5/swfupload.swf",
+			upload_url : srvMap.get('creatLbl'),
+			post_params : {},
+			use_query_string : false,
+			file_size_limit : "5 MB",
+			file_types : "*.xls;*.csv;", //允许所有类型时请使用 *.*
+			file_types_description : "All Files",
+			file_upload_limit : 0,
+			file_queue_limit : 0,
+			debug : false,
+			// Button settings
+			button_image_url : '../../css/images/upload_btn1.png',
+			button_width : '80',
+			button_height : "32",
+			button_placeholder_id : 'J_upload',
+			button_text_left_padding : 12,
+			button_text_top_padding : 3,
+			button_cursor : SWFUpload.CURSOR.HAND,
+
+			file_queued_handler : fileQueued,
+			file_dialog_complete_handler : fileDialogComplete,
+			upload_start_handler : uploadStart,
+			upload_error_handler : uploadError,
+			upload_success_handler : uploadSuccess
+		};
+		$(function() {
+
+			if(type == 2){
+				$("#J_stepstype2").show();
+				$("#J_stepstype1").hide();
+			}
+			
+			upload = new SWFUpload(settings);//初始化上传控件
+
+			/* $(".adddesc").bind("click", function() {
+				$(this).hide();
+				$(".textdesc").show();
+			}); */
+			$("#J_Cancel").bind("click", function() {
+				if (!$(this).hasClass("disable")) {
+					window.location.href = "draftList.html";
+				}
+
+			});
+			/* $("#J_Divide").bind("click", function() {
+				//To do 跳转到查询标签列表页面
+				window.location.href="campgnList.html";
+			}); */
+
+			/* $("#J_upload").on("click",function(){
+				    if(!isImport){
+				    	Util.dialog.tips('您已导入文件，不能再次导入！');
+					return;
+				    }
+				
+			}); */
+
+		});
+
+		function fileQueued(file) {
+			//$('#J_confirm').removeClass('disable');
+			//$('#J_fileName').text(file.name);
+			//$('#J_fileName').append($("<p>" + file.name + "</p>"));
+		}
+		//准备完成
+		function fileDialogComplete(numFilesSelected, numFilesQueued) {
+				//$("#J_import_fail").hide();
+				//$("#J_import_done").hide();
+				//$("#J_import_phone_exist").hide();
+				//$('#J_confirm').addClass('disable');
+				//动态的向表单内追加参数，不能使用拼接字符串形式
+				upload.addPostParam('uid', "mwq012");
+				upload.addPostParam('CMPGN_ID',CMPGN_ID );
+				upload.startUpload();
+		}
+		//上传前
+		function uploadStart(file) {
+			/*if (file.size > 5242880) {
+				Util.dialog.tips('文件大小超过5M,请重新上传！');
+				return false;
+			};
+			//createLoading('#J_front_wrap');
+			return true;*/
+		}
+		//上传出错
+		function uploadError(file, errorCode, message) {
+			try {
+
+			} catch (ex) {
+				this.debug(ex);
+			}
+			//unLoading('#J_front_wrap');
+		}
+
+		/* //上传成功之后回调方法
+		 function uploadSuccess(file, serverData){
+		 alert(1);
+		
+		 serverData = JSON.parse(serverData);
+		 if (serverData.returnCode == '0') {
+		 String flag=serverData.bean.flag;
+		 if(flag=='false'){
+		 $("#J_import_fail").removeClass("fn-hide");
+		 Util.ajax.loadTemp('#errorlist', $('#errorlist'), json);
+		 }else{
+		 $("#J_import_done").removeClass("fn-hide");
+		 Util.dialog.tips("执行成功");
+		 }
+		
+		 }
+		 } */
+
+		var timer;
+		//上传成功之后回调方法
+
+		function uploadSuccess(file, serverData) {
+			//alert(serverData);
+			$("#J_Cancel").addClass("disable");
+			serverData = JSON.parse(serverData);
+
+			var fileName = serverData.bean.fileName;
+			var fileoldName = serverData.bean.fileoldName;
+			var FILE_LIN_SEQ = serverData.bean.FILE_LIN_SEQ;
+			$(".fileName").html(fileName);
+			if (serverData.returnCode == '0') {
+				var randomKey = new Date().getTime();
+				//alert(2);
+				//var lableName = $('#LBL_NM').val();
+				//var desc=$('#LBL_DESC').val();
+				var param1 = {
+					"uid" : "mwt010",
+					"CMPGN_ID" : CMPGN_ID,
+					"fileoldname" : fileoldName,
+					"fileName" : fileName,
+					"randomKey" : randomKey,
+					"FILE_LIN_SEQ":FILE_LIN_SEQ
+				};
+				Util.ajax.postJson(srvMap.get("readingFile"), param1,
+						function(json, status) {
+							//alert(status);
+							if (status) {
+								if (json.returnCode == '0') {
+									var flag = json.bean.flag;
+									if (flag == 'false') {
+										$('#J_parse_file').hide();
+										$("#J_import_done").hide();
+										$("#J_import_fail").show();
+										$("#errorlist")
+												.html(json.returnMessage);
+										//$('#J_confirm').removeClass('disable');	
+									} else {
+										window.location.href="importCust.html?id="+CMPGN_ID;
+		 								/* var template = Handlebars.compile( $("#T_tabletpl").html());
+		 								console.log(json);
+		                                $("#J_tabletpl").append(template(json));
+		                                $('#J_parse_file').hide();
+										$("#J_import_fail").hide();
+										$("#J_import_done").show(); */
+										
+									}
+									clearInterval(timer);
+								} else {
+									$("#errorlist").html(json.returnMessage);
+									$("#J_import_file").show();
+									$('#J_parse_file').hide();
+									$("#J_import_fail").show();
+									// $('#J_confirm').removeClass('disable');
+									clearInterval(timer);
+
+								}
+							} else {
+								$("#errorlist").html("连接服务器异常！");
+								$("#J_import_file").show();
+								$('#J_parse_file').hide();
+								$("#J_import_fail").show();
+								//$('#J_confirm').removeClass('disable');
+								clearInterval(timer);
+							}
+						});
+				$('#J_import_file').hide();
+				$('#J_parse_file').show();
+				timer = setInterval(function() {
+					var param = {
+						"uid" : "mwt001",
+						"randomKey" : randomKey
+					};
+					Util.ajax.postJson(srvMap.get("excelFile"), param,
+							function(json, status) {
+								//alert(status);
+								if (status) {
+									/*
+									 *隔1.5秒钟请求一次数量
+									 *如果解析数等于总数，则停止请求
+									 */
+									//alert(JSON.stringify(json));
+									//alert(json.bean.progress);
+									//alert(json.bean.total);
+									if (json.bean.progress != json.bean.total) {
+										//alert(json.bean.progress);
+										//alert(json.bean.total);
+										var rate = parseInt(json.bean.progress)
+												/ parseInt(json.bean.total);
+										var rateBgWidth = $('.rateBg').width();
+										$('#J_progress').text(
+												json.bean.progress);
+										$('#J_total').text(json.bean.total);
+										$('#J_rate').text(
+												parseInt(rate * 100) + '%');
+										$('.rateProcess').width(
+												rateBgWidth * rate);
+									} /* else {
+															clearInterval(timer);
+															$('#J_confirm').addClass('disable');
+															$("#countTotal").html(json.bean.total);
+												            $('#J_parse_file').hide();
+												            $('#J_import_done').show();
+														} */
+								} else {
+									clearInterval(timer);
+									$("#errorlist").html("服务器异常");
+									/* $('#J_parse_file').hide();
+									$('#J_import_fail').show(); */
+									//$('#J_confirm').removeClass('disable');
+								}
+							});
+				}, 1500);
+
+			}
+		}
+		function divideTask() {
+			//alert(1);
+			if (!$("#J_Divide").hasClass("disable")) {
+				var param4 = {
+					"uid" : "mwt011",
+					"CMPGN_ID" : CMPGN_ID
+				};
+				Util.ajax
+						.postJsonSync(
+								srvMap.get('parseFile'),
+								param4,
+								function(json, status) {
+									if (status) {
+										var count = json.bean.count;
+										if (count == '0') {
+											//初始化分页查询标签
+											Util.dialog.tips("还未添加目标客户");
+											return;
+										} else {
+											//这里加判断条件是否显示提示
+											window.location.href = "dividetasksys.html?CMPGN_ID="+ CMPGN_ID+"&type="+type;
+										}
+									} else {
+
+									}
+								});
+			}
+		}
+
+		function deleteCust() {
+			var param3 = {
+				"uid" : "mwt012",
+				"CMPGN_ID" : CMPGN_ID
+			};
+			Util.ajax.postJsonSync(srvMap.get('parseFile'), param3, function(
+					json, status) {
+				if (status) {
+					$("#J_import_done").hide();
+					$("#J_Cancel").removeClass("disable");
+					$("#J_Divide").addClass("disable");
+					$('#J_confirm').addClass('disable');
+					Util.dialog.tips("删除目标客户成功");
+				} else {
+
+				}
+			});
+		}
+		
+		$(function() {
+			//查询已经导入的目标客户明细
+			var paramfile={"CMPGN_ID":CMPGN_ID};
+			Util.ajax.postJson(srvMap.get("queryFilelist"), paramfile,
+					function(json, status) {
+						//alert(status);
+						if (status) {
+							if (json.returnCode == '0') {
+								if(json.beans.length!=0){
+									$("#filelist").show();
+									$("#filecount").html(json.beans.length);
+									$("#total").html(json.bean.total);
+									Util.ajax.loadTemp('#J_tabletpl', $('#T_tabletpl'), json);
+								}
+							}
+						}
+			});
+			
+		});
+		
+		//删除文件
+		function deletefile(seq){
+			var deleteparam={"CMPGN_ID":CMPGN_ID,"FILE_LIN_SEQNO":seq};
+			Util.ajax.postJson(srvMap.get("deletefile"), deleteparam,
+					function(json, status) {
+						//alert(status);
+						if (status) {
+							if (json.returnCode == '0') {
+								window.location.href="importCust.html?id="+CMPGN_ID;
+							}
+						}
+			});
+		}
+		
+		function returnback(){
+			if(type == 2){
+				window.location.href="selectSingleQues.html?id="+CMPGN_ID;
+			}else{
+				window.location.href="addGoods.html?id="+CMPGN_ID+"&goodId="+goodId;;
+			}
+			
+		}
+		
+		function save(){
+			window.location.href="draftList.html";
+		}
+		
+		
+		$(function(){
+        	  $("#CanCelCreate").bind("click",function(){
+        		 var elem= $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">是否取消创建该项目？</div></div></div>');
+        	        var paramsdiv = {
+        	          top:top,
+        	          content: elem,
+        	          width: "300px",
+        	          height: "140px",
+        	          modal: true,
+        	          okVal:'取消创建',
+        	          okCallback:function(){
+        	                $(obj).hide().siblings().hide();
+        	              window.location.href="../market/campgnList.html";
+        	          },
+        	          cancelVal:'返回继续创建',
+        	          cancelCallback:function(){}
+        	        }
+        	        Util.dialog.openDiv(paramsdiv);
+        	  });
+        });
+	</script>
+</body>
+</html>

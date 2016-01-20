@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Untitled Form</title>
+<link href="../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../css/tablepay.css" media="all">
+<link rel="stylesheet" type="text/css" href="../css/common.css" media="all">
+<link rel="stylesheet" type="text/css" href="../lib/dialog/6.0.4/css/ui-dialog.css">
+<script src="../lib/jquery/1.8.1/jquery.js"></script>
+<script type="text/javascript" src="../lib/pretty/prettify.js"></script>
+<script src="../lib/datepicker/4.8.b2/WdatePicker.js"></script>
+<!-- <script src="../common/common.js"></script> -->
+<script type="text/javascript">
+	var curDate = new Date();
+	function endDateMax(){
+	    var startDate = $("#sDate").val();
+	    var y = startDate.substring(0,4);
+	    var maxDate = y+'-12-31';
+	    
+	    var y1 = JSON.stringify(curDate).substring(1,5);
+	    var y2 = startDate.substring(0,4);
+	    if(y2 < y1){
+	        return maxDate;
+	    }else{
+	        return curDate;
+	    }
+	}
+
+	function compareVal(){
+	    var startDate = $("#sDate").val();
+	    var endDate = $("#eDate").val();
+	    var y1 = startDate.substring(0,4);
+	    var y2 = endDate.substring(0,4);
+	    var cy =  JSON.stringify(curDate).substring(1,5);
+	    var ytempDate = y1+'-12-31';
+	    var ytempDateAll = ytempDate+' 23:59:59';
+	    if(y1!==y2){
+	        $("#eDate").val(ytempDate);
+	        $("#CREATE_DATE").val(ytempDateAll);
+	    }
+	    if(y1 == cy){
+	        $("#eDate").val(curDate.formatDD( "yyyy-MM-DD"));
+	        $("#CREATE_DATE").val(curDate.formatDD( "yyyy-MM-DD hh:mm:ss"));
+	    }
+	}
+	//当文本框失去焦点时，自动设置默认值
+	function setInputDefaultDay(obj ,startInput , endInput){
+	    if(obj.value==""){
+	        $("#sDate").val( $("#sDate").attr("defaultValue") );
+	        $("#eDate").val( $("#eDate").attr("defaultValue") );
+	        $("#"+startInput).val( $("#"+startInput).attr("defaultValue") );
+	        $("#"+endInput).val( $("#"+endInput).attr("defaultValue") );
+	        return false;
+	    }
+	}
+//获取当前月的第一天和当天
+function getFirstAndLastMonthDay(startInput, endInput , flag ){
+	var curDate = new Date();
+	//var _m = ((curDate.getMonth()+1)<10) ? ("0"+(curDate.getMonth()+1)) : (curDate.getMonth()+1);
+	//var firstdate = curDate.getFullYear() + "-"+ _m + "-01";
+    //var day = new Date( curDate.getFullYear() , _m , 0 );    
+    //获取当月最后一天日期
+	//var lastdate =  curDate.getFullYear() + "-"+ _m + "-"+ day.getDate();
+	var fdate = curDate.formatDD( "yyyy-MM-01");
+	var ldate = curDate.formatDD( "yyyy-MM-DD");
+	$("#sDate").val(fdate).attr("defaultValue",fdate);
+	$("#eDate").val(ldate).attr("defaultValue",ldate);
+	if(!flag){
+		fdate = curDate.formatDD( "yyyy-MM-01 00:00:00");
+		ldate = curDate.formatDD( "yyyy-MM-DD 23:59:59");
+	}
+	$("#"+startInput).val(fdate).attr("defaultValue",fdate);
+	$("#"+endInput).val(ldate).attr("defaultValue",ldate);
+	return fdate+","+ldate;  
+}
+
+//获取当前年的第一天和当前天
+function getFirstAndLastYearDay(startInput, endInput , flag ){
+	var curDate = new Date();
+	var fdate = curDate.formatDD( "yyyy-01-01");
+	var ldate = curDate.formatDD( "yyyy-MM-DD");
+	$("#sDate").val(fdate).attr("defaultValue",fdate);
+	$("#eDate").val(ldate).attr("defaultValue",ldate);
+	if(!flag){
+		fdate = curDate.formatDD( "yyyy-01-01 00:00:00");
+		ldate = curDate.formatDD( "yyyy-MM-DD 23:59:59");
+	}
+	$("#"+startInput).val(fdate).attr("defaultValue",fdate);
+	$("#"+endInput).val(ldate).attr("defaultValue",ldate);
+	return fdate+","+ldate;  
+}
+
+//获取当前年的第一天和当前天
+function setNoticeDate(startInput, endInput , flag ){
+	var curDate = new Date();
+	var fdate = curDate.formatDD( "yyyy-MM-DD");
+	var ldate = curDate.formatDD( "2020-12-31");
+	if(!flag){
+		fdate = curDate.formatDD( "yyyy-MM-DD 00:00:00");
+		ldate = curDate.formatDD( "2020-12-31 23:59:59");
+	}
+	$("#"+startInput).val(fdate).attr("defaultValue",fdate);
+	$("#"+endInput).val(ldate).attr("defaultValue",ldate);
+	return fdate+","+ldate;  
+}
+// data.formatDD( "yyyy-MM-DD hh:mm:ss");
+Date.prototype.formatDD = function( formatStr){ 
+  var date = this;
+  var str = formatStr; 
+  str=str.replace(/yyyy|YYYY/,date.getFullYear()); 
+  str=str.replace(/yy|YY/,(date.getYear() % 100)>9?(date.getYear() % 100).toString():"0" + (date.getYear() % 100)); 
+  str=str.replace(/MM/,date.getMonth()>8?(date.getMonth()+1).toString():"0" + (date.getMonth()+1)); 
+  str=str.replace(/M/g,date.getMonth()+1); 
+  str=str.replace(/dd|DD/,date.getDate()>9?date.getDate().toString():"0" + date.getDate()); 
+  str=str.replace(/d|D/g,date.getDate()); 
+  str=str.replace(/hh|HH/,date.getHours()>9?date.getHours().toString():"0" + date.getHours()); 
+  str=str.replace(/h|H/g,date.getHours()); 
+  str=str.replace(/mm/,date.getMinutes()>9?date.getMinutes().toString():"0" + date.getMinutes()); 
+  str=str.replace(/m/g,date.getMinutes()); 
+  str=str.replace(/ss|SS/,date.getSeconds()>9?date.getSeconds().toString():"0" + date.getSeconds()); 
+  str=str.replace(/s|S/g,date.getSeconds()); 
+  return str; 
+}
+</script>
+<style>
+.standard {
+	margin:0px 20px
+}
+.standard h1 {
+	font-size:20px;
+	margin:10px 0px;
+	font-weight:bold
+}
+.standard p {
+	line-height:150%;
+	margin:20px 0px 10px 0px;
+}
+.prettyprint{
+	background-color:#fff;
+}
+</style>
+</head>
+<body id="main_body" onload="prettyPrint()" style="background-color:#f5f5f5;">
+<div class="standard">
+	<H1>date控件</H1>
+
+	<div style="margin:20px 0;">
+		<p><strong>常规调用</strong></p>
+		<label for="date">选择日期：</label>
+		<input id="date" type="text" onClick="WdatePicker()"/>
+		<p><strong>代码</strong></p>
+<pre class="prettyprint">
+	&lt;label for=&quot;date&quot;&gt;常规调用：&lt;/label&gt;
+	&lt;input id=&quot;date&quot; type=&quot;text&quot; onClick=&quot;WdatePicker()&quot;/&gt;
+</pre>
+	</div>
+
+	<div style="margin:20px 0;">
+		<p><strong>限制开始日期小于结束日期</strong></p>
+		<label for="sDate">开始时间：</label>
+		<input id="sDate" class="text Wdate" type="text" onclick="WdatePicker({realDateFmt:'yyyy-MM-dd 00:00:00',dateFmt:'yyyy-MM-dd',minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'eDate\')}',vel:'CREATE_DATE'})"/>
+		<input type="text" name='CREATE_DATE' id="CREATE_DATE" class="fn-hide" />
+		
+		<label for="eDate">结束时间：</label>
+		<input id="eDate" class="text Wdate" type="text" onclick="WdatePicker({realDateFmt:'yyyy-MM-dd 23:59:59',dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'sDate\',{d:1})||\'2010-01-01 23:59:59\'}',vel:'FIELD_D1'})"/>
+		<input type="text" name='FIELD_D1' id="FIELD_D1" class="fn-hide" />
+
+		<p><strong>代码</strong></p>
+<pre class="prettyprint mg_t_20 fn-clear" id="html">
+	&lt;label for=&quot;sDate&quot;&gt;开始时间：&lt;/label&gt;
+	&lt;input id=&quot;sDate&quot; class=&quot;text Wdate&quot; type=&quot;text&quot; onclick=&quot;WdatePicker({realDateFmt:'yyyy-MM-dd 00:00:00',dateFmt:'yyyy-MM-dd',minDate:'#F{\'2010-01-01 00:00:00\'}',maxDate:'#F{$dp.$D(\'eDate\')}',vel:'CREATE_DATE'})&quot;/&gt;
+	&lt;input type=&quot;text&quot; name='CREATE_DATE' id=&quot;CREATE_DATE&quot; class=&quot;fn-hide&quot; /&gt;
+	&lt;label for=&quot;eDate&quot;&gt;结束时间：&lt;/label&gt;
+	&lt;input id=&quot;eDate&quot; class=&quot;text Wdate&quot; type=&quot;text&quot; onclick=&quot;WdatePicker({realDateFmt:'yyyy-MM-dd 23:59:59',dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'sDate\')||\'2010-01-01 23:59:59\'}',vel:'FIELD_D1'})&quot;/&gt;
+	&lt;input type=&quot;text&quot; name='FIELD_D1' id=&quot;FIELD_D1&quot; class=&quot;fn-hide&quot; /&gt;
+</pre>
+	</div>
+	
+</div>
+<script type="text/javascript">
+	$(function(){
+		/*var now = new Date();
+
+		var date = Util.date.dateTimeWrapper('yyyy-MM-dd hh:mm:ss')
+		// alert(date)
+		
+		var date1 = Util.date.dateTime2str(new Date() ,'yyyy-MM-dd hh:mm:ss');
+		alert(date1)*/
+	})
+</script>
+</body>
+</html>

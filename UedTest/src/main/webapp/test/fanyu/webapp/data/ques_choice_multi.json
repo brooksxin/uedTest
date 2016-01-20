@@ -1,0 +1,34 @@
+{
+	"returnCode": "0",
+	"returnMessage": "success",
+	"object":{
+		"QU_ID":"1002",						//问题id
+		"QU_TYPE_CD":"30",					//题型
+        "TGT_QU_ID": "001",                 //路由id
+		"QNR_REC_ID":"1002",				//问卷记录id
+		"QNR_ISTNC_ID":"200",				//问卷实例id
+		"QU_CNTT":"您是否正在使用4G手机？",
+		"QU_DESC":"问题的描述",
+		"QU_HAVE_ASWR_FLAG":"1",
+		"beans":[
+			{
+                "QNR_ISTNC_ID":"200",               //问卷实例id
+				"ASWR_ID":"101",
+				"ASWR_SEQNO":"1",
+				"ASWR_CNTT":"是"
+			},
+			{
+                "QNR_ISTNC_ID":"200",               //问卷实例id
+				"ASWR_ID":"102",
+				"ASWR_SEQNO":"2",
+				"ASWR_CNTT":"否"
+			},
+			{
+                "QNR_ISTNC_ID":"200",               //问卷实例id
+				"ASWR_ID":"103",
+				"ASWR_SEQNO":"2",
+				"ASWR_CNTT":"其他"
+			}
+		]
+	}
+}

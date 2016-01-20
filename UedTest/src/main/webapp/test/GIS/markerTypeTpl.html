@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>标点类型模板配置</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/opui/om-default.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/zTree/zTreeStyle.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/helpers.js"></script>
+<script type="text/javascript" src="res/lib/opui/2.1/operamasks-ui.src.js"></script>
+<script type="text/javascript" src="res/lib/zTree/3.5.16/jquery.ztree.core-3.5.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body>
+<!-- <div class="main">
+	<div id="hnav" >
+		<div class="hnav_logo"></div>
+	</div>
+	<div id="wrapContent">
+		<div class="wrap">
+			<div class="content"> -->
+				<!--内容start-->
+				<div class="pathhome">
+					<h4>标点 &gt; <b>标点类型模板配置</b></h4>
+				</div>
+				<div class="bz_manage">
+                    <form id="busi_form">
+                        <table class="infoTable" cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td class="description">模板名称：</td>
+                                    <td ><input class="normalinput" type="text" value="" name="markerTypeName" /></td>
+                                    <td class="description">模板类型：</td>
+                                    <td >
+                                        <select name="markerTpl" id="markerTpl"></select>
+                                    </td>
+                                    <td >
+                                        <div class="bz_btn_list">
+                                            <a class="btn_normal fn-mr-20" href="#nogo" id="J_add"><em>新增</em></a>
+                                            <a class="btn_normal " href="#nogo" id="J_search"><em>查询</em></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                    
+                    <table id="mytable"></table>
+
+                </div>
+				<!--内容end-->
+<!-- 			</div>
+		</div>
+	</div>
+</div> -->
+
+<textarea class="fn-hide" id="markerType_tpl">
+<option value="0">请选择</option>
+{{#each rows}}
+<option value="{{id}}">{{name}}</option>
+{{/each}}
+</textarea>
+
+<script type="text/javascript" >
+$(function(){
+    okGrid(REQURLS.markerTypeTpl_pageQuery);
+    $("#J_search").click(function(){
+        var str = "&"+$("#busi_form").serialize();
+        okGrid(REQURLS.markerTypeTpl_pageQuery+str);
+    })
+    $("#J_add").click(function(){
+        openWindow('新增标记点类型模板','markerTypeTplAdd.html' , 930 , 460 );
+    })
+
+    $.PostJson(REQURLS.markerTypeTpl_typeQuery,"",function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+                $("#markerTpl").temp($("#markerType_tpl"), json);
+            }else{
+                result_prompt(0,json.returnMessage||"获取模板类型失败！");
+            }
+        }else{
+            result_prompt(0,"系统错误！");
+        }
+    });
+})
+
+function okGrid(url){
+    var url = url||"";
+    $('#mytable').omGrid({
+        height : 365,
+        width : '100%',
+        limit : 10, //分页显示，每页显示8条
+        singleSelect : true, //出现checkbox列，可以选择同时多行记录
+        colModel : [
+            {header:'编号',name:'id', width:100, align : 'left'},
+            {header:'类型',name:'type_des', width:150, align : 'left'},
+            {header:'模板名称',name:'name', width:250, align : 'left'},
+            {header:'图标类型',name:'icon_type', width:150, align : 'left',renderer:function(value,rowData,rowIndex){
+	                var icon = parseInt(rowData.icon_type, 10);
+	                if(getImgType(icon))
+                    	return getImgType(icon);
+                    else
+                    	return "无";
+	                /* switch (icon){
+	                    case 1: 
+	                        return "营业厅";
+	                        break;
+	                    case 2: 
+	                        return "集团客户";
+	                        break;
+	                    case 3: 
+	                        return "社会渠道";
+	                        break;
+	                    default:
+	                        return "默认";
+	                        break;
+	                } */
+	            }
+	        },
+            {header:'操作',name:'des', width:'autoExpand', align : 'left',renderer:function(value,rowData,rowIndex){
+                    var str=
+                        '<a href="#nogo" onclick="markerTypeDel(\''+rowData.typeId+'\',event)" class="grid-btn fn-mr-20">删除</a>'+
+                        '<a href="#nogo" onclick="markerTypeMod(\''+rowData.typeId+'\',event)" class="grid-btn fn-mr-20">修改</a>'+
+                        '<a href="#nogo" onclick="markerTypeExp(\''+rowData.typeId+'\',event)" class="grid-btn">导出模板</a>';
+                    return str;
+                }
+            }
+        ],
+        dataSource : url,
+        onSuccess:function(data,testStatus,XMLHttpRequest,event){
+            var totals = data.total;
+            if(totals == "-9999"){
+            	data.total = "0";
+            	result_prompt(0,"系统异常,请稍后重试");
+            }
+        }
+    });
+}
+
+function markerTypeDel(id,e){
+    stopEvent(e);
+    result_comfirm("是否删除？",function(){
+        $.PostJson(REQURLS.markerTypeTpl_delQuery,"typeId="+id,function(state,json){
+            if(state=="success"){
+                if(json&&json.returnCode=="1"){
+                    result_prompt(1,"删除成功！");
+                    gridReload("mytable");
+                }else{
+                    result_prompt(0,json.returnMessage||"删除失败！");
+                }
+            }else{
+                result_prompt(0,"系统错误！");
+            }
+        });
+    },"");
+}
+function markerTypeMod(id,e){
+    stopEvent(e);
+    art.dialog.data('id',id);
+    openWindow('修改标记点类型模板','markerTypeTplMod.html' , 930 , 460 );
+}
+function markerTypeExp(id,e){
+    stopEvent(e);
+    
+    $('#exportTypeId').val(id);
+    $('#templateFM').attr('action',REQURLS.markerTypeTpl_exportTemplate);
+    $('#templateFM').submit();
+}
+function exportError(rtncode,rtnmsg){
+	result_prompt(0,rtnmsg);
+}
+</script>
+
+<form id="templateFM" action="" method="post" target="templateIF" class="fn-hide">
+    <input type="text" name="typeId" id="exportTypeId" />
+</form>
+<iframe id="templateIF" name="templateIF" src="about:blank" frameborder="0" style="height: 0px;width: 0px;"></iframe>
+</body>
+</html>
+
+

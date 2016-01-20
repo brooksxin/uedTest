@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<title>汇仁</title>
+<link rel="stylesheet" href="ui/mui/css/mui.min.css">
+<link rel="stylesheet" href="ui/common.css">
+
+<style type="text/css">
+
+</style>
+
+</head>
+<body class="zui">
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title" id="J_muiTitle">我的医生</h1>
+</header>
+
+<footer class="mui-bar mui-bar-tab">
+    <a class="mui-tab-item" href="guide.html">
+        <span class="mui-icon mui-icon-home"></span>
+        <span class="mui-tab-label">向导</span>
+    </a>
+    <a class="mui-tab-item" href="myPrescription.html">
+        <span class="mui-icon mui-icon-email"></span>
+        <span class="mui-tab-label">我的处方</span>
+    </a>
+    <a class="mui-tab-item active" href="myDoctor.html">
+        <span class="mui-icon mui-icon-contact"></span>
+        <span class="mui-tab-label">我的医生</span>
+    </a>
+    <a class="mui-tab-item" href="myHealthLog.html">
+        <span class="mui-icon mui-icon-gear"></span>
+        <span class="mui-tab-label">健康日记</span>
+    </a>
+</footer>
+
+<div class="mui-content myDoctor myDoctorDtl" id="J_docDtlWrap">
+    
+</div>
+
+<textarea class="fn-hide" id="T_docDtl">
+<ul class="mui-table-view">
+    <li class="mui-table-view-cell mui-media">
+        <a href="javascript:;">
+            <img class="mui-pull-left icon" src="{{icon}}" width="90" height="90">
+            <div class="mui-pull-left mui-media-body des">
+                <p class="mui-ellipsis">
+                    <span class="doc-name">{{name}}</span>
+                    {{#if_eq ident compare='0'}}
+                        <span class="mui-badge desident">未认证</span>
+                    {{else}}
+                        <span class="mui-badge ident"><span class="mui-icon mui-icon-checkmarkempty"></span>已认证</span>
+                    {{/if_eq}}
+                </p>
+                <p class='mui-ellipsis'>{{type}} {{position}}</p>
+                <p class='mui-ellipsis'>{{hospital}}</p>
+            </div>
+            <div class="mui-pull-right consult">
+                {{#if_eq ident compare='0'}}
+                    <button type="button" class="mui-btn mui-btn-warning ui-btn-yellow">
+                        <span class="mui-icon mui-icon-plusempty"></span>关注
+                    </button>
+                {{else}}
+                    <button type="button" class="mui-btn mui-btn-warning ui-btn-yellow">
+                        <span class="mui-icon mui-icon-plusempty"></span>关注
+                    </button>
+                {{/if_eq}}
+            </div>
+        </a>
+    </li>
+</ul>
+
+<div class="contact-wrap">
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell item">
+            <a href="javascript:;">
+                <p class='mui-ellipsis'>咨询</p>
+                <p class='mui-ellipsis'>
+                    <span class="mui-icon mui-icon-weixin"></span>
+                </p>
+                <p class='mui-ellipsis'>￥{{price1}}元/次</p>
+            </a>
+        </li>
+        <li class="mui-table-view-cell item">
+            <a href="javascript:;">
+                <p class='mui-ellipsis'>咨询包月</p>
+                <p class='mui-ellipsis'>
+                    <span class="mui-icon mui-icon-navigate"></span>
+                </p>
+                <p class='mui-ellipsis'>￥{{price2}}元/次</p>
+            </a>
+        </li>
+        <li class="mui-table-view-cell item">
+            <a href="javascript:;">
+                <p class='mui-ellipsis'>电话</p>
+                <p class='mui-ellipsis'>
+                    <span class="mui-icon mui-icon-phone"></span>
+                </p>
+                <p class='mui-ellipsis'>￥{{price3}}元/分</p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<ul class="mui-table-view mui-table-view-chevron fn-mb-20 desinfo">
+    <li class="mui-table-view-cell">
+        <p class='mui-ellipsis mui-pull-left'>性别</p>
+        <p class='mui-ellipsis mui-pull-right'>{{sex}}</p>
+    </li>
+    <li class="mui-table-view-cell">
+        <p class='mui-ellipsis mui-pull-left'>地区</p>
+        <p class='mui-ellipsis mui-pull-right'>{{area}}</p>
+    </li>
+</ul>
+
+<ul class="mui-table-view mui-table-view-chevron fn-mb-20 desinfo">
+    <li class="mui-table-view-cell">
+        <p class='mui-ellipsis mui-pull-left'>擅长疾病</p>
+        <p class='mui-ellipsis mui-pull-right'>{{goodat}}</p>
+    </li>
+    <li class="mui-table-view-cell introduction">
+        <p>简介</p>
+        <p class='word'>
+            {{retNewSafeStr des}}
+        </p>
+    </li>
+</ul>
+</textarea>
+
+<script src="ui/zepto.min.js"></script>
+<script src="ui/handlebars/handlebars.js"></script>
+<script src="ui/handlebars/helpers.js"></script>
+<script src="ui/common.js"></script>
+<script>
+var doctorId = "";
+$(function(){
+    srvMap.add("docDtl", "docDtl.json", "");
+
+    doctorId = Util.lStorage.getParam("doctorId");
+    console.log(doctorId);
+    getDoctorDtl();
+})
+
+function getDoctorDtl(){
+    createLoading();
+    $.PostJson(srvMap.get("docDtl"), "", function(state, json){
+        if(state == 'success'){
+            if(json){
+                $("#J_docDtlWrap").handleTemp($("#T_docDtl").val(), json);
+            }
+        }
+        unblockLoading();
+    })
+}
+</script>
+</body>
+</html>

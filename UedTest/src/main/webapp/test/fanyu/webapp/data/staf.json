@@ -1,0 +1,62 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": "数据加载成功！！！",
+    "bean": {},
+    "beans": [
+        {
+            "DEPT_ID": "201",
+            "CRT_APP_SYS_ID": "1",
+            "STAFF_TYPE_CD": "1003",
+            "CRT_USER_ID": "1",
+            "MODF_TIME": "2015-04-23 12:18:27.0",
+            "VALID_STS_CD": "1",
+            "TELNUM": "13837097929",
+            "ENTRY_DATE": "2015-01-01",
+            "PTY_NM": "孙晓辉",
+            "PRSN_ENCRG_CNTT": "O(∩_∩)O哈哈~\n\nnull!@#$%^&*()\n\nO(∩_∩)O哈哈~\n",
+            "STAFF_ID": "2",
+            "CRT_TIME": "2015-04-21 14:45:42.0",
+            "DIMSN_DATE": "2015-04-21",
+            "STAFF_DESC": "善于学习,对本职工作兢兢业业",
+            "STAFF_NO": "ZHANG478"
+        },
+        {
+            "DEPT_ID": "201",
+            "CRT_APP_SYS_ID": "1",
+            "STAFF_TYPE_CD": "1003",
+            "CRT_USER_ID": "1",
+            "MODF_TIME": "2015-04-23 14:18:49.0",
+            "VALID_STS_CD": "1",
+            "TELNUM": "13837097929",
+            "ENTRY_DATE": "2015-04-23",
+            "PTY_NM": "孙志国",
+            "PRSN_ENCRG_CNTT": "古之立大事者,不惟有超世之才,亦必有坚韧不拔之志",
+            "STAFF_ID": "6",
+            "CRT_TIME": "2015-04-23 14:18:46.0",
+            "DIMSN_DATE": "2015-04-23",
+            "STAFF_DESC": "思想上,为人正直,稳定、谦虚。事业心、进取心强,能设身处地为他人着想,热爱集体",
+            "STAFF_NO": "DSA32342"
+        },
+        {
+            "DEPT_ID": "201",
+            "CRT_APP_SYS_ID": "1",
+            "STAFF_TYPE_CD": "1003",
+            "CRT_USER_ID": "1",
+            "MODF_TIME": "2015-04-23 14:35:40.0",
+            "VALID_STS_CD": "1",
+            "TELNUM": "13837097929",
+            "ENTRY_DATE": "2015-04-23",
+            "PTY_NM": "李冬梅",
+            "PRSN_ENCRG_CNTT": "每一个成功者都有一个开始。勇于开始,才能找到成功的路",
+            "STAFF_ID": "8",
+            "CRT_TIME": "2015-04-23 14:35:37.0",
+            "DIMSN_DATE": "2015-04-23",
+            "STAFF_DESC": "管好所负责的区域,并完成上级指定的目标",
+            "STAFF_NO": "SADGDS32"
+        }
+    ],
+    "object": null
+}

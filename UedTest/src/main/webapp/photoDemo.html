@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<script src='jquery.js' type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+body {
+	display:block;
+	margin:0;
+	padding:0;
+	background-color:#EAEAEA;
+	font-family:"Lucida handwriting";
+}
+#ctrip_ued_content {
+	margin:20px;
+}
+section {
+	width:222px;
+	height:273px;
+	position:relative;
+	float:left;
+}
+.imageback {
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:20;
+	width:222px;
+	height:273px;
+	-webkit-transform-style:preserve-3d;
+	-webkit-backface-visibility:hidden;
+	-webkit-transition:all .4s ease-in-out;
+	background-color:#333;
+	border:1px solid #CCC;
+}
+.imagefront {
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:19;
+	width:222px;
+	height:213px;
+	background-color:#fff;
+	border:1px solid #CCC;
+	text-align:center;
+	-webkit-transform:rotatey(-180deg);
+	-webkit-transform-style:preserve-3d;
+	-webkit-backface-visibility:hidden;
+	-webkit-transition:all .4s ease-in-out;
+	padding:10px 0 50px;
+}
+section:hover .imageback {
+	z-index:100;
+	-webkit-transform:rotatey(180deg) scale(1.05);
+}
+section:hover .imagefront {
+	z-index:101;
+	-webkit-transform:rotate(0deg);
+	-webkit-transform:rotatey(0deg) scale(1.05);
+	box-shadow:0 0 8px #666;
+}
+
+</style>
+</head>
+<body>
+<div id="ctrip_ued_content">
+    <section class="img1">
+        <div class="imagefront">
+            <img src="http://pkgpic.ctrip.com/images2/1/61/61_132.jpg" alt="" width="200"
+            height="150" />
+            <p>
+                Incredible Views
+            </p>
+        </div>
+        <div class="imageback">
+        </div>
+    </section>
+    <section class="img2">
+        <div class="imagefront">
+            <img src="http://pkgpic.ctrip.com/images2/146/330/330_01.jpg " alt=""
+            width="200" height="150" />
+            <p>
+                Incredible Views
+            </p>
+        </div>
+        <div class="imageback">
+        </div>
+    </section>
+    <section class="img3">
+        <div class="imagefront">
+            <img src="http://pkgpic.ctrip.com/images2/146/330/330_03.jpg" alt="" width="200"
+            height="150" />
+            <p>
+                Incredible Views
+            </p>
+        </div>
+        <div class="imageback">
+        </div>
+    </section>
+    <section class="img4">
+        <div class="imagefront">
+            <img src="http://pkgpic.ctrip.com/images2/146/330/330_05.jpg" alt="" width="200"
+            height="150" />
+            <p>
+                Incredible Views
+            </p>
+        </div>
+        <div class="imageback">
+        </div>
+    </section>
+    <section class="img5">
+        <div class="imagefront">
+            <img src="http://pkgpic.ctrip.com/images2/146/330/330_06.jpg" alt="" width="200"
+            height="150" />
+            <p>
+                Incredible Views
+            </p>
+        </div>
+        <div class="imageback">
+        </div>
+    </section>
+    <section class="img6">
+        <div class="imagefront">
+            <img src="http://pkgpic.ctrip.com/images2/146/330/330_07.jpg" alt="" width="200"
+            height="150" />
+            <p>
+                Incredible Views
+            </p>
+        </div>
+        <div class="imageback">
+        </div>
+    </section>
+    <section class="img7">
+        <div class="imagefront">
+            <img src="http://pkgpic.ctrip.com/images2/146/330/330_20.jpg" alt="" width="200"
+            height="150" />
+            <p>
+                Incredible Views
+            </p>
+        </div>
+        <div class="imageback">
+        </div>
+    </section>
+    <section class="img8">
+        <div class="imagefront">
+            <img src="http://pkgpic.ctrip.com/images2/146/330/330_08.jpg" alt="" width="200"
+            height="150" />
+            <p>
+                Incredible Views
+            </p>
+        </div>
+        <div class="imageback">
+        </div>
+    </section>
+    <section class="img9">
+        <div class="imagefront">
+            <img src="http://pkgpic.ctrip.com/images2/146/330/330_52.jpg" alt="" width="200"
+            height="150" />
+            <p>
+                Incredible Views
+            </p>
+        </div>
+        <div class="imageback">
+        </div>
+    </section>
+    <section class="img10">
+        <div class="imagefront">
+            <img src="http://pkgpic.ctrip.com/images2/146/330/330_42.jpg " alt=""
+            width="200" height="150" />
+            <p>
+                Incredible Views
+            </p>
+        </div>
+        <div class="imageback">
+        </div>
+    </section>
+    <section class="img11">
+        <div class="imagefront">
+            <img src="http://pkgpic.ctrip.com/images2/146/330/330_54.jpg " alt=""
+            width="200" height="150" />
+            <p>
+                Incredible Views
+            </p>
+        </div>
+        <div class="imageback">
+        </div>
+    </section>
+    <section class="img12">
+        <div class="imagefront">
+            <img src="http://pkgpic.ctrip.com/images2/146/330/330_15.jpg " alt=""
+            width="200" height="150" />
+            <p>
+                Incredible Views
+            </p>
+        </div>
+        <div class="imageback">
+        </div>
+    </section>
+</div>
+<script type="text/javascript">
+$(function(){
+
+});
+</script>
+</body>
+</html>

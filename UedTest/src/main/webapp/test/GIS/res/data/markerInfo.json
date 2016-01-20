@@ -1,0 +1,45 @@
+{
+    "total": 4,
+    "rows": [
+        {
+            "id": "154",
+            "address": "adfsadf1111",
+            "name": "aaaa1111",
+            "lng": "120.188904",
+            "businessId": "Y0000001",
+            "type": "营业厅",
+            "typeId": "140",
+            "lat": "30.250759"
+        },
+        {
+            "id": "158",
+            "address": "测试导入地址",
+            "name": "导入测试",
+            "lng": "120.20529",
+            "businessId": "Y0000001",
+            "type": "营业厅",
+            "typeId": "140",
+            "lat": "30.247764"
+        },
+        {
+            "id": "160",
+            "address": "ffff",
+            "name": "fffff",
+            "lng": "120.156997",
+            "businessId": "fffff",
+            "type": "营业厅",
+            "typeId": "140",
+            "lat": "30.254502"
+        },
+        {
+            "id": "162",
+            "address": "sadf",
+            "name": "asdf",
+            "lng": "120.178843",
+            "businessId": "adsf",
+            "type": "营业厅",
+            "typeId": "140",
+            "lat": "30.269974"
+        }
+    ]
+}

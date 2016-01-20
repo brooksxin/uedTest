@@ -1,0 +1,9 @@
+{
+	"returnCode": "0000",
+	"returnMessage": "success",
+	"bean":{
+		"total":"1000",
+		"progress":"500"
+
+	}
+}

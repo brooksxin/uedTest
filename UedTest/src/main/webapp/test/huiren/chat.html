@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<title>汇仁</title>
+<link rel="stylesheet" href="ui/mui/css/mui.min.css">
+<link rel="stylesheet" href="ui/common.css">
+<link rel="stylesheet" href="ui/chat.css">
+
+<style type="text/css">
+.mui-table-view {
+    background: #E4E9EF;
+    padding-top: 17px;
+}
+#wrapper {
+    position:absolute; z-index:1;
+    top:45px; bottom:48px; left:0;
+    width:100%;
+    background:#555;
+    overflow:auto;
+}
+#scroller {
+    position:absolute; z-index:1;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    width:100%;
+    padding:0;
+}
+/**
+ *
+ * 下拉样式 Pull down styles
+ *
+ */
+#pullDown, #pullUp {
+    background:#fff;
+    height:50px;
+    line-height:50px;
+    padding:5px 10px;
+    border-bottom:1px solid #ccc;
+    font-weight:bold;
+    font-size:14px;
+    color:#888;
+}
+#pullDown {
+    margin-top: 15px;
+}
+#pullDown .pullDownIcon, #pullUp .pullUpIcon  {
+    display:block; float:left;
+    width:40px; height:40px;
+    background:url(ui/img/pull-icon@2x.png) 0 0 no-repeat;
+    -webkit-background-size:40px 80px; 
+    background-size:40px 80px;
+    -webkit-transition-property:-webkit-transform;
+    -webkit-transition-duration:250ms;  
+}
+#pullDown .pullDownIcon {
+    -webkit-transform:rotate(0deg) translateZ(0);
+}
+#pullUp .pullUpIcon  {
+    -webkit-transform:rotate(-180deg) translateZ(0);
+}
+
+#pullDown.flip .pullDownIcon {
+    -webkit-transform:rotate(-180deg) translateZ(0);
+}
+
+#pullUp.flip .pullUpIcon {
+    -webkit-transform:rotate(0deg) translateZ(0);
+}
+
+#pullDown.loading .pullDownIcon, #pullUp.loading .pullUpIcon {
+    background-position:0 100%;
+    -webkit-transform:rotate(0deg) translateZ(0);
+    -webkit-transition-duration:0ms;
+
+    -webkit-animation-name:loading;
+    -webkit-animation-duration:2s;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:linear;
+}
+
+@-webkit-keyframes loading {
+    from { -webkit-transform:rotate(0deg) translateZ(0); }
+    to { -webkit-transform:rotate(360deg) translateZ(0); }
+}
+
+</style>
+
+<script>
+    var html = '<li class="left fn-clear"> <div class="user_icon"></div> <div class="content-wrap"> <p class="user_name">名字</p> <p class="conten">4<span class="mui-icon mui-icon-spinner-cycle mui-spin loading"></span></p> </div> </li>';
+
+    var myScroll,
+        pullDownEl, pullDownOffset,
+        pullUpEl, pullUpOffset;
+
+    function pullDownAction () {
+        setTimeout(function () {    // <-- Simulate network congestion, remove setTimeout from production!
+            var el, li, i;
+            el = $('#thelist');
+            el.prepend(html);
+            myScroll.refresh();     // Remember to refresh when contents are loaded (ie: on ajax completion)
+        }, 1000);   // <-- Simulate network congestion, remove setTimeout from production!
+    }
+
+    function pullUpAction () {
+        // setTimeout(function () {    // <-- Simulate network congestion, remove setTimeout from production!
+        //     var el, li, i;
+        //     el = $('#thelist');
+        //     el.append(html);
+        //     myScroll.refresh();     // Remember to refresh when contents are loaded (ie: on ajax completion)
+        // }, 1000);   // <-- Simulate network congestion, remove setTimeout from production!
+    }
+
+    function loaded() {
+        pullDownEl = document.getElementById('pullDown');
+        pullDownOffset = pullDownEl.offsetHeight;
+        
+        myScroll = new iScroll('wrapper', {
+            useTransition: false,//防止闪屏
+            hideScrollbar: true,
+            topOffset: pullDownOffset,
+            onRefresh: function () {
+                if (pullDownEl.className.match('loading')) {
+                    pullDownEl.className = '';
+                    pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉获取历史信息...';
+                }
+            },
+            onScrollMove: function () {
+                if (this.y > 5 && !pullDownEl.className.match('flip')) {
+                    pullDownEl.className = 'flip';
+                    pullDownEl.querySelector('.pullDownLabel').innerHTML = '松开加载...';
+                    this.minScrollY = 0;
+                } else if (this.y < 5 && pullDownEl.className.match('flip')) {
+                    pullDownEl.className = '';
+                    pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉获取历史信息...';
+                    this.minScrollY = -pullDownOffset;
+                }
+            },
+            onScrollEnd: function () {
+                if (pullDownEl.className.match('flip')) {
+                    pullDownEl.className = 'loading';
+                    pullDownEl.querySelector('.pullDownLabel').innerHTML = '正在加载...';                
+                    pullDownAction();   // Execute custom function (ajax call?)
+                }
+            }
+        });
+        setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+    }
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+</script>
+
+</head>
+<body class="zui" onload="loaded();">
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">沟通</h1>
+</header>
+
+<footer class="mui-bar mui-bar-tab zfooter">
+    <ul class="fn-clear">
+        <li class="li_3">
+            <input type="text" value="" id="J_comui_input" name="J_comui_input" class="J_comui_input" />
+        </li>
+        <li class="li_4">
+            <button class="mui-btn mui-btn-primary" type="button" id="J_sendBtn">发送</button>
+        </li>
+    </ul>
+</footer>
+
+<div class="mui-content myDoctor">
+    <div id="wrapper">
+        <div id="scroller">
+            <div id="pullDown">
+                <span class="pullDownIcon"></span><span class="pullDownLabel">下拉获取历史信息...</span>
+            </div>
+            <ul class="comui-wrap-ul fn-clear" id="thelist">
+                <li class="left fn-clear">
+                    <div class="user_icon"></div>
+                    <div class="content-wrap">
+                        <p class="user_name">名字</p>
+                        <p class="conten">左边1<span class="mui-icon mui-icon-spinner-cycle mui-spin loading"></span></p>
+                    </div>
+                </li>
+                <li class="left fn-clear">
+                    <div class="user_icon"></div>
+                    <div class="content-wrap">
+                        <p class="user_name">名字</p>
+                        <p class="conten">
+                            左边2
+                            <span class="mui-icon mui-icon-spinner-cycle mui-spin loading"></span>
+                        </p>
+                    </div>
+                </li>
+                <li class="right fn-clear">
+                    <div class="user_icon"></div>
+                    <div class="content-wrap">
+                        <p class="user_name">名字</p>
+                        <p class="conten">111111111111111111111111111111111111111111111111111111111111111111111111111111<span class="mui-icon mui-icon-spinner-cycle mui-spin loading"></span></p>
+                    </div>
+                </li>
+                <li class="left fn-clear">
+                    <div class="user_icon"></div>
+                    <div class="content-wrap">
+                        <p class="user_name">名字</p>
+                        <p class="conten">左边3左边3左边3左边3左边3左边3左边3左边3左边3左边3左边3左边3左边3左边3左边3左边3左边3左边3<span class="mui-icon mui-icon-spinner-cycle mui-spin loading"></span></p>
+                    </div>
+                </li>
+                <li class="right fn-clear">
+                    <div class="user_icon"></div>
+                    <div class="content-wrap">
+                        <p class="user_name">名字</p>
+                        <p class="conten">右边2</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="ui/zepto.min.js"></script>
+<script src="ui/iscroll/iscroll.js"></script>
+<script src="ui/common.js"></script>
+<script>
+var doctorId = '';
+$(function(){
+    //查询医生跳转
+    doctorId = $.getUrlVar("doctorId")?$.getUrlVar("doctorId"):"";
+    console.log(doctorId)
+})
+</script>
+</body>
+</html>

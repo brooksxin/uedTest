@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人信息</title>
+<#include "../../tpl/res_css.tpl" />
+<style>
+html,body{background:#EDF0F2;height:100%;}
+</style>
+</head>
+
+<body>
+<#include "../../tpl/sys_top.tpl" />
+<div class="formItem">
+	<div class="pt-10 pb-10 userInfoBack ui-fhw"><a href="Javascript:history.go(-1);void(0);" class="formItem_jiantou-tu normalLink">返回</a></div>
+</div>
+
+<div class="userInfoContent">
+
+  <div class="titleArea">
+    <h2>个人信息</h2>
+  </div>
+  <div class="formArea-B">
+  	<div class="ml-20 mr-20">
+        <div class="ui-onlin_borB">基本信息</div>
+        
+	<div class="formItem" id="J_userinfo"></div>
+	<script id="T_userinfo" type="text/x-handlebars-template">
+        <div class="gray_text  mt-10" id="title">
+        <table width="100%">
+        	<tr>
+              <td width="15%" class="gray_text">姓名：</td>
+              <td width="85%">
+                  <span class="ui-poptip-white">{{bean.PTY_NM}}</span><span class="fn-right"><a href="javascript:void(0);" class="ui-colorAB" onclick="updatePwd()">修改登录密码</a></span>
+              </td>
+            </tr>
+        </table>
+        </div>
+        <!-- 点击“修改登录密码”字体，上面一行隐藏，出现下列修改框 -->
+     <form id="J_password" style="display: none">
+        <div class="ui-olineBcolor" >
+            <table width="100%">
+              <tbody>
+                <tr>
+				<input  name="uid" class="FormInputText" type="hidden" value="u001"/>
+                  <td width="15%" class="gray_text">姓名：</td>
+                  <td width="85%">{{bean.PTY_NM}}</td></tr>
+                <tr>
+                  <td width="15%" class="gray_text">当前登录密码：</td>
+                  <td width="85%"><input  class="FormInputText" name="curPassword" type="password" /></td>
+                </tr>
+                <tr>
+                  <td width="15%" class="gray_text">请输入新密码：</td>
+                  <td width="85%"><input class="FormInputText" name="newPassword"  type="password" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><div class="gray_text">密码由6-20位数字或字母组成</div></td>
+                </tr>
+                <tr>
+                  <td width="15%" class="gray_text">确认新密码：</td>
+                  <td width="85%"><input  class="FormInputText" name="confirmPassword" type="password" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="normalBtnArea">
+                            <a class="normalBtn BGblue largeBtn" href="javascript:void(0);" onclick="saveP()" >保存</a>    
+                            <a class="normalBtn BGgray largeBtn" href="javascript:void(0);" onclick="cancelP()" >取消</a>    
+                        </div>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div></form>
+        <table width="100%" class="form_table">
+          <tbody>
+            <tr>
+              <td width="15%" class="gray_text">工号：</td>
+              <td width="85%">{{bean.PTY_NO}}</td></tr>
+            <tr>
+              <td width="15%" class="gray_text">入职时间：</td>
+              <td width="85%">{{bean.ENTRY_DATE}}</td>
+            </tr>
+            <tr >
+              <td width="15%" class="gray_text">手机号：</td>
+              <td width="85%">{{bean.TELNUM}}</td>
+            </tr>
+            <tr id="updateZym">
+              <td width="15%" class="gray_text">座右铭：</td>
+              <td width="85%">
+                  <span class="fn-right"><a href="javascript:void(0);" onclick="updateInfo()" class="ui-colorAB">修改座右铭</a></span>
+                  <div style="margin-right:70px;">{{bean.PRSN_ENCRG_CNTT}}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <!-- 点击上面“修改座右铭”字体，上面一行隐藏，出现下列修改座右铭框 -->
+      <div class="ui-olineBcolor fn-clear mb-30" id="zym" style="display: none">
+      	<div class="gray_text mb-20">座右铭:<span class="fn-right">已输入<span class="ui-poptip-white" id="wordCheck">0</span>/80</span></div>
+        <div><textarea id="zymTextArea" class="FormTextarea_zcH104" onKeyUp="javascript:checkWord(this);" onMouseDown="javascript:checkWord(this);">{{bean.PRSN_ENCRG_CNTT}}</textarea></div>
+        <div class="normalBtnArea mt-20">
+           <a class="normalBtn BGblue largeBtn" href="javascript:void(0);" onclick="saveZym()">保存</a>    
+           <a class="normalBtn BGgray largeBtn" href="javascript:void(0);" onclick="cancel()" >取消</a>    
+        </div>  
+      </div>
+        </script>
+      <div class="ui-onlin_borB ui-topQuDashed mt-10">班组信息</div>
+          <div class="ui-olineBcolor">
+            <div class="subFormItem">
+              <table width="100%" class="form_table">
+                 <tr id="J_dept"></tr>
+       			 <script id="T_dept" type="text/x-handlebars-template">
+                  <td>所在班组：</td>
+                  <td>{{bean.deptName}}</td>
+                </script>
+                 <tr id="J_group"></tr>
+       		 <script id="T_group" type="text/x-handlebars-template">
+                  <td>班组长：</td>
+                  <td>{{bean.PTY_NM}}</td>
+                </script>
+                <tr>
+                  <td  valign="top">班组成员：</td>
+                  <td>                                                 
+                     <table class="ui-record-table table_radius table-bordered table-striped" >
+                         <thead>
+                            <tr>                                                                                                               
+                               <th width="30">序号</th>                                                         
+                               <th width="80">姓名</th>  
+                               <th>工号</th>
+                               <th>联系方式</th>                                                       
+                            </tr>                                                        
+                          </thead>                                                                                                              
+                         <tbody id="J_userlist"> 
+                  <script id="T_userlist" type="text/x-handlebars-template">    
+                  {{#if beans.length}}
+                   {{#each beans}}
+                     <tr>                                                        
+                       <td class="fn-center">{{index @index}}</td>                                                         
+                       <td>{{PTY_NM}}</td>
+                       <td>{{PTY_NO}}</td>                                                         
+                       <td>{{TELNUM}}</td>                                                         
+                    </tr>  
+                   {{/each}}
+    			{{/if}}                                                  
+                   
+					</script>                                                      
+                                                          
+                 </tbody>                                               
+                    </table>                                                        
+                 </td>                                               
+                </tr>                                                                                                  
+              </table>
+            </div>
+        </div>
+	</div>    
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<#include "../../tpl/res_js.tpl" />
+
+<script type="text/javascript">
+//页面加载完开始执行
+srvMap.add('session', 'session.json','front/sh/user!session');
+srvMap.add('info', 'userinfo.json','front/sh/user!userinfo');
+srvMap.add('updatePwd', 'pwd.json','front/sh/user!updatePwd');
+var staffId="";
+var deptId="";
+var param={'uid':'u001'}
+$(document).ready(function () {
+    //初始化函数
+     Util.ajax.postJson(srvMap.get("session"), param, function(json,flag){
+         if(flag){
+			staffId=json.bean.staffId;
+			deptId=json.bean.deptId;
+			var userName=json.bean.userName
+			 Util.ajax.loadTemp('#J_dept',$('#T_dept'),json);//加载模板
+			  var param1={'uid':'u002','STAFF_ID':staffId};
+		         Util.ajax.postJson(srvMap.get("info"), param1, function(json,flag){
+		             if(flag){
+						 Util.ajax.loadTemp('#J_userinfo',$('#T_userinfo'),json);//加载模板
+						 $("#userId").val(userName);
+		                 }
+		             });
+		         var param2={'uid':'u001','DEPT_ID':deptId};
+		        // var param2={'uid':'u003'}
+		         Util.ajax.postJson(srvMap.get("info"), param2, function(json,flag){
+		             if(flag){
+						 Util.ajax.loadTemp('#J_group',$('#T_group'),json);//加载模板
+		                 }
+		             });
+		         var param3={'uid':'u005','DEPT_ID':deptId};
+			        // var param2={'uid':'u003'}
+			         Util.ajax.postJson(srvMap.get("info"), param3, function(json,flag){
+			             if(flag){
+							 Util.ajax.loadTemp('#J_userlist',$('#T_userlist'),json);//加载模板
+			                 }
+			             });
+             }
+         });
+});
+function updateInfo(){
+	$("#updateZym").hide();
+	$("#zym").show();
+	checkWord(document.getElementById("zymTextArea"));
+}
+function saveZym(){
+  var zym=$("textarea").val();
+  var param={'uid':'u006','STAFF_ID':staffId,"PRSN_ENCRG_CNTT":zym};
+ Util.ajax.postJsonSync(srvMap.get("info"), param, function(json){
+		 var param1={'uid':'u002','STAFF_ID':staffId};
+         Util.ajax.postJson(srvMap.get("info"), param1, function(json,flag){
+             if(flag){
+				 Util.ajax.loadTemp('#J_userinfo',$('#T_userinfo'),json);//加载模板
+                 }
+             });
+	 });
+ $("#updateZym").show();
+ $("#zym").hide();
+}
+function cancel(){
+	$("#updateZym").show();
+	$("#zym").hide();
+}
+function saveP(){
+	  var str=$("#J_password").serialize();
+	  Util.ajax.postJson(srvMap.get("updatePwd"), str, function(json,flag){
+          if(flag){
+        	  var param1={'uid':'u002','STAFF_ID':staffId};
+              Util.ajax.postJson(srvMap.get("info"), param1, function(json,flag){
+                  if(flag){
+     				 Util.ajax.loadTemp('#J_userinfo',$('#T_userinfo'),json);//加载模板
+                      }
+                  });
+              $("#J_password").hide();
+              $("#title").show();
+              }else{
+            	  alert(json.returnMessage)
+                  }
+          });
+  
+}    
+function cancelP(){
+  $("#J_password").hide();
+  $("#title").show();
+   }
+function updatePwd(){
+	$("#title").hide();
+	document.getElementById("J_password").reset();
+	$("#J_password").show();
+	
+}
+
+//计算输入座右铭字数
+var maxstrlen = 80;
+
+function checkWord(c) {
+    len = maxstrlen;
+    var str = c.value;
+    myLen = getStrleng(str);
+    var wck = document.getElementById("wordCheck");
+    if (myLen > len * 2) {
+        c.value = str.substring(0, i + 1);
+    }
+   else {
+        wck.innerHTML = maxstrlen - Math.floor((len * 2 - myLen) / 2);
+    }
+}
+
+function getStrleng(str) {
+    myLen = 0;
+    i = 0;
+    for (; (i < str.length) && (myLen <= maxstrlen * 2); i++) {
+        if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128){
+        myLen++;
+        }else{
+         myLen += 2;
+            }
+    }
+    return myLen;
+}
+</script>
+</body>
+</html>

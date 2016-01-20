@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<script src='jquery.js' type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+
+<div id="turn">
+</div>
+
+<script type="text/javascript">
+$(function(){
+	var iMax=2;
+	var num=0;
+	var timer=null;
+	//主轮播按钮定位
+	$("#small").css('width',$("#small li").length*26).show();
+	$('#bigUl li:first').css({'opacity':'1','z-index':'1'}).siblings().css({'opacity':'0','z-index':'0'});
+	
+	tab();
+
+	$('#small li').each(function(i){
+		$(this).bind('mouseover',function(){
+			if(num==i) return
+			$('#small li').removeClass('active');
+			$(this).addClass('active');
+
+			$('#bigUl li').eq(i).css({'opacity':'0','z-index':iMax+1}).animate({opacity:1},500);
+			num=i;
+			
+			iMax++;
+		})
+	})
+	$('#turn').mouseover(function(){
+		clearInterval(timer);
+	})
+	
+	$('#turn').mouseout(function(){
+		clearInterval(timer);
+		tab();
+	})
+	
+    function tab(){
+		timer=setInterval(function(){
+			num++;
+			if(num>=$('#bigUl li').length)
+				num=0;	
+			iMax++;
+			$('#bigUl li').eq(num).css({'opacity':0,'z-index':iMax}).animate({opacity:1},800);
+			$('#small li').removeClass('active');
+			$('#small li').eq(num).addClass('active');
+			
+		},2400)	
+	}
+})
+
+$(function(){
+	
+	var scrollTop=0;
+	var menuTop=0;
+	var num=0;
+	var iHeightb=0;
+	var h=330;
+	
+	window.onresize=function(){	
+		menuTop=document.documentElement.clientHeight+scrollTop-h;
+	}
+	
+	$('#nav_list li').mouseenter(function(mevent){
+		
+		scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+	    menuTop=document.documentElement.clientHeight+scrollTop-h;
+		
+		var ev=mevent.currentTarget;
+		
+		var oTop=parseInt($(ev).css('top'));
+		
+		$(this).addClass('cur');
+		num=$('#nav_list li').index($(ev));
+		
+		iHeightb=parseInt($('.menu_eject').eq(num).css('height'));
+
+		$('.menu_eject').hide();
+		$('.menu_eject').eq(num).show();
+		
+		if(menuTop<iHeightb+oTop)
+		{
+			oTop=menuTop-iHeightb;
+			if(oTop<0)
+			{
+				oTop=0;	
+			}
+		}
+		
+		$('.menu_eject').stop().animate({'top':oTop+'px'});
+	})
+	$('.menu_eject').mouseenter(function(){
+		$('#nav_list li').eq(num).addClass('cur');
+		$('.menu_eject').eq(num).show();
+	})
+	$('#nav_list li').mouseleave(function(mevent){	
+		$('.menu_eject').hide();
+		$(this).removeClass('cur');
+	})
+	
+	$('.menu_eject').mouseleave(function(){	
+		$('#nav_list li').removeClass('cur')
+		$(this).hide();
+	})
+})
+</script>
+</body>
+</html>

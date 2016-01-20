@@ -1,0 +1,117 @@
+[
+    {
+        "list": [
+            {
+                "title": "能力管理",
+                "item": [
+                    {
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    }
+                ]
+            },{
+                "title": "代办审核",
+                "item": [
+                    {
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    }
+                ]
+            },{
+                "title": "合约管理",
+                "item": [
+                    {
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "list": [
+            {
+                "title": "能力管理22222",
+                "item": [
+                    {
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    }
+                ]
+            },{
+                "title": "代办审核222",
+                "item": [
+                    {
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    }
+                ]
+            },{
+                "title": "合约管理22",
+                "item": [
+                    {
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    },{
+                        "url": "javascript:;",
+                        "name": "sub1"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>scrollDemo</title>
+<script src="jquery.js" type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+
+<div class="div_1" style="padding: 10px;">
+	<div id="test" class="div_2" style="border:1px solid black;width:200px;height:200px;overflow:auto;margin-top: 30px;">
+	This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
+	</div>
+</div>
+
+<button class="btn1">设置 scrollTop为 100px</button>
+<br />
+
+<button class="btn2">获得 scrollTop</button>
+<br />
+
+<button class="btn3">获得 offsetTop</button>
+
+<script type="text/javascript">
+$(function(){
+
+	$(".btn1").click(function(){
+		$(".div_2").scrollTop(100);
+	});
+	$(".btn2").click(function(){
+		alert($(".div_2").scrollTop()+" px");
+	});
+	$(".btn3").click(function(){
+		alert($(".div_2").offset().top+" px");
+		alert(document.getElementById("test").offsetTop+" px");
+	});
+});
+</script>
+</body>
+</html>

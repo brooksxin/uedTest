@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>话务员接触记录</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+                <div class="breadcrumb"></div>
+                
+				<div class="formItem">
+					<div class="titleArea">
+						<h2>话务员接触记录</h2>
+					</div>
+				</div>
+                
+                <div class="cmxform" >
+                   <form class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+                      <div class="record-search-cate">
+            				<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+								
+									<tr>
+                                        <td width="90"><label class="description">话务员姓名</label></td>
+                                        <td width="100">
+                                        	<input class="inputWidth inputText" name="STAFF_NAME"  id="STAFF_NAME" type="text" maxlength="255" value="" style="width: 140px;"/>
+                                        </td>
+                                        <td width="90"><label class="description">工号</label></td>
+										<td width="100">
+											<input class="inputWidth inputText" name="userLoginId"  id="STAFF_ID" type="text" maxlength="255" value="" style="width: 140px;" />
+										</td>
+										<td width="90"><label  class="description">呼叫类型</label></td>
+										<td width="100">
+											<select class="inputWidth  inputSelect"  name ="TOUCH_MODE_CD" id="TOUCH_MODE_CD">
+                                        		<option value ="">全部</option>
+                                        		<option value ="0">呼入</option>
+                                        		<option value ="2">呼出</option>
+                                    		</select>                                 		
+										</td>
+										<td width="82" align="right"><a class="searchBtn" href="javascript:;" id="J_search" >查询</a></td>                                 
+									</tr>
+							   <tbody id="J_searchMore" class="searchMore">
+									<tr>
+										<td><label class="description" for="sDate">开始时间</label></td>
+                    					<td>
+                      						<input id="sDate" name='START_DATE' class="inputWidth text Wdate" style="width: 140px;" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'eDate\')}'})"/>
+										</td> 	
+										<td><label class="description" for="eDate">结束时间</label></td>
+										<td colspan="4">
+											<input id="eDate" name='END_DATE' class="inputWidth text Wdate" style="width: 140px;" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'sDate\')}'})"/>
+                    					</td>
+									</tr>
+								</tbody>
+            				</table>
+                        </div>
+                        <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+                        
+                    </form>
+                </div>
+                <div class="tablewidth mg_t_10">
+					<table class="ui-record-table table_radius table-bordered table-striped" >
+						<thead>
+							<tr>
+								<th width="50">顾客姓名</th>
+								<th width="80">顾客电话</th>
+								<th width="">日期</th>
+								<th width="">开始时间</th>
+								<th width="">结束时间</th>
+								<th width="70">持续时间(秒)</th>
+                                <th width="40">处理人</th>
+								<th width="40">工号</th>
+                                <th width="110">操作</th>
+							</tr>
+                         </thead>
+                         <tbody id="J_tabletpl"></tbody>
+					</table>
+                </div>
+            <!--翻页及功能按钮区域开始-->
+                <div class="amount-bottom">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+                      <tr>
+                        <td width="60">
+                        </td>
+                        <td>
+                        </td>
+                        <td width="50%">
+                            <div class="fn-clear action-other  action-other-show ">
+                                    <div id="PaginationCntMng" class="page pagination fn-right"></div>
+                                    <div class="fn-right fn-pt5 fn-pr10"></div>
+                            </div></td>
+                      </tr>
+                    </table>
+                 </div>
+       <!-- right stop -->
+       <div id="T_playReocrdPage" class="fn-hide">
+       		 <div class="nobottomborder">
+                <table width="100%">
+                	<tbody id="J_RcdTabletpl"></tbody>
+                </table>
+                <div style="text-align: center;"><a class="searchBtn" href="javascript:;" onclick="stopPlay();" >停止</a></div> 
+             </div>
+       	</div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+    /*
+    服务配置
+    param1: 服务名
+    param2: 假数据路径
+    param3: 后台服务路径
+    */
+    srvMap.add('queryContactCntMngs', 'contactCntMngs.json','front/sh/contact!execute?uid=u007');//查询接触记录
+    srvMap.add('selectCntMsgAndTouchRcd', 'rcdInfo.json','front/sh/contact!execute?uid=u014');//接触信息和录音信息查询
+    
+    var G_params = {
+    url : srvMap.get('queryContactCntMngs'),
+    items_per_page : 10 ,   // 每页数     @param : limit
+    page_index : 0 , //当前页  @param : start
+    pagination : "PaginationCntMng" , //分页id
+    searchformId : "J_formSearch", //搜索表单的id
+    tabletpl : "T_tabletpl", //表格模板
+    tablewrap : "J_tabletpl" //表格容器
+    };
+
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        try{
+            $('#J_search').bind('click',function(){
+                var strCntMng = $("#"+G_params.searchformId).serialize(); //把form序列化 队列
+                Util.pagination( G_params.page_index , true , G_params, strCntMng);
+            })
+        }catch(e)
+        {
+            alert(e);
+        }
+    });
+    //跳转到详情页面
+    function gotoDetail(CNTMNG_ID,CUST_MOBNUM,TOUCH_ID){
+    	window.location.href="telOperatorContactSearchDetail.html?CNTMNG_ID="+CNTMNG_ID+"&CUST_MOBNUM="+CUST_MOBNUM+"&TOUCH_ID="+TOUCH_ID;
+    }
+
+    function phoneCall(CUST_MOBNUM){
+        
+    }
+	//播放录音记录
+    function playRecord(CNTMNG_ID,TOUCH_ID){
+    	if(TOUCH_ID == ''){
+			alert('无播放录音！');
+			return;
+		}
+    	 Util.ajax.postJson(srvMap.get('selectCntMsgAndTouchRcd'),'&CNTMNG_ID='+CNTMNG_ID,function(json,status){
+ 	        if (status) {
+ 	            Util.ajax.loadTemp('#J_RcdTabletpl',$('#T_RcdTabletpl'),json);//加载模板
+ 	        }else{
+ 	            alert(json.returnMessage||'查询失败，请重试！');
+ 	        }
+ 	    })	
+    	var elem = document.getElementById('T_playReocrdPage');
+      	var params = {
+          id:'D_playReocrdPage',
+          title:'录音播放',
+          content: elem,
+          width: 700,
+          height:400,
+          modal: true
+      	}
+     	Util.dialog.openDiv(params);
+    }
+    function stopPlay(){
+    	 player.Stop();
+    }
+    Handlebars.registerHelper('compareTouchMode',function(val){
+    	var buffer = "";
+    	if(val == "0"){
+    		buffer = "呼入";
+    	}else{
+    		buffer = "呼出";
+    	}
+    	
+    	return buffer;
+    })
+</script>
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+			<td>{{CMCC_CUST_NM}}</td>
+			<td>{{CUST_MOBNUM}}</td>
+			<td>{{CRT_TIME}}</td>
+			<td>{{BGN_CNTMNG_TIME}}</td>
+			<td>{{END_CNTMNG_TIME}}</td>
+			<td>{{BETWEEN_TIME}}</td>
+			<td>{{STAFF_NAME}}</td>
+            <td>{{STAFF_ID}}</td>
+            <td>
+				<div class="gridRowBtn">
+					<a class="item-text" href="javascript:;" onclick="gotoDetail('{{CNTMNG_ID}}','{{CUST_MOBNUM}}','{{TOUCH_ID}}')">详情</a>
+					<a class="item-text" href="javascript:;" onclick="playRecord('{{CNTMNG_ID}}','{{TOUCH_ID}}')">播放录音</a>
+				</div>
+			</td>            
+        </tr>
+    {{/each}}
+{{else}}
+    <div>暂无接触记录！</div>
+{{/if}}
+</script>
+
+<script id="T_RcdTabletpl" type="text/x-handlebars-template">
+{{#if bean}}
+	<tr>
+        <td width="70" ><span class="text_gray-666">顾客姓名：</span></td>
+        <td width="100">{{bean.CMCC_CUST_NM}}</td>
+        <td width="70" ><span class="text_gray-666">顾客电话：</span></td>
+        <td width="">{{bean.CUST_MOBNUM}}</td>
+        <td width="70"><span class="text_gray-666">呼叫类型：</span></td>
+        <td>{{compareTouchMode bean.TOUCH_MODE_CD}}</td>
+    </tr>
+	<tr>
+        <td valign="top"><span class="text_gray-666">接触时间：</span></td>
+        <td colspan="5">{{bean.BGN_CNTMNG_TIME}} 至 {{bean.END_CNTMNG_TIME}}</td>
+     </tr>
+    <tr>
+        <td valign="top"><span class="text_gray-666">处理人：</span></td>
+        <td>{{bean.STAFF_NAME}}</td>
+        <td  valign="top"><span class="text_gray-666">工号：</span></td>
+        <td >{{bean.STAFF_ID}}</td>
+        <td ></td>
+        <td ></td>
+     </tr>
+     <tr>
+	     <td colspan="6">
+	         <embed id="player"  src="{{bean.rcdFileSvrUrlPath}}{{bean.rcdFileSavePath}}/{{bean.rcdFileNm}}"
+	            hidden="false" autostart="true" loop="false" width="90%" height="42"> 
+	         </embed>
+	     </td>
+	</tr>
+{{else}}
+	<tr><td colspan="6">
+    <div>无播放录音！</div>
+	</td></tr>
+{{/if}}
+</script>
+</body>
+</html>

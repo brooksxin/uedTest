@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>搜索demo</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/jquery-easyui-1.4/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/dialog/4.1.6/skins/blue.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+
+<script type="text/javascript" src="ui/js/jquery.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/jquery-easyui-1.4/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/js/jquery.form.js"></script>
+<script type="text/javascript" src="ui/js/json2.js"></script>
+<script type="text/javascript" src="ui/pagination/1.2.1/jquery.pagination.js"></script>
+<script type="text/javascript" src="ui/js/handlebars.js"></script>
+<script type="text/javascript" src="ui/js/helpers.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="ui/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="ui/js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="ui/js/common.js"></script>
+</head>
+<body>
+
+<!--右侧内容区-->
+<form id="J_formSearch" name="J_formSearch" class="formSearch">
+	<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+		<tbody>
+			<tr>
+				<td width="11%"><label class="description" for="J_BRAND_ID">下拉框：</label></td>
+				<td width="22%">
+					<select class="easyui-combobox" name="J_BRAND_ID" id="J_BRAND_ID">
+				        <option value="AL">Alabama</option>
+				        <option value="AK">Alaska</option>
+				        <option value="CA">California</option>
+				        <option value="CO">Colorado</option>
+				    </select>
+				</td>
+				<td width="11%"><label class="description" for="J_begin_date">起始时间：</label></td>
+				<td width="22%">
+					<input id="J_begin_date" name="J_begin_date" class="easyui-datetimebox">
+				</td>
+				<td width="11%"><label class="description" for="J_end_date">结束时间：</label></td>
+				<td width="22%">
+					<input id="J_end_date" name="J_end_date" class="easyui-datebox">
+				</td>
+			</tr>
+			<tr>
+				<td width="11%"><label class="description" for="">输入框：</label></td>
+				<td width="22%">
+					<input type="text" id="" class="ui-input" name="inputDemo" />
+				</td>
+				<td width="11%"><label class="description" for="">树：</label></td>
+				<td width="22%">
+					<input type="text" id="treeDemo" class="easyui-combotree" name="treeDemo" />
+				</td>
+				<td width="11%"><label class="description" for="">输入框2：</label></td>
+				<td width="22%">
+					<input type="text" id="" class="ui-input" name="inputDemo2" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6" class="fn-center">
+					<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="J_search">
+						<i class="iconfont" title="查询/搜索"></i>
+						<span>查 询</span>
+					</a>
+					<a class="ui-button ui-button-blue " href="javascript:;" hidefocus="true" id="J_reset">
+						<span>重 置</span>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+
+<div class="tool-bar fn-clear">
+	<a class="ui-button ui-button-normal fn-mr-20" href="javascript:;" hidefocus="true" id="J_add">
+		<span>发 布</span>
+	</a>
+	<a class="ui-button ui-button-normal fn-mr-20" href="javascript:;" hidefocus="true" id="">
+		<span>恢 复</span>
+	</a>
+	<a class="ui-button ui-button-normal fn-mr-20" href="javascript:;" hidefocus="true" id="">
+		<span>暂 停</span>
+	</a>
+	<a class="ui-button ui-button-normal" href="javascript:;" hidefocus="true" id="">
+		<span>下 线</span>
+	</a>
+</div>
+<!--分页table-->
+<div class="data-table" id="dataTable">
+	<table class="ui-table" cellpadding="0" cellspacing="0" border="0" width="100%">
+		<colgroup>
+			<col width="8%" />
+			<col width="11%" />
+			<col width="18%" />
+			<col width="11%" />
+			<col width="11%" />
+			<col width="16%" />
+			<col width="" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th class="dataTbl-first">
+					<input type="checkbox" class="ui-checkbox" name="dataCheckAll" id="dataCheckAll" />
+				</th>
+				<th>能力编码</th>
+				<th>能力名称</th>
+				<th>状态</th>
+				<th>能力目录</th>
+				<th>发布时间</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody id="dataTbody"></tbody>
+	</table>
+
+	<div class="dataTbl-bottom fn-hide fn-clear">
+        <div class="page pagination fn-left" id="Pagination">
+        	<!-- pagination -->
+        </div>
+        <div class="paginationTools fn-right">
+        	<span class="des">跳转到第</span>
+        	<input id="gotoPage" value="" type="text" class="ui-input" />
+        	<span class="des">页</span>
+        	<a class="ui-button ui-button-normal" href="javascript:;" hidefocus="true" id="">
+        		<span>确定</span>
+        	</a>
+        </div>
+	</div>
+</div>
+<!--右侧内容区 end-->
+
+<!--分页数据容器-->
+<textarea class="fn-hide" id="dataTbl_tpl">
+{{#each rows}}
+<tr>
+	<td class="dataTbl-first">{{indexAdd @index}}<input type="checkbox" class="ui-checkbox" name="dataCheck" /></td>
+	<td>{{ABILITY_CODE}}</td>
+	<td>{{ABILITY_NAME}}</td>
+	<td>{{ABILITY_STATUS}}</td>
+	<td>{{ABILITY_URL}}</td>
+	<td>{{REMARKS}}</td>
+	<td>
+		<a href="javascript:;" hidefocus="true"><span>暂停</span></a>
+		<a href="javascript:;" hidefocus="true"><span>下线</span></a>
+		<a href="javascript:;" hidefocus="true"><span>编辑</span></a>
+		<a href="javascript:;" hidefocus="true"><span>参数编辑</span></a>
+	</td>
+</tr>
+{{/each}}
+</textarea>
+
+<script type="text/javascript">
+$(function(){
+	//查询按钮
+	$("#J_search").click(function(){
+		var str = $("#J_formSearch").formSerialize();
+		var pageParam = {
+			url: "ui/json/tableData.json?1=1",
+			perPage: "10",
+			formStr: str
+		}
+		getPage(pageParam);
+	})
+});
+
+</script>
+</body>
+</html>

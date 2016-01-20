@@ -1,0 +1,21 @@
+{
+	"returnCode": "0",
+	"returnMessage": "success",
+	"beans":[
+		{
+			"menuId":"1001",
+			"url":"javascript:;",
+			"title":"一级菜单"
+		},
+		{
+			"menuId":"1002",
+			"url":"javascript:;",
+			"title":"二级菜单"
+		},
+		{
+			"menuId":"1003",
+			"url":"javascript:;",
+			"title":"三级菜单"
+		}
+	]
+}

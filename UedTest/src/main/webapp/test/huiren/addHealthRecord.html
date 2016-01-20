@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<title>汇仁</title>
+<link rel="stylesheet" href="ui/mui/css/mui.min.css">
+<link rel="stylesheet" href="ui/common.css">
+
+<style type="text/css">
+
+</style>
+
+</head>
+<body class="zui">
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">编辑电子健康记录</h1>
+</header>
+
+<footer class="mui-bar mui-bar-tab">
+    <a class="mui-tab-item active" href="guide.html">
+        <span class="mui-icon mui-icon-home"></span>
+        <span class="mui-tab-label">向导</span>
+    </a>
+    <a class="mui-tab-item" href="myPrescription.html">
+        <span class="mui-icon mui-icon-email"></span>
+        <span class="mui-tab-label">我的处方</span>
+    </a>
+    <a class="mui-tab-item" href="myDoctor.html">
+        <span class="mui-icon mui-icon-contact"></span>
+        <span class="mui-tab-label">我的医生</span>
+    </a>
+    <a class="mui-tab-item" href="myHealthLog.html">
+        <span class="mui-icon mui-icon-gear"></span>
+        <span class="mui-tab-label">健康日记</span>
+    </a>
+</footer>
+
+<div class="mui-content myCenter">
+    <div class="J_addLogNormal" id="J_logTempWrap">
+        <ul class="mui-table-view mui-table-view-chevron fn-mb-20">
+            <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                    <label>身高</label>
+                    <input type="text" class="ui-input mui-input-clear" value="" />
+                </div>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                    <label>体重</label>
+                    <input type="text" class="ui-input mui-input-clear" value="" />
+                </div>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                    <label>血型</label>
+                    <input type="text" class="ui-input mui-input-clear" value="" />
+                </div>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                    <label>过敏史</label>
+                    <textarea class="ui-textarea input-col" rows="3" placeholder="无"></textarea>
+                </div>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                    <label>遗传病史</label>
+                    <textarea class="ui-textarea input-col" rows="3" placeholder="无"></textarea>
+                </div>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                    <label>手术史</label>
+                    <textarea class="ui-textarea input-col" rows="3" placeholder="无"></textarea>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="mui-content-padded">
+        <button type="button" class="mui-btn mui-btn-success mui-btn-block ui-btn-blue" id="J_subm">保 存</button>
+    </div>
+</div>
+
+<script src="ui/zepto.min.js"></script>
+<script src="ui/handlebars/handlebars.js"></script>
+<script src="ui/handlebars/helpers.js"></script>
+<script src="ui/common.js"></script>
+<script>
+$(function(){
+    
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+{
+    "rtnMsg": null, 
+    "rtnCode": "1", 
+    "rows": [
+        {
+            "appList": [
+                {
+                    "appName": "优蓓通", 
+                    "appSize": "1", 
+                    "appDesc": "优蓓通", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "channelTp": "1", 
+                    "jumpurl": "http://www.youbeitong.cn/ybt.html", 
+                    "grade": "1", 
+                    "sortName": "学习资源", 
+                    "backcolor": "1", 
+                    "appID": "E001",
+                    "last": ""
+                }, 
+                {
+                    "appName": "故事屋", 
+                    "appSize": "1", 
+                    "appDesc": "故事屋", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "channelTp": "1", 
+                    "jumpurl": "http://www.youbeitong.cn/gsw.html", 
+                    "grade": "1,2", 
+                    "sortName": "学习资源", 
+                    "backcolor": "1", 
+                    "appID": "E002"
+                }, 
+                {
+                    "appName": "阅读乐园", 
+                    "appSize": "1", 
+                    "appDesc": "阅读乐园", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "channelTp": "1", 
+                    "jumpurl": "http://club.xxt.cn/book/index.action", 
+                    "grade": "1", 
+                    "sortName": "学习资源", 
+                    "backcolor": "1", 
+                    "appID": "E003"
+                }, 
+                {
+                    "appName": "专题学习", 
+                    "appSize": "1", 
+                    "appDesc": "专题学习", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "channelTp": "1", 
+                    "jumpurl": "http://blog.xxt.cn/zt/showIndex.action", 
+                    "grade": "1,2,3,4", 
+                    "sortName": "学习资源", 
+                    "backcolor": "1", 
+                    "appID": "E004"
+                }, 
+                {
+                    "appName": "教育文库", 
+                    "appSize": "1", 
+                    "appDesc": "教育文库", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "channelTp": "1", 
+                    "jumpurl": "http://wenku.xxt.cn/home/index.do", 
+                    "grade": "1,2,3,4", 
+                    "sortName": "学习资源", 
+                    "backcolor": "1", 
+                    "appID": "E005"
+                }
+            ], 
+            "sortId": "1", 
+            "sortName": "学习资源"
+        }, 
+        {
+            "appList": [
+                {
+                    "appName": "家校联系", 
+                    "appSize": "1", 
+                    "appDesc": "家校联系", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "jumpurl": "http://jxlx.xxt.cn/jxlx/main/main.action?temp=1436949970945", 
+                    "grade": "1,2,3,4,5", 
+                    "sortName": "家校沟通", 
+                    "backcolor": "1", 
+                    "appID": "E006"
+                }, 
+                {
+                    "appName": "乐贝通-家园互动", 
+                    "appSize": "1", 
+                    "appDesc": "乐贝通-家园互动", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "channelTp": "1", 
+                    "jumpurl": "", 
+                    "grade": "1,5", 
+                    "sortName": "家校沟通", 
+                    "backcolor": "1", 
+                    "appID": "E007"
+                }, 
+                {
+                    "appName": "乐贝通-平安短信", 
+                    "appSize": "1", 
+                    "appDesc": "乐贝通-平安短信", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "channelTp": "1", 
+                    "jumpurl": "", 
+                    "grade": "1", 
+                    "sortName": "家校沟通", 
+                    "backcolor": "1", 
+                    "appID": "E008"
+                }
+            ], 
+            "sortId": "2", 
+            "sortName": "家校沟通"
+        }, 
+        {
+            "appList": [
+                {
+                    "appName": "第一父母", 
+                    "appSize": "1", 
+                    "appDesc": "第一父母", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "channelTp": "1", 
+                    "jumpurl": "http://www.youbeitong.cn/ybt.html", 
+                    "grade": "1", 
+                    "sortName": "家长学堂", 
+                    "backcolor": "1", 
+                    "appID": "E009"
+                }, 
+                {
+                    "appName": "乐贝通-成长在线", 
+                    "appSize": "1", 
+                    "appDesc": "乐贝通-成长在线", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "jumpurl": "", 
+                    "grade": "1", 
+                    "sortName": "家长学堂", 
+                    "backcolor": "1", 
+                    "appID": "E010"
+                }, 
+                {
+                    "appName": "家庭教育彩信", 
+                    "appSize": "1", 
+                    "appDesc": "家庭教育彩信", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "channelTp": "1", 
+                    "jumpurl": "http://mzone.xxt.cn/mms/index.action", 
+                    "grade": "1,2,3", 
+                    "sortName": "家长学堂", 
+                    "backcolor": "1", 
+                    "appID": "E011"
+                }, 
+                {
+                    "appName": "校讯通大讲堂", 
+                    "appSize": "1", 
+                    "appDesc": "校讯通大讲堂", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "channelTp": "1", 
+                    "jumpurl": "http://blog.xxt.cn/zt/browseZt.action?dissertationId=108860", 
+                    "grade": "1,2,3,4", 
+                    "sortName": "家长学堂", 
+                    "backcolor": "1", 
+                    "appID": "E012"
+                }
+            ], 
+            "sortId": "3", 
+            "sortName": "家长学堂"
+        }, 
+        {
+            "appList": [
+                {
+                    "appName": "活动天地", 
+                    "appSize": "1", 
+                    "appDesc": "活动天地", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "channelTp": "1", 
+                    "jumpurl": "http://act.xxt.cn/act/index.do", 
+                    "grade": "1,2,3,4", 
+                    "sortName": "社区圈子", 
+                    "backcolor": "1", 
+                    "appID": "E013"
+                }, 
+                {
+                    "appName": "博谈客论", 
+                    "appSize": "1", 
+                    "appDesc": "博谈客论", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "channelTp": "1", 
+                    "jumpurl": "http://blog.xxt.cn/btkl/showMoreTopic.action", 
+                    "grade": "1,2,3,4", 
+                    "sortName": "社区圈子", 
+                    "backcolor": "1", 
+                    "appID": "E014"
+                }, 
+                {
+                    "appName": "博腕达人", 
+                    "appSize": "1", 
+                    "appDesc": "博腕达人", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "channelTp": "1", 
+                    "jumpurl": "http://blog.xxt.cn/showBwgy.action?type=1", 
+                    "grade": "1,2,3,4", 
+                    "sortName": "社区圈子", 
+                    "backcolor": "1", 
+                    "appID": "E015"
+                }, 
+                {
+                    "appName": "专家名博", 
+                    "appSize": "1", 
+                    "appDesc": "专家名博", 
+                    "appPic": "", 
+                    "maintenance": "1", 
+                    "channelTp": "1", 
+                    "jumpurl": "http://blog.xxt.cn/index/famousblog.action?aName=expert#expertA", 
+                    "grade": "1,2,3,4", 
+                    "sortName": "社区圈子", 
+                    "backcolor": "1", 
+                    "appID": "E016"
+                }
+            ], 
+            "sortId": "4", 
+            "sortName": "社区圈子"
+        }
+    ]
+}

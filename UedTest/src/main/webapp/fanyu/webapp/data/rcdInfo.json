@@ -1,0 +1,16 @@
+{
+	"returnCode":"0",
+	"returnMessage":null,
+	"bean":{
+		 "CMCC_CUST_NM":"李四",
+		 "CUST_MOBNUM":"1333333333",
+		 "TOUCH_MODE_CD":"呼入",
+		 "CRT_TIME":"2015-04-28 14:17:17.0",
+		 "STAFF_NAME":"张三",
+		 "STAFF_ID":"1",
+		 "TOUCH_MODE_CD":"呼入",
+		 "rcdFileNm":"1005A18838086870C20150506215911CA11F03002457079S20150506215914272694CA11F03002457232.mp3",
+		 "rcdFileSavePath":"servicerecord/000001888888011000/20150506",
+		 "rcdFileSvrUrlPath":"http://221.176.67.103:9999/media/888888/",
+		}	
+}

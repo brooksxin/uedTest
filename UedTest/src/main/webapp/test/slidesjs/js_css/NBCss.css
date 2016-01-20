@@ -1,0 +1,470 @@
+@charset "utf-8";
+
+/*
+ *样式重置--begin
+ *暂用淘宝alice
+*/
+/* 防止用户自定义背景颜色对网页的影响，添加让用户可以自定义字体 */
+html {
+    color:#000;background:#fff;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/* 内外边距通常让各个浏览器样式的表现位置不同 */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    margin:0;padding:0;
+}
+
+/* 重设 HTML5 标签, IE 需要在 js 中 createElement(TAG) */
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { 
+    display:block;
+}
+
+/* HTML5 媒体文件跟 img 保持一致 */
+audio,canvas,video {
+    display: inline-block;*display: inline;*zoom: 1;
+}
+
+/* 要注意表单元素并不继承父级 font 的问题 */
+body,button,input,select,textarea {
+    font:12px/1.5 tahoma,arial,"Hiragino Sans GB",\5b8b\4f53;
+}
+input,select,textarea {
+    font-size:100%;
+}
+
+/* 去掉各Table  cell 的边距并让其边重合 */
+table {
+    border-collapse:collapse;border-spacing:0;
+}
+
+/* IE bug fixed: th 不继承 text-align*/
+th {
+    text-align:inherit;
+}
+
+/* 去除默认边框 */
+fieldset,img {
+    border:0;
+}
+
+/* ie6 7 8(q) bug 显示为行内表现 */
+iframe {
+    display:block;
+}
+
+/* 去掉 firefox 下此元素的边框 */
+abbr,acronym {
+    border:0;font-variant:normal;
+}
+
+/* 一致的 del 样式 */
+del {
+    text-decoration:line-through;
+}
+
+address,caption,cite,code,dfn,em,th,var {
+    font-style:normal;
+    font-weight:500;
+}
+
+/* 去掉列表前的标识, li 会继承 */
+ol,ul {
+    list-style:none;
+}
+
+/* 对齐是排版最重要的因素, 别让什么都居中 */
+caption,th {
+    text-align:left;
+}
+
+/* 来自yahoo, 让标题都自定义, 适应多个系统应用 */
+h1,h2,h3,h4,h5,h6 {
+    font-size:100%;
+    font-weight:500;
+}
+
+q:before,q:after {
+    content:'';
+}
+
+/* 统一上标和下标 */
+sub, sup {
+    font-size: 75%; line-height: 0; position: relative; vertical-align: baseline;
+}
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+/* 正常链接 未访问 */
+a:link {
+    color: #08c;
+}
+
+/* 鼠标悬停 */
+a:hover {
+    color: #08c;
+    text-decoration: underline;
+}
+
+/* 去除点击后按钮的虚线
+ * ie中需添加代码 hidefocus="true"
+ */
+a:focus{
+    outline:none
+}
+
+/* 默认不显示下划线，保持页面简洁 */
+ins,a {
+    text-decoration:none;
+}
+
+/* 清理浮动 */
+.fn-clear:after {
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+}
+.fn-clear {
+    zoom:1; /* for IE6 IE7 */
+}
+
+/* 隐藏, 通常用来与 JS 配合 */
+body .fn-hide {
+    display:none;
+}
+
+/* 设置内联, 减少浮动带来的bug */
+.fn-left,.fn-right {
+    display:inline;
+}
+.fn-left {
+    float:left;
+}
+.fn-right {
+    float:right;
+}
+
+/* 单行文字溢出时出现省略号，需设定宽度 */ 
+.fn-text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 简单的渐变 */
+.fn-linear {
+    background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#f1f1f1));
+    background: -moz-linear-gradient(top, #fcfcfc, #f1f1f1);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#f1f1f1');
+    background:-o-linear-gradient(top, #fcfcfc, #f1f1f1);
+    background: linear-gradient(top, #fcfcfc, #f1f1f1);
+}
+
+/* 浅色的渐变 */
+.fn-linear-light {
+    background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#f9f9f9));
+    background: -moz-linear-gradient(top, #fcfcfc, #f9f9f9);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#f9f9f9');
+    background:-o-linear-gradient(top, #fcfcfc, #f9f9f9);
+    background: linear-gradient(top, #fcfcfc, #f9f9f9);
+}
+
+/* 人民币符号 */
+.fn-rmb {
+    font-family: arial;
+    font-style: normal;
+    padding-right: 4px;
+}
+
+/* chrome 下字体过小的问题 */
+.fn-webkit-adjust {
+    -webkit-text-size-adjust: none;
+}
+
+.fn-gray{
+	color: gray;
+}
+.fn-vtop{
+	vertical-align: top;
+}
+.fn-high{
+	color: #FF0000;
+}
+.fn-loading {
+    background: url("img/loading.gif") no-repeat scroll left center;
+    padding-left: 20px;
+}
+.mg_l_f_20 {
+    margin-left: -20px;
+}
+
+/*
+ *样式重置--end
+*/
+
+body{
+	margin: 0 auto;
+	padding: 20px 0;
+	background: none repeat scroll 0 0 #F5F5F5;
+}
+.Nb-ui-table,.Nb-ui-slides,.Nb-ui-phoneCompare{
+	width: 560px;
+	margin: 0 auto;
+}
+.fn-width-980{
+    width: 980px;
+}
+
+/*
+ *Nb-ui-table--begin
+ *table分为普通展示table：search_table
+ *详情页面table：detail_table
+ *数据展示table：data_table
+*/
+.Nb-ui-table .search_table td{
+	padding: 4px 6px;
+    text-align: left;
+}
+.Nb-ui-table .search_table td label.description{
+	border: medium none;
+    color: #222222;
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0 0 1px;
+}
+
+
+/*
+ *Nb-ui-table--end
+*/
+
+/*
+ *按钮--begin
+*/
+.W_btn_a,.W_btn_a span,.W_btn_a_disable,.W_btn_a_disable span {
+    cursor: pointer;
+    background: url(img/btn.gif) no-repeat 0 -144px;
+    color: #73797c;
+    display: inline-block;
+    padding: 0 0 0 2px;
+    height: 24px;
+    line-height: 23px;
+    line-height: 24px\9;
+}
+.W_btn_a span,.W_btn_a_disable span {
+    background-position: right -168px;
+    padding: 0 14px 0 12px;
+    min-width: 35px;
+    text-align: center;
+}
+.W_btn_a:hover {
+    background-position: 0 -192px;
+    text-decoration: none;
+}
+.W_btn_a:hover span {
+    background-position: right -216px;
+}
+.W_btn_b,.W_btn_b span,.W_btn_b_disable,.W_btn_b_disable span {
+    cursor: pointer;
+    background: url(img/btn.gif) no-repeat; 
+    color: #fff;
+    display: inline-block;
+    padding: 0 0 0 2px;
+    height: 24px;
+    line-height: 23px;
+    line-height: 24px\9;
+}
+.W_btn_b span,.W_btn_b_disable span {
+    background-position: right -24px;
+    padding: 0 14px 0 12px;
+    min-width: 30px;
+    text-align: center;
+}
+.W_btn_b:hover {
+    background-position: 0 -48px;
+    text-decoration: none;
+}
+.W_btn_b:hover span {
+    background-position: right -72px;
+}
+.W_btn_a_disable,.W_btn_a_disable:hover,.W_btn_b_disable,.W_btn_b_disable:hover
+    {
+    background-position: 0 -96px;
+    cursor: default;
+}
+.W_btn_a_disable:hover,.W_btn_b_disable:hover {
+    text-decoration: none;
+}
+.W_btn_a_disable span,.W_btn_a_disable span:hover,.W_btn_b_disable span,.W_btn_b_disable:hover span
+    {
+    background-position: right -120px;
+    color: #c7c7c7;
+    min-width: 37px;
+    cursor: default;
+}
+
+/*
+ *按钮--end
+*/
+
+/*
+ *图片轮播--begin
+*/
+.Nb-ui-slides .slides{
+    position: relative;
+    margin-bottom: -80px;/*导航按钮高度90px;不需要左右导航按钮的话设为0;*/
+    display:none;/* Prevents slides from flashing */
+}
+.Nb-ui-slides .slides a .icon-chevron-left,.Nb-ui-slides .slides a .icon-chevron-right{
+	background-image: url('img/ad_arrow_bg.png');
+    cursor: pointer;
+    width: 46px;
+    height: 90px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    margin: 0;
+    z-index: 100;
+}
+.Nb-ui-slides .slides a.slidesjs-navigation{
+    float: left;
+    margin-right: 6px;
+    position: relative;
+    z-index: 100;
+}
+.Nb-ui-slides .slides a .icon-chevron-left,.Nb-ui-slides .slides a.slidesjs-previous{
+    top: -330px;
+}
+.Nb-ui-slides .slides a .icon-chevron-right,.Nb-ui-slides .slides a.slidesjs-next{
+    left: 462px;
+    top: -330px;
+}
+.Nb-ui-slides .slides a:HOVER .icon-chevron-left{
+	background-image: url('img/ad_arrow_hover.png');
+	background-position: 0 0;
+}
+.Nb-ui-slides .slides a:HOVER .icon-chevron-right{
+	background-image: url('img/ad_arrow_hover.png');
+	background-position: -92px 0;
+}
+.Nb-ui-slides .slides a .icon-chevron-left{
+	background-position: 0 0;
+}
+.Nb-ui-slides .slides a .icon-chevron-right{
+	background-position: -92px 0;
+}
+.Nb-ui-slides .slides ul.slidesjs-pagination{
+    float: right;
+    list-style: none outside none;
+    margin: 6px 0 0;
+    position: relative;
+    right: 20px;
+    top: -30px;
+    z-index: 100;
+}
+.Nb-ui-slides .slides ul.slidesjs-pagination li{
+    float: left;
+    margin: 0 2px;
+}
+.Nb-ui-slides .slides ul.slidesjs-pagination li a{
+	background: none repeat scroll 0 0 #6C6C6C;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+    font-family: tahoma,arial;
+    font-size: 12px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    text-decoration: none;
+    text-indent: -9999px;
+    width: 16px;
+}
+.Nb-ui-slides .slides ul.slidesjs-pagination li a.active,.Nb-ui-slides ul.slidesjs-pagination li a:HOVER{
+	background: none repeat scroll 0 0 #339ED4;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+/*
+ *图片轮播--end
+*/
+
+/*
+ *手机对比--begin
+*/
+#J_combineDialog{width:62px;height:62px;background:url("img/btn_contrast.png") no-repeat left top;z-index:999;position:fixed;right:5px;bottom:80px;cursor:pointer;_position:absolute;_top:expression(eval(documentElement.scrollTop+document.documentElement.clientHeight-142));}
+#J_combinePlug{display:none;position:fixed;z-index:999;height:160px;width:926px;margin-left:-463px;left:50%;bottom:-161px;border:1px solid rgb(163,163,163);border-bottom:none;_position:absolute;_top:expression(eval(documentElement.scrollTop+document.documentElement.clientHeight-160));filter:progid:DXImageTransform.Microsoft.Shadow(color='#c0c0c0', Direction=360, Strength=3)progid:DXImageTransform.Microsoft.Shadow(color='#c0c0c0', Direction=90, Strength=3)progid:DXImageTransform.Microsoft.Shadow(color='#c0c0c0', Direction=270, Strength=3)\9;filter:none\9\0;background-color:whiteSmoke;-webkit-border-top-left-radius:5px;-webkit-border-top-right-radius:5px;-moz-border-top-left-radius:5px;-moz-border-top-right-radius:5px;-o-border-top-left-radius:5px;-o-border-top-right-radius:5px;border-top-left-radius:5px;border-top-right-radius:5px;box-shadow:0 0 6px #c0c0c0;-webkit-box-shadow:0 0 6px #c0c0c0;-moz-box-shadow:0 0 6px #c0c0c0;-o-box-shadow:0 0 6px #c0c0c0;}
+#J_combinePlug .reopen{width:100%;height:100%;overflow:hidden;}
+#J_combinePlug .iCol{padding:11px;}
+#J_combinePlug .iCol .hd{border-bottom:1px solid #E4E3E2;height:25px;}
+#J_combinePlug .iCol .hd span{height:24px;padding:0 13px;display:inline-block;line-height:25px;text-align:center;border:1px solid #E4E3E2;border-bottom:none;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#fffefefe, endColorstr=#fff5f5f5)/9;background:-moz-linear-gradient(top, #FEFEFE, whiteSmoke);background:-webkit-gradient(linear, 0 0, 0 100%, from(#FEFEFE), to(whiteSmoke));background:-ms-linear-gradient(top, #FEFEFE, whiteSmoke);background:-o-linear-gradient(top, #FEFEFE, whiteSmoke);background:linear-gradient(top, #FEFEFE, whiteSmoke);}
+#J_combinePlug .iCol .hd span em{font-style:normal;}
+#J_combinePlug .iCol .bd{padding-top:14px;border-top:1px solid #F8F8F8;}
+#J_CompareSpu .spu-list, #J_CompareSpu .spu-list ul{overflow:hidden;}
+.no-compare{text-align:center;margin:10px 0 20px;}
+#J_CompareSpu .goto-compare{width:240px;position:absolute;right:0;top:9px;}
+#J_CompareSpu .J_container{padding:0 20px;zoom:1;}
+#J_CompareSpu .J_container:after{content:"";display:block;height:0;clear:both;}
+#J_CompareSpu .J_gotoCompare{width:56px;height:18px;line-height:16px;line-height:18px\0;+line-height:20px;_line-height:16px;text-align:center;display:block;margin:0 8px;color:#000;text-decoration:none;float:left;cursor:pointer;background:url("img/btn_search_button.png") no-repeat left top;}
+#J_CompareSpu #gotoCompare{color:#FFF;background-position:left -28px;}
+#hideCompare{color:rgb(51,158,212);text-decoration:none;cursor:pointer;margin-left:15px;}
+#J_CompareSpu .spu-list ul li{height:90px;width:218px;margin-left:8px;border:1px solid #E4E3E2;float:left;position:relative;_margin-left:expression(this.previousSibling==null?'0':'8px');}
+#J_CompareSpu .spu-list ul li:first-child{margin-left:0;}
+#J_CompareSpu .spu-list ul li .pic{float:left;z-index:20;border-right:1px solid #ECEBEA;background:white;width:90px;height:90px;overflow:hidden;text-align:center;vertical-align:middle;display:table-cell;position:relative;margin-bottom:3px;}
+#J_CompareSpu .spu-list ul li .del-spu{position:absolute;height:12px;line-height:12px;text-align:center;background:#CCC;color:white;font-size:8px;top:1px;right:1px;width:12px;z-index:21;cursor:pointer;}
+#J_CompareSpu .spu-list ul li .message{float:left;display:inline;margin-left:10px;width:102px;}
+#J_CompareSpu .spu-list ul li p{overflow:hidden;line-height:20px;}
+#J_CompareSpu .spu-list ul li p a{color:#333;}
+#J_CompareSpu .spu-list ul li p.price span{color:#F90;}
+#J_CompareSpu .spu-list ul li .pic a{position:static;top:50%;width:110px;text-align:center;}
+#J_CompareSpu .spu-list ul li .pic img{position:static;top:-50%;left:-50%;}
+.pic a img{vertical-align:middle;}
+#J_CompareSpu .throw-compare{position:absolute;z-index:100;top:36px;left:12px;height:68px;zoom:1;width:904px;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#e52aadd7, endColorstr=#e52aadd7)/9;background:rgba(42, 173, 215, 0.9);_background:rgb(42, 173, 215);color:white;padding-top:40px;font-size:14px;font-weight:700;text-align:center;}
+#content{width:980px;margin:0 auto;}
+#J_ComTable{width:980px;margin:10px auto;}
+#J_ComTable .spuCompareTable, #J_ComTable .topTable{text-align:center;vertical-align:middle;width:100%;}
+#J_ComTable .topTable thead tr{background-color:#E2F2FF;text-align:center;height:40px;}
+#J_ComTable .topTable thead th{padding:10px;vertical-align:middle;text-align:center;color:#404040;border-top:3px solid #A7CBFF;}
+#J_ComTable .topTable thead th a{color:#2099CF;display:inline-block;height:14px;overflow:hidden;line-height:14px;text-decoration:none;}
+#J_ComTable .topTable tr.img{height:256px;text-align:center;}
+#J_ComTable .tbody tr.img th{border-bottom:1px solid #EFEFEF;}
+#J_ComTable tbody th{border-right:1px solid #EDEDED;width:70px;padding:10px 5px;text-align:center;color:rgb(153,153,153);}
+#J_ComTable tbody .odd th{border-right:1px solid #FFF;}
+#J_ComTable .topTable .pic-box{width:226px;height:226px;border:1px solid #EDEDED;margin:10px auto;}
+#J_ComTable .topTable .pic{width:226px;height:226px;position:relative;overflow:hidden;text-align:center;vertical-align:middle;display:table-cell;}
+#J_ComTable .topTable .pic a{position:static;top:50%;width:226px;text-align:center;*position:absolute;}
+#J_ComTable .topTable .pic img{position:static;top:-50%;left:-50%;*position:relative;border:none\9;}
+#J_ComTable .spuCompareTable tbody td{padding:10px 0;text-align:center;}
+#J_ComTable .spuCompareTable tbody .odd{background:#EDEDED;}
+#J_ComTable span.red{color:#F50;font-weight:700;}
+
+.Nb-ui-phoneCompare .gotoCompare{
+    margin-right: 10px;
+}
+.Nb-ui-phoneCompare .gotoCompare:HOVER{
+    text-decoration:none;/*防止a标签后有小尾巴*/
+}
+.Nb-ui-phoneCompare .gotoCompare span{
+    background-image: url("img/btn_search_button.png");
+    color: #333333;
+    display: inline-block;
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+    width: 56px;
+    text-align: center;
+    cursor: pointer;
+}
+.Nb-ui-phoneCompare .gotoCompare:HOVER span{
+    background-position:left -28px;
+    text-decoration:none;
+    color:#fff;
+}
+/*
+ *手机对比--end
+*/

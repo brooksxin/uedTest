@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>My JSP 'index.jsp' starting page</title>
+<script src='http://code.jquery.com/jquery-2.1.0.min.js' type="text/javascript"></script>
+<style type="text/css">
+.div1{
+	width: 800px;
+	height: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid #000000;
+}
+.div1 .goods{
+	float: left;
+	width: 150px;
+	height: 200px;
+	margin-left: 25px;
+	margin-top: 48px;
+	border: 1px solid #999999;
+}
+.div1 .goods .top{
+	width: 120px;
+	height: 80px;
+	margin-left: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.div1 .goods .top img{
+	width: 100%;
+	height: 100%;
+}
+.div1 .goods .name{
+	width: 150px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+}
+.div1 .goods .name a{
+	color: #999999;
+}
+.goods2{
+	position: absolute;
+}
+
+#drag{width:400px;height:300px;background:url(http://upload.yxgz.cn/uploadfile/2009/0513/20090513052611873.jpg);cursor:move;position:absolute;top:100px;left:100px;border:solid 1px #ccc;}
+h2{color:#fff;background: none repeat scroll 0 0 rgba(16, 90, 31, 0.7);color:#FFFFFF;height:40px;line-height:40px;margin:0;}
+</style>
+</head>
+  
+<body>
+<div class="div1">
+	<div class="goods">
+		<div class="top"><img src="zw.ico"></div>
+		<div class="name">长袖衬衫</div>
+		<div class="name">价格：70.00元</div>
+		<div class="name"><a href="javascript:;">选择</a></div>
+	</div>
+	<div class="goods">
+		<div class="top"><img src="zw.ico"></div>
+		<div class="name">长袖衬衫</div>
+		<div class="name">价格：70.00元</div>
+		<div class="name"><a href="javascript:;">选择</a></div>
+	</div>
+</div>
+
+
+<div id="drag">
+    <h2>来拖动我啊</h2>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$(".goods").not(".goods2").bind("mousedown",function(event){
+			var $new = $(this).clone();
+			$(this).parent().append($new);
+			$new.addClass("goods2").css({"left" : event.pageX,"top" : event.pageY,"opacity" : "0.5"});
+			moveThis($new);
+		});
+
+
+	});
+
+	function moveThis(obj){
+		obj.bind("mousemove",function(e){
+			drag(obj);
+		}).bind("mouseup",function(e){
+			obj.css({"opacity" : "1"});
+		});
+	}
+
+	/**拖拽函数drag*/
+	function drag(C) {
+	    var dx, dy, moveout;
+	    var T = C.find('.dragTitle').css('cursor', 'move');
+	    T.bind("selectstart",
+	    function() {
+	        return false;
+	    });
+	    T.mousedown(function(e) {
+	        dx = e.clientX - parseInt(C.css("left"));
+	        dy = e.clientY - parseInt(C.css("top"));
+	        C.mousemove(move).mouseout(out).css('opacity', 0.8);
+	        T.mouseup(up);
+	    });
+	    /**移动改变生活*/
+	    function move(e) {
+	        moveout = false;
+	        if (e.clientX - dx < 0) {
+	            l = 0;
+	        } else if (e.clientX - dx > $(window).width() - C.width()) {
+	            l = $(window).width() - C.width();
+	        } else {
+	            l = e.clientX - dx
+	        }
+	        C.css({
+	            left: l,
+	            top: e.clientY - dy
+	        });
+	    }
+	    /**你已经out啦！*/
+	    function out(e) {
+	        moveout = true;
+	        setTimeout(function() {
+	            checkout(e);
+	        },
+	        100);
+	    }
+	    /**放弃*/
+	    function up(e) {
+	        C.unbind("mousemove", move).unbind("mouseout", out).css('opacity', 1);
+	        T.unbind("mouseup", up);
+	    }
+	    /**检查成分*/
+	    function checkout(e) {
+	        moveout && up(e);
+	    }
+	}
+
+	/*var $new = null;
+	$(".goods").mousedown(function(event){
+		$new = $(this).clone();
+		$(this).parent().append($new);
+		$new.addClass("goods2");
+		$new.css({"left" : event.pageX,"top" : event.pageY,"marginLeft": "0px","marginTop" : "0px","opacity" : "0.5"});
+		$new.mousemove(function(event){
+			$new.css({"left" : event.pageX,"top" : event.pageY});
+		});
+		$(this).mousemove(function(event){
+			if($new != null){
+				$new.css({"left" : event.pageX,"top" : event.pageY});
+			}
+		});
+		return false;
+	});
+	$("body").mouseup(function(){
+		$(".goods").unbind("mousemove");
+		$new.remove();
+	});*/
+	/*$(function(){
+		$(".goods").mousedown(function(event){
+			var $new = $(this).clone();
+			$(this).parent().append($new);
+			$new.addClass("goods2");
+			$new.css({"left" : event.pageX,"top" : event.pageY,"marginLeft": "0px","marginTop" : "0px","opacity" : "0.5"});
+			$(this).mousemove(function(event){
+				$new.css({"left" : event.pageX,"top" : event.pageY});
+				$new.mousemove(function(event){
+					$new.css({"left" : event.pageX,"top" : event.pageY});
+				});
+			});
+			$(this).mouseup(function(){
+				$(this).unbind();
+				$new.unbind();
+			});
+			return false;
+		});
+	});*/
+
+$(function(){
+    /*--------------拖曳效果----------------
+    *原理：标记拖曳状态dragging ,坐标位置iX, iY
+    *         mousedown:fn(){dragging = true, 记录起始坐标位置，设置鼠标捕获}
+    *         mouseover:fn(){判断如果dragging = true, 则当前坐标位置 - 记录起始坐标位置，绝对定位的元素获得差值}
+    *         mouseup:fn(){dragging = false, 释放鼠标捕获，防止冒泡}
+    */
+    var dragging = false;
+    var iX, iY;
+    $("#drag").mousedown(function(e) {
+        dragging = true;
+        iX = e.clientX - this.offsetLeft;
+        iY = e.clientY - this.offsetTop;
+        this.setCapture && this.setCapture();
+        return false;
+    });
+    document.onmousemove = function(e) {
+        if (dragging) {
+        var e = e || window.event;
+        var oX = e.clientX - iX;
+        var oY = e.clientY - iY;
+        $("#drag").css({"left":oX + "px", "top":oY + "px"});
+        return false;
+        }
+    };
+    $(document).mouseup(function(e) {
+        dragging = false;
+        $("#drag")[0].releaseCapture();
+        e.cancelBubble = true;
+    })
+
+})
+</script>
+</body>
+</html>

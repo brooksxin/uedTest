@@ -1,0 +1,547 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Untitled Form</title>
+  <link href="../../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../../css/tablepay.css" media="all">
+  <link rel="stylesheet" type="text/css" href="../../css/common.css" media="all">
+  <link rel="stylesheet" type="text/css" href="../../lib/dialog/6.0.4/css/ui-dialog.css">
+
+  <style>
+    .standard { margin:0px 20px }
+    .standard h1 {
+      font-size:20px;
+      margin:10px 0px;
+      font-weight:bold
+    }
+    .standard p {
+      line-height:150%;
+      margin:20px 0px 10px 0px;
+    }
+    input[type=radio] { vertical-align: middle; }
+    .normalBtnArea a.largeBtn {
+      padding: 8px 15px;
+    }
+  </style>
+
+  <script src="../../lib/jquery/1.8.1/jquery.js"></script>
+  <script type="text/javascript" src="../../lib/pretty/prettify.js"></script>
+  <script src="../../lib/datepicker/4.8.b2/WdatePicker.js"></script>
+  <script src="../../lib/jquery/1.8.1/jquery.js"></script>
+  <script src="../../lib/validate/1.13.1/jquery.validate.min.js"></script>
+  <script src="../../lib/dialog/6.0.4/dialog-plus.js"></script>
+  <script src="../../common/config.js"></script>
+  <script src="../../common/common.js"></script>
+
+
+
+  <script type="text/javascript">
+    var validator = null;
+    $(function(){
+      init();
+    });
+    var init = function(){
+      validator = $('#form3').validate({
+        rules: {
+          selectFather:{
+            required:true
+          }, 
+          selectChildren:{
+            required:{
+              depends:function(){
+                return $("#selectFather").val();
+              }
+            }
+          }, 
+          projectBelong:{
+            required:true
+          }, 
+          questionnaireName: {
+            required: true
+          }, 
+          date: {
+            required: true, 
+            date:true
+          },
+          number:{
+            number:true
+          }, 
+          range:{
+            required:true, 
+            range:[10, 20]
+          }, 
+          url:{
+            url:true
+          }, 
+          sex:{
+            required:true
+          }, 
+          email:{
+            email:true
+          }, 
+          mobile:{
+            mobile:true
+          }, 
+          zipCode:{
+            zipCode:true
+          }
+        }, 
+        messages:{
+          selectFather:{
+            required:'适用渠道父级为必选项', 
+          },
+          selectChildren:{
+            required:'适用渠道子级为必选项', 
+          },
+          projectBelong:{
+            required:'项目归属为必填项', 
+          },
+          questionnaireName:{
+            required:'问卷名称为必填项', 
+          },
+          date:{
+            required:'日期为必填项', 
+            date:'日期格式不正确'
+          },
+          number:{
+            number:'数字格式不正确'
+          }, 
+          range:{
+            required:'数字范围为必填项', 
+            range:'超出数字范围'
+          }, 
+          url:{
+            url:'网址格式不正确'
+          }, 
+          sex:{
+            required:'性别为必填项'
+          }, 
+          email:{
+            email:'邮箱格式不正确'
+          }, 
+          mobile:{
+            mobile:'手机号码格式不正确'
+          }, 
+          zipCode:{
+            zipCode:'邮政编码格式不正确'
+          }
+        }, 
+        showErrors:function(errorMap, errorList){
+          /*$("#summary").html("Your form contains "
+            + this.numberOfInvalids()
+            + " errors, see details below.");
+          $.each(errorList, function(i, item){
+            $("#summary").append('<br><span>'+ item.message +'</span>')
+          })
+          console.log(errorList);*/
+          this.defaultShowErrors();
+        }
+      });
+      eventInit();
+    }
+
+    var eventInit = function(){
+      $('#save').on('click', function(){
+        validator.form()
+        return false;
+      });
+    }
+
+  </script>
+</head>
+<body id="main_body" onload="prettyPrint()">
+  <div class="standard">
+    <H1>表单验证</H1>
+    <!--<p><strong>示例</strong></p>-->
+    <div>
+
+    <form id="form3" novalidate="novalidate">
+      <table class="form_table" width="100%">
+          <tbody><tr>
+            <td width="90"><label class="formDescription"><span class="fn-high">*</span> 适用渠道</label></td>
+            <td class="useForChannel">
+              <div class="useForChannel">
+                <select id="selectFather" name="selectFather" class="selectStyle w160 levelOne valid" aria-invalid="false">
+                  <option value=""></option>
+                  <option value="1001">10085电话营销中心</option>
+                  <option value="1002">10085网上商城</option>
+                  <option value="1003">线下省级营业厅</option>
+                  <option value="1005">社交媒体</option>
+                  <option value="1010">社会代理</option>
+                </select>
+                <select name="selectChildren" class="selectStyle w160 levelTwo">
+                  <option value=""></option>
+                  <option value="1">子项1</option>
+                  <option value="2">子项2</option>
+                </select>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><label class="formDescription"><span class="fn-high">*</span> 项目归属</label></td>
+            <td class="projectBelong">
+              <div>
+                <select class="FormInputText selectStyle w160 province valid" name="projectBelong" aria-invalid="false">
+                  <option value=""></option>
+                  <option value="1000000000117">贵州中心</option>
+                  <option value="1000000000122">江苏中心</option>
+                  <option value="1000000000124">洛阳中心</option>
+                  <option value="D1000000000108">测试用户中心</option>
+                </select>
+              </div>
+            </td>
+          </tr>
+          <tr>
+              <td><label class="formDescription"><span class="fn-high">*</span> 问卷名称</label></td>
+              <td>
+                  <input type="text" name="questionnaireName" value="" class="FormInputText w314 QNR_NM">
+              </td>
+          </tr>
+          <tr>
+              <td><label  class="formDescription"><span class="fn-high">*</span>手输日期</label></td>
+              <td>
+                  <input type="text" name="date" value="" class="FormInputText w314 QNR_NM">
+              </td>
+          </tr>
+          <tr>
+              <td><label  class="formDescription"><span class="fn-high">*</span> 数字</label></td>
+              <td>
+                  <input type="text" name="number" value="" class="FormInputText">
+              </td>
+          </tr>
+          <tr>
+              <td><label class="formDescription"><span class="fn-high">*</span>圈定一个数字范围</label></td>
+              <td>
+                  <input type="text" name="range" value="" class="FormInputText w314 QNR_NM">
+              </td>
+          </tr>
+          <tr>
+              <td><label class="formDescription"><span class="fn-high">*</span>网址URL</label></td>
+              <td>
+                  <input type="text" name="url" value="" class="FormInputText w314 QNR_NM">
+              </td>
+          </tr>
+          <tr>
+              <td><label class="formDescription"><span class="fn-high">*</span>邮箱</label></td>
+              <td>
+                  <input type="text" name="email" value="" class="FormInputText w314 QNR_NM">
+              </td>
+          </tr>
+          <tr>
+              <td><label class="formDescription"><span class="fn-high">*</span>手机号</label></td>
+              <td>
+                  <input type="text" name="mobile" value="" class="FormInputText w314 QNR_NM">
+              </td>
+          </tr>
+          <tr>
+              <td><label class="formDescription"><span class="fn-high">*</span>邮编</label></td>
+              <td>
+                  <input type="text" name="zipCode" value="" class="FormInputText w314 QNR_NM">
+              </td>
+          </tr>
+
+          <tr>
+              <td><label class="formDescription"><span class="fn-high">*</span>可选择的开始日期</label></td>
+              <td>
+                  <input type="text"  id='end' name='end'  class="FormInputText inputWidth Wdate" value="" onFocus="WdatePicker({
+                      startDate:'%y-%M-%d',
+                      realDateFmt:'yyyy-MM-dd',
+                      dateFmt:'yyyy-MM-dd'
+                      }); " />
+              </td>
+          </tr>
+          <tr>
+              <td><label class="formDescription"><span class="fn-high">*</span>性别</label></td>
+              <td>
+                  <input type="radio" name="sex" value="1" /><label>男</label>
+                  <input type="radio" name="sex" value="0" /><label>女</label>
+              </td>
+          </tr>
+          <tr>
+              <td><label class="formDescription"><span class="fn-high">*</span>爱好</label></td>
+              <td>
+                  <input type="checkbox" name="sex" value="1" checked=true /><label>看书</label>
+                  <input type="checkbox" name="sex" value="0" /><label>打球</label>
+                  <input type="checkbox" name="sex" value="0" /><label>游泳</label>
+                  <input type="checkbox" name="sex" value="0" /><label>交友</label>
+              </td>
+          </tr>
+      </tbody>
+    </table>
+  </form>
+
+  <div id="summary">
+  </div>
+  <div class="normalBtnArea current_1">
+      <a class="normalBtn BGblue largeBtn" href="javascript:;" id="save">保存</a>
+      <a class="normalBtn BGgray largeBtn" href="javascript:;" id="cancel">取消</a>
+  </div>
+
+
+    </div>
+    
+    <p><strong>html代码</strong></p>
+    <pre class="prettyprint mg_t_20 fn-clear" id="html">
+      &lt;form id="form3" novalidate="novalidate"&gt;
+        &lt;table class="form_table" width="100%"&gt;
+            &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td width="90"&gt;&lt;label class="formDescription"&gt;&lt;span class="fn-high"&gt;*&lt;/span&gt; 适用渠道&lt;/label&gt;&lt;/td&gt;
+              &lt;td class="useForChannel"&gt;
+                &lt;div class="useForChannel"&gt;
+                  &lt;select id="selectFather" name="selectFather" class="selectStyle w160 levelOne valid" aria-invalid="false"&gt;
+                    &lt;option value=""&gt;&lt;/option&gt;
+                    &lt;option value="1001"&gt;10085电话营销中心&lt;/option&gt;
+                    &lt;option value="1002"&gt;10085网上商城&lt;/option&gt;
+                    &lt;option value="1003"&gt;线下省级营业厅&lt;/option&gt;
+                    &lt;option value="1005"&gt;社交媒体&lt;/option&gt;
+                    &lt;option value="1010"&gt;社会代理&lt;/option&gt;
+                  &lt;/select&gt;
+                  &lt;select name="selectChildren" class="selectStyle w160 levelTwo"&gt;
+                    &lt;option value=""&gt;&lt;/option&gt;
+                    &lt;option value="1"&gt;子项1&lt;/option&gt;
+                    &lt;option value="2"&gt;子项2&lt;/option&gt;
+                  &lt;/select&gt;
+                &lt;/div&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td&gt;&lt;label class="formDescription"&gt;&lt;span class="fn-high"&gt;*&lt;/span&gt; 项目归属&lt;/label&gt;&lt;/td&gt;
+              &lt;td class="projectBelong"&gt;
+                &lt;div&gt;
+                  &lt;select class="FormInputText selectStyle w160 province valid" name="projectBelong" aria-invalid="false"&gt;
+                    &lt;option value=""&gt;&lt;/option&gt;
+                    &lt;option value="1000000000117"&gt;贵州中心&lt;/option&gt;
+                    &lt;option value="1000000000122"&gt;江苏中心&lt;/option&gt;
+                    &lt;option value="1000000000124"&gt;洛阳中心&lt;/option&gt;
+                    &lt;option value="D1000000000108"&gt;测试用户中心&lt;/option&gt;
+                  &lt;/select&gt;
+                &lt;/div&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;label class="formDescription"&gt;&lt;span class="fn-high"&gt;*&lt;/span&gt; 问卷名称&lt;/label&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="text" name="questionnaireName" value="" class="FormInputText w314 QNR_NM"&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;label  class="formDescription"&gt;&lt;span class="fn-high"&gt;*&lt;/span&gt;手输日期&lt;/label&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="text" name="date" value="" class="FormInputText w314 QNR_NM"&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;label  class="formDescription"&gt;&lt;span class="fn-high"&gt;*&lt;/span&gt; 数字&lt;/label&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="text" name="number" value="" class="FormInputText"&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;label class="formDescription"&gt;&lt;span class="fn-high"&gt;*&lt;/span&gt;圈定一个数字范围&lt;/label&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="text" name="range" value="" class="FormInputText w314 QNR_NM"&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;label class="formDescription"&gt;&lt;span class="fn-high"&gt;*&lt;/span&gt;网址URL&lt;/label&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="text" name="url" value="" class="FormInputText w314 QNR_NM"&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;label class="formDescription"&gt;&lt;span class="fn-high"&gt;*&lt;/span&gt;邮箱&lt;/label&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="text" name="email" value="" class="FormInputText w314 QNR_NM"&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;label class="formDescription"&gt;&lt;span class="fn-high"&gt;*&lt;/span&gt;手机号&lt;/label&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="text" name="mobile" value="" class="FormInputText w314 QNR_NM"&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;label class="formDescription"&gt;&lt;span class="fn-high"&gt;*&lt;/span&gt;邮编&lt;/label&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="text" name="zipCode" value="" class="FormInputText w314 QNR_NM"&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;tr&gt;
+                &lt;td&gt;&lt;label class="formDescription"&gt;&lt;span class="fn-high"&gt;*&lt;/span&gt;可选择的开始日期&lt;/label&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="text"  id='end' name='end'  class="FormInputText inputWidth Wdate" value="" onFocus="WdatePicker({
+                        startDate:'%y-%M-%d',
+                        realDateFmt:'yyyy-MM-dd',
+                        dateFmt:'yyyy-MM-dd'
+                        }); " /&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;label class="formDescription"&gt;&lt;span class="fn-high"&gt;*&lt;/span&gt;性别&lt;/label&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="radio" name="sex" value="1" /&gt;&lt;label&gt;男&lt;/label&gt;
+                    &lt;input type="radio" name="sex" value="0" /&gt;&lt;label&gt;女&lt;/label&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;label class="formDescription"&gt;&lt;span class="fn-high"&gt;*&lt;/span&gt;爱好&lt;/label&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;input type="checkbox" name="sex" value="1" checked=true /&gt;&lt;label&gt;看书&lt;/label&gt;
+                    &lt;input type="checkbox" name="sex" value="0" /&gt;&lt;label&gt;打球&lt;/label&gt;
+                    &lt;input type="checkbox" name="sex" value="0" /&gt;&lt;label&gt;游泳&lt;/label&gt;
+                    &lt;input type="checkbox" name="sex" value="0" /&gt;&lt;label&gt;交友&lt;/label&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/form&gt;
+
+    &lt;div id="summary"&gt;
+    &lt;/div&gt;
+    &lt;div class="normalBtnArea current_1"&gt;
+        &lt;a class="normalBtn BGblue largeBtn" href="javascript:;" id="save"&gt;保存&lt;/a&gt;
+        &lt;a class="normalBtn BGgray largeBtn" href="javascript:;" id="cancel"&gt;取消&lt;/a&gt;
+    &lt;/div&gt;
+
+    </pre>    
+    
+    <p><strong>js代码</strong></p>
+    <pre class="prettyprint mg_t_20 fn-clear" id="html">
+      var validator = null;
+      $(function(){
+        init();
+      });
+      var init = function(){
+        /*要完成验证工作分三步
+          1、定义表单元素的name
+          2、定义验证规则及消息
+          3、执行验证
+        */
+        validator = $('#form3').validate({
+          rules: {
+            //下面的selectFather为元素的name，required设置为true表示启用必填项验证
+            selectFather:{
+              required:true
+            }, 
+            //同样selectChildren为元素的name，required为depends表示启用必填项验证的条件是selectFather的值不为空
+            selectChildren:{
+              required:{
+                depends:function(){
+                  return $("#selectFather").val();
+                }
+              }
+            }, 
+            projectBelong:{
+              required:true
+            }, 
+            questionnaireName: {
+              required: true
+            }, 
+            //下面第一date表示date字段，第二个date表示启用date格式的数据验证
+            date: {
+              required: true, 
+              date:true
+            },
+            //下面第一number表示form表单中的number字段，第二个number表示启用数字格式的数据验证
+            number:{
+              number:true
+            }, 
+            //限定数字范围为10到20
+            range:{
+              required:true, 
+              range:[10, 20]
+            }, 
+            //限定输入格式为网址
+            url:{
+              url:true
+            }, 
+            sex:{
+              required:true
+            }, 
+            //限定输入格式为email
+            email:{
+              email:true
+            }, 
+            //限定输入格式为手机
+            mobile:{
+              mobile:true
+            }, 
+            //限定输入格式为邮编
+            zipCode:{
+              zipCode:true
+            }
+          }, 
+          messages:{
+            selectFather:{
+              //selectFather在上面rules里启用了required，它变成了必填项，当元素没有输入内容时，会提示以下信息
+              required:'适用渠道父级为必选项', 
+            },
+            selectChildren:{
+              //name为selectChildren的元素没有输入内容时的提示信息
+              required:'适用渠道子级为必选项', 
+            },
+            projectBelong:{
+              //name为projectBelong的元素是下拉列表框，但仍然可以使用required验证
+              required:'项目归属为必填项', 
+            },
+            questionnaireName:{
+              required:'问卷名称为必填项', 
+            },
+            date:{
+              //date元素没有输入内容时的提示信息
+              required:'日期为必填项', 
+              //date元素输入内容格式不是日期格式时的提示信息
+              date:'日期格式不正确'
+            },
+            number:{
+              //number元素输入内容格式不是数字时的提示准息
+              number:'数字格式不正确'
+            }, 
+            range:{
+              //reange元素没有输入内容时的提示信息
+              required:'数字范围为必填项', 
+              //数字超出范围时的提示信息
+              range:'超出数字范围'
+            }, 
+            url:{
+              //url元素输入内容格式不是网址时的提示信息
+              url:'网址格式不正确'
+            }, 
+            sex:{
+              //sex元素没有输入内容时的提示信息
+              required:'性别为必填项'
+            }, 
+            email:{
+              //email元素输入内容不是email格式时的提示信息
+              email:'邮箱格式不正确'
+            }, 
+            mobile:{
+              //mobile元素输入内容不是手机号时的提示信息
+              mobile:'手机号码格式不正确'
+            }, 
+            zipCode:{
+              //zipCode元素输入内容不是邮政编码时的提示信息
+              zipCode:'邮政编码格式不正确'
+            }
+          }, 
+          showErrors:function(errorMap, errorList){
+            //验证失败时，显示每个验证元素后面的提示信息
+            this.defaultShowErrors();
+          }
+        });
+        eventInit();
+      }
+
+      var eventInit = function(){
+        $('#save').on('click', function(){
+          validator.form()
+          return false;
+        });
+      }
+    </pre>
+  </div>
+</body>
+</html>

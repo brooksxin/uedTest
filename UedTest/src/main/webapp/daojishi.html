@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>倒计时</title>
+<script src="jquery.js" type="text/javascript"></script>
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+</style>
+<script type="text/javascript">
+
+if(document.all){
+    window.XMLHttpRequest=function(){
+        var get=['Microsoft.XMLHTTP','Msxml2.XMLHTTP'];
+		for(var i=0;i<get.length;i++){try{return new ActiveXObject(get[i])}catch(e){}};
+    };
+}
+webDate=function(fn){
+	var Htime=new XMLHttpRequest();
+	Htime.onreadystatechange=function(){Htime.readyState==4&&(fn(new Date(Htime.getResponseHeader('Date'))))};
+	Htime.open('HEAD', '/?_='+(-new Date));
+	Htime.send(null);
+}
+nowTime=new Date();
+targetTime=new Date();
+time2String=function (t){
+	return [t.getFullYear(),'年',
+		('0'+(t.getMonth()+1)).slice(-2),'月',
+		('0'+t.getDate()).slice(-2),'日 ',
+		('0'+t.getHours()).slice(-2),': ',
+		('0'+t.getMinutes()).slice(-2),': ',
+		('0'+t.getSeconds()).slice(-2)].join('');
+}
+int2time=function (m){
+	m-=(D=parseInt(m/86400000))*86400000;
+	m-=(H=parseInt(m/3600000))*3600000;
+	S=parseInt((m-=(M=parseInt(m/60000))*60000)/1000);
+	return D+'天'+addZero(H)+'小时'+addZero(M)+'分'+addZero(S)+'秒';
+}
+setInterval(function (){
+	webDate(function (webTime){
+		$('#web').text(time2String(nowTime=webTime));
+	});
+	$('#locale').text(time2String(new Date));
+	$('#time').text(int2time(targetTime-nowTime));
+	if ((targetTime-nowTime)<0) {
+		$('#time').text('团购开始');
+	}
+},1000)
+
+function addZero(n){
+	var n = parseInt(n, 10);
+	if(n > 0){
+		if(n <= 9){
+			n = "0" + n;
+		}
+		return String(n);
+	}else{
+		return "00";
+	}
+}
+</script>
+</head>
+<body>
+服务器时间:<span id='web'>loading...</span><br>
+本地时间:<span id="locale">loading...</span><br>
+活动开始时间:<span id="beginDate">loading...</span><br>
+倒计时时间:<span id="time">loading...</span>
+<script type="text/javascript">
+targetTime = new Date(2014,9,15,00,00,00);
+$("#beginDate").text(time2String(targetTime));
+
+</script>
+</body>
+</html>

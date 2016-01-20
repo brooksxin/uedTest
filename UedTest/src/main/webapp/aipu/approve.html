@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="zw.ico">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>用户审批 - 亚信开源社区</title>
+<link rel="stylesheet" type="text/css" href="ui/theme/alice.css">
+<link rel="stylesheet" type="text/css" href="ui/js/dialog/6.0.5/ui-dialog.css">
+<link rel="stylesheet" type="text/css" href="ui/js/selectordie/0.1.8/selectordie.css">
+<link rel="stylesheet" type="text/css" href="ui/theme/common.css">
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+<div class="search_wrap approve">
+	<form id="J_formSearch" name="J_formSearch" class="formSearch">
+		<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tbody>
+				<tr>
+					<td width="10%">
+						<label>选择产品：</label>
+					</td>
+					<td width="40%">
+						<select id="J_province" name="J_province">
+							<option value="1">北京</option>
+							<option value="2">郑州</option>
+							<option value="3">南京</option>
+						</select>
+					</td>
+					<td width="10%">
+						<label>NT账号：</label>
+					</td>
+					<td>
+						<input type="text" value="" name="J_qudao_code" id="J_qudao_code" class="ui-input J_qudao_code" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>开始时间：</label>
+					</td>
+					<td>
+						<input type="text" value="" name="J_date_s" id="J_date_s" class="ui-input Wdate" 
+						onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'J_date_e\') || \'%y-%M-%d\'}', minDate:'1949-10-01'})" />
+					</td>
+					<td>
+						<label>结束时间：</label>
+					</td>
+					<td>
+						<input type="text" value="" name="J_date_e" id="J_date_e" class="ui-input Wdate" 
+						onfocus="WdatePicker({maxDate:'%y-%M-%d', minDate:'#F{$dp.$D(\'J_date_s\')||\'1940-10-01\'}'})" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" class="fn-center">
+						<a class="ui-button ui-button-green fn-mr-20" href="javascript:;" hidefocus="true" id="J_search">
+							<i class="iconfont" title="查询/搜索"></i>
+							<span>查 询</span>
+						</a>
+						<a class="ui-button ui-button-blue " href="javascript:;" hidefocus="true" id="J_reset">
+							<span>重 置</span>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+
+	<!--分页table-->
+	<div class="data-table" id="dataTable">
+		<table class="ui-table" cellpadding="0" cellspacing="0" border="0" width="100%">
+			<colgroup>
+				<col width="8%">
+				<col width="18%">
+				<col width="">
+				<col width="12%">
+				<col width="28%">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>NT账号</th>
+					<th>申请内容</th>
+					<th>申请时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody id="dataTbody"></tbody>
+		</table>
+
+		<div class="dataTbl-bottom fn-hide fn-clear">
+	        <div class="page pagination fn-left" id="Pagination">
+	        	<!-- pagination -->
+	        </div>
+	        <div class="paginationTools fn-right">
+	        	<span class="des">跳转到第</span>
+	        	<input id="gotoPage" value="" type="text" class="ui-input" />
+	        	<span class="des">页</span>
+	        	<a class="ui-button ui-button-normal" href="javascript:;" hidefocus="true" id="">
+	        		<span>确定</span>
+	        	</a>
+	        </div>
+		</div>
+	</div>
+</div>
+
+<!--分页数据容器-->
+<textarea class="fn-hide" id="dataTbl_tpl">
+{{#each rows}}
+<tr>
+	<td>{{indexAdd @index}}</td>
+	<td><i class="iconfont" title=""></i>{{ABILITY_CODE}}</td>
+	<td>
+		<p class="pdes">申请前角色：<span>{{ABILITY_NAME}}</span></p>
+		<p class="pdes">申请后角色：<span>{{ABILITY_URL}}</span></p>
+	</td>
+	<td>{{REMARKS}}</td>
+	<td data-json="{{retJson2Str this}}">
+		<a href="javascript:;" hidefocus="true" onclick="approve('1', this)"><span>同意</span></a>
+		<i class="split">|</i>
+		<a href="javascript:;" hidefocus="true" onclick="approve('2', this)"><span>不同意</span></a>
+		<i class="split">|</i>
+		<a href="javascript:;" hidefocus="true" onclick="approve('3', this)"><span>同意并微调权限</span></a>
+	</td>
+</tr>
+{{/each}}
+</textarea>
+
+<textarea class="fn-hide" id="T_approve">
+	<div class="T_approve_wrap">
+		<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tbody>
+				<tr>
+					<td width="35%">
+						<label>申请内容：</label>
+					</td>
+					<td>
+						<p class="pdes">申请前角色：<span>{{ABILITY_NAME}}</span></p>
+						<p class="pdes">申请后角色：<span>{{ABILITY_URL}}</span></p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>驳回原因：</label>
+					</td>
+					<td>
+						&lt;textarea class="ui-textarea" id="J_refuse_res"&gt;&lt;/textarea&gt;
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</textarea>
+
+<script src="ui/js/jquery/1.8.3/jquery.js"></script>
+<script src="ui/js/dialog/6.0.5/dialog-min.js"></script>
+<script src="ui/js/jqueryForm/jquery.form.js"></script>
+<script src="ui/js/json2/json2.js"></script>
+<script src="ui/js/pagination/1.2.1/jquery.pagination.js"></script>
+<script src="ui/js/handlebars/handlebars.js"></script>
+<script src="ui/js/handlebars/helpers.js"></script>
+<script src="ui/js/blockUI/jquery.blockUI.js"></script>
+<script src="ui/js/slides/3.0.3/jquery.slides.min.js"></script>
+<script src="ui/js/selectordie/0.1.8/selectordie.js"></script>
+<script src="ui/js/datepicker/4.8.b2/WdatePicker.js"></script>
+<script src="ui/js/common.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+	srvMap.add('approve', 'tableData.json','');//审批table
+	srvMap.add('approveHand', 'test.json','');//审批操作
+
+	//查询按钮
+	$("#J_search").click(function(){
+		var str = $("#J_formSearch").formSerialize();
+		var pageParam = {
+			url: srvMap.get("approve"),
+			formStr: str
+		}
+		//分页查询
+		getPage(pageParam);
+	})
+
+	$("#J_province").selectOrDie();
+})
+
+function approve(type, obj){
+	var json = $(obj).parent().data('json');
+	var ABILITY_ID = json.ABILITY_ID;
+	var ABILITY_CODE = json.ABILITY_CODE;
+	var ABILITY_NAME = json.ABILITY_NAME;
+	var ABILITY_URL = json.ABILITY_URL;
+	if(type == '1'){
+		result_comfirm("是否审批同意？", function(){
+			$.PostJson(srvMap.get("approveHand"), "ABILITY_ID="+ABILITY_ID+"&type="+type, function(state, json){
+				if(state == 'success'){
+					if(json && json.rtnCode=='0'){
+						result_tips(json.rtnMsg || "操作成功！");
+					}else{
+						result_prompt(0, json.rtnMsg || "操作失败！");
+					}
+				}else{
+					result_prompt(0, json.rtnMsg || "系统错误！");
+				}
+			})
+		});
+	}else if(type == '2'){
+		result_comfirm($("#T_approve").val(), function(){
+			var J_refuse_res = $("#J_refuse_res").val();
+			$.PostJson(srvMap.get("approveHand"), "ABILITY_ID="+ABILITY_ID+"&J_refuse_res="+J_refuse_res+"&type="+type, function(state, json){
+				if(state == 'success'){
+					if(json && json.rtnCode=='0'){
+						result_tips(json.rtnMsg || "操作成功！");
+					}else{
+						result_prompt(0, json.rtnMsg || "操作失败！");
+					}
+				}else{
+					result_prompt(0, json.rtnMsg || "系统错误！");
+				}
+			})
+		});
+	}else if(type == '3'){
+		result_comfirm("同意并微调权限将进入“用户赋权”菜单，是否确认？", function(){
+			window.location.href = 'empowerment.html?userId='+ABILITY_ID;
+		});
+	}
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<title>汇仁</title>
+<link rel="stylesheet" href="ui/mui/css/mui.min.css">
+<link rel="stylesheet" href="ui/mobiscroll/mobiscroll.css">
+<link rel="stylesheet" href="ui/common.css?v=20">
+
+<style type="text/css">
+
+</style>
+
+</head>
+<body class="zui">
+
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title" id="J_muiTitle">健康日记</h1>
+</header>
+
+<footer class="mui-bar mui-bar-tab">
+    <a class="mui-tab-item" href="guide.html">
+        <span class="mui-icon mui-icon-home"></span>
+        <span class="mui-tab-label">向导</span>
+    </a>
+    <a class="mui-tab-item" href="myPrescription.html">
+        <span class="mui-icon mui-icon-email"></span>
+        <span class="mui-tab-label">我的处方</span>
+    </a>
+    <a class="mui-tab-item" href="myDoctor.html">
+        <span class="mui-icon mui-icon-contact"></span>
+        <span class="mui-tab-label">我的医生</span>
+    </a>
+    <a class="mui-tab-item active" href="myHealthLog.html">
+        <span class="mui-icon mui-icon-gear"></span>
+        <span class="mui-tab-label">健康日记</span>
+    </a>
+</footer>
+
+<div class="mui-content">
+    <div class="J_addLogNormal" id="J_addLogNormal">
+        <ul class="mui-table-view mui-table-view-chevron fn-mb-20">
+            <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                    <label>日记类型</label>
+                    <select class="ui-select" name="rec">
+                        <option value="就诊记录1">就诊记录</option>
+                        <option value="2">Doc张</option>
+                        <option value="3">Doc王</option>
+                    </select>
+                    <span class="mui-icon mui-icon-arrowdown ui-select-arrow"></span>
+                </div>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="mui-input-row">
+                    <label>记录类型</label>
+                    <select class="ui-select" name="recType">
+                        <option value="病历1">病历</option>
+                        <option value="2">Doc张</option>
+                        <option value="3">Doc王</option>
+                    </select>
+                    <span class="mui-icon mui-icon-arrowdown ui-select-arrow"></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="J_addLogNormal" id="J_logTempWrap">
+
+    </div>
+</div>
+
+<textarea class="fn-hide" id="T_addLog">
+<ul class="mui-table-view mui-table-view-chevron fn-mb-20">
+    {{#each item}}
+    <li class="mui-table-view-cell">
+        {{#if unit.length}}
+       
+        <div class="mui-input-row J_unit">
+            <label>{{title}}</label>
+            <label class="unit">{{unit}}</label>
+            {{#if_eq type compare='1'}}
+            <input type="text" id="J_{{name}}" name="{{name}}" class="ui-input mui-input-clear" value="{{value}}" data-require="{{require}}" data-tips="{{tips}}"/>
+            {{/if_eq}}
+
+            {{#if_eq type compare='2'}}
+            <select class="ui-select" id="J_{{name}}" name="{{name}}">
+                {{retOption this}}
+            </select>
+            <span class="mui-icon mui-icon-arrowdown ui-select-arrow"></span>
+            {{/if_eq}}
+
+            {{#if_eq type compare='3'}}
+            <input type="text" id="J_{{name}}" name="{{name}}" class="ui-input ui-date" value="" data-require="{{require}}" data-tips="{{tips}}" readonly="readonly" placeholder="{{value}}"/>
+            <span class="mui-icon mui-icon-arrowdown ui-select-arrow"></span>
+            {{/if_eq}}
+
+            {{#if_eq type compare='4'}}
+            <span class="J_fileUpload">
+                <input type="file" accept="image/*" id="J_{{name}}" name="{{name}}" class="ui-file" data-require="{{require}}" data-tips="{{tips}}"/>
+                <label class="des">上传相关图片</label>
+            </span>
+            {{/if_eq}}
+
+            {{#if_eq type compare='5'}}
+            &lt;textarea class="ui-textarea input-col" rows="3" id="J_{{name}}" name="{{name}}" value="{{value}}" data-require="{{require}}" data-tips="{{tips}}"&gt;&lt;/textarea&gt;
+            {{/if_eq}}
+
+            {{#if_eq type compare='6'}}
+            <input type="tel" id="J_{{name}}" name="{{name}}" class="ui-input" value="{{value}}" data-require="{{require}}" data-tips="{{tips}}"/>
+            {{/if_eq}}
+        </div>
+
+        {{else}}
+
+        <div class="mui-input-row">
+            <label>{{title}}</label>
+
+            {{#if_eq type compare='1'}}
+            <input type="text" id="J_{{name}}" name="{{name}}" class="ui-input mui-input-clear" value="{{value}}" data-require="{{require}}" data-tips="{{tips}}"/>
+            {{/if_eq}}
+
+            {{#if_eq type compare='2'}}
+            <select class="ui-select" id="J_{{name}}" name="{{name}}">
+                {{retOption this}}
+            </select>
+            <span class="mui-icon mui-icon-arrowdown ui-select-arrow"></span>
+            {{/if_eq}}
+
+            {{#if_eq type compare='3'}}
+            <input type="text" id="J_{{name}}" name="{{name}}" class="ui-input ui-date" value="" data-require="{{require}}" data-tips="{{tips}}" readonly="readonly" placeholder="{{value}}" />
+            <span class="mui-icon mui-icon-arrowdown ui-select-arrow"></span>
+            {{/if_eq}}
+
+            {{#if_eq type compare='4'}}
+            <span class="J_fileUpload">
+                <input type="file" accept="image/*" id="J_{{name}}" name="{{name}}" class="ui-file" data-require="{{require}}" data-tips="{{tips}}"/>
+                <label class="des">上传相关图片</label>
+            </span>
+            {{/if_eq}}
+
+            {{#if_eq type compare='5'}}
+            &lt;textarea class="ui-textarea input-col" rows="3" id="J_{{name}}" name="{{name}}" value="{{value}}" data-require="{{require}}" data-tips="{{tips}}"&gt;&lt;/textarea&gt;
+            {{/if_eq}}
+
+            {{#if_eq type compare='6'}}
+            <input type="tel" id="J_{{name}}" name="{{name}}" class="ui-input" value="{{value}}" data-require="{{require}}" data-tips="{{tips}}"/>
+            {{/if_eq}}
+        </div>
+
+        {{/if}}
+
+    </li>
+    {{/each}}
+</ul>
+<div class="mui-content-padded">
+    <button type="button" class="mui-btn mui-btn-success mui-btn-block ui-btn-blue" id="J_subm">保 存</button>
+</div>
+</textarea>
+
+<script src="ui/zepto.min.js"></script>
+<script src="ui/handlebars/handlebars.js"></script>
+<script src="ui/handlebars/helpers.js"></script>
+<script src="ui/mobiscroll/mobiscroll.js"></script>
+<script src="ui/common.js"></script>
+<script>
+var jump,
+    imgPath = "";
+$(function(){
+    srvMap.add("logTemp", "logTemp.json", "");
+
+    jump = $.getUrlVar("jump")?$.getUrlVar("jump"):"";
+    console.log(jump)
+
+    if(jump && jump == '1'){//向导-病历
+        $("#J_addLogNormal").remove();
+        guideJump();
+    }else if(jump && jump == '2'){//向导-处方
+        // $("#J_addLogNormal").remove();
+        $("#J_muiTitle").html("添加日记");
+        guideJump();
+    }else{
+        $("#J_muiTitle").html("健康日记");
+    }
+
+})
+
+function guideJump(){
+    createLoading();
+    $.PostJson(srvMap.get("logTemp"), "", function(state, json){
+        if(state == 'success'){
+            if(json){
+                $("#J_logTempWrap").handleTemp($("#T_addLog").val(), json);
+
+                var currYear = (new Date()).getFullYear();  
+                var opt={};
+                opt.date = {preset : 'date'};
+                opt.datetime = {preset : 'datetime'};
+                opt.time = {preset : 'time'};
+                opt.default = {
+                    theme: 'android-ics light', //皮肤样式
+                    display: 'modal', //显示方式 
+                    mode: 'scroller', //日期选择模式
+                    dateFormat: 'yyyy-mm-dd',
+                    lang: 'zh',
+                    showNow: true,
+                    nowText: "今天"
+                };
+
+                $(".ui-date").mobiscroll($.extend(opt['date'], opt['default']));
+
+                //绑定文件上传事件
+                $(".J_addLogNormal .ui-file").on("change", function(){
+                    var file = this.files[0];
+                    //判断类型是不是图片
+                    if(!/image\/\w+/.test(file.type)){
+                        alert("请确保文件为图像类型");
+                        return false;
+                    }
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function(e){
+                        console.log(this.result);
+                        imgPath = this.result;
+                    }
+                })
+
+                //绑定提交事件
+                $("#J_subm").on("tap", function(){
+                    gotoSubm();
+                })
+            }
+        }
+        unblockLoading();
+    })
+}
+
+Handlebars.registerHelper('retOption', function(obj) {
+    var buffer = '',
+        select = obj.select;
+    for(var i=0,len=select.length; i<len; i++){
+        buffer += '<option value="'+select[i].key+'">'+select[i].value+'</option>';
+    }
+    return new Handlebars.SafeString(buffer);
+});
+
+function gotoSubm(){
+    var $uiInput = $(".J_addLogNormal .ui-input, .J_addLogNormal .ui-textarea, .J_addLogNormal .ui-select"),
+        $uiFile = $(".J_addLogNormal .ui-file");
+    var str = "",
+        flag = 1;
+    if($uiInput.length){
+        $uiInput.each(function(){
+            if(!flag)
+                return false;
+            var $this = $(this),
+                val = $this.val(),
+                name = $this.attr("name");
+                require = $this.data("require"),
+                tips = $this.data("tips");
+            if(require == '1' && !val){
+                flag = 0;
+                alert(tips);
+                return false;
+            }else{
+                str += "&"+name+"="+val;
+            }
+        })
+    }
+    if($uiFile.length && flag){
+        var name = $uiFile.attr("name");
+            require = $uiFile.data("require"),
+            tips = $uiFile.data("tips");
+        if(!imgPath){
+            flag = 0;
+            alert(tips);
+            return false;
+        }else{
+            str += "&"+name+"="+imgPath;
+        }
+    }
+
+    if(flag){
+        console.log(str);
+    }
+
+}
+</script>
+</body>
+</html>

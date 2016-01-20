@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<link rel="stylesheet" href="../alice.css">
+<style type="text/css">
+html,body{
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+</style>
+</head>
+<body>
+
+<input type="file" id="fileImg" >
+<form>
+    <img src="" id="test" alt="">
+</form>
+
+
+<script src="../jquery.js"></script>
+<script src="lrz.all.bundle.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	function handleFileSelect () { 
+         	var file = this.files[0];
+			lrz(file, {quality:0.7}).then(function (rst) {
+				$('#test').attr("src",rst.base64);       
+        // 处理成功会执行
+        console.log(rst);
+    })
+    .catch(function (err) {
+        // 处理失败会执行
+    })
+    .always(function () {
+        // 不管是成功失败，都会执行
+    });
+
+	}
+	document.getElementById('fileImg').addEventListener('change', handleFileSelect, false);
+
+});
+
+</script>
+</body>
+</html>

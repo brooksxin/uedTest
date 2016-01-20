@@ -1,0 +1,177 @@
+      <!DOCTYPE html>
+      <html>
+      <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>配置CTI账号</title>
+          <#include "../../tpl/res_css.tpl" />
+          <link rel="stylesheet" href="../../dest/ecp.min.css" />
+          <link rel="stylesheet" href="../../css/common.css" />
+          <link rel="stylesheet" href="../../css/tablepay.css" />
+          <link rel="stylesheet" href="../../lib/jqueryui/jquery-ui.min.css" />
+          <link rel="stylesheet" href="../../lib/dialog/6.0.4/css/ui-dialog.css" />
+          <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+      </head>
+      
+      <body>
+      <div class="formItem">
+         
+                <div class="titleArea">
+                    <h2>配置CTI账号</h2>
+                </div>
+         <form class="editForm" class="formArea">
+                <table class="form_table">
+                                <tbody>
+                                    <tr>
+                                        <td width="90"><label class="formDescription">员工编号</label></td>
+                                        <td colspan="3" id="emnumberidone">ZYZX1234</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription">所属渠道</label></td>
+                                        <td colspan="3" id="CHNL_ID">语音</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="120"><label class="formDescription"><span class="fn-high">*</span> 主用服务器地址</label></td>
+                                        <td width="">
+                                             <select class="FormInputText width100 hostcomputer">
+                                                 <option>请选择</option>
+                                             </select>
+                                        </td>
+                                        <td width="90"><label class="formDescription">端口</label></td>
+                                        <td width=""><input class="FormInputText hostcomputer" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription alternateserver">备用服务器地址</label></td>
+                                        <td width="">
+                                             <select class="FormInputText width100">
+                                                 <option>请选择</option>
+                                             </select>
+                                        </td>
+                                        <td width="90"><label class="formDescription">端口</label></td>
+                                        <td width=""><input class="FormInputText alternateserver" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 分机地址</label></td>
+                                        <td width="">
+                                             <select class="FormInputText width100 extaddress">
+                                                 <option>请选择</option>
+                                             </select>
+                                        </td>
+                                        <td width="90"><label class="formDescription">端口</label></td>
+                                        <td width=""><input class="FormInputText extaddress" type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span>CTI工号</label></td>
+                                        <td colspan="3"><input class="FormInputText width100" id="ctinumber"type="text" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span>分机号</label></td>
+                                        <td colspan="3"><input class="FormInputText width100" type="text" id="fenjinumber" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription qualityservice"><span class="fn-high">*</span>质检服务器地址</label></td>
+                                        <td width="">
+                                             <select class="FormInputText width100 qualityservice">
+                                                 <option>请选择</option>
+                                             </select>
+                                        </td>
+                                        <td width="90"><label class="formDescription">端口</label></td>
+                                        <td width=""><input class="FormInputText" type="text" /></td>
+                                    </tr>
+
+                                    
+                                </tbody>
+                </table>
+                <hr/>
+                <div class="formBtnArea">
+                      <table width="100%">
+                        <tr>
+                          <td>
+                            <div class="normalBtnArea fn-center">
+                                <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" onclick="goNext(3)">确定</a>
+                                <a class="normalBtn BGgray largeBtn" href="javascript:history.back();" id="J_search" >取消</a>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                </div>
+                                                 
+      </form>
+      
+   </div>   
+      
+      
+      
+      
+      
+      
+      <#include "../../tpl/res_js.tpl" />
+      <script src="../../lib/jquery/1.8.1/jquery.js"></script>  
+      <script src="../../lib/validate/1.13.1/jquery.validate.js"></script> 
+      <script src="../../lib/dialog/6.0.4/dialog-min.js"></script> 
+      <script src="../../common/common.js"></script>  
+      <script src="../../common/config.js"></script>
+      <script type="text/javascript">
+
+
+
+
+
+          //页面加载完开始执行
+          $(document).ready(function () {
+                init();
+                eventInit();
+            });
+          var init = function(){
+            //初始化员工编号
+            var emnumberidone = Util.browser.getParameter("PTY_NO");
+            $("#emnumberidone").val(emnumberidone);
+            //初始化渠道
+            var qudaoid = Util.browser.getParameter("CHNL_ID");
+            $("#qudaoid").val(qudaoid);
+            //主用服务器地址、端口
+            var qudaoid = Util.browser.getParameter("CHNL_ID");
+            $(".hostcomputer").val(qudaoid);
+            //备用服务器地址、端口
+            var ctinumber = Util.browser.getParameter("");
+            $(".alternateserver").val(ctinumber);
+            //分机地址、端口
+            var ctinumber = Util.browser.getParameter("");
+            $(".extaddres").val(ctinumber);
+            //CTI工号
+            var ctinumber = Util.browser.getParameter("");
+            $("#ctinumber").val(ctinumber);
+            //分机号
+            var ctinumber = Util.browser.getParameter("");
+            $("#fenjinumber").val(ctinumber);
+            //质检服务器地址、端口
+            var qualityservice = Util.browser.getParameter("");
+            $("#qualityservice").val(qualityservice);
+
+          }
+
+          //获取用户输入的from表单的值
+          var eventInit = function(){
+            var arr = $('.editForm').serializeArray();
+            console.log(arr);
+          }
+
+
+          //判断input内容
+          function checkInfo(){  
+
+             var ctinumber = $("#ctinumber").val();
+             if(ctinumber=='null' || ctinumber =="" || ctinumber=="undefined"){
+               alert("请输入正确的CTI账号！")
+               return false;
+             }
+             var fenjinumber = $("#fenjinumber").val();
+             if(fenjinumber=='null' || fenjinumber =="" || fenjinumber=="undefined"){
+               alert("请输入正确分机号！")
+               return false;
+             }
+             return true;
+            } 
+
+      </script>
+      </body>
+      </html>

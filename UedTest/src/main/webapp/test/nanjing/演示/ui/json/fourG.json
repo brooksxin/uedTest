@@ -1,0 +1,42 @@
+{
+    "title": "4G红包",
+    "demoInfo": {
+        "title": "1，场景说明",
+        "content": "由一位客户发起，通过微信将自已帐户内指定的流量转赠给微信好友用户，可实现对多人的转赠，解决了用户月底流量清零问题，满足了用户社交需求，通过口碑营销，刺激用户购买级别更高的套餐。同时完成向竞争对手渗透。"
+    },
+    "demoDes": {
+        "title": "2，流程介绍",
+        "content": [
+            {
+                "cur": "1",
+                "total": "4",
+                "tit": "内外部系统（能力提供者）：",
+                "des": "向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）向能力开放平台提供积分兑换服务（开放服务注册）",
+                "img": "ui/theme/img/des_11.png"
+            },
+            {
+                "cur": "2",
+                "total": "4",
+                "tit": "服务治理组（能力运营者）：",
+                "des": "将积分兑换服务进行编排封装",
+                "img": "ui/theme/img/des_12.jpg"
+            },
+            {
+                "cur": "3",
+                "total": "4",
+                "tit": "服务治理组（能力运营者）：",
+                "des": "根据封装后的服务编排创建能力",
+                "img": "ui/theme/img/des_12.jpg"
+            },
+            {
+                "cur": "4",
+                "total": "4",
+                "tit": "服务治理组（能力运营者）",
+                "des": "",
+                "img": "ui/theme/img/des_13.jpg"
+            }
+        ]
+    },
+    "javaCode": "public List&lt;AbilityParamBean&gt; parseArrayToBean(String param,\n                    List&lt;AbilityParamBean&gt; as) throws Exception {\n                if (StringUtils.isNotBlank(param)) {\n\n                    JSONArray jsonArray = JSONArray.parseArray(param); \n                    if (jsonArray.toArray() != null && jsonArray.toArray().length > 0) {\n                        log.debug(\"jsonArray.toArray\"\n                                + jsonArray.toArray()[0].toString());\n                        DataContainerInterface[] datas = FormDataToBoDataUtil\n                                .convertDataToBoData(jsonArray, AbilityParamBean.class);\n\n                        if (datas != null && datas.length > 0) {\n                            int length = datas.length;\n                            for (int i = 0; i < length; i++) {\n                                as.add((AbilityParamBean) datas[i]);\n                                log.debug(i + \":\" + as.get(i));\n                            }\n\n                        }\n                    }\n                }\n                return as;\n            }",
+    "htmlCode": "<div id=\"demoDown\">\n\t<h3>3\uff0cDEMO\u4ee3\u7801\u4e0b\u8f7d</h3>\n\t<a href=\"javascript:;\" hidefocuse=\"true\" class=\"ui-button ui-button-green demo-down\">\n\t\t<span>Free Download</span>&nbsp;&nbsp;<i class=\"iconfont\" title=\"\u4e0b\u8f7d\">\uf04f</i>\n\t</a>\n</div>"
+}

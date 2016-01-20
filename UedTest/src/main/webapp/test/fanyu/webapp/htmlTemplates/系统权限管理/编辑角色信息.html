@@ -1,0 +1,77 @@
+      <!DOCTYPE html>
+      <html>
+      <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>编辑角色信息</title>
+      <#include "../../tpl/res_css.tpl" />
+      
+      </head>
+      
+      <body>
+      <div class="formItem">
+         
+                <div class="titleArea">
+                    <h2>编辑角色信息</h2>
+                </div>
+          <div class="formArea">
+                <table class="form_table">
+                                <tbody>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 角色名称</label></td>
+                                        <td width=""><input class="FormInputText width100" type="text" value="外呼任务创建" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 渠道</label></td>
+                                        <td width="">
+                                             <select class="FormInputText width100">
+                                                 <option>语音</option>
+                                                 <option>众包</option>
+                                                 <option>O2O</option>
+                                             </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="90"><label class="formDescription"><span class="fn-high">*</span> 类型</label></td>
+                                        <td width="">
+                                             <select class="FormInputText width100">
+                                                 <option>全部</option>
+                                                 <option>销售</option>
+                                                 <option>询问</option>
+                                             </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top"><label class="formDescription"><span class="fn-high">*</span> 角色描述：</label></td>
+                                        <td>此处插入文本编辑器</td>
+                                    </tr>
+                                </tbody>
+                </table>
+                <hr/>
+                <div class="formBtnArea">
+                    <table width="100%">
+                      <tr>
+                        <td>
+                          <div class="normalBtnArea fn-center">
+                              <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" >保存</a>
+                              <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_search" >取消</a>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                </div>
+                                                 
+      </div>
+      
+   </div>   
+     
+     
+      
+      <#include "../../tpl/res_js.tpl" />   
+      <script type="text/javascript">
+          //页面加载完开始执行
+          $(document).ready(function () {
+              //初始化函数
+          });
+      </script>
+      </body>
+      </html>

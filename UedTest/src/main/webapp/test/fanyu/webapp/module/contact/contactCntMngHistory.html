@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>接触查询</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+    <div class="cmxform">
+       <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+          <div class="record-search-cate">
+				<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+					<tbody>
+						<tr>
+                            <td width="60"><label class="description">开始时间</label></td>
+                            <td>
+                            	<input id="param-eDate2" name='START_DATE' class="inputWidth  element text Wdate" type="text"  onfocus="WdatePicker()"/> 
+                            </td>
+                            <td width="60"><label class="description">结束时间</label></td>	
+                            <td><input id="param-eDate"  name='END_DATE'   class="inputWidth  element text Wdate" type="text"  onFocus="WdatePicker()"/></td>    
+                            <td width="60"><label class="description">工号</label></td>
+							<td width="150">
+								<input class="inputWidth  inputText" type="text" name="STAFF_ID" maxlength="255" />
+							</td>
+                            <td width="120"><a class="btn_search" href="javascript:;" id="J_search" >查询</a></td>
+						</tr>
+					</tbody>
+				</table>
+            </div>
+            <div class="seeMoreFilter"><a href="#" class="down"></a></div>
+        </form>
+    </div>
+
+
+	
+    <div class="tablewidth mg_t_10">
+    	<table class="ui-record-table table_radius table-bordered table-striped" >
+        	<thead>
+        		<tr>
+        			<th width="100">日期</th>
+        			<th width="100">开始时间</th>
+        			<th width="100">结束时间</th>
+        		 
+                    <th width="100">持续时间</th>
+        			<th width="60">处理人工号</th>
+                    <th width="">操作</th>
+        		</tr>
+             </thead>
+             <tbody id="J_tabletpl"></tbody>
+        </table>
+    </div>
+  <!-- end -->
+  
+   <!--翻页及功能按钮区域开始-->
+<div class="amount-bottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+      <tr>
+        <td width="60">
+        </td>
+        <td>
+        </td>
+        <td width="50%">
+            <div class="fn-clear action-other  action-other-show ">
+                    <div id="PaginationCntMng" class="page pagination fn-right"></div>
+                    <div class="fn-right fn-pt5 fn-pr10"></div>
+            </div></td>
+      </tr>
+    </table>
+ </div>
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+  /*
+    服务配置
+    param1: 服务名
+    param2: 假数据路径
+    param3: 后台服务路径
+    */
+    srvMap.add('queryContactCntMngs', 'contactCntMngs.json','front/sh/contact!execute?uid=u007');//查询接触记录
+
+    var G_params = {
+    url : srvMap.get('queryContactCntMngs'),
+    items_per_page : 10 ,   // 每页数     @param : limit
+    page_index : 0 , //当前页  @param : start
+    pagination : "PaginationCntMng" , //分页id
+    searchformId : "J_formSearch", //搜索表单的id
+    tabletpl : "T_tabletpl", //表格模板
+    tablewrap : "J_tabletpl" //表格容器
+    };
+
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        try{
+            $('#J_search').bind('click',function(){
+                var strCntMng = $("#"+G_params.searchformId).serialize(); //把form序列化 队列
+                Util.pagination( G_params.page_index , true , G_params, strCntMng);
+            })
+        }catch(e)
+        {
+            alert(e);
+        }
+    });
+    function gotoDetail(ivrId){
+       
+    }
+
+    function phoneCall(ivrId){
+        
+    }
+</script>
+
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+			<td>{{CRT_TIME}}</td>
+			<td>{{BGN_CNTMNG_TIME}}</td>
+			<td>{{END_CNTMNG_TIME}}</td>
+			<td>{{BETWEEN_TIME}}</td>
+            <td>{{STAFF_ID}}</td>
+            <td>
+				<a class="item-text" href="javascript:;" onclick="gotoDetail({{CNTMNG_ID}})">详情   </a>
+				<a class="item-text" href="javascript:;" onclick="phoneCall({{CUST_MOBNUM}})">拨打电话  </a>
+			</td>            
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="6">
+			<div class="ui-tips-box">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无接触记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+</body>
+</html>

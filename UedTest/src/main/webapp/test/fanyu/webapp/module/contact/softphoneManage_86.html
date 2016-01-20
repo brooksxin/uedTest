@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10086-外呼平台</title>
+<#include "../../tpl/res_css.tpl" />
+<style type="text/css">
+.right iframe{border: none;}
+.ui-tab li{margin-left:0; }
+.record-search-cate{margin: 0;}
+</style>
+  	</head>
+  	<body style="overflow: hidden;">
+	<div style="position:absolute;height:0px;width:0px;right:0;bottom:0">
+	  	<OBJECT id="objCinVccBar" height="0" width="100%" classid="clsid:3E006E71-9408-4F24-9F6D-69C81BD5682F" >
+				<PARAM NAME="_Version" VALUE="65536">
+				<PARAM NAME="_ExtentX" VALUE="25321">
+				<PARAM NAME="_ExtentY" VALUE="794">
+				<PARAM NAME="_StockProps" VALUE="0">
+		</OBJECT>
+		<OBJECT ID="CtHelper" CLASSID="CLSID:A6FE439E-CDF5-47C0-83F1-088C1AF290F1" CODEBASE="activex/cthelper.CAB#version=1,0,0,28" width="0" height="0"></OBJECT>
+	</div>
+
+    <#include "../../tpl/outCall_top_86.tpl" />
+
+    
+    <div class="wrapper">
+    	<#include "../../tpl/outCall_topMenu.tpl" />
+
+
+       	<div class=" left_outcall">
+            <div class=" leftInner_outcall" id="mainLeft" >
+				<#include "../../tpl/outCall_left.tpl" />
+            </div>
+            <div class=" middle_outcall" id="mainMiddle">&nbsp;</div>
+            <input type="hidden" id="termlist_param" />
+            <input type="hidden" id="termlist_param_type" />
+            <input type="hidden" id="call_type" />
+        </div>
+
+
+        <div class=" right_outcall" id="mainRight" style="overflow:auto;*position:relative">
+            <div id="mainRight_child" style="height:100%;">
+            <!-- 话务右侧内容区域开始 -->
+            <div class="outCallRight_Container">
+                <div class="productsFilter">
+			        <div class="nextTAskBtn" style="margin-right:15px;float:right;">
+			            <a href="#" class="normalBtn BGblue" id="NextTask">下一任务</a>
+			        </div>
+                    <div class="filterTitle fn-clear">
+                        <div class="tabs fn-left">
+	                        <div class="ui-tab">
+	                            <ul class="ui-tab-items">
+	                                <!-- <li class="ui-tab-item ui-tab-item-current">
+	                                    <a href="javascript:;">终端业务</a>
+	                                </li>
+	                                <li class="ui-tab-item fn-hide">
+	                                    <a href="javascript:;">项目</a>
+	                                </li>
+	                                <li class="ui-tab-item fn-hide" id="Tabs_marketDetail">
+	                                    <a href="javascript:;">活动详情</a>
+	                                </li> -->
+	                                <li class="ui-tab-item ui-tab-item-current">
+	                                    <a href="javascript:;">问卷调查</a>
+	                                </li>
+	                            </ul>
+	                        </div>
+                        </div>
+                    </div>
+                </div>
+
+            	<div id="J_iframe_tab">
+            	    <!-- <iframe id="I_term" class="ui-busi-item" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+            	    <iframe id="I_market" class="ui-busi-item fn-hide" src="" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+            	    <iframe id="I_marketDetail" class="ui-busi-item fn-hide" src="" width="100%" height="600" frameborder="0" scrolling="no"></iframe> -->
+            	    <div id="J_questionnaire" class="ui-busi-item">
+            	    	<div id="J_que_start">
+            	    	    <div class="formItem bd-bottom">
+            	    	        <div class="titleArea fn-posr">
+            	    	            <h2>用户满意度问卷调查</h2>
+            	    	        </div>
+            	    	    </div>
+            	    	   <div class="answerStart">
+            	    	        <div class="startIcon"></div>
+            	    	        <div class="startText">
+            	    	            <!-- <h2>问卷描述</h2> -->
+            	    	            <p id="J_quesDesc" style="height:25px;"></p>
+            	    	            <p class="questionNum">点击下一任务开始外呼</p>
+            	    	        </div>
+            	    	    </div>
+            	    	</div>
+            	    </div>
+            	</div>
+
+                <!-- 话费和套餐业务内容区域开始 -->
+                <div id="easyTab_2" class="fn-hide">话费和套餐业务内容未确定</div><!-- 话费和套餐业务内容区域END -->
+            </div>
+            <!-- 话务右侧内容区域END -->
+          	</div>
+        </div>
+        <!-- right stop -->
+    </div>
+	
+	<div id="T_transferPage" class="fn-hide">
+	 	<div class="ui-tab">
+		    <ul id = "J_openIvr" class="ui-tab-items">
+		        <li class="ui-tab-item  ui-tab-item-current">
+		            <a href="javascript:;">IVR转接</a>
+		        </li>
+		        <li class="ui-tab-item">
+		            <a href="javascript:;">人工技能</a>
+		        </li>
+		        <li class="ui-tab-item">
+		            <a href="javascript:;">座席转接</a>
+		        </li>
+		    </ul>
+			<div class="ui-tab-wrap">
+		        <div>
+					<div class="cmxform" >
+					    <form class="record-search-form record-search-min record-search-form-border" id="J_formIVRSearch" name="J_formIVRSearch" >
+					       <div class="record-search-cate">
+								<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+									<tr>
+										<td width="100"><label class="description">IVR流程名称</label></td>
+										<td width="150">
+											<input id="ivrSeqprcNm" name="ivrSeqprcNm" class="inputText" type="text" maxlength="255" value=""/>
+										</td>
+							            <td>
+							                <div class="normalBtnArea w82">
+							                  	<a class="searchBtn" href="javascript:;" id="J_searchIvr" ><i></i>查询</a>
+							                </div>
+							            </td>
+									</tr>
+								</table>
+						    </div>
+					    </form>
+					</div>
+				 	<div class="tablewidth" style="margin:10px 0 0 0;">
+						<table class="ui-record-table table_radius table-bordered table-striped" >
+							<thead>
+								<tr>
+									<th width="80"><span>IVR流程名称</span></th>
+									<th width="50">转接码</th>
+									<th width="80">流程描述</th>
+						            <th width="30">操作</th>
+								</tr>
+						     </thead>
+						     <tbody id="J_Ivrtabletpl">
+						     </tbody>
+						</table>
+					</div>
+				  	<!--翻页及功能按钮区域开始-->
+		            <DIV class="amount-bottom">
+		                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+		                  <tr>
+		                    <td width="60">
+		                    </td>
+		                    <td>
+		                    </td>
+		                    <td width="50%">
+		                        <DIV class="fn-clear action-other  action-other-show ">
+		                                <DIV id="PaginationIvr" class="page pagination fn-right"></DIV>
+		                                <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+		                        </DIV></td>
+		                  </tr>
+		                </table>
+		            </DIV>
+				</div>
+		        <div class="fn-hide">
+		        	<!--技能队列-->
+					<div method="post" action="#" class="cmxform" >
+					    <form class="record-search-form record-search-min record-search-form-border" id="J_formQueueSearch" name="J_formQueueSearch" >
+					       <div class="record-search-cate">
+								<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+									<tr>
+										<td width="100"><label class="description">技能队列名称</label></td>
+										<td width="150">
+											<input id="skilQueueNm" name="skilQueueNm" class="inputText" type="text" maxlength="255" value=""/>
+										</td>
+						              	<td>
+						                  	<div class="normalBtnArea w82">
+						                  		<a class="searchBtn" href="javascript:;" id="J_searchQueue" ><i></i>查询</a>
+						                  	</div>
+						              	</td>
+									</tr>
+								</table>
+						    </div>
+					    </form>
+					</div>
+				 	<div class="tablewidth" style="margin:10px 0 0 0;">
+						<table class="ui-record-table table_radius table-bordered table-striped" >
+							<thead>
+								<tr>
+									<th width="80"><span>技能队列名称</span></th>
+									<th width="50">转接码</th>
+									<th width="80">队列描述</th>
+						            <th width="30">操作</th>
+								</tr>
+						     </thead>
+						     <tbody id="J_Queuetabletpl"></tbody>
+						</table>
+					</div>
+		  
+					  <!--翻页及功能按钮区域开始-->
+		            <DIV class="amount-bottom">
+		                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+		                  <tr>
+		                    <td width="60"></td>
+		                    <td></td>
+		                    <td width="50%">
+		                        <DIV class="fn-clear action-other  action-other-show ">
+		                            <DIV id="PaginationQueue" class="page pagination fn-right"></DIV>
+		                            <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+		                        </DIV></td>
+		                  </tr>
+		                </table>
+		            </DIV>
+		        </div>
+		        <div class="fn-hide">
+		        	 <!--Agent-->
+					<div method="post" action="#" class="cmxform" >
+					    <form class="record-search-form record-search-min record-search-form-border" id="J_formAgentSearch" name="J_formQueueSearch" >
+					       <div class="record-search-cate">
+								<table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+									<tr>
+										  <td ui-alltextidth="30"><label class="description">座席班组</label></td>
+							              <td ui-alltextidth="30">
+							                 <div id="J_StleDerictionGroup">
+		                                        <select id="STLE_DERICTION_GROUP" name="STLE_DERICTION_GROUP">
+		                                                <option value="">全部</option>
+		                                        </select>
+		                                    </div>
+							              </td>
+							              <td wtidth="30"><label class="description">姓名</label></td>
+							              <td ui-alltextidth="30"><input class="inputText2" type="text" id="staffName" name="staffName" value=""/></td>
+							              <td>
+							                  <div class="normalBtnArea w82">
+								                  	<a class="searchBtn" href="javascript:;" id="J_searchAgent" ><i></i>查询</a>
+							                  </div>
+							              </td>
+									</tr>
+								</table>
+						    </div>
+					     </form>
+					 </div>
+				 	<div class="tablewidth" style="margin:10px 0 0 0;">
+						<table class="ui-record-table table_radius table-bordered table-striped" >
+							<thead>
+								<tr>
+									<th width="80"><span>座席姓名</span></th>
+									<th width="50">座席工号</th>
+									<th width="80">座席状态</th>
+						            <th width="30">操作</th>
+								</tr>
+						     </thead>
+						     <tbody id="J_Agenttabletpl"></tbody>
+						</table>
+					</div>
+					<!--翻页及功能按钮区域开始-->
+		            <DIV class="amount-bottom">
+		                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+		                  <tr>
+		                    <td width="60">
+		                    </td>
+		                    <td>
+		                    </td>
+		                    <td width="50%">
+		                        <DIV class="fn-clear action-other  action-other-show ">
+	                                <DIV id="PaginationAgent" class="page pagination fn-right"></DIV>
+	                                <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+		                        </DIV></td>
+		                  </tr>
+		                </table>
+		            </DIV>
+			    </div>
+			</div>
+		</div>
+	</div>
+		
+<div id="T_outCallPage"  class="fn-hide">
+	<div class="ui-CallOut">
+	    <div class="ui-CallOutA fn-clear">
+<!--	    	<div class="ui-CallOutCenter_left fn-left">
+	        	<div class="mb-20">我的呼出任务</div>
+	        	<div id="J_outCallTableTpl">
+	        	
+	        	</div>
+	            <div class="ui-WaitCallOut">
+	            	待回拨电话
+	            </div>
+	           	
+		           <div id="J_outCallDetailPage">
+	        	
+	        	</div>
+	        </div>
+-->
+	        <div class="ui-CallOutCenter_right fn-left">
+	            <div class="fn-clear">
+	                <input type="text" id="myinput" class="ui-CallOut_text mr-20 fn-left" />
+	                <div class="normalBtnArea fn-left">
+	                    <a class="normalBtn BGblue" href="javascript:;" id="outCallBtn"  onclick="dialOutByInput();">拨打</a>
+	                </div>
+	            </div>
+	            <div class="ui-CallOutNumber fn-clear">
+	            	<a href="javascript:;" onmouseup="onKeybordPress(this,'1')" class="ui-number1 fn-left"></a>
+	                <a href="javascript:;" onmouseup="onKeybordPress(this,'2')" class="ui-number2 fn-left"></a>
+	                <a href="javascript:;" onmouseup="onKeybordPress(this,'3')" class="ui-number3 fn-left"></a>
+	                <a href="javascript:;" onmouseup="onKeybordPress(this,'4')" class="ui-number4 fn-left"></a>
+	                <a href="javascript:;" onmouseup="onKeybordPress(this,'5')" class="ui-number5 fn-left"></a>
+	                <a href="javascript:;" onmouseup="onKeybordPress(this,'6')" class="ui-number6 fn-left"></a>
+	                <a href="javascript:;" onmouseup="onKeybordPress(this,'7')" class="ui-number7 fn-left"></a>
+	                <a href="javascript:;" onmouseup="onKeybordPress(this,'8')" class="ui-number8 fn-left"></a>
+	                <a href="javascript:;" onmouseup="onKeybordPress(this,'9')" class="ui-number9 fn-left"></a>
+	                <a href="javascript:;" onmouseup="onKeybordPress(this,'*')" class="ui-numberX fn-left"></a>
+	                <a href="javascript:;" onmouseup="onKeybordPress(this,'0')" class="ui-number0 fn-left"></a>
+	                <a href="javascript:;" onmouseup="onKeybordPress(this,'#')" class="ui-numberJ fn-left"></a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</div>
+
+<!-- 手机列表模板 -->
+<script id="T_termList" type="text/x-handlebars-template">
+	{{#if beans.length}}
+		{{#each beans}}
+		    <div class="productsItem" data-id="{{mcds_unit_id}}">
+		        <div class="fn-clear">
+		            <div class="productPic">
+		            	<a href="../product/phoneDetail.html?pid={{mcds_unit_id}}"><img src="{{mcds_pic_url}}" /></a>
+		            </div>
+		            <div class="productInfo">
+		                <h4><a href="../product/phoneDetail.html?pid={{mcds_unit_id}}">{{mcds_unit_nm}}</a></h4>
+		                <div class="productPrice">
+		                	价格：<span>&yen;{{mcds_price}}</span>
+		                </div>
+		                <div class="stock">
+		                	库存：<span>{{mcds_sku_qty}}</span>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="productProcess">
+		        	<a class="formLink" href="javascript:void(0);" onclick="softphone.favorites.{{favop}}('{{mcds_unit_id}}', this)">{{favtext}}</a> |
+					<a class="formLink" href="javascript:void(0);" onclick="softphone.compare.toggle('{{mcds_unit_id}}', this)">{{optext}}</a>
+		        	<a class="normalBtn BGblue" href="../orders/editNum.html">立即购买</a>
+		        </div>
+		    </div>
+		{{/each}}
+	{{else}}
+	{{/if}}
+</script>
+<!-- 挂机页面 start -->
+<div id="T_hangupPage"  class="fn-hide">
+		<div class="formItem">
+		  	<div class="onlin_borBot">
+		    	<div class="ui-hangupTop fn-clear">
+		            <div class="ui-hangupRed fn-left"></div>
+		            <div class="ui-hangupText fn-left">电话已挂断</div>
+		        </div>
+		    </div>
+		    <div class="selectListArea fn-clear">
+		    	<div class="selectListTitle">
+		    		<h4>本次通话标记为</h4>
+		    		<div class="selectList">
+		    			<label for="callResultStateRadio_0">
+		    				<input type="radio" id="callResultStateRadio_0" name="callResultStateRadio_0" checked="checked" value="100" onclick="chooseDisplayArea(100)"/>已接通
+	    				</label>
+	    				
+		    			<label for="callResultStateRadio_1" style="margin-left:30px;">
+		    				<input type="radio" id="callResultStateRadio_1" name="callResultStateRadio_0" value="200" onclick="chooseDisplayArea(200)"/>未接通
+	    				</label>
+	    			</div>
+		    	</div>
+		    	<div class="selectArea">
+					<ul class="fn-clear" id="J_resultState">
+					</ul>
+				</div>
+				<!-- 此处是设置回拨时间提醒，在需要时打开 -->
+				<div class="setCallbackTime fn-hide">
+					<table><tr>
+						<td class="setCallbackDesc">
+							<label class="description"><span class="fn-high">*</span>设置回拨时间：</label>
+						</td>
+						<td><input id="BGN_DATE" name="BGN_DATE" class="inputWidthDataPoint element text Wdate" type="text" value="" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-%d %H:%m:%s',alwaysUseStartDate:true})">
+						或
+						<select id="timeChoiceData" class="inputWidthDataPoint"> 
+							<option selected value="0">请选择</option>
+							<option value="15">15</option>
+							<option value="30">30</option>
+							<option value="45">45</option>
+							<option value="60">60</option>
+						</select>
+						分钟后
+						</td>
+					</tr>
+					<tr>
+						<td><label class="description">备注：</label></td>
+						<td><textarea placeholder="备注信息" class="textareaDesc"></textarea></td>
+					</tr>
+					</table>
+				</div>
+		    </div>
+		</div>
+		
+		<div class="formBtnArea">
+		  <table width="100%">
+		    <tr>
+		      <td>
+		        <div class="normalBtnArea fn-center">
+		        	<a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_sendSms" >发送短信</a>
+		        	<a class="normalBtn BGblue largeBtn fn-hide" onclick ="AiSoftPhone.doSaveHangupCommonTag(5);">标记回拨</a>
+		            <a class="normalBtn BGblue largeBtn" onclick ="AiSoftPhone.doSaveHangupCommonTag(5);" id="J_hangupComplete" >完成</a>
+		        </div>
+			  </td>
+		    </tr>
+		  </table>
+		</div>
+    </div>
+	<!-- 挂机页面 end -->
+
+<!-- 短信页面 start -->
+<div id="T_sendSmsPage"  class="fn-hide">
+	<div class="formItem">
+		<div class="titleArea fn-center">
+    		<h2 class="mb-30 mt-20">发送短信</h2>
+    	<hr/>
+    	</div>	
+    	<table  class="form_table" >
+    		<tbody>
+      			<tr>
+       				<td width="90"><label class="formDescription"><span class="fn-high">*</span>电话号码：</label></td>
+        			<td colspan="3">
+        				<input id ="smsSdTelnum"  name ="smsSdTelnum" class="inputWidth FormInputText" 
+        						type="text" maxlength="11" value="" />
+        			</td>
+      			</tr>
+      			<tr>
+        			<td width="90" valign="top">
+        				<label class="formDescription"><span class="fn-high">*</span>短信模板：</label>
+        			</td>
+        			<td class="fn-clear">
+        			<div class="fn-left">
+          			<div id="J_smsTemplate"></div>
+        			</div>
+        			</td>
+      			</tr>
+      			<tr>
+        			<td valign="top"><label class="formDescription"><span class="fn-high">*</span>短信内容：</label></td>
+        			<td colspan="3" class="mb-50"><textarea name="smsCntt" id ="smsCntt" style="height:70px;width:400px;margin-bottom:30px"></textarea></td>
+      			</tr>
+    		</tbody>
+  		</table>
+  		<hr/>	
+		<div class="formBtnArea">
+		  <table width="100%">
+		    <tr>
+		      <td>
+		        <div class="normalBtnArea fn-center mt-30 mb-30">
+		        	<a class="normalBtn BGblue largeBtn" href="javascript:;" id="smsSend" >发送</a>
+		        	<a class="normalBtn BGblue largeBtn" href="javascript:;" id="smsCancel" >取消</a>
+		        </div>
+			  </td>
+		    </tr>
+		  </table>
+		</div>
+    </div>
+</div>    
+<!-- 短信页面 end -->
+
+<!--订单提交成功提交提示-->
+<div id="T_hangupOrderPage"  class="fn-hide">
+	<div class="formItem">
+	
+		<div class="onlin_borBot">
+			<div class="ui-hangupTop fn-clear">
+				<div class="ui-successfulGreen fn-left"></div>
+				<div class="ui-hangupText fn-left">恭喜！订单已成功提交</div>
+			</div>
+		</div>
+
+		<div class="onlin_borBot ui-SuPaOnlinCenter">
+			<div class="gray_text breakWord">
+				订单编号：<span id ="hangupOrderId"> </span> 顾客已转入付款流程，电话已挂断，点击“完成”自动转至下一来话。
+			</div>
+		</div>
+	   
+		<div class="onlin_borBot">
+			<div class="onlin_borBot ui-hangupCenter pt-30 pb-30">
+				<div class="ft-14 mb-10">
+					<input class="dataListNo" value="6" type="hidden"/>
+					<span>本次通话已被自动标记为</span><span class="ui-tGreen ml-10">"购买"</span>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="formBtnArea">
+		<div class="normalBtnArea fn-center">
+			<a class="normalBtn BGblue largeBtn" onclick ="AiSoftPhone.doSaveHangupCommonTag(6);" id="J_orderHangup"  >完成</a>
+		</div>
+	</div>
+</div>
+<!--订单提交成功提交提示END-->
+
+
+
+<!--预约成功提示start-->
+<div id="T_hangupAppointPage"  class="fn-hide">
+	<div class="formItem">
+		<div class="onlin_borBot">
+			<div class="ui-hangupTop fn-clear">
+				<div class="ui-successfulOrage fn-left"></div>
+				<div class="ui-hangupText fn-left">恭喜！已成功预约。</div>
+			</div>
+		</div>
+		
+		<div class="onlin_borBot ui-SuPaOnlinCenter">
+			<div class="gray_text breakWord">
+				顾客已预约成功，预约单号：<span id ="appointOrderId"> </span>电话已挂断，点击"完成"自动转至下一来话。
+			</div>
+		</div>
+	   
+		<div class="onlin_borBot">
+			<div class="onlin_borBot ui-hangupCenter pt-30 pb-30">
+				<div class="ft-14 mb-10">
+					<span>本次通话已被自动标记为</span><span class="ui-tGreen ml-10">"预约"</span>
+				</div>
+			   
+	
+			</div>
+		</div>
+	</div>
+	
+	<div class="formBtnArea">
+		<div class="normalBtnArea fn-center">
+			<a class="normalBtn BGblue largeBtn" onclick ="AiSoftPhone.doSaveHangupCommonTag(7);" id="J_appointHangupTag" >完成</a>
+		</div>
+	</div>
+</div>
+<!--预约成功提示end-->
+<!-- 转ivr挂机 start -->
+<div id="T_hangupCallRefusePage"  class="fn-hide">
+	<div class="formItem">
+	  	<div class="onlin_borBot">
+	    	<div class="ui-hangupTop fn-clear">
+	            <div class="ui-hangupRed fn-left"></div>
+	            <div class="ui-hangupText fn-left">电话已挂断</div>
+	        </div>
+	    </div>
+	   	<div class="onlin_borBot">
+	        <div class="onlin_borBot ui-hangupCenter pt-30 pb-30">
+                <div class="ft-14 mb-10" id="distText">
+                    <span>转接完成,本次通话标记为：充值</span>
+                </div>
+	            <div class="gray_text breakWord">
+					电话已挂断，点击"完成"自动转至下一来话。
+				</div>
+	        </div>
+	    </div>
+	</div>
+	<div class="formBtnArea">
+		<table width="100%">
+			<tr>
+			  	<td>
+			        <div class="normalBtnArea fn-center">
+			            <a class="normalBtn BGblue largeBtn" onclick ="AiSoftPhone.doSaveHangupCommonTag(8);">完成</a>
+			        </div>
+			  	</td>
+			</tr>
+		</table>
+	</div>
+</div>
+	<!-- 转ivr挂机页面 end -->
+	<!-- 挂机页面 start -->
+<div id="T_hangupUnconnPage"  class="fn-hide">
+	<div class="formItem">
+	  	<div class="onlin_borBot">
+	    	<div class="ui-hangupTop fn-clear">
+	            <div class="ui-hangupRed fn-left"></div>
+	            <div class="ui-hangupText fn-left">电话已挂断</div>
+	        </div>
+	    </div>
+	   	<div class="onlin_borBot">
+	        <div class="onlin_borBot ui-hangupCenter pt-30 pb-30">
+                <div class="ft-14 mb-10" id="distText">
+                    <span>本次通话标记为：未接通</span>
+                </div>
+	        </div>
+	    </div>
+	</div>
+	<div class="formBtnArea">
+	  	<table width="100%">
+		    <tr>
+		      	<td>
+			        <div class="normalBtnArea fn-center">
+			            <a class="normalBtn BGblue largeBtn"  onclick ="AiSoftPhone.doSaveHangupCommonTag(10);">完成</a>
+			        </div>
+			  	</td>
+		    </tr>
+	  	</table>
+	</div>
+</div>
+	<!-- 挂机页面 end -->
+	 <!--客户详情  浮层开始 -->
+<div class="formItem" id="J_custInfoMoreLayer"></div>
+<!-- 浮层结束 -->
+<#include "../../tpl/res_js.tpl" />
+<script language="JavaScript" src="js/softphone_conf.js"></script>
+<script language="JavaScript" src="js/softphone_core_86.js"></script>
+<script language="JavaScript" src="js/softphone_util.js"></script>
+<script language="JavaScript" src="js/softphone_event_86.js"></script>
+<script language="JavaScript" src="js/softphone_api.js"></script>
+<script type="text/javascript" src="js/jquery.caretInsert.js"></script> 
+<script language="JavaScript" src="js/quickKey.js"></script>
+<!-- 该页面数据初始化 -->
+<script type="text/javascript" src="js/softphone_init.js"></script>
+<script type="text/javascript">
+srvMap.add('queryCallResultState', 'resultState.json','front/sh/contact!execute?uid=u017');//查询通化状态数据
+srvMap.add('rejectQnr','','front/sh/questionaire!index?uid=qoro011');//拒绝问卷 客户拒绝访问（调查类）102
+srvMap.add('suspendQnr','','front/sh/questionaire!index?uid=qoro012');//暂停问卷 中途拒绝访问（调查类）103
+srvMap.add('finishQnr','','front/sh/questionaire!index?uid=qoro010');// 完成问卷   成功调研（调查类）104
+srvMap.add('contact', 'query.json', 'front/sh/market!index?uid=mwt002');//随机获取一条任务
+srvMap.add('save', 'myTask.json', 'front/sh/market!index?uid=mt007');//营销结果保存
+srvMap.add('myTask', 'myTask.json', 'front/sh/market!index?uid=my019');//根据活动id查询未拨打的电话数
+srvMap.add('queryCmpgnDetail', 'query.json', 'front/sh/market!index?uid=my004');//查询活动详情
+
+var CD_VAL=null;
+var sale_date=null;
+$(function(){
+	//调用计算主框架的高度
+	setWindow1();
+	var CD_VAL=null;
+	var QNR_ID = Util.browser.getParameter('QNR_ID');
+	var reCall = Util.browser.getParameter('reCall');
+	var RESV_MOBNUM = Util.browser.getParameter('RESV_MOBNUM');
+	
+	if(RESV_MOBNUM != "" && RESV_MOBNUM != "undefined" && RESV_MOBNUM != undefined){
+
+		$("#NextTask").hide();
+		setTimeout(function(){
+			AiCtFrame.BusinessTracks.signInOutObj.hungup_flag=1;
+			AiCtFrame.BusinessTracks.signInOutObj.forespeak_flag_86=1
+			 	var QNR_ID = Util.browser.getParameter("QNR_ID");
+				if (QNR_ID) {
+				    $('#J_ques_items').html('');
+				    if ($('#J_que_fail').length) {
+				        $('#J_que_fail').remove();
+				    }
+				    $('#J_questionRender').html(
+				        '<div class="ui-loading" style="margin: 60px auto; display: none;"><h1><img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等 ...</h1></div>');
+				 
+				    require(['common/questionnaire/ques_start'], function (fn) {
+				        var obj = new fn.init(QNR_ID ? QNR_ID : '');
+				        obj.startManage = function (options) {
+				            require(['common/questionnaire/questionnaire'], function (fn) {
+				                fn.init(options.tempVal);
+				                var tpl = fn.getTpl;
+				                $('#J_questionnaire').html(tpl);
+				            })
+				        }
+				        $('#J_questionnaire').html(obj.$el);
+				    })
+				};
+			
+			CtiUtils.API.dialOut(RESV_MOBNUM);
+		},5000);
+                
+	}
+	//窗口变化时重新执行计算
+	$(window).resize(function(){
+		setWindow1();
+	});
+	chooseDisplayArea(100);
+	//点击折叠
+	toggleLeft1();
+    $('#NextTask').bind('click', function () {
+    	if($(this).hasClass("BGgray")){
+    		return;
+    	}
+        campId = Util.browser.getParameter("CMPGN_ID");
+        cmd = {
+            "CMPGN_ID": campId
+        };
+        Util.ajax.postJsonSync(srvMap.get("queryCmpgnDetail"), cmd, function (jsona) {
+            if (jsona.beans != null && jsona.returnCode == 0) {
+                campgnType = jsona.beans[0].CMPGN_TYPE_CD;
+                campgnendtime= jsona.beans[0].CMPGN_INVLD_DATE;
+            }
+        });
+       	Util.ajax.postJson(srvMap.get("contact"), cmd, function(jsons,status) {
+    	   	if(status){
+    		   	if (jsons.bean != null && typeof (jsons.bean) != 'undefined') {
+				   	var phoneNu = jsons.bean.RESV_MOBNUM;
+                    goodId = jsons.bean.RSVT_MCDS_UNIT_ID;
+                   	
+							
+                            AiCtFrame.BusinessTracks.signInOutObj.hungup_flag=1;
+                            CtiUtils.API.dialOut(phoneNu);
+	                        	    $("#NextTask").removeClass("BGblue").addClass("BGgray");
+	                               var QNR_ID = Util.browser.getParameter("QNR_ID");
+	                             if (QNR_ID) {
+	                       			$('#J_ques_items').html('');
+									if($('#J_que_fail').length){
+							   			$('#J_que_fail').remove();
+									} 
+	                       			$('#J_questionRender').html('<div class="ui-loading" style="margin: 60px auto; display: none;"><h1><img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等 ...</h1></div>');
+										$('.tabs .ui-tab-items li').eq(3).removeClass('fn-hide').click();
+	                                    require(['common/questionnaire/ques_start'],function(fn){
+	                                        var obj = new fn.init(QNR_ID?QNR_ID:'');
+	                                        obj.startManage = function(options){
+	                                            require(['common/questionnaire/questionnaire'],function(fn){
+	                                                fn.init(options.tempVal);
+	                                                var tpl = fn.getTpl;
+	                                                $('#J_questionnaire').html(tpl);
+	                                            })
+	                                        }
+	                                        $('#J_questionnaire').html(obj.$el);
+	                                    })
+	                               };
+					
+					
+			   	}else{
+				   	Util.dialog.tips("您已完成此活动中的任务！请再接再厉哦~^_^"); 
+			   	}
+    	   }else{
+    		   Util.ajax.postJson(srvMap.get("myTask"), cmd, function (jsonsaa) {
+                   if (jsonsaa.returnCode == 0) {
+                       if (jsonsaa.bean.Counts == 0) {
+                           Util.dialog.tips("任务已结束");
+                       } else {
+                           Util.dialog.tips("获取号码出现错误！");
+                       }
+                   }
+               });
+    	   }
+        });
+    });
+
+	//待回拨电话直接拨打电话
+	if (reCall) {
+		$('#NextTask').hide().trigger('click');
+	};
+
+	chooseDisplayArea(100);
+
+	//window.setInterval("initIframe()", 1500);
+})
+
+//计算主框架的高度
+function setWindow1(){
+	var headerHeight=$(".header").height();
+	var menuHeight=$(".menu").height();
+	var windowHeight=$(window).height();
+	var centerHeight=windowHeight-headerHeight-menuHeight;
+	$(".left_outcall").height(centerHeight);
+	$(".right_outcall").height(centerHeight);
+	$(".leftInner_outcall").height(centerHeight);
+	$(".middle_outcall").height(centerHeight);
+
+}
+
+//点击折叠
+function toggleLeft1(){	
+	$(".middle_outcall").click(function(){
+		$(".left_outcall").toggleClass("leftClose_outcall");
+		$(".right_outcall").toggleClass("rightOpen");
+	});
+}
+
+//点击可参与的营销活动打开活动详情
+function openTabsItem(obj){
+	var cmpgnId = $(obj).find("input").val();
+	var call_no = AiCtFrame.BusinessTracks.callingObj.custMobnum;
+	var current_date = new Date();
+	var convert_date = current_date.toLocaleString().replace(/年|月/g,'-').replace(/日/g,'');
+	AiCtFrame.bussinessData.BEGIN_SALE_TIME = convert_date;
+	AiCtFrame.bussinessData.CMPGN_ID = cmpgnId;
+	try{
+		if(cmpgnId!=null && cmpgnId!="undefined" && cmpgnId!=""){
+			/*if($("#Tabs_marketDetail").hasClass("fn-hide")){
+				$("#Tabs_marketDetail").removeClass("fn-hide");
+				$("#Tabs_marketDetail").trigger("click");
+				$('#J_iframe_tab iframe').eq(2).html('').attr('src','../market/saleActivityDetail.html?CMPGN_ID='+cmpgnId+'&call_no='+call_no);
+			}else{
+				$("#Tabs_marketDetail").trigger("click");
+				$('#J_iframe_tab iframe').eq(2).html('').attr('src','../market/saleActivityDetail.html?CMPGN_ID='+cmpgnId+'&call_no='+call_no);
+			}*/
+		}
+	}catch(e){
+		LogManager.proxyMethod.ctlogger("----event------------onOnInitalSuccess 营销活动刷新异常"+e.message);
+	}
+}
+
+//切换通话结果状态 未接通和已接通区域
+function chooseDisplayArea(flag){
+	var params = {"flag":flag};
+	Util.ajax.postJson(srvMap.get("queryCallResultState"),params, function(json, flag) {
+			Util.ajax.loadTemp('#J_resultState', $('#resultState'), json);//加载模板
+	});	
+}
+</script>
+<script id="T_Ivrtabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+            <td>{{ivrSeqprcNm}}</td>
+            <td>{{ivrJnupNum}}</td>
+            <td>{{ivrSeqprcDesc}}</td>
+            <td width="30">
+                <div class="gridRowBtn">
+                    <a class="item-text" href="javascript:;" onclick="doTransferIvr('{{ivrJnupNum}}')">转接</a>
+                </div>
+            </td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="4">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+<script><!--
+//切换通话结果状态 未接通和已接通区域
+function chooseDisplayArea(flag)
+{
+	var params = {"flag":flag};
+	Util.ajax.postJson(srvMap.get("queryCallResultState"),params, function(json, flag) {
+			Util.ajax.loadTemp('#J_resultState', $('#resultState'), json);//加载模板
+	});	
+}
+
+function assignCurrentRadio(resultChoice){
+	
+	CD_VAL=resultChoice;
+	if(resultChoice==108){
+		$(".setCallbackTime").show();
+	}
+}
+
+function initialLoadMethod(){
+	//代办任务
+	Util.ajax.postJson(srvMap.get('dolist'),'',function(json,status){
+	    if (status) {
+	    	$('#wait-item').html(json.beans.length);
+	        Util.ajax.loadTemp('#J_newlist',$('#T_newlist'),json);//加载模板
+	    }else{
+	        $('#J_newlist').html('<div class="ui-tips-box tipsBox"><div class="ui-icon-noData"></div><div class="ui-tips-text">'+json.returnMessage||'查询失败，请重试！'+'</div></div>');
+	    }
+	});
+	//待回拨电话
+	 Util.ajax.postJson(srvMap.get('dialback'),'',function(json,status){
+	    if (status) {
+	    	$('#dialback-item').html(json.beans.length);
+	        Util.ajax.loadTemp('#J_dialback',$('#T_dialback'),json);//加载模板
+	    }else{
+	        $('#J_newlist').html('<div class="ui-tips-box tipsBox"><div class="ui-icon-noData"></div><div class="ui-tips-text">'+json.returnMessage||'查询失败，请重试！'+'</div></div>');
+	    }
+	});	
+}
+
+ Handlebars.registerHelper('isNAN',function(finishcount,total){
+		var str="";
+		if(total < 1){
+			str=finishcount;
+		}else{
+			str=finishcount+"/"+total;
+		}
+		return str;
+	});
+ Handlebars.registerHelper('replace',function(RESV_MOBNUM){
+	 var phone=RESV_MOBNUM;
+	 var newphone=phone.replace((phone.substr(3,4)),"****");
+	 return newphone;
+ });
+ 
+ 
+ function promptFun(cmpgn_id,flag,resv_mobnum,qnr_id){
+		var softphoneUrl = "../contact/softphoneManage.html?CMPGN_ID=" + cmpgn_id+"&QNR_ID="+qnr_id;
+	    var cmd = {
+	            "CMPGN_ID": cmpgn_id,
+	            "flag":flag
+	        };	
+	    
+	    if(flag=='2'){
+	    	
+	       	Util.ajax.postJson(srvMap.get("contact"), cmd, function(jsons,status) {
+	    	   	if(status){
+	    		   if (jsons.bean != null && typeof (jsons.bean) != 'undefined') {
+	    				   var phoneNu = jsons.bean.RESV_MOBNUM;    
+	    	   var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">您已获取号码,是否确定拨打</div></div></div>'
+	    	                       );
+	    	                       var params = {
+	    	                           content: elem,
+	    	                           width: "300px",
+	    	                           height: "120px",
+	    	                           //modal: true,
+	    	                           okVal:'确定',
+	    	                           okCallback:function(){
+										$('#I_market').contents().find('#NextTask').removeClass("BGblue").addClass("BGgray");
+										
+	    	                        	   AiCtFrame.BusinessTracks.signInOutObj.hungup_flag=1;
+	    	                        	   CtiUtils.API.dialOut(phoneNu);
+	    	                        	    //$("#NextTask").removeClass("BGblue").addClass("BGgray");
+	    	                               var QNR_ID = qnr_id;
+	    	                             if (QNR_ID) {
+	    	                       			$('#J_ques_items').html('');
+	    									if($('#J_que_fail').length){
+	    							   			$('#J_que_fail').remove();
+	    									} 
+	    	                       			$('#J_questionRender').html('<div class="ui-loading" style="margin: 60px auto; display: none;"><h1><img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等 ...</h1></div>');
+	    										$('.tabs .ui-tab-items li').eq(3).removeClass('fn-hide').click();
+	    										
+	    	                                    require(['common/questionnaire/ques_start'],function(fn){
+	    	                                        var obj = new fn.init(QNR_ID?QNR_ID:'');
+	    	                                        obj.startManage = function(options){
+	    	                                            require(['common/questionnaire/questionnaire'],function(fn){
+	    	                                                fn.init(options.tempVal);
+	    	                                                var tpl = fn.getTpl;
+	    	                                                $('#J_questionnaire').html(tpl);
+	    	                                            })
+	    	                                        }
+	    	                                        $('#J_questionnaire').html(obj.$el);
+	    	                                    })
+	    	                               };
+	    	                               Util.dialog.close("D_outCallPage");	
+	   		                   			//判断是否打开
+	    			                   	   /* if (objWin == null || objWin.closed) {
+	    			                   				 objWin = window.open(softphoneUrl,"","menubar=no,status=no,resizable=yes,scrollbars=no,toolbar=no,top=0,left=0,width="+ (window.screen.availWidth)+ ",height=" +(window.screen.availHeight-30));
+	    			                   			} else {
+	    			                   				objWin.focus();
+	    			                   			}   */  	                               
+	    	                           },
+	    	                           cancelVal:'取消',
+	    	                           cancelCallback:function(){
+	    	                        	  var cmder={
+	    	                        			"CMPGN_ID":cmpgn_id,
+	    	                        			"STAFF_ID":userInfo.bean.staffId,
+	    	                        			"CNTMNG_ID":"0",
+	    	                        			"RESV_MOBNUM":phoneNu,
+	    	                        			"CUST_STS_CD":"0",
+	    	                        			"type":"2"
+	    	                        	  };
+	    	                        	   Util.ajax.postJson(srvMap.get("save"), cmder, function (json,status) {
+	    	                        		   if(status){
+	    	                        		   }
+	    	                        	   });
+	    	                           }
+	    	                         } 
+	    	                       Util.dialog.openDiv(params);
+	    		   }else{
+	    			   Util.dialog.tips('活动无效，请联系管理员！');
+	    		   }
+	    		   }
+	    	   	});    	
+	    	
+	    }else if(flag=='1'){
+	    				//回拨电话，激活项目页签和问卷页签
+					   var phoneNu = resv_mobnum;    
+		               var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">是否确定拨打</div></div></div>'
+		                       );
+		                       var params = {
+		                    	   id:"currentPopDiv",	   
+		                           content: elem,
+		                           width: "300px",
+		                           height: "120px",
+		                           //modal: true,
+		                           okVal:'确定',
+		                           okCallback:function(){
+										
+										$('#I_market').contents().find('#NextTask').removeClass("BGblue").addClass("BGgray");
+										
+		                        	   AiCtFrame.BusinessTracks.signInOutObj.hungup_flag=1;
+		                        	   AiCtFrame.BusinessTracks.signInOutObj.forespeak_flag_86=1;
+		                        	   CtiUtils.API.dialOut(resv_mobnum);
+		                        	    //$("#NextTask").removeClass("BGblue").addClass("BGgray");
+		                               var QNR_ID = qnr_id;
+		                             if (QNR_ID) {
+		                       			$('#J_ques_items').html('');
+										if($('#J_que_fail').length){
+								   			$('#J_que_fail').remove();
+										} 
+		                       			$('#J_questionRender').html('<div class="ui-loading" style="margin: 60px auto; display: none;"><h1><img src="../../css/images/loading.gif" alt="loading">正在加载，请稍等 ...</h1></div>');
+											$('.tabs .ui-tab-items li').eq(3).removeClass('fn-hide').click();
+											
+		                                    require(['common/questionnaire/ques_start'],function(fn){
+		                                        var obj = new fn.init(QNR_ID?QNR_ID:'');
+		                                        obj.startManage = function(options){
+		                                            require(['common/questionnaire/questionnaire'],function(fn){
+		                                                fn.init(options.tempVal);
+		                                                var tpl = fn.getTpl;
+		                                                $('#J_questionnaire').html(tpl);
+		                                            })
+		                                        }
+		                                        $('#J_questionnaire').html(obj.$el);
+		                                    })
+		                               };
+		                               Util.dialog.close("D_outCallPage");	
+			                   			//判断是否打开
+			                   	   /* if (objWin == null || objWin.closed) {
+			                   				 objWin = window.open(softphoneUrl,"","menubar=no,status=no,resizable=yes,scrollbars=no,toolbar=no,top=0,left=0,width="+ (window.screen.availWidth)+ ",height=" +(window.screen.availHeight-30));
+			                   			} else {
+			                   				objWin.focus();
+			                   			} 	 */                               
+		                           },
+		                           cancelVal:'取消',
+		                           cancelCallback:function(){
+		                        	  
+		                           }
+		                         } 
+		                       Util.dialog.openDiv(params);
+			   
+			   }    
+	    }
+ 
+--></script>
+<script id="T_Ivrtabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+            <td>{{ivrSeqprcNm}}</td>
+            <td>{{ivrJnupNum}}</td>
+            <td>{{ivrSeqprcDesc}}</td>
+            <td width="30">
+                <div class="gridRowBtn">
+                    <a class="item-text" href="javascript:;" onclick="doTransferIvr('{{ivrJnupNum}}')">转接</a>
+                </div>
+            </td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="4">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+
+<script id="T_Queuetabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+            <td>{{skilQueueNm}}</td>
+            <td>{{skillQueueNo}}</td>
+            <td>{{skilQueueDesc}}</td>
+            <td width="30">
+                <div class="gridRowBtn">
+                    <a class="item-text" href="javascript:;" onclick="doTransferQueue('{{skillQueueNo}}')">转接</a>
+                </div>
+            </td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="4">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+
+
+<script id="T_Queuetabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+            <td>{{skilQueueNm}}</td>
+            <td>{{skillQueueNo}}</td>
+            <td>{{skilQueueDesc}}</td>
+            <td width="30">
+                <div class="gridRowBtn">
+                    <a class="item-text" href="javascript:;" onclick="doTransferQueue('{{skillQueueNo}}')">转接</a>
+                </div>
+            </td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="4">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+
+<script id="T_Agenttabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <tr>
+            <td>{{staffName}}</td>
+            <td>{{callPltfStaffNum}}</td>
+            <td>{{agentStatsRevert seatStsCd}}</td>
+            <td>
+                <div class="gridRowBtn">
+                    <a class="item-text" href="javascript:;" onclick="doTransferAgent('{{callPltfStaffNum}}'+','+'{{seatStsCd}}')">转接</a>
+                </div>
+            </td>
+        </tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="4">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+
+<script id="T_outCallPagetpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+        <div class="ui-CallOutTask mb-20">
+			<div>{{TASK_NAME}}</div>
+		    <div class="fn-clear"><a href="javascript:;" class="ui-CallOutAcolor fn-right" onclick="openTaskDetail({{TASK_ID}})">处理该呼出列表</a></div>
+		    <div class="gray_text">共 <span class="ui-poptip-white">{{TASK_TOTAL_NUM}}</span> 个电话需要呼出 | 已完成 <span class="ui-poptip-white">{{TASK_FINISH_NUM}}</span> 个</div>
+		</div>
+    {{/each}}
+{{else}}
+    <div>对不起，没有数据！</div>
+{{/if}}
+</script>
+
+<script id="T_outCallPage_Detailtpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+		 <div class="ui-WaitCallOut_center">
+			<span class="gray_text">[{{Cust_Date}}]</span>
+			<span class="ml-10">{{Cust_phone}}</span>
+			<span class="ml-10">{{Cust_Name}}</span>
+			<span class="ml-10">{{Dail_Content}}</span>
+			<a href="javascript:;" class="ui-CallOutPhone" onclick="dialOutTask({{Cust_phone}})">拨打电话</a>
+		</div>
+    {{/each}}
+{{else}}
+    <div>对不起，没有数据！</div>
+{{/if}}
+</script>
+<script id="T_contact_custInfoMoreLayer"type="text/x-handlebars-template">
+{{#if custInfo}}
+    <div class="formArea-B">
+  	  <table width="100%">
+        <tbody>
+			 <tr>
+                <td width="15%" align="right"><span class="tc-c2">客户名称：</span></td>
+                <td width="35%">{{custInfo.custFamilyName}}</td>
+                <td width="15%"  align="right"><span class="tc-c2">客户品牌名称：</span></td>
+                <td>{{custInfo.custBrandName}}</td>
+            </tr>
+            <tr>
+                <td align="right"><span class="tc-c2">客户级别：</span></td>
+                <td>{{custInfo.custLevelName}}</td>
+                <td align="right"><span class="tc-c2">当前套餐：</span></td>
+                <td>{{custInfo.basicFeeName}}</td>
+            </tr>
+            <tr class="formArea-A-dashed">
+                <td align="right"><span class="tc-c2">当前手机：</span></td>
+                <td>{{custInfo.termEqpmtId}}</td>
+                <td align="right"><span class="tc-c2">4G用户：</span></td>
+                <td>{{is4G custInfo.usimFlag}}</td>
+            </tr>
+            <tr>
+                <td align="right"><span class="tc-c2">月均流量：</span></td>
+                <td>{{custInfo.meanDataAmt}}M</td>
+                <td align="right"><span class="tc-c2">月均话费：</span></td>
+                <td>{{custInfo.mean4gCost}}元</td>
+            </tr>
+ 			<tr>
+                <td align="right"><span class="tc-c2">客户地址：</span></td>
+                <td>{{custInfo.address}}</td>
+                <td align="right"><span class="tc-c2">出生年月：</span></td>
+                <td>{{custInfo.birthDt}}</td>
+            </tr>
+			<tr>
+                <td align="right"><span class="tc-c2">归属地市：</span></td>
+                <td>{{custInfo.cityCode}}</td>
+                <td align="right"><span class="tc-c2">入网时间：</span></td>
+                <td>{{custInfo.entDt}}</td>
+            </tr>
+			<tr>
+                <td align="right"><span class="tc-c2">用户状态：</span></td>
+                <td>{{custInfo.subsStatType}}</td>
+                <td align="right"><span class="tc-c2">集团客户名称：</span></td>
+                <td>{{custInfo.orgName}}</td>
+            </tr>
+			<tr>
+                <td align="right"><span class="tc-c2">终端使用时长：</span></td>
+                <td>{{custInfo.termUsedMons}}月</td>
+                <td align="right"><span class="tc-c2">最近帐期费用：</span></td>
+                <td>{{custInfo.lastBillCost}}元</td>
+            </tr>
+        </tbody>
+     </table>
+	</div>
+{{/if}}
+</script>
+
+<script type="text/x-handlebars-template" id="T_smsTemplate">
+    <span class="ri_all_margin">
+		{{#each beans}}
+ 			<label>
+               <input type="radio" name="smsType" value="{{CD_VAL}}"  />
+               <span class="pl-10 pr-30">{{CMN_CD_VAL_NM}}</span>
+            </label>
+	</span>
+		{{/each}}
+</script>
+
+<script type="text/x-handlebars-template" id="resultState">
+        {{#each beans}}
+          <li><label for="{{CD_VAL}}"><input id="{{CD_VAL}}" type="radio" name="callResultStateRadio_1" value="{{CD_VAL}}" onclick="assignCurrentRadio(this.value)" />{{CMN_CD_VAL_NM}}</label></li>
+        {{/each}}
+</script>
+<!-- 待办事项 -->
+ <script id="T_newlist" type="text/x-handlebars-template">
+	{{#if beans}}
+		{{#each beans}}
+					 <div class="ui-topQuDashed pt-15 pb-15"> 
+                    <div class="pb-10">
+                        <a href="#" class="attributionValue ft-14"><span>[{{cmpgn_type_cd}}]{{cmpgn_name}}</span></a>
+                        <a href="#" class="ml-10" style="color:#666"><span>(已完成:{{isNAN finishcount total}})</span> </a>
+                        <a class="icon_phoneblue fn-right" herf="javascript:void(0)" onclick="promptFun('{{cmpgn_id}}','2','','{{qnr_id}}')"></a>
+                    </div>
+                    <div class="ft-gray">起止时间：{{CMPGN_EFF_DATE}}-{{CMPGN_INVLD_DATE}}</div>
+                </div>
+		{{/each}}
+	{{else}}
+		 <div class="pb-10">没有待办事项!</div>
+	{{/if}}
+</script>
+<!--待回电话 -->
+ <script id="T_dialback" type="text/x-handlebars-template">
+	{{#if beans}}
+		{{#each beans}}
+					<div class="ui-topQuDashed pt-15"> 
+                        <div class="pb-10">
+                            <a href="#" class="attributionValue ft-14">
+                                <span>{{replace RESV_MOBNUM}}</span>
+                                <span class="pl-30">回拨时间：{{ONEMRE_RSVT_TIME}}</span>
+                            </a>
+                            <a href="javascript:void(0)" class="icon_phoneblue fn-right" onclick="promptFun('{{CMPGN_ID}}','1','{{RESV_MOBNUM}}','{{QNR_ID}}')"></a>
+                        </div>
+                        <div class="ft-gray pb-10">{{CMPGN_DESC}}（已完成:{{finnishcount}}/{{total}}）</div>
+                    </div>
+		{{/each}}
+	{{else}}
+		<div class="pb-10">暂无信息!</div>
+	{{/if}}
+</script>
+</body>
+</html>

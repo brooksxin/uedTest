@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新建问题-填空题</title>
+    <#include "../../tpl/res_css.tpl" />
+</head>
+
+<body>
+<div class="formItem">
+    <div class="pt-10 ui-fhw"><a href="Javascript:history.go(-1);void(0);" class="formItem_jiantou-tu normalLink">返回</a></div>
+</div>
+
+<div class="formItem bd-bottom">
+    <div class="titleArea">
+        <!--
+        不同题型对应样式
+        单选：qIcon_Radio
+        判断：qIcon_Judgment
+        多选：qIcon_Checkbox
+        填空：qIcon_Blank
+        问答：qIcon_Essay
+        日期：qIcon_Date
+        -->
+        <h2><i class="qTitleIcon qIcon_Blank"></i><span class="titleAreaTxt">填空题</span></h2>
+    </div>
+</div>
+
+
+    <!--新增问题START-->
+    <div class="questionAdd">
+
+<!-- 填空题展示 -->
+        <div class="qBox">
+            <div class="qBoxTitle">
+                <div class="qDecoration"><a href="#" id="J_addDescription"  title="点击添加问题描述" >问题描述</a></div>
+            </div>
+ 
+            <div class="qDecorationTxt">
+                <textarea id ="quDesc" name="" class="qDecorationTxtEdit" placeholder="您可以在这里输入问题描述，非必填项"></textarea>
+            </div>
+
+            <div class="qContent">
+                <!--编辑时展示内容-->
+                <div class="editContent">
+                    <div class="qTitle">填空题</div>
+                    <div class="qAnswerEdit">
+                        <ul class="fn-clear">
+                            <!--  <li><input type="text" class="quIds" style="display:none;" value="" /><input type="text" class="FormInputText" value="" /><a href="javascript:;" class="delIcon"></a></li> --> 
+                            
+                        </ul>
+                    </div>
+                    <a href="#" class="addAnswer" id="addAnswer">添加一项</a>
+                </div>
+
+            </div>
+       </div>
+	</div>
+
+<div class="formBtnArea bd-top">
+    <table width="100%">
+        <tr>
+            <td>
+                <div class="normalBtnArea norBtnAleft">
+                    <a class="normalBtn BGblue largeBtn" href="javascript:;" id="Next">发布</a>
+                    <a class="normalBtn BGgray largeBtn" href="javascript:;" id="Save">保存</a>
+                </div>
+            </td>
+            <td>
+                <div class="normalBtnArea fn-right">
+                    <a href="#" class="formLink" id="Cancel"><span>取消编辑</span></a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+
+
+<#include "../../tpl/res_js.tpl" />    
+<script type="text/javascript">
+
+
+    srvMap.add('save', 'query.json', 'front/sh/question!index?uid=qnrTKT001');//新增 修改
+    srvMap.add('publish',  'query.json',  'front/sh/question!index?uid=qnrTKT003');//发布
+    srvMap.add('query',  'query.json',  'front/sh/question!index?uid=qnrTKT004');//查询
+    srvMap.add('del',  'query.json',  'front/sh/question!index?uid=qnrTKT005');//删除子问题
+    var params = null;
+    var quId = ""; 
+    var copyQuId = ""; //复制的问题ID
+    var quNm = "问答题"; //问题名称   QU_NM
+    var quCntt = "问题内容"; //问题内容 QU_CNTT
+    var quDesc = "问题描述"; //问题描述 QU_DESC 
+    var quTypeCd = "10"; //问题类型代码 QU_TYPE_CD  填空题  10 
+    var quShareTypeCd = "02"; //问题共享类型代码  共享02、私有 01 
+    var gainAswrModeCd = "01";  //获取答案方式代码 GAIN_ASWR_MODE_CD 静态01，动态02 
+	var quShowModeCd = "0";	//问题显示方式代码 QU_SHOW_MODE_CD  
+	var haveChildQuFlag = "0";	//有子问题标志 HAVE_CHILD_QU_FLAG 有1 ，无 0
+	var quStsCd="10D"    //问题状态代码  QU_STS_CD (新建:10D,发布:10A,失效:10X) 
+	
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        $("#J_addDescription").on('click',function(){
+        	$(".qDecorationTxt").toggle();
+        });
+        
+        quId=Util.browser.getParameter("QU_ID");//问题ID QU_ID
+        copyQuId=Util.browser.getParameter("COPY_QU_ID");//复制问题ID QU_ID
+        
+        //删除子问题
+        function delIconClick(delQuId){
+            if(delQuId==null||delQuId=="") 
+            return;
+            paramq = {
+                "QU_ID": delQuId 
+            };
+            Util.ajax.postJson(srvMap.get("del"), paramq, function (data) {
+                if (data.returnCode == 0) {
+                    Util.dialog.tips("删除子问题完成！");
+                }else{
+                    Util.dialog.tips("删除子问题失败！");
+                }
+        
+            });
+        }
+        
+        //加载传入的问题
+        function quInit(cmd,flag){
+            Util.ajax.postJson(srvMap.get("query"), cmd, function (json) {
+                var beans = json.beans;
+                for(var i=1; i<beans.length; i++){
+                    var $li =$("<li><input type=\"text\" class=\"quIds\" style=\"display:none;\" value=\"\" /><input type=\"text\" class=\"FormInputText\" value=\"\" /><span class=\"borderLabel\">带文本框</span><input type=\"checkbox\" class=\"borderBox\" checked=\"\"><a href=\"javascript:;\" class=\"delIcon\"></a></li>");
+        	        $('.delIcon', $li).bind('click', function () {
+        	            var delQuId =$(this).prevAll(".quIds").val();
+        	            delIconClick(delQuId);
+                        $(this).parent().remove();
+	                }); 
+                    $("ul").append($li);
+                }
+                var $qus=$(".FormInputText");
+                var $quIds=$(".quIds");
+                var $borderBox=$(".borderBox");
+                $("#quDesc").val(beans[0].QU_DESC);
+                if (json.returnCode == 0) {
+                    for(var i=0; i<beans.length; i++){
+                        if(i==0){
+                           //quId=beans[i].QU_ID;
+                        }else{
+                           //alert(" beas=  "+beans[i].QU_ID+" "+beans[i].QU_CNTT);
+                           if (flag=="1") {
+                               $quIds.eq(i-1).val(beans[i].QU_ID);
+                           }
+                           $qus.eq(i-1).val(beans[i].QU_CNTT);
+                           
+                           if(beans[i].QU_SHOW_MODE_CD=="1"){
+                               $borderBox.eq(i-1).attr('checked', 'checked');
+                           }else{
+                               $borderBox.eq(i-1).removeAttr('checked'); 
+                           }
+                        }
+                    }
+                } 
+            });
+        }
+        
+        //编辑
+        if (quId != null && quId != "" && quId != "undefined") {
+        
+            var cmd = {
+                "QU_ID": quId,
+            };
+            quInit(cmd,"1");
+            
+        }else{
+            if(copyQuId != null && copyQuId != "" && copyQuId != "undefined"){
+                var cmd = {
+                    "QU_ID": copyQuId,
+                };
+                quInit(cmd,"0");
+            }else{
+                //默认加入一项
+                //var $li = $("<li><input type=\"text\" class=\"FormInputText\" value=\"\" /><a href=\"javascript:;\" class=\"delIcon\"></a></li> ");
+        	    var $li =$("<li><input type=\"text\" class=\"quIds\" style=\"display:none;\" value=\"\" /><input type=\"text\" class=\"FormInputText\" value=\"\" placeholder=\"在此输入问题\" /><span class=\"borderLabel\">带文本框</span><input type=\"checkbox\" class=\"borderBox\" checked=\"\"><a href=\"javascript:;\" class=\"delIcon\"></a></li>");
+        	    $('.delIcon', $li).bind('click', function () {
+                   //alert("1111=  ");
+        	       var delQuId =$(this).prevAll(".quIds").val();
+        	       delIconClick(delQuId);
+                   $(this).parent().remove();
+	            }); 
+                $("ul").append($li);
+            }
+        }
+        
+        
+        //保存(新建 or修改)
+        $("#Save").bind('click', function () {
+        
+            var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要保存吗？</div></div></div>');
+            var params = { 
+                           top:top,
+                           content: elem,
+                           width: "300px",
+                           height: "120px",
+                           modal: true,
+                           okVal:'确定',
+                           okCallback:function(){
+                               quDesc = $("#quDesc").val();// 问题描述 QU_DESC
+                               
+                               if(quDesc == null || quDesc == "" || quDesc == undefined){
+                                  Util.dialog.tips("请输入问题描述");
+                                  return;
+                               }
+                               
+                               var params="";
+                               var $qus=$(".FormInputText");
+                               var $quIds=$(".quIds");
+                               
+                               var $borderBox=$(".borderBox");
+                               
+                               var quCntts = ""; 
+                               for(var i=0; i<$qus.length; i++){
+                                   if( $borderBox.eq(i).is(':checked')==true){
+                                       QU_SHOW_MODE_CD="1";
+                                   }else{
+                                       QU_SHOW_MODE_CD="0";
+                                   }
+                                   
+                                   if($qus.eq(i).val() == null || $qus.eq(i).val() == "" ){
+                                      Util.dialog.tips("请输入子问题内容");
+                                      return;
+                                   }
+                               
+                                   params = params + "&BASE_QU_ID="+quId+"&TGT_QU_ID="+$quIds.eq(i).val()+"&QU_NM="+$qus.eq(i).val()+"&QU_CNTT="+$qus.eq(i).val()+"&QU_DESC="+quDesc+"&QU_SHOW_MODE_CD="+QU_SHOW_MODE_CD+"&HAVE_CHILD_QU_FLAG=0";
+                                   quCntts = quCntts+ $qus.eq(i).val()+"__";
+                               }
+                               params= "&BASE_QU_ID="+quId+"&TGT_QU_ID="+"&QU_NM="+quCntts+"&QU_CNTT="+quCntts+"&QU_DESC="+quDesc+"&QU_SHOW_MODE_CD=0&HAVE_CHILD_QU_FLAG=1" +params;
+                               Util.ajax.postJson(srvMap.get("save"), params, function (data) {
+                                   var beans = data.beans;
+                                   if (data.returnCode == 0) {
+                                       for(var i=0; i<beans.length; i++){
+                                           if(i==0){
+                                              quId=beans[i].QU_ID;
+                                           }else{
+                                              $quIds.eq(i-1).val(beans[i].TGT_QU_ID);
+                                           }
+                                       
+                                       }
+                                       Util.dialog.tips("保存问题完成！");
+                                       window.location.href = "questionList.html";
+                                   }else{
+                                       Util.dialog.tips("保存问题失败！");
+                                   }
+                               
+                               });
+                           },
+                           cancelVal:'取消',
+                           cancelCallback:function(){}
+            };
+            Util.dialog.openDiv(params);
+            
+            
+           
+            
+        
+             
+        });
+        
+        //发布
+        $('#Next').bind('click', function () {
+        
+ 
+            if (quId == null || quId == "" || quId == "undefined") {
+                quDesc = $("#quDesc").val();// 问题描述 QU_DESC
+                if(quDesc == null || quDesc == "" || quDesc == undefined){
+                   Util.dialog.tips("请输入问题描述");
+                   return;
+                }
+                var params="";
+                var $qus=$(".FormInputText");
+                var $quIds=$(".quIds");
+                var quCntts = ""; 
+                var $borderBox=$(".borderBox");
+                for(var i=0; i<$qus.length; i++){
+                    if( $borderBox.eq(i).is(':checked')==true){
+                        QU_SHOW_MODE_CD="1";
+                    }else{
+                        QU_SHOW_MODE_CD="0";
+                    }
+                    if($qus.eq(i).val() == null || $qus.eq(i).val() == "" ){
+                        Util.dialog.tips("请输入子问题内容");
+                        return;
+                    }
+                    params = params + "&BASE_QU_ID="+quId+"&TGT_QU_ID="+$quIds.eq(i).val()+"&QU_NM="+$qus.eq(i).val()+"&QU_CNTT="+$qus.eq(i).val()+"&QU_DESC="+quDesc+"&QU_SHOW_MODE_CD="+QU_SHOW_MODE_CD+"&HAVE_CHILD_QU_FLAG=0";
+                    quCntts = quCntts+ $qus.eq(i).val()+"__";
+                }
+                params= "&BASE_QU_ID="+quId+"&TGT_QU_ID="+"&QU_NM="+quCntts+"&QU_CNTT="+quCntts+"&QU_DESC="+quDesc+"&QU_SHOW_MODE_CD=0&HAVE_CHILD_QU_FLAG=1" +params;
+                Util.ajax.postJson(srvMap.get("save"), params, function (data) {
+                    var beans = data.beans;
+                   
+                    if (data.returnCode == 0) {
+                        for(var i=0; i<beans.length; i++){
+                            if(i==0){
+                               quId=beans[i].QU_ID;
+                            }else{
+                               $quIds.eq(i-1).val(beans[i].TGT_QU_ID);
+                            }
+                        
+                        }
+
+                    }else{
+                        Util.dialog.tips("保存问题失败！");
+                        return;
+                    }
+                
+                });
+            
+            }
+    
+            var elem = $('<div class="fn-hide"><div class="warn-wrapper"><div class="warn-logo"></div><div class="warn-text">你确定要发布吗？</div></div></div>');
+            var params = { 
+                           top:top,
+                           content: elem,
+                           width: "300px",
+                           height: "120px",
+                           modal: true,
+                           okVal:'确定',
+                           okCallback:function(){
+                               //发布。。。。。。
+                               paramq = {
+                                          "QU_ID": quId 
+                               };
+                               Util.ajax.postJson(srvMap.get("publish"), paramq, function (data) {
+					               if (data.returnCode == 0) {
+					                   Util.dialog.tips("发布问题完成！");
+					                   window.location.href = "questionList.html";
+					               }else{
+					                   Util.dialog.tips("发布问题失败！");
+					               }
+        
+                               });
+                           },
+                           cancelVal:'取消',
+                           cancelCallback:function(){}
+            };
+            Util.dialog.openDiv(params); 
+        });
+        
+ 
+        
+        //添加一项
+        $('#addAnswer').bind('click', function () {
+        	//var $li = $("<li><input type=\"text\" class=\"FormInputText\" value=\"\" /><a href=\"javascript:;\" class=\"delIcon\"></a></li> ");
+        	var $li =$("<li><input type=\"text\" class=\"quIds\" style=\"display:none;\" value=\"\" /><input type=\"text\" class=\"FormInputText\" value=\"\" placeholder=\"在此输入问题\" /><span class=\"borderLabel\">带文本框</span><input type=\"checkbox\" class=\"borderBox\" checked=\"\"><a href=\"javascript:;\" class=\"delIcon\"></a></li>");
+        	$('.delIcon', $li).bind('click', function () {
+        	    //alert("2222=  ");
+        	    var delQuId =$(this).prevAll(".quIds").val();
+        	    delIconClick(delQuId);
+                $(this).parent().remove();
+	        }); 
+            $("ul").append($li);
+        }); 
+             
+        //取消编辑
+        $('#Cancel').bind('click', function () {
+            window.location.href="questionList.html";
+        });      
+             
+             
+             
+             
+             
+             
+    });
+</script>
+</body>
+</html>

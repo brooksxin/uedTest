@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>质量管理模块——添加评分项</title>
+<#include "../../tpl/res_css.tpl" />
+
+</head>
+
+<body>
+<!-- 面包屑 begain -->
+<div class="breadcrumb"></div>
+<!-- 面包屑end -->
+<div class="titleArea">
+    <div class="listTopBtn fn-clear">
+        <h2 class="fn-left">查看策略模板</h2>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../res/common/NiceTools.js"></script>
+<script type="text/javascript" src="../../res/common/common.js"></script>
+<table cellpadding="0" cellspacing="0" border="0" width="100%" class="form_table">
+    <tbody>
+        <tr>
+            <td width="100"><label class="formDescription">策略模版名称：</label></td>
+            <td><p>抽取策略模版1</p></td>
+        </tr>
+        <tr>
+            <td><label class="formDescription">模版描述：</label></td>
+            <td><p>该模版包括3个抽取维度，包括时长、总条数、日期</p></td>
+        </tr>
+        <tr>
+            <td><label class="formDescription">策略类型：</label></td>
+            <td><p>语音外呼类</p></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="tablewidth mg_t_10">
+    <table class="ui-record-table table_radius table-bordered table-striped" >
+        <thead>
+            <tr>
+                <th width="25">序号</th>
+                <th width="150">策略项</th>
+                <th width="">范围(最小值)</th>
+                <th width="200">范围(最大值)</th>
+                <th width="260">抽取数量</th>
+            </tr>
+        </thead>
+        <tbody id="J_tabletpl">
+            <tr>
+                <td>1</td>
+                <td><a class="item-text" href="javascript:;">时长（秒）</a></td>
+                <td>120</td>
+                <td>480</td>
+                <td>10</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!--翻页及功能按钮区域开始-->
+<#include "../../tpl/res_js.tpl" />
+<script type="text/javascript">
+      //页面加载完开始执行
+      $(document).ready(function () {
+          //初始化函数
+      });
+  </script>
+</body>
+</html>

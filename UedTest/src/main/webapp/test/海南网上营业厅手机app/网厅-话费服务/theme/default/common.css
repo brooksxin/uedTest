@@ -1,0 +1,152 @@
+.ui-body{
+	padding-top: 44px;
+}
+.ui-content-wp{
+	padding:0 15px;
+}
+.ui-content-tb td{
+	padding:3px 0;
+	font-size: 1.2em;
+	border:none;
+}
+.ui-content-tb .label{
+	text-align: right;
+}
+.ui-content-tb .value{
+	text-align: left;	
+}
+.ui-impo{
+	color:#FF9500;
+}
+.ui-percent-bar{
+	width:100%;
+	font-size: 0;
+	height: 2px;
+	background-color: #B9B4AE;
+}
+.ui-percent-bar .value{
+	height: 2px;
+	background-color: #3CC2F0;
+}
+.pdt15{padding-top:15px;}
+.fn-relative{
+	position: relative;
+}
+.nb-ui-scrollList {
+	/*position: fixed;*/
+	width: 100%;
+	background-color: #6CBFF1;
+}
+.nb-ui-scrollList a{
+	color: #E5E4E4;
+}
+.nb-ui-busiTab li {
+	float: left;
+	height: 44px;
+	line-height: 44px;
+	padding: 0 0.7em;
+	font-size: 1.2em;
+}
+a.ui-tab-cur{
+	color:#fff;
+	font-size: 1.1em;
+}
+/*teleCharge*/
+.tele-link{
+	font-size: 1.4em;
+	padding-left:10px;
+	color:#00B0F0;
+}
+.tele-link-panel{
+	margin-top: 19px;
+}
+.tele-info-bill{
+	background-color: #F8F8F8;
+	padding-top:7px;
+	padding-bottom:7px;
+}
+.tele-info-date{
+	background-color: #E8E7E4;
+	padding-top:5px;
+	padding-bottom:5px;
+	font-size: 1.1em;
+	color: #0C0C0C;
+}
+.tele-detail{
+	margin-top: 15px;
+}
+.tele-item-data{
+}
+.tele-item-list{
+	position: relative;
+	padding-left:10px;
+	padding-right: 70px;
+	margin-top: 15px;
+}
+.tele-item-percent{
+	width:60px;
+	text-align: right;
+	position: absolute;
+	right: 0px;
+	bottom:-5px;
+}
+.tele-detail-title{
+	font-size: 1.3em;
+	color:#00B0F0;
+}
+.tele-textdata{
+	margin-bottom: 5px;
+	font-size: 1.1em;
+}
+.tele-detail-value{
+	color:#ACA8A3;
+	font-style: italic;
+}
+.tele-item-full .ui-percent-bar .value{
+	background-color:#FF0000;
+}
+.tele-item-full .tele-item-percent{
+	color: #FF0000;
+}
+.tele-item-order{
+	background: url(images/prom.png);
+	display:block;
+	padding:6px 15px 3px 15px;
+	border-radius: 6px;
+	font-size: 1.1em;
+	color: #DA6600;
+	margin-top: 10px;
+}
+.tele-item-sorrow{
+	background: url(images/swrro.png);
+	display: inline-block;
+	width:20px;
+	height:13px;
+	background-size: 100%;
+	position: absolute;
+	left: 33px;
+	top: -8px;
+}
+.bar {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  height: 44px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+.bar-nav {
+top: 0;
+}
+
+
+
+
+
+

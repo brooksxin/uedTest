@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>顾客接触记录详情</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+	<div class="formItem">
+		<div class="pt-10 pb-10 ui-fhw"><a href="Javascript:history.go(-1);void(0);" class="formItem_jiantou-tu normalLink">返回</a></div>
+		<div class="titleArea">
+			<h2>接触详情</h2>
+		</div>
+
+
+
+		<div class="formArea-B nobottomborder">
+			<table width="100%">
+				<tbody id="J_CntMngTabletpl"></tbody>
+				<tbody id="J_CustomerTabletpl"></tbody>			
+			</table>
+		</div>
+
+		<div class="ui-secondaryTitle pt-10 pb-10">接触历史</div>
+		<div>
+			<table
+				class="ui-record-table table_radius table-bordered table-striped fn-center">
+				<thead>
+					<tr>
+						<th>日期</th>
+						<th>开始时间</th>
+						<th>结束时间</th>
+						<th>持续时间</th>
+						<th>处理人</th>
+						<th>工号</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="J_ContactTabletpl"/>
+			</table>
+		</div>
+
+		<div class="ui-secondaryTitle pt-10 pb-10">预约历史</div>
+		<div>
+			<table
+				class="ui-record-table table_radius table-bordered table-striped fn-center">
+				<thead>
+					<tr>
+						<th>预约订单编号</th>
+						<th>商品名称</th>
+						<th>预约时间</th>
+						<th>预约状态</th>
+						<th>处理人工号</th>
+					</tr>
+				</thead>
+				<tbody id="J_ReservationTabletpl"/>
+			</table>
+		</div>
+
+		<div class="ui-secondaryTitle pt-10 pb-10">订单历史</div>
+		<div>
+			<table
+				class="ui-record-table table_radius table-bordered table-striped fn-center">
+				<thead>
+					<tr>
+						<th>订单编号</th>
+						<th>商品名称</th>
+						<th>下单时间</th>
+						<th>订单状态</th>
+						<th>处理人工号</th>
+					</tr>
+				</thead>
+				<tbody id="J_orderTabletpl_11"/>
+			</table>
+		</div>
+
+		<div class="ui-secondaryTitle pt-10 pb-10">退货历史</div>
+		<div>
+			<table
+				class="ui-record-table table_radius table-bordered table-striped fn-center">
+				<thead>
+					<tr>
+						<th>预约订单编号</th>
+						<th>商品名称</th>
+						<th>退货时间</th>
+						<th>状态</th>
+						<th>处理人工号</th>
+					</tr>
+				</thead>
+				<tbody id="J_tabletpl">
+					<tr>
+						<td colspan="5">
+							<div class="ui-tips-box tipsBox">
+							<div class="ui-icon-noData"></div>
+							<div class="ui-tips-text">对不起，没有数据！</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+				
+			</table>
+		</div>
+	</div>
+
+	<div class="formBtnArea">
+		<table width="100%">
+			<tr>
+				<td>
+					<div class="normalBtnArea fn-center">
+						<a class="normalBtn BGgray largeBtn"
+							href="javascript:;"onclick="addRemark()">添加备注</a>
+					</div></td>
+			</tr>
+		</table>
+	</div>
+	
+	<div id="T_playReocrdPage" class="fn-hide">
+       	<div class="formArea-B nobottomborder">
+            <table width="100%">
+               <tbody id="J_RcdTabletpl"></tbody>
+            </table>
+            <div style="text-align: center;"><a class="searchBtn" href="javascript:;" onclick="stopPlay();" >停止</a></div> 
+        </div>
+    </div>
+    
+    <div id="TouchMarkPage" class="fn-hide">
+         <div class="nobottomborder">
+              <table width="100%">
+                 <tbody>
+					<tr>
+                        <td><textarea name="touchRmk" id ="touchRmk" style="height:130px;width:400px" ></textarea></td>
+                    </tr>
+                    <tr>
+						<td>
+							<div class="normalBtnArea fn-center">
+								<a class="normalBtn BGblue largeBtn"
+									href="javascript:;"onclick="add()">添加</a>
+							</div>
+						</td>
+					</tr>
+                 </tbody>       
+              </table>
+         </div>
+    </div>
+
+
+<script id="T_CntMngTabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}} 
+ 		<tr>
+          	<td width="100"><span class="text_gray-666">顾客姓名：</span></td>
+           	<td width="200">{{CMCC_CUST_NM}}</td>
+           	<td width="90"><span class="text_gray-666">顾客电话：</span></td>
+           	<td>{{CUST_MOBNUM}}</td>
+			<td width="80"><span class="text_gray-666">呼叫类型：</span></td>
+			<td>{{compareTouchMode TOUCH_MODE_CD}}</td>
+       	</tr>
+		<tr>
+ 			<td><span class="text_gray-666">开始时间：</span></td>
+  			<td >{{BGN_CNTMNG_TIME}}</td>
+			<td><span class="text_gray-666">结束时间：</span></td>
+   			<td >{{END_CNTMNG_TIME}}</td>
+			<td><span class="text_gray-666">持续时间：</span></td>
+   			<td >{{BETWEEN_TIME}}</td>		
+		</tr>
+  		<tr>
+ 			<td><span class="text_gray-666">处理人：</span></td>
+ 			<td>{{STAFF_NAME}}</td>
+    		<td><span class="text_gray-666">工号：</span></td>
+ 			<td>{{STAFF_ID}}</td>
+			<td><span class="text_gray-666">渠道类别：</span></td>
+  			<td>{{compareChannelId CHNL_ID}}</td>
+   		</tr>
+		<tr>
+			<td valign="top"><span class="text_gray-666">备注：</span></td>
+			<td colspan="5">{{TOUCH_RMK}}</td>
+		</tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="6">
+    		<div>暂无接触记录！</div>
+		</td>
+	</tr>
+{{/if}}  
+</script>
+<script id="T_CustomerTabletpl" type="text/x-handlebars-template">
+ 		<tr>
+   			<td width="90" valign="top"><span class="text_gray-666">顾客所在地：</span></td>
+   			<td width="250">{{bean.address}}</td>
+			<td width="70" ><span class="text_gray-666">顾客套餐：</span></td>
+			<td>{{bean.basicFeeName}}</td>
+			<td width="70"><span class="text_gray-666">顾客手机：</span></td>
+  			<td>{{bean.termEqpmtId}}  <span class="fn-high">（使用{{bean.termUsedMons}}月）</span></td>
+ 		</tr>
+  		<tr>			
+   			<td><span class="text_gray-666">出生年月：</span></td>
+ 			<td>{{bean.birthDt}}</td>
+			<td><span class="text_gray-666">性别：</span></td>
+  			<td></td>
+			<td><span class="text_gray-666">职业：</span></td>
+ 			<td></td>
+ 		</tr>
+ 		<tr> 			
+  			<td><span class="text_gray-666">费用当前状态：</span></td>
+  			<td>{{bean.subs_stat_type}}</td>
+			<td><span class="text_gray-666">入网时间：</span></td>
+ 			<td>{{bean.entDt}}</td>
+		</tr>
+	</script>
+	
+<script id="T_ContactTabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}} 		
+		<tr>
+			<td>{{CRT_TIME}}</td>
+			<td>{{BGN_CNTMNG_TIME}}</td>
+			<td>{{END_CNTMNG_TIME}}</td>
+			<td>{{BETWEEN_TIME}}</td>
+			<td>{{STAFF_NAME}}</td>
+			<td>{{STAFF_ID}}</td>
+			<td>
+			<div class="gridRowBtn">
+				<a class="item-text" href="javascript:;" onclick="playRecord('{{CNTMNG_ID}}','{{TOUCH_ID}}')">播放录音</a>
+			</div>
+			</td>
+		</tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="8">
+    	<div>对不起，没有数据！</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+	
+<script id="T_RcdTabletpl" type="text/x-handlebars-template">
+{{#if bean}}
+	<tr>
+        <td width="10%" ><span class="text_gray-666">顾客姓名：</span></td>
+        <td width="20%">{{bean.CMCC_CUST_NM}}</td>
+        <td width="10%" ><span class="text_gray-666">顾客电话：</span></td>
+        <td width="20%">{{bean.CUST_MOBNUM}}</td>
+        <td width="10%"><span class="text_gray-666">呼叫类型：</span></td>
+        <td width="20%">{{compareTouchMode bean.TOUCH_MODE_CD}}</td>
+    </tr>
+	<tr>
+        <td width="10%" valign="top"><span class="text_gray-666">接触时间：</span></td>
+        <td colspan="5">{{bean.BGN_CNTMNG_TIME}} 至 {{bean.END_CNTMNG_TIME}}</td>
+     </tr>
+    <tr>
+        <td width="10%" valign="top"><span class="text_gray-666">处理人：</span></td>
+        <td width="20%">{{bean.STAFF_NAME}}</td>
+        <td width="10%" valign="top"><span class="text_gray-666">工号：</span></td>
+        <td width="20%">{{bean.STAFF_ID}}</td>
+        <td width="10%"></td>
+        <td width="20%"></td>
+     </tr>
+     <tr>
+	     <td colspan="6">
+	         <embed id="player"  src="{{bean.rcdFileSvrUrlPath}}{{bean.rcdFileSavePath}}/{{bean.rcdFileNm}}"
+	            hidden="false" ShowStatusBar="true" type="application/x-mplayer3" EnableContextMenu="false" autostart="true" ShowTracker="true" ShowPositionControls="false" autostart="true" loop="false" width="90%" height="70"> 
+	         </embed>
+	     </td>
+	</tr>
+{{else}}
+    <div>无播放录音！</div>
+{{/if}}
+</script>
+
+<script id="T_ReservationTabletpl" type="text/x-handlebars-template">
+    {{#if beans}}
+        {{#each beans}}
+            <tr>
+                <td>{{RSVT_ODR_ID}}</td>
+				<td>{{RSVT_INPUT_MCDS_NM}}</td>
+                <td>{{RSVT_DATE}}</td>
+                <td>{{VALID_STS_CD}}</td>
+                <td></td>
+            </tr>
+        {{/each}}
+    {{else}}
+<tr>
+	<td colspan="5">
+	<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">对不起，没有数据！</div>
+	</div>
+	</td>
+</tr>
+    {{/if}}
+</script>
+
+<script id="T_OrderTabletpl" type="text/x-handlebars-template">
+    {{#if beans}}
+        {{#each beans}}
+            <tr>
+                <td>{{odrId}}</td>
+				<td>{{mcdsUnitNm}}</td>
+                <td>{{crtTime}}</td>
+                <td>{{compareOdrSts odrSts}}</td>
+                <td>{{userLoginId}}</td>
+            </tr>
+        {{/each}}
+    {{else}}
+<tr>
+	<td colspan="5">
+	<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">对不起，没有数据！</div>
+	</div>
+	</td>
+</tr>
+	{{/if}}
+</script>
+
+<#include "../../tpl/res_js.tpl" />
+
+<script type="text/javascript">
+	/*
+	服务配置
+	param1: 服务名
+	param2: 假数据路径
+	param3: 后台服务路径
+	*/
+	srvMap.add('queryContactCntMng', 'contactCntMng.json','front/sh/contact!execute?uid=u007');//查询接触记录
+	srvMap.add('queryContactCntMngLogs', 'contactCntMngs.json','front/sh/contact!execute?uid=u007');//查询接触记录
+	srvMap.add('queryCustomerInfo', 'customerInfo.json','front/sh/contact!execute?uid=u009');//查询客户信息
+    srvMap.add('selectCntMsgAndTouchRcd', 'rcdInfo.json','front/sh/contact!execute?uid=u014');//接触信息和录音信息查询
+    srvMap.add('updateTouchRemark', '','front/sh/contact!execute?uid=u015');//接触备注信息更新
+    srvMap.add('queryReservationOrder', 'reservationOrder.json','front/sh/order!getReservationOrder?uid=ort20');//查询预约历史
+    srvMap.add('queryOrderLog', 'reservationOrder.json','front/sh/order!queryOrderDetail?uid=o001');//查询订单历史
+    
+    var CNTMNG_ID = "";
+	var CUST_MOBNUM = "";
+	var TOUCH_ID = "";
+	//页面加载完开始执行
+	$(document).ready(function() {
+	//初始化函数		
+		CNTMNG_ID = Util.browser.getParameter("CNTMNG_ID");
+		CUST_MOBNUM = Util.browser.getParameter("CUST_MOBNUM");
+		TOUCH_ID = Util.browser.getParameter("TOUCH_ID");	
+		if(CNTMNG_ID != ''){
+			loadCntMngByCntMngId(CNTMNG_ID);
+		}
+		if(CUST_MOBNUM != ''){			
+			loadCustomerInfoByPhone(CUST_MOBNUM);
+			loadCntMngLogsByPhone(CUST_MOBNUM);
+			loadReservationLogsByPhone(CUST_MOBNUM);
+			loadOrderLogsByPhone(CUST_MOBNUM);			
+		}
+	});
+
+//查询接触信息
+function loadCntMngByCntMngId(CNTMNG_ID)
+{
+	 Util.ajax.postJson(srvMap.get('queryContactCntMng'),'&CNTMNG_ID='+CNTMNG_ID,function(json,status){
+	        if (status) {
+	            Util.ajax.loadTemp('#J_CntMngTabletpl',$('#T_CntMngTabletpl'),json);//加载模板
+	        }else{
+	            alert(json.returnMessage||'查询失败，请重试！');
+	        }
+	    })
+}
+//查询顾客信息
+function loadCustomerInfoByPhone(CUST_MOBNUM)
+{
+	 Util.ajax.postJson(srvMap.get('queryCustomerInfo'),'&MSISDN='+CUST_MOBNUM,function(json,status){
+	        if (status) {
+	            Util.ajax.loadTemp('#J_CustomerTabletpl',$('#T_CustomerTabletpl'),json);//加载模板
+	        }else{
+	            alert(json.returnMessage||'没有查询到相关顾客信息！');
+	        }
+	    })
+}
+//查询接触历史
+function loadCntMngLogsByPhone(CUST_MOBNUM)
+{
+	 Util.ajax.postJson(srvMap.get('queryContactCntMngLogs'),'&CUST_MOBNUM='+CUST_MOBNUM,function(json,status){  
+		 if (status) {
+	            Util.ajax.loadTemp('#J_ContactTabletpl',$('#T_ContactTabletpl'),json);//加载模板
+	        }else{
+	            alert(json.returnMessage||'查询失败，请重试！');
+	        }
+	    })
+}
+//查询预约历史
+function loadReservationLogsByPhone(CUST_MOBNUM)
+{
+	 Util.ajax.postJson(srvMap.get('queryReservationOrder'),'&resv_mobnum='+CUST_MOBNUM,function(json,status){  
+		 if (status) {
+	            Util.ajax.loadTemp('#J_ReservationTabletpl',$('#T_ReservationTabletpl'),json);//加载模板
+	        }else{
+	            alert(json.returnMessage||'查询失败，请重试！');
+	        }
+	    })
+}
+//查询订单历史
+function loadOrderLogsByPhone(CUST_MOBNUM)
+{
+	 Util.ajax.postJson(srvMap.get('queryOrderLog'),'&custResvTelNum='+CUST_MOBNUM,function(json,status){  
+		 if (status) {			 
+	            Util.ajax.loadTemp('#J_orderTabletpl_11',$('#T_OrderTabletpl'),json);//加载模板
+	        }else{
+	            alert(json.returnMessage||'查询失败，请重试！');
+	        }
+	    }) 
+}
+//播放录音记录
+function playRecord(CNTMNG_ID,TOUCH_ID){
+	if(TOUCH_ID == ''){
+		alert('无播放录音！');
+		return;
+	}
+	 Util.ajax.postJson(srvMap.get('selectCntMsgAndTouchRcd'),'&CNTMNG_ID='+CNTMNG_ID,function(json,status){
+	        if (status) {
+	            Util.ajax.loadTemp('#J_RcdTabletpl',$('#T_RcdTabletpl'),json);//加载模板
+	        }else{
+	            alert(json.returnMessage||'查询失败，请重试！');
+	        }
+	    })	
+	var elem = document.getElementById('T_playReocrdPage');
+  	var params = {
+      id:'D_playReocrdPage',
+      title:'录音播放',
+      content: elem,
+      width: 700,
+      height:400,
+      modal: true,
+      closeCallback: stopPlay
+  	}
+ 	Util.dialog.openDiv(params);
+}
+function stopPlay(){
+	try{
+   		 player.Stop();
+   		 Util.dialog.close("D_playReocrdPage");
+    }catch(e){}
+}
+
+function addRemark(){
+	var elem = document.getElementById('TouchMarkPage');
+  	var params = {
+      id:'TouchMarkPage',
+      title:'添加备注',
+      content: elem,
+      width: 400,
+      height:200,
+      modal: true
+      
+  	}
+ 	Util.dialog.openDiv(params);
+}
+
+function add(){
+	var touchRmk = document.getElementById('touchRmk').value;
+	if(touchRmk.length > 500){
+		alert("字数不能超过500字!");
+		return;
+	}
+	Util.ajax.postJson(srvMap.get('updateTouchRemark'),'&touchId='+TOUCH_ID+'&touchRmk='+touchRmk,function(json,status){})
+	loadCntMngByCntMngId(CNTMNG_ID);
+	var markPage = document.getElementById('TouchMarkPage');	
+	Util.dialog.close("TouchMarkPage");
+}
+Handlebars.registerHelper('compareTouchMode',function(val){
+	var buffer = "";
+	if(val == "0"){
+		buffer = "呼入";
+	}else{
+		buffer = "呼出";
+	}
+	
+	return buffer;
+})
+Handlebars.registerHelper('compareChannelId',function(val){
+	var buffer = "";
+	if(val == "1"){
+		buffer = "10085";
+	}else{
+		buffer = val;
+	}
+	
+	return buffer;
+})
+Handlebars.registerHelper('compareOdrSts',function(val){
+	var buffer = "";
+	if(val == "1000"){
+		buffer = "初始订单";
+	}else if(val == "1025"){
+		buffer = "已取消";
+	}else if(val == "1030"){
+		buffer = "已退款";
+	}else if(val == "1024"){
+		buffer = "已签收";
+	}else if(val == "1010"){
+		buffer = "已发货";
+	}else if(val == "1031"){
+		buffer = "退款中";
+	}else if(val == "1005"){
+		buffer = "已下单";
+	}else if(val == "1032"){
+		buffer = "退款失败";
+	}else if(val == "1033"){
+		buffer = "厂商状态异常";
+	}else if(val == "1034"){
+		buffer = "拒收";
+	}else{
+		buffer = val;
+	}	
+	return buffer;
+})
+</script>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>10086系统</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<!-- <link rel="stylesheet" href="dest/ecp.min.css" /> -->
+<link rel="stylesheet" href="css/common.css" />
+<link rel="stylesheet" href="css/tablepay.css" />
+<link rel="stylesheet" href="lib/jqueryui/jquery-ui.min.css" />
+<link rel="stylesheet" href="lib/dialog/6.0.4/css/ui-dialog.css" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+</head>
+<body>
+<!--login top begain -->
+<div class="login_top login_container">
+    <h1>10086<span>外呼平台</span></h1>
+</div>
+<!--login top end -->
+<!-- middle begain -->
+<div class="login_middle">
+	<div class="login_container login_bj fn-clear">
+	    <div class="login_right">
+	        <h3>账号登录</h3>
+	        <form id="J_formLogin" name="J_formLogin">
+	            <ul>
+	                <li>
+	                    <div class="login_box fn-clear">
+	                        <p class="num"></p>
+	                        <input type="hidden" id="uid" name="uid" value="l001" />
+	                        <input id="username" name="username" type="text" class="login_text" placeholder="请输入工号" />
+	                    </div>
+	                    <div class="login_warn fn-hide" id="J_username_wrapper">
+	                        <p id="J_username" class="error">请输入正确的工号</p>
+	                        <!-- <p class="right">您输入的工号可以使用</p> -->
+	                    </div>
+	                </li>
+	                <li>
+	                    <div class="login_box fn-clear">
+	                        <p class="pas"></p>
+	                        <input id="password" name="password" type="password" class="login_text" placeholder="请输入密码"/>
+	                    </div>
+	                    <div class="login_warn fn-hide" id="J_password_wrapper">
+	                        <p id="J_password" class="error">密码错误</p>
+	                        <!-- <p class="right">您输入的工号可以使用</p> -->
+	                    </div>
+	                </li>
+	                <li>
+	                    <div class="login_box validate fn-clear">
+	                        <p class="jp"></p>
+	                        <input id="NCode" name="NCode" type="text" class="login_text confirm" placeholder="短信验证码"/>
+	                    </div>
+	                    <a href="javascript:;" class="gain" id="J_getValidCode">获取验证码</a>
+	                    <div class="login_warn fn-hide" id="J_code_wrapper">
+	                        <p id="J_code" class="error">验证码错误</p>
+	                        <!--  <p class="right">您输入的工号可以使用</p> -->
+	                    </div>
+	                </li>
+	                <li>
+	                    <a href="javascript:;" class="login_btn" id="J_login">登录</a>
+	                </li>
+	                <li style="height:auto;margin:-20px 0 20px 0;">
+	                    <div class="fields_input-he">
+	                        <input name="rememberMe" id="rememberMe" type="checkbox" value="yes" style="vertical-align:middle" />
+	                        <label style="display:inline" for="rememberMe">记住我，公用电脑请勿勾选</label>
+	                    </div>
+	                </li>
+	            </ul>
+	        </form>
+	    </div>
+    </div>
+</div>
+<!-- middle end -->
+<!-- bottom begain -->
+<div class="login_bottom">
+    <p>Copyright&copy;1999-2015 中国移动 版权所有</p>
+</div>
+<!-- bottom end -->
+
+<script src="dest/lib.min.js"></script>
+<script src="common/config.js"></script>
+<script src="common/common.js"></script>
+<script type="text/javascript">
+document.onkeydown = function (e) { 
+    var theEvent = window.event || e; 
+    var code = theEvent.keyCode || theEvent.which; 
+    if (code == 13) { 
+          $("#J_login").click(); 
+    }
+}
+//页面加载完开始执行
+$(function () {
+    $("#J_getValidCode").click(getSMSCode);
+    $('#J_login').bind('click',function(){
+        var str = $("#J_formLogin").serialize(); //把form序列化
+        cleanErrMsg();
+        var username = $("#username").attr("value");
+        if(username.replace(/\s+/g,"") == ''){
+             $("#J_username").html("工号不能为空");
+           $("#J_username_wrapper").removeClass("fn-hide");
+             return;
+        }
+        var password = $("#password").attr("value");
+        if(password.replace(/\s+/g,"") == ''){
+             $("#J_password").html("密码不能为空");
+           $("#J_password_wrapper").removeClass("fn-hide");
+             return;
+        }
+        var code = $("#NCode").attr("value");
+        if(password.replace(/\s+/g,"") == ''){
+             $("#J_code").html("验证码不能为空");
+           $("#J_code_wrapper").removeClass("fn-hide");
+             return;
+        }
+        //不分页获取数据'?uid=1001&smsSdTelnum=13526424057
+         // Util.ajax.postJson('data/login.json',str,function(json,status){
+         Util.ajax.postJson('front/sh/login!index',str,function(json,status){
+            if (status) {
+              Util.cookie.remove('f','/');
+              Util.cookie.remove('t','/');
+                window.location.href="module/homePage/hp_86.html";
+                //window.location.href="index.html";
+            }else{
+                if(json.bean == null){
+                    Util.dialog.tips(json.errorMsg||'登录失败，请重试！');
+                }else{
+                    var errorCode = json.bean.errorCode;
+                    var errorMsg = json.bean.errorMsg;
+                    if(errorCode == '0001'){ //用户帐户不存在
+                        $("#J_username").html(errorMsg);//加载模板
+                   $("#J_username_wrapper").removeClass("fn-hide");
+                    }else if(errorCode == '0002'){  //用户帐户锁定
+                        $("#J_username").html(errorMsg);//加载模板
+                   $("#J_username_wrapper").removeClass("fn-hide");
+                    }else if(errorCode == '0003'){  //登录过于频繁
+                        $("#J_username").html(errorMsg);//加载模板
+                   $("#J_username_wrapper").removeClass("fn-hide");
+                    }else if(errorCode == '0004'){  //用户名密码错误
+                        $("#J_password").html(errorMsg);//加载模板
+                  $("#J_password_wrapper").removeClass("fn-hide");
+                    }else if(errorCode == '0006'){  //验证码错误
+                        $("#J_code").html(errorMsg);//加载模板
+                          $("#J_code_wrapper").removeClass("fn-hide");
+                    }else if(errorCode == '0007'){  //首次登录
+                        window.location.href="module/user/firstLoginMdfPwd_86.html";
+                    }else if(errorCode == '9999'){
+                        Util.dialog.tips(errorMsg);
+                    }
+                }
+            }
+        }); 
+    })
+});
+
+//倒计时获取验证码
+function getSMSCode(){
+    cleanErrMsg();
+    var username = $("#username").val();
+    if(username.replace(/\s+/g,"") == ''){
+       $("#J_username").html("工号不能为空");
+        $("#J_username_wrapper").removeClass("fn-hide");
+       return;
+     }
+    var password = $("#password").val();
+    if(password.replace(/\s+/g,"") == ''){
+         $("#J_password").html("密码不能为空");
+         $("#J_password_wrapper").removeClass("fn-hide");
+         return;
+    }
+    var param={'uid':'1001','username':username,'password':password};
+
+    var _this = $(this);
+    _this.text('正在发送..').unbind("click");
+    //短信验证码
+    // Util.ajax.postJson('data/login.json',param,function(json,status){
+    Util.ajax.postJson('front/sh/login!getNCodeTest',param,function(json,status){
+        if (!status) {
+            var maxTime=json.bean!=null?json.bean.max:1;
+            var opts = {
+                obj : '#J_getValidCode',
+                maxtime : maxTime,
+                timer : null,
+                succ : '再次获取',
+                fail : '重新获取',
+                wait : '发送中...',
+                succf : '{0}秒后再次获取'
+            }
+            current = opts.maxtime;
+            current = current - 1;
+            opts.timer = setInterval(function() {
+                if (current > 0) {
+                    var msg = Util.sms.formatStr(opts.succf, current);
+                    $(opts.obj).html(msg);
+                    if (!_this.hasClass('disable')) {
+                        $(opts.obj).addClass('disable');  
+                    };
+                    current = (current) - 1;
+                } else {
+                    clearInterval(opts.timer);
+                    $(opts.obj).html(opts.succ).removeClass('disable');
+                    _this.bind("click",getSMSCode);
+                }
+            }, 1000);
+            if(json.bean!=null){
+             $("#NCode").val(json.bean.Ncode)
+             }else{
+             $("#J_code").html(json.returnMessage);//加载模板
+             $("#J_code_wrapper").removeClass("fn-hide");
+              }
+              
+        }else{
+            _this.text('获取短信验证码');
+            $("#J_code").html(json.returnMessage);//加载模板
+            $("#J_code_wrapper").removeClass("fn-hide");
+        }
+    })
+}
+
+function cleanErrMsg(){
+     $("#J_username").html("");
+     $("#J_password").html("");
+     $("#J_code").html("");
+     $("#J_code_wrapper").addClass("fn-hide");
+     $("#J_username_wrapper").addClass("fn-hide");
+     $("#J_password_wrapper").addClass("fn-hide");
+}
+</script>
+</body>
+</html>

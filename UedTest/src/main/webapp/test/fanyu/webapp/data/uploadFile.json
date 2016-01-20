@@ -1,0 +1,11 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": null,
+    "bean": {"count":"6"},
+    "beans": [
+    ],
+    "object": null
+}

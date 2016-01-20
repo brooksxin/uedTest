@@ -1,0 +1,22 @@
+{
+	"busiCode":null,
+	"opId":null,
+	"phone":null,
+	"returnCode":"0",
+	"returnMessage":null,
+	"bean":{
+		"deptName":"12DEPT",
+		"staffEnName":null,
+		"uid":"u001",
+		"staffId":"100001",
+		"staffName":"dsdfds",
+		"postName": "订单组",
+		"postId": "1",
+		"userId":"1001",
+		"userName":"admin",
+		"userAls":"ADMIN",
+		"deptId":"1",
+		"ptyId":"1001",
+		"ptyName":"话务员"
+	}
+}

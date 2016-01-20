@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="shortcut icon" href="../zw.ico">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<title>css3-demo</title>
+<script type="text/javascript" src="../jquery.js"></script>
+<style type="text/css">
+/*
+*
+*/
+body{
+	width: 960px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
+	font-size: 12px;
+}
+.pcontent{
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: #002b36;
+	color: #F2ECDE;
+}
+.fn-high{color: #ED5736;}
+
+</style>
+
+</head>
+<body>
+
+	<div>
+		<p class="pcontent">
+			css3中的animation只应用在页面上已存在的dom元素上。
+		</p>
+
+    <p class="pcontent">
+      <span class="fn-high">keyframes</span>：关键帧。前面说过的transition，只是包括了开始状态和结束状态，而中间过程都是自动形成的。<br />
+      keyframes命名以@keyframes开头，后面紧接着的是这个“动画的名词”加上一对花括号“{}”，括号中就是一些不同时间段样式规则。<br />
+      对于一个"@keyframes"来说，其中的样式规则是由多个百分比构成的，例如"0%"<span class="fn-high">（%不能少）</span>到"100%"之间，我们可以在这个规则中创建多个百分比，我们分别给每一个百分比中需要有动画效果的袁术加上不同的属性，从而让元素打到一种不断变化的效果，例如移动、颜色、位置、大小、形状等。<span class="fn-high">我们可以使用"from"（相当于0%）、"to"相当于100%）来表示一个动画是从哪开始，到哪结束。keyframes的单位只接受百分比值。</span>
+    </p>
+  </div>
+
+<script type="text/javascript">
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Untitled Form</title>
+<link href="../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../css/tablepay.css" media="all">
+<link rel="stylesheet" type="text/css" href="../css/common.css" media="all">
+<link rel="stylesheet" type="text/css" href="../lib/dialog/6.0.4/css/ui-dialog.css">
+<script src="../lib/jquery/1.8.1/jquery.js"></script>
+<script type="text/javascript" src="../lib/pretty/prettify.js"></script>
+<script src="../lib/datepicker/4.8.b2/WdatePicker.js"></script>
+<style>
+.standard {
+	margin:0px 20px
+}
+.standard h1 {
+	font-size:20px;
+	margin:10px 0px;
+	font-weight:bold
+}
+.standard p {
+	line-height:150%;
+	margin:20px 0px 10px 0px;
+}
+</style>
+</head>
+<body id="main_body" onload="prettyPrint()">
+<div class="standard">
+  <H1>数据集列表页面条件过滤区域</H1>
+  <p><strong>示例</strong></p>
+  
+  <div>
+    <form class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+      <div class="record-search-cate">
+        <table class="search_table" cellpadding="0" cellspacing="0" border="0" width="100%">
+          <tbody>
+            <tr>
+           	<!--每行最多三个查询条件-->
+              <td width="100"><label class="description">商家名称</label></td>
+              <td width="150"><input class="inputText" type="text" maxlength="255" value=""/></td>
+              <!--日期开始与结束选择分开放置-->
+              <td width="90"><label class="description">日期起</label></td>
+              <td width="150">
+              	<input type="text"  id='start' name='start'  class="FormInputText inputWidth Wdate" value="" onFocus="WdatePicker({
+                    onpicked:function(){end.focus();},//选择后自动打开id为end的日期选择
+                    startDate:'%y-%M-%d',//初始化从今天开始
+                    realDateFmt:'yyyy-MM-dd',//格式化后的值
+                    dateFmt:'yyyy-MM-dd',//显示的格式
+                    minDate:'%y-%M-%d',//选择的最小值是今天
+                    maxDate:'#F{$dp.$D(\'end\')}'//选择的最大值不能大过ID为end的值
+                    })"/>
+              </td>
+              <td width="90"><label class="description">日期止</label></td>
+              <td width="150">
+              <input type="text"  id='end' name='end'  class="FormInputText inputWidth Wdate" value="" onFocus="WdatePicker({
+                  startDate:'%y-%M-%d',
+                  realDateFmt:'yyyy-MM-dd',
+                  dateFmt:'yyyy-MM-dd',
+                  minDate:'#F{$dp.$D(\'start\')}',//选择的最小值不能小于ID为start的值
+                  })"/>
+              </td>
+              <td><div class="normalBtnArea w82"> <a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a> </div></td>
+            </tr>
+            <tr>
+              <td width="100"><label class="description">商家名称</label></td>
+              <td width="150"><input class="inputText" type="text" maxlength="255" value=""/></td>
+              <td width="90"><label class="description">精确日期起</label></td>
+              <td width="150">
+                <input type="text"  id='start1' name='start1'  class="inputWidthDataPoint FormInputText  Wdate" value="" onFocus="WdatePicker({
+                    onpicked:function(){end1.focus();},//选择后自动打开id为end1的日期选择
+                    startDate:'%y-%M-%d',//初始化从今天开始
+                    realDateFmt:'yyyy-MM-dd HH:mm:ss',//格式化后的值
+                    dateFmt:'yyyy-MM-dd HH:mm:ss',//显示的格式
+                    minDate:'%y-%M-%d',//选择的最小值是今天
+                    maxDate:'#F{$dp.$D(\'end1\')}'//选择的最大值不能大过ID为end的值
+                    })"/>
+              </td>
+              <td width="90"><label class="description">精确日期止</label></td>
+              <td width="150">
+              <input type="text"  id='end1' name='end1'  class="inputWidthDataPoint FormInputText Wdate" value="" onFocus="WdatePicker({
+                  startDate:'%y-%M-%d',
+                  realDateFmt:'yyyy-MM-dd HH:mm:ss',
+                  dateFmt:'yyyy-MM-dd HH:mm:ss',
+                  minDate:'#F{$dp.$D(\'start1\')}',//选择的最小值不能小于ID为start的值
+                  })"/>
+              </td>
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+          <!--更多查询条件写在id为JS_filterMore的tbody下面-->
+          <tbody id="JS_filterMore" class="fn-hide">
+            <tr>
+              <td width="90"><label class="description">更多查询名称</label></td>
+              <td width="150"><input class="inputText" type="text" maxlength="255" value=""/></td>
+              <td width="90"><label class="description">日期起</label></td>
+              <td width="150"><input id="param-eDate" class="element text Wdate" type="text" value="" onFocus="WdatePicker()"  /></td>
+              <td width="90"><label class="description">日期止</label></td>
+              <td width="150"><input id="param-eDate" class="element text Wdate" type="text" value="" onFocus="WdatePicker()"  /></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--没有更多搜索条件时去掉-->
+      <div class="seeMoreFilter"><a href="javascript:;" id="J_toggleSearch" class="down"></a></div>
+    </form>
+  </div>
+  
+  
+  
+  <p><strong>代码</strong></p>
+  
+  <pre class="prettyprint mg_t_20 fn-clear" id="html">
+
+  &lt;div method=&quot;post&quot; action=&quot;#&quot; class=&quot;cmxform&quot; &gt;
+    &lt;form class=&quot;record-search-form record-search-min record-search-form-border&quot; id=&quot;J_formSearch&quot; name=&quot;J_formSearch&quot; &gt;
+      &lt;div class=&quot;record-search-cate&quot;&gt;
+        &lt;table class=&quot;search_table&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+           	&lt;!--每行最多四个查询条件--&gt;
+              &lt;td width=&quot;100&quot;&gt;&lt;label class=&quot;description&quot;&gt;商家名称&lt;/label&gt;&lt;/td&gt;
+              &lt;td width=&quot;150&quot;&gt;&lt;input class=&quot;inputText&quot; type=&quot;text&quot; maxlength=&quot;255&quot; value=&quot;&quot;/&gt;&lt;/td&gt;
+              &lt;td width=&quot;90&quot;&gt;&lt;label class=&quot;description&quot;&gt;日期起&lt;/label&gt;&lt;/td&gt;
+              &lt;td width=&quot;150&quot;&gt;
+              	&lt;!--日期组件--&gt;
+              	&lt;input id=&quot;param-eDate&quot; class=&quot;element text Wdate&quot; type=&quot;text&quot; value=&quot;&quot; onFocus=&quot;WdatePicker()&quot;  /&gt;
+              &lt;/td&gt;
+              &lt;td width=&quot;90&quot;&gt;&lt;label class=&quot;description&quot;&gt;日期止&lt;/label&gt;&lt;/td&gt;
+              &lt;td width=&quot;150&quot;&gt;&lt;input id=&quot;param-eDate&quot; class=&quot;element text Wdate&quot; type=&quot;text&quot; value=&quot;&quot; onFocus=&quot;WdatePicker()&quot;  /&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class=&quot;normalBtnArea&quot;&gt; &lt;a class=&quot;searchBtn&quot; href=&quot;javascript:;&quot; id=&quot;J_search&quot; &gt;&lt;i&gt;&lt;/i&gt;查询&lt;/a&gt; &lt;/div&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+          &lt;!--更多查询条件写在下面，id和class一定保留--&gt;
+          &lt;tbody id=&quot;JS_filterMore&quot; class=&quot;fn-hide&quot;&gt;
+            &lt;tr&gt;
+              &lt;td width=&quot;90&quot;&gt;&lt;label class=&quot;description&quot;&gt;更多查询名称&lt;/label&gt;&lt;/td&gt;
+              &lt;td width=&quot;150&quot;&gt;&lt;input class=&quot;inputText&quot; type=&quot;text&quot; maxlength=&quot;255&quot; value=&quot;&quot;/&gt;&lt;/td&gt;
+              &lt;td width=&quot;90&quot;&gt;&lt;label class=&quot;description&quot;&gt;日期起&lt;/label&gt;&lt;/td&gt;
+              &lt;td width=&quot;150&quot;&gt;&lt;input id=&quot;param-eDate&quot; class=&quot;element text Wdate&quot; type=&quot;text&quot; value=&quot;&quot; onFocus=&quot;WdatePicker()&quot;  /&gt;&lt;/td&gt;
+              &lt;td width=&quot;90&quot;&gt;&lt;label class=&quot;description&quot;&gt;日期止&lt;/label&gt;&lt;/td&gt;
+              &lt;td width=&quot;150&quot;&gt;&lt;input id=&quot;param-eDate&quot; class=&quot;element text Wdate&quot; type=&quot;text&quot; value=&quot;&quot; onFocus=&quot;WdatePicker()&quot;  /&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/div&gt;
+      &lt;!--没有更多搜索条件时去掉--&gt;
+      &lt;div class=&quot;seeMoreFilter&quot;&gt;&lt;a href=&quot;javascript:;&quot; id=&quot;J_toggleSearch&quot; class=&quot;down&quot;&gt;&lt;/a&gt;&lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+	</pre>
+</div>
+</body>
+</html>

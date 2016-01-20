@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>10085系统</title> <#include "../../tpl/res_css.tpl" />
+	</head>
+	<body>
+		<div class="formItem">
+			<div class="pt-10 pb-10 ui-fhw">
+				<a href="Javascript:history.go(-1);void(0);"
+					class="formItem_jiantou-tu normalLink">返回</a>
+			</div>
+			
+			<div class="titleArea">
+				<h2>
+					订单详情
+				</h2>
+				<div id="J_tabletpl" class=""></div>
+			</div>
+
+			<div class="formArea-B"></div>
+		</div>
+		<div class="formBtnArea">
+			<div class="normalBtnArea fn-center">
+				<a class="normalBtn BGblue largeBtn" href="javascript:;"
+					id="J_search"><span>拨打来电人电话</span> </a>
+				<a class="normalBtn BGblue largeBtn" href="javascript:;"
+					id="J_wuliu"><span>查看物流信息</span> </a>
+			</div>
+		</div>
+		<#include "../../tpl/res_js.tpl" />
+		<script id="T_tabletpl" type="text/x-handlebars-template">
+<div class="formArea-B">
+<table width="100%">
+<tbody>
+    <tr>
+     <td width="100" valign="top"><span class="txt_gray">订单编号：</span></td>
+     <td width="400">{{bean.odrId}}</td>
+     <td width="100" valign="top"><span class="txt_gray">订单状态：</span></td>
+     <td>{{bean.odrStsNm}}</td>
+    </tr>
+    <tr>
+     <td valign="top"><span class="txt_gray">商品名称：</span></td>
+     <td>{{bean.mcdsUnitNm}}</td>
+     <td valign="top"><span class="txt_gray">数量：</span></td>
+     <td>{{bean.sbscrMcdsQty}}</td>
+    </tr>
+    <tr class="formArea-A-dashed">
+     <td valign="top"><span class="txt_gray">金额（元）：</span></td>
+     <td class="fn-high">￥{{bean.odrOrigAmt}}</td>
+     <td></td>
+     <td></td>
+    </tr>
+</tbody>
+</table>
+<table width="100%">
+<tbody>
+    <tr>
+     <td width="100" valign="top"><span class="txt_gray">IMEI：</span></td>
+     <td width="400">{{bean.IMEI}}</td>
+     <td width="100" valign="top"><span class="txt_gray">客户姓名：</span></td>
+     <td>{{bean.custName}}</td>
+    </tr>
+    <tr>
+     <td valign="top"><span class="txt_gray">客户来电号码：</span></td>
+     <td>{{bean.custResvTelNum}}</td>
+     <td valign="top"><span class="txt_gray">下单时间：</span></td>
+     <td>{{bean.crtTime}}</td>
+    </tr>
+    <tr>
+     <td valign="top"><span class="txt_gray">客户套餐：</span></td>
+     <td>{{bean.custSetmeal}}</td>
+     <td valign="top"><span class="txt_gray">客户归属地：</span></td>
+     <td>{{bean.custRegion}}</td>
+    </tr>
+    <tr class="formArea-A-dashed">
+     <td valign="top"><span class="txt_gray">活动信息：</span></td>
+     <td colspan="3">{{bean.cmpgnNm}}</td>
+    </tr>
+</tbody>
+</table>
+<table width="100%">
+   <tbody>
+    <tr>
+     <td width="100" valign="top"><span class="txt_gray">处理人：</span></td>
+     <td width="400">{{bean.ptyName}}</td>
+     <td width="100" valign="top"><span class="txt_gray">工号：</span></td>
+     <td>{{bean.userLoginId}}</td>
+    </tr>
+    <tr class="formArea-A-dashed">
+     <td valign="top"><span class="txt_gray">订单来源：</span></td>
+     <td>{{bean.chnlId}}</td>
+     <td></td>
+     <td></td>
+    </tr>
+   </tbody>
+  </table>
+<table width="100%">
+<tbody>
+    <tr>
+     <td width="100" valign="top"><span class="txt_gray">收货人姓名：</span></td>
+     <td width="400">{{bean.revrNm}}</td>
+     <td width="100" valign="top"><span class="txt_gray">收货人电话：</span></td>
+     <td>{{bean.mobnum}}</td>
+    </tr>
+    <tr>
+     <td valign="top"><span class="txt_gray">收货地址：</span></td>
+     <td>{{bean.addr}}</td>
+     <td valign="top"><span class="txt_gray">支付方式：</span></td>
+     <td>{{bean.paymnTypeNm}}</td>
+    </tr>
+    <tr class="formArea-A-dashed">
+     <td valign="top"><span class="txt_gray">物流状态：</span></td>
+     <td>{{bean.ehsStsCdNm}}</td>
+     <td valign="top"><span class="txt_gray">运单号：</span></td>
+     <td>{{bean.ehsBlId}}</td>
+    </tr>
+	<tr>
+		<td><span class="txt_gray">厂商订单号：</span></td>
+		<td>{{bean.fctyOrdId}}</td>
+		<td></td><td></td>
+	</tr>
+   </tbody>
+	</table>
+		<table width="100%">
+		<tbody>
+			<tr>
+				<td width="100" valign="top"><span class="txt_gray">备注：</span></td>
+				<td>{{bean.odrRmk}}</td>
+			</tr>
+		</tbody>
+	</table>
+ </div>
+</script>
+		<script type="text/javascript">
+
+/*
+ 服务配置
+ param1: 服务名
+ param2: 假数据路径
+ param3: 后台服务路径
+ */
+srvMap.add('queryOrderDetail', 'orders/orderDetail.json',
+		'front/sh/order!queryOrderDetail?uid=o001');//查询服务
+srvMap.add('orderEhsInfo', '', 'module/orders/orderEhsInfo.html');//物流信息页面
+srvMap.add('logistics', 'orders/logistics.json','front/sh/order!queryLogistics?uid=log001');//物流信息
+//页面加载完开始执行
+$(document).ready(function() {
+	var brandId = Util.browser.getParameter('brandId');
+	var str = "odrId=" + brandId;
+	//初始化函数
+		Util.ajax.postJson(srvMap.get('queryOrderDetail'), str, function(json,
+				status) {
+			/* alert(JSON.stringify(json));  */
+			if (status) {
+				Util.ajax.loadTemp('#J_tabletpl', $('#T_tabletpl'), json);//加载模板
+			} else {
+				alert(json.returnMessage || '查询失败，请重试！');
+			}
+            //查看物流信息
+            $("#J_wuliu").click(
+                require(['common/util/loading'], function(Loading){
+                    Loading.init();
+                    require(['common/business/logistics'], function(Logistics){
+                        Logistics(json.bean.odrId, function(){
+                            Loading.destroy();
+                        });
+                    });
+                });
+                /*
+                require(['common/business/logistics'], function(Logistics){
+                    new Logistics(json.bean.odrId);
+                })*/
+                return false;
+            });
+		})
+		
+</script>
+	</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>testDemo</title>
+<link rel="stylesheet" href="../alice.css">
+<style type="text/css">
+
+body,
+html{
+    text-align: center;
+    color: white;
+}
+
+body{
+    background-color: #333;
+    font-family: Georgia;
+}
+
+div.page{
+    margin: 50px auto 50px auto;
+    max-width: 500px;
+    position: relative;
+    text-align: left;
+}
+
+div.pinch-zoom {
+    position: relative;
+}
+div.pinch-zoom a{
+    color: white;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    text-decoration: none;
+    background: #333;
+    padding: 3px;
+    font-size: 11px;
+}
+
+div.pinch-zoom div.description {
+    position: absolute;
+    top: 500px;
+    left: 210px;
+}
+
+div.pinch-zoom div.description h1{
+    font-size: 40px;
+    margin: 0px;
+    margin-bottom: 10px;
+}
+div.pinch-zoom div.description p{
+    margin: 0px;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+div.pinch-zoom,
+div.pinch-zoom img{
+    width: 100%;
+    -webkit-user-drag: none;
+}
+</style>
+</head>
+<body>
+
+<div class="pinch-zoom">
+   <img src="DN_L.jpg"/>
+</div>
+
+<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="underscore.js"></script>
+<script type="text/javascript" src="pinchzoom.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	$('div.pinch-zoom').each(function () {
+        new RTP.PinchZoom($(this), {});
+    });
+
+});
+
+</script>
+</body>
+</html>

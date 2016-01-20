@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>标点类型修改</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/opui/om-default.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/opui/2.1/operamasks-ui.src.js"></script>
+<script type="text/javascript" src="res/lib/zTree/3.5.16/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="res/lib/ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="res/lib/AIMap/1.0.0/AIMap.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body onload="AIMap_loadScript()">
+<div class="openwin markerMod">
+	 <div>
+	 	<form id="busi_form" class="bz_manage">
+	        <table class="infoTable" cellpadding="0" cellspacing="0" border="0" width="100%">
+	            <tbody id="loadtemp">
+	            </tbody>
+	            <tfoot>
+	            	<tr>
+	                    <td colspan="2">
+	                        <div class="bz_btn_list" >
+	                            <a class="btn_normal fn-mr-20" href="#nogo" id="J_save"><em>保存</em></a>
+	                            <a class="btn_normal " href="#nogo" id="J_cancel"><em>关闭</em></a>
+	                        </div>
+	                    </td>
+	                </tr>
+	            </tfoot>
+	        </table>
+	    </form>
+	    <div class="mapcontainer">
+	    	<div class="search_con">
+		    	<label for="suggestId">搜索：</label>
+		    	<input type="text" id="suggestId" value="" class="normalinput"/>
+				<span class="suggestId" style=" color: #A9A9A9; position:absolute;left:328px; top:14px;">请输入关键字</span>
+		    </div>
+		    
+		    <div id="myMap" name="myMap" style="width: 100%;height: 370px;">
+		    </div>
+	    </div>
+	 </div>
+</div>
+<textarea class="fn-hide" id="markerType_tpl1">
+
+{{#each rows}}
+<tr>
+	<td class="description">{{propLable}}:</td>
+	<td><input type="text" value="{{propVal}}" id="{{propName}}" name="{{propName}}" class="normalinput" {{ads propName}} /></td>
+	
+</tr>
+ 
+{{/each}}
+</textarea>
+
+<script type="text/javascript" >
+var myMap;
+var zLng = art.dialog.data("lng");
+var zLat = art.dialog.data("lat");
+
+Handlebars.registerHelper("ads", function(formType) {
+	  var buffer = "";
+	  if (formType == "name"||formType == "businessId"||formType == "address") {
+		  buffer = "readonly='readonly' style=background-color:#ccc";
+	  } else {
+		  
+	  }
+	  return buffer;
+	});
+
+
+function AIMap_encapsulateBMap() {
+	result_prompt(-1,"正在加载地图...");
+	AIMap_asysScript("http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager.js",loadSearch);
+}
+
+function loadSearch(){
+    AIMapLib = BMapLib;
+    AIMap_asysScript("http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js",AIMap_loadTools);//最后一个异步加载的回调方法必须为loadTools
+}
+
+function AIMap_init(){
+	
+	myMap = new AIMap.Map("myMap");
+    myMap.centerAndZoom('浙江',13);
+    myMap.panTo(new AIMap.Point(zLng, zLat));
+    myMap.enableScrollWheelZoom();
+    myMap.addControl(new AIMap.NavigationControl());  //添加默认缩放平移控件
+	
+    myMap.onload = mapLoadCallback;
+}
+
+function mapLoadCallback(){
+	var urlinfo = $("#suggestId").val();
+	if(urlinfo == ""){
+		$(".suggestId").show();
+	}
+	
+	closeDialog("loadingBusiId");
+	
+	$("#suggestId").focus(function(){
+		$(".suggestId").hide();
+		if($(this).val() == "请输入关键字")
+		$(this).val("").css("color","black");
+	}).blur(function(){
+		$(".suggestId").hide();
+		if($(this).val() == "")
+		$(this).val("请输入关键字").css("color","#A9A9A9");
+	}) 
+	
+	var ac = new AIMap.Autocomplete({
+		"input":"suggestId",
+		"location":myMap
+	});
+	
+	var myValue;
+	ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+	var _value = e.item.value;
+	    myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+	    //G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+	    setPlace();
+	});
+
+	function setPlace(){
+	    myMap.clearOverlays();    //清除地图上所有覆盖物
+	    function myFun(){
+	        var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+	        myMap.centerAndZoom(pp, 18);
+	        myMap.addOverlay(new BMap.Marker(pp));    //添加标注
+	    }
+	    var local = new BMap.LocalSearch(myMap, { //智能搜索
+	      onSearchComplete: myFun
+	    });
+	    local.search(myValue);
+	}
+	
+	AIMap.service.getPoint(myMap,true,function(e){
+		$("#lng").val(e.point.lng);
+		$("#lat").val(e.point.lat);
+	});
+	
+	var id = art.dialog.data("id");
+	var type = art.dialog.data("type");
+	
+	//$.PostJson("res/data/markerInfoTplMod.json?1=1",id,function(state,json){
+	$.PostJson(REQURLS.markerInfoMod,"nodeId="+id,function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+                $("#loadtemp").temp($("#markerType_tpl1"), json);
+                setTimeout(function(){ str1 = $("#busi_form").serialize();},800);
+                getMark();
+
+                $("#lng").bind("keyup", function(e){
+                	var _self = $(this);
+                	var newVal = isDotNum(_self.val());
+                	_self.val(newVal);
+                	setTimeout(function(){
+	                	getMark();
+                	},1000);
+                });
+
+                $("#lat").bind("keyup", function(e){
+                	var _self = $(this);
+                	var newVal = isDotNum(_self.val());
+                	_self.val(newVal);
+                	setTimeout(function(){
+	                	getMark();
+                	},1000);
+                });
+
+            }else{
+                result_prompt(0,json.returnMessage||"修改失败！");
+            }
+        }else{
+            result_prompt(0,"系统错误！");
+        }
+    });
+	
+    $("#J_save").click(function(){
+        var str = ""+$("#busi_form").serialize();
+        //$.PostJson("res/data/markerInfoTplMod.json?1=1",str,function(state,json){
+    	var $btn = $(this);
+    	
+   	    var name = $("#name").val().length;
+        var lng = $("#lng").val().length;
+        var lat = $("#lat").val().length;
+        if(name == 0 || lng == 0 || lat == 0){
+        	result_prompt(2,"标记点的名称和经纬度不能为空！");
+        	return false;
+        }else if(str == str1){
+        	result_prompt(2,"未做任何修改！");
+        	return false;
+        }else
+        {
+        	toggleButtonStyle($btn,true);
+        	$.PostJson(REQURLS.markerInfoAdd,"markerType="+type+"&nodeId="+id+"&"+str,function(state,json){
+	            if(state=="success"){
+	                if(json && parseInt(json.returnCode) > 0){
+	                    result_prompt(1,"修改成功");
+	                    parent.gridReload("mytable");
+	                }else{
+	                    result_prompt(0,json.returnMessage||"修改失败！");
+	                }
+	            }else{
+	                result_prompt(0,"系统错误！");
+	            }
+	            toggleButtonStyle($btn,false);
+	        });
+        }
+    })
+}
+
+function isDotNum(value){
+	var newVal = "";
+	if(value.match(/\./)){
+		var str = value.split(".");
+		str[0] = str[0].replace(/[^\d]/g,'');
+		if(str[0].length=='0'){
+			str[0] = 0;
+		}
+		
+		str[1] = str[1].replace(/[^\d]/g,'');
+		var len2 = str[1].length;
+		if(len2>7){
+			str[1] = str[1].substring(0,7);
+		}
+		newVal = str[0]+"."+str[1];
+	}else{
+		newVal = value.replace(/[^\d]/g,'');
+	}
+	return newVal;
+}
+
+function getMark(){
+	var lng = $("#lng").val();
+	var lat = $("#lat").val();
+	AIMap.draw.createPoint(myMap, "", lng, lat, 13, function(marker){
+	    var point = marker.getPosition();
+		$("#lng").val(point.lng);
+		$("#lat").val(point.lat);
+	});
+}
+
+</script>
+
+</body>
+</html>
+
+

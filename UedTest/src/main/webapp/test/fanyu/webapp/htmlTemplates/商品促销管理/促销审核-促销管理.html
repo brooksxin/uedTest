@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>促销审核-促销管理</title>
+<link rel="stylesheet" href="../../css/common.css">
+<link rel="stylesheet" href="../../css/tablepay.css" />
+<link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+</head>
+<body>
+<div class="formItem">
+ <div class="titleArea">
+  <div class="listTopBtn fn-clear">
+   <h2 class="fn-left">促销管理</h2>
+   <div class="normalBtnArea mb-10 ft-right"><a class="normalBtn BGblue" href="#">创建商品促销</a></div>
+  </div>
+ </div>
+ <div method="post" action="#" class="cmxform" >
+  <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+   <div class="record-search-cate">
+    <table class="search_table" width="100%">
+     <tbody>
+      <tr>
+       <td width="80"><label class="description">商品编号</label></td>
+       <td><input class="inputText" type="text" maxlength="255" value="" /></td>
+       <td width="80"><label class="description">商品名称</label></td>
+       <td><input class="inputText" type="text" maxlength="255" value="" /></td>
+       <td width="80"><label class="description">渠道</label></td>
+       <td><select class="inputSelect" style="width:100px;">
+         <option>全部</option>
+        </select></td>
+       <td width="80"><label class="description">状态</label></td>
+       <td><select class="inputSelect" style="width:100px;">
+         <option>全部</option>
+        </select></td>
+       <td width="100"><div class="normalBtnArea w82"> <a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a> </div></td>
+      </tr>
+      <tr>
+       <td width="80"><label class="description">归属</label></td>
+       <td><select class="inputSelect" style="width:100px;">
+         <option>全部</option>
+        </select></td>
+       <td width="80"><label class="description">创建人</label></td>
+       <td><input class="inputText" type="text" maxlength="255" value="" /></td>
+       <td width="80"><label class="description">审核人</label></td>
+       <td><input class="inputText" type="text" maxlength="255" value="" /></td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="tablewidth mg_t_10" style="margin-top:50px;">
+   <table class="ui-record-table table_radius table-bordered table-striped"  >
+    <thead>
+     <tr>
+     <th></th>
+      <th width="80">商品编号</th>
+      <th>促销商品</th>
+      <th width="100">渠道</th>
+      <th width="80">归属</th>
+      <th width="80">创建人</th>
+      <th width="80">审核人</th>
+      <th width="120">审核通过时间</th>
+      <th width="80">状态</th>
+      <th width="80">操作</th>
+     </tr>
+    </thead>
+    <tbody id="J_tabletpl">
+     <tr>
+      <td><div class="table_select"><input type="checkbox" /></div></td>
+      <td>KP1234</td>
+      <td><a href="#">酷派大神F1plus 移动4G（智铂银）</a></td>
+      <td>营销活动</td>
+      <td>全部</td>
+      <td>X10085</td>
+      <td>X10086</td>
+      <td>2015-06-15  12:40</td>
+      <td>已发布</td>
+      <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">审核</a></div></td>
+     </tr>
+     <tr>
+      <td><div class="table_select"><input type="checkbox" /></div></td>
+      <td>KP1234</td>
+      <td><a href="#">酷派大神F1plus 移动4G（智铂银）</a></td>
+      <td>全部</td>
+      <td>贵州</td>
+      <td>X10085</td>
+      <td>X10086</td>
+      <td>2015-06-15  12:40</td>
+      <td>已发布</td>
+      <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">审核</a></div></td>
+     </tr>
+     <tr>
+      <td><div class="table_select"><input type="checkbox" /></div></td>
+      <td>KP1234</td>
+      <td><a href="#">酷派大神F1plus 移动4G（智铂银）</a></td>
+      <td>接入</td>
+      <td>贵州</td>
+      <td>X10085</td>
+      <td>X10086</td>
+      <td>2015-06-15  12:40</td>
+      <td>已发布</td>
+      <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">审核</a></div></td>
+     </tr>
+     <tr>
+      <td><div class="table_select"><input type="checkbox" /></div></td>
+      <td>KP1234</td>
+      <td><a href="#">酷派大神F1plus 移动4G（智铂银）</a></td>
+      <td>营销活动</td>
+      <td>贵州</td>
+      <td>X10085</td>
+      <td>X10086</td>
+      <td>2015-06-15  12:40</td>
+      <td>已发布</td>
+      <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">审核</a></div></td>
+     </tr>
+     <tr>
+      <td><div class="table_select"><input type="checkbox" /></div></td>
+      <td>KP1234</td>
+      <td><a href="#">酷派大神F1plus 移动4G（智铂银）</a></td>
+      <td>营销活动</td>
+      <td>全部</td>
+      <td>X10085</td>
+      <td>X10086</td>
+      <td>2015-06-15  12:40</td>
+      <td>已发布</td>
+      <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">审核</a></div></td>
+     </tr>
+     <tr>
+      <td><div class="table_select"><input type="checkbox" /></div></td>
+      <td>KP1234</td>
+      <td><a href="#">酷派大神F1plus 移动4G（智铂银）</a></td>
+      <td>营销活动</td>
+      <td>全部</td>
+      <td>X10085</td>
+      <td>X10086</td>
+      <td>2015-06-15  12:40</td>
+      <td>已发布</td>
+      <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">审核</a></div></td>
+     </tr>
+     <tr>
+      <td><div class="table_select"><input type="checkbox" /></div></td>
+      <td>KP1234</td>
+      <td><a href="#">酷派大神F1plus 移动4G（智铂银）</a></td>
+      <td>营销活动</td>
+      <td>全部</td>
+      <td>X10085</td>
+      <td>X10086</td>
+      <td>2015-06-15  12:40</td>
+      <td>已发布</td>
+      <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">审核</a></div></td>
+     </tr>
+     <tr>
+      <td><div class="table_select"><input type="checkbox" /></div></td>
+      <td>KP1234</td>
+      <td><a href="#">酷派大神F1plus 移动4G（智铂银）</a></td>
+      <td>营销活动</td>
+      <td>全部</td>
+      <td>X10085</td>
+      <td>X10086</td>
+      <td>2015-06-15  12:40</td>
+      <td>已发布</td>
+      <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">审核</a></div></td>
+     </tr>
+     <tr>
+      <td><div class="table_select"><input type="checkbox" /></div></td>
+      <td>KP1234</td>
+      <td><a href="#">酷派大神F1plus 移动4G（智铂银）</a></td>
+      <td>营销活动</td>
+      <td>全部</td>
+      <td>X10085</td>
+      <td>X10086</td>
+      <td>2015-06-15  12:40</td>
+      <td>已发布</td>
+      <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">审核</a></div></td>
+     </tr>
+     <tr>
+      <td><div class="table_select"><input type="checkbox" /></div></td>
+      <td>KP1234</td>
+      <td><a href="#">酷派大神F1plus 移动4G（智铂银）</a></td>
+      <td>营销活动</td>
+      <td>全部</td>
+      <td>X10085</td>
+      <td>X10086</td>
+      <td>2015-06-15  12:40</td>
+      <td>已发布</td>
+      <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">审核</a></div></td>
+     </tr>
+    </tbody>
+   </table>
+   </div>
+  </form>
+ </div>
+</div>
+
+<!--翻页及功能按钮区域开始-->
+<DIV class="amount-bottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+      <tr>
+        <td width="60">
+            <input type="checkbox" class="selectAll" id="selectAll" /> <label for="selectAll">全选</label> 
+        </td>
+        <td>
+            <div class="normalBtnArea"><!--不附加ft-right样式，默认左对齐-->
+                
+                <a class="normalBtn BGgray" href="#">删除按钮</a>
+            </div>
+        </td>
+        <td width="50%">
+            <DIV class="fn-clear action-other  action-other-show ">
+                    <DIV id=Pagination class="page pagination fn-right"> </DIV>
+                    <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+            </DIV></td>
+      </tr>
+    </table>
+</DIV>	
+<script src="../../lib/jquery/1.8.1/jquery.js"></script> 
+<script src="../../lib/json2/1.0.0/json2.js"></script> 
+<script src="../../lib/handlebars/1.3.0/handlebars.js"></script> 
+<script src="../../lib/handlebars/1.3.0/helpers.js"></script> 
+<script src="../../lib/pagination/1.2.1/jquery.pagination.js"></script> 
+<script src="../../lib/blockUI/2.64/jquery.blockUI.js"></script> 
+<script src="../../common/frameInit.js"></script> 
+<script src="../../lib/dialog/4.1.7/artDialog.js"></script> 
+<script src="../../lib/dialog/4.1.7/iframeTools.js"></script> 
+<script src="../../common/config.js"></script> 
+<script src="../../common/common.js"></script> 
+<script type="text/javascript">
+          //页面加载完开始执行
+          $(document).ready(function () {
+              //初始化函数
+          });
+      </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>slidesjsDemo</title>
+  <link rel="stylesheet" type="text/css" href="js_css/NBCss.css">
+	<script type="text/javascript" src="js_css/jquery/1.7.2/jquery.js"></script>
+	<script type="text/javascript" src="js_css/slides/3.0/jquery.slides.js"></script>
+</head>
+<body>
+
+<div class="Nb-ui-slides">
+  <div id="slides" class="slides">
+    
+  </div>
+</div>
+
+<a href="javascript:;" id="showSlide" >点击ajax生成另外一个</a>
+
+<script type="text/javascript">
+$(function(){
+
+$("#showSlide").click(function(){
+    console.log("1")
+    $("#slides").parent().html('<div id="slides" class="slides"> </div>');
+    $("#slides").html('<img src="js_css/img/middlePic_1.jpg" alt=""> <img src="js_css/img/middlePic_4.jpg" alt=""> <img src="js_css/img/middlePic_5.jpg" alt=""> <a href="javascript:;" class="slidesjs-previous slidesjs-navigation" hidefocus="true"> <i class="icon-chevron-left icon-large"></i> </a> <a href="javascript:;" class="slidesjs-next slidesjs-navigation" hidefocus="true"> <i class="icon-chevron-right icon-large"></i> </a>');
+
+    $("#slides").slidesjs({
+          width: 400,
+          height: 400,
+          navigation: false,
+          callback: {
+              loaded: function(number) {
+                  console.log("2")
+              },
+              complete: function(number) {
+                  console.log("4")
+                  
+              }
+          }
+      });
+    console.log("3")
+})
+  		
+})
+</script>
+</body>
+</html>

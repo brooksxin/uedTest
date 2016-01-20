@@ -1,0 +1,15 @@
+{
+    "busiCode": null,
+    "opId": null,
+    "phone": null,
+    "returnCode": "0",
+    "returnMessage": null,
+    "bean": {
+        "count": "2000",
+        "total":"2000",
+        "plusCount":"778",
+        "TSK_QTY":"300"
+    },
+    "beans": [],
+    "object": null
+}

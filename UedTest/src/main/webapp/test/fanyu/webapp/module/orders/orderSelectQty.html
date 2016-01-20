@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10085-下单量-编辑数量</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+
+<div class="pageMargin10">
+    <div class="formItem">
+		<div class="pt-10 pb-10 ui-fhw"><a href="#" class="formItem_jiantou-tu normalLink" onclick="choiceCallback()">取消</a></div>
+    </div>
+
+					<form name="J_qtySelect" id="J_qtySelect">
+						<input type="hidden" id="mcdsUnitId" name="mcdsUnitId" value=""/>
+						<input type="hidden" id="mcdsUnitNm" name="mcdsUnitNm" value=""/>
+						<input type="hidden" id="phoneNum" name="phoneNum" value=""/>
+						<input type="hidden" id="custId" name="custId" value=""/>
+						<input type="hidden" id="custNm" name="custNm" value=""/>
+						<input type="hidden" id="cntmngId" name="cntmngId" value=""/>
+						<input type="hidden" id="userId" name="userId" value=""/>
+						<input type="hidden" id="mcdsUnitTypeCd" name="mcdsUnitTypeCd" value=""/>
+						
+						<div class="formArea payForNumBgColor">
+							<table width="100%" class="order_productItem">
+									 <tr>
+										  <td>[<label id="mcdsUnitIdLabel"></label>]<label id="mcdsUnitNmLabel"></label></td>
+										  <td width="200">
+										  		<div style="line-height:0px">
+											  		<!-- <a herf="#" class="order_productDiva" name="qtyReduce">-</a> -->
+											  		<input type="text" value="1" class="order_productinput fn-mtl-5" name="mcdsUnitQty" readOnly="readOnly">
+											  		<!-- <a herf="#" class="order_productDiva fn-mtl-5" name="qtyAdd">+</a> -->
+											  		<input type="hidden" id="mcdsUnitPrice" name="singlePrice" value=""/>
+											  	</div>
+										   </td>
+										  <td width="100" class="txt-right">&yen;<label id="mcdsUnitPriceLabel"></label></td>
+									 </tr>
+							</table>
+							<hr/>
+							<h2 class="order_productTitle">周边商品：</h2>
+							<table width="100%"  class="order_productItem">
+								  <tbody id="J_tabletpl">
+								  	<tr><div>暂无数据</div></tr>
+								  </tbody>
+							</table>
+					   </div>
+				   </form>
+				   <div class="ft-right mt-30 mb-10 mr-10">合计：<span class="order_productDiv">&yen;<label id="orderAmt"></label></span></div>
+					<hr/>
+					<table width="100%">
+							  <tr>
+								   <td height="70"><div class="normalBtnArea ft-left"><a class="normalBtn BGgray largeBtn" href="javascript:;" id="generateYcOrder">预约</a></div></td>
+								   <td><div class="normalBtnArea ft-right"><a class="normalBtn BGblue  largeBtn" href="javascript:;" id="generateOrder">下单</a></div></td>
+							  </tr>
+					 </table>
+                </div>
+</div>                
+                
+                
+            </div>
+            <!-- right stop -->
+            <!-- 初始化客户信息 -->
+            <div id="T_addCust" class="fn-hide">
+			    <div style="height:200px;overflow:auto;">
+			        <form id="J_CustForm" name="J_CustForm">
+			       	 	<input type="hidden" id="paramType" name="paramType" value=""/>
+			            <div class="formItem">
+			                <table class="form_table">
+			                    <tbody>
+			                    	<tr>
+			                        	<td></td>
+			                        	<td class="gray_text">当前未在通话状态下，请输入要下单的客户手机号码</td>
+			                        </tr>
+			                        <tr>
+			                            <td width="146">
+			                                <label for="phoneNum" class="formDescription">
+			                                   <span class="fn-high">*</span>客户手机号码：
+			                                </label>
+			                            </td>
+			                            <td>
+			                                <input type="text" id="custPhoneNum" name="custPhoneNum" class="FormInputText width100"/>
+			                            </td>
+			                        </tr>
+			                    </tbody>
+			                </table>
+			                <div class="formBtnArea">
+			                    <table width="100%">
+			                        <tr>
+			                            <td>
+			                                <div class="normalBtnArea fn-center">
+			                                    <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_custAdd">确定</a>
+			                                    <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_custCancel">取消</a>
+			                                </div>
+			                            </td>
+			                        </tr>
+			                    </table>
+			                </div>
+			            </div>
+			        </form>
+			    </div>
+			</div>
+			<!-- 初始化客户信息 end -->
+        </div>
+        <!-- right stop -->
+    </div>
+<#include "../../tpl/res_js.tpl" />
+<script id="T_tabletpl" type="text/x-handlebars-template">
+{{#if beans}}
+    {{#each beans}}
+ 		<tr>
+			<td><input type="checkbox" name="mcdsUnitGoodsId" value='{{mcdsUnitId}}_{{tgtMcdsUnitId}}'/> 
+				<label for="selectAll">[{{mcdsUnitId}}]{{mcdsUnitNm}}</label>
+				<input type="hidden" name="singlePrice" value="{{price}}"/>
+			</td>
+			<td width="200"><div style="line-height:0px"><a herf="javascript:;" class="order_productDiva" name="qtyReduce">-</a><input type="text" value="1" name="qty" class="order_productinput fn-mtl-5"><a herf="javascript:;" class="order_productDiva fn-mtl-5" name="qtyAdd">+</a></div></td>
+			<td width="100" class="txt-right">&yen;<label name="sPrice"></label></td>
+		</tr>
+    {{/each}}
+{{else}}
+	<tr>
+		<td colspan="4">
+			<div class="ui-tips-box tipsBox">
+				<div class="ui-icon-noData"></div>
+				<div class="ui-tips-text">暂无数据记录！</div>
+			</div>
+		</td>
+	</tr>
+{{/if}}
+</script>
+<script type="text/javascript">
+/*
+    服务配置
+    param1: 服务名
+    param2: 假数据路径
+    param3: 后台服务路径
+*/
+srvMap.add('noPayPhoneBuyquery', 'noPayPhoneBuy.json','/front/sh/order!excute?uid=o002');//查询服务
+srvMap.add('allPayMode', 'allPayMode.json','/front/sh/common!execute?uid=c002');//查询所有支付方式
+srvMap.add('getMcdsUnitAndGoods', '','/front/sh/user!session');//加载商品以及周边商品信息
+srvMap.add('queryStock', '','front/sh/prod!execute?uid=p014');//查询库存
+var J_custAdd = $('#J_custAdd');
+var J_custCancel = $('#J_custCancel');
+var elem = document.getElementById('T_addCust');
+var custForm = $("#J_CustForm");
+var custPhoneNum = $("#custPhoneNum");
+var paramType = $("#paramType");
+
+var validate_cust = $("#J_CustForm").validate({
+    rules: {
+    	custPhoneNum: {
+            required: true,
+            number: true,
+            maxlength:11,
+            minlength:11
+        }
+    },
+    messages: {
+    	custPhoneNum: {
+            required: "请输入手机号码",
+            number: "手机号码必须为数字",
+            maxlength:"手机号码长度为11位",
+            minlength:"手机号码长度为11位"
+        }
+    },
+    showErrors:function(){
+        this.defaultShowErrors();
+    },
+    success: function(currentDom){
+        $(currentDom).html("<img src='../../css/images/validate-right.png' class='right-img'>");
+    }
+});
+
+var G_params = {
+    url : srvMap.get('noPayPhoneBuyquery'),
+    items_per_page : 10 ,   // 每页数     @param : limit
+    page_index : 0 , //当前页  @param : start
+    pagination : "Pagination" , //分页id
+    searchformId : "J_formSearch", //搜索表单的id
+    tabletpl : "T_tabletpl", //表格模板
+    tablewrap : "J_tabletpl" //表格容器
+};
+
+//页面加载完开始执行
+$(function () {
+	
+	init();
+	eventInit();
+	//生成预约订单事件
+	$("#generateYcOrder").bind("click",function(){
+		var agentTalking = top.CtiUtils.API.judgeAgentTalking();
+		if(agentTalking!="3"){
+			addCust("1");
+		}else{
+			generateYcOrder();
+		}
+    });
+	
+	//下单事件绑定
+	$("#generateOrder").bind("click",function(){
+		var agentTalking = top.CtiUtils.API.judgeAgentTalking();
+		if(agentTalking!="3"){
+			addCust("2");
+		}else{
+			generateOrder();
+		}
+	});
+	
+	//数量减少事件
+	$("a[name='qtyReduce']").bind("click",function(index,ele){
+		var qty = $(this).next("input").val();
+		var regex = /^\d+$/;
+		if(regex.test(qty)){
+			if(Number(qty) >= 2){
+				$(this).next("input").val(Number(qty)-1);
+				var price = $(this).parent("div").find("input[name='singlePrice']").val();
+				var amt = price * $(this).next("input").val()
+				$("#mcdsUnitPriceLabel").text(amt)
+				//$(this).parent("tr").find("input[name='sPrice']").val(amt);
+				$("#orderAmt").text(amt);
+			}
+		}else{
+			alert("数据格式错误,请输入正确的数据格式");
+		}
+	});
+	//数量增加事件
+	$("a[name='qtyAdd']").bind("click",function(index,ele){
+		var qty = $(this).prev("input").val();
+		var regex = /^\d+$/;
+		if(regex.test(qty)){
+			$(this).prev("input").val(Number(qty)+1);
+			var price = $(this).parent("div").find("input[name='singlePrice']").val();
+			console.log("price=="+price);
+			var amt = price * Number($(this).prev("input").val());
+			$("#mcdsUnitPriceLabel").text(amt)
+			//$(this).parent("tr").find("input[name='sPrice']").val(amt);
+			$("#orderAmt").text(amt);
+		}else{
+			alert("数据格式错误,请输入正确的数据格式");
+		}
+	});
+});
+
+function init(){
+    var params = top.$("#termlist_param").val();
+    if (params) {
+    	//params = eval('(' + params + ')');
+        params = JSON.parse(params);
+    };
+    
+	//得到浏览器参数
+	var mcdsUnitId = params.mcds_unit_id;
+	$("#mcdsUnitId").val(mcdsUnitId);
+	$("#mcdsUnitIdLabel").text(mcdsUnitId);
+	//商品单元名称
+	var mcdsUnitNm = decodeURIComponent(params.mcds_unit_nm);
+	$("#mcdsUnitNm").val(mcdsUnitNm);
+	$("#mcdsUnitNmLabel").text(mcdsUnitNm);
+	
+	//商品单元类型编码
+	//var mcdsUnitTypeCd = Util.browser.getParameter("mcdsUnitTypeCd")||"";
+	$("#mcdsUnitTypeCd").val("");
+	var mcdsUnitPrice = params.mcdsUnitPrice||"0.00";
+	$("#mcdsUnitPrice").val(mcdsUnitPrice);
+	$("#mcdsUnitPriceLabel").text(mcdsUnitPrice);
+	$("#orderAmt").text(mcdsUnitPrice * Number($("input[name='mcdsUnitQty']").val()||"1"));
+	//var userId = Util.browser.getParameter("userId");
+	
+	var userId = userInfo.bean.userId;
+	$("input[name='userId']").val(userId);
+	/* Util.ajax.postJsonSync(srvMap.get("getUserInfo"),"",function(json,status){
+		 if (status) {
+	        $("input[name='userId']").val(json.userId);
+        }else {
+       		alert(json.returnMessage||'查询失败，请重试！');
+        }
+	}); */
+	
+	//加载商品单元信息以及周边商品信息
+	//Util.ajax.postJson(srvMap.get("queryMcdsUnitAndGoods"),{mcdsUnitId:mcdsUnitId,mcdsUnitTypeCd:mcdsUnitTypeCd},function(json,status){
+	//	if (status) {
+	//		Util.ajax.loadTemp('#J_tabletpl',$('#T_tabletpl'),json);//加载模板
+    //    }
+	//});
+}
+
+var eventInit = function(){
+	$('#custPhoneNum', elem).on('keydown', custPhoneNumEnter);
+}
+
+var custPhoneNumEnter = function(e){
+	if (e.keyCode == 13){
+		J_custAdd_callback(e);
+		return false;
+	}
+}
+
+function addCust(paramType){
+	var params = {
+		top : top,
+		id : 'D_addCust',
+		title : '初始化客户',
+		content : elem,
+		width : 600,
+		modal : true
+	}
+	Util.dialog.openDiv(params);//弹出框需要在iframe的父页面上弹出，需要添加'top'
+	custForm.find("input[name='paramType']").val(paramType);
+}
+
+var J_custAdd_callback = function(){
+	if(validate_cust.form()){
+		 var custPhone = custPhoneNum.attr("value");
+		 var paramTypeValue = paramType.attr("value");
+	     top.CtiUtils.API.setCurCustId(custPhone);
+	     if(paramTypeValue == "1"){	//预约
+	    	generateYcOrder();
+	     }else if(paramTypeValue == "2"){	//下单
+	     	generateOrder();
+	     }
+	     top.Util.dialog.close('D_addCust');
+	}
+}
+//添加客户按钮
+J_custAdd.click(J_custAdd_callback);
+//取消按钮
+J_custCancel.click(function(){
+    top.Util.dialog.close('D_addCust');
+})
+
+//下单
+function generateOrder(){
+	top.$("#termlist_param_type").val("2");
+	Util.ajax.postJsonSync(srvMap.get("queryStock"),{mcdsUnitId:$("input[name='mcdsUnitId']").val()},function(json,status){
+		if(status){
+			var mcdsUnitQty = Number($("input[name='mcdsUnitQty']").val()||"1");
+			if(json.bean.skuQty && Number(json.bean.skuQty) >= mcdsUnitQty){
+				window.location.href = "../orders/checkOrderInfo.html?"+$("#J_qtySelect").serialize();
+			}else{
+				Util.dialog.tips('库存不足!');
+			}
+		}else{
+			 Util.dialog.tips(json.returnMessage||'查询失败，请重试！');
+		}
+	});
+}
+
+//预约
+function generateYcOrder(){
+		top.$("#termlist_param_type").val("1");
+		window.location.href = "../orders/checkOrderInfo.html?"+$("#J_qtySelect").serialize();
+}
+
+//根据前页面来向，判断返回的页面
+function choiceCallback(){
+	var typeValue,CMPGN_ID;
+		typeValue = Util.browser.getParameter("type");
+		CMPGN_ID = Util.browser.getParameter("CMPGN_ID");
+		if(typeValue == "1"){
+			window.location.href='../market/saleActivity.html?CMPGN_ID='+CMPGN_ID;
+		}else{
+			window.location.href='../contact/termList.html';
+		};
+}
+</script>
+</body>
+</html>
+

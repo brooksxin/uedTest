@@ -1,0 +1,47 @@
+{
+	"returnCode":"0",
+	"returnMessage":null,
+	"bean":{},
+	"beans":[
+		{
+		 "STAFF_ID":"1",
+		 "CRT_TIME":"2015-04-28 15:16:11.0",
+		 "CNTMNG_ID":"1",
+		 "BGN_CNTMNG_TIME":"2015-04-28 14:17:17.0",
+		 "CMCC_CUST_NM":"张三",
+		 "CNTMNG_TYPE_CD":"01",
+		 "END_CNTMNG_TIME":"2015-04-28 15:17:28.0",
+		 "BETWEEN_TIME":"30",
+		 "CUST_MOBNUM":"13838383838",
+		 "TOUCH_MODE_CD":"0",
+		 "CHNL_ID":"1"
+		},
+		{
+		 "STAFF_ID":"2",
+		 "CRT_TIME":"2015-04-28 15:16:11.0",
+		 "CNTMNG_ID":"1",
+		 "BGN_CNTMNG_TIME":"2015-04-28 14:17:17.0",
+		 "CMCC_CUST_NM":"李四",
+		  "CNTMNG_TYPE_CD":"01",
+		 "END_CNTMNG_TIME":"2015-04-28 15:17:28.0",
+		 "BETWEEN_TIME":"30",
+		 "CUST_MOBNUM":"13939393939",
+		 "TOUCH_MODE_CD":"0",
+		 "CHNL_ID":"1"
+		},
+		
+		{
+		 "STAFF_ID":"3",
+		 "CRT_TIME":"2015-04-28 15:16:11.0",
+		 "CNTMNG_ID":"1",
+		 "BGN_CNTMNG_TIME":"2015-04-28 14:17:17.0",
+		 "CMCC_CUST_NM":"李四",
+		  "CNTMNG_TYPE_CD":"01",
+		 "END_CNTMNG_TIME":"2015-04-28 15:17:28.0",
+		 "BETWEEN_TIME":"30",
+		 "CUST_MOBNUM":"13939393939",
+		 "TOUCH_MODE_CD":"0",
+		 "CHNL_ID":"1"
+		}
+	   ]
+}

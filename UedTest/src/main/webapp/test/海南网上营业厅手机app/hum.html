@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>移动端UI组件库</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"></head>
+	<link rel="stylesheet" type="text/css" href="theme/hum.css">
+	<style type="text/css">
+		body {
+			background-color: #efeff4;
+		}
+		h1{
+			background: #fff;
+			color: #CCC;
+			padding: 30px 0;
+			font-size: 30px;
+			text-indent: 10px;
+		}
+		button,header,.ui-summary{
+			margin-bottom: 10px;
+		}
+	</style>
+<body>
+	<h1>Toolbar 工具栏</h1>
+	<header class="ui-toolbar">
+		<h1 class="ui-toolbar-title">全部动态</h1>
+	</header>
+	
+	<header class="ui-toolbar">
+		<button class="ui-toolbar-btn fn-left">菜单</button>
+		<button class="ui-toolbar-btn fn-right">刷新</button>
+		<h1 class="ui-toolbar-title">全部动态</h1>
+	</header>
+	
+	<header class="ui-toolbar">
+		<a class="ui-icon icon-list fn-left"></a>
+		<a class="ui-icon icon-refresh fn-right"></a>
+		<h1 class="ui-toolbar-title">全部动态</h1>
+	</header>
+
+	<header class="ui-toolbar">
+		<button class="ui-toolbar-btn ui-btn-link fn-left">
+			<span class="ui-icon icon-list"></span>
+			菜单
+		</button>
+		<button class="ui-toolbar-btn ui-btn-link fn-right">
+			刷新
+			<span class="ui-icon icon-refresh"></span>
+		</button>
+		<h1 class="ui-toolbar-title">全部动态</h1>
+	</header>
+
+	<header class="ui-toolbar">
+		<button class="ui-toolbar-btn fn-left">菜单</button>
+		<button class="ui-toolbar-btn fn-right">刷新</button>
+		<div class="ui-tab">
+			<a class="ui-tab-item active">账户</a>
+			<a class="ui-tab-item">转入</a>
+			<a class="ui-tab-item">转出</a>
+		</div>
+	</header>
+	<h1>Navbar 导航栏</h1>
+	<nav class="ui-navbar" style="position:relative;">
+		<a class="ui-navbar-item active" href="#">
+			<span class="ui-icon icon-home"></span>
+			<span class="ui-navbar-item-label">首页</span>
+		</a>
+		<a class="ui-navbar-item" href="#">
+			<span class="ui-icon icon-person"></span>
+			<span class="ui-navbar-item-label">通讯录</span>
+		</a>
+		<a class="ui-navbar-item" href="#">
+			<span class="ui-icon icon-star-filled"></span>
+			<span class="ui-navbar-item-label">收藏</span>
+		</a>
+		<a class="ui-navbar-item" href="#">
+			<span class="ui-icon icon-search"></span>
+			<span class="ui-navbar-item-label">搜索</span>
+		</a>
+		<a class="ui-navbar-item" href="#">
+			<span class="ui-icon icon-gear"></span>
+			<span class="ui-navbar-item-label">设置</span>
+		</a>
+	</nav>
+	<h1>Search 搜索</h1>
+	<div class="ui-search">
+		<div class="ui-search-container">
+			<input name="keyword" type="text" class="ui-search-input" value="" />	
+			<a href="javascript:void(0);" class="ui-search-close">
+				<span class="ui-icon icon-close"></span>
+			</a>
+			<a href="javascript:void(0)" class="ui-search-btn">
+				<span class="ui-icon icon-search"></span>
+			</a>
+		</div>
+	</div>
+	<h1>Nav 导航</h1>
+	<div class="ui-nav">
+		<ul class="ui-nav-main">
+			<li class="ui-nav-item">
+				<a href="#" >首页</a>
+			</li>
+			<li class="ui-nav-item">
+				<a href="#">服务</a>
+			</li>
+			<li class="ui-nav-item">
+				<a href="#">套餐</a>
+			</li>
+			<li class="ui-nav-item">
+				<a href="#">优惠</a>
+			</li>
+			<li class="ui-nav-item">
+				<a href="#">充值</a>
+			</li>
+		</ul>
+		<a href="#" class="ui-nav-btn">
+			 <span class="ui-icon icon-list"></span>		
+		</a>
+		<ul class="ui-nav-sub" style="display: block;">
+			<li><a href="#">账单</a></li>
+			<li><a href="#">详单</a></li>
+			<li><a href="#">视频</a></li>
+		</ul>
+	</div>
+	<h1>Category 类目</h1>
+	<div class="ui-category fn-clear">
+		<a href="javascript:void(0);" class="ui-category-item  ">
+			<span class="ui-category-icon ui-color-1">
+				<span class="ui-icon icon-search"></span>
+			</span>
+			流量专区
+		</a>
+		<a href="javascript:void(0);" class="ui-category-item  movie">
+			<span class="ui-category-icon ui-color-2"></span>
+			话费服务
+		</a>
+		<a href="javascript:void(0);" class="ui-category-item  ktv">
+			<span class="ui-category-icon ui-color-3"></span>
+			账单查询
+		</a>
+		<a href="javascript:void(0);" class="ui-category-item  hotel">
+			<span class="ui-category-icon ui-color-4"></span>
+			手机充值
+		</a>
+		<a href="javascript:void(0);" class="ui-category-item  tuan">
+			<span class="ui-category-icon ui-color-5"></span>
+			积分兑换
+		</a>
+		<a href="javascript:void(0);" class="ui-category-item  beauty">
+			<span class="ui-category-icon ui-color-6"></span>
+			营业厅查询
+		</a>
+		<a href="javascript:void(0);" class="ui-category-item  massage">
+			<span class="ui-category-icon ui-color-7"></span>
+			业务大全
+		</a>
+		<a href="javascript:void(0);" class="ui-category-item  more">
+			<span class="ui-category-icon ui-color-8">
+				<span class="ui-icon icon-more"></span>
+			</span>
+			更多
+		</a>
+	</div>	
+	<h1>Tab 页签</h1>
+	<div class="ui-tab">
+		<a class="ui-tab-item active">账户</a>
+		<a class="ui-tab-item">转入</a>
+		<a class="ui-tab-item">转出</a>
+	</div>
+	<h1>List 列表</h1>
+	<ul class="ui-list">
+		<li class="ui-list-item">
+			<a class="icon-navigate-right" >Item 1</a>
+		</li>
+		<li class="ui-list-item">
+			<a class="icon-navigate-right">Item 2</a>
+		</li>
+		<li class="ui-list-item">
+			<a class="icon-navigate-right">Item 3</a>
+		</li>
+	</ul>
+
+	<ul class="ui-list">
+		<li class="ui-list-item">
+			Item 1
+			<span class="ui-badge">4</span>
+		</li>
+		<li class="ui-list-item">
+			Item 2
+			<span class="ui-badge">1</span>
+		</li>
+		<li class="ui-list-item">
+			Item 3
+			<span class="ui-badge">5</span>
+		</li>
+	</ul>
+
+	<ul class="ui-list">
+		<li class="ui-list-item">
+			<a class="icon-navigate-right">
+				<span class="ui-badge">5</span>
+				Item 1
+			</a>
+		</li>
+		<li class="ui-list-item">
+			<a class="icon-navigate-right">
+				<span class="ui-badge">5</span>
+				Item 2
+			</a>
+		</li>
+		<li class="ui-list-item">
+			<a class="icon-navigate-right">
+				<span class="ui-badge">5</span>
+				Item 3
+			</a>
+		</li>
+	</ul>
+
+	<ul class="ui-list">
+		<li class="ui-list-item ui-media">
+			<a class="icon-navigate-right">
+				<img class="ui-media-object fn-left" src="http://placehold.it/42x42">	
+				<div class="ui-media-body">
+					<p>Item 1</p>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor sit amet.
+					</p>
+				</div>
+			</a>
+		</li>
+		<li class="ui-list-item ui-media">
+			<a class="icon-navigate-right">
+				<img class="ui-media-object fn-left" src="http://placehold.it/42x42">	
+				<div class="ui-media-body">
+					<p>Item 1</p>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor sit amet.
+					</p>
+				</div>
+			</a>
+		</li>
+		<li class="ui-list-item ui-media">
+			<a class="icon-navigate-right">
+				<img class="ui-media-object fn-left" src="http://placehold.it/42x42">	
+				<div class="ui-media-body">
+					<p>Item 1</p>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor sit amet.
+					</p>
+				</div>
+			</a>
+		</li>
+	</ul>
+
+	<ul class="ui-list">
+		<li class="ui-list-item ui-media">
+			<a class="icon-navigate-right">
+				<span class="ui-media-object fn-left ui-icon icon-trash"></span>
+				<div class="ui-media-body">Item 1</div>
+			</a>
+		</li>
+		<li class="ui-list-item ui-media">
+			<a class="icon-navigate-right">
+				<span class="ui-media-object fn-left ui-icon icon-gear"></span>
+				<div class="ui-media-body">Item 2</div>
+			</a>
+		</li>
+		<li class="ui-list-item ui-media">
+			<a class="icon-navigate-right">
+				<span class="ui-media-object fn-left ui-icon icon-pages"></span>
+				<div class="ui-media-body">Item 3</div>
+			</a>
+		</li>
+	</ul>
+	<h1>Summary 概要</h1>
+	<ul class="ui-summary ui-summary-2">
+		<li class="ui-summary-item">
+			<span class="ui-summary-item-key">名称：</span>上网流量包
+		</li>
+		<li class="ui-summary-item">
+			<span class="ui-summary-item-key">热度：</span>五颗星
+		</li>
+		<li class="ui-summary-item">
+			<span class="ui-summary-item-key">品牌：</span>全球通 神州行 动感地带
+		</li>
+		<li class="ui-summary-item">
+			<span class="ui-summary-item-key">资费：</span>月费5元
+		</li>
+		<li class="ui-summary-item">
+			<span class="ui-summary-item-key">介绍：</span>含30M国内（不含港澳台）移动数据流量
+		</li>
+	</ul>
+	
+	<ul class="ui-summary ui-summary-3">
+			<li class="ui-summary-item">
+				<span class="ui-summary-item-key">名称：</span>上网流量包
+			</li>
+			<li class="ui-summary-item">
+				<span class="ui-summary-item-key">热度：</span>五颗星
+			</li>
+			<li class="ui-summary-item">
+				<span class="ui-summary-item-key">品牌：</span>全球通 神州行 动感地带
+			</li>
+			<li class="ui-summary-item">
+				<span class="ui-summary-item-key">资费：</span>月费5元
+			</li>
+			<li class="ui-summary-item">
+				<span class="ui-summary-item-key">介绍：</span>含30M国内（不含港澳台）移动数据流量
+			</li>
+		</ul>
+
+	<h1>Panel 区块</h1>
+	<div class="ui-panel">
+		<ul class="ui-list">
+			<li class="ui-list-item ui-media">
+				<a class="icon-navigate-right">
+					<span class="ui-media-object fn-left ui-icon icon-trash"></span>
+					<div class="ui-media-body">Item 1</div>
+				</a>
+			</li>
+			<li class="ui-list-item ui-media">
+				<a class="icon-navigate-right">
+					<span class="ui-media-object fn-left ui-icon icon-gear"></span>
+					<div class="ui-media-body">Item 2</div>
+				</a>
+			</li>
+			<li class="ui-list-item ui-media">
+				<a class="icon-navigate-right">
+					<span class="ui-media-object fn-left ui-icon icon-pages"></span>
+					<div class="ui-media-body">Item 3</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="ui-panel">
+		<div class="ui-panel-head fn-clear">
+			<h3 class="ui-panel-head-title">标题</h3>
+    		<span class="ui-panel-head-text">文字</span>
+    		<span class="ui-panel-head-more">其他</span>
+		</div>
+		<div class="ui-panel-container">
+			<ul class="ui-list">
+				<li class="ui-list-item">
+					<a class="icon-navigate-right" >Item 1</a>
+				</li>
+				<li class="ui-list-item">
+					<a class="icon-navigate-right">Item 2</a>
+				</li>
+				<li class="ui-list-item">
+					<a class="icon-navigate-right">Item 3</a>
+				</li>
+			</ul>
+		</div>	
+	</div>
+	<div class="ui-panel">
+		<ul class="ui-summary">
+			<li class="ui-summary-item">
+				<span class="ui-summary-item-key">名称：</span>上网流量包
+			</li>
+		</ul>
+		<ul class="ui-summary ui-summary-2">
+			<li class="ui-summary-item">
+				<span class="ui-summary-item-key">热度：</span>五颗星
+			</li>
+			<li class="ui-summary-item">
+				<span class="ui-summary-item-key">品牌：</span>全球通 神州行 动感地带
+			</li>
+			<li class="ui-summary-item">
+				<span class="ui-summary-item-key">资费：</span>月费5元
+			</li>
+			<li class="ui-summary-item">
+				<span class="ui-summary-item-key">介绍：</span>含30M国内（不含港澳台）移动数据流量
+			</li>
+		</ul>
+	</div>
+	<h1>Button 按钮</h1>
+	<button class="ui-btn ui-btn-block" >默认</button>
+	<button class="ui-btn ui-btn-block ui-btn-disabled" >不可选</button>
+	<button class="ui-btn ui-btn-block ui-btn-white">白色</button>
+	<button class="ui-btn ui-btn-block ui-btn-green">绿色</button>
+	<button class="ui-btn ui-btn-block ui-btn-red">红色</button>
+
+	<button class="ui-btn">默认</button>
+	<button class="ui-btn ui-btn-white">白色</button>
+	<button class="ui-btn ui-btn-green">绿色</button>
+	<button class="ui-btn ui-btn-red">红色</button>
+
+	<button class="ui-btn">
+		<span class="ui-icon icon-search"></span>
+		搜索
+	</button>
+	<button class="ui-btn ui-btn-white">
+		<span class="ui-icon icon-person"></span>
+		通讯录
+	</button>
+	<button class="ui-btn ui-btn-green">
+		<span class="ui-icon icon-play"></span>
+		播放
+	</button>
+	<button class="ui-btn ui-btn-red">
+		<span class="ui-icon icon-trash"></span>
+		删除
+	</button>
+	
+	<button class="ui-btn">
+		我的收信<span class="ui-badge">10</span>
+	</button>
+
+	<button class="ui-btn ui-btn-link">
+		<span class="ui-icon icon-left"></span>
+		返回
+	</button>
+	<h1>Form 表单</h1>
+	<form class="ui-form">
+		<input type="text" placeholder="姓名" />	
+		<input type="text" placeholder="户口(不可选)" disabled />
+		<select name="province">
+			<option value="0">请选择星座</option>
+			<option value="1">双鱼座</option>
+			<option value="2">射手座</option>
+		</select>
+		<textarea rows="5" placeholder="兴趣爱好"></textarea>
+		<button class="ui-btn ui-btn-block">保存</button>
+
+	</form>
+
+	<form class="ui-form ui-form-group">
+		<input type="text" placeholder="姓名">	
+		<input type="text" placeholder="户口(不可选)" disabled>	
+		<input type="text" placeholder="毕业院校">
+		<select name="province">
+			<option value="0">请选择星座</option>
+			<option value="1">双鱼座</option>
+			<option value="2">射手座</option>
+		</select>
+		<textarea rows="5" placeholder="兴趣爱好"></textarea>
+		<button class="ui-btn ui-btn-block">保存</button>
+	</form>
+
+	<form class="ui-form ui-form-group">
+		<div class="ui-form-row">
+			<label>用户</label>
+			<input type="text" placeholder="用户名/邮箱/手机号">
+		</div>
+		<div class="ui-form-row">
+			<label>密码</label>
+			<input type="password" placeholder="密码">
+		</div>
+		<button class="ui-btn ui-btn-block">提交</button>
+	</form>
+
+	<h1>Option 选项</h1>
+	<div class="ui-panel">
+		<div class="ui-panel-head fn-clear">
+			<h3 class="ui-panel-head-title">请选择</h3>
+    		<span class="ui-panel-head-text">产品档次</span>
+		</div>
+		<div class="ui-panel-container">
+			<div class="ui-panel-content">
+				<div class="ui-option">
+					<input type="radio" value="01" name="option" id="s101" >
+					<label for="s101">5元30M</label>
+					<input type="radio" value="01" name="option" id="s102">
+					<label for="s102">6元30M超值包</label>
+					<input type="radio" value="01" name="option" id="s103">
+					<label for="s103">10元80M</label>
+					<input type="radio" value="01" name="option" id="s104">
+					<label for="s104">15元200M</label>
+					<input type="radio" value="01" name="option" id="s105">
+					<label for="s105">18元250M</label>
+					<input type="radio" value="01" name="option" id="s106">
+					<label for="s106">20元200M</label>
+					<input type="radio" value="01" name="option" id="s107">
+					<label for="s107">30元200M</label>
+					<input type="radio" value="01" name="option" id="s108" disabled>
+					<label for="s108">3元加油包</label>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<h1>Toggles 开关</h1>
+	<div class="ui-toggle active">
+		<div class="ui-toggle-handle"></div>
+	</div>
+	<div class="ui-toggle">
+		<div class="ui-toggle-handle"></div>
+	</div>
+	<h1>Progress 进度条</h1>
+	<div class="ui-panel">
+		<div class="ui-panel-content">
+			<div class="ui-progress">
+				<div class="ui-progress-bar" style="width:20%;">20%</div>
+			</div>
+
+			<div class="ui-progress ui-progress-success">
+				<div class="ui-progress-bar" style="width:40%;">40%</div>
+			</div>
+
+			<div class="ui-progress ui-progress-warning">
+				<div class="ui-progress-bar" style="width:60%;">60%</div>
+			</div>
+
+			<div class="ui-progress ui-progress-danger">
+				<div class="ui-progress-bar" style="width:80%;">80%</div>
+			</div>
+
+			<div class="ui-progress ui-progress-striped ui-active">
+				<div class="ui-progress-bar" style="width:90%;">90%</div>
+			</div>
+		</div>
+	</div>
+	<h1>Alert 提示</h1>
+	<div class="ui-alert">
+		<p>此服务不收取任何费用。</p>
+	</div>
+	
+	<div class="ui-alert ui-alert-success">
+		<p>此服务不收取任何费用。</p>
+	</div>
+
+	<div class="ui-alert ui-alert-warning">
+		<p>此服务不收取任何费用。</p>
+	</div>
+
+	<div class="ui-alert ui-alert-danger">
+		<p>此服务不收取任何费用。</p>
+	</div>
+
+	<div class="ui-alert ui-alert-large">
+		<h2>提交成功</h2>
+		<p>此服务不收取任何费用。</p>
+	</div>
+	<h1>Loading 等待</h1>
+	<div class="ui-panel">
+		<div class="ui-panel-head fn-clear">
+			<h3 class="ui-panel-head-title">信息公告</h3>
+		</div>
+		<div class="ui-panel-container">
+			<div class="ui-loader-cnt">
+				<span class="ui-loader-icon"></span>	
+			</div>	
+		</div>	
+	</div>
+	<div class="ui-loader" id="ui-loader">
+		<span class="ui-loader-icon"></span>
+		<span class="ui-loader-text">正在加载...</span>
+	</div>
+	<div class="ui-panel">
+		<button class="ui-btn ui-btn-block" onclick="document.getElementById('ui-loader').style.display='block'">弹层加载</button>
+	</div>
+	<h1>Step 步骤</h1>
+	<ul class="ui-step ui-step-2">
+		<li class="active">第一步</li>
+		<li >第二步</li>
+	</ul>
+	<ul class="ui-step ui-step-3">
+		<li class="active">第一步</li>
+		<li class="active">第二步</li>
+		<li>第三步</li>
+	</ul>
+	<ul class="ui-step ui-step-4">
+		<li class="active">第一步</li>
+		<li class="active">第二步</li>
+		<li class="active">第三步</li>
+		<li>第四步</li>
+	</ul>
+	<ul class="ui-step ui-step-5">
+		<li class="active">第一步</li>
+		<li class="active">第二步</li>
+		<li class="active">第三步</li>
+		<li class="active">第四步</li>
+		<li>第五步</li>
+	</ul>
+	<h1>Backtop 返回顶部</h1>
+	<a class="ui-backtop" href="#top" style="display: block;">
+        <span class="ui-icon icon-up"></span>
+    </a>
+    <div class="ui-panel">
+		<button class="ui-btn ui-btn-block">效果见右侧</button>
+	</div>
+</body>
+</html>

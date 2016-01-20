@@ -1,0 +1,88 @@
+{
+	"item": [
+		/*{
+			"title": "(控件名)",
+			"name": "(提交后台名)",
+			"type": "(1表示input，2表示下拉框，3表示日历，4表示图片上传，5表示textarea，6表示数字类型)",
+			"require": "(1表示必填，2表示非必填)",
+			"placeholder": "(占位符)",
+			"value": "(默认值)",
+			"unit": "(单位)",
+			"select": [
+				{
+					"key": "(下拉框key)",
+					"value": "(下拉框value)"
+				}
+			]
+		},*/
+		{
+			"title": "标题",
+			"name": "",
+			"type": "1",
+			"require": "1",
+			"placeholder": "",
+			"value": "",
+			"unit": "",
+			"select": ""
+		},
+		{
+			"title": "身高",
+			"name": "",
+			"type": "1",
+			"require": "1",
+			"placeholder": "",
+			"value": "",
+			"unit": "cm",
+			"select": ""
+		},
+		{
+			"title": "就诊医生",
+			"name": "",
+			"type": "2",
+			"require": "1",
+			"placeholder": "",
+			"value": "Doc李",
+			"unit": "",
+			"select": [
+				{
+					"key": "1",
+					"value": "Doc李"
+				},
+				{
+					"key": "2",
+					"value": "Doc王"
+				}
+			]
+		},
+		{
+			"title": "就诊时间",
+			"name": "",
+			"type": "3",
+			"require": "1",
+			"placeholder": "",
+			"value": "1989-12-30",
+			"unit": "",
+			"select": ""
+		},
+		{
+			"title": "就诊结果",
+			"name": "",
+			"type": "5",
+			"require": "1",
+			"placeholder": "",
+			"value": "",
+			"unit": "",
+			"select": ""
+		},
+		{
+			"title": "处方照片",
+			"name": "",
+			"type": "4",
+			"require": "1",
+			"placeholder": "",
+			"value": "",
+			"unit": "",
+			"select": ""
+		}
+	]
+}

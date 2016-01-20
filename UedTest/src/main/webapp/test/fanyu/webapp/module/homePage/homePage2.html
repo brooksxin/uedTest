@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>欢迎登录10085 - 美好一天即将开始</title>
+<#include "../../tpl/res_css.tpl" />
+<style type="text/css">
+.ui-loading{
+    margin: 95px auto;
+}
+.ui-no-data{
+    margin:20px;width:115px;font-size:14px;
+}
+.rateBar .rateProcess{width: 0;}
+.ui-dialog-content{overflow: auto;}
+.createQuestionnarie,.createRouter {  }
+</style>
+<#include "../../tpl/res_js.tpl" />
+
+<script src="../../lib/handlebars/1.3.0/handlebars.js"></script>
+<script src="../../lib/handlebars/1.3.0/helpers.js"></script>
+<script>
+    //创建新的问卷
+    var createQuestionnarie = function(){
+        var $mainRight = $('#mainRight_child');
+        $mainRight.html('加载中...')
+        require(['common/questionnaire/builder'], function(builder){
+            //builder.init({ questionnaireID:'5062eb07-9dee-4071-a6b6-63b34098e9f5' });
+            //builder.init();
+            //var data = {questionnaireID:'5062eb07-9dee-4071-a6b6-63b34098e9f5'}
+            var data = null;
+            $mainRight.html('').append(new builder(data).render().el);
+        });
+    }
+    //配置问卷routerQuestionnarie
+    var createRouter = function(){
+        var $mainRight = $('#mainRight_child');
+        $mainRight.html('加载中...')
+        require(['common/questionnaire/router'], function(router){
+            //builder.init({ questionnaireID:'5062eb07-9dee-4071-a6b6-63b34098e9f5' });
+            //builder.init();
+            srvMap.add('router', ' router.json','front/sh/questionaire!index');//编辑问卷
+            var router = new router('f973eac3-8a32-47e9-aff6-e485c00f0730');
+            //.render()
+            $mainRight.html('').append(router.el);
+        });
+    }
+
+    var createLib = function(){
+        //8debe9ce-d511-4816-9340-e1db3d9c9160,3a56c309-f2e2-4c84-a629-c1fc0ab2708a,
+        var $mainRight = $('#mainRight_child');
+        $mainRight.html('加载中...')
+        require(['common/questionnaire/questions/questionSelector'], function(QuestionSelector){
+            //builder.init({ questionnaireID:'5062eb07-9dee-4071-a6b6-63b34098e9f5' });
+            //builder.init();
+            var data = { questionnaireID:'5062eb07-9dee-4071-a6b6-63b34098e9f5' }
+
+            var selector = new QuestionSelector(data);
+            selector.on('select', function(result){
+                console.log(result);
+            })
+            $mainRight.html('').append(selector.$el);
+        });
+    }
+
+    var createQuestions = function(){
+        //8debe9ce-d511-4816-9340-e1db3d9c9160,3a56c309-f2e2-4c84-a629-c1fc0ab2708a,
+        var $mainRight = $('#mainRight_child');
+        $mainRight.html('加载中...')
+        require(['common/questionnaire/questions'], function(Questions){
+            var data = { questionnaireID:'5062eb07-9dee-4071-a6b6-63b34098e9f5' }
+            var q = new Questions(data);
+            
+            $mainRight.html('').append(q.render().$el);
+        });
+    }
+
+    var templateTest = function(){
+        var $test = $('#T_test');
+        var $mainRight = $('#mainRight_child');
+        var json = {
+            beans:[
+                { name:'n1', value:1}, 
+                { name:'n2', value:2}, 
+                { name:'n3', value:3}, 
+                { name:'n4', value:4}, 
+            ]
+        }
+        $mainRight.html(Handlebars.compile($test.html())(json));
+    }
+
+    var createQuestionView = function(){
+        require(['common/questionnaire/questionView'], function(QuestionView){
+            var creatQuestionArie = new QuestionView({ questionnaireID:'77ee5102-51cd-4223-ac68-39868917a8ce' }).render();
+        });
+    }
+
+    $(function(){
+        //createQuestionnarie();
+        //templateTest();
+        //createQuestions();
+        createQuestionView();
+    });
+</script>
+</head>
+<body>
+
+	<#include "../../tpl/sys_top.tpl" />
+    <!--
+    <div class="toolLoadingCenter" style=" display:table;  border-radius: 3px;  text-align: center;position:absolute; left:100px; top:100px; background-color:#f0fbff; border:1px solid #a8c9db; padding:12px 40px; textAlign:left; max-width:300px; ">
+        
+        <span style="display:table-cell; width:35px; vertical-align: middle; text-align:left;  "><img src="../../css/images/loading.gif" style="  " /></span>
+        <span style=" display:table-cell; font-size: 16px; ">加载中...</span>
+    </div>
+    -->
+
+    <div class="wrapper">
+        <!-- 顶部菜单容器 -->
+        <div id="J_topMenu" class="menu fn-clear"></div>
+        <div id="J_homePage">
+             <!-- left start -->
+                <div class="mainLeft" style="background:#fff;">
+                 <div class="mainLeftInner">
+                 <div class="mainLeftMenu">
+                     <h2>常用功能</h2>
+                     <ul>
+                         <li class="createQuestionnarie">
+                             <a href="javascript:;" onclick="createQuestionnarie();"><i class="icon icon4"></i><span>创建问卷</span></a>
+                         </li>
+
+                         <li class="createRouter">
+                             <a href="javascript:;" onclick="createRouter();"><i class="icon icon4"></i><span>路由</span></a>
+                         </li>
+
+                         <li class="createLib">
+                             <a href="javascript:;" onclick="createLib();"><i class="icon icon4"></i><span>问题库</span></a>
+                         </li>
+
+                     </ul>
+                 </div>
+                 </div>
+                 
+                 
+             </div><!-- left stop -->
+             <!-- left stop -->
+             <!-- right start -->
+             <div class="right" id="mainRight" style="overflow:auto;margin-left:156px;background:#EDF0F2;">
+                 <div id="mainRight_child" style="height:100%;">
+                 <div class="mainRightContent fn-clear">
+
+                 </div>
+               </div>
+             </div>
+             <!-- right stop -->
+        </div>
+
+        <div class="fn-hide" id="busi_right">
+             <!-- left start -->
+                <div class="left">
+                 <!-- 左侧菜单容器 -->
+                 <div class="leftInner" id="J_leftMenu"></div>
+                 <div class="middle" id="mainMiddle">&nbsp;</div>
+             </div>
+             <!-- left stop -->
+             <!-- right start -->
+             <div class="right" id="mainRight" style="overflow:auto">
+                 <div id="mainRight_child" style="height:100%;">
+                     <iframe id="J_busi_iframe" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+                     <div id="J_busi_div" class="fn-hide"></div>
+                 </div>
+             </div>
+             <!-- right stop -->
+        </div>
+    </div>
+
+
+<script id="T_test" type="text/text/x-handlebars-template">
+    {{#if beans.length}}
+        {{#each beans}}
+            {{#if_eq value compare=1}}
+            <div>{{name}}</div>
+            {{else}}
+                {{#if_gt value compare=2}}
+                <div>if_gt{{name}}</div>
+                {{else}}
+                <div>if_gt else{{name}}</div>
+                {{/if_gt}}
+            {{/if_eq}}
+        {{/each}}
+    {{else}}
+        <div class="ui-no-data">暂无排名</div>
+    {{/if}}
+    
+</script>
+
+
+<script>
+
+
+</script>
+</body>
+</html>

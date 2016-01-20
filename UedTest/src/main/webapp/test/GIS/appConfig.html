@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>应用配置</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/opui/om-default.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/ajaxform/3.2.3/jquery.form.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="res/lib/opui/2.1/operamasks-ui.src.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body>
+<!-- <div class="main">
+	<div id="hnav" >
+		<div class="hnav_logo"></div>
+	</div>
+	<div id="wrapContent">
+		<div class="wrap">
+			<div class="content"> -->
+				<!--内容start-->
+				<div class="pathhome">
+					<h4>应用&gt; <b>应用配置</b></h4>
+				</div>
+				<div class="bz_manage">
+                    <form id="busi_form">
+                        <table class="infoTable" cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <tbody>
+                                <tr>
+                                	<td class="description">应用名称：</td>
+                                    <td ><input class="normalinput" type="text" value="" name="appName" /></td>
+                                    <td style="width: 120px;">&nbsp;</td>
+                                    <td style="width: 120px;">&nbsp;</td>
+                                    <td colspan="2">
+                                        <div class="bz_btn_list">
+                                            <a class="btn_normal fn-mr-20" href="#nogo" id="J_add"><em>新增</em></a>
+                                            <a class="btn_normal " href="#nogo" id="J_search"><em>查询</em></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                    
+                    <table id="mytable"></table>
+
+                </div>
+				<!--内容end-->
+<!-- 			</div>
+		</div>
+	</div>
+</div> -->
+
+<textarea class="fn-hide" id="markerType_tpl">
+{{#each rows}}
+	<option value="{{type}}">{{type_des}}</option>
+{{/each}}
+</textarea>
+
+<script type="text/javascript" >
+$(function(){
+	//okGrid("res/data/appConfig.json");
+	okGrid(REQURLS.appConfig_pageQuery);
+	$("#J_search").click(function(){
+	    var str = "&"+$("#busi_form").serialize();
+	    //okGrid("res/data/appConfig.json");
+	    okGrid(REQURLS.appConfig_pageQuery+str);
+	})
+	$("#J_add").click(function(){
+	    openWindow('新增应用','appConfigAdd.html' , 900 , 460 );
+	})
+
+})
+
+function okGrid(url){
+    var url = url||"";
+    $('#mytable').omGrid({
+        height : 365,
+        width : '100%',
+        limit : 10, //分页显示，每页显示8条
+        singleSelect : true, //出现checkbox列，可以选择同时多行记录
+        colModel : [
+            {header:'应用编号',name:'appid', width:100, align : 'left'},
+            {header:'应用名称',name:'appname', width:250, align : 'left'},
+            {header:'描述',name:'appdesc', width:350, align : 'left'},
+            {header:'操作',name:'des', width:'autoExpand', align : 'left',renderer:function(value,rowData,rowIndex){
+                    var str=
+                        '<a href="#nogo" onclick="appConfigDel(\''+rowData.appid+'\',event)" class="grid-btn fn-mr-20">删除</a>'+
+                        '<a href="#nogo" onclick="appConfigMod(\''+rowData.appid+'\',\''+rowData.appname+'\',\''+rowData.treeRootId+'\',\''+rowData.signTypeId+'\',event)" class="grid-btn">修改</a>' + "&nbsp;&nbsp;&nbsp;"
+                        //'<a href="#nogo" onclick="attrRoleConfig(\''+rowData.appid+'\',\''+rowData.appname+'\',event)" class="grid-btn">配置</a>';
+                    return str;
+                }
+            }
+        ],
+        dataSource : url,
+        onSuccess:function(data,testStatus,XMLHttpRequest,event){
+            var totals = data.total;
+            if(totals == "-9999"){
+            	data.total = "0";
+                result_prompt(0,"系统异常,请稍后重试");
+            }
+        }
+    });
+}
+
+function appConfigDel(id,e){
+	stopEvent(e);
+    result_comfirm("是否删除？",function(){
+        $.PostJson(REQURLS.appConfig_delTemplate,"id="+id,function(state,json){
+            if(state=="success"){
+                if(json&&json.returnCode=="1"){
+                    result_prompt(1,"删除成功！");
+                    gridReload("mytable");
+                }else{
+                    result_prompt(0,json.returnMessage||"删除失败！");
+                }
+            }else{
+                result_prompt(0,"系统错误！");
+            }
+        });
+    },"");
+}
+function appConfigMod(id,name,treeid,signTypeId){
+	art.dialog.data('id',id);
+    art.dialog.data('name',name);
+    art.dialog.data('treeid',treeid);
+    art.dialog.data('signTypeId',signTypeId);
+    openWindow('应用配置修改','appConfigMod.html' , 900 , 460 );
+
+}
+function attrRoleConfig(id,name){
+	art.dialog.data('id',id);
+	art.dialog.data('name',name);
+    openWindow("属性权限配置",'attrRoleConfig.html', 900, 460);
+}
+</script>
+
+</body>
+</html>
+
+

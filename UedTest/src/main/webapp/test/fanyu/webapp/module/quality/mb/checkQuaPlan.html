@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>查看质检计划</title>
+<#include "../../tpl/res_css.tpl" />
+</head>
+<body>
+<div class="formItem">
+    <div class="titleArea">
+        <div class="listTopBtn fn-clear">
+            <p>2015年6月第一周通话服务质量检测</p>
+            <p class="ft-12">开始时间：2015年4月14日 09:00 — 2015年5月15日 09:00</p>
+        </div>
+    </div>
+    <div class="record-search-cate">
+        <p class="ft-12">本次质检计划主要考察员工平时工作态度，以及相关专业技能，同时本次质检范围包括2015年第一周全部外呼项目</p>
+    </div>
+    <hr class="mtb20" />
+<div method="post" action="#" class="cmxform" >
+    <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+        <div class="form_table">
+            <table cellpadding="0" cellspacing="0" border="0" class="form_table" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="80"><label class="formDescription">质检条件</label></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="formDescription">质检项目</label>
+                        </td>
+                        <td>
+                            <p>全部外呼活动</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <label class="formDescription">抽取策略</label>
+                        </td>
+                        <td>
+                            <p>总外呼量为 0-10000 时，抽检 10 条</p>
+                            <p>总外呼量为 10000－ +∞ 时，抽检 0.08%</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <label class="formDescription">评分模版</label>
+                        </td>
+                        <td>
+                            <p>服务用语模版</p>
+                            <div class="tablewidth mg_t_10">
+                                <table class="ui-record-table table_radius table-bordered table-striped" >
+                                    <thead>
+                                        <tr>
+                                            <th width="25">序号</th>
+                                            <th width="100">评分项</th>
+                                            <th>等级名称</th>
+                                            <th width="80">等级分值</th>
+                                            <th width="80">权重</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="J_tabletpl">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                <a class="item-text" href="javascript:;">基本用语</a>
+                                            </td>
+                                            <td>优秀/良好/及格/不及格</td>
+                                            <td align="right">100/70/40/0</td>
+                                            <td align="right"><a class="item-text" href="javascript:;">10%</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="formDescription">任务分配方式</label>
+                        </td>
+                        <td>
+                            <p>自动分配、手动分配</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>    
+        
+    </form>
+</div>
+<hr class="mtb20" />
+<div method="post" action="#" class="cmxform" >
+    <form method="get" action=""  class="record-search-form record-search-min record-search-form-border" id="J_formSearch" name="J_formSearch" >
+        <div class="form_table">
+            <table cellpadding="0" cellspacing="0" border="0" class="form_table" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="80"><label class="formDescription">考评关系</label></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <label class="formDescription">执行部门</label>
+                        </td>
+                        <td>
+                            <p>北京客服中心：</p>
+                            <p>质检1组：王小波、窦娆、苏轼</p>
+                            <p>质检2组：全部</p>
+                            <p>河南客服中心：全部</p>
+                            <p>河南客服中心：全部</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <label class="formDescription">被测团队</label>
+                        </td>
+                        <td>
+                            <p>北京客服中心：</p>
+                            <p>希望组、梦想组</p>
+                            <p>河南客服中心：全部</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>    
+        
+    </form>
+</div>
+
+</div>
+
+<#include "../../tpl/res_js.tpl" /> 
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+    });
+</script>
+</body>
+</html>

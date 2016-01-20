@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>10085_buton</title>
+<link href="../lib/pretty/prettify.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../css/tablepay.css" media="all">
+<link rel="stylesheet" type="text/css" href="../css/common.css" media="all">
+<script src="../lib/jquery/1.8.1/jquery.js"></script>
+<script type="text/javascript" src="../lib/pretty/prettify.js"></script>
+<script src="../lib/dialog/6.0.4/dialog-plus.js"></script>
+<!-- <script src="../common/common.js"></script> -->
+<style>
+
+.standard {
+	margin:0px 20px
+}
+.standard h1 {
+	font-size:20px;
+	margin:10px 0px;
+	font-weight:bold
+}
+.standard p {
+	line-height:150%;
+	margin:20px 0px 10px 0px;
+}
+</style>
+</head>
+<body id="main_body" onload="prettyPrint()" style="background-color:#f5f5f5;">
+<div class="standard">
+
+  <H1>按钮使用规范</H1>
+  <p>按照北京设计公司的规范要求，按钮主要有以下几种：<br />
+    <strong>1、一般查询列表页面按钮</strong> </p>
+    
+  <div class="normalBtnArea ft-right"><!--不附加ft-right样式，默认左对齐--> 
+    <a class="normalBtn BGblue" href="#">蓝色按钮</a> <a class="normalBtn BGgray" href="#">灰色按钮</a> <a class="normalBtn disable" href="#">不可用按钮</a> </div>
+  <pre class="prettyprint mg_t_20 fn-clear" id="html">
+&lt;div class=&quot;normalBtnArea ft-right&quot;&gt;&lt;!--不附加ft-right样式，默认左对齐--&gt;
+    &lt;a class=&quot;normalBtn BGblue&quot; href=&quot;#&quot;&gt;蓝色按钮&lt;/a&gt;
+    &lt;a class=&quot;normalBtn BGgray&quot; href=&quot;#&quot;&gt;灰色按钮&lt;/a&gt;
+    &lt;a class=&quot;normalBtn disable&quot; href=&quot;#&quot;&gt;不可用按钮&lt;/a&gt;
+&lt;/div&gt;
+	</pre>
+    
+    
+  <p><strong>2、查询专用按钮</strong></p>
+  <div class="normalBtnArea"> <a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询按钮</a> </div>
+  <pre class="prettyprint mg_t_20 fn-clear" id="html">
+&lt;div class=&quot;normalBtnArea&quot;&gt;
+    &lt;a class=&quot;searchBtn&quot; href=&quot;javascript:;&quot; id=&quot;J_search&quot; &gt;&lt;i&gt;&lt;/i&gt;查询按钮&lt;/a&gt;
+&lt;/div&gt;
+	</pre>
+    
+    
+  <p> <strong>3、表单录入页面使用按钮</strong> </p>
+  <div class="formBtnArea">
+    <table width="100%">
+      <tr>
+        <td><div class="normalBtnArea"> <a class="normalBtn BGblue largeBtn" href="javascript:;" id="J_search" >查询</a> <a class="normalBtn BGgray largeBtn" href="javascript:;" id="J_search" >浏览</a> </div></td>
+        <td><div class="normalBtnArea fn-right"> <a href="#" class="formLink"><span>取消上传</span></a> </div></td>
+      </tr>
+    </table>
+  </div>
+  <pre class="prettyprint mg_t_20 fn-clear" id="html">
+&lt;div class=&quot;formBtnArea&quot;&gt;
+  &lt;table width=&quot;100%&quot;&gt;
+    &lt;tr&gt;
+      &lt;td&gt;
+        &lt;div class=&quot;normalBtnArea&quot;&gt;
+            &lt;a class=&quot;normalBtn BGblue largeBtn&quot; href=&quot;javascript:;&quot; id=&quot;J_search&quot; &gt;查询&lt;/a&gt;
+            &lt;a class=&quot;normalBtn BGgray largeBtn&quot; href=&quot;javascript:;&quot; id=&quot;J_search&quot; &gt;浏览&lt;/a&gt;
+        &lt;/div&gt;
+	  &lt;/td&gt;
+      &lt;td&gt;
+          &lt;div class=&quot;normalBtnArea fn-right&quot;&gt;
+            &lt;a href=&quot;#&quot; class=&quot;formLink&quot;&gt;&lt;span&gt;取消上传&lt;/span&gt;&lt;/a&gt;
+          &lt;/div&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+	</pre>
+    
+    
+</div>
+</body>
+</html>

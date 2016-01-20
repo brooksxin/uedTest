@@ -1,0 +1,22 @@
+{
+    "total": 126,
+    "returnCode": "1",
+    "rows": [
+        {
+            "signid": "110",
+            "signtypeName": "营业厅A",
+            "imgtype": "2",
+            "signtypeDesc": "营业厅A的标记点类型"
+        },{
+            "signid": "111",
+            "signtypeName": "营业厅B",
+            "imgtype": "1",
+            "signtypeDesc": "营业厅B的标记点类型"
+        },{
+            "signid": "113",
+            "signtypeName": "营业厅C",
+            "imgtype": "4",
+            "signtypeDesc": "营业厅C的标记点类型"
+        }
+    ]
+}

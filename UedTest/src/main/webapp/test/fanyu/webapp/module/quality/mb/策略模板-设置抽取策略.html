@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>设置抽取策略</title>
+   <#include "../../tpl/res_css.tpl" />
+</head>
+
+<body>
+<div class="onlin_borBot pb-10 mb-10">
+    <h2 class="fn-center">设置抽取策略</h2>
+</div>
+
+<div class="formItem">
+
+    <div class="ml-15 mr-15 mb-20">
+      	<div class="pb-10 fn-clear">
+          <div class="fn-left pr-30"> <span class="attributionValue fn-right"><span class="fn-high">*</span> 模板名称</span></div>
+          <div class="fn-left">
+              <div class="mb-10">
+                  <input type="text" class="FormInputText w314" />
+              </div>
+          </div>
+        </div>     
+    	<div class="pb-10 fn-clear">
+          <div class="fn-left pr-30"> <span class="attributionValue fn-right"> 模板描述</span></div>
+          <div class="fn-left">
+              <div class="mb-10">
+              	<textarea name="REMARK" class="width374" id="REMARK" style="resize: none;" rows="8" cols="40"></textarea>
+              </div>
+          </div>
+        </div>
+    	<div class="pb-10 fn-clear">
+          <div class="fn-left pr-30"> <span class="attributionValue fn-right"><span class="fn-high">*</span> 策略类型</span></div>
+          <div class="fn-left">
+              <div class="mb-10">
+                  <select  class="selectStyle w314">
+                    <option>语音外呼类</option>
+                  </select>
+              </div>
+          </div>
+        </div>
+        <div class="pb-10 fn-clear">
+          <div class="fn-left pr-30"> <span class="attributionValue fn-right"><span class="fn-high">*</span> 抽取频率</span></div>
+          <div class="fn-left">
+              <div class="mb-10">
+                  <select  class="selectStyle w314">
+                    <option>5分钟</option>
+                  </select>
+              </div>
+          </div>
+        </div>
+        <div class="fn-clear pd_bo-dashed">
+          <div class="fn-left pr-30"> <span class="attributionValue fn-right"><span class="fn-high">*</span> 策略项</span></div>
+          <div class="fn-left">
+              <div class="divborder mr-15 ml-15 ">
+                  <div class="mb-10">
+                      按时长抽取<a href="#" class="fn-right"><span class="ui-gbPic pl-20 text_gray-666">删除策略项</span></a>
+                  </div>
+                  <div>
+                      <table class="ui-record-table table_radius table-bordered table-striped"  >
+                        <thead>
+                          <tr>
+                            <th>范围（最小值）</th>
+                            <th width="150">范围（最大值）</th>
+                            <th width="150">抽取数量</th>
+                            <th width="180">操作</th>
+                          </tr>
+                        </thead>
+                        <tbody id="J_tabletpl">
+                          <tr>
+                            <td>0</td>
+                            <td>30</td>
+                            <td>5</td>
+                            <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">添加描述</a><a class="item-textR" href="javascript:;">删除</a></div></td>
+                          </tr>
+                          <tr>
+                            <td>0</td>
+                            <td>30</td>
+                            <td>5</td>
+                            <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">查看描述</a><a class="item-textR" href="javascript:;">删除</a></div></td>
+                          </tr>
+                          <tr>
+                            <td>0</td>
+                            <td>30</td>
+                            <td>5</td>
+                            <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">查看描述</a><a class="item-textR" href="javascript:;">删除</a></div></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
+                  <div class="fn-clear mt-10 mb-10">
+                    <div class="fn-left">说明：请在列表中输入通话时长（秒数）</div>
+                    <div class="normalBtnArea ft-right"> <a class="normalBtn BGgray" href="#">新增</a> </div>
+                  </div>
+              </div>
+              <div class="divborder mr-15 ml-15">
+                  <div class="mb-10 mt-10">
+                      按时间抽取<a href="#" class="fn-right"><span class="ui-gbPic pl-20 text_gray-666">删除策略项</span></a>
+                  </div>
+                  <div>
+                      <table class="ui-record-table table_radius table-bordered table-striped"  >
+                        <thead>
+                          <tr>
+                            <th>范围（最小值）</th>
+                            <th width="150">范围（最大值）</th>
+                            <th width="150">抽取数量</th>
+                            <th width="180">操作</th>
+                          </tr>
+                        </thead>
+                        <tbody id="J_tabletpl">
+                          <tr>
+                            <td>10：00:00</td>
+                            <td>11:59:59</td>
+                            <td>15</td>
+                            <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">添加描述</a><a class="item-textR" href="javascript:;">删除</a></div></td>
+                          </tr>
+                          <tr>
+                            <td>0</td>
+                            <td>30</td>
+                            <td>5</td>
+                            <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">添加描述</a><a class="item-textR" href="javascript:;">删除</a></div></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
+                  <div class="fn-clear mt-10 mb-10">
+                    <div class="fn-left">说明：请在列表中输入具体小时（需精确到秒）</div>
+                    <div class="normalBtnArea ft-right"> <a class="normalBtn BGgray" href="#">新增</a> </div>
+                  </div>
+              </div>
+              <div class="divborder mr-15 ml-15">
+                  <div class="mb-10 mt-10">
+                      按日期抽取<a href="#" class="fn-right"><span class="ui-gbPic pl-20 text_gray-666">删除策略项</span></a>
+                  </div>
+                  <div>
+                      <table class="ui-record-table table_radius table-bordered table-striped"  >
+                        <thead>
+                          <tr>
+                            <th>范围（最小值）</th>
+                            <th width="150">范围（最大值）</th>
+                            <th width="150">抽取数量</th>
+                            <th width="180">操作</th>
+                          </tr>
+                        </thead>
+                        <tbody id="J_tabletpl">
+                          <tr>
+                            <td>1</td>
+                            <td>5</td>
+                            <td>20</td>
+                            <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">添加描述</a><a class="item-textR" href="javascript:;">删除</a></div></td>
+                          </tr>
+                          <tr>
+                            <td>6</td>
+                            <td>10</td>
+                            <td>20</td>
+                            <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">添加描述</a><a class="item-textR" href="javascript:;">删除</a></div></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
+                  <div class="fn-clear mt-10 mb-10">
+                    <div class="fn-left">说明：请在列表中输入具体日期</div>
+                    <div class="normalBtnArea ft-right"> <a class="normalBtn BGgray" href="#">新增</a> </div>
+                  </div>
+              </div>
+              <div class="divborder mr-15 ml-15">
+                  <div class="mb-10 mt-10">
+                      按总条数抽取<a href="#" class="fn-right"><span class="ui-gbPic pl-20 text_gray-666">删除策略项</span></a>
+                  </div>
+                  <div>
+                      <table class="ui-record-table table_radius table-bordered table-striped"  >
+                        <thead>
+                          <tr>
+                            <th width="50%">抽取数量</th>
+                            <th>操作</th>
+                          </tr>
+                        </thead>
+                        <tbody id="J_tabletpl">
+                          <tr>
+                            <td>20</td>
+                            <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">添加描述</a><a class="item-textR" href="javascript:;">删除</a></div></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
+                  <div class="fn-clear mt-10 mb-10">
+                    <div class="fn-left">说明：将按照抽取策略模板的抽取总条数范围内来抽取</div>
+                    <div class="normalBtnArea ft-right"> <a class="normalBtn BGgray" href="#">新增</a> </div>
+                  </div>
+              </div>
+              <div class="divborder mr-15 ml-15">
+                  <div class="mb-10 mt-10">
+                      按总条数抽取<a href="#" class="fn-right"><span class="ui-gbPic pl-20 text_gray-666">删除策略项</span></a>
+                  </div>
+                  <div>
+                      <table class="ui-record-table table_radius table-bordered table-striped"  >
+                        <thead>
+                          <tr>
+                            <th>全球通（%）</th>
+                            <th>动感地带（%）</th>
+                            <th>神州行（%）</th>
+                            <th width="120">操作</th>
+                          </tr>
+                        </thead>
+                        <tbody id="J_tabletpl">
+                          <tr>
+                            <td>50</td>
+                            <td>20</td>
+                            <td>30</td>
+                            <td width="90"><div class="gridRowBtn"><a class="item-text" href="javascript:;">添加描述</a><a class="item-textR" href="javascript:;">删除</a></div></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
+                  <div class="fn-clear mt-10 mb-10">
+                    <div class="fn-left">说明：请在列表中输入具体百分数，各权重相加应为100%</div>
+                    <div class="normalBtnArea ft-right"> <a class="normalBtn BGgray" href="#">新增</a> </div>
+                  </div>
+              </div>
+              <div class="normalBtnArea ml-15 mt-10"> <a class="normalBtn BGgray" href="#">增加策略项</a> </div>
+        </div>
+    
+	</div>
+
+</div>
+
+
+
+<div class="formBtnArea bd-top fn-clear">
+    <div class="normalBtnArea fn-center">
+        <a class="normalBtn BGblue largeBtn" href="javascript:;">确定</a>
+        <a class="normalBtn BGgray largeBtn" href="javascript:;">取消</a>
+    </div>
+</div>
+
+
+</div>
+
+
+
+
+<#include "../../tpl/res_js.tpl" />    
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        $(".qBox").mouseover(function() {
+          $(this).addClass("qBoxHover");
+          $(this).find(".qEditIcon").show();
+
+        }).mouseout(function() {
+          $(this).removeClass("qBoxHover");
+          $(this).find(".qEditIcon").hide();
+        });;
+    });
+</script>
+</body>
+</html>

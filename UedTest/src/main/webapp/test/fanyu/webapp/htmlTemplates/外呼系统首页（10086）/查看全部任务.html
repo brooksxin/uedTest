@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>查看全部任务</title>    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/tablepay.css" />
+    <link rel="stylesheet" href="../../lib/dialog/4.1.7/skins/blue.css" />
+</head>
+
+<body>
+<div class="formItem">
+    <div class="titleArea bd-bottom fn-clear">
+        <a href="javascript:history.go(-1);" class="ui-getBackJ fn-left"></a><h2 class="ui-textIndentStyle fn-left">外呼任务</h2>
+    </div>
+
+	<div class="record-search-cate" style="margin-top:30px;">
+      <table class="search_table" width="100%">
+          <tbody>
+              <tr>
+                  <td width="80"><label class="description">项目类型</label></td>
+                  <td>
+                   <select class="inputSelect" style="width:100px;">
+                      <option>全部</option>
+                   </select>
+                  </td>
+                  <td width="80"><label class="description">项目编号</label></td>
+                  <td>
+                      <input class="inputText" type="text" maxlength="255" value="" />
+                  </td>
+                  <td width="80"><label class="description">项目名称</label></td>
+                  <td>
+                      <input class="inputText" type="text" maxlength="255" value="" />
+                  </td>
+                  <td width="80"><label class="description">状态</label></td>
+                  <td>
+                   <select class="inputSelect" style="width:100px;">
+                      <option>全部</option>
+                   </select>
+                  </td>  
+                  <td width="100">
+				       <div class="normalBtnArea w82">
+                            <a class="searchBtn" href="javascript:;" id="J_search" ><i></i>查询</a>
+                        </div>
+				  </td>
+              </tr>
+              
+          </tbody>
+      </table>
+</div>
+
+<div class="tablewidth mg_t_10" style="margin-top:15px;">
+                <table class="ui-record-table table_radius table-bordered table-striped"  >
+                    <thead>
+                        <tr>
+                            <th width="80">项目编号</th>
+                            <th width="80">项目类型</th>
+                            <th>项目名称</th>
+                            <th width="80">省公司</th>
+                            <th width="80">地市</th>
+                            <th width="150">开始时间</th>
+                            <th width="150">结束时间</th>
+                            <th width="60">状态</th>
+                            <th width="60">完成数量</th>
+                            <th width="60">操作</th>
+                        </tr>
+                     </thead>
+                     <tbody id="J_tabletpl">
+                        <tr>
+                            <td>YX20150610</td>
+                            <td>营销类</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">情满七夕优惠巨献</a></div></td>
+                            <td>河南</td>
+                            <td>洛阳</td>
+                            <td>2015.04.01 08:00</td>
+                            <td>2015.04.04 20:00</td>
+                            <td>进行中</td>
+                            <td>20</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">呼叫</a></div></td>
+                        </tr>
+                        <tr>
+                            <td>YX20150609</td>
+                            <td>营销类</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">情满七夕优惠巨献</a></div></td>
+                            <td>河南</td>
+                            <td>洛阳</td>
+                            <td>2015.04.01 08:00</td>
+                            <td>2015.04.04 20:00</td>
+                            <td>进行中</td>
+                            <td>20</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">呼叫</a></div></td>
+                        </tr>
+
+                        <tr>
+                            <td>YX20150608</td>
+                            <td>营销类</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">情满七夕优惠巨献</a></div></td>
+                            <td>河南</td>
+                            <td>洛阳</td>
+                            <td>2015.04.01 08:00</td>
+                            <td>2015.04.04 20:00</td>
+                            <td>进行中</td>
+                            <td>20</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">呼叫</a></div></td>
+                        </tr>
+
+                        <tr>
+                            <td>YX20150607</td>
+                            <td>调研类</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">4G网络使用调研</a></div></td>
+                            <td>河南</td>
+                            <td>洛阳</td>
+                            <td>2015.04.01 08:00</td>
+                            <td>2015.04.04 20:00</td>
+                            <td>进行中</td>
+                            <td>40</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">呼叫</a></div></td>
+                        </tr>
+
+                        <tr>
+                            <td>YX20150606</td>
+                            <td>调研类</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">4G网络使用调研</a></div></td>
+                            <td>河南</td>
+                            <td>洛阳</td>
+                            <td>2015.04.01 08:00</td>
+                            <td>2015.04.04 20:00</td>
+                            <td>暂停</td>
+                            <td>60</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">呼叫</a></div></td>
+                        </tr>
+                        <tr>
+                            <td>YX20150605</td>
+                            <td>调研类</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">4G网络使用调研</a></div></td>
+                            <td>河南</td>
+                            <td>洛阳</td>
+                            <td>2015.04.01 08:00</td>
+                            <td>2015.04.04 20:00</td>
+                            <td>暂停</td>
+                            <td>80</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">呼叫</a></div></td>
+                        </tr>
+                        <tr>
+                            <td>YX20150604</td>
+                            <td>调研类</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">4G网络使用调研</a></div></td>
+                            <td>河南</td>
+                            <td>洛阳</td>
+                            <td>2015.04.01 08:00</td>
+                            <td>2015.04.04 20:00</td>
+                            <td>已结束</td>
+                            <td>60</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">呼叫</a></div></td>
+                        </tr>
+                        <tr>
+                            <td>YX20150603</td>
+                            <td>调研类</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">4G网络使用调研</a></div></td>
+                            <td>河南</td>
+                            <td>洛阳</td>
+                            <td>2015.04.01 08:00</td>
+                            <td>2015.04.04 20:00</td>
+                            <td>已结束</td>
+                            <td>80</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">呼叫</a></div></td>
+                        </tr>
+                        <tr>
+                            <td>YX20150604</td>
+                            <td>调研类</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">4G网络使用调研</a></div></td>
+                            <td>河南</td>
+                            <td>洛阳</td>
+                            <td>2015.04.01 08:00</td>
+                            <td>2015.04.04 20:00</td>
+                            <td>已结束</td>
+                            <td>60</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">呼叫</a></div></td>
+                        </tr>
+                        <tr>
+                            <td>YX20150603</td>
+                            <td>调研类</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">4G网络使用调研</a></div></td>
+                            <td>河南</td>
+                            <td>洛阳</td>
+                            <td>2015.04.01 08:00</td>
+                            <td>2015.04.04 20:00</td>
+                            <td>已结束</td>
+                            <td>80</td>
+                            <td><div class="gridRowBtn"><a class="item-text" href="javascript:;">呼叫</a></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+</div>
+          
+              <!--翻页及功能按钮区域开始-->
+    <DIV class="amount-bottom">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gridBottom">
+          <tr>
+            <td>
+                <DIV class="fn-clear action-other  action-other-show ">
+                        <DIV id=Pagination class="page pagination fn-right"> </DIV>
+                        <DIV class="fn-right fn-pt5 fn-pr10"></DIV>
+                </DIV></td>
+          </tr>
+        </table>
+    </DIV>	
+
+    </div>
+
+
+
+</div>
+
+
+
+<#include "../../tpl/res_js.tpl" />  
+
+    
+<script type="text/javascript">
+    //页面加载完开始执行
+    $(document).ready(function () {
+        //初始化函数
+        $(".qBox").mouseover(function() {
+          $(this).addClass("qBoxHover");
+          $(this).find(".qEditIcon").show();
+
+        }).mouseout(function() {
+          $(this).removeClass("qBoxHover");
+          $(this).find(".qEditIcon").hide();
+        });;
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+<head>
+<title>修改业务</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="res/theme/alice/alice.css" rel="stylesheet" type="text/css" />
+<link href="res/lib/dialog/4.1.6/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="res/theme/default/common.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="res/lib/jquery/1.7.2/jquery.js"></script>
+<script type="text/javascript" src="res/lib/json/2.0/json2.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/artDialog.source.js"></script>
+<script type="text/javascript" src="res/lib/dialog/4.1.6/iframeTools.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/handlebars.js"></script>
+<script type="text/javascript" src="res/lib/handlebars/1.0.rc.3/helpers.js"></script>
+<!-- base64 -->
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/core-min.js"></script>
+<script type="text/javascript" src="res/lib/crypto-js/3.1.2-4/enc-base64-min.js"></script>
+<script type='text/javascript' src='res/common/common.js'></script>
+</head>
+<body>
+<div class="openwin">
+    <form id="busi_form" class="bz_manage" width="100%">
+        <table class="infoTable" cellpadding="0" cellspacing="0" border="0" width="100%">
+            <colgroup>
+                <col width="15%"/>
+                <col width="35%" />
+                <col width="15%"/>
+                <col />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td class="description">业务编号：</td>
+                    <td ><input class="normalinput" type="text" value="" id="businessId" name="businessId" maxlength="18" /></td>
+                    <td class="description">业务名称：</td>
+                    <td ><input class="normalinput" type="text" value="" id="businessName" name="businessName" maxlength="20" /></td>
+                </tr>
+                <tr>
+                    <td class="description">描述信息：</td>
+                    <td colspan="3"><textarea rows="3" style="width: 91%;" name="businessDesc" id="businessDesc" class="desc" maxlength="80"></textarea></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <!--加载属性-->
+    <div id="mydiv"></div>
+
+    <div class="bz_btn_list" >
+        <a class="btn_normal fn-mr-20" href="#nogo" id="J_save"><em>保存</em></a>
+        <a class="btn_normal " href="#nogo" onclick="closeDialog();return false;"><em>关闭</em></a>
+    </div>
+
+</div>
+
+<textarea class="fn-hide" id="typeAttr_tpl">
+{{#each rows}}
+<div class="ui-box">
+    <div class="ui-box-head">
+        <h3 class="ui-box-head-title" data-nodetypeid="{{nodeTypeId}}">{{nodeType}}</h3>
+        <label class="ui-box-head-text" for="selectAll_{{@index}}">全选</label>
+        <input type="checkbox" onclick="selectAll(this);" style="float: left; height: 18px;" id="selectAll_{{@index}}" />
+        <a href="javascript:;" class="ui-box-head-more" onclick="toggleDiv(this);">展开/收起</a>
+    </div>
+    <div class="ui-box-container fn-hide">
+        <div class="ui-box-content">
+            {{#each property}}
+            <input id="{{templateId}}" type="checkbox" value="{{templateId}}" name="mycheckbox" {{isSlect isBand}}  />
+            <label for="{{templateId}}">{{label}}</label>
+            {{/each}}
+        </div>
+    </div>
+</div>
+{{/each}}
+</textarea>
+
+<script type="text/javascript">
+var id = artDialog.data("id");
+$(function(){
+	$("#businessId").bind("keyup", function(e){
+        var _self = $(this);
+        var newVal = _self.val().replace(/[^\d]/g,'');
+        _self.val(newVal);
+    });
+	
+    $.PostJson(REQURLS.getPropByBusinessId,"id="+id,function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+                $("#mydiv").temp($("#typeAttr_tpl"), json).find(".ui-box:eq(0) .ui-box-head-more").trigger("click");
+                //获取保存之前表单和多选框的ID值
+                setTimeout(function(){
+                        prevstr1 = $("#busi_form").serialize();
+                        $(".ui-box-content").find("input[type='checkbox']:checked").each(function(){
+                            prevstr1 += $(this).attr("id");
+                        });
+                },800);
+            }
+        }
+    });
+
+    $.PostJson(REQURLS.getBusinessInfoById,"id="+id,function(state,json){
+        if(state=="success"){
+            if(json&&json.returnCode=="1"){
+                $("#businessId").val(json.businessId);
+                $("#businessName").val(json.businessName);
+                $("#businessDesc").val(json.businessDesc);
+                placeholder("#businessId","长度小于18个数字");
+                placeholder("#businessName","长度小于20个字符");
+                placeholder("#businessDesc","长度小于80个字符",true);
+                textareaLimit();
+            }else{
+                result_prompt(0,json.returnMessage||"获取业务信息失败！");
+            }
+        }else{
+            result_prompt(0,"系统错误！");
+        }
+    });
+
+
+
+    $("#J_save").click(function(){
+    	var businessdesc = $("#businessDesc").val();
+    	if(businessdesc == "" || businessdesc == "长度小于80个字符"){
+        	$("#businessDesc").val("");
+        }
+    	var str = $("#busi_form").serialize();
+        var beans = [];
+        var json={};
+        json.id = id;
+        json.businessId = $("#businessId").val();
+        json.businessName = $("#businessName").val();
+        json.businessDesc = $("#businessDesc").val();
+        _box = $("#mydiv").find(".ui-box");
+        var property = [];
+        _box.each(function(){
+            var _self = $(this);
+            _self.find(".ui-box-container input[type='checkbox']").each(function(){
+                if($(this).is(":checked")){
+                    var zAttr = {};
+                    zAttr.templateId = $(this).val();
+                    zAttr.nodeTypeId = _self.find("h3").data("nodetypeid");
+                    property.push(zAttr);
+                }
+            });
+        })
+        json.property = property;
+        var dataP = encodeBase64(encodeURIComponent(JSON.stringify(json)));
+        //获取保存之后表单和多选框的ID值
+        nextstr2 = $("#busi_form").serialize();
+        $(".ui-box-content").find("input[type='checkbox']:checked").each(function(){
+            nextstr2 += $(this).attr("id");
+        });
+        
+        if($.trim($("#businessId").val())==""){
+            result_prompt(2,"业务编号不能为空！");
+        }else if($.trim($("#businessName").val())==""||$("#businessName").val()=='长度小于20个字符'){
+            result_prompt(2,"业务名称不能为空！");
+        }else if(prevstr1 == nextstr2){
+            result_prompt(2,"未对任何数据进行修改");
+        }else{
+            $.PostJson(REQURLS.updateBusinessInfo,"dataP="+dataP,function(state,json){
+                if(state=="success"){
+                    if(json&&json.returnCode=="1"){
+                        result_prompt(1,"修改业务成功");
+                        parent.gridReload("mytable");
+                    }else{
+                        result_prompt(0,json.returnMessage||"修改业务失败！");
+                    }
+                }else{
+                    result_prompt(0,"系统错误！");
+                }
+            });
+        }
+    });
+})
+
+function selectAll(obj){
+    var _self = $(obj);
+    var _checkbox = _self.parent().siblings(".ui-box-container").find("input[type='checkbox']");
+    var _flag = _self.is(":checked");
+    _checkbox.each(function(){
+        $(this).attr({"checked":_flag});
+    });
+}
+
+function toggleDiv(obj){
+    var _self = $(obj);
+    _self.parent().siblings(".ui-box-container").slideToggle(10);
+}
+
+Handlebars.registerHelper('isSlect', function(isBand,fn){
+    var buffer = "";
+    if(isBand=='1'){
+        buffer = "checked = true";
+    }
+    return new Handlebars.SafeString(buffer);
+});
+</script>
+
+</body>
+</html>

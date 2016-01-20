@@ -1,0 +1,32 @@
+{
+	"returnCode": "0",
+	"returnMessage": "success",
+	"bean":{
+	"staffId":"2",
+	"grpcmNum":"888888",
+	"callPltfStaffNum":"0000108888881006",
+	"seatPw":"111111",
+	"seatPwEncrModeCd":"0",
+	"seatTypeCd":0,
+	"selfHintMarkNum":0,
+	"ctiIpAddr":"221.176.67.103",
+	"ctiPrtnum":"14800",
+	"backctiIpAddr":"221.176.67.103",
+	"backctiPrtnum":14800,
+	"locPrtnum":9008,
+	"callPltfExtNum":"0000028888881006",
+	"sipSvrIpAddr":"221.176.67.103",
+	"sipSvrPrtnum":5040,
+	"sipDscrmPrivModeCd":1,
+	"sipPw":"00000000",
+	"sipAgrmtCntt":"UDP",
+	"telnumTrmnModeCd":1,
+	"appTypeCd":2,
+	"monrSvrIpAddr":"221.176.67.103",
+	"monrSvrPrtnum":4503,
+	"sipPwEncrModeCd":0,
+	"sipUbtyAreaNm":"ASIA",
+	"backsipSvrPrtnum":5040,
+	"backsipSvrIpAddr":"221.176.67.103"
+	}
+}
